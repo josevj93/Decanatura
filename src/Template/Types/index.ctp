@@ -1,35 +1,47 @@
-<h1>Tipos de activo</h1>
-<?= $this->Html->link(
-    'Añadir artículo',
-    ['controller' => 'Types', 'action' => 'add']
-) ?>
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Acción</th>
-    </tr>
-
-    <!-- Aquí es donde iteramos nuestro objeto de consulta $types, mostrando en pantalla la información del type -->
-
-  <?php foreach ($types as $type): ?>
-    <tr>
-         <td>
-           <?= $this->Html->link($type->type_id,
-            ['controller' => 'Types', 'action' => 'view', $type->type_id]) ?>
-       </td>
- 
-            <td><?= $type->name ?></td>
-        
-        <td><?= $type->description ?></td>
-       <td>
-            <?= $this->Form->postLink(
-                'Eliminar',
-                ['action' => 'delete', $type->type_id],
-                ['confirm' => '¿Estás seguro?'])
-            ?>
-        </td>
-    </tr>
-    <?php endforeach; ?>
-</table>
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\Type[]|\Cake\Collection\CollectionInterface $types
+ */
+?>
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('New Type'), ['action' => 'add']) ?></li>
+    </ul>
+</nav>
+<div class="types index large-9 medium-8 columns content">
+    <h3><?= __('Types') ?></h3>
+    <table cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th scope="col"><?= $this->Paginator->sort('type_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($types as $type): ?>
+            <tr>
+                <td><?= h($type->type_id) ?></td>
+                <td><?= h($type->name) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $type->type_id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $type->type_id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $type->type_id], ['confirm' => __('Are you sure you want to delete # {0}?', $type->type_id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <div class="paginator">
+        <ul class="pagination">
+            <?= $this->Paginator->first('<< ' . __('first')) ?>
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->last(__('last') . ' >>') ?>
+        </ul>
+        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+    </div>
+</div>
