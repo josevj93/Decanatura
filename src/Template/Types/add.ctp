@@ -15,9 +15,9 @@
     <fieldset>
         <legend><?= __('Add Type') ?></legend>
         <?php
-            echo $this->Form->control('type_id', array('type' => 'text'));
-            echo $this->Form->control('name');
-            echo $this->Form->control('description');
+            echo $this->Form->input('type_id', array('type' => 'text'));
+            echo $this->Form->input('name');
+            echo $this->Form->input('description');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

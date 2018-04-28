@@ -23,6 +23,7 @@ class Type extends Entity
      * @var array
      */
     protected $_accessible = [
+        'type_id' => true,
         'name' => true,
         'description' => true
     ];
