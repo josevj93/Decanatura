@@ -4,13 +4,13 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 /**
- * Types Controller
+ * Users Controller
  *
- * @property \App\Model\Table\TypesTable $Types
+ * @property \App\Model\Table\UsersTable $Users
  *
- * @method \App\Model\Entity\Type[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class TypesController extends AppController
+class UsersController extends AppController
 {
 
     /**
@@ -20,25 +20,25 @@ class TypesController extends AppController
      */
     public function index()
     {
-        $types = $this->paginate($this->Types);
+        $users = $this->paginate($this->Users);
 
-        $this->set(compact('types'));
+        $this->set(compact('users'));
     }
 
     /**
      * View method
      *
-     * @param string|null $id Type id.
+     * @param string|null $id User id.
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
-        $type = $this->Types->get($id, [
+        $user = $this->Users->get($id, [
             'contain' => []
         ]);
 
-        $this->set('type', $type);
+        $this->set('user', $user);
     }
 
     /**
@@ -48,58 +48,58 @@ class TypesController extends AppController
      */
     public function add()
     {
-        $type = $this->Types->newEntity();
+        $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
-            $type = $this->Types->patchEntity($type, $this->request->getData());
-            if ($this->Types->save($type)) {
-                $this->Flash->success(__('The type has been saved.'));
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The type could not be saved. Please, try again.'));
+            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $this->set(compact('type'));
+        $this->set(compact('user'));
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Type id.
+     * @param string|null $id User id.
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $type = $this->Types->get($id, [
+        $user = $this->Users->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $type = $this->Types->patchEntity($type, $this->request->getData());
-            if ($this->Types->save($type)) {
-                $this->Flash->success(__('The type has been saved.'));
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The type could not be saved. Please, try again.'));
+            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $this->set(compact('type'));
+        $this->set(compact('user'));
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Type id.
+     * @param string|null $id User id.
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $type = $this->Types->get($id);
-        if ($this->Types->delete($type)) {
-            $this->Flash->success(__('The type has been deleted.'));
+        $user = $this->Users->get($id);
+        if ($this->Users->delete($user)) {
+            $this->Flash->success(__('The user has been deleted.'));
         } else {
-            $this->Flash->error(__('The type could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
