@@ -30,23 +30,41 @@ $cakeDescription = 'Prueba Jose Valverde';
   <?= $this->Html->css('cake.css') ?>
 
 
-  <?= $this->Html->css([ 'bootstrap.min.css', 'dataTables.bootstrap.min.css', 'sb-admin.css','font-awesome/css/font-awesome.min.css' ]) ?>
+  <?= $this->Html->css([ 'plugins/bootstrap/css/bootstrap.min.css', 'plugins/font-awesome/css/font-awesome.min.css', 'plugins/datatables/dataTables.bootstrap4.css','sb-admin.css']) ?>
   <?=
-  $this->Html->script([ 'jQuery-3.2.1/jquery-3.2.1','bootstrap.min', 'jquery.dataTables.min',
-    'dataTables.bootstrap.min','sb-admin.js' , 'jquery.easing.min.js','bootstrap.bundle.min.js'
- ])
- ?>
+  $this->Html->script([ 'plugins/jquery/jquery.min.js','plugins/bootstrap/js/bootstrap.bundle.min.js' ,'sb-admin.min.js',
+    'plugins/jquery-easing/jquery.easing.min.js','plugins/datatables/jquery.dataTables.js','plugins/datatables/dataTables.bootstrap4.js',
+    'sb-admin-datatables.min.js'
+  ])
+  ?>
+
+  <!-- Bootstrap core JavaScript-->
+
+ 
+
 <!--
+'dataTables.bootstrap.min','jquery.dataTables.min',, 'jquery.easing.min.js','bootstrap.min', 
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+  <link href="css/sb-admin.css" rel="stylesheet">
+ <script src="js/sb-admin.min.js"></script>
    <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   
+
+
+
      <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
    
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/datatables/jquery.dataTables.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
   
-    <script src="js/sb-admin.min.js"></script>
+   
    
     <script src="js/sb-admin-datatables.min.js"></script>
     <script src="js/sb-admin-charts.min.js"></script>
@@ -300,9 +318,20 @@ $cakeDescription = 'Prueba Jose Valverde';
               </div>
             </div>
           </div>
+
+   <script src="js/sb-admin.min.js"></script>
+   <script src="js/plugins/jquery/jquery.min.js"></script>
+    <script src="js/plugins/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="js/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <script src="js/sb-admin-datatables.min.js"></script>
+
+
+  
+
+
         </div>
         <!-- Bootstrap core JavaScript-->
-
 
 
 
