@@ -1,278 +1,50 @@
-<?php
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
-use Cake\Cache\Cache;
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
-use Cake\Datasource\ConnectionManager;
-use Cake\Error\Debugger;
-use Cake\Network\Exception\NotFoundException;
-
-$this->layout = false;
-
-if (!Configure::read('debug')) :
-    throw new NotFoundException(
-        'Please replace src/Template/Pages/home.ctp with your own version or re-enable debug mode.'
-    );
-endif;
-
-$cakeDescription = 'CakePHP: the rapid development PHP framework';
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?>
-    </title>
-
-    <?= $this->Html->meta('icon') ?>
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
-    <?= $this->Html->css('home.css') ?>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:500i|Roboto:300,400,700|Roboto+Mono" rel="stylesheet">
-</head>
-<body class="home">
-
-<header class="row">
-    <div class="header-image"><?= $this->Html->image('cake.logo.svg') ?></div>
-    <div class="header-title">
-        <h1>Welcome to CakePHP <?= Configure::version() ?> Red Velvet. Build fast. Grow solid.</h1>
-    </div>
-</header>
-
 <div class="row">
-    <div class="columns large-12">
-        <div class="ctp-warning alert text-center">
-            <p>Please be aware that this page will not be shown if you turn off debug mode unless you replace src/Template/Pages/home.ctp with your own version.</p>
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table id="employees-grid"  class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Employees No</th>
+                        <th>Birth Date</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Hire Date</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
-        <div id="url-rewriting-warning" class="alert url-rewriting">
-            <ul>
-                <li class="bullet problem">
-                    URL rewriting is not properly configured on your server.<br />
-                    1) <a target="_blank" href="https://book.cakephp.org/3.0/en/installation.html#url-rewriting">Help me configure it</a><br />
-                    2) <a target="_blank" href="https://book.cakephp.org/3.0/en/development/configuration.html#general-configuration">I don't / can't use URL rewriting</a>
-                </li>
-            </ul>
-        </div>
-        <?php Debugger::checkSecurityKeys(); ?>
     </div>
 </div>
 
-<div class="row">
-    <div class="columns large-6">
-        <h4>Environment</h4>
-        <ul>
-        <?php if (version_compare(PHP_VERSION, '5.6.0', '>=')) : ?>
-            <li class="bullet success">Your version of PHP is 5.6.0 or higher (detected <?= PHP_VERSION ?>).</li>
-        <?php else : ?>
-            <li class="bullet problem">Your version of PHP is too low. You need PHP 5.6.0 or higher to use CakePHP (detected <?= PHP_VERSION ?>).</li>
-        <?php endif; ?>
 
-        <?php if (extension_loaded('mbstring')) : ?>
-            <li class="bullet success">Your version of PHP has the mbstring extension loaded.</li>
-        <?php else : ?>
-            <li class="bullet problem">Your version of PHP does NOT have the mbstring extension loaded.</li>;
-        <?php endif; ?>
+<script>
 
-        <?php if (extension_loaded('openssl')) : ?>
-            <li class="bullet success">Your version of PHP has the openssl extension loaded.</li>
-        <?php elseif (extension_loaded('mcrypt')) : ?>
-            <li class="bullet success">Your version of PHP has the mcrypt extension loaded.</li>
-        <?php else : ?>
-            <li class="bullet problem">Your version of PHP does NOT have the openssl or mcrypt extension loaded.</li>
-        <?php endif; ?>
+    var staticData = [["10001","1953-09-02","Georgi","Facello","M","1986-06-26"],
+    ["10002","1964-06-02","Bezalel","Simmel","F","1985-11-21"],
+    ["10003","1959-12-03","Parto","Bamford","M","1986-08-28"],
+    ["10004","1954-05-01","Chirstian","Koblick","M","1986-12-01"],
+    ["10005","1955-01-21","Kyoichi","Maliniak","M","1989-09-12"],
+    ["10006","1953-04-20","Anneke","Preusig","F","1989-06-02"],
+    ["10007","1957-05-23","Tzvetan","Zielinski","F","1989-02-10"],
+    ["10008","1958-02-19","Saniya","Kalloufi","M","1994-09-15"],
+    ["10009","1952-04-19","Sumant","Peac","F","1985-02-18"],
+    ["10010","1963-06-01","Duangkaew","Piveteau","F","1989-08-24"],
+    ["10011","1953-11-07","Mary","Sluis","F","1990-01-22"],
+    ["10012","1960-10-04","Patricio","Bridgland","M","1992-12-18"],
+    ["10013","1963-06-07","Eberhardt","Terkki","M","1985-10-20"],
+    ["10014","1956-02-12","Berni","Genin","M","1987-03-11"],
+    ["10015","1959-08-19","Guoxiang","Nooteboom","M","1987-07-02"],
+    ["10016","1961-05-02","Kazuhito","Cappelletti","M","1995-01-27"],
+    ["10017","1958-07-06","Cristinel","Bouloucos","F","1993-08-03"],
+    ["10018","1954-06-19","Kazuhide","Peha","F","1987-04-03"],
+    ["10019","1953-01-23","Lillian","Haddadi","M","1999-04-30"],
+    ["10020","1952-12-24","Mayuko","Warwick","M","1991-01-26"],
+    ["10021","1960-02-20","Ramzi","Erde","M","1988-02-10"],["10022","1952-07-08","Shahaf","Famili","M","1995-08-22"],["10023","1953-09-29","Bojan","Montemayor","F","1989-12-17"],["10024","1958-09-05","Suzette","Pettey","F","1997-05-19"],["10025","1958-10-31","Prasadram","Heyers","M","1987-08-17"],["10026","1953-04-03","Yongqiao","Berztiss","M","1995-03-20"],["10027","1962-07-10","Divier","Reistad","F","1989-07-07"],["10028","1963-11-26","Domenick","Tempesti","M","1991-10-22"],["10029","1956-12-13","Otmar","Herbst","M","1985-11-20"],["10030","1958-07-14","Elvis","Demeyer","M","1994-02-17"],["10031","1959-01-27","Karsten","Joslin","M","1991-09-01"],["10032","1960-08-09","Jeong","Reistad","F","1990-06-20"],["10033","1956-11-14","Arif","Merlo","M","1987-03-18"],["10034","1962-12-29","Bader","Swan","M","1988-09-21"],["10035","1953-02-08","Alain","Chappelet","M","1988-09-05"],["10036","1959-08-10","Adamantios","Portugali","M","1992-01-03"],["10037","1963-07-22","Pradeep","Makrucki","M","1990-12-05"],["10038","1960-07-20","Huan","Lortz","M","1989-09-20"],["10039","1959-10-01","Alejandro","Brender","M","1988-01-19"],["10040","1959-09-13","Weiyi","Meriste","F","1993-02-14"],["10041","1959-08-27","Uri","Lenart","F","1989-11-12"],["10042","1956-02-26","Magy","Stamatiou","F","1993-03-21"],["10043","1960-09-19","Yishay","Tzvieli","M","1990-10-20"],["10044","1961-09-21","Mingsen","Casley","F","1994-05-21"],["10045","1957-08-14","Moss","Shanbhogue","M","1989-09-02"],["10046","1960-07-23","Lucien","Rosenbaum","M","1992-06-20"],["10047","1952-06-29","Zvonko","Nyanchama","M","1989-03-31"],["10048","1963-07-11","Florian","Syrotiuk","M","1985-02-24"],["10049","1961-04-24","Basil","Tramer","F","1992-05-04"],["10050","1958-05-21","Yinghua","Dredge","M","1990-12-25"],["10051","1953-07-28","Hidefumi","Caine","M","1992-10-15"],["10052","1961-02-26","Heping","Nitsch","M","1988-05-21"],["10053","1954-09-13","Sanjiv","Zschoche","F","1986-02-04"],["10054","1957-04-04","Mayumi","Schueller","M","1995-03-13"],["10055","1956-06-06","Georgy","Dredge","M","1992-04-27"],["10056","1961-09-01","Brendon","Bernini","F","1990-02-01"],["10057","1954-05-30","Ebbe","Callaway","F","1992-01-15"],["10058","1954-10-01","Berhard","McFarlin","M","1987-04-13"],["10059","1953-09-19","Alejandro","McAlpine","F","1991-06-26"],["10060","1961-10-15","Breannda","Billingsley","M","1987-11-02"],["10061","1962-10-19","Tse","Herber","M","1985-09-17"],["10062","1961-11-02","Anoosh","Peyn","M","1991-08-30"],["10063","1952-08-06","Gino","Leonhardt","F","1989-04-08"],["10064","1959-04-07","Udi","Jansch","M","1985-11-20"],["10065","1963-04-14","Satosi","Awdeh","M","1988-05-18"],["10066","1952-11-13","Kwee","Schusler","M","1986-02-26"],["10067","1953-01-07","Claudi","Stavenow","M","1987-03-04"],["10068","1962-11-26","Charlene","Brattka","M","1987-08-07"],["10069","1960-09-06","Margareta","Bierman","F","1989-11-05"],["10070","1955-08-20","Reuven","Garigliano","M","1985-10-14"],["10071","1958-01-21","Hisao","Lipner","M","1987-10-01"],["10072","1952-05-15","Hironoby","Sidou","F","1988-07-21"],["10073","1954-02-23","Shir","McClurg","M","1991-12-01"],["10074","1955-08-28","Mokhtar","Bernatsky","F","1990-08-13"],["10075","1960-03-09","Gao","Dolinsky","F","1987-03-19"],["10076","1952-06-13","Erez","Ritzmann","F","1985-07-09"],["10077","1964-04-18","Mona","Azuma","M","1990-03-02"],["10078","1959-12-25","Danel","Mondadori","F","1987-05-26"],["10079","1961-10-05","Kshitij","Gils","F","1986-03-27"],["10080","1957-12-03","Premal","Baek","M","1985-11-19"],["10081","1960-12-17","Zhongwei","Rosen","M","1986-10-30"],["10082","1963-09-09","Parviz","Lortz","M","1990-01-03"],["10083","1959-07-23","Vishv","Zockler","M","1987-03-31"],["10084","1960-05-25","Tuval","Kalloufi","M","1995-12-15"],["10085","1962-11-07","Kenroku","Malabarba","M","1994-04-09"],["10086","1962-11-19","Somnath","Foote","M","1990-02-16"],["10087","1959-07-23","Xinglin","Eugenio","F","1986-09-08"],["10088","1954-02-25","Jungsoon","Syrzycki","F","1988-09-02"],["10089","1963-03-21","Sudharsan","Flasterstein","F","1986-08-12"],["10090","1961-05-30","Kendra","Hofting","M","1986-03-14"],["10091","1955-10-04","Amabile","Gomatam","M","1992-11-18"],["10092","1964-10-18","Valdiodio","Niizuma","F","1989-09-22"],["10093","1964-06-11","Sailaja","Desikan","M","1996-11-05"],["10094","1957-05-25","Arumugam","Ossenbruggen","F","1987-04-18"],["10095","1965-01-03","Hilari","Morton","M","1986-07-15"],["10096","1954-09-16","Jayson","Mandell","M","1990-01-14"],["10097","1952-02-27","Remzi","Waschkowski","M","1990-09-15"],["10098","1961-09-23","Sreekrishna","Servieres","F","1985-05-13"],["10099","1956-05-25","Valter","Sullins","F","1988-10-18"],["10100","1953-04-21","Hironobu","Haraldson","F","1987-09-21"]];
+$(document).ready(function() {
+    $('#employees-grid').DataTable( {
+        data: staticData
+    } );
+} );
+</script>
 
-        <?php if (extension_loaded('intl')) : ?>
-            <li class="bullet success">Your version of PHP has the intl extension loaded.</li>
-        <?php else : ?>
-            <li class="bullet problem">Your version of PHP does NOT have the intl extension loaded.</li>
-        <?php endif; ?>
-        </ul>
-    </div>
-    <div class="columns large-6">
-        <h4>Filesystem</h4>
-        <ul>
-        <?php if (is_writable(TMP)) : ?>
-            <li class="bullet success">Your tmp directory is writable.</li>
-        <?php else : ?>
-            <li class="bullet problem">Your tmp directory is NOT writable.</li>
-        <?php endif; ?>
-
-        <?php if (is_writable(LOGS)) : ?>
-            <li class="bullet success">Your logs directory is writable.</li>
-        <?php else : ?>
-            <li class="bullet problem">Your logs directory is NOT writable.</li>
-        <?php endif; ?>
-
-        <?php $settings = Cache::getConfig('_cake_core_'); ?>
-        <?php if (!empty($settings)) : ?>
-            <li class="bullet success">The <em><?= $settings['className'] ?>Engine</em> is being used for core caching. To change the config edit config/app.php</li>
-        <?php else : ?>
-            <li class="bullet problem">Your cache is NOT working. Please check the settings in config/app.php</li>
-        <?php endif; ?>
-        </ul>
-    </div>
-    <hr />
-</div>
-
-<div class="row">
-    <div class="columns large-6">
-        <h4>Database</h4>
-        <?php
-        try {
-            $connection = ConnectionManager::get('default');
-            $connected = $connection->connect();
-        } catch (Exception $connectionError) {
-            $connected = false;
-            $errorMsg = $connectionError->getMessage();
-            if (method_exists($connectionError, 'getAttributes')) :
-                $attributes = $connectionError->getAttributes();
-                if (isset($errorMsg['message'])) :
-                    $errorMsg .= '<br />' . $attributes['message'];
-                endif;
-            endif;
-        }
-        ?>
-        <ul>
-        <?php if ($connected) : ?>
-            <li class="bullet success">CakePHP is able to connect to the database.</li>
-        <?php else : ?>
-            <li class="bullet problem">CakePHP is NOT able to connect to the database.<br /><?= $errorMsg ?></li>
-        <?php endif; ?>
-        </ul>
-    </div>
-    <div class="columns large-6">
-        <h4>DebugKit</h4>
-        <ul>
-        <?php if (Plugin::loaded('DebugKit')) : ?>
-            <li class="bullet success">DebugKit is loaded.</li>
-        <?php else : ?>
-            <li class="bullet problem">DebugKit is NOT loaded. You need to either install pdo_sqlite, or define the "debug_kit" connection name.</li>
-        <?php endif; ?>
-        </ul>
-    </div>
-    <hr />
-</div>
-
-<div class="row">
-    <div class="columns large-6">
-        <h3>Editing this Page</h3>
-        <ul>
-            <li class="bullet cutlery">To change the content of this page, edit: src/Template/Pages/home.ctp.</li>
-            <li class="bullet cutlery">You can also add some CSS styles for your pages at: webroot/css/.</li>
-        </ul>
-    </div>
-    <div class="columns large-6">
-        <h3>Getting Started</h3>
-        <ul>
-            <li class="bullet book"><a target="_blank" href="https://book.cakephp.org/3.0/en/">CakePHP 3.0 Docs</a></li>
-            <li class="bullet book"><a target="_blank" href="https://book.cakephp.org/3.0/en/tutorials-and-examples/bookmarks/intro.html">The 15 min Bookmarker Tutorial</a></li>
-            <li class="bullet book"><a target="_blank" href="https://book.cakephp.org/3.0/en/tutorials-and-examples/blog/blog.html">The 15 min Blog Tutorial</a></li>
-            <li class="bullet book"><a target="_blank" href="https://book.cakephp.org/3.0/en/tutorials-and-examples/cms/installation.html">The 15 min CMS Tutorial</a></li>
-        </ul>
-    </div>
-</div>
-
-<div class="row">
-    <div class="columns large-12 text-center">
-        <h3 class="more">More about Cake</h3>
-        <p>
-            CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Front Controller and MVC.<br />
-            Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
-        </p>
-    </div>
-    <hr/>
-</div>
-
-<div class="row">
-    <div class="columns large-4">
-        <i class="icon support">P</i>
-        <h3>Help and Bug Reports</h3>
-        <ul>
-            <li class="bullet cutlery">
-                <a href="irc://irc.freenode.net/cakephp">irc.freenode.net #cakephp</a>
-                <ul><li>Live chat about CakePHP</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="http://cakesf.herokuapp.com/">Slack</a>
-                <ul><li>CakePHP Slack support</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://github.com/cakephp/cakephp/issues">CakePHP Issues</a>
-                <ul><li>CakePHP issues and pull requests</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="http://discourse.cakephp.org/">CakePHP Forum</a>
-                <ul><li>CakePHP official discussion forum</li></ul>
-            </li>
-        </ul>
-    </div>
-    <div class="columns large-4">
-        <i class="icon docs">r</i>
-        <h3>Docs and Downloads</h3>
-        <ul>
-            <li class="bullet cutlery">
-                <a href="https://api.cakephp.org/3.0/">CakePHP API</a>
-                <ul><li>Quick Reference</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://book.cakephp.org/3.0/en/">CakePHP Documentation</a>
-                <ul><li>Your Rapid Development Cookbook</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://bakery.cakephp.org">The Bakery</a>
-                <ul><li>Everything CakePHP</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://plugins.cakephp.org">CakePHP plugins repo</a>
-                <ul><li>A comprehensive list of all CakePHP plugins created by the community</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://github.com/cakephp/">CakePHP Code</a>
-                <ul><li>For the Development of CakePHP Git repository, Downloads</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://github.com/FriendsOfCake/awesome-cakephp">CakePHP Awesome List</a>
-                <ul><li>A curated list of amazingly awesome CakePHP plugins, resources and shiny things.</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://www.cakephp.org">CakePHP</a>
-                <ul><li>The Rapid Development Framework</li></ul>
-            </li>
-        </ul>
-    </div>
-    <div class="columns large-4">
-        <i class="icon training">s</i>
-        <h3>Training and Certification</h3>
-        <ul>
-            <li class="bullet cutlery">
-                <a href="https://cakefoundation.org/">Cake Software Foundation</a>
-                <ul><li>Promoting development related to CakePHP</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://training.cakephp.org/">CakePHP Training</a>
-                <ul><li>Learn to use the CakePHP framework</li></ul>
-            </li>
-            <li class="bullet cutlery">
-                <a href="https://certification.cakephp.org/">CakePHP Certification</a>
-                <ul><li>Become a certified CakePHP developer</li></ul>
-            </li>
-        </ul>
-    </div>
-</div>
-
-</body>
-</html>
