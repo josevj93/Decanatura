@@ -231,7 +231,7 @@ return [
             //'port' => 'non_standard_port_number',
             'username' => 'diego@decanatura',
             'password' => 'Ecci4321',
-            'database' => 'Decanatura',
+            'database' => 'decanatura',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'flags' => [],
