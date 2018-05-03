@@ -15,19 +15,9 @@
                 <tr>
                     <td class="actions">
                         
-                        <!--a class="nav-link" href="view/<?php echo $location->location_id;?>">
-                            <i class="fa fa-fw fa-search"></i>
-                        </a>
-                        <a class="nav-link" href="edit/<?php echo $location->location_id;?>">
-                            <i class="fa fa-fw fa-search"></i>
-                        </a>
-                        <a class="nav-link" href="delete/<?php echo $location->location_id;?>">
-                            <i class="fa fa-fw fa-search"></i>
-                        </a>
-                        --> 
                         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $location->location_id], array('escape' => false)) ?>
                         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $location->location_id], array('escape' => false)) ?>
-                        <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $location->location_id], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $location->location_id)]) ?>
+                        <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $location->location_id], ['escape' => false, 'confirm' => __('Seguro que desea eliminar la Ubicación # {0}?', $location->location_id)]) ?>
                     </td>
                     <td><?= h($location->location_id) ?></td>
                     <td><?= h($location->description) ?></td>
@@ -47,7 +37,7 @@
 }
 </style>    
 </div>
-<form action="add"><input type="submit" class="btn btn-primary" value="Nueva Ubicacion" /></form>
+<?= $this->Html->link(__('Insertar Ubicación'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
 <script type="text/javascript">
     $(document).ready(function() 
     {

@@ -1,24 +1,23 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Location $location
- */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(('List Locations'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
 <div class="locations form large-9 medium-8 columns content">
     <?= $this->Form->create($location) ?>
     <fieldset>
-        <legend><?= __('Add Location') ?></legend>
+        <legend><?= __('Insertar Ubicacion') ?></legend>
         <?php
-            echo $this->Form->control('description');
-            echo $this->Form->control('nombre');
+            echo $this->Form->input('location_id', array('type' => 'text', 'label' => 'Id'));
+            echo $this->Form->control('description', array('label' => 'Descripcion'));
+            echo $this->Form->control('nombre', array('label' => 'Descripcion'));
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <style>
+        .btn-primary {
+          color: #fff;
+          background-color: #FF9933;
+          border-color: #FF9933;
+          
+        }
+    </style>
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->end() ?>
+
+    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 </div>
