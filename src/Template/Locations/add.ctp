@@ -5,15 +5,16 @@
         <?php
             echo $this->Form->input('location_id', array('type' => 'text', 'label' => 'Id'));
             echo $this->Form->control('description', array('label' => 'Descripcion'));
-            echo $this->Form->control('nombre', array('label' => 'Descripcion'));
+            echo $this->Form->control('nombre', array('label' => 'Nombre'));
         ?>
     </fieldset>
     <style>
         .btn-primary {
           color: #fff;
-          background-color: #FF9933;
-          border-color: #FF9933;
-          
+          background-color: #0099FF;
+          border-color: #0099FF;
+          float: right;
+          margin-left: 10px;
         }
     </style>
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>

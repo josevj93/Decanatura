@@ -20,7 +20,8 @@
       color: #FFF;
       background-color: #0099FF;
       border-color: #0099FF;
-      
+      float: right;
+      margin-left:10px;
     }
 </style> 
     
