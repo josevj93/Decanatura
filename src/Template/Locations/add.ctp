@@ -2,7 +2,6 @@
     <?= $this->Form->create($location) ?>
     <fieldset>
         <legend><?= __('Insertar Ubicacion') ?></legend>
-          <div>
             <div>
                 <label>Id:</label><br>
                 <?php 
@@ -10,7 +9,7 @@
                 ?><br>
             </div>
             <div>
-            <label>Nombre:</label><br>
+                <label>Nombre:</label><br>
                 <?php 
                 echo $this->Form->imput('nombre', ['label' => 'Nombre:', 'class'=>'form-control col-sm-2']);
                 ?><br>
@@ -21,7 +20,6 @@
                 echo $this->Form->textarea('description', ['label' => 'Descripción:', 'class'=>'form-control col-sm-4']);
                 ?><br>
             </div>
-          </div>
     </fieldset>
 
     <style>
@@ -33,8 +31,9 @@
           margin-left: 10px;
         }
     </style>
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->end() ?>
-
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+
+    
 </div>
