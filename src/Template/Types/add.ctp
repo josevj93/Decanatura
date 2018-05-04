@@ -10,13 +10,13 @@
     <fieldset>
         <legend><?= __('Agregar tipo') ?></legend>
         <?php
-            echo $this->Form->input('type_id', array('type' => 'text', 'label' => 'ID'));
-            echo $this->Form->input('name', array('label' => 'Nombre'));
-            echo $this->Form->input('description', array('label' => 'Descripción'));
+            echo $this->Form->input('type_id', array('type' => 'text', 'label' => 'ID', 'class' => 'form-control'));
+            echo $this->Form->input('name', array('label' => 'Nombre', 'class' => 'form-control'));
+            echo $this->Form->input('description', array('label' => 'Descripción', 'class' => 'form-control'));
         ?>
     </fieldset>
-    <a href="javascript:window.history.back()">Cancelar</a>
-    <?= $this->Form->button(__('Aceptar')) ?>
+    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Types', 'action' => 'index'], ['class' => 'btn btn-danger']) ?>
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->end() ?>
 
 
