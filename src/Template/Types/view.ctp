@@ -4,29 +4,31 @@
  * @var \App\Model\Entity\Type $type
  */
 ?>
+
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Type'), ['action' => 'edit', $type->type_id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Type'), ['action' => 'delete', $type->type_id], ['confirm' => __('Are you sure you want to delete # {0}?', $type->type_id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Types'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Type'), ['action' => 'add']) ?> </li>
+      
+        <li><?= $this->Html->link(__('Lista Activos'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Lista Tipos'), ['controller' => 'Types', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Editar'), ['action' => 'edit', $type->type_id]) ?> </li>
+       
     </ul>
 </nav>
+
 <div class="types view large-9 medium-8 columns content">
-    <h3><?= h($type->name) ?></h3>
+    <h3>Consultar</h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Type Id') ?></th>
+            <th scope="row"><?= __('ID') ?></th>
             <td><?= h($type->type_id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Name') ?></th>
+            <th scope="row"><?= __('Nombre') ?></th>
             <td><?= h($type->name) ?></td>
         </tr>
     </table>
     <div class="row">
-        <h4><?= __('Description') ?></h4>
+        <h4><?= __('Descripción') ?></h4>
         <?= $this->Text->autoParagraph(h($type->description)); ?>
     </div>
 </div>
