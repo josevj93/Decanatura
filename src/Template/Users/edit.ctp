@@ -6,20 +6,20 @@
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
+        <li class="heading"><?= __('Acciones') ?></li>
         <li><?= $this->Form->postLink(
-                __('Delete'),
+                __('Eliminar'),
                 ['action' => 'delete', $user->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]
+                ['confirm' => __('¿Está seguro que desea eliminar este usuario? # {0}?', $user->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Lista Usuarios'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">
     <?= $this->Form->create($user) ?>
     <fieldset>
-        <legend><?= __('Edit User') ?></legend>
+        <legend><?= __('Editar Usuario') ?></legend>
         <?php
             echo $this->Form->control('nombre');
             echo $this->Form->control('apellido1');
@@ -30,6 +30,6 @@
             echo $this->Form->control('id_rol');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Aceptar')) ?>
     <?= $this->Form->end() ?>
 </div>
