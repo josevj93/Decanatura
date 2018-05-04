@@ -1,0 +1,17 @@
+2018-05-03 04:17:52 Error: [Cake\Database\Exception] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'decanatura.ejemplo' doesn't exist in C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Schema\Collection.php on line 131
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(97): Cake\Database\Schema\Collection->_reflect('Column', 'ejemplo', Array, Object(Cake\Database\Schema\TableSchema))
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(63): Cake\Database\Schema\Collection->describe('ejemplo', Array)
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Table.php(532): Cake\Database\Schema\CachedCollection->describe('ejemplo')
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Table.php(653): Cake\ORM\Table->getSchema()
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\bake\src\Shell\Task\TemplateTask.php(288): Cake\ORM\Table->getPrimaryKey()
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\bake\src\Shell\Task\TemplateTask.php(369): Bake\Shell\Task\TemplateTask->_loadController()
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\bake\src\Shell\Task\TemplateTask.php(344): Bake\Shell\Task\TemplateTask->getContent('Index')
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\bake\src\Shell\Task\TemplateTask.php(137): Bake\Shell\Task\TemplateTask->bake('Index', true, 'Index')
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Console\Shell.php(507): Bake\Shell\Task\TemplateTask->main('Ejemplo', 'Index')
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Console\Shell.php(500): Cake\Console\Shell->runCommand(Array, false, Array)
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Console\CommandRunner.php(141): Cake\Console\Shell->runCommand(Array, true)
+#11 C:\xampp\htdocs\Decanatura\bin\cake.php(12): Cake\Console\CommandRunner->run(Array)
+#12 {main}
+
+
