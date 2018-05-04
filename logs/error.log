@@ -5420,3 +5420,120 @@ Stack Trace:
 #15 {main}
 
 
+2018-05-03 21:49:19 Error: [PDOException] SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+
+Request URL: /users
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Driver\PDODriverTrait.php(48): PDO->__construct('mysql:host=deca...', 'ecci@decanatura', 'Gaby1234', Array)
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Driver\Mysql.php(104): Cake\Database\Driver\Mysql->_connect('mysql:host=deca...', Array)
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Schema\BaseSchema.php(45): Cake\Database\Driver\Mysql->connect()
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Dialect\MysqlDialectTrait.php(63): Cake\Database\Schema\BaseSchema->__construct(Object(Cake\Database\Driver\Mysql))
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(52): Cake\Database\Driver\Mysql->schemaDialect()
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(42): Cake\Database\Schema\Collection->__construct(Object(Cake\Database\Connection))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Connection.php(369): Cake\Database\Schema\CachedCollection->__construct(Object(Cake\Database\Connection), true)
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Table.php(531): Cake\Database\Connection->getSchemaCollection()
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Query.php(211): Cake\ORM\Table->getSchema()
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Query.php(168): Cake\ORM\Query->addDefaultTypes(Object(App\Model\Table\UsersTable))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Table.php(1582): Cake\ORM\Query->__construct(Object(Cake\Database\Connection), Object(App\Model\Table\UsersTable))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Table.php(1182): Cake\ORM\Table->query()
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Datasource\Paginator.php(180): Cake\ORM\Table->find('all', Array)
+#13 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Component\PaginatorComponent.php(200): Cake\Datasource\Paginator->paginate(Object(App\Model\Table\UsersTable), Array, Array)
+#14 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Controller.php(718): Cake\Controller\Component\PaginatorComponent->paginate(Object(App\Model\Table\UsersTable), Array)
+#15 C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php(23): Cake\Controller\Controller->paginate(Object(App\Model\Table\UsersTable))
+#16 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Controller.php(440): App\Controller\UsersController->index()
+#17 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(119): Cake\Controller\Controller->invokeAction()
+#18 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\UsersController))
+#19 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#20 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#21 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#22 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#23 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#24 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#25 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#26 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#27 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#28 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#29 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#30 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#31 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#32 {main}
+
+
+2018-05-03 21:49:26 Error: [PDOException] SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+
+Request URL: /Users
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Driver\PDODriverTrait.php(48): PDO->__construct('mysql:host=deca...', 'ecci@decanatura', 'Gaby1234', Array)
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Driver\Mysql.php(104): Cake\Database\Driver\Mysql->_connect('mysql:host=deca...', Array)
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Schema\BaseSchema.php(45): Cake\Database\Driver\Mysql->connect()
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Dialect\MysqlDialectTrait.php(63): Cake\Database\Schema\BaseSchema->__construct(Object(Cake\Database\Driver\Mysql))
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(52): Cake\Database\Driver\Mysql->schemaDialect()
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(42): Cake\Database\Schema\Collection->__construct(Object(Cake\Database\Connection))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Connection.php(369): Cake\Database\Schema\CachedCollection->__construct(Object(Cake\Database\Connection), true)
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Table.php(531): Cake\Database\Connection->getSchemaCollection()
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Query.php(211): Cake\ORM\Table->getSchema()
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Query.php(168): Cake\ORM\Query->addDefaultTypes(Object(App\Model\Table\UsersTable))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Table.php(1582): Cake\ORM\Query->__construct(Object(Cake\Database\Connection), Object(App\Model\Table\UsersTable))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Table.php(1182): Cake\ORM\Table->query()
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Datasource\Paginator.php(180): Cake\ORM\Table->find('all', Array)
+#13 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Component\PaginatorComponent.php(200): Cake\Datasource\Paginator->paginate(Object(App\Model\Table\UsersTable), Array, Array)
+#14 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Controller.php(718): Cake\Controller\Component\PaginatorComponent->paginate(Object(App\Model\Table\UsersTable), Array)
+#15 C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php(23): Cake\Controller\Controller->paginate(Object(App\Model\Table\UsersTable))
+#16 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Controller.php(440): App\Controller\UsersController->index()
+#17 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(119): Cake\Controller\Controller->invokeAction()
+#18 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\UsersController))
+#19 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#20 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#21 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#22 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#23 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#24 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#25 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#26 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#27 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#28 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#29 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#30 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#31 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#32 {main}
+
+
+2018-05-03 21:55:13 Error: [PDOException] SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+
+Request URL: /Users
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Driver\PDODriverTrait.php(48): PDO->__construct('mysql:host=deca...', 'ecci@decanatura', 'Gaby1234', Array)
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Driver\Mysql.php(104): Cake\Database\Driver\Mysql->_connect('mysql:host=deca...', Array)
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Schema\BaseSchema.php(45): Cake\Database\Driver\Mysql->connect()
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Dialect\MysqlDialectTrait.php(63): Cake\Database\Schema\BaseSchema->__construct(Object(Cake\Database\Driver\Mysql))
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(52): Cake\Database\Driver\Mysql->schemaDialect()
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(42): Cake\Database\Schema\Collection->__construct(Object(Cake\Database\Connection))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Connection.php(369): Cake\Database\Schema\CachedCollection->__construct(Object(Cake\Database\Connection), true)
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Table.php(531): Cake\Database\Connection->getSchemaCollection()
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Query.php(211): Cake\ORM\Table->getSchema()
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Query.php(168): Cake\ORM\Query->addDefaultTypes(Object(App\Model\Table\UsersTable))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Table.php(1582): Cake\ORM\Query->__construct(Object(Cake\Database\Connection), Object(App\Model\Table\UsersTable))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\ORM\Table.php(1182): Cake\ORM\Table->query()
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Datasource\Paginator.php(180): Cake\ORM\Table->find('all', Array)
+#13 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Component\PaginatorComponent.php(200): Cake\Datasource\Paginator->paginate(Object(App\Model\Table\UsersTable), Array, Array)
+#14 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Controller.php(718): Cake\Controller\Component\PaginatorComponent->paginate(Object(App\Model\Table\UsersTable), Array)
+#15 C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php(23): Cake\Controller\Controller->paginate(Object(App\Model\Table\UsersTable))
+#16 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Controller.php(440): App\Controller\UsersController->index()
+#17 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(119): Cake\Controller\Controller->invokeAction()
+#18 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\UsersController))
+#19 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#20 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#21 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#22 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#23 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#24 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#25 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#26 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#27 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#28 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#29 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#30 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#31 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#32 {main}
+
+
