@@ -32,16 +32,7 @@
             </tbody>
         </table>
     </form>
-
-<style>
-    .btn-primary {
-      color: #FFF;
-      background-color: #0099FF;
-      border-color: #0099FF;
-      float: left;
-      margin-left:10px;
-    }
-</style>    
+   
 </div>
 <?= $this->Html->link(__('Insertar Tipo'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
 <script type="text/javascript">
