@@ -23,7 +23,7 @@
                         
                         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $type->type_id], array('escape' => false)) ?>
                         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $type->type_id], array('escape' => false)) ?>
-                        <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $type->type_id], ['escape' => false, 'confirm' => __('Seguro que desea eliminar la Ubicación # {0}?', $type->type_id)]) ?>
+                        <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $type->type_id], ['escape' => false, 'confirm' => __('Seguro que desea eliminar el tipo de activo # {0}?', $type->type_id)]) ?>
                     </td>
                     <td><?= h($type->type_id) ?></td>
                     <td><?= h($type->name) ?></td>
@@ -34,12 +34,13 @@
     </form>
 
 <style>
-.btn-primary {
-  color: #fff;
-  background-color: #FF9933;
-  border-color: #FF9933;
-  
-}
+    .btn-primary {
+      color: #FFF;
+      background-color: #0099FF;
+      border-color: #0099FF;
+      float: left;
+      margin-left:10px;
+    }
 </style>    
 </div>
 <?= $this->Html->link(__('Insertar Tipo'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
