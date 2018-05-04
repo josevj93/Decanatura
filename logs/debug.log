@@ -52,11 +52,20 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-03 21:06:17 Notice: Notice (8): Undefined index: textoBusqueda in [C:\xampp\htdocs\Decanatura\src\Template\TechnicalReports\add.ctp, line 44]
 Request URL: /TechnicalReports/add
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\TechnicalReports\add.ctp, line 44
+=======
+2018-05-04 02:21:28 Notice: Notice (8): Undefined variable: Nombre in [C:\xampp\htdocs\Decanatura\src\Template\Locations\edit.ctp, line 5]
+Request URL: /locations/edit/1525
+Referer URL: http://localhost/Decanatura/locations
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Locations\edit.ctp, line 5
+>>>>>>> e49e16eb66216d7d9065617099b74368c011fefc
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -79,11 +88,20 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-03 21:06:17 Notice: Notice (8): Undefined index: textoBusqueda in [C:\xampp\htdocs\Decanatura\src\Template\TechnicalReports\add.ctp, line 52]
 Request URL: /TechnicalReports/add
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\TechnicalReports\add.ctp, line 52
+=======
+2018-05-04 02:21:28 Notice: Notice (8): Undefined variable: description in [C:\xampp\htdocs\Decanatura\src\Template\Locations\edit.ctp, line 6]
+Request URL: /locations/edit/1525
+Referer URL: http://localhost/Decanatura/locations
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Locations\edit.ctp, line 6
+>>>>>>> e49e16eb66216d7d9065617099b74368c011fefc
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -106,11 +124,20 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-03 21:06:39 Notice: Notice (8): Undefined index: textoBusqueda in [C:\xampp\htdocs\Decanatura\src\Template\TechnicalReports\add.ctp, line 44]
 Request URL: /TechnicalReports/add
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\TechnicalReports\add.ctp, line 44
+=======
+2018-05-04 02:22:33 Notice: Notice (8): Undefined variable: Nombre in [C:\xampp\htdocs\Decanatura\src\Template\Locations\edit.ctp, line 5]
+Request URL: /locations/edit/1525
+Referer URL: http://localhost/Decanatura/locations
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Locations\edit.ctp, line 5
+>>>>>>> e49e16eb66216d7d9065617099b74368c011fefc
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -133,6 +160,7 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-03 21:06:39 Notice: Notice (8): Undefined index: textoBusqueda in [C:\xampp\htdocs\Decanatura\src\Template\TechnicalReports\add.ctp, line 52]
 Request URL: /TechnicalReports/add
 Trace:
@@ -165,6 +193,14 @@ Request URL: /TechnicalReports/add
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\TechnicalReports\add.ctp, line 49
+=======
+2018-05-04 02:22:33 Notice: Notice (8): Undefined variable: description in [C:\xampp\htdocs\Decanatura\src\Template\Locations\edit.ctp, line 6]
+Request URL: /locations/edit/1525
+Referer URL: http://localhost/Decanatura/locations
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Locations\edit.ctp, line 6
+>>>>>>> e49e16eb66216d7d9065617099b74368c011fefc
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
