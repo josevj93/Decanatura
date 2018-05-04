@@ -86,10 +86,17 @@ $cakeDescription = ' ';
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
-          <a class="nav-link" href="charts.html">
-            <span class="nav-link-text">Activos</span>
-          </a>
+          <?php 
+          echo  $this->Html->link(__('Activos'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'nav-link']);
+          ?> 
         </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="TiposActivos">
+          <?php 
+          echo  $this->Html->link(__('Tipos de activos'), ['controller' => 'Types', 'action' => 'index'], ['class' => 'nav-link']);
+          ?> 
+        </li>
+
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
           <a class="nav-link" href="tables.html">
             <span class="nav-link-text">Préstamos</span>
