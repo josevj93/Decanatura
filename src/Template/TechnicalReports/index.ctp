@@ -32,6 +32,7 @@
     </form>
     
 </div>
+
 <style>
 .btn-primary {
   color: #fff;
