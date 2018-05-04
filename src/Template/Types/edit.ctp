@@ -15,11 +15,11 @@
         ?>
     </fieldset>
     
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
     
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Types', 'action' => 'index'], ['class' => 'btn btn-danger']) ?>
      
-      
+
     
     <?= $this->Form->end() ?>
 </div>
