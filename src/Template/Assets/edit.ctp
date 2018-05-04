@@ -7,8 +7,8 @@
 
 <div class="assets form large-9 medium-8 columns content">
     <?= $this->Form->create($asset) ?>
+    <h3>Editar activo</h3>
     <fieldset>
-        <legend><?= __('Editar Activo') ?></legend>
         <div class="form-group">
         <?php
            
@@ -28,8 +28,15 @@
             echo $this->Form->control('observations', array('label'=>'Observaciones', 'class' => 'form-control'));
         ?>
         </div>
-    </fieldset>
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $asset->plaque], ['confirm' => __('Esta seguro que desea eliminar el activo # {0}?', $asset->plaque)]) ?>
-    <?= $this->Form->end() ?>
+        
+<style>
+    .btn-primary {
+      margin-top: 15px;
+      float: right;
+    }
+</style> 
 </div>
+
+<?= $this->Html->link(__('Cancelar'), ['controller' => 'Types', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+
+<?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
