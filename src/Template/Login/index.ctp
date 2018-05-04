@@ -1,5 +1,0 @@
-<div class="row">
-
-	Test
-
-</div>

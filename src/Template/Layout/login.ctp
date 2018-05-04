@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,47 +10,68 @@
   <meta name="author" content="">
   <title>SB Admin - Start Bootstrap Template</title>
   <!-- Bootstrap core CSS-->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">
-</head>
+   <?= $this->Html->css('cake.css') ?>
 
+  <link href="../webroot/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="../webroot/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="../webroot/css/sb-admin.css" rel="stylesheet">
+</head>
+ <?= $this->Flash->render() ?>
+ <div class="clearfix"></div>
 <body class="bg-dark">
-  <div class="container">
+	
+     <div class="container">
+
+	
+           
+             
+               
+         
+
     <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Login</div>
+      <div class="card-header">Ingreso al Sistema</div>
       <div class="card-body">
-        <form>
+
+      	
+        <!--<form>-->
+        	<?= $this->Form->create() ?>
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+          	
+
+            <!--<label for="usr">Usuario</label>-->
+            <?= $this->Form->input('Usuario', array('id' => 'username', 'name' => 'username', 'class' => 'form-control', 'type' => 'username', 'aria-describedby' => 'emailHelp', 'placeholder' => 'Digite su usuario')); ?>
+            <!--<input class="form-control" id="username" type="username" aria-describedby="emailHelp" placeholder="Digite su usuario">-->
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
+          	
+            <!--<label for="psw">Contraseña</label>-->
+            <?= $this->Form->input('Contraseña', array('id' => 'password', 'name' => 'password', 'class' => 'form-control', 'type' => 'password',  'placeholder' => 'Contraseña')) ?>
+            <!--<input class="form-control" id="password" type="password" placeholder="Contraseña">-->
           </div>
           <div class="form-group">
             <div class="form-check">
               <label class="form-check-label">
-                <input class="form-check-input" type="checkbox"> Remember Password</label>
+                <!--<input class="form-check-input" type="checkbox"> Recordar mi contraseña</label>-->
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="index.html">Login</a>
-        </form>
+          <?= $this->Form->button('Ingresar', array('class' => 'btn btn-primary btn-block')) ?>
+          <!--<a class="btn btn-primary btn-block" href="index">Ingresar</a>-->
+        <!--</form>-->
+        <?= $this->Form->end() ?>
         <div class="text-center">
-          <a class="d-block small mt-3" href="register.html">Register an Account</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          <!--<a class="d-block small mt-3" href="register.html">Register an Account</a>-->
+          <!--<a class="d-block small" href="forgot-password.html">Olvidé mi contraseña</a>-->
         </div>
       </div>
     </div>
   </div>
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../webroot/js/plugins/jquery/jquery.min.js"></script>
+  <script src="../webroot/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../webroot/js/plugins/jquery-easing/jquery.easing.min.js"></script>
 </body>
 
 </html>
