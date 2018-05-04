@@ -76,12 +76,12 @@
                             </div><br>
 
                             <div>
-                                <label>Nº de serie:</label><br>
+                                <label>Marca:</label><br>
                                     <?php echo '<input type="text" class="form-control col-sm-3" readonly="readonly" name="fecha" value="' . htmlspecialchars($technicalReport->asset->brand) . '">'; ?>     
                             </div><br>
 
                             <div>
-                                <label>Nº de serie:</label><br>
+                                <label>Modelo:</label><br>
                                     <?php echo '<input type="text" class="form-control col-sm-3" readonly="readonly" name="fecha" value="' . htmlspecialchars($technicalReport->asset->model) . '">'; ?>     
                             </div><br>
 
