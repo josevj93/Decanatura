@@ -4,14 +4,25 @@
  * @var \App\Model\Entity\Type[]|\Cake\Collection\CollectionInterface $types
  */
 ?>
+
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+
+       <li><?= $this->Html->link(__('Activos'), ['controller' => 'Assets','action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('Tipos'), ['controller' => 'Types', 'action' => 'index']) ?> </li>
+        
+       
+    </ul>
+</nav>
+
 <div class="types index large-9 medium-8 columns content">
-    <h3><?= __('Types') ?></h3>
+    <h3><?= __('Tipos') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('type_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('type_id', 'Tipo' ) ?></th>
+                <th scope="col"><?= $this->Paginator->sort('name','Nombre') ?></th>
+                <th scope="col" class="actions"><?= __('Acciones') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -20,22 +31,15 @@
                 <td><?= h($type->type_id) ?></td>
                 <td><?= h($type->name) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $type->type_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $type->type_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $type->type_id], ['confirm' => __('Are you sure you want to delete # {0}?', $type->type_id)]) ?>
+                    <?= $this->Html->link(__('Consultar'), ['action' => 'view', $type->type_id]) ?>
+                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $type->type_id]) ?>
+                    <?= $this->Form->postLink(__('Borrar'), ['action' => 'delete', $type->type_id], ['confirm' => __('Seguro que desea eliminar el activo # {0}?', $type->type_id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
     <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+
        <?= $this->Html->link(__('Agregar tipo'), ['action' => 'add']) ?> 
     </dright<>
