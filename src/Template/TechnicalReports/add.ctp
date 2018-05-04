@@ -19,21 +19,20 @@
     $( "#datepicker" ).datepicker();
   } );
   </script>
-
-  <script">
-    function Buscar(placa) {
-      $.ajax({
-           type: "POST",
-           url: '<?php echo Router::url(array('controller' => 'TechnicalReports', 'action' => 'BuscarActivo')); ?>',
-           data:{placa:placa},
-           success:function(html) {
-             alert(html);
-           }
-
-      });
-    }
-</script>
 </head>
+
+<?php
+
+    $placa="Hola";
+    if($_GET['btnBuscar']){Buscar();}
+
+    function Buscar() {
+      $placa= $_GET['lblPlaca'] ; 
+    }
+
+
+?>
+
 <body>
 
 
@@ -69,17 +68,16 @@
     Lalala
     <div class="col-lg-6">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Numero de plcada" id="lblPlaca" > 
+        <input type="text" class="form-control" placeholder="Numero de plcada" name="lblPlaca" > 
         <span class="input-group-btn">
-          <button class="btn btn-secondary col-xs-6"" type="button" id="btnBuscar" 
-                   onclick="Buscar(document.getElementById("lblPlaca").value; )"><i class="fa fa-search"></i></button>
+          <button id="btnBuscar" name="btnBuscar" onClick='location.href="?btnBuscar=1"'><i class="fa fa-search"></i></button>
         </span>
       </div>
     </div>
 
-    <?php foreach ($AssetsBuscados as $Asset): ?>
-        <?= h($Asset->model) ?>
-    <?php endforeach; ?>
+    <?php if ($placa == "Hola"): ?>
+        <?= h($placa) ?>
+    <?php endif; ?>
   
     <?php echo $this->Form->control('assets_id', ['options' => $assets]); ?>
     <label for="Evaluacion">Evaluación:</label>
@@ -102,10 +100,5 @@
     <input type="submit" name="submit" value="Submit">  
   </form>
 
-  <script type="text/javascript">
-    $(document).ready(function() 
-    {
-        $('#locations-grid').DataTable( {} );
-    } );
-</script>
+
 </body>

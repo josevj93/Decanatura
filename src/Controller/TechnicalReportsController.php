@@ -21,9 +21,7 @@ class TechnicalReportsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Assets']
-        ];
+        
         $technicalReports = $this->paginate($this->TechnicalReports);
 
         $this->set(compact('technicalReports'));
@@ -62,11 +60,9 @@ class TechnicalReportsController extends AppController
             }
             $this->Flash->error(__('The technical report could not be saved. Please, try again.'));
         }
-        //$assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
-       /* $Assets = TableRegistry::get('Articles');
-        $AssetLista= $Assets->find()
-                              ->select(['brand','model','series','description']);*/
-        $this->set(compact('technicalReport'/*, 'AssetLista'*/));
+        $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
+
+        $this->set(compact('technicalReport', 'assets'));
     }
 
     /**
@@ -117,8 +113,8 @@ class TechnicalReportsController extends AppController
     public function BuscarActivo($placa = null)
     {
         $Assets = TableRegistry::get('Assets');
-        $AssetsBuscados= $Assets->find()
+        $AssetBuscado= $Assets->find()
                               ->select(['brand','model','series','description']);
-        $this->set(compact('AssetsBuscados'));
+        $this->set(compact( 'AssetLista'));
     }
 }
