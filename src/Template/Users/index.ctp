@@ -23,7 +23,7 @@ index
                 <th scope="col"><?= $this->Paginator->sort('apellido1') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('apellido2') ?></th>
                 <!--<th scope="col"><?= $this->Paginator->sort('correo') ?></th>-->
-                <th scope="col"><?= $this->Paginator->sort('usuario') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('username') ?></th>
                 <!--<th scope="col"><?= $this->Paginator->sort('password') ?></th>-->
                 <!--<th scope="col"><?= $this->Paginator->sort('id_rol') ?></th>-->
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -37,7 +37,7 @@ index
                 <td><?= h($user->apellido1) ?></td>
                 <td><?= h($user->apellido2) ?></td>
                 <!--<td><?= h($user->correo) ?></td>-->
-                <td><?= h($user->usuario) ?></td>
+                <td><?= h($user->username) ?></td>
                 <!--<td><?= h($user->password) ?></td>-->
                 <!--<td><?= $this->Number->format($user->id_rol) ?></td>-->
                 <td class="actions">

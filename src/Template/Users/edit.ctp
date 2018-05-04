@@ -25,11 +25,12 @@
             echo $this->Form->control('apellido1');
             echo $this->Form->control('apellido2');
             echo $this->Form->control('correo');
-            echo $this->Form->control('usuario');
+            echo $this->Form->control('username');
             echo $this->Form->control('password');
             echo $this->Form->control('id_rol');
         ?>
     </fieldset>
+    &nbsp;
     <?= $this->Form->button(__('Aceptar')) ?>
     <?= $this->Form->end() ?>
 </div>

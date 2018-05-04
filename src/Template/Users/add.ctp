@@ -24,6 +24,7 @@
             echo $this->Form->control('id_rol');
         ?>
     </fieldset>
+    &nbsp;
     <?= $this->Form->button(__('Aceptar')) ?>
     <?= $this->Form->end() ?>
 </div>
