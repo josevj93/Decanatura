@@ -1,19 +1,26 @@
 <div class="locations view large-9 medium-8 columns content">
-    <h3><?= h("Consultar Ubicacion") ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= h($location->location_id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Descripcion') ?></th>
-            <td><?= h($location->description) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Nombre') ?></th>
-            <td><?= h($location->nombre) ?></td>
-        </tr>
-    </table>
+    <?= $this->Form->create($location) ?>
+    <fieldset>
+        <legend><?= __('Consultar Ubicación') ?></legend><br>
+            <div>
+                <label>Id:</label><br>
+                <?php 
+                echo $this->Form->imput('location_id',  ['label' => 'Id:', 'class'=>'form-control col-sm-2', 'disabled']);
+                ?><br>
+            </div>
+            <div>
+                <label>Nombre:</label><br>
+                <?php 
+                echo $this->Form->imput('nombre', ['label' => 'Nombre:', 'class'=>'form-control col-sm-2', 'disabled']);
+                ?><br>
+            </div>
+            <div>
+                <label>Descripción:</label><br>
+                <?php 
+                echo $this->Form->textarea('description', ['label' => 'Descripción:', 'class'=>'form-control col-sm-4', 'disabled']);
+                ?><br>
+            </div>
+    </fieldset>
 
 <style>
     .btn-primary {

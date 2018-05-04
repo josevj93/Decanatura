@@ -2,12 +2,28 @@
     <?= $this->Form->create($location) ?>
     <fieldset>
         <legend><?= __('Insertar Ubicacion') ?></legend>
-        <?php
-            echo $this->Form->input('location_id', array('type' => 'text', 'label' => 'Id'));
-            echo $this->Form->control('description', array('label' => 'Descripcion'));
-            echo $this->Form->control('nombre', array('label' => 'Nombre'));
-        ?>
+          <div>
+            <div>
+                <label>Id:</label><br>
+                <?php 
+                echo $this->Form->imput('location_id', ['label' => 'Id:', 'class'=>'form-control col-sm-2']);
+                ?><br>
+            </div>
+            <div>
+            <label>Nombre:</label><br>
+                <?php 
+                echo $this->Form->imput('nombre', ['label' => 'Nombre:', 'class'=>'form-control col-sm-2']);
+                ?><br>
+            </div>
+            <div>
+                <label>Descripción:</label><br>
+                <?php 
+                echo $this->Form->textarea('description', ['label' => 'Descripción:', 'class'=>'form-control col-sm-4']);
+                ?><br>
+            </div>
+          </div>
     </fieldset>
+
     <style>
         .btn-primary {
           color: #fff;
