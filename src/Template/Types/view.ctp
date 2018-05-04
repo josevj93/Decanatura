@@ -6,7 +6,7 @@
 ?>
 
 <div class="types view large-9 medium-8 columns content">
-    <h3>Consultar</h3>
+    <h3>Consultar tipo de activo</h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('ID') ?></th>
@@ -30,6 +30,6 @@
 </div>
 <?= $this->Form->postLink('Eliminar', array('action' => 'delete', $type->type_id), array('class' => 'btn btn-primary') , array('Seguro que desea eliminar la Ubicación # {0}?', $type->type_id)) ?>
 
-<?= $this->Html->link(__('Modificar'), ['action' => 'edit', $type->type_id], ['class' => 'btn btn-primary']) ?>
+<?= $this->Html->link(__('Editar'), ['action' => 'edit', $type->type_id], ['class' => 'btn btn-primary']) ?>
     
 <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>

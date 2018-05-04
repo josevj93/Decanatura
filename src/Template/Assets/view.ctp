@@ -4,18 +4,8 @@
  * @var \App\Model\Entity\Asset $asset
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        
-        <li><?= $this->Html->link(__('Activos'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('Tipos'), ['controller' => 'Types', 'action' => 'index']) ?> </li>
-         <li><?= $this->Html->link(__('Editar'), ['action' => 'edit', $asset->plaque]) ?> </li>
-        
-     
-    </ul>
-</nav>
 <div class="assets view large-9 medium-8 columns content">
-    <h3>Consulta</h3>
+    <h3>Consultar activo</h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Placa') ?></th>
@@ -69,9 +59,20 @@
             <th scope="row"><?= __('Prestable') ?></th>
             <td><?= $asset->lendable ? __('Yes') : __('No'); ?></td>
         </tr>
+        <tr>
+            <th scope="row"><?= __('Observaciones') ?></th>
+            <td><?= h($asset->observations) ?></td>
+        </tr>
     </table>
-    <div class="row">
-        <h4><?= __('Observaciones') ?></h4>
-        <?= $this->Text->autoParagraph(h($asset->observations)); ?>
-    </div>
+
+<style>
+    .btn-primary {
+      float: right;
+    }
+</style>    
 </div>
+<?= $this->Form->postLink('Eliminar', array('action' => 'delete', $asset->plaque), array('class' => 'btn btn-primary') , array('Seguro que desea eliminar la Ubicación # {0}?', $asset->plaque)) ?>
+
+<?= $this->Html->link(__('Editar'), ['action' => 'edit', $asset->plaque], ['class' => 'btn btn-primary']) ?>
+    
+<?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>

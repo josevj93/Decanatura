@@ -7,8 +7,8 @@
 
 <div class="assets form large-9 medium-8 columns content">
     <?= $this->Form->create($asset) ?>
+    <h3>Insertar activo</h3>
     <fieldset>
-        <legend><?= __('Agregar Activo') ?></legend>
         <?php
 
 
@@ -27,8 +27,15 @@
             echo $this->Form->control('lendable',  array('label'=>'Prestable', 'class' => 'checkbox'));
             echo $this->Form->control('observations', array('label'=>'Observaciones', 'class' => 'form-control'));
         ?>
-    </fieldset>
-    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Types', 'action' => 'index'], ['class' => 'btn btn-danger']) ?>
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->end() ?>
+
+<style>
+    .btn-primary {
+      margin-top: 15px;
+      float: right;
+    }
+</style> 
 </div>
+
+<?= $this->Html->link(__('Cancelar'), ['controller' => 'Types', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+
+<?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
