@@ -75,11 +75,11 @@ class TypesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $type = $this->Types->patchEntity($type, $this->request->getData());
             if ($this->Types->save($type)) {
-                $this->Flash->success(__('The type has been saved.'));
+                $this->Flash->success(__('Tipo de activo fue guardado'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The type could not be saved. Please, try again.'));
+            $this->Flash->error(__('El tipo de activo no se pudo guardar, porfavor intente nuevamente'));
         }
         $this->set(compact('type'));
     }

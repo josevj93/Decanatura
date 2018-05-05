@@ -12,7 +12,7 @@
         <div class="form-group">
         <?php
            
-            echo $this->Form->input('plaque',array('type' => 'text','label'=>'Placa', 'class' => 'form-control'));    
+            echo $this->Form->input('plaque',array('type' => 'text','label'=>'Placa', 'disabled' => true, 'class' => 'form-control'));
             echo $this->Form->control('type_id', array('options' => $types,'label'=>'Tipo', 'class' => 'form-control'));
             echo $this->Form->control('brand', array('label'=>'Marca', 'class' => 'form-control'));
             echo $this->Form->control('model' , array('label'=>'Modelo', 'class' => 'form-control'));
@@ -37,6 +37,6 @@
 </style> 
 </div>
 
-<?= $this->Html->link(__('Cancelar'), ['controller' => 'Types', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+<?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
 <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
