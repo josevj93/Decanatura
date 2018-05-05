@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+index
+=======
 <?php
 /**
  * @var \App\View\AppView $this
@@ -20,7 +23,7 @@
                 <th scope="col"><?= $this->Paginator->sort('apellido1') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('apellido2') ?></th>
                 <!--<th scope="col"><?= $this->Paginator->sort('correo') ?></th>-->
-                <th scope="col"><?= $this->Paginator->sort('usuario') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('username') ?></th>
                 <!--<th scope="col"><?= $this->Paginator->sort('password') ?></th>-->
                 <!--<th scope="col"><?= $this->Paginator->sort('id_rol') ?></th>-->
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -34,7 +37,7 @@
                 <td><?= h($user->apellido1) ?></td>
                 <td><?= h($user->apellido2) ?></td>
                 <!--<td><?= h($user->correo) ?></td>-->
-                <td><?= h($user->usuario) ?></td>
+                <td><?= h($user->username) ?></td>
                 <!--<td><?= h($user->password) ?></td>-->
                 <!--<td><?= $this->Number->format($user->id_rol) ?></td>-->
                 <td class="actions">
@@ -57,3 +60,4 @@
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
 </div>
+>>>>>>> 8b82fd1846c24b21fef004bb1e49061828091515

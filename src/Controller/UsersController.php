@@ -52,8 +52,12 @@ class UsersController extends AppController
      */
     public function add()
     {
+<<<<<<< HEAD
 
         $this->viewBuilder()->setLayout('default');
+=======
+        
+>>>>>>> b4f2ead75db15d8208ca4c033fe50db7cb1bcad2
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -110,4 +114,33 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+
+
+    public function login(){
+
+         $this->viewBuilder()->setLayout('login');
+
+        if($this->request->is('post')){
+            $user = $this->Auth->identify();
+            if($user){
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error(__('Usuario o contaseña inválidos, intente otra vez'));
+        }
+
+    }
+
+
+    public function logout(){
+
+        return $this->redirect($this->Auth->logout());
+    }
+
 }
+
+
+
+
+

@@ -34,18 +34,22 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Usuario') ?></th>
-            <td><?= h($user->usuario) ?></td>
+            <td><?= h($user->username) ?></td>
         </tr>
+    <!--
         <tr>
             <th scope="row"><?= __('Password') ?></th>
             <td><?= h($user->password) ?></td>
         </tr>
+    -->
+    <!--
         <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($user->id) ?></td>
         </tr>
+    -->
         <tr>
-            <th scope="row"><?= __('Id Rol') ?></th>
+            <th scope="row"><?= __('Rol') ?></th>
             <td><?= $this->Number->format($user->id_rol) ?></td>
         </tr>
     </table>

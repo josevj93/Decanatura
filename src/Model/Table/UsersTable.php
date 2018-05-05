@@ -68,13 +68,13 @@ class UsersTable extends Table
             ->allowEmpty('correo');
 
         $validator
-            ->scalar('usuario')
-            ->maxLength('usuario', 100)
-            ->allowEmpty('usuario');
+            ->scalar('username')
+            ->maxLength('username', 100)
+            ->allowEmpty('username');
 
         $validator
             ->scalar('password')
-            ->maxLength('password', 32)
+            ->maxLength('password', 100)
             ->allowEmpty('password');
 
         $validator
