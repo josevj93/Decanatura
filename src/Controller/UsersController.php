@@ -52,13 +52,7 @@ class UsersController extends AppController
      */
     public function add()
     {
-<<<<<<< HEAD
-
-        $this->viewBuilder()->setLayout('default');
-=======
-        
->>>>>>> b4f2ead75db15d8208ca4c033fe50db7cb1bcad2
-        $user = $this->Users->newEntity();
+     $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
