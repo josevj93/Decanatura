@@ -175,26 +175,19 @@ $cakeDescription = ' ';
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-<<<<<<< HEAD
-                <h5 class="modal-title" id="exampleModalLabel">Está a punto de desconectarse.</h5>
-=======
+
                 <h5 class="modal-title" id="exampleModalLabel">¿List@ para salir?</h5>
->>>>>>> pr/18
+
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
-<<<<<<< HEAD
+
               <div class="modal-body">En caso de que desee salir presione aceptar, o en caso contrario cancelar.</div>
               <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                 <a class="btn btn-primary" href="login.html">Aceptar</a>
-=======
-              <div class="modal-body">Seleccione "Salir" para cerrar sesión.</div>
-              <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                <a class="btn btn-primary" href="users/logout">Salir</a>
->>>>>>> pr/18
+
               </div>
             </div>
           </div>
