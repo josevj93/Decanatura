@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <title>SB Admin - Start Bootstrap Template</title>
   <!-- Bootstrap core CSS-->
-   <?= $this->Html->css('cake.css') ?>
+  <?= $this->Html->css('cake.css') ?>
 
   <link href="../webroot/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -18,46 +18,39 @@
   <!-- Custom styles for this template-->
   <link href="../webroot/css/sb-admin.css" rel="stylesheet">
 </head>
- <?= $this->Flash->render() ?>
- <div class="clearfix"></div>
+<?= $this->Flash->render() ?>
+<div class="clearfix"></div>
 <body class="bg-dark">
 	
-     <div class="container">
+ <div class="container">
+  <div class="card card-login mx-auto mt-5">
+    <div class="card-header">Ingreso al Sistema</div>
+    <div class="card-body">
 
-	
-           
-             
-               
+     
+      <!--<form>-->
+       <?= $this->Form->create() ?>
+       <div class="form-group">
          
 
-    <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Ingreso al Sistema</div>
-      <div class="card-body">
-
-      	
-        <!--<form>-->
-        	<?= $this->Form->create() ?>
-          <div class="form-group">
-          	
-
-            <!--<label for="usr">Usuario</label>-->
-            <?= $this->Form->input('Usuario', array('id' => 'username', 'name' => 'username', 'class' => 'form-control', 'type' => 'username', 'aria-describedby' => 'emailHelp', 'placeholder' => 'Digite su usuario')); ?>
-            <!--<input class="form-control" id="username" type="username" aria-describedby="emailHelp" placeholder="Digite su usuario">-->
+        <!--<label for="usr">Usuario</label>-->
+        <?= $this->Form->input('Usuario', array('id' => 'username', 'name' => 'username', 'class' => 'form-control', 'type' => 'username', 'aria-describedby' => 'emailHelp', 'placeholder' => 'Digite su usuario')); ?>
+        <!--<input class="form-control" id="username" type="username" aria-describedby="emailHelp" placeholder="Digite su usuario">-->
+      </div>
+      <div class="form-group">
+       
+        <!--<label for="psw">Contraseña</label>-->
+        <?= $this->Form->input('Contraseña', array('id' => 'password', 'name' => 'password', 'class' => 'form-control', 'type' => 'password',  'placeholder' => 'Contraseña')) ?>
+        <!--<input class="form-control" id="password" type="password" placeholder="Contraseña">-->
+      </div>
+      <div class="form-group">
+        <div class="form-check">
+          <label class="form-check-label">
+            <!--<input class="form-check-input" type="checkbox"> Recordar mi contraseña</label>-->
           </div>
-          <div class="form-group">
-          	
-            <!--<label for="psw">Contraseña</label>-->
-            <?= $this->Form->input('Contraseña', array('id' => 'password', 'name' => 'password', 'class' => 'form-control', 'type' => 'password',  'placeholder' => 'Contraseña')) ?>
-            <!--<input class="form-control" id="password" type="password" placeholder="Contraseña">-->
-          </div>
-          <div class="form-group">
-            <div class="form-check">
-              <label class="form-check-label">
-                <!--<input class="form-check-input" type="checkbox"> Recordar mi contraseña</label>-->
-            </div>
-          </div>
-          <?= $this->Form->button('Ingresar', array('class' => 'btn btn-primary btn-block')) ?>
-          <!--<a class="btn btn-primary btn-block" href="index">Ingresar</a>-->
+        </div>
+        <?= $this->Form->button('Ingresar', array('class' => 'btn btn-primary btn-block')) ?>
+        <!--<a class="btn btn-primary btn-block" href="index">Ingresar</a>-->
         <!--</form>-->
         <?= $this->Form->end() ?>
         <div class="text-center">
