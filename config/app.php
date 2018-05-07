@@ -229,8 +229,9 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'non_standard_port_number',
-            'username' => 'diego@decanatura',
-            'password' => 'Ecci4321',
+
+            'username' => 'ecci@decanatura',
+            'password' => 'Gaby1234',
             'database' => 'decanatura',
             'encoding' => 'utf8',
             'timezone' => 'UTC',

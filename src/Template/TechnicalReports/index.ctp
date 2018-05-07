@@ -19,12 +19,37 @@
                 <?php foreach ($technicalReports as $technicalReport): ?>
                 <tr>
                     <td class="actions">
-                        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $technicalReport->date(format)], array('escape' => false)) ?>
-                        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $technicalReport->recommendation], array('escape' => false)) ?>
-                        <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $technicalReport->technical_report_id], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $technicalReports->technical_report_id)]) ?>
+                        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $technicalReport->technical_report_id], array('escape' => false)) ?>
+                        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $technicalReport->technical_report_id], array('escape' => false)) ?>
+                        <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $technicalReport->technical_report_id], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $technicalReport->technical_report_id)]) ?>
                     </td>
-                    <td><?= h($technicalReport->date(format)) ?></td>
-                    <td><?= h($technicalReport->recommendation) ?></td>                    
+
+                    <td><?= h($technicalReport->date ) ?></td>
+
+
+                    <td>
+                        <?php if ("U"==$technicalReport->recommendation): ?>
+                          Reubicar
+                        <?php endif; ?>
+
+                        <?php if("P"==$technicalReport->recommendation): ?>
+                          Reparar
+                        <?php endif; ?>
+
+                        <?php if("E"==$technicalReport->recommendation): ?>
+                          Desechar
+                        <?php endif; ?>
+
+                        <?php if("D"==$technicalReport->recommendation): ?>
+                          Usar piesas
+                        <?php endif; ?>
+
+                        <?php if("O"==$technicalReport->recommendation): ?>
+                          Otros
+                        <?php endif; ?>
+
+                    </td>           
+
                 </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -32,6 +57,7 @@
     </form>
     
 </div>
+
 <style>
 .btn-primary {
   color: #fff;
@@ -46,6 +72,6 @@
 <script type="text/javascript">
     $(document).ready(function() 
     {
-        $('#locations-grid').DataTable( {} );
+        $('#technicalReports-grid').DataTable( {} );
     } );
 </script>
