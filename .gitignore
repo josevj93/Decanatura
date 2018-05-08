@@ -1,9 +1,6 @@
 # CakePHP specific files #
-.tmp/
-.logs/
-
 ##########################
-
+/tmp
 
 # OS generated files #
 ######################
