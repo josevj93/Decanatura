@@ -4,19 +4,13 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 /**
- * Assets Controller
- *
- * @property \App\Model\Table\AssetsTable $Assets
- *
- * @method \App\Model\Entity\Asset[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * Controlador para los activos de la aplicación
  */
 class AssetsController extends AppController
 {
 
     /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
+     * Método para desplegar una lista con un resumen de los datos de activos
      */
     public function index()
     {
@@ -29,11 +23,7 @@ class AssetsController extends AppController
     }
 
     /**
-     * View method
-     *
-     * @param string|null $id Asset id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * Método para ver los datos completos de un activo
      */
     public function view($id = null)
     {
@@ -45,9 +35,7 @@ class AssetsController extends AppController
     }
 
     /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * Método para agregar nuevos activos al sistema
      */
     public function add()
     {
@@ -68,11 +56,7 @@ class AssetsController extends AppController
     }
 
     /**
-     * Edit method
-     *
-     * @param string|null $id Asset id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * Método para editar un activo en el sistema
      */
     public function edit($id = null)
     {
@@ -95,11 +79,7 @@ class AssetsController extends AppController
     }
 
     /**
-     * Delete method
-     *
-     * @param string|null $id Asset id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * Método para eliminar un activo del sistema
      */
     public function delete($id = null)
     {

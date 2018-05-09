@@ -67,8 +67,6 @@ class AssetsTable extends Table
             ->scalar('plaque')
             ->maxLength('plaque', 255)
             ->notEmpty('plaque');
-            
-            
 
         $validator
             ->scalar('brand')
