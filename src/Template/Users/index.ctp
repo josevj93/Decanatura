@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-index
-=======
+
 <?php
 /**
  * @var \App\View\AppView $this
@@ -13,6 +11,7 @@ index
         <li><?= $this->Html->link(__('Nuevo Usuario'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
+
 <div class="users index large-9 medium-8 columns content">
     <h3><?= __('Usuarios') ?></h3>
     <table cellpadding="0" cellspacing="0">
@@ -60,4 +59,4 @@ index
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
 </div>
->>>>>>> 8b82fd1846c24b21fef004bb1e49061828091515
+

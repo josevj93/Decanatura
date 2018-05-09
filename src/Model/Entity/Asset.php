@@ -13,15 +13,15 @@ use Cake\ORM\Entity;
  * @property string $series
  * @property string $description
  * @property string $state
- * @property string|resource $image
+ * @property string $image
  * @property int $owner_id
  * @property int $responsable_id
  * @property string $location_id
  * @property string $sub_location
  * @property int $year
  * @property bool $lendable
- * @property int $lot
  * @property string $observations
+ * @property string $dir
  *
  * @property \App\Model\Entity\Type $type
  * @property \App\Model\Entity\User $user
@@ -54,10 +54,11 @@ class Asset extends Entity
         'sub_location' => true,
         'year' => true,
         'lendable' => true,
-        'lot' => true,
         'observations' => true,
+        'image_dir' => true,
         'type' => true,
         'user' => true,
-        'location' => true
+        'location' => true,
+        'unique_id' => true
     ];
 }
