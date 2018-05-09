@@ -1,9 +1,5 @@
 <?php
-
 $cakeDescription = 'Control de Activos';
-
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,49 +22,11 @@ $cakeDescription = 'Control de Activos';
   $this->Html->script([ 'plugins/jquery/jquery.min.js']);
   ?>
 
-  <!--$this->Html->css($this->Html->url('/css/main.css', true));-->
-
-  <!-- Bootstrap core JavaScript-->
-
-
-
-<!--
-'dataTables.bootstrap.min','jquery.dataTables.min',, 'jquery.easing.min.js','bootstrap.min', 
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-  <link href="css/sb-admin.css" rel="stylesheet">
- <script src="js/sb-admin.min.js"></script>
-   <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  
-
-
-
-     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-   
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-  
-   
-   
-    <script src="js/sb-admin-datatables.min.js"></script>
-    <script src="js/sb-admin-charts.min.js"></script>
-<<<<<<< HEAD
-
-         
--->
 
 </head>
 
 
-   <!--script src="js/sb-admin.min.js"></script>
-=======
--->
+
 
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -82,13 +40,14 @@ $cakeDescription = 'Control de Activos';
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
         <?=$this->Html->link(
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Usuarios', array('class' => 'nav-link-text')),
-          array('controller' => 'Users','action' => 'index'),
+
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Usuarios', array('class' => 'nav-link-text')),array('controller' => 'Users','action' => 'index'),
           array('class' => 'nav-link',
             'escape'=> false)
         );
         ?>
       </li>
+
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
         <?=$this->Html->link(
@@ -108,6 +67,7 @@ $cakeDescription = 'Control de Activos';
             'escape'=> false)
         );
         ?>
+
       </li>
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
@@ -158,6 +118,7 @@ $cakeDescription = 'Control de Activos';
   </nav>
 
 
+
   <div class="content-wrapper">
     <div class="container-fluid">
       <div class="container">
@@ -203,6 +164,7 @@ $cakeDescription = 'Control de Activos';
       </div>
     </div>
   </div>
+</div>
 
 
 
@@ -214,13 +176,10 @@ $cakeDescription = 'Control de Activos';
   ?>
 
 
-
-
-</div>
-<!-- Bootstrap core JavaScript-->
-
 </body>
 </html>
+
+
 
 
 

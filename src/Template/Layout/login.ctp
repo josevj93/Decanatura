@@ -11,7 +11,9 @@
   <title>SB Admin - Start Bootstrap Template</title>
   <!-- Bootstrap core CSS-->
 
+
   <?= $this->Html->css('cake.css') ?>
+
 
 
   <link href="../webroot/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,24 +29,17 @@
 	
  <div class="container">
 
-
-
-
-
-
-
   <div class="card card-login mx-auto mt-5">
     <div class="card-header">Ingreso al Sistema</div>
     <div class="card-body">
 
-
+     
       <!--<form>-->
        <?= $this->Form->create() ?>
        <div class="form-group">
-
-
         <!--<label for="usr">Usuario</label>-->
-        <?= $this->Form->input('Usuario', array('id' => 'username', 'name' => 'username', 'class' => 'form-control', 'type' => 'username', 'aria-describedby' => 'emailHelp', 'placeholder' => 'Digite su usuario')); ?>
+        <?= $this->Form->input('Usuario', array('id' => 'username', 'name' => 'username', 'class' => 'form-control', 'type' => 'username', 
+        'aria-describedby' => 'emailHelp', 'placeholder' => 'Digite su usuario')); ?>
         <!--<input class="form-control" id="username" type="username" aria-describedby="emailHelp" placeholder="Digite su usuario">-->
       </div>
       <div class="form-group">
