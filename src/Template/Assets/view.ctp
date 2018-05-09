@@ -65,7 +65,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Imagen') ?></th>
-            <td><?= $this->Html->image('../files/Assets/image/' . $asset->uniqid . '/' . $asset->image) ?></td>
+            <td><?= $this->Html->image('/webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png') ?></td>
         </tr>
     </table>
 
