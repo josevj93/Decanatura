@@ -30,7 +30,7 @@ $random = uniqid();
             <?php echo $this->Form->control('lendable',  array('label'=>'Prestable', 'class' => 'checkbox')); ?>
             <?php echo $this->Form->control('observations', array('label'=>'Observaciones', 'class' => 'form-control'));?>
             <?php echo $this->Form->hidden('unique_id', array('value' => $random));?>
-            <?php echo $this->Form->input('image',['type' => 'file', 'class' => 'form-control']); ?>
+            <?php echo $this->Form->input('image',['label' => 'Imagen', 'type' => 'file', 'class' => 'form-control']); ?>
         
 </div>
 
