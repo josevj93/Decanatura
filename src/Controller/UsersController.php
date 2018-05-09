@@ -21,7 +21,11 @@ class UsersController extends AppController
     public function index()
     {
 
+
+
         $this->viewBuilder()->setLayout('default');
+
+
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
@@ -36,8 +40,11 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-        
+
+
         $this->viewBuilder()->setLayout('default');
+
+
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
@@ -52,12 +59,16 @@ class UsersController extends AppController
      */
     public function add()
     {
-     $user = $this->Users->newEntity();
+
+
+        
+        $user = $this->Users->newEntity();
+
+
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
@@ -80,11 +91,11 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('Cambios guardados.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('Los cambios no pudieron ser guardados. Por favor vuelva a intentarlo.'));
         }
         $this->set(compact('user'));
     }
@@ -133,8 +144,6 @@ class UsersController extends AppController
     }
 
 }
-
-
 
 
 
