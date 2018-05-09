@@ -63,6 +63,10 @@
             <th scope="row"><?= __('Observaciones') ?></th>
             <td><?= h($asset->observations) ?></td>
         </tr>
+        <tr>
+            <th scope="row"><?= __('Imagen') ?></th>
+            <td><?= $this->Html->image('../files/Assets/image/' . $asset->uniqid . '/' . $asset->image) ?></td>
+        </tr>
     </table>
 
 <style>
