@@ -121,9 +121,9 @@ $cakeDescription = 'Control de Activos';
         </a>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="InfTencnico">
-        <a class="nav-link" href="tables.html">
-          <span class="nav-link-text">Informe Técnico</span>
-        </a>
+        <?php 
+        echo  $this->Html->link(__('Informes Técnicos'), ['controller' => 'TechnicalReports', 'action' => 'index'], ['class' => 'nav-link']);
+        ?>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Desechos">
         <a class="nav-link" href="tables.html">
@@ -141,9 +141,9 @@ $cakeDescription = 'Control de Activos';
         </a>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ubicaciones">
-        <a class="nav-link" href="tables.html">
-          <span class="nav-link-text">Ubicaciones</span>
-        </a>
+        <?php 
+        echo  $this->Html->link(__('Ubicaciones'), ['controller' => 'Locations', 'action' => 'index'], ['class' => 'nav-link']);
+        ?>
       </li>
     </ul>
     <ul class="navbar-nav sidenav-toggler">
