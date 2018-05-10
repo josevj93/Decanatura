@@ -15,90 +15,101 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
-  $( function Fecha() {
-    $( "#datepicker" ).datepicker();
+
+  $( function Picker() {
+    $( "#datepicker" ).datepicker({ dateFormat: 'y-mm-dd' });
   } );
+
   </script>
+
+  <style>
+        .btn-primary {
+          color: #fff;
+          background-color: #0099FF;
+          border-color: #0099FF;
+          float: right;
+          margin-left: 10px;
+        }
+  </style>
+
 </head>
 
-<?php
-
-    $placa="Hola";
-    if($_GET['btnBuscar']){Buscar();}
-
-    function Buscar() {
-      $placa= $_GET['lblPlaca'] ; 
-    }
-
-
-?>
 
 <body>
 
 
-<legend><?= __('Insertar informe técnico') ?></legend>
   <br>
-
-  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+<div class="locations form large-9 medium-8 columns content">
+  <?= $this->Form->create($technicalReport) ?>
+  <fieldset>
+    <legend><?= __('Insertar informe técnico') ?></legend>
   
-    <label for="nRepote">Numero de reporte:</label>
-     <div class="col-md-4 col-sm-4">
-          <input type="text" class="form-control" id="">
-     </div>
-    <br>
+    <div class="row">
+      
 
-   <label for="Fecha">Fecha:</label>
-    <div class="col-md-4 col-sm-4">
-       <input class="form-control" input-group pull-right type="text" name="date" id="datepicker" onclick="Fecha()">    
-   </div>
-    <br>
-
-
-   
-    <label for="Fecha">Placa del activo: </label>
-    <div class="col-xs-6 col-md-6">
-      <div class="input-group">
-          <input type="text" class="form-control col-sm-4" placeholder="Buscar" name="textoBusqueda"
-          onclick="" />
-          </div>
+      <div class="col-md-6">
+        <label>Nº Reporte:</label><br>
+        <?php 
+          echo h('Numero autogenerado');
+          ?>
       </div>
-    </div>
 
-    <br>
-    Lalala
-    <div class="col-lg-6">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Numero de plcada" name="lblPlaca" > 
-        <span class="input-group-btn">
-          <button id="btnBuscar" name="btnBuscar" onClick='location.href="?btnBuscar=1"'><i class="fa fa-search"></i></button>
-        </span>
+      <div class="col-md-6">
+        <label>Fecha:</label><br>
+        <?php
+        echo $this->Form->imput('date', ['class'=>'form-control col-sm-6','id'=>'datepicker']); 
+        ?>
+      
       </div>
-    </div>
 
-    <?php if ($placa == "Hola"): ?>
-        <?= h($placa) ?>
-    <?php endif; ?>
+    </div><br>
+
+    
+
+     /** TRABAJANDO EN ESTA PARTE **/
+    <br>
+    | barrar de busqueda | boton
+     <br> 
+    /** TRABAjANDO EN ESTA PARTE **/
   
+    <br><br>
     <?php echo $this->Form->control('assets_id', ['options' => $assets]); ?>
-    <label for="Evaluacion">Evaluación:</label>
-     <div class="col-md-8 col-sm-6">  
-       <textarea class="form-control" type="text" name="evaluation" rows="5" cols="40"></textarea></p>
-     </div> 
-   <br>
+    <br>
 
-   <label for="Recomendacion">Recomendación:</label>
-    <div class="col-md-8 col-sm-6">
-       <input type="radio" name="recommendation" value="U">Reubicar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       <input type="radio" name="recommendation" value="P">Reparar  &nbsp;
-       <input type="radio" name="recommendation" value="E">Desechar
-       <br>
-       <input type="radio" name="recommendation" value="D">Usar piesas &nbsp;
-       <input type="radio" name="recommendation" value="O">Otros  
+    <div>
+      <label for="Evaluacion">Evaluación:</label>
+      <?php 
+        echo $this->Form->textarea('evaluation', ['label' => 'Evaluación:', 'class'=>'form-control col-md-6']);
+      ?>
     </div>
     <br>
 
-    <input type="submit" name="submit" value="Submit">  
-  </form>
+    <div>
+      <label for="Evaluacion">Recomendación:</label>
+      <br>
+      <?php
+       echo $this->Form->radio('recommendation',
+          [
+           ['value'=>'C', 'text'=>'Reubicar  '],
+           ['value'=>'R', 'text'=>'Reparar  '],
+           ['value'=>'D', 'text'=>'Desechar  '],
+           ['value'=>'U', 'text'=>'Usar piesas  '],
+           ['value'=>'O', 'text'=>'Otros'],
+          ]);
+      ?>
+    </div> 
+    <br>
 
+    <div>
+    <?php echo $this->Form->file('document'); ?>
+    </div>
+    <br>
+
+  </fieldset>
+
+
+</div>
+  <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+  <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
 
 </body>

@@ -55,13 +55,11 @@ class TechnicalReportsController extends AppController
             $technicalReport = $this->TechnicalReports->patchEntity($technicalReport, $this->request->getData());
             if ($this->TechnicalReports->save($technicalReport)) {
                 $this->Flash->success(__('The technical report has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The technical report could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo guardar el reporte.'));
         }
         $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
-
         $this->set(compact('technicalReport', 'assets'));
     }
 
