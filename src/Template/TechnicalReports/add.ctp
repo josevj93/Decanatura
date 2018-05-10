@@ -20,7 +20,6 @@
   } );
   </script>
 </head>
-
 <?php
 
     $placa="Hola";
@@ -78,8 +77,14 @@
     <?php if ($placa == "Hola"): ?>
         <?= h($placa) ?>
     <?php endif; ?>
+
+
+
+
+
   
-    <?php echo $this->Form->control('assets_id', ['options' => $assets]); ?>
+    <?php $this->Form->control('assets_id', ['options' => $assets]); ?>
+
     <label for="Evaluacion">Evaluación:</label>
      <div class="col-md-8 col-sm-6">  
        <textarea class="form-control" type="text" name="evaluation" rows="5" cols="40"></textarea></p>
@@ -96,9 +101,11 @@
        <input type="radio" name="recommendation" value="O">Otros  
     </div>
     <br>
+      <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]) ?>
+
+    <br>
+    <br>
 
     <input type="submit" name="submit" value="Submit">  
   </form>
-
-
 </body>

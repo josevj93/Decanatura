@@ -3,7 +3,25 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\TechnicalReport $technicalReport
  */
+
+
+
 ?>
+
+<?php 
+
+$mysqli = new mysqli('decanatura.mysql.database.azure.com', 'ecci@decanatura', 'Gaby1234','decanatura');
+
+$query = "select* from technical_reports";
+$result = $mysqli->query($query);
+
+foreach($result as $fila)
+{
+    echo $fila['date'];
+}
+
+?>
+
 <style>
 .modal-header-primary {
     color:#fff;
@@ -132,8 +150,9 @@
 
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-    <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $technicalReport->location_id], ['class' => 'btn btn-primary']) ?>
+    <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $technicalReport->technical_report_id], ['class' => 'btn btn-primary']) ?>
     
-    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $technicalReport->location_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar la Ubicación # {0}?', $technicalReport->location_id)]) ?>
+    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar la Ubicación # {0}?', $technicalReport->technical_report_id)]) ?>
 
+    <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]) ?>
 </div>

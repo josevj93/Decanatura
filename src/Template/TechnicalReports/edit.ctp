@@ -6,7 +6,11 @@
 ?>
 
 <div class="technicalReports form large-9 medium-8 columns content">
-    <?= $this->Form->create($technicalReport) ?>
+    <?= 
+    //$this->Form->create($technicalReport) 
+
+      echo $this->Form->create($technicalReport, ['url' => ['TechnicalReport' => 'Articles', 'action' => 'download']);
+    ?>
     
     <fieldset>
         <h3><legend><?= __('Editar Informe Técnico') ?></legend></h3>
@@ -33,6 +37,8 @@
 </style> 
 
     <?= $this->Form->button(__('Guardar'), ['class' => 'btn btn-primary']) ?>
+
+
 
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 

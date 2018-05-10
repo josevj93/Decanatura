@@ -87,3 +87,5 @@ Router::connect('/', ['controller' => 'Types', 'action' => 'index']);
  * how to customize the loading of plugin routes.
  */
 Plugin::routes();
+
+Router::extensions(['pdf']);

@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Dompdf\Dompdf;
 
 /**
  * TechnicalReports Controller
@@ -26,7 +27,6 @@ class TechnicalReportsController extends AppController
 
         $this->set(compact('technicalReports'));
     }
-
     /**
      * View method
      *
@@ -106,6 +106,68 @@ class TechnicalReportsController extends AppController
         } else {
             $this->Flash->error(__('The technical report could not be deleted. Please, try again.'));
         }
+
+        return $this->redirect(['action' => 'index']);
+    }
+
+    public function download($id = null)
+    { 
+
+
+
+
+
+
+
+require_once 'dompdf/autoload.inc.php';
+
+// reference the Dompdf namespace
+
+
+
+//initialize dompdf class
+
+$document = new Dompdf();
+
+$html = '';
+
+//$document->loadHtml($html);
+//$page = file_get_contents("cat.html");
+
+//$document->loadHtml($page);
+
+$document->loadHtml('hola');
+
+//set page size and orientation
+
+$document->setPaper('A4', 'landscape');
+
+//Render the HTML as PDF
+
+$document->render();
+
+//Get output of generated pdf in Browser
+
+$document->stream("Informe técnico", array("Attachment"=>1));
+//1  = Download
+//0 = Preview
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         return $this->redirect(['action' => 'index']);
     }
