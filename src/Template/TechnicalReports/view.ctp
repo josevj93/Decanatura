@@ -7,21 +7,6 @@
 
 
 ?>
-
-<?php 
-
-$mysqli = new mysqli('decanatura.mysql.database.azure.com', 'ecci@decanatura', 'Gaby1234','decanatura');
-
-$query = "select* from technical_reports";
-$result = $mysqli->query($query);
-
-foreach($result as $fila)
-{
-    echo $fila['date'];
-}
-
-?>
-
 <style>
 .modal-header-primary {
     color:#fff;
