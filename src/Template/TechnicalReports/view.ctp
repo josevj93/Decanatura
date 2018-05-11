@@ -89,7 +89,7 @@
                             </div><br>
 
                             <div>
-                            <label>Evaluación:</label><br>
+                            <label>Descripción:</label><br>
                                 <textarea class="form-control" readonly="readonly" rows="3" cols="20"><?= h($technicalReport->asset->description);?></textarea>     
                             </div><br>
             
