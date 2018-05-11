@@ -13,10 +13,8 @@
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 namespace App\Controller;
-
 use Cake\Controller\Controller;
 use Cake\Event\Event;
-
 /**
  * Application Controller
  *
@@ -27,7 +25,6 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
-
     /**
      * Initialization hook method.
      *
@@ -40,10 +37,8 @@ class AppController extends Controller
     public function initialize()
     {
         parent::initialize();
-
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-
         $this->loadComponent('Auth',[
                 'authenticate' => [
                     'Form' => [
@@ -58,10 +53,6 @@ class AppController extends Controller
                     'action' => 'login'
                 ]
             ]);
-
-
-
-
 /*
         $this->loadComponent('Auth', [
         'authError' => 'Did you really think you are allowed to see that? -2',
@@ -92,9 +83,5 @@ class AppController extends Controller
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
     }
-
     
-
-
-
 }
