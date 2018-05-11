@@ -7,11 +7,17 @@ use App\Controller\AppController;
  * Roles Controller
  *
  * @property \App\Model\Table\RolesTable $Roles
+   @property \App\Model\Table\PermissionsTable $Permissions
  *
  * @method \App\Model\Entity\Role[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class RolesController extends AppController
 {
+
+    public function initialize(){
+        $this->Permissions = $this->loadModel('Permissions');
+        $this->RolesPermissions = $this->loadModel('RolesPermissions');
+    }
 
     /**
      * Index method
@@ -20,9 +26,26 @@ class RolesController extends AppController
      */
     public function index()
     {
-        $roles = $this->paginate($this->Roles);
 
-        $this->set(compact('roles'));
+        $roles = $this->Roles->find('all',
+        array('fields' => array('nombre') ));
+
+        $this->set('roles',$roles);
+
+        $permissions = $this->Permissions->find('all');
+
+        $this->set('permissions',$permissions);
+
+        $rolespermissions = $this->RolesPermissions->find('all');
+
+        $this->set('rolespermissions',$rolespermissions);
+
+
+        if ($this->request->is('post')) {
+            
+                return $this->redirect(['action' => 'index']);
+
+        }
     }
 
     /**

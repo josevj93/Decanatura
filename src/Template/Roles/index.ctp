@@ -1,19 +1,28 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $roles
+ * 
+ *@var \App\Model\Entity\Role $role
  */
 ?>
 
-<div class="roles index large-9 medium-8 columns content">
+
+
+<div class="roles x large-9 medium-8 columns content">
     <h1><?= __('Roles') ?></h1>
 
-    <?php echo $this->Form->input('Rol', array(
-    'type' => 'select', 
-    'options' => array('estudiante' => 'Estudiante', 'director' => 'Director de Escuela', 'administrador' => 'Administrador'), 
-    'selected' => 'private'
-)); ?>
+    <?php echo $this->Form->create(); ?>
 
+
+    <?php echo $this->Form->input('Editar Rol:', array(
+    'type' => 'select',
+    'class' => 'form-control',
+    'options' => $roles, 
+    'selected' => 'private'
+    )); ?>
+
+
+    <?= $this->Form->end() ?>
 
     <table class="table">
     	<tr>
@@ -140,28 +149,39 @@
     		<td>
     			<?php echo $this->Form->input('', array(
                                   'type'=>'checkbox', 
+                                  'name' => 'usuarios[]',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' ) 
   ) ); ?>
     		</td>
     		<td>
     			<?php echo $this->Form->input('', array(
                                   'type'=>'checkbox', 
+                                  'name' => 'usuarios[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' ) 
+  ) ); ?>
+    		</td>
+    		<td>
+    			<?php echo $this->Form->input('', array(
+                                  'type'=>'checkbox',
+                                  'name' => 'usuarios[]', 
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' ) 
   ) ); ?>
     		</td>
     		<td>
     			<?php echo $this->Form->input('', array(
                                   'type'=>'checkbox', 
-                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' ) 
-  ) ); ?>
-    		</td>
-    		<td>
-    			<?php echo $this->Form->input('', array(
-                                  'type'=>'checkbox', 
+                                  'name' => 'usuarios[]',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' ) 
   ) ); ?>
     		</td>
     	</tr>
     	
     </table>
+
+
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->end() ?>
+
+
+
 </div>
