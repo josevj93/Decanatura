@@ -28,19 +28,19 @@
 
 
                     <td>
-                        <?php if ("U"==$technicalReport->recommendation): ?>
+                        <?php if ("C"==$technicalReport->recommendation): ?>
                           Reubicar
                         <?php endif; ?>
 
-                        <?php if("P"==$technicalReport->recommendation): ?>
+                        <?php if("R"==$technicalReport->recommendation): ?>
                           Reparar
                         <?php endif; ?>
 
-                        <?php if("E"==$technicalReport->recommendation): ?>
+                        <?php if("D"==$technicalReport->recommendation): ?>
                           Desechar
                         <?php endif; ?>
 
-                        <?php if("D"==$technicalReport->recommendation): ?>
+                        <?php if("U"==$technicalReport->recommendation): ?>
                           Usar piesas
                         <?php endif; ?>
 
