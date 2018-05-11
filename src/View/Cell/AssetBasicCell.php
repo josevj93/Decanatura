@@ -22,7 +22,11 @@ class AssetBasicCell extends Cell
      *
      * @return void
      */
-    public function display()
+    public function display($plaque)
     {
+        $this->loadModel('Assets');
+        $assetBasic = $this->Assets->find($plaque);
+        echo $assetBasic;
+        $this->set(compact('assetBasic'));
     }
 }

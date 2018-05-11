@@ -108,11 +108,37 @@ class TechnicalReportsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function BuscarActivo($placa = null)
+    public function searchAsset()
+    {   
+        $this->loadComponent('RequestHandler');
+         $this->autoRender = false;
+        /*if($placa!=null)
+        {   
+            $assets = TableRegistry::get('Assets');
+           
+            $assetSearch= $Assets->find('list',['conditions'=>['plaque ='=>$placa] ])
+                                  ->select(['brand','model','series','description']);
+            $asset= $assetSearch;
+            echo "<label>Placa</label>";
+            echo $asset->plaque;
+        }*/
+        if($this->RequestHandler->isAjax()) 
+        {       
+                $now = new Time();
+                $resultJ = json_encode(array('result' => array('now' => $now)));
+                $this->response->type('json');
+                $this->response->body($resultJ);
+
+                return $this->response;
+        }   
+    }
+
+    public function search()
     {
-        $Assets = TableRegistry::get('Assets');
-        $AssetBuscado= $Assets->find()
-                              ->select(['brand','model','series','description']);
-        $this->set(compact( 'AssetLista'));
+        $id= $_GET['id'];
+        $assets = TableRegistry::get('Assets');
+        $assetSearch= $assets->get('640');
+        $this->set('assetSerched',$assetSearch);
+    
     }
 }

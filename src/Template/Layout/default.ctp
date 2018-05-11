@@ -15,7 +15,7 @@
 
 
 $cakeDescription = 'Control de Activos';
-
+use Cake\Routing\Router;
 
 
 ?>
@@ -104,15 +104,15 @@ $cakeDescription = 'Control de Activos';
         ?>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
-        <?php 
-        echo  $this->Html->link(__('Activos'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'nav-link']);
-        ?> 
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Assets']); ?>">
+          <span class="nav-link-text">Activos</span>
+        </a> 
       </li>
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="TiposActivos">
-        <?php 
-        echo  $this->Html->link(__('Tipos de activos'), ['controller' => 'Types', 'action' => 'index'], ['class' => 'nav-link']);
-        ?> 
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Types']); ?>">
+          <span class="nav-link-text">Tipos de activos</span>
+        </a>
       </li>
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
@@ -121,12 +121,12 @@ $cakeDescription = 'Control de Activos';
         </a>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="InfTencnico">
-        <?php 
-        echo  $this->Html->link(__('Informes Técnicos'), ['controller' => 'TechnicalReports', 'action' => 'index'], ['class' => 'nav-link']);
-        ?>
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'TechnicalReports']); ?>">
+          <span class="nav-link-text">Reportes Técnicos</span>
+        </a>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Desechos">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Residues']); ?>">
           <span class="nav-link-text">Desechos</span>
         </a>
       </li>
@@ -141,9 +141,9 @@ $cakeDescription = 'Control de Activos';
         </a>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ubicaciones">
-        <?php 
-        echo  $this->Html->link(__('Ubicaciones'), ['controller' => 'Locations', 'action' => 'index'], ['class' => 'nav-link']);
-        ?>
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Locations']); ?>">
+          <span class="nav-link-text">Ubicaciones</span>
+        </a>
       </li>
     </ul>
     <ul class="navbar-nav sidenav-toggler">
