@@ -57,6 +57,7 @@ class AssetsController extends AppController
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
             if ($this->Assets->save($asset)) {
 
+
                 /*Si el archivo tiene imagen, crea un thumbnail*/
                 if(!strlen($asset->image_dir) == 0){
                     $imagine = new Imagine\Gd\Imagine();
@@ -96,9 +97,23 @@ class AssetsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+            
             if ($this->Assets->save($asset)) {
-                $this->Flash->success(__('El activo fue guardado con exito'));
+            /*    
+                
+                if(!strlen($asset->image_dir) == 0){
+                    $imagine = new Imagine\Gd\Imagine();
 
+                    $size    = new Imagine\Image\Box(640, 640);
+
+                    $mode    = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+
+                    $imagine->open('../webroot/files/Assets/image/' .  $asset->unique_id . '/' . $asset->image)
+                            ->thumbnail($size, $mode)
+                            ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
+                }*/
+
+                $this->Flash->success(__('El activo fue guardado con exito'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
