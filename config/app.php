@@ -230,8 +230,8 @@ return [
              */
             //'port' => 'non_standard_port_number',
 
-            'username' => 'ecci@decanatura',
-            'password' => 'Gaby1234',
+            'username' => 'jorge@decanatura',
+            'password' => 'Ecci1234',
             'database' => 'decanatura',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
