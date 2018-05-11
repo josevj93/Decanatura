@@ -34,5 +34,3 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
-vendor/seld/cli-prompt/res/hiddeninput.exe
-vendor/symfony/console/Resources/bin/hiddeninput.exe
