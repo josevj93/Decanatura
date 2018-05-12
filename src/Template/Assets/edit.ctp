@@ -6,16 +6,15 @@
 ?>
 
 <?php 
-$random = uniqid();
+    $random = uniqid();
 ?>
 
 <div class="col-md-12 col-sm-12">
     <h3>Editar activo</h3>
     <?= $this->Form->create($asset, ['type' => 'file']) ?>
-
+</div>
 
 <div class="row">
-    
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
         <?php echo $this->Form->input('plaque',array('type' => 'text','label'=>'Placa', 'class' => 'form-control')); ?>   
     </div>
@@ -59,19 +58,36 @@ $random = uniqid();
 
 
 <div class="row">
-    <?php echo $this->Form->control('location_id',  array('options' => $locations,'label'=>'Ubicacion', 'class' => 'form-control')); ?>
-    <?php echo $this->Form->control('sub_location', array('label'=>'Sub-ubicacion', 'class' => 'form-control')); ?>
-    <?php echo $this->Form->control('year',  array('label'=>'Año', 'class' => 'form-control')); ?>
+    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+        <?php echo $this->Form->control('location_id',  array('options' => $locations,'label'=>'Ubicacion', 'class' => 'form-control')); ?>
+    </div>
+    
+    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+        <?php echo $this->Form->control('sub_location', array('label'=>'Sub-ubicacion', 'class' => 'form-control')); ?>
+    </div>
+    
+    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+        <?php echo $this->Form->control('year',  array('label'=>'Año', 'class' => 'form-control')); ?>
+    </div>
 </div>
-    <?php echo $this->Form->control('lendable',  array('label'=>'Prestable', 'class' => 'checkbox')); ?>
-                     
-    <?php echo $this->Form->control('observations', array('label'=>'Observaciones', 'class' => 'form-control'));?>
-    <?php echo $this->Form->hidden('unique_id', array('value' => $random));?>
-        
 
+<div class = "row">
+    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+        <?php echo $this->Form->control('lendable',  array('label'=>'Prestable', 'class' => 'checkbox')); ?>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+        <?php echo $this->Form->control('observations', array('label'=>'Observaciones', 'class' => 'form-control'));?>
+    </div>
+</div>
+
+<?php echo $this->Form->hidden('unique_id', array('value' => $random));?>
+
+<br>        
 
 <div class="col-12 text-right">
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
-
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
 </div>
