@@ -52,8 +52,8 @@ class TechnicalReportsTable extends Table
     {
         $validator
             ->integer('technical_report_id')
-            ->notEmpty('tecnical_report_id')
-            ->requirePresence('location_id', 'create');
+            ->allowEmpty('tecnical_report_id');
+            
 
         $validator
             ->date('date')

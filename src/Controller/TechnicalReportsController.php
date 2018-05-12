@@ -55,13 +55,11 @@ class TechnicalReportsController extends AppController
             $technicalReport = $this->TechnicalReports->patchEntity($technicalReport, $this->request->getData());
             if ($this->TechnicalReports->save($technicalReport)) {
                 $this->Flash->success(__('The technical report has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The technical report could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo guardar el reporte.'));
         }
         $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
-
         $this->set(compact('technicalReport', 'assets'));
     }
 
@@ -110,11 +108,40 @@ class TechnicalReportsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function BuscarActivo($placa = null)
+    public function searchAsset()
+    {   
+        $this->loadComponent('RequestHandler');
+         $this->autoRender = false;
+        /*if($placa!=null)
+        {   
+            $assets = TableRegistry::get('Assets');
+           
+            $assetSearch= $Assets->find('list',['conditions'=>['plaque ='=>$placa] ])
+                                  ->select(['brand','model','series','description']);
+            $asset= $assetSearch;
+            echo "<label>Placa</label>";
+            echo $asset->plaque;
+        }*/
+        if($this->RequestHandler->isAjax()) 
+        {       
+                $now = new Time();
+                $resultJ = json_encode(array('result' => array('now' => $now)));
+                $this->response->type('json');
+                $this->response->body($resultJ);
+
+                return $this->response;
+        }   
+    }
+
+    public function search()
     {
-        $Assets = TableRegistry::get('Assets');
-        $AssetBuscado= $Assets->find()
-                              ->select(['brand','model','series','description']);
-        $this->set(compact( 'AssetLista'));
+        $id= $_GET['id'];
+        $assets = TableRegistry::get('Assets');
+        $searchedAsset= $assets->get($id);
+        if(empty($searchedAsset) )
+        {
+            throw new NotFoundException(__('Activo no encontrado') );      
+        }
+        $this->set('serchedAsset',$searchedAsset);
     }
 }
