@@ -1,5 +1,5 @@
 <?php
-<<<<<<< HEAD
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -14,8 +14,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-=======
->>>>>>> pr/22
+
 
 $cakeDescription = 'Control de Activos';
 
@@ -83,10 +82,7 @@ $cakeDescription = 'Control de Activos';
 </head>
 
 
-   <!--script src="js/sb-admin.min.js"></script>
-=======
--->
-
+  
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
@@ -99,29 +95,15 @@ $cakeDescription = 'Control de Activos';
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
         <?=$this->Html->link(
-<<<<<<< HEAD
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Usuarios', array('class' => '')),
-=======
+
           $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Usuarios', array('class' => 'nav-link-text')),
->>>>>>> pr/22
           array('controller' => 'Users','action' => 'index'),
           array('class' => 'nav-link',
             'escape'=> false)
         );
         ?>
       </li>
-<<<<<<< HEAD
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
-        <?php 
-        echo  $this->Html->link(__('Activos'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'nav-link']);
-        ?> 
-      </li>
 
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="TiposActivos">
-        <?php 
-        echo  $this->Html->link(__('Tipos de activos'), ['controller' => 'Types', 'action' => 'index'], ['class' => 'nav-link']);
-        ?> 
-=======
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
         <?=$this->Html->link(
@@ -141,7 +123,7 @@ $cakeDescription = 'Control de Activos';
             'escape'=> false)
         );
         ?>
->>>>>>> pr/22
+
       </li>
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
