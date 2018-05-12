@@ -29,19 +29,7 @@
           float: right;
           margin-left: 10px;
         }
-        .modal-header-primary {
-          color:#fff;
-          padding:9px 15px;
-          border-bottom:1px solid #eee;
-          background-color: #428bca;
-          -webkit-border-top-left-radius: 5px;
-          -webkit-border-top-right-radius: 5px;
-          -moz-border-radius-topleft: 5px;
-          -moz-border-radius-topright: 5px;
-          border-top-left-radius: 5px;
-          border-top-right-radius: 5px;
-        }
-
+        
         .btn-default {
           color: #000;
           background-color: #7DC7EF;
@@ -52,6 +40,7 @@
         label {
 
           text-align:left;
+          margin-right: 10px;
           
         }
 
@@ -83,7 +72,8 @@
       <div class="col-md-8">
         <div >
           <label>Nº Reporte:</label>
-          <label>Número autogenerado</label>
+          <label><?php echo h($tmpId); ?> *</label>
+
         </div>
       </div>
 
@@ -138,7 +128,7 @@
     <br>
 
     <div>
-    <?php echo $this->Form->file('document'); ?>
+    <label>nota * : El número de reporte es autogenerado.</label>
     </div>
     <br>
 
@@ -172,7 +162,7 @@
                 url: '<?php echo Router::url(['controller' => 'TechnicalReports', 'action' => 'search' ]); ?>',
                 data:{id:plaque},
                 beforeSend: function() {
-                     $('#assetResult').html('Cargando...');
+                     $('#assetResult').html('<label>Cargando</label><i class="fa fa-spinner fa-spin" style="font-size:25px"></i>');
                      },
                 success: function(msg){
                     $('#assetResult').html(msg);
