@@ -14,6 +14,8 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
+=======
+>>>>>>> pr/22
 
 $cakeDescription = 'Control de Activos';
 
@@ -99,6 +101,9 @@ $cakeDescription = 'Control de Activos';
         <?=$this->Html->link(
 <<<<<<< HEAD
           $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Usuarios', array('class' => '')),
+=======
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Usuarios', array('class' => 'nav-link-text')),
+>>>>>>> pr/22
           array('controller' => 'Users','action' => 'index'),
           array('class' => 'nav-link',
             'escape'=> false)
@@ -116,6 +121,27 @@ $cakeDescription = 'Control de Activos';
         <?php 
         echo  $this->Html->link(__('Tipos de activos'), ['controller' => 'Types', 'action' => 'index'], ['class' => 'nav-link']);
         ?> 
+=======
+
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
+        <?=$this->Html->link(
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Activos', array('class' => 'nav-link-text')),
+          array('controller' => 'Assets','action' => 'index'),
+          array('class' => 'nav-link',
+            'escape'=> false)
+        );
+        ?>
+      </li>
+
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tipos de activos">
+        <?=$this->Html->link(
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Tipos de activos', array('class' => 'nav-link-text')),
+          array('controller' => 'Types','action' => 'index'),
+          array('class' => 'nav-link',
+            'escape'=> false)
+        );
+        ?>
+>>>>>>> pr/22
       </li>
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
