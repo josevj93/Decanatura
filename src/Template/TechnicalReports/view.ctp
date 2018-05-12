@@ -135,5 +135,7 @@
     <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $technicalReport->location_id], ['class' => 'btn btn-primary']) ?>
     
     <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $technicalReport->location_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar la Ubicación # {0}?', $technicalReport->location_id)]) ?>
+    <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]) ?>
+
 
 </div>
