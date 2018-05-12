@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -96,6 +97,7 @@ $cakeDescription = 'Control de Activos';
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
         <?=$this->Html->link(
+<<<<<<< HEAD
           $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Usuarios', array('class' => '')),
           array('controller' => 'Users','action' => 'index'),
           array('class' => 'nav-link',
@@ -103,6 +105,7 @@ $cakeDescription = 'Control de Activos';
         );
         ?>
       </li>
+<<<<<<< HEAD
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
         <?php 
         echo  $this->Html->link(__('Activos'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'nav-link']);
