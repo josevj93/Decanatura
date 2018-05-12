@@ -58,11 +58,15 @@ class TechnicalReportsController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The technical report could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo guardar el reporte.'));
         }
-        $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
+        //Saco el ultimo id y le sumo 1
+        $tmpId= $this->TechnicalReports->find('all',['fields'=>'technical_report_id'])->last();
+        $tmpId= $tmpId->technical_report_id+1;
 
-        $this->set(compact('technicalReport', 'assets'));
+        $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
+        $this->set(compact('technicalReport', 'assets','tmpId'));
+
     }
 
     /**
@@ -80,14 +84,19 @@ class TechnicalReportsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $technicalReport = $this->TechnicalReports->patchEntity($technicalReport, $this->request->getData());
             if ($this->TechnicalReports->save($technicalReport)) {
-                $this->Flash->success(__('The technical report has been saved.'));
+                $this->Flash->success(__('Los cambios han sido guardados.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The technical report could not be saved. Please, try again.'));
+            $this->Flash->error(__('El reporte técnico no se pudo guardar.'));
+            debug($technicalReport->errors());
+
         }
         $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
-        $this->set(compact('technicalReport', 'assets'));
+
+        //variable para cargar los datos del activo ya asignado
+        $assets2= $this->TechnicalReports->Assets->get($technicalReport->assets_id);
+        $this->set(compact('technicalReport', 'assets','assets2'));
     }
 
     /**
@@ -110,6 +119,20 @@ class TechnicalReportsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+
+    public function search()
+    {
+        $id= $_GET['id'];
+        $assets = TableRegistry::get('Assets');
+        $searchedAsset= $assets->get($id);
+        if(empty($searchedAsset) )
+        {
+            throw new NotFoundException(__('Activo no encontrado') );      
+        }
+        $this->set('serchedAsset',$searchedAsset);
+    }
+
+    
     public function download($id = null)
     { 
 
@@ -181,13 +204,7 @@ class TechnicalReportsController extends AppController
         //1  = Download
         //0 = Preview
         return $this->redirect(['action' => 'index']);
-    }
 
-    public function BuscarActivo($placa = null)
-    {
-        $Assets = TableRegistry::get('Assets');
-        $AssetBuscado= $Assets->find()
-                              ->select(['brand','model','series','description']);
-        $this->set(compact( 'AssetLista'));
     }
+    
 }

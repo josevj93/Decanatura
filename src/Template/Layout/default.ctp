@@ -104,15 +104,17 @@ $cakeDescription = 'Control de Activos';
         ?>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
-        <?php 
-        echo  $this->Html->link(__('Activos'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'nav-link']);
-        ?> 
+
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Assets','action'=>'index']); ?>">
+          <span class="nav-link-text">Activos</span>
+        </a> 
       </li>
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="TiposActivos">
-        <?php 
-        echo  $this->Html->link(__('Tipos de activos'), ['controller' => 'Types', 'action' => 'index'], ['class' => 'nav-link']);
-        ?> 
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Types','action'=>'index']); ?>">
+          <span class="nav-link-text">Tipos de activos</span>
+        </a>
+
       </li>
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
@@ -121,12 +123,12 @@ $cakeDescription = 'Control de Activos';
         </a>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="InfTencnico">
-        <a class="nav-link" href="tables.html">
-          <span class="nav-link-text">Informe Técnico</span>
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'TechnicalReports','action'=>'index']); ?>">
+          <span class="nav-link-text">Reportes Técnicos</span>
         </a>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Desechos">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Residues','action'=>'index']); ?>">
           <span class="nav-link-text">Desechos</span>
         </a>
       </li>
@@ -141,7 +143,7 @@ $cakeDescription = 'Control de Activos';
         </a>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ubicaciones">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Locations','action'=>'index']); ?>">
           <span class="nav-link-text">Ubicaciones</span>
         </a>
       </li>
