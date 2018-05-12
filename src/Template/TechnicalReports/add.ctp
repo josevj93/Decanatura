@@ -48,6 +48,24 @@
           border-top-right-radius: 5px;
           border-bottom-right-radius: 5px;
         }
+
+        label {
+
+          text-align:left;
+          
+        }
+
+        input[type=radio] {
+          width:10px;
+          clear:left;
+          text-align:left;
+        }
+
+        input[name=date]{
+          width:100px;
+          margin-left: 10px;
+        }
+        
   </style>
 
 </head>
@@ -59,25 +77,22 @@
   <fieldset>
     <legend><?= __('Insertar informe técnico') ?></legend>
     <br>
+    
     <div class="row">
-      
 
-      <div class="col-md-6">
-        <div class='input-group mb-3'>
-          <label>Nº Reporte:  número autogenerado</label><br>
+      <div class="col-md-8">
+        <div >
+          <label>Nº Reporte:</label>
+          <label>Número autogenerado</label>
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class='row'>
-        <label>Fecha:  </label>
+      <label>Fecha:</label>
         <?php
-        echo $this->Form->imput('date', ['class'=>'form-control col-sm-6','id'=>'datepicker']); 
+        echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker']); 
         ?>
-        </div>
-      </div>
-
-    </div>
+  </div>
+    
 
     <label>Placa del activo:</label><br>
     <div class='input-group mb-3'>
@@ -101,13 +116,13 @@
     <div>
       <label for="Evaluacion">Evaluación:</label>
       <?php 
-        echo $this->Form->textarea('evaluation', ['label' => 'Evaluación:', 'class'=>'form-control col-md-6']);
+        echo $this->Form->textarea('evaluation', ['label' => 'Evaluación:', 'class'=>'form-control col-md-8']);
       ?>
     </div>
     <br>
 
     <div>
-      <label for="Evaluacion">Recomendación:</label>
+      <label >Recomendación:</label>
       <br>
       <?php
        echo $this->Form->radio('recommendation',
@@ -148,21 +163,25 @@
       $('#assetButton').click( function()
       {
         var plaque = $('#assetImput').val();
-        var prueba = '640';
         if(''!=plaque)
         {
          $.ajax({
                 type: "GET",
-                url: '<?php echo Router::url(['controller' => 'TechnicalReports', 'action' => 'seach' ]); ?>',
-                data:{id:'640'},
+                url: '<?php echo Router::url(['controller' => 'TechnicalReports', 'action' => 'search' ]); ?>',
+                data:{id:plaque},
                 beforeSend: function() {
                      $('#assetResult').html('Cargando...');
                      },
                 success: function(msg){
                     $('#assetResult').html(msg);
-                }
+                    },
+                error: function(e) {
+                    alert("Ocurrió un error: artículo no encontrado.");
+                    console.log(e);
+                    $('#assetResult').html('Introdusca otro número de placa.');
+                    }
               });
-          //$('#assetResult').html('FRITO...');
+          
         }
         else
         {

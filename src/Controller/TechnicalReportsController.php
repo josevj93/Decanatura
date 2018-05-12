@@ -137,8 +137,11 @@ class TechnicalReportsController extends AppController
     {
         $id= $_GET['id'];
         $assets = TableRegistry::get('Assets');
-        $assetSearch= $assets->get('640');
-        $this->set('assetSerched',$assetSearch);
-    
+        $searchedAsset= $assets->get($id);
+        if(empty($searchedAsset) )
+        {
+            throw new NotFoundException(__('Activo no encontrado') );      
+        }
+        $this->set('serchedAsset',$searchedAsset);
     }
 }
