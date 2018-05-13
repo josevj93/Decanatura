@@ -129,4 +129,36 @@ class RolesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+
+
+
+    public function consultar(){
+        
+        if($this->request->is('post')){
+            $id = (int)$this->request->data['rol'];
+            $rol = $this->Roles->get($id);
+            pr($rol);
+
+            exit;
+        }
+
+
+    }
+
+
+    public function guardar(){
+        
+        if($this->request->is('post')){
+            $myarray = $this->request->data;
+            pr($myarray);
+
+            exit;
+        }
+
+
+    }
+
+
+
 }
