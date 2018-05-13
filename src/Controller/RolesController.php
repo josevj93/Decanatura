@@ -137,15 +137,16 @@ class RolesController extends AppController
         
         if($this->request->is('post')){
             $id = (int)$this->request->data['rol'];
+            $id = $id + 1;
             //$rol = $this->Roles->get($id);
             //pr($rol);
-
-            $rol = $this->Roles->find('all', array(
+/*
+            $rol = $this->Roles->find('list', array(
                 'joins' => array(
                     array(
-                        'table' => 'users',
+                        'table' => 'RolesPermissions',
                         //'alias' => 'UserJoin',
-                        'type' => 'INNER',
+                        'type' => 'left',
                         'conditions' => array(
                             'Roles.id = RolesPermissions.id_rol'
                         )
@@ -153,12 +154,40 @@ class RolesController extends AppController
                 ),
                 'conditions' => array(
                     'Roles.id' => $id
+                )//,
+                //'fields' => array('Roles.id', 'RolesPermissions.id_rol')
+            ));
+*/
+
+            $rol = $this->RolesPermissions->find('all', array(
+                'joins' => array(
+                    array(
+                        'table' => 'Permissions',
+                        //'alias' => 'UserJoin',
+                        'type' => 'INNER',
+                        'conditions' => array(
+                            'RolesPermissions.id_permission = Permissions.id'
+                        )
+                    )
                 ),
-                'fields' => array('Roles.id', 'RolesPermissions.id_permission')
+                'conditions' => array(
+                    'RolesPermissions.id_rol' => $id
+                ),
+                'fields' => array('id_permission')
             ));
 
-            pr($rol);
-            exit;
+            
+
+            $datos = $rol->toArray(); 
+
+            foreach($datos as $var){
+
+                pr($var['id_permission']);
+
+            }
+            
+
+            //exit;
         }
 
 

@@ -6,8 +6,6 @@
  */
 ?>
 
-
-
 <div class="roles x large-9 medium-8 columns content">
     <h1><?= __('Roles') ?></h1>
 

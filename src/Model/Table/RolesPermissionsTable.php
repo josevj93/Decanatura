@@ -53,9 +53,9 @@ class RolesPermissionsTable extends Table
             ->notEmpty('id_rol');
 
         $validator
-            ->integer('id_permiso')
-            ->requirePresence('id_permiso', 'create')
-            ->notEmpty('id_permiso');
+            ->integer('id_permission')
+            ->requirePresence('id_permission', 'create')
+            ->notEmpty('id_permission');
 
         return $validator;
     }
