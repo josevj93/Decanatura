@@ -75,8 +75,13 @@ class ComposerStaticInit1e67c796edb9c0c844d6c5b428997d3e
             'Josegonzalez\\Upload\\' => 20,
             'Jasny\\Twig\\' => 11,
         ),
+        'F' => 
+        array (
+            'FontLib\\' => 8,
+        ),
         'D' => 
         array (
+            'Dompdf\\' => 7,
             'DebugKit\\Test\\Fixture\\' => 22,
             'DebugKit\\' => 9,
         ),
@@ -90,6 +95,7 @@ class ComposerStaticInit1e67c796edb9c0c844d6c5b428997d3e
             'Cake\\Composer\\' => 14,
             'Cake\\Chronos\\' => 13,
             'Cake\\' => 5,
+            'CakePdf\\' => 8,
             'CakePHP\\' => 8,
         ),
         'B' => 
@@ -222,6 +228,14 @@ class ComposerStaticInit1e67c796edb9c0c844d6c5b428997d3e
         array (
             0 => __DIR__ . '/..' . '/jasny/twig-extensions/src',
         ),
+        'FontLib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
+        ),
+        'Dompdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
+        ),
         'DebugKit\\Test\\Fixture\\' => 
         array (
             0 => __DIR__ . '/..' . '/cakephp/debug_kit/tests/Fixture',
@@ -261,6 +275,10 @@ class ComposerStaticInit1e67c796edb9c0c844d6c5b428997d3e
         'Cake\\' => 
         array (
             0 => __DIR__ . '/..' . '/cakephp/cakephp/src',
+        ),
+        'CakePdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/friendsofcake/cakepdf/src',
         ),
         'CakePHP\\' => 
         array (
@@ -315,6 +333,17 @@ class ComposerStaticInit1e67c796edb9c0c844d6c5b428997d3e
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
             ),
         ),
+        'S' => 
+        array (
+            'Svg\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src',
+            ),
+            'Sabberworm\\CSS' => 
+            array (
+                0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/lib',
+            ),
+        ),
         'J' => 
         array (
             'JakubOnderka\\PhpConsoleHighlighter' => 
@@ -343,6 +372,12 @@ class ComposerStaticInit1e67c796edb9c0c844d6c5b428997d3e
     );
 
     public static $classMap = array (
+        'Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
+        'HTML5_Data' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Data.php',
+        'HTML5_InputStream' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/InputStream.php',
+        'HTML5_Parser' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Parser.php',
+        'HTML5_Tokenizer' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Tokenizer.php',
+        'HTML5_TreeBuilder' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/TreeBuilder.php',
         'Mobile_Detect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
         'SqlFormatter' => __DIR__ . '/..' . '/jdorn/sql-formatter/lib/SqlFormatter.php',
     );
