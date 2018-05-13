@@ -187,7 +187,7 @@ class RolesController extends AppController
             }
             
 
-            //exit;
+            exit;
         }
 
 
