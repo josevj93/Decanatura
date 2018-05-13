@@ -16,7 +16,7 @@
             echo $this->Form->control('correo', array('type'=> 'text', 'label'=> 'Correo', 'class' => 'form-control'));
             echo $this->Form->control('username', array('type'=> 'text', 'label'=> 'Usuario', 'class' => 'form-control'));
             echo $this->Form->control('password', array('type'=> 'password', 'label'=> 'Contraseña', 'class' => 'form-control'));
-            echo $this->Form->control('id_rol', array('type'=> 'number', 'label'=> 'Id Rol', 'class' => 'form-control'));
+            echo $this->Form->input('id_rol', array('type' => 'select','class' => 'form-control','options' => array('1' => 'Estudiante', '2' => 'Administrador', '3' => 'Director de la Escuela'), 'selected' => 'private'));
         ?>
     </fieldset>
         <style>
