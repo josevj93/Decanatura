@@ -137,9 +137,27 @@ class RolesController extends AppController
         
         if($this->request->is('post')){
             $id = (int)$this->request->data['rol'];
-            $rol = $this->Roles->get($id);
-            pr($rol);
+            //$rol = $this->Roles->get($id);
+            //pr($rol);
 
+            $rol = $this->Roles->find('all', array(
+                'joins' => array(
+                    array(
+                        'table' => 'users',
+                        //'alias' => 'UserJoin',
+                        'type' => 'INNER',
+                        'conditions' => array(
+                            'Roles.id = RolesPermissions.id_rol'
+                        )
+                    )
+                ),
+                'conditions' => array(
+                    'Roles.id' => $id
+                ),
+                'fields' => array('Roles.id', 'RolesPermissions.id_permission')
+            ));
+
+            pr($rol);
             exit;
         }
 
