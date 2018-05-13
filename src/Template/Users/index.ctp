@@ -6,6 +6,19 @@
  */
 ?>
 
+<div class="row">
+ <div class="col-md-4 col-xs-12 col-lg-6 col-sm-6">
+
+<?= $this->Html->link(__('Nuevo Usuario'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
+</div>
+ <div class="col-md-4 col-xs-12 col-lg-6 col-sm-6">
+
+<?= $this->Html->link(__('Nuevo Usuario'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
+</div>
+
+
+</div>
+
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Acciones') ?></li>
