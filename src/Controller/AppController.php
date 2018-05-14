@@ -25,6 +25,9 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
+
+    public $components = array('RequestHandler');
+
     /**
      * Initialization hook method.
      *
@@ -61,6 +64,11 @@ class AppController extends Controller
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
     }
+
+   /* public function beforeRender(Event $event) {
+    $this->set('nombre', $this->Auth->user('nombre'));
+    $this->set('apellido', $this->Auth->user('apellido1'));
+}*/
    
 
 

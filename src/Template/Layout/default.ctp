@@ -1,4 +1,5 @@
 <?php
+
 $cakeDescription = 'Control de Activos';
 ?>
 <!DOCTYPE html>
@@ -16,7 +17,9 @@ $cakeDescription = 'Control de Activos';
   <?= $this->Html->css('cake.css') ?>
 
 
+
   <?= $this->Html->css(['plugins/bootstrap/css/bootstrap.css','plugins/bootstrap/css/bootstrap.min.css', 'plugins/font-awesome/css/font-awesome.min.css', 'plugins/datatables/dataTables.bootstrap4.css','sb-admin.css']) ?>
+
 
   <?=
   $this->Html->script([ 'plugins/jquery/jquery.min.js']);
@@ -39,9 +42,9 @@ $cakeDescription = 'Control de Activos';
     </a>
 
     <a class="navbar-brand" href="index.html">Sistema de Activos</a>
-   
 
- 
+
+
 
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -51,6 +54,7 @@ $cakeDescription = 'Control de Activos';
        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
         <?=$this->Html->link(
 
+
           $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Usuarios', array('class' => 'nav-link-text')),array('controller' => 'Users','action' => 'index'),
           array('class' => 'nav-link',
             'escape'=> false)
@@ -59,15 +63,20 @@ $cakeDescription = 'Control de Activos';
       </li>
 
 
+
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
-        <?=$this->Html->link(
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Activos', array('class' => 'nav-link-text')),
-          array('controller' => 'Assets','action' => 'index'),
-          array('class' => 'nav-link',
-            'escape'=> false)
-        );
-        ?>
+
+
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Assets','action'=>'index']); ?>">
+          <span class="nav-link-text">Activos</span>
+        </a> 
       </li>
+
+   
+
+
+
+
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tipos de activos">
         <?=$this->Html->link(
@@ -78,6 +87,7 @@ $cakeDescription = 'Control de Activos';
         );
         ?>
 
+
       </li>
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
@@ -86,12 +96,12 @@ $cakeDescription = 'Control de Activos';
         </a>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="InfTencnico">
-        <a class="nav-link" href="tables.html">
-          <span class="nav-link-text">Informe Técnico</span>
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'TechnicalReports','action'=>'index']); ?>">
+          <span class="nav-link-text">Reportes Técnicos</span>
         </a>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Desechos">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Residues','action'=>'index']); ?>">
           <span class="nav-link-text">Desechos</span>
         </a>
       </li>
@@ -106,7 +116,7 @@ $cakeDescription = 'Control de Activos';
         </a>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ubicaciones">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Locations','action'=>'index']); ?>">
           <span class="nav-link-text">Ubicaciones</span>
         </a>
       </li>
@@ -118,7 +128,12 @@ $cakeDescription = 'Control de Activos';
         </a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto">        
+    <ul class="navbar-nav ml-auto">
+        <!--li class="nav-item">
+            <a class="navbar-brand" style="color:white">
+                <i class="fa fa-user"></i> <?php echo "Bienvenido:" ." ". $nombre ."". $apellido; ?></a>
+        </li-->
+
       <li class="nav-item">
         <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
           <i class="fa fa-fw fa-sign-out"></i>Salir</a>

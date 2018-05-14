@@ -5,16 +5,26 @@
  */
 ?>
 
-<div class="types form large-9 medium-8 columns content">
+<div class="types form large-12 medium-12 columns content">
     <?= $this->Form->create($type) ?>
     <h3>Insertar tipo de activo</h3>
-    <fieldset>
-        <?php
-            echo $this->Form->input('type_id', array('type' => 'text', 'label' => 'ID', 'class' => 'form-control'));
-            echo $this->Form->input('name', array('label' => 'Nombre', 'class' => 'form-control'));
-            echo $this->Form->input('description', array('label' => 'Descripción', 'class' => 'form-control'));
-        ?>
-    </fieldset>
+    
+
+<div class="row">
+    
+    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+        <?php echo $this->Form->input('type_id',array('type' => 'text','label'=>'ID', 'class' => 'form-control')); ?>   
+    </div>
+    
+    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+        <?php echo $this->Form->control('name', array('label' =>  'Nombre', 'class' => 'form-control')); ?>
+    </div>
+        
+    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+        <?php echo $this->Form->control('description', array('label'=>'Descripcion', 'class' => 'form-control')); ?>
+    </div>
+</div>
+
 
 <style>
     .btn-primary {
