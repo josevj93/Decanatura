@@ -61,6 +61,11 @@ class AppController extends Controller
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
     }
+
+    public function beforeRender(Event $event) {
+    $this->set('nombre', $this->Auth->user('nombre'));
+    $this->set('apellido', $this->Auth->user('apellido1'));
+}
    
 
 

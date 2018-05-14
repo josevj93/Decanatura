@@ -151,6 +151,8 @@ public function beforeFilter(Event $event)
          $this->Auth->allow(['login']);
      }
 
+
+
  
 
 
