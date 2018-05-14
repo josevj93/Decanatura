@@ -13,10 +13,8 @@
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 namespace App\Controller;
-
 use Cake\Controller\Controller;
 use Cake\Event\Event;
-
 /**
  * Application Controller
  *
@@ -27,7 +25,9 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
+
     public $components = array('RequestHandler');
+
     /**
      * Initialization hook method.
      *
@@ -40,10 +40,8 @@ class AppController extends Controller
     public function initialize()
     {
         parent::initialize();
-
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-
         $this->loadComponent('Auth',[
                 'authenticate' => [
                     'Form' => [
@@ -58,6 +56,7 @@ class AppController extends Controller
                     'action' => 'login'
                 ]
             ]);
+
         /*
          * Enable the following components for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
@@ -65,4 +64,13 @@ class AppController extends Controller
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
     }
+
+   /* public function beforeRender(Event $event) {
+    $this->set('nombre', $this->Auth->user('nombre'));
+    $this->set('apellido', $this->Auth->user('apellido1'));
+}*/
+   
+
+
+    
 }

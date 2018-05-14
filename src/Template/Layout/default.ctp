@@ -1,25 +1,6 @@
 <?php
 
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
-
-
-
 $cakeDescription = 'Control de Activos';
-
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,58 +17,35 @@ $cakeDescription = 'Control de Activos';
   <?= $this->Html->css('cake.css') ?>
 
 
-  <?= $this->Html->css([ 'plugins/bootstrap/css/bootstrap.css','plugins/bootstrap/css/bootstrap.min.css', 'plugins/font-awesome/css/font-awesome.min.css', 'plugins/datatables/dataTables.bootstrap4.css','sb-admin.css']) ?>
+
+  <?= $this->Html->css(['plugins/bootstrap/css/bootstrap.css','plugins/bootstrap/css/bootstrap.min.css', 'plugins/font-awesome/css/font-awesome.min.css', 'plugins/datatables/dataTables.bootstrap4.css','sb-admin.css']) ?>
+
 
   <?=
   $this->Html->script([ 'plugins/jquery/jquery.min.js']);
   ?>
 
-  <!--$this->Html->css($this->Html->url('/css/main.css', true));-->
-
-  <!-- Bootstrap core JavaScript-->
-
-
-
-<!--
-'dataTables.bootstrap.min','jquery.dataTables.min',, 'jquery.easing.min.js','bootstrap.min', 
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-  <link href="css/sb-admin.css" rel="stylesheet">
- <script src="js/sb-admin.min.js"></script>
-   <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  
-
-
-
-     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-   
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-  
-   
-   
-    <script src="js/sb-admin-datatables.min.js"></script>
-    <script src="js/sb-admin-charts.min.js"></script>
-<<<<<<< HEAD
-
-         
--->
 
 </head>
 
 
-  
+
+
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+
+
+    <a class="navbar-left" rel="home" href="#" title="Sistema de Activos">
+      <?= $this->Html->image('acronimo.png', array('style' => 'max-width:100px; margin-top: -7px; margin-right: 40px;'),['alt' => 'Facultad de Ingenieria']);?>
+    </a>
+
     <a class="navbar-brand" href="index.html">Sistema de Activos</a>
+
+
+
+
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -96,13 +54,14 @@ $cakeDescription = 'Control de Activos';
        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
         <?=$this->Html->link(
 
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Usuarios', array('class' => 'nav-link-text')),
-          array('controller' => 'Users','action' => 'index'),
+
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Usuarios', array('class' => 'nav-link-text')),array('controller' => 'Users','action' => 'index'),
           array('class' => 'nav-link',
             'escape'=> false)
         );
         ?>
       </li>
+
 
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
@@ -113,10 +72,20 @@ $cakeDescription = 'Control de Activos';
         </a> 
       </li>
 
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="TiposActivos">
-        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Types','action'=>'index']); ?>">
-          <span class="nav-link-text">Tipos de activos</span>
-        </a>
+   
+
+
+
+
+
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tipos de activos">
+        <?=$this->Html->link(
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Tipos de activos', array('class' => 'nav-link-text')),
+          array('controller' => 'Types','action' => 'index'),
+          array('class' => 'nav-link',
+            'escape'=> false)
+        );
+        ?>
 
 
       </li>
@@ -159,7 +128,12 @@ $cakeDescription = 'Control de Activos';
         </a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto">        
+    <ul class="navbar-nav ml-auto">
+        <!--li class="nav-item">
+            <a class="navbar-brand" style="color:white">
+                <i class="fa fa-user"></i> <?php echo "Bienvenido:" ." ". $nombre ."". $apellido; ?></a>
+        </li-->
+
       <li class="nav-item">
         <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
           <i class="fa fa-fw fa-sign-out"></i>Salir</a>
@@ -167,6 +141,8 @@ $cakeDescription = 'Control de Activos';
       </ul>
     </div>
   </nav>
+
+
 
   <div class="content-wrapper">
     <div class="container-fluid">
@@ -213,6 +189,7 @@ $cakeDescription = 'Control de Activos';
       </div>
     </div>
   </div>
+</div>
 
 
 
@@ -224,13 +201,10 @@ $cakeDescription = 'Control de Activos';
   ?>
 
 
-
-
-</div>
-<!-- Bootstrap core JavaScript-->
-
 </body>
 </html>
+
+
 
 
 
