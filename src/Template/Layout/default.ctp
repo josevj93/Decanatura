@@ -119,10 +119,10 @@ $cakeDescription = 'Control de Activos';
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <!--li class="nav-item">
             <a class="navbar-brand" style="color:white">
                 <i class="fa fa-user"></i> <?php echo "Bienvenido:" ." ". $nombre ."". $apellido; ?></a>
-        </li>
+        </li-->
 
       <li class="nav-item">
         <a class="nav-link" data-toggle="modal" data-target="#exampleModal">

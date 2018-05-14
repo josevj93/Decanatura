@@ -37,8 +37,8 @@ class RolesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->belongsToMany('Permissions', [
-            'foreignKey' => 'role_id',
-            'targetForeignKey' => 'permission_id',
+            'foreignKey' => 'id_rol',
+            'targetForeignKey' => 'id_permission',
             'joinTable' => 'roles_permissions'
         ]);
     }
