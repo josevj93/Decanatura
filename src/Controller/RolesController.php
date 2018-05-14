@@ -141,23 +141,7 @@ class RolesController extends AppController
             //$rol = $this->Roles->get($id);
             //pr($rol);
 /*
-            $rol = $this->Roles->find('list', array(
-                'joins' => array(
-                    array(
-                        'table' => 'RolesPermissions',
-                        //'alias' => 'UserJoin',
-                        'type' => 'left',
-                        'conditions' => array(
-                            'Roles.id = RolesPermissions.id_rol'
-                        )
-                    )
-                ),
-                'conditions' => array(
-                    'Roles.id' => $id
-                )//,
-                //'fields' => array('Roles.id', 'RolesPermissions.id_rol')
-            ));
-*/
+
 
             $rol = $this->RolesPermissions->find('all', array(
                 'joins' => array(
@@ -176,8 +160,34 @@ class RolesController extends AppController
                 'fields' => array('id_permission')
             ));
 
-            
+*/
 
+
+            $query = $this->Roles->find('all', array(
+                'conditions' => array(
+                    'id' => $id
+                )
+            ))->contain(['Permissions']);;
+
+
+
+
+
+
+
+            //find('all')->contain(['Roles']);
+
+
+            foreach ($query as $roles) {
+                $rls = $roles['permissions'];
+                foreach ($rls as $item){
+                    echo $item['nombre'];
+                    echo "<br>";
+                }
+            }            
+
+            exit;
+/*
             $datos = $rol->toArray(); 
 
             foreach($datos as $var){
@@ -188,6 +198,9 @@ class RolesController extends AppController
             
 
             exit;
+
+
+*/
         }
 
 
