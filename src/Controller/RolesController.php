@@ -17,6 +17,7 @@ class RolesController extends AppController
     public function initialize(){
         $this->Permissions = $this->loadModel('Permissions');
         $this->RolesPermissions = $this->loadModel('RolesPermissions');
+
     }
 
     /**
@@ -27,25 +28,127 @@ class RolesController extends AppController
     public function index()
     {
 
-        $roles = $this->Roles->find('all',
-        array('fields' => array('nombre') ));
+        
 
-        $this->set('roles',$roles);
+        $permisos = array();
 
-        $permissions = $this->Permissions->find('all');
+        for ($i = 1; $i < 25; ++$i) {
+            $permisos[$i] = 0;
+        }
 
-        $this->set('permissions',$permissions);
+        
 
-        $rolespermissions = $this->RolesPermissions->find('all');
+        $roles = $this->Roles->find('all');
 
-        $this->set('rolespermissions',$rolespermissions);
+        $roles_names = array(); 
 
+        foreach ($roles as $item) {
+            $roles_names[] = $item['nombre'];
+        
+        } 
+        
+
+        $this->set('roles',$roles_names);
+
+       
 
         if ($this->request->is('post')) {
-            
-                return $this->redirect(['action' => 'index']);
+                //return $this->redirect(['action' => 'index']);
+
+
+            $accion = (int)$this->request->data['accion'];
+
+
+            if($accion == 1){
+                //CONSULTA LOS PERMISOS DEL ROL SELECCIONADO
+                $id = (int)$this->request->data['rol'];
+                $id = $id + 1;
+
+                $rol_activo = $id;
+
+                $query = $this->Roles->find('all', array(
+                    'conditions' => array(
+                        'id' => $id
+                    )
+                ))->contain(['Permissions']);;
+
+                foreach ($query as $roles) {
+                    $rls = $roles['permissions'];
+                    foreach ($rls as $item){
+                        $permisos[(int)$item['id']] = 1;
+                        //echo $item['id'];
+                        //echo "<br>";
+                    }
+                } 
+
+
+                //aqui termina if         
+            }else if($accion == 2){
+                //GUARDA LOS ROLES SEGUN LA MATRIZ DE CHECKBOX
+                $checks = $this->request->data;
+                
+                $rol_activo = (int)$this->request->data['activo'];
+                //BORRA LAS TUPLAS DE PERMISOS PARA EL ROL
+
+                $this->RolesPermissions->deleteAll(
+                    array(
+                        "RolesPermissions.id_rol" => $rol_activo
+                    )
+                );
+                
+                for($i=1;$i<21;$i++){
+                    if($checks[$i] == 1){
+                        //INSERTA
+                        $permiso = $this->RolesPermissions->newEntity();
+                        
+                        $permiso->id_rol = $rol_activo;
+                        $permiso->id_permission = $i; 
+
+                        if ($this->RolesPermissions->save($permiso)) {
+                            //$this->Flash->success(__('The roles permission has been saved.'));
+                        }else{
+                            //$this->Flash->error(__('The roles permission could not be saved. Please, try again.'));
+                        }
+                        
+
+
+                        
+                    }
+                }
+
+
+
+            }
+
+        }else{
+            //CARGA SIN POST
+
+
+                $id = 1;
+                $rol_activo = 1;
+
+                $query = $this->Roles->find('all', array(
+                    'conditions' => array(
+                        'id' => $id
+                    )
+                ))->contain(['Permissions']);;
+
+                foreach ($query as $roles) {
+                    $rls = $roles['permissions'];
+                    foreach ($rls as $item){
+                        $permisos[(int)$item['id']] = 1;
+                        //echo $item['id'];
+                        //echo "<br>";
+                    }
+                }
+
+
 
         }
+
+        $this->set('permisos',$permisos);
+
+        $this->set('rol_activo',$rol_activo);
     }
 
     /**
@@ -131,51 +234,6 @@ class RolesController extends AppController
     }
 
 
-
-
-    public function consultar(){
-        
-        if($this->request->is('post')){
-            $id = (int)$this->request->data['rol'];
-            //$rol = $this->Roles->get($id);
-            //pr($rol);
-
-            $rol = $this->Roles->find('all', array(
-                'joins' => array(
-                    array(
-                        'table' => 'users',
-                        //'alias' => 'UserJoin',
-                        'type' => 'INNER',
-                        'conditions' => array(
-                            'Roles.id = RolesPermissions.id_rol'
-                        )
-                    )
-                ),
-                'conditions' => array(
-                    'Roles.id' => $id
-                ),
-                'fields' => array('Roles.id', 'RolesPermissions.id_permission')
-            ));
-
-            pr($rol);
-            exit;
-        }
-
-
-    }
-
-
-    public function guardar(){
-        
-        if($this->request->is('post')){
-            $myarray = $this->request->data;
-            pr($myarray);
-
-            exit;
-        }
-
-
-    }
 
 
 
