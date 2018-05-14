@@ -7,7 +7,7 @@ use App\Controller\AppController;
  * Roles Controller
  *
  * @property \App\Model\Table\RolesTable $Roles
-   @property \App\Model\Table\PermissionsTable $Permissions
+@property \App\Model\Table\PermissionsTable $Permissions
  *
  * @method \App\Model\Entity\Role[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
@@ -28,7 +28,7 @@ class RolesController extends AppController
     public function index()
     {
 
-        
+
 
         $permisos = array();
 
@@ -36,24 +36,24 @@ class RolesController extends AppController
             $permisos[$i] = 0;
         }
 
-        
+
 
         $roles = $this->Roles->find('all');
 
-        $roles_names = array(); 
+        $roles_names = array();
 
         foreach ($roles as $item) {
             $roles_names[] = $item['nombre'];
-        
-        } 
-        
+
+        }
+
 
         $this->set('roles',$roles_names);
 
-       
+
 
         if ($this->request->is('post')) {
-                //return $this->redirect(['action' => 'index']);
+            //return $this->redirect(['action' => 'index']);
 
 
             $accion = (int)$this->request->data['accion'];
@@ -79,14 +79,14 @@ class RolesController extends AppController
                         //echo $item['id'];
                         //echo "<br>";
                     }
-                } 
+                }
 
 
-                //aqui termina if         
+                //aqui termina if
             }else if($accion == 2){
                 //GUARDA LOS ROLES SEGUN LA MATRIZ DE CHECKBOX
                 $checks = $this->request->data;
-                
+
                 $rol_activo = (int)$this->request->data['activo'];
                 //BORRA LAS TUPLAS DE PERMISOS PARA EL ROL
 
@@ -95,24 +95,24 @@ class RolesController extends AppController
                         "RolesPermissions.id_rol" => $rol_activo
                     )
                 );
-                
+
                 for($i=1;$i<21;$i++){
                     if($checks[$i] == 1){
                         //INSERTA
                         $permiso = $this->RolesPermissions->newEntity();
-                        
+
                         $permiso->id_rol = $rol_activo;
-                        $permiso->id_permission = $i; 
+                        $permiso->id_permission = $i;
 
                         if ($this->RolesPermissions->save($permiso)) {
                             //$this->Flash->success(__('The roles permission has been saved.'));
                         }else{
                             //$this->Flash->error(__('The roles permission could not be saved. Please, try again.'));
                         }
-                        
 
 
-                        
+
+
                     }
                 }
 
@@ -124,23 +124,23 @@ class RolesController extends AppController
             //CARGA SIN POST
 
 
-                $id = 1;
-                $rol_activo = 1;
+            $id = 1;
+            $rol_activo = 1;
 
-                $query = $this->Roles->find('all', array(
-                    'conditions' => array(
-                        'id' => $id
-                    )
-                ))->contain(['Permissions']);;
+            $query = $this->Roles->find('all', array(
+                'conditions' => array(
+                    'id' => $id
+                )
+            ))->contain(['Permissions']);;
 
-                foreach ($query as $roles) {
-                    $rls = $roles['permissions'];
-                    foreach ($rls as $item){
-                        $permisos[(int)$item['id']] = 1;
-                        //echo $item['id'];
-                        //echo "<br>";
-                    }
+            foreach ($query as $roles) {
+                $rls = $roles['permissions'];
+                foreach ($rls as $item){
+                    $permisos[(int)$item['id']] = 1;
+                    //echo $item['id'];
+                    //echo "<br>";
                 }
+            }
 
 
 

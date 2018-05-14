@@ -145,11 +145,13 @@ public function logout(){
     return $this->redirect($this->Auth->logout());
 }
 
-public function beforeFilter(Event $event)
+/*public function beforeFilter(Event $event)
     {
         // allow only login
          $this->Auth->allow(['login']);
-     }
+     }*/
+
+
 
  
 

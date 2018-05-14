@@ -39,9 +39,9 @@ $cakeDescription = 'Control de Activos';
     </a>
 
     <a class="navbar-brand" href="index.html">Sistema de Activos</a>
-   
 
- 
+
+
 
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -118,7 +118,12 @@ $cakeDescription = 'Control de Activos';
         </a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto">        
+    <ul class="navbar-nav ml-auto">
+        <!--li class="nav-item">
+            <a class="navbar-brand" style="color:white">
+                <i class="fa fa-user"></i> <?php echo "Bienvenido:" ." ". $nombre ."". $apellido; ?></a>
+        </li-->
+
       <li class="nav-item">
         <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
           <i class="fa fa-fw fa-sign-out"></i>Salir</a>
