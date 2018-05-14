@@ -4,13 +4,10 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
+
 
     "content-hash": "f0019b7157e5f43e0d1aa3d897fb21a4",
 
-=======
-    "content-hash": "98e13f48eb22b45d6393bdc09629135b",
->>>>>>> pr/24
     "packages": [
         {
             "name": "aura/intl",
@@ -296,10 +293,7 @@
             "time": "2017-12-24T21:09:29+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "dompdf/dompdf",
-            "version": "v0.8.2",
-=======
+
             "name": "imagine/imagine",
             "version": "v0.7.1",
             "source": {
@@ -360,7 +354,7 @@
         {
             "name": "josegonzalez/cakephp-upload",
             "version": "4.0.0",
->>>>>>> pr/24
+
             "source": {
                 "type": "git",
                 "url": "https://github.com/dompdf/dompdf.git",
