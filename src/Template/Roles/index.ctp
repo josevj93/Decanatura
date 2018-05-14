@@ -19,7 +19,8 @@
     'type' => 'select',
     'class' => 'form-control',
     'options' => $roles, 
-    'selected' => $rol_activo-1 
+    'selected' => 'selected',
+    'value' => $rol_activo - 1, 
     )); ?>
 
     <br>
