@@ -9,15 +9,10 @@
         "cakephp/cakephp": "3.5.*",
         "cakephp/migrations": "^1.0",
         "cakephp/plugin-installer": "^1.0",
-<<<<<<< HEAD
-
         "dompdf/dompdf": "^0.8.2",
         "friendsofcake/cakepdf": "^3.5",
 
-=======
-        "imagine/imagine": "^0.7.1",
-        "josegonzalez/cakephp-upload": "^4.0",
->>>>>>> pr/24
+
         "josegonzalez/dotenv": "2.*",
         "mobiledetect/mobiledetectlib": "2.*"
     },
