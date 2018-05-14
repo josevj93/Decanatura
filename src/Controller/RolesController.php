@@ -17,6 +17,7 @@ class RolesController extends AppController
     public function initialize(){
         $this->Permissions = $this->loadModel('Permissions');
         $this->RolesPermissions = $this->loadModel('RolesPermissions');
+
     }
 
     /**
@@ -27,25 +28,69 @@ class RolesController extends AppController
     public function index()
     {
 
-        $roles = $this->Roles->find('all',
-        array('fields' => array('nombre') ));
+        $permisos = array();
 
-        $this->set('roles',$roles);
+        for ($i = 1; $i < 25; ++$i) {
+            $permisos[$i] = 0;
+        }
 
-        $permissions = $this->Permissions->find('all');
+        
 
-        $this->set('permissions',$permissions);
+        $roles = $this->Roles->find('all');
 
-        $rolespermissions = $this->RolesPermissions->find('all');
+        $roles_names = array(); 
 
-        $this->set('rolespermissions',$rolespermissions);
+        foreach ($roles as $item) {
+            $roles_names[] = $item['nombre'];
+        
+        } 
+        
 
+        $this->set('roles',$roles_names);
+
+       
 
         if ($this->request->is('post')) {
             
-                return $this->redirect(['action' => 'index']);
+                //return $this->redirect(['action' => 'index']);
+
+
+            $accion = (int)$this->request->data['accion'];
+
+
+            if($accion == 1){
+                //CONSULTA LOS PERMISOS DEL ROL SELECCIONADO
+                $id = (int)$this->request->data['rol'];
+                $id = $id + 1;
+
+
+                $query = $this->Roles->find('all', array(
+                    'conditions' => array(
+                        'id' => $id
+                    )
+                ))->contain(['Permissions']);;
+
+                foreach ($query as $roles) {
+                    $rls = $roles['permissions'];
+                    foreach ($rls as $item){
+                        $permisos[(int)$item['id']] = 1;
+                        //echo $item['id'];
+                        //echo "<br>";
+                    }
+                } 
+
+
+                //aqui termina if         
+            }else if($accion == 2){
+                //GUARDA LOS ROLES SEGUN LA MATRIZ DE CHECKBOX
+
+
+
+            }
 
         }
+
+        $this->set('permisos',$permisos);
     }
 
     /**
@@ -186,7 +231,7 @@ class RolesController extends AppController
                 }
             }            
 
-            exit;
+            //exit;
 /*
             $datos = $rol->toArray(); 
 
@@ -210,7 +255,7 @@ class RolesController extends AppController
     public function guardar(){
         
         if($this->request->is('post')){
-            $myarray = $this->request->data;
+            $myarray = $this->request->data['desechos'];
             pr($myarray);
 
             exit;
