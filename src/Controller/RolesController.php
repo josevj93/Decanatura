@@ -7,11 +7,17 @@ use App\Controller\AppController;
  * Roles Controller
  *
  * @property \App\Model\Table\RolesTable $Roles
+   @property \App\Model\Table\PermissionsTable $Permissions
  *
  * @method \App\Model\Entity\Role[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class RolesController extends AppController
 {
+
+    public function initialize(){
+        $this->Permissions = $this->loadModel('Permissions');
+        $this->RolesPermissions = $this->loadModel('RolesPermissions');
+    }
 
     /**
      * Index method
@@ -20,9 +26,26 @@ class RolesController extends AppController
      */
     public function index()
     {
-        $roles = $this->paginate($this->Roles);
 
-        $this->set(compact('roles'));
+        $roles = $this->Roles->find('all',
+        array('fields' => array('nombre') ));
+
+        $this->set('roles',$roles);
+
+        $permissions = $this->Permissions->find('all');
+
+        $this->set('permissions',$permissions);
+
+        $rolespermissions = $this->RolesPermissions->find('all');
+
+        $this->set('rolespermissions',$rolespermissions);
+
+
+        if ($this->request->is('post')) {
+            
+                return $this->redirect(['action' => 'index']);
+
+        }
     }
 
     /**
@@ -106,4 +129,96 @@ class RolesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+
+
+
+    public function consultar(){
+        
+        if($this->request->is('post')){
+            $id = (int)$this->request->data['rol'];
+            $id = $id + 1;
+            //$rol = $this->Roles->get($id);
+            //pr($rol);
+/*
+
+
+            $rol = $this->RolesPermissions->find('all', array(
+                'joins' => array(
+                    array(
+                        'table' => 'Permissions',
+                        //'alias' => 'UserJoin',
+                        'type' => 'INNER',
+                        'conditions' => array(
+                            'RolesPermissions.id_permission = Permissions.id'
+                        )
+                    )
+                ),
+                'conditions' => array(
+                    'RolesPermissions.id_rol' => $id
+                ),
+                'fields' => array('id_permission')
+            ));
+
+*/
+
+
+            $query = $this->Roles->find('all', array(
+                'conditions' => array(
+                    'id' => $id
+                )
+            ))->contain(['Permissions']);;
+
+
+
+
+
+
+
+            //find('all')->contain(['Roles']);
+
+
+            foreach ($query as $roles) {
+                $rls = $roles['permissions'];
+                foreach ($rls as $item){
+                    echo $item['nombre'];
+                    echo "<br>";
+                }
+            }            
+
+            exit;
+/*
+            $datos = $rol->toArray(); 
+
+            foreach($datos as $var){
+
+                pr($var['id_permission']);
+
+            }
+            
+
+            exit;
+
+
+*/
+        }
+
+
+    }
+
+
+    public function guardar(){
+        
+        if($this->request->is('post')){
+            $myarray = $this->request->data;
+            pr($myarray);
+
+            exit;
+        }
+
+
+    }
+
+
+
 }

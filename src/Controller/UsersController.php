@@ -2,7 +2,9 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Event\Event;
+//use Cake\Controller\Component\AuthComponent;
+//use Cake\Controller\Component;
 /**
  * Users Controller
  *
@@ -61,7 +63,7 @@ class UsersController extends AppController
     {
 
 
-        
+
         $user = $this->Users->newEntity();
 
 
@@ -124,24 +126,34 @@ class UsersController extends AppController
 
     public function login(){
 
-         $this->viewBuilder()->setLayout('login');
+     $this->viewBuilder()->setLayout('login');
 
-        if($this->request->is('post')){
-            $user = $this->Auth->identify();
-            if($user){
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
-            }
-            $this->Flash->error(__('Usuario o contaseña inválidos, intente otra vez'));
+     if($this->request->is('post')){
+        $user = $this->Auth->identify();
+        if($user){
+            $this->Auth->setUser($user);
+            return $this->redirect('/pages/home');
         }
-
+        $this->Flash->error(__('Usuario o contaseña inválidos, intente otra vez'));
     }
 
+}
 
-    public function logout(){
 
-        return $this->redirect($this->Auth->logout());
-    }
+public function logout(){
+
+    return $this->redirect($this->Auth->logout());
+}
+
+public function beforeFilter(Event $event)
+    {
+        // allow only login
+         $this->Auth->allow(['login']);
+     }
+
+ 
+
+
 
 }
 

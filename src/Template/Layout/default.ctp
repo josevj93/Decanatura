@@ -16,7 +16,7 @@ $cakeDescription = 'Control de Activos';
   <?= $this->Html->css('cake.css') ?>
 
 
-  <?= $this->Html->css([ 'plugins/bootstrap/css/bootstrap.min.css', 'plugins/font-awesome/css/font-awesome.min.css', 'plugins/datatables/dataTables.bootstrap4.css','sb-admin.css']) ?>
+  <?= $this->Html->css(['plugins/bootstrap/css/bootstrap.css','plugins/bootstrap/css/bootstrap.min.css', 'plugins/font-awesome/css/font-awesome.min.css', 'plugins/datatables/dataTables.bootstrap4.css','sb-admin.css']) ?>
 
   <?=
   $this->Html->script([ 'plugins/jquery/jquery.min.js']);
@@ -32,7 +32,17 @@ $cakeDescription = 'Control de Activos';
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+
+
+    <a class="navbar-left" rel="home" href="#" title="Sistema de Activos">
+      <?= $this->Html->image('acronimo.png', array('style' => 'max-width:100px; margin-top: -7px; margin-right: 40px;'),['alt' => 'Facultad de Ingenieria']);?>
+    </a>
+
     <a class="navbar-brand" href="index.html">Sistema de Activos</a>
+   
+
+ 
+
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

@@ -1,19 +1,40 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $roles
+ *
+ *@var \App\Model\Entity\Role $role
  */
 ?>
 
-<div class="roles index large-9 medium-8 columns content">
+<div class="roles x large-9 medium-8 columns content">
     <h1><?= __('Roles') ?></h1>
 
-    <?php echo $this->Form->input('Rol', array(
-    'type' => 'select',
-    'options' => array('estudiante' => 'Estudiante', 'director' => 'Director de Escuela', 'administrador' => 'Administrador'),
-    'selected' => 'private'
-)); ?>
+    <?php echo $this->Form->create(false, array(
+    'url' => array('controller' => 'Roles', 'action' => 'consultar')
+    ));
+    ?>
 
+
+    <?php echo $this->Form->input('Editar Rol:', array(
+    'name' => 'rol',
+    'type' => 'select',
+    'class' => 'form-control',
+    'options' => $roles,
+    'selected' => 'private'
+    )); ?>
+
+    <br><br><?php echo $roles; ?><br><br>
+
+    <?= $this->Form->button(__('Consultar'), ['class' => 'btn btn-primary']) ?>
+
+
+    <?= $this->Form->end() ?>
+
+  <br><br>
+    <?php echo $this->Form->create(false, array(
+    'url' => array('controller' => 'Roles', 'action' => 'guardar')
+    ));
+    ?>
 
     <table class="table">
     	<tr>
@@ -27,26 +48,49 @@
     		<th><h5><?= __('Desechos') ?></h5></th>
     		<td>
     			<?php echo $this->Form->input('', array(
+<<<<<<< HEAD
                                   'type'=>'checkbox',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'type'=>'checkbox',
+                                  'name' => 'desechos[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
+  ) ); ?>
+    		</td>
+    		<td>
+    			<?php echo $this->Form->input('', array(
+<<<<<<< HEAD
+                                  'type'=>'checkbox',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'type'=>'checkbox',
+                                  'name' => 'desechos[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
+  ) ); ?>
+    		</td>
+    		<td>
+    			<?php echo $this->Form->input('', array(
+<<<<<<< HEAD
+                                  'type'=>'checkbox',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'type'=>'checkbox',
+                                  'name' => 'desechos[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     		<td>
     			<?php echo $this->Form->input('', array(
                                   'type'=>'checkbox',
+<<<<<<< HEAD
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
-  ) ); ?>
-    		</td>
-    		<td>
-    			<?php echo $this->Form->input('', array(
-                                  'type'=>'checkbox',
+=======
+                                  'name' => 'desechos[]',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
-  ) ); ?>
-    		</td>
-    		<td>
-    			<?php echo $this->Form->input('', array(
-                                  'type'=>'checkbox',
-                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     	</tr>
@@ -56,25 +100,46 @@
     		<td>
     			<?php echo $this->Form->input('', array(
                                   'type'=>'checkbox',
+<<<<<<< HEAD
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'name' => 'traslados[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     		<td>
     			<?php echo $this->Form->input('', array(
                                   'type'=>'checkbox',
+<<<<<<< HEAD
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'name' => 'traslados[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     		<td>
     			<?php echo $this->Form->input('', array(
                                   'type'=>'checkbox',
+<<<<<<< HEAD
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'name' => 'traslados[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     		<td>
     			<?php echo $this->Form->input('', array(
+<<<<<<< HEAD
                                   'type'=>'checkbox',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'type'=>'checkbox',
+                                  'name' => 'traslados[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     	</tr>
@@ -83,26 +148,48 @@
     		<th><h5><?= __('Devoluciones') ?></h5></th>
     		<td>
     			<?php echo $this->Form->input('', array(
+<<<<<<< HEAD
                                   'type'=>'checkbox',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'type'=>'checkbox',
+                                  'name' => 'devoluciones[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     		<td>
     			<?php echo $this->Form->input('', array(
                                   'type'=>'checkbox',
+<<<<<<< HEAD
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'name' => 'devoluciones[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
+  ) ); ?>
+    		</td>
+    		<td>
+    			<?php echo $this->Form->input('', array(
+<<<<<<< HEAD
+                                  'type'=>'checkbox',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'type'=>'checkbox',
+                                  'name' => 'devoluciones[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     		<td>
     			<?php echo $this->Form->input('', array(
                                   'type'=>'checkbox',
+<<<<<<< HEAD
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
-  ) ); ?>
-    		</td>
-    		<td>
-    			<?php echo $this->Form->input('', array(
-                                  'type'=>'checkbox',
+=======
+                                  'name' => 'devoluciones[]',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     	</tr>
@@ -111,26 +198,50 @@
     		<th><h5><?= __('Prestamos') ?></h5></th>
     		<td>
     			<?php echo $this->Form->input('', array(
+<<<<<<< HEAD
                                   'type'=>'checkbox',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'type'=>'checkbox',
+                                  'name' => 'prestamos[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     		<td>
     			<?php echo $this->Form->input('', array(
+<<<<<<< HEAD
                                   'type'=>'checkbox',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'type'=>'checkbox',
+                                  'name' => 'prestamos[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     		<td>
     			<?php echo $this->Form->input('', array(
+<<<<<<< HEAD
                                   'type'=>'checkbox',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'type'=>'checkbox',
+                                  'name' => 'prestamos[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     		<td>
     			<?php echo $this->Form->input('', array(
+<<<<<<< HEAD
                                   'type'=>'checkbox',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'type'=>'checkbox',
+                                  'name' => 'prestamos[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     	</tr>
@@ -139,29 +250,59 @@
     		<th><h5><?= __('Usuarios') ?></h5></th>
     		<td>
     			<?php echo $this->Form->input('', array(
+<<<<<<< HEAD
                                   'type'=>'checkbox',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'type'=>'checkbox',
+                                  'name' => 'usuarios[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
+  ) ); ?>
+    		</td>
+    		<td>
+    			<?php echo $this->Form->input('', array(
+<<<<<<< HEAD
+                                  'type'=>'checkbox',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'type'=>'checkbox',
+                                  'name' => 'usuarios[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     		<td>
     			<?php echo $this->Form->input('', array(
                                   'type'=>'checkbox',
+<<<<<<< HEAD
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+=======
+                                  'name' => 'usuarios[]',
+                                  'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     		<td>
     			<?php echo $this->Form->input('', array(
+<<<<<<< HEAD
                                   'type'=>'checkbox',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
-  ) ); ?>
-    		</td>
-    		<td>
-    			<?php echo $this->Form->input('', array(
+=======
                                   'type'=>'checkbox',
+                                  'name' => 'usuarios[]',
                                   'format' => array('before', 'input', 'between', 'label', 'after', 'error' )
+>>>>>>> 17115d665dd38dd5611574a5a9a1603542dee98f
   ) ); ?>
     		</td>
     	</tr>
 
     </table>
+
+
+    <?= $this->Form->button(__('Guardar'), ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->end() ?>
+
+
+
 </div>

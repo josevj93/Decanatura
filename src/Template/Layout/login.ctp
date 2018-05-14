@@ -11,16 +11,13 @@
   <title>SB Admin - Start Bootstrap Template</title>
   <!-- Bootstrap core CSS-->
 
-
+ <?= $this->Html->meta('icon') ?>
   <?= $this->Html->css('cake.css') ?>
 
 
+ <?= $this->Html->css([ 'plugins/bootstrap/css/bootstrap.min.css', 'plugins/font-awesome/css/font-awesome.min.css','sb-admin.css']) ?>
 
-  <link href="../webroot/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="../webroot/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="../webroot/css/sb-admin.css" rel="stylesheet">
+ 
 </head>
 
 <?= $this->Flash->render() ?>
@@ -30,12 +27,19 @@
  <div class="container">
 
   <div class="card card-login mx-auto mt-5">
-    <div class="card-header">Ingreso al Sistema</div>
+    <div class="card-header">Ingreso al Sistema de Activos</div>
     <div class="card-body">
 
      
-      <!--<form>-->
+     <div align="center">
+       <?= $this->Html->image('acronimo.png', array('style' => 'max-width:100px; margin-top: -7px;'),['alt' => 'Facultad de Ingenieria']);?>
+     </div>
+   
+     
+     <!--<form>-->
        <?= $this->Form->create() ?>
+
+
        <div class="form-group">
         <!--<label for="usr">Usuario</label>-->
         <?= $this->Form->input('Usuario', array('id' => 'username', 'name' => 'username', 'class' => 'form-control', 'type' => 'username', 
@@ -66,11 +70,7 @@
       </div>
     </div>
   </div>
-  <!-- Bootstrap core JavaScript-->
-  <script src="../webroot/js/plugins/jquery/jquery.min.js"></script>
-  <script src="../webroot/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- Core plugin JavaScript-->
-  <script src="../webroot/js/plugins/jquery-easing/jquery.easing.min.js"></script>
+
 </body>
 
 </html>
