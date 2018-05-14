@@ -3,6 +3,9 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\TechnicalReport $technicalReport
  */
+
+
+
 ?>
 <style>
 .modal-header-primary {
@@ -106,19 +109,19 @@
 
             <div>
                 <label>Recomendación:</label><br>
-                <?php if ("U"==$technicalReport->recommendation): ?>
+                <?php if ("C"==$technicalReport->recommendation): ?>
                     Reubicar
                 <?php endif; ?>
 
-                <?php if("P"==$technicalReport->recommendation): ?>
+                <?php if("R"==$technicalReport->recommendation): ?>
                     Reparar
                 <?php endif; ?>
 
-                <?php if("E"==$technicalReport->recommendation): ?>
+                <?php if("D"==$technicalReport->recommendation): ?>
                     Desechar
                 <?php endif; ?>
 
-                <?php if("D"==$technicalReport->recommendation): ?>
+                <?php if("U"==$technicalReport->recommendation): ?>
                     Usar piesas
                 <?php endif; ?>
 
@@ -132,8 +135,10 @@
 
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-    <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $technicalReport->location_id], ['class' => 'btn btn-primary']) ?>
+    <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $technicalReport->technical_report_id], ['class' => 'btn btn-primary']) ?>
     
-    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $technicalReport->location_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar la Ubicación # {0}?', $technicalReport->location_id)]) ?>
 
+    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Seguro que desea eliminar la Ubicación #'.$technicalReport->technical_report_id.' ?', $technicalReport->technical_report_id)]) ?>
+
+    <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]) ?>
 </div>
