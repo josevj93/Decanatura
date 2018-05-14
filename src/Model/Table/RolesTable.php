@@ -21,7 +21,7 @@ use Cake\Validation\Validator;
  */
 class RolesTable extends Table
 {
-
+ 
     /**
      * Initialize method
      *
@@ -34,7 +34,7 @@ class RolesTable extends Table
 
         $this->setTable('roles');
         $this->setDisplayField('id');
-        $this->setPrimaryKey('id');
+        $this->setPrimaryKey('id'); 
 
         $this->belongsToMany('Permissions', [
             'foreignKey' => 'id_rol',

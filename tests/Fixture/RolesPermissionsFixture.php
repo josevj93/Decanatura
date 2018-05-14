@@ -19,15 +19,15 @@ class RolesPermissionsFixture extends TestFixture
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'id_rol' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'id_permiso' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'id_permission' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
             'id_rol' => ['type' => 'index', 'columns' => ['id_rol'], 'length' => []],
-            'id_permiso' => ['type' => 'index', 'columns' => ['id_permiso'], 'length' => []],
+            'id_permission' => ['type' => 'index', 'columns' => ['id_permission'], 'length' => []],
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'roles_permissions_ibfk_1' => ['type' => 'foreign', 'columns' => ['id_rol'], 'references' => ['roles', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
-            'roles_permissions_ibfk_2' => ['type' => 'foreign', 'columns' => ['id_permiso'], 'references' => ['permissions', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'roles_permissions_ibfk_2' => ['type' => 'foreign', 'columns' => ['id_permission'], 'references' => ['permissions', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -45,7 +45,7 @@ class RolesPermissionsFixture extends TestFixture
         [
             'id' => 1,
             'id_rol' => 1,
-            'id_permiso' => 1
+            'id_permission' => 1
         ],
     ];
 }

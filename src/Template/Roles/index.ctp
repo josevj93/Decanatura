@@ -14,16 +14,13 @@
     ));
     ?>
 
-    <?php echo $roles[$rol_activo-1]; ?>
-
-
     <?php echo $this->Form->input('Editar Rol:', array(
         'name' => 'rol',
         'type' => 'select',
         'class' => 'form-control',
         'options' => $roles,
-        'value' => $roles[$rol_activo-1],
-        'escape' => false // prevent HTML being automatically escaped
+        'selected' => 'selected',
+        'value' => $rol_activo - 1,
     )); ?>
 
     <br>
