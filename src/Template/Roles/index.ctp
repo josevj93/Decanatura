@@ -13,14 +13,13 @@
     'url' => array('controller' => 'Roles', 'action' => 'index')
     ));
     ?>
-
-
+    
     <?php echo $this->Form->input('Editar Rol:', array(
     'name' => 'rol',
     'type' => 'select',
     'class' => 'form-control',
     'options' => $roles, 
-    'selected' => 'private'
+    'selected' => $rol_activo-1 
     )); ?>
 
     <br>
@@ -28,6 +27,8 @@
     <?= $this->Form->button(__('Consultar'), ['class' => 'btn btn-primary']) ?>
 
     <input type="hidden" name="accion" value="1" />
+
+
     <?= $this->Form->end() ?>
 
   <br><br>
@@ -35,7 +36,7 @@
     'url' => array('controller' => 'Roles', 'action' => 'index')
     ));
     ?>
-    
+  
 
     <table class="table">
     	<tr>
@@ -150,6 +151,11 @@
 
 
     <?= $this->Form->button(__('Guardar'), ['class' => 'btn btn-primary']) ?>
+
+    <input type="hidden" name="accion" value="2" />
+
+    <input type="hidden" name="activo" value= "<?= $rol_activo ?>" />
+
     <?= $this->Form->end() ?>
 
 
