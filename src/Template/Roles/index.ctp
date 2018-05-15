@@ -15,22 +15,14 @@
     ?>
 
     <?php echo $this->Form->input('Editar Rol:', array(
-<<<<<<< HEAD
+
     'name' => 'rol',
     'type' => 'select',
     'class' => 'form-control',
     'options' => $roles, 
     'selected' => 'selected',
     'value' => $rol_activo - 1, 
-=======
-        'name' => 'rol',
-        'type' => 'select',
-        'class' => 'form-control',
-        'options' => $roles,
-        'selected' => 'selected',
-        'value' => $rol_activo - 1,
->>>>>>> dc1b0cd3029a2f20e776e88b675e824f7dc87209
-    )); ?>
+
 
     <br>
 
