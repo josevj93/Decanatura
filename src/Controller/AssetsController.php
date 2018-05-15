@@ -59,10 +59,10 @@ class AssetsController extends AppController
                             ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
                 }
 
-                $this->Flash->success(__('El activo fue guardado'));
+                $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
+            $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
 
         $types = $this->Assets->Types->find('list', ['limit' => 200]);
@@ -97,10 +97,10 @@ class AssetsController extends AppController
                             ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
                 }*/
 
-                $this->Flash->success(__('El activo fue guardado con exito'));
+                $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente'));
+            $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
         $types = $this->Assets->Types->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
@@ -116,9 +116,9 @@ class AssetsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $asset = $this->Assets->get($id);
         if ($this->Assets->delete($asset)) {
-            $this->Flash->success(__('El activo fue borrado con exito'));
+            $this->Flash->success(__('El activo fue borrado exitosamente.'));
         } else {
-            $this->Flash->error(__('El activo no se pudo borrar, por favor intente nuevamente'));
+            $this->Flash->error(__('El activo no se pudo borrar, por favor intente nuevamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
