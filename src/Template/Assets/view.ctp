@@ -153,7 +153,7 @@
     }
 </style>    
 </div>
-<?= $this->Form->postLink('Eliminar', array('action' => 'delete', $asset->plaque), array('class' => 'btn btn-primary') , array('Seguro que desea eliminar la Ubicación # {0}?', $asset->plaque)) ?>
+<?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $asset->plaque], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el activo # {0}?', $asset->plaque)]) ?>
 
 <?= $this->Html->link(__('Editar'), ['action' => 'edit', $asset->plaque], ['class' => 'btn btn-primary']) ?>
     
