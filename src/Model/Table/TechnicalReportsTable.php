@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * TechnicalReports Model
  *
  * @property \App\Model\Table\AssetsTable|\Cake\ORM\Association\BelongsTo $Assets
+ * @property |\Cake\ORM\Association\BelongsTo $Residues
  *
  * @method \App\Model\Entity\TechnicalReport get($primaryKey, $options = [])
  * @method \App\Model\Entity\TechnicalReport newEntity($data = null, array $options = [])
@@ -40,6 +41,9 @@ class TechnicalReportsTable extends Table
             'foreignKey' => 'assets_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Residues', [
+            'foreignKey' => 'residues_id'
+        ]);
     }
 
     /**
@@ -52,13 +56,7 @@ class TechnicalReportsTable extends Table
     {
         $validator
             ->integer('technical_report_id')
-            ->notEmpty('tecnical_report_id')
-            ->requirePresence('location_id', 'create');
-
-        $validator
-            ->date('date')
-            ->requirePresence('date', 'create')
-            ->notEmpty('date');
+            ->allowEmpty('technical_report_id', 'create');
 
         $validator
             ->scalar('evaluation')
@@ -73,7 +71,20 @@ class TechnicalReportsTable extends Table
             ->notEmpty('recommendation');
 
         $validator
-            ->allowEmpty('document');
+            ->date('date')
+            ->requirePresence('date', 'create')
+            ->notEmpty('date');
+
+
+        $validator
+            ->scalar('file_name')
+            ->maxLength('file_name', 200)
+            ->allowEmpty('file_name');
+
+        $validator
+            ->scalar('path')
+            ->maxLength('path', 200)
+            ->allowEmpty('path');
 
         return $validator;
     }
@@ -88,6 +99,7 @@ class TechnicalReportsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['assets_id'], 'Assets'));
+        $rules->add($rules->existsIn(['residues_id'], 'Residues'));
 
         return $rules;
     }
