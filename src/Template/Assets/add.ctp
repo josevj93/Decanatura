@@ -5,11 +5,6 @@
  */
 ?>
 
-<!-- Genera un id unico para el campo unique_id con el que se guardaran las imagenes en webroot -->
-<?php 
-$random = uniqid();
-?>
-
 <div class="col-md-12 col-sm-12">
     <h3>Insertar activo</h3>
     <?= $this->Form->create($asset, ['type' => 'file']) ?>
@@ -68,7 +63,13 @@ $random = uniqid();
     </div>    
         
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">    
-        <?php echo $this->Form->control('year',  array('label'=>'Año', 'class' => 'form-control')); ?>
+        <?php echo $this->Form->control('year',  array(
+            'type' => 'year', 
+            'maxYear' => date('Y'), 
+            'minYear' => 1950,
+            'value' => date('Y'), 
+            'label'=>'Año', 
+            'class' => 'form-control')); ?>
     </div>
 </div>
 
@@ -83,8 +84,6 @@ $random = uniqid();
         <?php echo $this->Form->control('observations', array('label'=>'Observaciones', 'class' => 'form-control'));?>
     </div>
 </div>
-
-<?php echo $this->Form->hidden('unique_id', array('value' => $random));?>
 
 <div class="row">
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">

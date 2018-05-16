@@ -43,6 +43,15 @@ class AssetsController extends AppController
         $asset = $this->Assets->newEntity();
         if ($this->request->is('post')) {
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+            
+            $fecha = date('Y-m-d H:i:s');
+            $random = uniqid();
+
+            $asset->created = $fecha;
+            $asset->modified = $fecha;
+            $asset->unique_id = $random;
+            $asset->deletable = true;
+
             if ($this->Assets->save($asset)) {
 
 
@@ -79,6 +88,10 @@ class AssetsController extends AppController
         $asset = $this->Assets->get($id, [
             'contain' => []
         ]);
+        
+        $fecha = date('Y-m-d H:i:s');
+        $asset->modified = $fecha;
+        
         if ($this->request->is(['patch', 'post', 'put'])) {
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
             

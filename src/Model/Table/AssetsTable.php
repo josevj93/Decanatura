@@ -76,7 +76,11 @@ class AssetsTable extends Table
         $validator
             ->scalar('plaque')
             ->maxLength('plaque', 255)
-            ->notEmpty('plaque');
+            ->notEmpty('plaque', 'Debe ingresar un número de placa');
+            
+        $validator
+            ->scalar('type_id')
+            ->notEmpty('type_id');
 
         $validator
             ->scalar('brand')
@@ -96,12 +100,12 @@ class AssetsTable extends Table
         $validator
             ->scalar('description')
             ->maxLength('description', 255)
-            ->allowEmpty('description');
+            ->notEmpty('description','Debe ingresar un descripción');
 
         $validator
             ->scalar('state')
             ->maxLength('state', 255)
-            ->allowEmpty('state');
+            ->notEmpty('state','Debe ingresar un estado');
 
         $validator
             ->maxLength('image', 255)
@@ -113,13 +117,12 @@ class AssetsTable extends Table
             ->allowEmpty('sub_location');
 
         $validator
-            ->integer('year')
-            ->allowEmpty('year');
+            ->notEmpty('year','Debe ingresar un año');
 
         $validator
             ->boolean('lendable')
             ->requirePresence('lendable', 'create')
-            ->notEmpty('lendable');
+            ->notEmpty('lendable','Debe ingresar si el activo es prestable');
 
         $validator
             ->scalar('observations')

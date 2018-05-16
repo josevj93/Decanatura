@@ -39,9 +39,9 @@
                 
                     <td><?= $this->Number->format($asset->owner_id) ?></td>
                     
-                    <td><?= $asset->has('location') ? $this->Html->link($asset->location->location_id, ['controller' => 'Locations', 'action' => 'view', $asset->location->location_id]) : '' ?></td>
+                    <td><?= $asset->has('location') ? $this->Html->link($asset->location->nombre, ['controller' => 'Locations', 'action' => 'view', $asset->location->location_id]) : '' ?></td>
                 
-                    <td><?= $this->Number->format($asset->year) ?></td>
+                    <td><?= h($asset->year)?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
