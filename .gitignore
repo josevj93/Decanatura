@@ -53,3 +53,4 @@ tmp/cache/models/myapp_cake_model_debug_kit_requests
 tmp/cache/models/myapp_cake_model_debug_kit_panels
 logs/error.log
 vendor/seld/cli-prompt/res/hiddeninput.exe
+vendor/symfony/console/Resources/bin/hiddeninput.exe
