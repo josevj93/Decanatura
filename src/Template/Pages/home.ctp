@@ -1,4 +1,5 @@
 <div class="row">
+<<<<<<< HEAD
     <div class="col-md-12">
         <div class="table-responsive">
             <table id="employees-grid"  class="table table-striped">
@@ -19,6 +20,33 @@
 
 
 <script>
+=======
+
+      <?= $this->Html->image('bienvenidaDecanatura.png', array('style' => 'max-width: 100%; position: absolute; top:10%;'),['alt' => 'Facultad de Ingenieria']);?>
+</div>
+
+<!--div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table id="employees-grid"  class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Employees No</th>
+                        <th>Birth Date</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Hire Date</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div-->
+
+
+<!--script>
+>>>>>>> origin/Develop
 
     var staticData = [["10001","1953-09-02","Georgi","Facello","M","1986-06-26"],
     ["10002","1964-06-02","Bezalel","Simmel","F","1985-11-21"],
@@ -46,5 +74,9 @@ $(document).ready(function() {
         data: staticData
     } );
 } );
+<<<<<<< HEAD
 </script>
+=======
+</script-->
+>>>>>>> origin/Develop
 

@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
+<<<<<<< HEAD
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Acciones') ?></li>
@@ -15,6 +16,11 @@
 </nav>
 <div class="users view large-9 medium-8 columns content">
     <h3><?= h($user->id) ?></h3>
+=======
+
+<div class="users view large-9 medium-8 columns content">
+    <h3>Consultar Usuario</h3>
+>>>>>>> origin/Develop
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Nombre') ?></th>
@@ -53,4 +59,22 @@
             <td><?= $this->Number->format($user->id_rol) ?></td>
         </tr>
     </table>
+<<<<<<< HEAD
 </div>
+=======
+        <style>
+        .btn-primary {
+            float: right;
+            margin: 10px;
+            margin-top: 15px;
+            color: #fff
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        </style> 
+</div>
+    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+    <?= $this->Html->link(__('Modificar'), ['controller' => 'Users', 'action' => 'edit'], ['class' => 'btn btn-primary']) ?>
+    <?= $this->Html->link(__('Eliminar'), ['controller' => 'Users', 'action' => 'delete'], ['class' => 'btn btn-primary']) ?>
+
+>>>>>>> origin/Develop

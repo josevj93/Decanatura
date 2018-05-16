@@ -21,7 +21,11 @@ use Cake\Validation\Validator;
  */
 class RolesTable extends Table
 {
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> origin/Develop
     /**
      * Initialize method
      *
@@ -34,11 +38,19 @@ class RolesTable extends Table
 
         $this->setTable('roles');
         $this->setDisplayField('id');
+<<<<<<< HEAD
         $this->setPrimaryKey('id');
 
         $this->belongsToMany('Permissions', [
             'foreignKey' => 'role_id',
             'targetForeignKey' => 'permission_id',
+=======
+        $this->setPrimaryKey('id'); 
+
+        $this->belongsToMany('Permissions', [
+            'foreignKey' => 'id_rol',
+            'targetForeignKey' => 'id_permission',
+>>>>>>> origin/Develop
             'joinTable' => 'roles_permissions'
         ]);
     }
