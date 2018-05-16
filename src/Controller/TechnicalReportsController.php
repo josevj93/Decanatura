@@ -59,9 +59,15 @@ class TechnicalReportsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('No se pudo guardar el reporte.'));
-        }
+            
+;        }
+
+        //Saco el ultimo id y le sumo 1
+        $tmpId= $this->TechnicalReports->find('all',['fields'=>'technical_report_id'])->last();
+        $tmpId= $tmpId->technical_report_id+1;
+
         $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
-        $this->set(compact('technicalReport', 'assets'));
+        $this->set(compact('technicalReport', 'assets','tmpId'));
     }
 
     /**
@@ -79,14 +85,19 @@ class TechnicalReportsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $technicalReport = $this->TechnicalReports->patchEntity($technicalReport, $this->request->getData());
             if ($this->TechnicalReports->save($technicalReport)) {
-                $this->Flash->success(__('The technical report has been saved.'));
+                $this->Flash->success(__('Los cambios han sido guardados.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The technical report could not be saved. Please, try again.'));
+            $this->Flash->error(__('El reporte técnico no se pudo guardar.'));
+            debug($technicalReport->errors());
+
         }
         $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
-        $this->set(compact('technicalReport', 'assets'));
+
+        //variable para cargar los datos del activo ya asignado
+        $assets2= $this->TechnicalReports->Assets->get($technicalReport->assets_id);
+        $this->set(compact('technicalReport', 'assets','assets2'));
     }
 
     /**
@@ -107,31 +118,6 @@ class TechnicalReportsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
-    }
-
-    public function searchAsset()
-    {   
-        $this->loadComponent('RequestHandler');
-         $this->autoRender = false;
-        /*if($placa!=null)
-        {   
-            $assets = TableRegistry::get('Assets');
-           
-            $assetSearch= $Assets->find('list',['conditions'=>['plaque ='=>$placa] ])
-                                  ->select(['brand','model','series','description']);
-            $asset= $assetSearch;
-            echo "<label>Placa</label>";
-            echo $asset->plaque;
-        }*/
-        if($this->RequestHandler->isAjax()) 
-        {       
-                $now = new Time();
-                $resultJ = json_encode(array('result' => array('now' => $now)));
-                $this->response->type('json');
-                $this->response->body($resultJ);
-
-                return $this->response;
-        }   
     }
 
     public function search()

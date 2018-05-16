@@ -7,11 +7,13 @@ use Cake\ORM\Entity;
  * TechnicalReport Entity
  *
  * @property int $technical_report_id
- * @property \Cake\I18n\FrozenDate $date
  * @property string $assets_id
  * @property string $evaluation
  * @property string $recommendation
- * @property string|resource $document
+ * @property \Cake\I18n\FrozenDate $date
+ * @property string $file_name
+ * @property string $path
+ * @property string $residues_id
  *
  * @property \App\Model\Entity\Asset $asset
  */
@@ -28,11 +30,13 @@ class TechnicalReport extends Entity
      * @var array
      */
     protected $_accessible = [
-        'date' => true,
         'assets_id' => true,
         'evaluation' => true,
         'recommendation' => true,
-        'document' => true,
+        'date' => true,
+        'file_name' => true,
+        'path' => true,
+        'residues_id' => true,
         'asset' => true
     ];
 }
