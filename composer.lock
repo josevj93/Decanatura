@@ -4,14 +4,10 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "1e6c84f275db5f9da979cde8a870eb72",
-=======
 
 
     "content-hash": "f0019b7157e5f43e0d1aa3d897fb21a4",
 
->>>>>>> origin/Develop
     "packages": [
         {
             "name": "aura/intl",
@@ -297,38 +293,6 @@
             "time": "2017-12-24T21:09:29+00:00"
         },
         {
-<<<<<<< HEAD
-            "name": "josegonzalez/cakephp-upload",
-            "version": "4.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FriendsOfCake/cakephp-upload.git",
-                "reference": "dd91ff86321e87d1fb5af9cd03d78022d214f319"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfCake/cakephp-upload/zipball/dd91ff86321e87d1fb5af9cd03d78022d214f319",
-                "reference": "dd91ff86321e87d1fb5af9cd03d78022d214f319",
-                "shasum": ""
-            },
-            "require": {
-                "cakephp/orm": "3.*",
-                "league/flysystem": "*",
-                "php": ">=5.6"
-            },
-            "require-dev": {
-                "cakephp/cakephp": "~3.4",
-                "cakephp/cakephp-codesniffer": "dev-master",
-                "league/flysystem-vfs": "*",
-                "phpunit/phpunit": "<6.0",
-                "satooshi/php-coveralls": "^2.0"
-            },
-            "type": "cakephp-plugin",
-            "autoload": {
-                "psr-4": {
-                    "Josegonzalez\\Upload\\": "src",
-                    "Josegonzalez\\Upload\\Test\\Fixture\\": "tests\\Fixture"
-=======
 
             "name": "imagine/imagine",
             "version": "v0.7.1",
@@ -364,7 +328,6 @@
             "autoload": {
                 "psr-0": {
                     "Imagine": "lib/"
->>>>>>> origin/Develop
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -373,22 +336,6 @@
             ],
             "authors": [
                 {
-<<<<<<< HEAD
-                    "name": "Jose Diaz-Gonzalez",
-                    "email": "cakephp+upload@josediazgonzalez.com"
-                }
-            ],
-            "description": "CakePHP plugin to handle file uploading sans ridiculous automagic",
-            "homepage": "https://github.com/FriendsOfCake/cakephp-upload",
-            "keywords": [
-                "Behavior",
-                "cakephp",
-                "files",
-                "orm",
-                "upload"
-            ],
-            "time": "2018-04-26T21:49:45+00:00"
-=======
                     "name": "Bulat Shakirzyanov",
                     "email": "mallluhuct@gmail.com",
                     "homepage": "http://avalanche123.com"
@@ -513,7 +460,6 @@
             "homepage": "http://github.com/friendsofcake/CakePdf",
             "time": "2018-04-30T12:07:26+00:00"
 
->>>>>>> origin/Develop
         },
         {
             "name": "josegonzalez/dotenv",

@@ -10,10 +10,7 @@ use Cake\Validation\Validator;
  * TechnicalReports Model
  *
  * @property \App\Model\Table\AssetsTable|\Cake\ORM\Association\BelongsTo $Assets
-<<<<<<< HEAD
-=======
  * @property |\Cake\ORM\Association\BelongsTo $Residues
->>>>>>> origin/Develop
  *
  * @method \App\Model\Entity\TechnicalReport get($primaryKey, $options = [])
  * @method \App\Model\Entity\TechnicalReport newEntity($data = null, array $options = [])
@@ -44,12 +41,9 @@ class TechnicalReportsTable extends Table
             'foreignKey' => 'assets_id',
             'joinType' => 'INNER'
         ]);
-<<<<<<< HEAD
-=======
         $this->belongsTo('Residues', [
             'foreignKey' => 'residues_id'
         ]);
->>>>>>> origin/Develop
     }
 
     /**
@@ -62,17 +56,7 @@ class TechnicalReportsTable extends Table
     {
         $validator
             ->integer('technical_report_id')
-<<<<<<< HEAD
-            ->notEmpty('tecnical_report_id')
-            ->requirePresence('location_id', 'create');
-
-        $validator
-            ->date('date')
-            ->requirePresence('date', 'create')
-            ->notEmpty('date');
-=======
             ->allowEmpty('technical_report_id', 'create');
->>>>>>> origin/Develop
 
         $validator
             ->scalar('evaluation')
@@ -87,9 +71,6 @@ class TechnicalReportsTable extends Table
             ->notEmpty('recommendation');
 
         $validator
-<<<<<<< HEAD
-            ->allowEmpty('document');
-=======
             ->date('date')
             ->requirePresence('date', 'create')
             ->notEmpty('date');
@@ -104,7 +85,6 @@ class TechnicalReportsTable extends Table
             ->scalar('path')
             ->maxLength('path', 200)
             ->allowEmpty('path');
->>>>>>> origin/Develop
 
         return $validator;
     }
@@ -119,10 +99,7 @@ class TechnicalReportsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['assets_id'], 'Assets'));
-<<<<<<< HEAD
-=======
         $rules->add($rules->existsIn(['residues_id'], 'Residues'));
->>>>>>> origin/Develop
 
         return $rules;
     }

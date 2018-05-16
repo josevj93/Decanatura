@@ -3,12 +3,9 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\TechnicalReport $technicalReport
  */
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> origin/Develop
 ?>
 <style>
 .modal-header-primary {
@@ -112,21 +109,6 @@
 
             <div>
                 <label>Recomendación:</label><br>
-<<<<<<< HEAD
-                <?php if ("U"==$technicalReport->recommendation): ?>
-                    Reubicar
-                <?php endif; ?>
-
-                <?php if("P"==$technicalReport->recommendation): ?>
-                    Reparar
-                <?php endif; ?>
-
-                <?php if("E"==$technicalReport->recommendation): ?>
-                    Desechar
-                <?php endif; ?>
-
-                <?php if("D"==$technicalReport->recommendation): ?>
-=======
                 <?php if ("C"==$technicalReport->recommendation): ?>
                     Reubicar
                 <?php endif; ?>
@@ -140,7 +122,6 @@
                 <?php endif; ?>
 
                 <?php if("U"==$technicalReport->recommendation): ?>
->>>>>>> origin/Develop
                     Usar piesas
                 <?php endif; ?>
 
@@ -154,17 +135,10 @@
 
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-<<<<<<< HEAD
-    <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $technicalReport->location_id], ['class' => 'btn btn-primary']) ?>
-    
-    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $technicalReport->location_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar la Ubicación # {0}?', $technicalReport->location_id)]) ?>
-
-=======
     <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $technicalReport->technical_report_id], ['class' => 'btn btn-primary']) ?>
     
 
     <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Seguro que desea eliminar la Ubicación #'.$technicalReport->technical_report_id.' ?', $technicalReport->technical_report_id)]) ?>
 
     <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]) ?>
->>>>>>> origin/Develop
 </div>

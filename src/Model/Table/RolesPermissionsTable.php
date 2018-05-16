@@ -5,11 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-<<<<<<< HEAD
-
-=======
  
->>>>>>> origin/Develop
 /**
  * RolesPermissions Model
  *
@@ -57,15 +53,9 @@ class RolesPermissionsTable extends Table
             ->notEmpty('id_rol');
 
         $validator
-<<<<<<< HEAD
-            ->integer('id_permiso')
-            ->requirePresence('id_permiso', 'create')
-            ->notEmpty('id_permiso');
-=======
             ->integer('id_permission')
             ->requirePresence('id_permission', 'create')
             ->notEmpty('id_permission');
->>>>>>> origin/Develop
 
         return $validator;
     }

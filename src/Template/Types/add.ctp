@@ -8,15 +8,6 @@
 <div class="types form large-12 medium-12 columns content">
     <?= $this->Form->create($type) ?>
     <h3>Insertar tipo de activo</h3>
-<<<<<<< HEAD
-    <fieldset>
-        <?php
-            echo $this->Form->input('type_id', array('type' => 'text', 'label' => 'ID', 'class' => 'form-control'));
-            echo $this->Form->input('name', array('label' => 'Nombre', 'class' => 'form-control'));
-            echo $this->Form->input('description', array('label' => 'Descripción', 'class' => 'form-control'));
-        ?>
-    </fieldset>
-=======
     
 
 <div class="row">
@@ -34,7 +25,6 @@
     </div>
 </div>
 
->>>>>>> origin/Develop
 
 <style>
     .btn-primary {

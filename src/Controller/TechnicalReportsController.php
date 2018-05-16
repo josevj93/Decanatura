@@ -3,10 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
-<<<<<<< HEAD
-=======
 use Dompdf\Dompdf;
->>>>>>> origin/Develop
 
 /**
  * TechnicalReports Controller
@@ -30,10 +27,6 @@ class TechnicalReportsController extends AppController
 
         $this->set(compact('technicalReports'));
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/Develop
     /**
      * View method
      *
@@ -65,13 +58,6 @@ class TechnicalReportsController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-<<<<<<< HEAD
-            $this->Flash->error(__('The technical report could not be saved. Please, try again.'));
-        }
-        $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
-
-        $this->set(compact('technicalReport', 'assets'));
-=======
             $this->Flash->error(__('No se pudo guardar el reporte.'));
         }
         //Saco el ultimo id y le sumo 1
@@ -81,7 +67,6 @@ class TechnicalReportsController extends AppController
         $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
         $this->set(compact('technicalReport', 'assets','tmpId'));
 
->>>>>>> origin/Develop
     }
 
     /**
@@ -99,16 +84,6 @@ class TechnicalReportsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $technicalReport = $this->TechnicalReports->patchEntity($technicalReport, $this->request->getData());
             if ($this->TechnicalReports->save($technicalReport)) {
-<<<<<<< HEAD
-                $this->Flash->success(__('The technical report has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The technical report could not be saved. Please, try again.'));
-        }
-        $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
-        $this->set(compact('technicalReport', 'assets'));
-=======
                 $this->Flash->success(__('Los cambios han sido guardados.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -122,7 +97,6 @@ class TechnicalReportsController extends AppController
         //variable para cargar los datos del activo ya asignado
         $assets2= $this->TechnicalReports->Assets->get($technicalReport->assets_id);
         $this->set(compact('technicalReport', 'assets','assets2'));
->>>>>>> origin/Develop
     }
 
     /**
@@ -145,15 +119,6 @@ class TechnicalReportsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-<<<<<<< HEAD
-    public function BuscarActivo($placa = null)
-    {
-        $Assets = TableRegistry::get('Assets');
-        $AssetBuscado= $Assets->find()
-                              ->select(['brand','model','series','description']);
-        $this->set(compact( 'AssetLista'));
-    }
-=======
 
     public function search()
     {
@@ -242,5 +207,4 @@ class TechnicalReportsController extends AppController
 
     }
     
->>>>>>> origin/Develop
 }

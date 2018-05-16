@@ -7,13 +7,6 @@ use Cake\ORM\Entity;
  * TechnicalReport Entity
  *
  * @property int $technical_report_id
-<<<<<<< HEAD
- * @property \Cake\I18n\FrozenDate $date
- * @property string $assets_id
- * @property string $evaluation
- * @property string $recommendation
- * @property string|resource $document
-=======
  * @property string $assets_id
  * @property string $evaluation
  * @property string $recommendation
@@ -21,7 +14,6 @@ use Cake\ORM\Entity;
  * @property string $file_name
  * @property string $path
  * @property string $residues_id
->>>>>>> origin/Develop
  *
  * @property \App\Model\Entity\Asset $asset
  */
@@ -38,13 +30,6 @@ class TechnicalReport extends Entity
      * @var array
      */
     protected $_accessible = [
-<<<<<<< HEAD
-        'date' => true,
-        'assets_id' => true,
-        'evaluation' => true,
-        'recommendation' => true,
-        'document' => true,
-=======
         'assets_id' => true,
         'evaluation' => true,
         'recommendation' => true,
@@ -52,7 +37,6 @@ class TechnicalReport extends Entity
         'file_name' => true,
         'path' => true,
         'residues_id' => true,
->>>>>>> origin/Develop
         'asset' => true
     ];
 }

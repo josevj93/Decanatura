@@ -2,13 +2,9 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-<<<<<<< HEAD
-
-=======
 use Cake\Event\Event;
 //use Cake\Controller\Component\AuthComponent;
 //use Cake\Controller\Component;
->>>>>>> origin/Develop
 /**
  * Users Controller
  *
@@ -27,15 +23,11 @@ class UsersController extends AppController
     public function index()
     {
 
-<<<<<<< HEAD
-        $this->viewBuilder()->setLayout('default');
-=======
 
 
         $this->viewBuilder()->setLayout('default');
 
 
->>>>>>> origin/Develop
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
@@ -50,16 +42,11 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-<<<<<<< HEAD
-        
-        $this->viewBuilder()->setLayout('default');
-=======
 
 
         $this->viewBuilder()->setLayout('default');
 
 
->>>>>>> origin/Develop
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
@@ -74,24 +61,16 @@ class UsersController extends AppController
      */
     public function add()
     {
-<<<<<<< HEAD
-     $user = $this->Users->newEntity();
-=======
 
 
 
         $user = $this->Users->newEntity();
 
 
->>>>>>> origin/Develop
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/Develop
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
@@ -114,19 +93,11 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-<<<<<<< HEAD
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
-=======
                 $this->Flash->success(__('Cambios guardados.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('Los cambios no pudieron ser guardados. Por favor vuelva a intentarlo.'));
->>>>>>> origin/Develop
         }
         $this->set(compact('user'));
     }
@@ -155,32 +126,6 @@ class UsersController extends AppController
 
     public function login(){
 
-<<<<<<< HEAD
-         $this->viewBuilder()->setLayout('login');
-
-        if($this->request->is('post')){
-            $user = $this->Auth->identify();
-            if($user){
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
-            }
-            $this->Flash->error(__('Usuario o contaseña inválidos, intente otra vez'));
-        }
-
-    }
-
-
-    public function logout(){
-
-        return $this->redirect($this->Auth->logout());
-    }
-
-}
-
-
-
-
-=======
      $this->viewBuilder()->setLayout('login');
 
      if($this->request->is('post')){
@@ -215,5 +160,4 @@ public function logout(){
 }
 
 
->>>>>>> origin/Develop
 
