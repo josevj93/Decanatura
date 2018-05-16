@@ -148,9 +148,13 @@ $cakeDescription = 'Control de Activos';
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-        
+        <!--li class="nav-item">
+            <a class="navbar-brand" style="color:white">
+                <i class="fa fa-user"></i> <?php echo "Bienvenido:" ." ". $nombre ."". $apellido; ?></a>
+        </li-->
 
-      <li class="nav-item">
+
+        <li class="nav-item">
         <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
           <i class="fa fa-fw fa-sign-out"></i>Salir</a>
         </li>
@@ -201,7 +205,8 @@ $cakeDescription = 'Control de Activos';
       <div class="modal-body">Seleccione "Salir" para cerrar sesiÃ³n.</div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-        <a class="btn btn-primary" href="users/logout">Salir</a>
+          <?=$this->Html->link("Salir", array('controller' => 'users','action'=> 'logout'), array( 'class' => 'btn btn-primary'))?>
+
       </div>
     </div>
   </div>
