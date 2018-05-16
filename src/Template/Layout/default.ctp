@@ -16,7 +16,12 @@ $cakeDescription = 'Control de Activos';
   <?= $this->Html->css('cake.css') ?>
 
 
-  <?= $this->Html->css(['plugins/bootstrap/css/bootstrap.css','plugins/bootstrap/css/bootstrap.min.css', 'plugins/font-awesome/css/font-awesome.min.css', 'plugins/datatables/dataTables.bootstrap4.css','sb-admin.css']) ?>
+  <?= $this->Html->css(['plugins/bootstrap/css/bootstrap.css','plugins/bootstrap/css/bootstrap.min.css',
+      'plugins/font-awesome/css/font-awesome.min.css',
+      'plugins/datatables/dataTables.bootstrap4.css',
+      'plugins/buttons.dataTables.min.css',
+      'plugins/jquery.dataTables.min.css',
+      'sb-admin.css']) ?>
 
   <?=
   $this->Html->script([ 'plugins/jquery/jquery.min.js']);
@@ -40,7 +45,7 @@ $cakeDescription = 'Control de Activos';
       ['escape' => false]
       );
 ?>
-  
+
 
     <a class="navbar-brand" href="index.html">Sistema de Activos</a>
 
@@ -63,7 +68,7 @@ $cakeDescription = 'Control de Activos';
       </li>
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Roles">
               <?=$this->Html->link(
-                  $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Roles', array('class' => 'nav-link-text')),
+                  $this->Html->tag('i','' , array('class' => 'fa fa-apple')).$this->Html->tag('span', ' Roles', array('class' => 'nav-link-text')),
                   array('controller' => 'Roles','action' => 'index'),
                   array('class' => 'nav-link',
                       'escape'=> false)
@@ -73,7 +78,7 @@ $cakeDescription = 'Control de Activos';
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
         <?=$this->Html->link(
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Activos', array('class' => 'nav-link-text')),
+          $this->Html->tag('i','' , array('class' => 'fa fa-boxes')).$this->Html->tag('span', ' Activos', array('class' => 'nav-link-text')),
           array('controller' => 'Assets','action' => 'index'),
           array('class' => 'nav-link',
             'escape'=> false)
@@ -207,7 +212,9 @@ $cakeDescription = 'Control de Activos';
   <?=
   $this->Html->script([ 'plugins/jquery/jquery.min.js','plugins/bootstrap/js/bootstrap.bundle.min.js' ,'sb-admin.min.js',
     'plugins/jquery-easing/jquery.easing.min.js','plugins/datatables/jquery.dataTables.js','plugins/datatables/dataTables.bootstrap4.js',
-    'sb-admin-datatables.min.js'
+    'sb-admin-datatables.min.js',
+      'plugins/buttons.html5.min.js','plugins/datatables.buttons.min.js',
+      'plugins/jszip.min.js','plugins/pdfmake.min.js','plugins/vfs_fonts.js'
   ])
   ?>
 
