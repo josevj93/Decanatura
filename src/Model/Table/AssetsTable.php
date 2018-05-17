@@ -96,12 +96,12 @@ class AssetsTable extends Table
         $validator
             ->scalar('description')
             ->maxLength('description', 255)
-            ->allowEmpty('description');
+            ->notEmpty('description');
 
         $validator
             ->scalar('state')
             ->maxLength('state', 255)
-            ->allowEmpty('state');
+            ->notEmpty('state');
 
         $validator
             ->maxLength('image', 255)
@@ -136,6 +136,14 @@ class AssetsTable extends Table
             ->maxLength('unique_id', 255)
             ->notEmpty('unique_id');
 
+        $validator
+            ->scalar('type_id')
+            ->notEmpty('type_id');
+            
+        $validator
+            ->scalar('location_id')
+            ->notEmpty('location_id');
+            
         return $validator;
     }
 
