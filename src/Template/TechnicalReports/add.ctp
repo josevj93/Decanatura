@@ -36,20 +36,16 @@
           border-top-right-radius: 5px;
           border-bottom-right-radius: 5px;
         }
-
         label {
-
           text-align:left;
           margin-right: 10px;
           
         }
-
         input[type=radio] {
           width:10px;
           clear:left;
           text-align:left;
         }
-
         input[name=date]{
           width:100px;
           margin-left: 10px;
@@ -117,10 +113,10 @@
       <?php
        echo $this->Form->radio('recommendation',
           [
-           ['value'=>'C', 'text'=>'Reubicar  '],
-           ['value'=>'R', 'text'=>'Reparar  '],
-           ['value'=>'D', 'text'=>'Desechar  '],
-           ['value'=>'U', 'text'=>'Usar piesas  '],
+           ['value'=>'C', 'text'=>'Reubicar  '],
+           ['value'=>'R', 'text'=>'Reparar  '],
+           ['value'=>'D', 'text'=>'Desechar  '],
+           ['value'=>'U', 'text'=>'Usar piesas  '],
            ['value'=>'O', 'text'=>'Otros'],
           ]);
       ?>
@@ -144,14 +140,11 @@
 </body>
 
 <script>
-
   $( function Picker() {
     $( "#datepicker" ).datepicker({ dateFormat: 'y-mm-dd' });
   } );
-
   $("document").ready(
     function() {
-
       $('#assetButton').click( function()
       {
         var plaque = $('#assetImput').val();
@@ -179,10 +172,7 @@
         {
           $('#assetResult').html('Primero escriba un número de placa.');
         }
-
       });
-
     }
   );
-
 </script>
