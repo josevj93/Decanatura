@@ -27,7 +27,6 @@ class TechnicalReportsController extends AppController
 
         $this->set(compact('technicalReports'));
     }
-
     /**
      * View method
      *
@@ -56,18 +55,18 @@ class TechnicalReportsController extends AppController
             $technicalReport = $this->TechnicalReports->patchEntity($technicalReport, $this->request->getData());
             if ($this->TechnicalReports->save($technicalReport)) {
                 $this->Flash->success(__('The technical report has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('No se pudo guardar el reporte.'));
-            
-;        }
-
+        }
         //Saco el ultimo id y le sumo 1
         $tmpId= $this->TechnicalReports->find('all',['fields'=>'technical_report_id'])->last();
         $tmpId= $tmpId->technical_report_id+1;
 
         $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
         $this->set(compact('technicalReport', 'assets','tmpId'));
+
     }
 
     /**
@@ -119,6 +118,7 @@ class TechnicalReportsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
 
     public function search()
     {
@@ -204,6 +204,7 @@ class TechnicalReportsController extends AppController
         //1  = Download
         //0 = Preview
         return $this->redirect(['action' => 'index']);
+
     }
     
 }

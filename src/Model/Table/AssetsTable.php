@@ -38,6 +38,16 @@ class AssetsTable extends Table
         $this->setTable('assets');
         $this->setDisplayField('plaque');
         $this->setPrimaryKey('plaque');
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'image' => [
+                'fields' => [
+                    'dir' => 'image_dir',
+                    'size' => 'image_size',
+                    'type' => 'image_type',
+                ],
+                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:unique_id}{DS}',
+            ],
+        ]);
 
         $this->belongsTo('Types', [
             'foreignKey' => 'type_id',
@@ -67,8 +77,6 @@ class AssetsTable extends Table
             ->scalar('plaque')
             ->maxLength('plaque', 255)
             ->notEmpty('plaque');
-            
-            
 
         $validator
             ->scalar('brand')
@@ -96,6 +104,7 @@ class AssetsTable extends Table
             ->allowEmpty('state');
 
         $validator
+            ->maxLength('image', 255)
             ->allowEmpty('image');
 
         $validator
@@ -113,13 +122,19 @@ class AssetsTable extends Table
             ->notEmpty('lendable');
 
         $validator
-            ->integer('lot')
-            ->allowEmpty('lot');
-
-        $validator
             ->scalar('observations')
             ->maxLength('observations', 4294967295)
             ->allowEmpty('observations');
+
+        $validator
+            ->scalar('image_dir')
+            ->maxLength('image_dir', 255)
+            ->allowEmpty('image_dir');
+
+        $validator
+            ->scalar('unique_id')
+            ->maxLength('unique_id', 255)
+            ->notEmpty('unique_id');
 
         return $validator;
     }
