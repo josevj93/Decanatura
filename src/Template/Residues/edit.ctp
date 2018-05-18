@@ -8,31 +8,48 @@
                     echo $this->Form->control('date', ['empty' => true]);
                 ?><br>
             </div>
-            <div>
-                <label>Nombre:</label><br>
+             <div id=assetResult>
+        <div class="row">
+          <div class="col-md-6">
+            <div class='input-group mb-3'>
+              <label>Nombre:  </label>
                 <?php 
-                    echo $this->Form->control('name1', ['class'=>'form-control col-sm-2']);
-                ?><br>
+                    echo $this->Form->imput('name1', ['class'=>'form-control col-sm-6']);
+                ?>
             </div>
-            <div>
-                <label>Cédula:</label><br>
+          </div>
+
+          <div class="col-md-6">
+            <div class='row'>
+            <label>Cédula:  </label>
                 <?php 
-                    echo $this->Form->control('identification1');
-                ?><br>
+                    echo $this->Form->imput('identification1', ['class'=>'form-control col-sm-6']);
+                ?>
             </div>
-            <div>
-                <label>Nombre:</label><br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class='input-group mb-3'>
+              <label >Nombre:</label>
                 <?php 
-                    echo $this->Form->control('name2');
-                ?><br>
+                    echo $this->Form->imput('name2', ['class'=>'form-control col-sm-6']);
+                ?>
             </div>
-            <div>
-                <label>Cédula:</label><br>
+          </div>
+
+          <div class="col-md-6">
+            <div class='row'>
+            <label>Cédula:  </label>
                 <?php 
-                    echo $this->Form->control('identification2');
-                ?><br>
+                    echo $this->Form->imput('identification2', ['class'=>'form-control col-sm-6']);
+                ?> 
             </div>
+          </div>
+        </div>
     </fieldset>
+    </div>
     
     <style>
     .btn-primary {
