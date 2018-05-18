@@ -36,20 +36,16 @@
           border-top-right-radius: 5px;
           border-bottom-right-radius: 5px;
         }
-
         label {
-
           text-align:left;
           margin-right: 10px;
           
         }
-
         input[type=radio] {
           width:10px;
           clear:left;
           text-align:left;
         }
-
         input[name=date]{
           width:100px;
           margin-left: 10px;
@@ -58,19 +54,15 @@
         input[name=plaque]{
           margin-left: 10px;
         }
-
         input[name=brand]{
           margin-left: 19px;
         }
-
         input[name=series]{
           margin-left: 13px;
         }
-
         input[name=model]{
          margin-left: 10px;
         }
-
   </style>
 
 </head>
@@ -97,7 +89,6 @@
       <label>Fecha:</label>
         <?php
         $tmpDate= $technicalReport->date->format('y-m-d');
-
         echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker','value'=>$tmpDate]); 
         ?>
   </div>
@@ -173,10 +164,10 @@
       <?php
        echo $this->Form->radio('recommendation',
           [
-           ['value'=>'C', 'text'=>'Reubicar  '],
-           ['value'=>'R', 'text'=>'Reparar  '],
-           ['value'=>'D', 'text'=>'Desechar  '],
-           ['value'=>'U', 'text'=>'Usar piesas  '],
+           ['value'=>'C', 'text'=>'Reubicar  '],
+           ['value'=>'R', 'text'=>'Reparar  '],
+           ['value'=>'D', 'text'=>'Desechar  '],
+           ['value'=>'U', 'text'=>'Usar piesas  '],
            ['value'=>'O', 'text'=>'Otros'],
           ]);
       ?>
@@ -196,14 +187,11 @@
 </body>
 
 <script>
-
   $( function Picker() {
     $( "#datepicker" ).datepicker({ dateFormat: 'y-mm-dd' });
   } );
-
   $("document").ready(
     function() {
-
       $('#assetButton').click( function()
       {
         var plaque = $('#assetImput').val();
@@ -231,10 +219,7 @@
         {
           $('#assetResult').html('Primero escriba un número de placa.');
         }
-
       });
-
     }
   );
-
 </script>
