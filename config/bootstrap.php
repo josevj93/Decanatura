@@ -211,6 +211,55 @@ Type::build('timestamp')
  * Only try to load DebugKit in development mode
  * Debug Kit should not be installed on a production system
  */
+
+
 if (Configure::read('debug')) {
     Plugin::load('DebugKit', ['bootstrap' => true]);
 }
+
+/*
+Plugin::load('CakePdf', ['bootstrap' => true]);
+
+ Plugin::load('CakePdf', array('routes' => true, 'bootstrap' => true ));
+
+ Configure::write('CakePdf', array
+    ('engine' => 'CakePdf.WkHtmlToPdf', 'pageSize' =>'A4', 'orientetion' => 'portrait'));
+
+
+
+
+```php
+<?php
+    Configure::write('CakePdf', [
+        'engine' => 'CakePdf.WkHtmlToPdf',
+        'margin' => [
+            'bottom' => 15,
+            'left' => 50,
+            'right' => 30,
+            'top' => 45
+        ],
+        'orientation' => 'landscape',
+        'download' => true
+    ]);
+?>
+
+
+
+
+    */
+//Plugin::load('CakePdf', ['bootstrap' => true]);
+
+ Plugin::load('CakePdf', array('routes' => true, 'bootstrap' => true ));
+
+Configure::write('CakePdf', [
+        'engine' => 'CakePdf.DomPdf',
+        'margin' => [
+            'bottom' => 15,
+            'left' => 50,
+            'right' => 30,
+            'top' => 45
+        ],
+        'orientation' => 'landscape',
+        'download' => true
+    ]);
+
