@@ -5,46 +5,36 @@
  */
 ?>
 
-<div class="types view large-12 medium-12 columns content">
+<div class="types view large-9 medium-8 columns content">
     <h3>Consultar tipo de activo</h3>
 
-  <div class="row">
-    
-    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-        <?= __('ID') ?>
-        <br>
-        <br>
-         <td><?= h($type->type_id) ?></td>
-        <br>
-        <br>
-    </div>
-    
-    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-        <?= __('Nombre') ?>
-        <br>
-        <br>
-        <td><?= h($type->name) ?></td>
-        <br>
-        <br>
-    </div>
-        
-    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-        <?= __('Descripcion') ?>
-        <br>
-        <br>
-          <td><?= h($type->description) ?></td>
-        <br>
-        <br>
-    </div>
-</div>
+   <table class="vertical-table">
+        <tr>
+            <th scope="row"><?= __('ID') ?></th>
+            <td><?= h($type->type_id) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Nombre') ?></th>
+            <td><?= h($type->name) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Descripción') ?></th>
+            <td><?= h($type->description) ?></td>
+        </tr>
+   </table>
 
 
 
 
 
 <style>
-    .btn-primary {
-      float: right;
+.btn-primary {
+    float: right;
+    margin: 10px;
+    margin-top: 15px;
+    color: #fff
+    background-color: #ffc107;
+     border-color: #ffc107;
     }
 </style>    
 </div>
