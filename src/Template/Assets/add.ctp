@@ -89,12 +89,14 @@ $random = uniqid();
 <br>
 
     <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">                         
-        <?php echo $this->Form->control('unique_id', array('label'=>'Nombre foto', 'class' => 'form-control'));?>
+        <?php echo $this->Form->control('unique_id', array('type' => 'text','label'=>'Nombre foto', 'class' => 'form-control'));?>
     </div>
   <br>
 
 <div class="col-12 text-right">
-    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+    
 </div>
 <br>

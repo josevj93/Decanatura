@@ -50,8 +50,20 @@
             </tbody>
         </table>
     </form>
+
+
    
 </div>
+
+            <style>
+        .btn-primary {
+            float: left;
+            margin: 20px;
+            color: #fff;
+            background-color: #F2A32C;
+            border-color: #F2A32C;
+        }
+    </style> 
 <?= $this->Html->link(__('Insertar Activo'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
 <script type="text/javascript">
     $(document).ready(function() 

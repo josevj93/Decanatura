@@ -97,6 +97,7 @@ class AssetsController extends AppController
                             ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
                 }
 
+
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }

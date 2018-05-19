@@ -100,6 +100,7 @@
 <br>        
 
 <div class="col-12 text-right">
+      <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+  
 </div>
