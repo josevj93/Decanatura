@@ -65,10 +65,10 @@
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
         <?php echo $this->Form->control('sub_location', array('label'=>'Sub-ubicacion', 'class' => 'form-control')); ?>
     </div>
-    
+    <!--
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-        <?php echo $this->Form->control('year',  array('label'=>'Año', 'class' => 'form-control')); ?>
-    </div>
+        <?php //echo $this->Form->control('year',  array('label'=>'Año', 'class' => 'form-control')); ?>
+    </div>-->
 </div>
 
 <div class = "row">
@@ -82,8 +82,20 @@
         <?php echo $this->Form->control('observations', array('label'=>'Observaciones', 'class' => 'form-control'));?>
     </div>
 </div>
+<br>
+<div class="row">
+    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+        <?php echo $this->Form->input('image',['label'=>'Imagen', 'type' => 'file', 'class' => 'form-control']); ?>
+    </div>
+</div>
+<br>
 
-<?php echo $this->Form->hidden('unique_id', array('value' => $random));?>
+<div class="row">
+    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+        <?php echo $this->Form->control('unique_id', array('type' => 'text', 'label'=>'Nombre imagen', 'class' => 'form-control'));?>
+    </div>
+</div>
+
 
 <br>        
 

@@ -83,13 +83,15 @@ $random = uniqid();
     </div>
   <br>
 
-<?php echo $this->Form->hidden('unique_id', array('value' => $random));?>
-
-
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
         <?php echo $this->Form->input('image',['label'=>'Imagen', 'type' => 'file', 'class' => 'form-control']); ?>
     </div>
 <br>
+
+    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">                         
+        <?php echo $this->Form->control('unique_id', array('label'=>'Nombre foto', 'class' => 'form-control'));?>
+    </div>
+  <br>
 
 <div class="col-12 text-right">
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
