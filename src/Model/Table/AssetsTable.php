@@ -134,7 +134,7 @@ class AssetsTable extends Table
         $validator
             ->scalar('unique_id')
             ->maxLength('unique_id', 255)
-            ->notEmpty('unique_id');
+            ->allowEmpty('unique_id');
 
         $validator
             ->scalar('type_id')

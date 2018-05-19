@@ -29,8 +29,12 @@
 
 <style>
     .btn-primary {
-      margin-top: 15px;
       float: right;
+            margin: 10px;
+            margin-top: 15px;
+            color: #fff
+            background-color: #ffc107;
+            border-color: #ffc107;
     }
 </style> 
 </div>

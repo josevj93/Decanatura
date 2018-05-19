@@ -83,7 +83,7 @@ class AssetsController extends AppController
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
             
             if ($this->Assets->save($asset)) {
-            /*    
+             
                 
                 if(!strlen($asset->image_dir) == 0){
                     $imagine = new Imagine\Gd\Imagine();
@@ -95,7 +95,8 @@ class AssetsController extends AppController
                     $imagine->open('../webroot/files/Assets/image/' .  $asset->unique_id . '/' . $asset->image)
                             ->thumbnail($size, $mode)
                             ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
-                }*/
+                }
+
 
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
