@@ -113,8 +113,13 @@ class AssetsTable extends Table
             ->allowEmpty('sub_location');
 
         $validator
-            ->integer('year')
-            ->allowEmpty('year');
+            ->scalar('year')
+            ->maxLength('year', 4)
+            ->add('year', 'validFormat',[
+                'rule' => array('custom', '/^[0-9]{4}$/'),
+                'message' => 'El año debe de tener el formato yyyy'
+                ])
+            ->notEmpty('year');
 
         $validator
             ->boolean('lendable')
