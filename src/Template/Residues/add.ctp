@@ -15,6 +15,7 @@
     <fieldset>
         <legend><?= __('Add Residue') ?></legend>
         <?php
+            echo $this->Form->control('residues_id');
             echo $this->Form->control('name1');
             echo $this->Form->control('identification1');
             echo $this->Form->control('name2');
