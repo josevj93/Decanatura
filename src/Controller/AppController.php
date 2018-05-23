@@ -65,6 +65,19 @@ class AppController extends Controller
         //$this->loadComponent('Csrf');
     }
 
+
+   /* public function isAuthorized($user)
+    {
+
+        // Admin can access every action
+        if (isset($user['id_rol']) && $user['id_rol'] === '2') {
+            return true;
+        }
+
+        // Default deny
+        return false;
+    }*/
+
     /*public function beforeFilter(Event $event)
     {
         $this->set('nombre', $this->Auth->user('nombre'));
