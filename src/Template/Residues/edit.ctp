@@ -59,7 +59,7 @@
       float: right;
       margin-left: 10px;
     }
-</style> 
+    </style> 
 
     
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
