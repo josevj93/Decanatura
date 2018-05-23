@@ -2,13 +2,20 @@
     <?= $this->Form->create($residue) ?>
     <fieldset>
         <legend><?= __('Modificar acta de desecho') ?></legend>
-            <div>
-                <label>Fecha:</label><br>
+            <div class='row'>
+                <label>Número de Autorización:  </label>
+                VRA-
                 <?php 
-                    echo $this->Form->control('date', ['empty' => true]);
+                    echo $this->Form->imput('residues_id', ['class'=>'form-control col-sm-2']);
                 ?><br>
-            </div>
-             <div id=assetResult>
+            </div><br>
+            <div class='row'>
+                <?php 
+                    echo $this->Form->control('date', ['empty' => true, 'label'=> "Fecha:", 'class'=>'form-control col-sm-2']);
+                ?><br>
+            </div><br>
+        
+        <div id=assetResult>
         <div class="row">
           <div class="col-md-6">
             <div class='input-group mb-3'>
@@ -48,6 +55,7 @@
             </div>
           </div>
         </div>
+
     </fieldset>
     </div>
     
@@ -58,6 +66,12 @@
       border-color: #0099FF;
       float: right;
       margin-left: 10px;
+    }
+
+    label {
+          text-align:left;
+          margin-right: 10px;
+          
     }
     </style> 
 
