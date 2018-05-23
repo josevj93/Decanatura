@@ -46,6 +46,7 @@ class AssetsTable extends Table
                     'type' => 'image_type',
                 ],
                 'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:unique_id}{DS}',
+                'nameCallback'=>'imagen_original',
             ],
         ]);
 
@@ -76,7 +77,7 @@ class AssetsTable extends Table
         $validator
             ->scalar('plaque')
             ->maxLength('plaque', 255)
-            ->notEmpty('plaque');
+            ->notEmpty('plaque', 'Debe ingresar una placa');
 
         $validator
             ->scalar('brand')
@@ -96,12 +97,12 @@ class AssetsTable extends Table
         $validator
             ->scalar('description')
             ->maxLength('description', 255)
-            ->notEmpty('description');
+            ->notEmpty('description','Debe ingresar una descripción');
 
         $validator
             ->scalar('state')
             ->maxLength('state', 255)
-            ->notEmpty('state');
+            ->notEmpty('state','Debe ingresar un estado');
 
         $validator
             ->maxLength('image', 255)
@@ -113,8 +114,12 @@ class AssetsTable extends Table
             ->allowEmpty('sub_location');
 
         $validator
-            ->integer('year')
-            ->allowEmpty('year');
+            ->scalar('year')
+            ->add('year', 'validFormat',[
+                'rule' => array('custom', '/^[0-9]{4}$/'),
+                'message' => 'El año debe de tener el formato yyyy'
+                ])
+            ->notEmpty('year','Debe ingresar un año');
 
         $validator
             ->boolean('lendable')
@@ -143,6 +148,14 @@ class AssetsTable extends Table
         $validator
             ->scalar('location_id')
             ->notEmpty('location_id');
+
+        $validator
+            ->scalar('responsable_id')
+            ->notEmpty('responsable_id');
+
+        $validator
+            ->scalar('owner_id')
+            ->notEmpty('owner_id');
             
         return $validator;
     }
