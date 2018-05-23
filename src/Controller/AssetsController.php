@@ -9,11 +9,13 @@ use Imagine;
 */
 class AssetsController extends AppController
 {
+    /*Fix para no tener que estar autenticado*/
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
         $this->Auth->allow(['add']);
         $this->Auth->allow(['edit']);
+        $this->Auth->allow(['index']);
     }
 
     /**

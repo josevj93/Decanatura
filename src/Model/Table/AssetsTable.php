@@ -46,6 +46,7 @@ class AssetsTable extends Table
                     'type' => 'image_type',
                 ],
                 'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:unique_id}{DS}',
+                'nameCallback'=>'imagen_original',
             ],
         ]);
 
