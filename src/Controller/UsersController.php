@@ -132,7 +132,7 @@ class UsersController extends AppController
         $user = $this->Auth->identify();
         if($user){
             $this->Auth->setUser($user);
-            return $this->redirect('/pages/home');
+            return $this->redirect('/');
         }
         $this->Flash->error(__('Usuario o contaseña inválidos, intente otra vez'));
     }
