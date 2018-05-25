@@ -178,6 +178,26 @@ class AssetsTable extends Table
         }
     }
 
+    public function addThumbnail()
+    {
+        /*Si el archivo tiene imagen, crea un thumbnail*/
+        if(!strlen($asset->image_dir) == 0){
+            $imagine = new Imagine\Gd\Imagine();
+
+            $size    = new Imagine\Image\Box(300, 300);
+
+            $mode    = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+
+            $imagine->open('../webroot/files/Assets/image/' .  $asset->unique_id . '/' . $asset->image)
+                    ->thumbnail($size, $mode)
+                    ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
+
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
