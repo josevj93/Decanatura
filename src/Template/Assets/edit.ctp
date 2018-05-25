@@ -32,6 +32,7 @@
 
 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
     <?php echo $this->Form->control('description', array('label'=>'Descripcion', 'class' => 'form-control')); ?>
+    <?php echo $this->Form->control('description', array('label'=>'Descripcion', 'class' => 'form-control','rows' => '3')); ?>
 </div>
 
 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
@@ -39,7 +40,7 @@
 </div>
 
 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('owner_id', array('label'=>'Dueño', 'class' => 'form-control')); ?>
+    <?php echo $this->Form->control('owner_id', array('options' => $users,'label'=>'Dueño', 'class' => 'form-control')); ?>
 </div>
 
 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
