@@ -160,6 +160,25 @@ class AssetsTable extends Table
     }
 
     /**
+     * Elimina solo logicamente los activos de la base de datos
+     * 
+     * @param asset
+     * @return 0 - archivo no es eliminable, 1 - archivo ha sido eliminado
+     */
+    public function softDelete($asset){
+
+        if($asset->deletable){
+            $fecha = date('Y-m-d H:i:s');
+            $asset->deleted = true;
+            $asset->modified = $fecha;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
      *

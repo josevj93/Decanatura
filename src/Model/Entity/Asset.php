@@ -59,6 +59,8 @@ class Asset extends Entity
         'type' => true,
         'user' => true,
         'location' => true,
-        'unique_id' => true
+        'unique_id' => true,
+        'deleted' => true,
+        'deletable' => true
     ];
 }
