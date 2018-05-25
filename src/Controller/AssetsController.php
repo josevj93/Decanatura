@@ -123,4 +123,41 @@ class AssetsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    
+    /**
+     * Método para agregar activos por lotes
+     */
+    public function batch()
+    {
+        $asset = $this->Assets->newEntity();
+        if ($this->request->is('post')) {
+            $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+            if ($this->Assets->save($asset)) {
+
+
+                /*Si el archivo tiene imagen, crea un thumbnail*/
+                if(!strlen($asset->image_dir) == 0){
+                    $imagine = new Imagine\Gd\Imagine();
+
+                    $size    = new Imagine\Image\Box(640, 640);
+
+                    $mode    = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+
+                    $imagine->open('../webroot/files/Assets/image/' .  $asset->unique_id . '/' . $asset->image)
+                            ->thumbnail($size, $mode)
+                            ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
+                }
+
+                $this->Flash->success(__('El activo fue guardado'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
+        }
+
+        $types = $this->Assets->Types->find('list', ['limit' => 200]);
+        $users = $this->Assets->Users->find('list', ['limit' => 200]);
+        $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
+        $this->set(compact('asset', 'types', 'users', 'locations'));
+    }
 }

@@ -50,6 +50,8 @@
    
 </div>
 <?= $this->Html->link(__('Insertar Activo'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
+
+<?= $this->Html->link(__('Insertar Activos por Lote'), ['action' => 'batch'] ,['class' => 'btn btn-primary']) ?>
 <script type="text/javascript">
     $(document).ready(function() 
     {
