@@ -21,6 +21,7 @@ class AssetsController extends AppController
      */
     public function index()
     {
+        
         $this->paginate = [
             'contain' => ['Types', 'Users', 'Locations']
         ];
