@@ -10,11 +10,6 @@
     <h3>Editar tipo de activo</h3>
 
 <div class="row">
-    
-    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-        <?php echo $this->Form->input('type_id',array('type' => 'text','label'=>'ID', 'class' => 'form-control')); ?>   
-    </div>
-    
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
         <?php echo $this->Form->control('name', array('label' =>  'Nombre', 'class' => 'form-control')); ?>
     </div>
@@ -29,8 +24,12 @@
 
 <style>
     .btn-primary {
-      margin-top: 15px;
       float: right;
+            margin: 10px;
+            margin-top: 15px;
+            color: #fff
+            background-color: #ffc107;
+            border-color: #ffc107;
     }
 </style> 
 </div>

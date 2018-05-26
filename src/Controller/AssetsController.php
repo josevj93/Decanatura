@@ -2,19 +2,32 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 use Imagine;
-
 /**
 * Controlador para los activos de la aplicación
 */
 class AssetsController extends AppController
 {
 
+    /*Fix para no tener que estar autenticado*/
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add']);
+        $this->Auth->allow(['edit']);
+
+        $this->Auth->allow(['index']);
+
+    }
+
     /**
      * Método para desplegar una lista con un resumen de los datos de activos
      */
     public function index()
     {
+        
         $this->paginate = [
             'contain' => ['Types', 'Users', 'Locations']
         ];
@@ -42,27 +55,23 @@ class AssetsController extends AppController
     {
         $asset = $this->Assets->newEntity();
         if ($this->request->is('post')) {
-            $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+            $random = uniqid();
+            $fecha = date('Y-m-d H:i:s');
+
+            $asset->created = $fecha;
+            $asset->modified = $fecha;
+            $asset->unique_id = $random;
+            $asset->deletable = true;
+            $asset->deleted = false;
+            $asset = $this->Assets->patchEntity($asset, $this->request->getData()); 
+
             if ($this->Assets->save($asset)) {
-
-
-                /*Si el archivo tiene imagen, crea un thumbnail*/
-                if(!strlen($asset->image_dir) == 0){
-                    $imagine = new Imagine\Gd\Imagine();
-
-                    $size    = new Imagine\Image\Box(640, 640);
-
-                    $mode    = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
-
-                    $imagine->open('../webroot/files/Assets/image/' .  $asset->unique_id . '/' . $asset->image)
-                            ->thumbnail($size, $mode)
-                            ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
-                }
-
-                $this->Flash->success(__('El activo fue guardado'));
+                $this->Assets->addThumbnail();
+                
+                $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
+            $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
 
         $types = $this->Assets->Types->find('list', ['limit' => 200]);
@@ -80,27 +89,17 @@ class AssetsController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+            $fecha = date('Y-m-d H:i:s');
+            $asset->modified = $fecha;
             
+            $asset = $this->Assets->patchEntity($asset, $this->request->getData());
             if ($this->Assets->save($asset)) {
-            /*    
-                
-                if(!strlen($asset->image_dir) == 0){
-                    $imagine = new Imagine\Gd\Imagine();
+                $this->Assets->addThumbnail();
 
-                    $size    = new Imagine\Image\Box(640, 640);
-
-                    $mode    = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
-
-                    $imagine->open('../webroot/files/Assets/image/' .  $asset->unique_id . '/' . $asset->image)
-                            ->thumbnail($size, $mode)
-                            ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
-                }*/
-
-                $this->Flash->success(__('El activo fue guardado con exito'));
+                $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
+            $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
         $types = $this->Assets->Types->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
@@ -113,12 +112,11 @@ class AssetsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
         $asset = $this->Assets->get($id);
-        if ($this->Assets->delete($asset)) {
-            $this->Flash->success(__('El activo fue borrado con exito'));
+        if ($this->Assets->softDelete($asset)) {
+            $this->Flash->success(__('El activo fue borrado exitosamente.'));
         } else {
-            $this->Flash->error(__('El activo no se pudo borrar, porfavor intente nuevamente'));
+            $this->Flash->error(__('El activo no se pudo borrar, solo se pueden borrar activos que no han estado en ninguna transacción'));
         }
 
         return $this->redirect(['action' => 'index']);

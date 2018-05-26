@@ -49,13 +49,16 @@ class TypesController extends AppController
     {
         $type = $this->Types->newEntity();
         if ($this->request->is('post')) {
+            $random = uniqid();
+            $type->type_id = $random;
             $type = $this->Types->patchEntity($type, $this->request->getData());
+            
             if ($this->Types->save($type)) {
-                $this->Flash->success(__('The type has been saved.'));
+                $this->Flash->success(__('El tipo de activo fue guardado exitosamente.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The type could not be saved. Please, try again.'));
+            $this->Flash->error(__('El tipo de activo no se pudo guardar, por favor intente nuevamente.'));
         }
         $this->set(compact('type'));
     }
@@ -75,11 +78,11 @@ class TypesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $type = $this->Types->patchEntity($type, $this->request->getData());
             if ($this->Types->save($type)) {
-                $this->Flash->success(__('Tipo de activo fue guardado'));
+            $this->Flash->success(__('El tipo de activo fue guardado exitosamente.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('El tipo de activo no se pudo guardar, porfavor intente nuevamente'));
+            $this->Flash->error(__('El tipo de activo no se pudo guardar, por favor intente nuevamente.'));
         }
         $this->set(compact('type'));
     }
@@ -96,9 +99,9 @@ class TypesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $type = $this->Types->get($id);
         if ($this->Types->delete($type)) {
-            $this->Flash->success(__('The type has been deleted.'));
+            $this->Flash->success(__('El tipo de activo fue borrado exitosamente.'));
         } else {
-            $this->Flash->error(__('The type could not be deleted. Please, try again.'));
+            $this->Flash->error(__('El tipo de activo no se pudo borrar, por favor intente nuevamente.'));
         }
 
         return $this->redirect(['action' => 'index']);
