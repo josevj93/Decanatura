@@ -178,6 +178,12 @@ class AssetsTable extends Table
         }
     }
 
+    /**
+     * Crea un thumbnail con la imagen subida por el usuario
+     * 
+     * @param 
+     * @return bool
+     */
     public function addThumbnail()
     {
         /*Si el archivo tiene imagen, crea un thumbnail*/
