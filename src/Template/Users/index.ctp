@@ -19,6 +19,7 @@
                         <th scope="col"><?= $this->Paginator->sort('Apellido 2') ?></th>
                         <!--<th scope="col"><?= $this->Paginator->sort('Correo') ?></th>-->
                         <th scope="col"><?= $this->Paginator->sort('Usuario') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('Estado') ?></th>
                         <!--<th scope="col"><?= $this->Paginator->sort('password') ?></th>-->
                         <!--<th scope="col"><?= $this->Paginator->sort('id_rol') ?></th>-->
                     </tr>
@@ -39,6 +40,7 @@
                         <td><?= h($user->username) ?></td>
                         <!--<td><?= h($user->password) ?></td>-->
                         <!--<td><?= $this->Number->format($user->id_rol) ?></td>-->
+                        <td><?= h($user->account_status == 1 ? 'Activo' : 'Inoperante') ?></td>
 
                     </tr>
                 <?php endforeach; ?>
@@ -50,6 +52,7 @@
                     <th>Apellido1</th>
                     <th>Apellido2</th>
                     <th>Usuario</th>
+                    <th>Estado</th>
                 </tr>
                 </tfoot>
             </table>
