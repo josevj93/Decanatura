@@ -19,9 +19,9 @@
     <table id='transfers-grid' class="table table-striped" cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('date') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('transfers_id') ?></th>                
+                <th scope="col" class="actions"><?= __('Acciones') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Fecha') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Nº traslado') ?></th>                
             </tr>
         </thead>
         <tbody>
@@ -30,13 +30,29 @@
                 <td class="actions">
                     <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $transfer->transfers_id], array('escape' => false)) ?>
                         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $transfer->transfers_id], array('escape' => false)) ?>
-                        <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $transfer->transfers_id], ['escape' => false, 'confirm' => __('¿Seguro quiere borrar el reporte # '.$transfer->transfers_id.' ?', $$transfer->transfers_id)]) ?>
+                        <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $transfer->transfers_id], ['escape' => false, 'confirm' => __('¿Seguro quiere borrar el reporte # '.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
                 </td>
-                <td><?= h($transfer->date) ?></td>
+                <td>
+                    <?php 
+                    //para darle formato a la fecha
+                    $tmpdate= $transfer->date->format('d-m-Y');
+                    ?>
+
+                    <?= h($tmpdate) ?>
+                    
+                </td>
                 <td><?= h($transfer->transfers_id) ?></td>              
             </tr>
             <?php endforeach; ?>
         </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <th>Fecha</th>
+                <th>Nº Reporte</th>
+                
+            </tr>
+        </tfoot>
     </table>
     
 </div>

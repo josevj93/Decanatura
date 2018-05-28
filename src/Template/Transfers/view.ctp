@@ -5,67 +5,145 @@
  */
 ?>
 <style>
-    td, th {
+    table {
+
+    border-collapse: collapse;
+    width: 100%;
+    }
+    td{
         border: 1px solid #000000;
-        text-align: left;
+        border-bottom: 1px solid #000000;
         padding: 8px;
     }
+    th[class=transfer-h]{
+        border-bottom: 1px solid #000000;
+        text-align: center;
+        color:black;
+        padding: 8px;
+    }
+    label[class=label-t]{
+        margin-left: 20px;
+    }
+    label {
+        text-align:left;
+        margin-right: 10px;
+          
+    }
+    .btn-primary {
+      color: #FFF;
+      background-color: #0099FF;
+      border-color: #0099FF;
+      float: right;
+      margin-left:10px;
+    }
+
 </style>
 <div class="transfers view large-9 medium-8 columns content">
-    <h3><?= h($transfer->transfers_id) ?></h3>
-    <table class="vertical-table">
+    <legend>Traslado</legend>
+    <br>
+        <div class= 'row'>
+            <div class ="col-md-8">                
+                    <label>Nº traslado:</label>
+                    <?php //echo '<input type="text" class="form-control col-sm-2" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?> 
+            </div>
+
+            <label>Fecha:</label>
+            <?php
+            // para dar formato a la fecha
+            $tmpDate= $transfer->date->format('d-m-Y');
+            ?>  
+            <?php echo '<input type="text" class="form-control col-sm-2" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?> 
+        </div>
+    <br>
+    <table>
+        <!-- Tabla para rellenar los datos de las unidades academicas -->
         <tr>
-            <th scope="row"><?= __('Transfers Id') ?></th>
-            <td><?= h($transfer->transfers_id) ?></td>
+            <th class="transfer-h"><h5>Unidad que entrega<h5></th>
+            <th class="transfer-h"><h5>Unidad que recibe<h5></th>
         </tr>
         <tr>
-            <th scope="row"><?= __('Acade Unit Recib') ?></th>
-            <td><?= h($transfer->Acade_Unit_recib) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Functionary') ?></th>
-            <td><?= h($transfer->functionary) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Identification') ?></th>
-            <td><?= h($transfer->identification) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Date') ?></th>
-            <td><?= h($transfer->date) ?></td>
+            <!-- Fila para la Unidad que entrega -->
+            <td>
+                <div class="row" >
+                    <label class="label-t">Unidad academica: </label>
+                   
+                    <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars('*sistema*') . '">'; ?>
+                </div>
+                <br>
+                <div class="row">
+                    <label class="label-t">Funcionario: </label>
+                    <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($transfer->functionary) . '">'; ?>
+                </div>
+                <br>
+                <div class="row">
+                    <label class="label-t">Identificación:</label>
+                    <?php echo '<input type="text" class="form-control col-sm-4" readonly="readonly" value="' . htmlspecialchars($transfer->identification) . '">'; ?>
+                </div>
+            </td>
+
+
+            <!-- Fila para la Unidad que recibe -->
+            <td>
+                <div class="row">
+                    
+                        <label class="label-t">Unidad academica: </label>
+                    
+                        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($transfer->Acade_Unit_recib). '">'; ?>
+                    
+                </div>
+                <br>
+                <div class="row">
+                    <label class="label-t">Funcionario: </label>
+                    <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($transfer->functionary_recib). '">'; ?>
+                </div>
+                <br>
+                <div class="row">
+                    <label class="label-t">Identificación:</label>
+                    <?php echo '<input type="text" class="form-control col-sm-4" readonly="readonly" value="' . htmlspecialchars($transfer->identification_recib) . '">'; ?>
+                </div>               
+            </td>
+            
         </tr>
     </table>
+    <br>
+    
     <div class="related">
-        <h4><?= __('Related Assets') ?></h4>
-        <?php if (!empty($transfer->assets)): ?>
+        <legend><?= __('Activos trasladados') ?></legend>
+
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <th scope="col"><?= __('Plaque') ?></th>
+                <th class="transfer-h" scope="col"><?= __('Placa') ?></th>
 
-                <th scope="col"><?= __('Brand') ?></th>
-                <th scope="col"><?= __('Model') ?></th>
-                <th scope="col"><?= __('Series') ?></th>
-                <th scope="col"><?= __('Description') ?></th>
+                <th class="transfer-h" scope="col"><?= __('Marca') ?></th>
+                <th class="transfer-h" scope="col"><?= __('Modelo') ?></th>
+                <th class="transfer-h" scope="col"><?= __('Serie') ?></th>
+                <th class="transfer-h" scope="col"><?= __('Estado') ?></th>
                 
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($transfer->assets as $assets): ?>
+            <?php //debug ($result) ?>
+
+            <?php foreach ($result as $asset): ?>
             <tr>
-                <td><?= h($assets->plaque) ?></td>
+                <?php
+                    //$a= (object)$asset->assets;
+                ?>
+                <td><?= h($asset->plaque) ?></td>
+                <td><?= h($asset->brand) ?></td>
+                <td><?= h($asset->model) ?></td>
+                <td><?= h($asset->series) ?></td>
+                <td><?= h($asset->state) ?></td>
 
-                <td><?= h($assets->brand) ?></td>
-                <td><?= h($assets->model) ?></td>
-                <td><?= h($assets->series) ?></td>
-                <td><?= h($assets->description) ?></td>
-
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Assets', 'action' => 'view', $assets->plaque]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Assets', 'action' => 'edit', $assets->plaque]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Assets', 'action' => 'delete', $assets->plaque], ['confirm' => __('Are you sure you want to delete # {0}?', $assets->plaque)]) ?>
-                </td>
             </tr>
             <?php endforeach; ?>
         </table>
-        <?php endif; ?>
+
     </div>
+
+    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+
+    <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $transfer->transfers_id], ['class' => 'btn btn-primary']) ?>
+    
+
+    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Seguro que desea eliminar la Ubicación #'.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
+
 </div>

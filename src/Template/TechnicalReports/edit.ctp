@@ -88,7 +88,7 @@
 
       <label>Fecha:</label>
         <?php
-        $tmpDate= $technicalReport->date->format('y-m-d');
+        $tmpDate= $technicalReport->date->format('Y-m-d');
         echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker','value'=>$tmpDate]); 
         ?>
   </div>

@@ -79,6 +79,16 @@ class TransfersTable extends Table
             ->requirePresence('identification', 'create')
             ->notEmpty('identification');
 
+        $validator
+            ->scalar('functionary_recib')
+            ->maxLength('functionary_recib', 100)
+            ->allowEmpty('functionary_recib');
+
+        $validator
+            ->scalar('identification_recib')
+            ->maxLength('identification_recib', 10)
+            ->allowEmpty('identification_recib');
+
         return $validator;
     }
 }

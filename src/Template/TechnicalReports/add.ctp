@@ -77,6 +77,7 @@
         <?php
         echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker']); 
         ?>
+        
     </div>
     
 
