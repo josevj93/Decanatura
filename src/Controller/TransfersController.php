@@ -14,6 +14,7 @@ use Cake\ORM\TableRegistry;
 class TransfersController extends AppController
 {
 
+    private $UnidadAcadémica='Ingeniería';
     /**
      * Index method
      *
@@ -63,8 +64,9 @@ class TransfersController extends AppController
         }
         //$user =$this->Auth->user();
         
+        $Unidad= $this->UnidadAcadémica;
 
-        $this->set(compact('transfer','result'));
+        $this->set(compact('transfer','result','Unidad'));
     }
 
     /**
