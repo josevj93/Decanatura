@@ -77,7 +77,20 @@ class AssetsController extends AppController
         $types = $this->Assets->Types->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('asset', 'types', 'users', 'locations'));
+        
+		
+		$brands = array(); 
+		$this->paginate = [
+            'contain' => ['Types', 'Users', 'Locations']
+        ];
+        $assets = $this->paginate($this->Assets);
+		foreach ($assets as $filterBrand) {
+			if (!in_array($filterBrand->brand, $brands)){
+				array_push($brands, $filterBrand->brand);
+			}
+		}
+		
+        $this->set(compact('asset', 'types', 'users', 'locations', 'brands', 'assets'));
     }
 
     /**
@@ -120,5 +133,20 @@ class AssetsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+	
+	
+	public static function storeModel($activos = null, $marca = null)
+    {   
+        $models = array(); 
+        //$marca = "Apple";
+       
+        foreach ($activos as $filterModel) {
+            if ($filterModel->brand == $marca && !in_array($filterModel->model, $models)){
+                array_push($models, $filterModel->model);
+            }
+        }
+        return $models;
+        
     }
 }
