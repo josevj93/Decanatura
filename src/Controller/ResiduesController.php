@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
+use Cake\ORM\Query;
 
 /**
  * Residues Controller
@@ -92,10 +94,20 @@ class ResiduesController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    //borra la referencia en assets(activos) y borra el acta de desecho con el id enviado
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
+
+        $assets = TableRegistry::get('Assets')->find()->where(['residues_id' => $id]);
+        
+        $assets->update()
+        ->set(['residues_id' => null])
+        ->where(['residues_id' => $id])
+        ->execute();
+
         $residue = $this->Residues->get($id);
+        debug($this->Residues->get($id));
         if ($this->Residues->delete($residue)) {
             $this->Flash->success(__('The residue has been deleted.'));
         } else {
