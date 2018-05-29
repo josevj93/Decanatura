@@ -60,15 +60,15 @@ class LoansTable extends Table
         $validator
             ->scalar('id_assets')
             ->maxLength('id_assets', 255)
-            ->allowEmpty('id_assets');
+            ->notEmpty('id_assets');
 
         $validator
             ->integer('id_responsables')
-            ->allowEmpty('id_responsables');
+            ->notEmpty('id_responsables');
 
         $validator
             ->date('fecha_inicio')
-            ->allowEmpty('fecha_inicio');
+            ->notEmpty('fecha_inicio','Ingrese una fecha de inicio');
 
         $validator
             ->date('fecha_devolucion')
