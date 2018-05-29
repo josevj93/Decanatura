@@ -49,7 +49,10 @@ class TypesController extends AppController
     {
         $type = $this->Types->newEntity();
         if ($this->request->is('post')) {
+            $random = uniqid();
+            $type->type_id = $random;
             $type = $this->Types->patchEntity($type, $this->request->getData());
+            
             if ($this->Types->save($type)) {
                 $this->Flash->success(__('El tipo de activo fue guardado exitosamente.'));
 
