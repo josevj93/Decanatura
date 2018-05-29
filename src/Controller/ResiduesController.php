@@ -116,4 +116,16 @@ class ResiduesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function search()
+    {
+        $id= $_GET['id'];
+        $assets = TableRegistry::get('Assets');
+        $searchedAsset= $assets->get($id);
+        if(empty($searchedAsset) )
+        {
+            throw new NotFoundException(__('Activo no encontrado') );      
+        }
+        $this->set('serchedAsset',$searchedAsset);
+    }
 }
