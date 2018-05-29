@@ -35,10 +35,6 @@
 </div>
 
 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('state', array('label'=>'Estado', 'class' => 'form-control')); ?>
-</div>
-
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
     <?php echo $this->Form->control('owner_id', array('options' => $users,'label'=>'Dueño', 'class' => 'form-control')); ?>
 </div>
 
