@@ -76,6 +76,7 @@ class TransfersController extends AppController
      */
     public function add()
     {
+
         $transfer = $this->Transfers->newEntity();
         if ($this->request->is('post')) {
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
@@ -126,7 +127,27 @@ class TransfersController extends AppController
             $result[$i] =(object)$query[$i]->assets;
         }
 
+
+       
+
         if ($this->request->is(['patch', 'post', 'put'])) {
+
+        /////////////////////////////////////////////////////////////////////
+            /////////////aporte sebastián, nada más para que se vea XD//////////
+        $contador=0;
+        while($this->request->getData((string)$contador))
+        {
+            //debug( $this->request->getData(string($contador)));
+            //debug((string)$contador);
+         debug($this->request->getData((string)$contador));
+         //debug(2);
+         //debug($this->request->getData('1'));
+            $contador = $contador+1;
+        }
+        ////////////////////////////////////////////////////////////////
+
+
+
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             if ($this->Transfers->save($transfer)) {
                 $this->Flash->success(__('The transfer has been saved.'));

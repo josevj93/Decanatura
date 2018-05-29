@@ -37,7 +37,10 @@
             <tbody>
                 <?php //debug($asset)?>
                 <?php //debug(array_column($result, 'plaque'))?>
-                <?php foreach ($asset as $a): ?>
+                <?php 
+
+                $contador = 0;
+                foreach ($asset as $a): ?>
                 <tr>
                     <td><?= h($a->plaque) ?></td>
                     <td><?= h($a->brand) ?></td>
@@ -46,13 +49,18 @@
                     <td><?= h($a->state) ?></td>
                     <td><?php
                         //debug($a->plaque);
+                        
                         $isIn= in_array($a->plaque, array_column($result, 'plaque') );
+
+                        
 
                         if($isIn)
                             {
                                 echo $this->Form->checkbox('assets_id',
-                                ['value'=>htmlspecialchars($a->plaque),'checked']
+                                ['value'=>htmlspecialchars($a->plaque),'checked', 'name' => 
+                                (string)$contador]
                                 );
+                                $contador =$contador+1;
                             }
                         else
                             {
