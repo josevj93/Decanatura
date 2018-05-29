@@ -95,7 +95,7 @@
         <div class='input-group mb-3'>
             
               <?php 
-                echo $this->form->imput('assets_id',['class'=>'form-control col-sm-3', 'id'=>'assetImput'])
+                echo $this->form->imput('assets_id',['class'=>'form-control col-sm-3', 'id'=>'assetImput', 'name' => 'Aid'])
               ?>
               <div class= 'input-group-append'>
                 <?php echo $this->Html->link('Buscar','#',['type'=>'button','class'=>'btn btn-default','id'=>'assetButton','onclick'=>'return false']);

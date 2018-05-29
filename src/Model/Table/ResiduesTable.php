@@ -46,7 +46,7 @@ class ResiduesTable extends Table
         $validator
             ->scalar('residues_id')
             ->maxLength('residues_id', 200)
-            ->allowEmpty('residues_id', 'create');
+            ->notEmpty('residues_id', 'create');
 
         $validator
             ->scalar('name1')
