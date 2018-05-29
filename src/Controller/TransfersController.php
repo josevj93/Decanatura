@@ -99,9 +99,33 @@ class TransfersController extends AppController
      */
     public function edit($id = null)
     {
-        $transfer = $this->Transfers->get($id, [
-            'contain' => ['Assets']
-        ]);
+        $transfer = $this->Transfers->get($id);
+
+        // obtengo la tabla assets
+        $assets_transfers = TableRegistry::get('AssetsTransfers');
+
+        // reallizo un join  a assets_tranfers para obtener los activos
+        //asosiados a un traslado
+        $query = $assets_transfers->find()
+                    ->select(['assets.plaque'])
+                    ->join([
+                      'assets'=> [
+                        'table'=>'assets',
+                        'type'=>'INNER',
+                        'conditions'=> [ 'assets.plaque= AssetsTransfers.assets_id']
+                        ]
+                    ])
+                    ->where(['AssetsTransfers.transfers_id'=>$id])
+                    ->toList();
+        // Aqui paso el resultado de $query a un objeto
+        $size = count($query);
+        $result=   array_fill(0, $size, NULL);
+        
+        for($i=0;$i<$size;$i++)
+        {
+            $result[$i] =(object)$query[$i]->assets;
+        }
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             if ($this->Transfers->save($transfer)) {
@@ -111,8 +135,23 @@ class TransfersController extends AppController
             }
             $this->Flash->error(__('The transfer could not be saved. Please, try again.'));
         }
-        $assets = $this->Transfers->Assets->find('list', ['limit' => 200]);
-        $this->set(compact('transfer', 'assets'));
+
+
+        $assetsQuery = TableRegistry::get('Assets');
+        $assetsQuery = $assetsQuery->find()
+                         ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
+                         ->toList();
+        //debug($assetsQuery);
+        $size = count($assetsQuery);
+        $asset=   array_fill(0, $size, NULL);
+        
+        for($i=0;$i<$size;$i++)
+        {
+            $asset[$i] =(object)$assetsQuery[$i]->assets;
+        }
+        /*$asset= $this->paginate($asset);*/
+        /*$assets = $this->Transfers->Assets->find('list', ['limit' => 200]);*/
+        $this->set(compact('transfer', 'asset', 'result'));
     }
 
     /**
