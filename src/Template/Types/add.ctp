@@ -12,7 +12,6 @@
 
     <fieldset>
         <?php
-            echo $this->Form->input('type_id', array('type' => 'text', 'label' => 'ID', 'class' => 'form-control'));
             echo $this->Form->input('name', array('label' => 'Nombre', 'class' => 'form-control'));
             echo $this->Form->input('description', array('label' => 'Descripción', 'class' => 'form-control'));
         ?>

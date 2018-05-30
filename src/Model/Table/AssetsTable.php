@@ -161,6 +161,51 @@ class AssetsTable extends Table
     }
 
     /**
+     * Elimina solo logicamente los activos de la base de datos
+     * 
+     * @param asset
+     * @return 0 - archivo no es eliminable, 1 - archivo ha sido eliminado
+     */
+    public function softDelete($asset){
+
+        if($asset->deletable){
+            $fecha = date('Y-m-d H:i:s');
+            $asset->deleted = true;
+            $asset->modified = $fecha;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    /**
+     * Crea un thumbnail con la imagen subida por el usuario
+     * 
+     * @param 
+     * @return bool
+     */
+    public function addThumbnail()
+    {
+        /*Si el archivo tiene imagen, crea un thumbnail*/
+        if(!strlen($asset->image_dir) == 0){
+            $imagine = new Imagine\Gd\Imagine();
+
+            $size    = new Imagine\Image\Box(300, 300);
+
+            $mode    = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+
+            $imagine->open('../webroot/files/Assets/image/' .  $asset->unique_id . '/' . $asset->image)
+                    ->thumbnail($size, $mode)
+                    ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
      *

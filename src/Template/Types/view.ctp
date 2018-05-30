@@ -10,10 +10,6 @@
 
    <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('ID') ?></th>
-            <td><?= h($type->type_id) ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Nombre') ?></th>
             <td><?= h($type->name) ?></td>
         </tr>

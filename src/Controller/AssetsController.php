@@ -27,6 +27,7 @@ class AssetsController extends AppController
      */
     public function index()
     {
+        
         $this->paginate = [
             'contain' => ['Types', 'Users', 'Locations']
         ];
@@ -61,23 +62,12 @@ class AssetsController extends AppController
             $asset->modified = $fecha;
             $asset->unique_id = $random;
             $asset->deletable = true;
-            $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+            $asset->deleted = false;
+            $asset = $this->Assets->patchEntity($asset, $this->request->getData()); 
 
             if ($this->Assets->save($asset)) {
-
-                /*Si el archivo tiene imagen, crea un thumbnail*/
-                if(!strlen($asset->image_dir) == 0){
-                    $imagine = new Imagine\Gd\Imagine();
-
-                    $size    = new Imagine\Image\Box(640, 640);
-
-                    $mode    = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
-
-                    $imagine->open('../webroot/files/Assets/image/' .  $asset->unique_id . '/' . $asset->image)
-                            ->thumbnail($size, $mode)
-                            ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
-                }
-
+                $this->Assets->addThumbnail();
+                
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
@@ -104,17 +94,7 @@ class AssetsController extends AppController
             
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
             if ($this->Assets->save($asset)) {
-                if(!strlen($asset->image_dir) == 0){
-                    $imagine = new Imagine\Gd\Imagine();
-
-                    $size    = new Imagine\Image\Box(640, 640);
-
-                    $mode    = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
-
-                    $imagine->open('../webroot/files/Assets/image/' .  $asset->unique_id . '/' . $asset->image)
-                            ->thumbnail($size, $mode)
-                            ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
-                }
+                $this->Assets->addThumbnail();
 
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
@@ -132,12 +112,11 @@ class AssetsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
         $asset = $this->Assets->get($id);
-        if ($this->Assets->delete($asset)) {
+        if ($this->Assets->softDelete($asset)) {
             $this->Flash->success(__('El activo fue borrado exitosamente.'));
         } else {
-            $this->Flash->error(__('El activo no se pudo borrar, por favor intente nuevamente.'));
+            $this->Flash->error(__('El activo no se pudo borrar, solo se pueden borrar activos que no han estado en ninguna transacción'));
         }
 
         return $this->redirect(['action' => 'index']);
