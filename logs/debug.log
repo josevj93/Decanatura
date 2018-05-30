@@ -20607,6 +20607,7 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:13 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 21]
 Request URL: /Roles
 Trace:
@@ -20639,6 +20640,15 @@ Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 21
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 9]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 9
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -20661,11 +20671,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:13 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 25]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 25
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 32]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 32
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -20688,11 +20708,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:13 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 25]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 25
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 32]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 32
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -20715,11 +20745,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:13 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 29]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 29
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 32]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 32
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -20742,11 +20782,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:13 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 29]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 29
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 32]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 32
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -20769,11 +20819,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:13 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 33]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 33
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 52]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 52
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -20796,11 +20856,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:13 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 33]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 33
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 52]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 52
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -20823,11 +20893,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:13 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 37]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 37
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 52]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 52
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -20850,11 +20930,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:14 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 37]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 37
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 52]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 52
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -20877,11 +20967,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:14 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 41]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 41
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 72]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 72
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -20904,11 +21004,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:14 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 41]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 41
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 72]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 72
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -20931,11 +21041,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:14 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 45]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 45
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 72]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 72
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -20958,11 +21078,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:14 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 45]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 45
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 72]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 72
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -20985,11 +21115,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:14 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 49]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 49
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 93]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 93
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21012,11 +21152,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:01:14 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 49]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 49
+=======
+2018-05-30 15:53:57 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 93]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 93
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21039,11 +21189,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 27]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 27
+=======
+2018-05-30 15:53:58 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 93]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 93
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21066,11 +21226,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 27]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 27
+=======
+2018-05-30 15:53:58 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 93]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 93
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21093,11 +21263,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 31]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 31
+=======
+2018-05-30 15:53:58 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 112]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 112
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21120,11 +21300,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 31]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 31
+=======
+2018-05-30 15:53:58 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 112]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 112
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21147,11 +21337,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 35]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 35
+=======
+2018-05-30 15:53:58 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 112]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 112
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21174,11 +21374,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 35]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 35
+=======
+2018-05-30 15:53:58 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 112]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 112
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21201,11 +21411,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 39]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 39
+=======
+2018-05-30 15:54:39 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 9]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 9
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21228,11 +21448,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 39]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 39
+=======
+2018-05-30 15:54:39 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 32]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 32
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21255,11 +21485,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 43]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 43
+=======
+2018-05-30 15:54:39 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 32]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 32
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21282,11 +21522,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 43]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 43
+=======
+2018-05-30 15:54:39 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 32]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 32
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21309,11 +21559,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 47]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 47
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 32]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 32
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21336,11 +21596,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 47]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 47
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 52]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 52
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21363,11 +21633,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 51]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 51
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 52]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 52
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21390,11 +21670,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 51]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 51
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 52]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 52
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21417,11 +21707,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 55]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 55
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 52]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 52
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21444,11 +21744,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:02:44 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 55]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 55
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 72]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 72
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21471,11 +21781,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 27]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 27
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 72]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 72
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21498,11 +21818,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 27]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 27
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 72]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 72
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21525,11 +21855,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 31]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 31
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 72]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 72
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21552,11 +21892,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 31]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 31
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 93]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 93
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21579,11 +21929,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 35]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 35
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 93]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 93
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21606,11 +21966,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 35]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 35
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 93]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 93
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21633,11 +22003,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 39]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 39
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 93]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 93
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21660,11 +22040,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 39]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 39
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 112]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 112
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21687,11 +22077,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 43]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 43
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 112]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 112
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21714,11 +22114,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 43]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 43
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 112]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 112
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21741,11 +22151,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 47]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 47
+=======
+2018-05-30 15:54:40 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 112]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 112
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21768,11 +22188,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 47]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 47
+=======
+2018-05-30 15:54:52 Notice: Notice (8): Undefined variable: rol in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 9]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 9
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21795,11 +22225,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 51]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 51
+=======
+2018-05-30 15:54:52 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 32]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 32
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21822,11 +22262,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 51]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 51
+=======
+2018-05-30 15:54:52 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 32]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 32
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21849,11 +22299,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 55]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 55
+=======
+2018-05-30 15:54:52 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 32]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 32
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21876,11 +22336,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:03:06 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 55]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 55
+=======
+2018-05-30 15:54:52 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 32]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 32
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21903,11 +22373,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 27]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 27
+=======
+2018-05-30 15:54:52 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 52]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 52
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21930,11 +22410,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 27]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 27
+=======
+2018-05-30 15:54:52 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 52]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 52
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21957,11 +22447,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 31]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 31
+=======
+2018-05-30 15:54:52 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 52]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 52
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -21984,11 +22484,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 31]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 31
+=======
+2018-05-30 15:54:52 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 52]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 52
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22011,11 +22521,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 35]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 35
+=======
+2018-05-30 15:54:52 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 72]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 72
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22038,11 +22558,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 35]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 35
+=======
+2018-05-30 15:54:53 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 72]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 72
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22065,11 +22595,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 39]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 39
+=======
+2018-05-30 15:54:53 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 72]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 72
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22092,11 +22632,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 39]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 39
+=======
+2018-05-30 15:54:53 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 72]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 72
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22119,11 +22669,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 43]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 43
+=======
+2018-05-30 15:54:53 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 93]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 93
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22146,11 +22706,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 43]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 43
+=======
+2018-05-30 15:54:53 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 93]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 93
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22173,11 +22743,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 47]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 47
+=======
+2018-05-30 15:54:53 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 93]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 93
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22200,11 +22780,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 47]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 47
+=======
+2018-05-30 15:54:53 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 93]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 93
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22227,11 +22817,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 51]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 51
+=======
+2018-05-30 15:54:53 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 112]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 112
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22254,11 +22854,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 51]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 51
+=======
+2018-05-30 15:54:53 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 112]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 112
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22281,11 +22891,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 55]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 55
+=======
+2018-05-30 15:54:53 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 112]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 112
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22308,11 +22928,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:04:24 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 55]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 55
+=======
+2018-05-30 15:54:53 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 112]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 112
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22335,11 +22965,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:05:03 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 27]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 27
+=======
+2018-05-30 15:55:48 Notice: Notice (8): Undefined variable: permisos in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 32]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 32
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22362,11 +23002,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:05:03 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 27]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 27
+=======
+2018-05-30 16:07:00 Notice: Notice (8): Undefined variable: role in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 9]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 9
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22389,11 +23039,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:05:03 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 31]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 31
+=======
+2018-05-30 16:07:00 Notice: Notice (8): Undefined variable: i in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 35]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 35
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22416,11 +23076,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:05:03 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 31]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 31
+=======
+2018-05-30 16:07:00 Notice: Notice (8): Undefined variable: i in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 35]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 35
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22443,11 +23113,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:05:03 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 35]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 35
+=======
+2018-05-30 16:07:00 Notice: Notice (8): Undefined variable: i in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 35]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 35
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22470,11 +23150,21 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:05:03 Notice: Notice (8): Trying to get property of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 35]
 Request URL: /Roles
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 35
+=======
+2018-05-30 16:07:00 Notice: Notice (8): Undefined variable: i in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 35]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 35
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
@@ -22497,6 +23187,7 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-05-04 15:05:03 Notice: Notice (8): Undefined variable: user in [C:\xampp\htdocs\Decanatura\src\Template\Roles\index.ctp, line 39]
 Request URL: /Roles
 Trace:
@@ -29149,6 +29840,15 @@ Referer URL: http://localhost:81/Decanatura/
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Roles\index.ctp, line 38
+=======
+2018-05-30 16:07:27 Notice: Notice (8): Undefined variable: role in [C:\xampp\htdocs\Decanatura\src\Template\Roles\add.ctp, line 9]
+Request URL: /roles/add
+Referer URL: http://127.0.0.1/Decanatura/roles
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Roles\add.ctp, line 9
+>>>>>>> 653a045b389ffc52aeb15636499f0e6fcb6c0260
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772

@@ -28,7 +28,7 @@ class RolesController extends AppController
         $this->Roles = $this->loadModel('Roles');
         $this->Permissions = $this->loadModel('Permissions');
         $this->RolesPermissions = $this->loadModel('RolesPermissions');
-
+        
         $query = $this->Roles->find('all', array(
                     'conditions' => array(
                         'id' => $user['id_rol']
@@ -41,6 +41,11 @@ class RolesController extends AppController
                 return false;
             }
         } 
+
+        $this->set('allowI',$allowI);
+        $this->set('allowM',$allowM);
+        $this->set('allowE',$allowE);
+        $this->set('allowC',$allowC);
 
         return true;
 
