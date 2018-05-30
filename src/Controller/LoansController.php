@@ -63,6 +63,7 @@ class LoansController extends AppController
                 ]);
 
                 $asset->state = 'Disponible';
+                $asset->deletable = false;
 
                 if($this->Assets->save($asset)){
                     $this->Flash->success(__('El préstamo fue guardado exitosamente.'));
