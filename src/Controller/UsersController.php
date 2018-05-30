@@ -120,10 +120,7 @@ class UsersController extends AppController
      */
     public function view($id = null)
     {
-
-
         $this->viewBuilder()->setLayout('default');
-
 
         $user = $this->Users->get($id, [
             'contain' => []
