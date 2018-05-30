@@ -60,7 +60,7 @@
 <div class="locations form large-9 medium-8 columns content">
   <?= $this->Form->create($transfer)?>
   <fieldset>
-    <legend><?= __('Insertar informe técnico') ?></legend>
+    <legend><?= __('Insertar acta de traslado') ?></legend>
     <br>
     
     <div class="row">
@@ -78,22 +78,6 @@
         echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker']); 
         ?>
   </div>
-    
-
-    <label>Placa del activo:</label><br>
-    <div class='input-group mb-3'>
-        
-          <?php 
-            echo $this->form->imput('assets_id',['class'=>'form-control col-sm-3','name'=>'placa' ,'id'=>'assetImput'])
-          ?>
-          <div class= 'input-group-append'>
-          <?php echo $this->Html->link('Buscar','#',['type'=>'button','class'=>'btn btn-default','id'=>'assetButton','onclick'=>'return false']);
-          ?>
-          </div>
-          <br>
-          
-
-    </div>
     <div id=assetResult> 
     </div><br>
    
@@ -159,6 +143,67 @@
         </table>
 
 
+
+        <div class="related">
+        <legend><?= __('Activos a trasladar') ?></legend>
+
+        <table id='assets-transfers-grid' cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="transfer-h"><?= __('Placa') ?></th>
+                    <th class="transfer-h"><?= __('Marca') ?></th>
+                    <th class="transfer-h"><?= __('Modelo') ?></th>
+                    <th class="transfer-h"><?= __('Serie') ?></th>
+                    <th class="transfer-h"><?= __('Estado') ?></th>
+                    <th class="transfer-h"><?= __('Seleccionados') ?></th>
+                </tr>
+            <thead>
+            <tbody>
+                <?php //debug($asset)?>
+                <?php //debug(array_column($result, 'plaque'))?>
+                <?php 
+
+                $contador = 0;
+                foreach ($asset as $a): ?>
+                <tr>
+                    <td><?= h($a->plaque) ?></td>
+                    <td><?= h($a->brand) ?></td>
+                    <td><?= h($a->model) ?></td>
+                    <td><?= h($a->series) ?></td>
+                    <td><?= h($a->state) ?></td>
+                    <td><?php                        
+                        $isIn= in_array($a->plaque, array_column($result, 'plaque') );
+
+                        
+
+                        if($isIn)
+                            {
+                                echo $this->Form->checkbox('assets_id',
+                                ['value'=>htmlspecialchars($a->plaque),'checked', 'name' => 
+                                (string)$contador]
+                                );
+                                $contador =$contador+1;
+                            }
+                        else
+                            {
+                                echo $this->Form->checkbox('assets_id',
+                                ['value'=>htmlspecialchars($a->plaque), 'name' => 
+                                (string)$contador]
+                                );
+                                $contador =$contador+1;
+                            }
+
+                        ?>
+                        
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+    </div>
+
+
       
       
 
@@ -218,4 +263,11 @@
       });
     }
   );
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() 
+    {
+        $('#assets-transfers-grid').DataTable( {} );
+    } );
 </script>
