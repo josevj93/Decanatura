@@ -24,11 +24,11 @@ class RolesController extends AppController
 
     public function isAuthorized($user)
     {
-        /*
+        
         $this->Roles = $this->loadModel('Roles');
         $this->Permissions = $this->loadModel('Permissions');
         $this->RolesPermissions = $this->loadModel('RolesPermissions');
-        
+
         $query = $this->Roles->find('all', array(
                     'conditions' => array(
                         'id' => $user['id_rol']
@@ -40,16 +40,7 @@ class RolesController extends AppController
             }else{
                 return false;
             }
-        } */
-        $allowI = true;
-        $allowM = true;
-        $allowE = true;
-        $allowC = true;
-
-        $this->set('allowI',$allowI);
-        $this->set('allowM',$allowM);
-        $this->set('allowE',$allowE);
-        $this->set('allowC',$allowC);
+        } 
 
         return true;
 

@@ -22,18 +22,9 @@
                 <?php foreach ($roles as $rol): ?>
                     <tr>
                         <td class="actions">
-                            <?php if($allowC) : ?>
-                                    <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $rol->id], array('escape'=> false));?>
-                            <?php endif; ?> 
-
-                            <?php if($allowM) : ?>
-                                    <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $rol->id],  array('escape'=> false));?>
-                            <?php endif; ?>
-
-                            <?php if($allowE) : ?> 
-                                    <?= $this->Form->postLink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $rol->id],  ['escape'=> false,'confirm' => __('¿Está seguro que desea eliminar el rol: {0}?', $rol->nombre)]);?>
-                            <?php endif; ?> 
-                            
+                            <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $rol->id], array('escape'=> false));?>
+                            <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $rol->id],  array('escape'=> false));?>
+                            <?= $this->Form->postLink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $rol->id],  ['escape'=> false,'confirm' => __('¿Está seguro que desea eliminar el rol: {0}?', $rol->nombre)]);?>
                         </td>
                         <td><?= h($rol->nombre) ?></td>
                     </tr>
@@ -44,9 +35,8 @@
     </div>
 </div>
 
-<?php if($allowI) : ?>
 <?= $this->Html->link(__('Nuevo Rol'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
-<?php endif; ?>
+
 
 <script type="text/javascript">
 
