@@ -4,45 +4,46 @@
  * @var \App\Model\Entity\Loan $loan
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Loan'), ['action' => 'edit', $loan->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Loan'), ['action' => 'delete', $loan->id], ['confirm' => __('Are you sure you want to delete # {0}?', $loan->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Loans'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Loan'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="loans view large-9 medium-8 columns content">
-    <h3><?= h($loan->id) ?></h3>
+
+<style>
+.btn-primary {
+    float: right;
+    margin: 10px;
+    margin-top: 15px;
+    color: #fff
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+</style> 
+
+<div class="col-md-12 col-sm-12">
+    <h3>Consultar préstamo</h3>
+</div>
+
+<div class="users view large-9 medium-8 columns content">
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= h($loan->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id Assets') ?></th>
+            <th scope="row"><?= __('Placa') ?></th>
             <td><?= h($loan->id_assets) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Estado') ?></th>
-            <td><?= h($loan->estado) ?></td>
+            <th scope="row"><?= __('Responsable') ?></th>
+            <td><?= h($loan->id_responsables) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Id Responsables') ?></th>
-            <td><?= $this->Number->format($loan->id_responsables) ?></td>
+            <th scope="row"><?= __('Fecha de inicio') ?></th>
+            <td><?= h(date("d-m-Y", strtotime($loan->fecha_inicio))) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Fecha Inicio') ?></th>
-            <td><?= h($loan->fecha_inicio) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Fecha Devolucion') ?></th>
-            <td><?= h($loan->fecha_devolucion) ?></td>
+            <th scope="row"><?= __('Fecha de devolución') ?></th>
+            <td><?= h(date("d-m-Y", strtotime($loan->fecha_devolucion))) ?></td>
         </tr>
     </table>
-    <div class="row">
-        <h4><?= __('Observaciones') ?></h4>
-        <?= $this->Text->autoParagraph(h($loan->observaciones)); ?>
-    </div>
+        
+</div>
+
+<div class="col-12 text-right">
+
+<?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>    
+
 </div>
