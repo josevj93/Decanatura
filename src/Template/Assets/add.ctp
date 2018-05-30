@@ -24,13 +24,19 @@
 <br>
     
 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('brand', array('label'=>'Marca', 'class' => 'form-control')); ?>
+    <?php echo $this->Form->control('brand', array('id' => 'brandField', 'options' => $brands, 'label'=>'Marca', 'class' => 'form-control')); ?>
 </div>
 
 <br>
 
 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('model' , array('label'=>'Modelo', 'class' => 'form-control')); ?>
+	<?php use App\Controller\AssetsController ?>
+
+    <?php
+		$filterMod = "Apple";
+		$options = AssetsController::storeModel($assets, $filterMod);
+		echo $this->Form->control('model' , array('options' => $options,'label'=>'Modelo', 'class' => 'form-control')); 
+	?>
 </div>
 
 <br>
