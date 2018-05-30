@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\Transfer[]|\Cake\Collection\CollectionInterface $transfers
  */
 ?>
+
 <style>
 .btn-primary {
   color: #fff;
@@ -22,6 +23,7 @@
                 <th scope="col" class="actions"><?= __('Acciones') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Fecha') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Nº traslado') ?></th>                
+
             </tr>
         </thead>
         <tbody>
@@ -97,3 +99,4 @@
 
 
 </script>
+

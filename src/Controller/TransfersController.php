@@ -14,7 +14,9 @@ use Cake\ORM\TableRegistry;
 class TransfersController extends AppController
 {
 
+
     private $UnidadAcadémica='Ingeniería';
+
     /**
      * Index method
      *
@@ -36,6 +38,7 @@ class TransfersController extends AppController
      */
     public function view($id = null)
     {
+
         $transfer = $this->Transfers->get($id);
 
         // obtengo la tabla assets
@@ -117,7 +120,9 @@ class TransfersController extends AppController
                         'conditions'=> [ 'assets.plaque= AssetsTransfers.assets_id']
                         ]
                     ])
+
                     ->where(['AssetsTransfers.transfers_id'=>$id])
+
                     ->toList();
         // Aqui paso el resultado de $query a un objeto
         $size = count($query);
@@ -136,7 +141,8 @@ class TransfersController extends AppController
 
             //saco la lista de placas señaladas y luego las paso a Array
             $check= $this->request->getData("checkList");
-            $check = explode(",",$check); 
+            $check = explode(",",$check);
+             
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             if ($this->Transfers->save($transfer)) {
                 $this->Flash->success(__('Los cambios han sido guardados.'));
@@ -147,6 +153,7 @@ class TransfersController extends AppController
             $this->Flash->error(__('El traslado no se pudo guardar, porfavor intente nuevamente'));
 
         }
+
 
 
         $assetsQuery = TableRegistry::get('Assets');
@@ -164,6 +171,7 @@ class TransfersController extends AppController
 
         $Unidad= $this->UnidadAcadémica;
         $this->set(compact('transfer', 'asset', 'result','Unidad'));
+
     }
 
     /**

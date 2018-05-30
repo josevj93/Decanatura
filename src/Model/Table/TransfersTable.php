@@ -83,11 +83,11 @@ class TransfersTable extends Table
             ->maxLength('identification_recib', 10)
             ->allowEmpty('identification_recib');
 
+
         $validator
             ->scalar('Acade_Unit_recib')
             ->maxLength('Acade_Unit_recib', 30)
             ->allowEmpty('Acade_Unit_recib');
-
         return $validator;
     }
 }

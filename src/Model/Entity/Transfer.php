@@ -13,6 +13,7 @@ use Cake\ORM\Entity;
  * @property string $functionary_recib
  * @property string $identification_recib
  * @property string $Acade_Unit_recib
+
  *
  * @property \App\Model\Entity\Asset[] $assets
  */
@@ -30,6 +31,7 @@ class Transfer extends Entity
      */
     protected $_accessible = [
         'date' => true,
+
         'functionary' => true,
         'identification' => true,
         'functionary_recib' => true,
