@@ -18,7 +18,7 @@ use Cake\Core\Configure;
 use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
-
+use Cake\Event\Event;
 /**
  * Static content controller
  *
@@ -66,4 +66,18 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+
+    public function isAuthorized($user)
+    {
+
+        // Admin can access every action
+        if (true) {
+            return true;
+        }
+
+        // Default deny
+        return false;
+    }
+
+    
 }
