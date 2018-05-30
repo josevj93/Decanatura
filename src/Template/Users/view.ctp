@@ -30,12 +30,6 @@
         </tr>
     <!--
         <tr>
-            <th scope="row"><?= __('Password') ?></th>
-            <td><?= h($user->password) ?></td>
-        </tr>
-    -->
-    <!--
-        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($user->id) ?></td>
         </tr>
@@ -59,4 +53,3 @@
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Html->link(__('Modificar'), ['controller' => 'Users', 'action' => 'edit'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Html->link(__('Eliminar'), ['controller' => 'Users', 'action' => 'delete'], ['class' => 'btn btn-primary']) ?>
-
