@@ -1,64 +1,66 @@
+ <?php
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\TechnicalReport $technicalReport
+ */
+   use Cake\Routing\Router;
+?>
+
 <div class="residues form large-9 medium-8 columns content">
     <?= $this->Form->create($residue) ?>
     <fieldset>
         <legend><?= __('Modificar acta de desecho') ?></legend>
-            <div class='row'>
-                <label>Número de Autorización:  </label>
-                VRA-
-                <?php 
-                    echo $this->Form->imput('residues_id', ['class'=>'form-control col-sm-2']);
-                ?><br>
-            </div><br>
-            <div class='row'>
-                <?php 
-                    echo $this->Form->control('date', ['empty' => true, 'label'=> "Fecha:", 'class'=>'form-control col-sm-2']);
-                ?><br>
-            </div><br>
-        
-        <div id=assetResult>
-        <div class="row">
-          <div class="col-md-6">
-            <div class='input-group mb-3'>
-              <label>Nombre:  </label>
-                <?php 
-                    echo $this->Form->imput('name1', ['class'=>'form-control col-sm-6']);
-                ?>
-            </div>
-          </div>
+        <br>    
+        <div class='row'>
+            <label>Fecha:</label>
+            <?php
+            $tmpDate= $residue->date->format('y-m-d');
+            echo $this->Form->imput('date', ['class'=>'form-control ', 'value'=>$tmpDate, 'disabled']); 
+            ?>
+        </div><br>
 
-          <div class="col-md-6">
-            <div class='row'>
-            <label>Cédula:  </label>
-                <?php 
-                    echo $this->Form->imput('identification1', ['class'=>'form-control col-sm-6']);
-                ?>
-            </div>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col-md-6">
-            <div class='input-group mb-3'>
-              <label >Nombre:</label>
-                <?php 
-                    echo $this->Form->imput('name2', ['class'=>'form-control col-sm-6']);
-                ?>
-            </div>
-          </div>
+        <label>En presencia de:</label>
+        <table>
+            <tr>
+                <td><br>
+                    <div class="row">
+                            <label class='label-t'>Nombre:  </label>
+                                <?php 
+                                    echo $this->Form->imput('name1', ['class'=>'form-control col-sm-6']);
+                                ?>
+                    </div><br>
+                    <div class="row">
+                            <label class='label-t'>Cédula:  </label>
+                                <?php 
+                                    echo $this->Form->imput('identification1', ['class'=>'form-control col-sm-6']);
+                                ?>
+                    </div><br>
+                </td>
+            
+                <td><br>
+                    <div class="row">
+                            <label class='label-t'>Nombre:</label>
+                                <?php 
+                                    echo $this->Form->imput('name2', ['class'=>'form-control col-sm-6']);
+                                ?>
+                    </div><br>
+                    <div class="row">
+                            <label class='label-t'>Cédula:  </label>
+                                <?php 
+                                    echo $this->Form->imput('identification2', ['class'=>'form-control col-sm-6']);
+                                ?> 
+                    </div><br>
+                </td>
+            </tr>
+        </table>
 
-          <div class="col-md-6">
-            <div class='row'>
-            <label>Cédula:  </label>
-                <?php 
-                    echo $this->Form->imput('identification2', ['class'=>'form-control col-sm-6']);
-                ?> 
-            </div>
-          </div>
-        </div>
-
+    
     </fieldset>
     </div>
+
     
+
     <style>
     .btn-primary {
       color: #FFF;
@@ -73,12 +75,45 @@
           margin-right: 10px;
           
     }
+
+    label[class=label-t]{
+        margin-left: 20px;
+    }
+
+    input[name=date]{
+          width:100px;
+          margin-left: 10px;
+        }
+
+    table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    }
+
+    td {
+
+        border: 1px solid #000000;
+        border-bottom: 1px solid #000000;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
     </style> 
 
     
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+    </div>
 
-</div>
-
-
+    <script>
+            
+    </script>

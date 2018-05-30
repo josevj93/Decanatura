@@ -40,7 +40,39 @@ class ResiduesController extends AppController
             'contain' => []
         ]);
 
-        $this->set('residue', $residue);
+        //obtengo la tabla assets
+        $assets = TableRegistry::get('Assets');
+        //busco los datos que necesito
+        $query = $assets->find()
+                        ->select(['Assets.plaque'])
+                        ->where(['Assets.residues_id'=>$id])
+                        ->toList();
+        //lo paso a objeto
+        $size = count($query);
+        $result = array_fill(0, $size, NULL);
+        
+        for($i = 0; $i < $size; $i++)
+        {
+            $result[$i] =(object)$query[$i]->assets;
+        }
+
+        //obtengo la tabla technical_reports
+        $technical_reports = TableRegistry::get('TechnicalReports');
+        //busco los datos que necesito
+        $query2 = $technical_reports->find()
+                                    ->select(['TechnicalReports.recommendation', 'TechnicalReports.technical_report_id'])
+                                    ->where(['TechnicalReports.residues_id'=>$id])
+                                    ->toList();
+        //lo paso a objeto
+        $size2 = count($query2);
+        $result2 = array_fill(0, $size2, NULL);
+        
+        for($i = 0; $i < $size2; $i++)
+        {
+            $result2[$i] =(object)$query2[$i]->technical_reports;
+        }
+
+        $this->set(compact('residue', 'result', 'result2'));
     }
 
     /**
