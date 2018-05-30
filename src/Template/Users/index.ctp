@@ -6,6 +6,10 @@
  */
 ?>
 
+<div class="users x large-9 medium-8 columns content">
+    <h3><?= __('Usuarios') ?></h3>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="table-responsive">
