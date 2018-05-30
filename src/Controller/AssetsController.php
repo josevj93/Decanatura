@@ -9,19 +9,6 @@ use Imagine;
 */
 class AssetsController extends AppController
 {
-
-    /*Fix para no tener que estar autenticado*/
-
-    public function beforeFilter(Event $event)
-    {
-        parent::beforeFilter($event);
-        $this->Auth->allow(['add']);
-        $this->Auth->allow(['edit']);
-
-        $this->Auth->allow(['index']);
-
-    }
-
     /**
      * Método para desplegar una lista con un resumen de los datos de activos
      */
@@ -113,10 +100,14 @@ class AssetsController extends AppController
     public function delete($id = null)
     {
         $asset = $this->Assets->get($id);
-        if ($this->Assets->softDelete($asset)) {
+        if ($this->Assets->softDelete($asset) == 1) {
             $this->Flash->success(__('El activo fue borrado exitosamente.'));
-        } else {
-            $this->Flash->error(__('El activo no se pudo borrar, solo se pueden borrar activos que no han estado en ninguna transacción'));
+        } 
+        else if($this->Assets->softDelete($asset) == 2) {
+            $this->Flash->error(__('El activo fue desactivado correctamente'));
+        }
+        else{
+            $this->Flash->error(__('Error al intentar eliminar el archivo'));
         }
 
         return $this->redirect(['action' => 'index']);

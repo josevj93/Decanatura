@@ -164,20 +164,24 @@ class AssetsTable extends Table
      * Elimina solo logicamente los activos de la base de datos
      * 
      * @param asset
-     * @return 0 - archivo no es eliminable, 1 - archivo ha sido eliminado
+     * @return 0 - archivo no se eliminó correctamente, 1 - hard delete completado, 2 - soft delete completado
      */
     public function softDelete($asset){
 
         if($asset->deletable){
-            $fecha = date('Y-m-d H:i:s');
-            $asset->deleted = true;
-            $asset->modified = $fecha;
-            return true;
+            if($this->Users->delete($user)){
+                return 1;
+            }
+            return 0;
         }
-        else{
-            return false;
-        }
+        
+        $fecha = date('Y-m-d H:i:s');
+        $asset->deleted = true;
+        $asset->modified = $fecha;
+        return 2;
     }
+
+
 
     /**
      * Crea un thumbnail con la imagen subida por el usuario

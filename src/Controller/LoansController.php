@@ -52,9 +52,17 @@ class LoansController extends AppController
         if ($this->request->is('post')) {
             $loan = $this->Loans->patchEntity($loan, $this->request->getData());
             if ($this->Loans->save($loan)) {
-                $this->Flash->success(__('The loan has been saved.'));
+                $asset= $this->Asset->get($loan->id_assets, [
+                    'contain' => []
+                ]);
 
-                return $this->redirect(['action' => 'index']);
+                $asset->estado = 'Prestado';
+
+                if($this->Assets->save($loan)){
+                    $this->Flash->success(__('The loan has been saved.'));
+                    return $this->redirect(['action' => 'index']);
+                }
+
             }
             $this->Flash->error(__('The loan could not be saved. Please, try again.'));
         }
