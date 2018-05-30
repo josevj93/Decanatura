@@ -50,7 +50,7 @@ class RolesController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
-    public function index()
+    public function edit()
     {
 
         $this->Permissions = $this->loadModel('Permissions');
@@ -213,18 +213,75 @@ class RolesController extends AppController
      */
     public function add()
     {
+        
         $role = $this->Roles->newEntity();
+        
         if ($this->request->is('post')) {
             $role = $this->Roles->patchEntity($role, $this->request->getData());
             if ($this->Roles->save($role)) {
+                //agregar permisos
+
+                //GUARDA LOS ROLES SEGUN LA MATRIZ DE CHECKBOX
+                $checks = $this->request->data;
+                
+                $rol_activo = (int)$role['id'];
+                //BORRA LAS TUPLAS DE PERMISOS PARA EL ROL
+
+                $this->RolesPermissions->deleteAll(
+                    array(
+                        "RolesPermissions.id_rol" => $rol_activo
+                    )
+                );
+                
+                for($i=1;$i<21;$i++){
+                    if($checks[$i] == 1){
+                        //INSERTA
+                        $permiso = $this->RolesPermissions->newEntity();
+                        
+                        $permiso->id_rol = $rol_activo;
+                        $permiso->id_permission = $i; 
+
+                        if ($this->RolesPermissions->save($permiso)) {
+                            //$this->Flash->success(__('The roles permission has been saved.'));
+                        }else{
+                            //$this->Flash->error(__('The roles permission could not be saved. Please, try again.'));
+                        }
+                        
+
+
+                        
+                    }
+                }
+
+                $query = $this->Roles->find('all', array(
+                    'conditions' => array(
+                        'id' => $rol_activo
+                    )
+                ))->contain(['Permissions']);;
+
+                foreach ($query as $roles) {
+                    $rls = $roles['permissions'];
+                    foreach ($rls as $item){
+                        $permisos[(int)$item['id']] = 1;
+                        //echo $item['id'];
+                        //echo "<br>";
+                    }
+                }
+
+
+
+
+
                 $this->Flash->success(__('The role has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The role could not be saved. Please, try again.'));
         }
+
         $permissions = $this->Roles->Permissions->find('list', ['limit' => 200]);
-        $this->set(compact('role', 'permissions'));
+        //die();
+        $this->set('role', 'role');
     }
 
     /**
@@ -233,7 +290,7 @@ class RolesController extends AppController
      * @param string|null $id Role id.
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
+     /
     public function edit($id = null)
     {
         $role = $this->Roles->get($id, [
@@ -251,7 +308,7 @@ class RolesController extends AppController
         $permissions = $this->Roles->Permissions->find('list', ['limit' => 200]);
         $this->set(compact('role', 'permissions'));
     }
-
+*/
     /**
      * Delete method
      *
@@ -272,6 +329,18 @@ class RolesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+public function index()
+    {
+
+
+
+        $this->viewBuilder()->setLayout('default');
+
+
+        $roles = $this->paginate($this->Roles);
+
+        $this->set(compact('roles'));
+    }
 
 
 
