@@ -71,7 +71,9 @@ class LoansController extends AppController
             }
             $this->Flash->error(__('El préstamo no se pudo guardar, por favor intente nuevamente.'));
         }       
-        $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
+        $assets = $this->Loans->Assets->find('list', [
+            'conditions' => ['assets.state' => 'Disponible']
+        ]);
         $users = $this->Loans->Users->find('list', ['limit' => 200]);
         $this->set(compact('assets', 'loan', 'users'));
     }
