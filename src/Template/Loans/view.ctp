@@ -44,6 +44,6 @@
 
 <div class="col-12 text-right">
 
-<?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>    
+<?= $this->Html->link(__('Cancelar'), ['action' => 'cancel',$loan->id], ['class' => 'btn btn-primary']) ?>    
 
 </div>

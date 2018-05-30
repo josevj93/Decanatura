@@ -18,6 +18,7 @@
                         <th scope="col" class="actions"><?= __('') ?></th>        
                         <th scope="col"><?= $this->Paginator->sort('Placa') ?></th>        
                         <th scope="col"><?= $this->Paginator->sort('Responsable') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('Estado') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('Fecha de inicio') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('Fecha de devolución') ?></th>
                     </tr>
@@ -29,7 +30,8 @@
                                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $loan->id], array('escape'=> false)) ?>
                             </td>                            
                             <td><?= h($loan->id_assets) ?></td>
-                            <td><?= $this->Number->format($loan->id_responsables) ?></td>                            
+                            <td><?= $this->Number->format($loan->id_responsables) ?></td>   
+                            <td><?= h($loan->estado) ?></td>                         
                             <td><?= h(date("d-m-Y", strtotime($loan->fecha_inicio))) ?></td>
                             <td><?= h(date("d-m-Y", strtotime($loan->fecha_devolucion))) ?></td>
                         </tr>
@@ -40,6 +42,7 @@
                     <td></td>
                     <th>Placa</th>
                     <th>Responsable</th>
+                    <th>Estado</th>
                     <th>Fecha de inicio</th>
                     <th>Fecha de devolución</th>
                 </tr>

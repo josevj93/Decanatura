@@ -50,10 +50,11 @@ class AssetsController extends AppController
             $asset->unique_id = $random;
             $asset->deletable = true;
             $asset->deleted = false;
+            $asset->state = "Disponible";
             $asset = $this->Assets->patchEntity($asset, $this->request->getData()); 
 
             if ($this->Assets->save($asset)) {
-                $this->Assets->addThumbnail();
+                $this->Assets->addThumbnail($asset);
                 
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
@@ -108,15 +109,36 @@ class AssetsController extends AppController
     }
 
     /**
+     * Elimina solo logicamente los activos de la base de datos
+     * 
+     * @param asset
+     * @return 0 - archivo no se eliminó correctamente, 1 - hard delete completado, 2 - soft delete completado
+     */
+    public function softDelete($asset){
+
+        if($asset->deletable){
+            if($this->Assets->delete($asset)){
+                return 1;
+            }
+            return 0;
+        }
+        
+        $fecha = date('Y-m-d H:i:s');
+        $asset->deleted = true;
+        $asset->modified = $fecha;
+        return 2;
+    }
+
+    /**
      * Método para eliminar un activo del sistema
      */
     public function delete($id = null)
     {
         $asset = $this->Assets->get($id);
-        if ($this->Assets->softDelete($asset) == 1) {
+        if ($this->softDelete($asset) == 1) {
             $this->Flash->success(__('El activo fue borrado exitosamente.'));
         } 
-        else if($this->Assets->softDelete($asset) == 2) {
+        else if($softDelete($asset) == 2) {
             $this->Flash->error(__('El activo fue desactivado correctamente'));
         }
         else{

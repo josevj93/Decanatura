@@ -48,28 +48,55 @@ class LoansController extends AppController
      */
     public function add()
     {
+        $this->loadModel('Assets');
+
         $loan = $this->Loans->newEntity();
         if ($this->request->is('post')) {
             $random = uniqid();
             $loan->id = $random;
+            $loan->estado = 'Activo';
             $loan = $this->Loans->patchEntity($loan, $this->request->getData());
             
-            if ($this->Loans->save($loan)) {
-                $asset= $this->Asset->get($loan->id_assets, [
+            if ($this->Loans->save($asset)) {
+                $asset= $this->Assets->get($loan->id_assets, [
                     'contain' => []
                 ]);
 
-                $asset->estado = 'Prestado';
+                $asset->state = 'Disponible';
 
-                if($this->Assets->save($loan)){
+                if($this->Assets->save($asset)){
                     $this->Flash->success(__('El préstamo fue guardado exitosamente.'));
                     return $this->redirect(['action' => 'index']);
                 }
-
             }
             $this->Flash->error(__('El préstamo no se pudo guardar, por favor intente nuevamente.'));
         }       
+        $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
+        $users = $this->Loans->Users->find('list', ['limit' => 200]);
+        $this->set(compact('assets', 'loan', 'users'));
+    }
 
+    public function cancel($id)
+    {
+        $this->loadModel('Assets');
+        $loan = $this->Loans->get($id, [
+            'contain' => []
+        ]);
+
+        $loan->estado = 'Cancelado';
+        if ($this->Loans->save($loan)){
+            $asset= $this->Assets->get($loan->id_assets, [
+                'contain' => []
+            ]);
+
+            $asset->state = 'Disponible';
+
+            if($this->Assets->save($asset)){
+                $this->Flash->success(__('El préstamo fue cancelado exitosamente.'));
+                return $this->redirect(['action' => 'index']);
+            }
+
+        }
         $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
         $users = $this->Loans->Users->find('list', ['limit' => 200]);
         $this->set(compact('assets', 'loan', 'users'));
