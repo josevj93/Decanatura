@@ -32,22 +32,22 @@ $mysqli = new mysqli('decanatura.mysql.database.azure.com','ecci@decanatura','Ga
                     <td><?php
                         //consulta para obtener la recomendación que proviene del informe técnico (no potimizada)
                         $query =  "select  technical_reports.recommendation from residues, assets, technical_reports
-                            where residues.residues_id = '11' and residues.residues_id = assets.residues_id and technical_reports.assets_id = assets.plaque
+                            where residues.residues_id = '".$residuess->residues_id."' and residues.residues_id = assets.residues_id and technical_reports.assets_id = assets.plaque
                             order by technical_reports.date desc limit 1;";
                         $result = $mysqli->query($query);
 
                         foreach ($result as $fila)
                         {
-                        if("U"==$fila['recommendation']):
+                        if("C"==$fila['recommendation']):
                           echo 'Reubicar';
                         endif;
-                        if("P"==$fila['recommendation']):
+                        if("R"==$fila['recommendation']):
                           echo 'Reparar';
                         endif;
-                        if("E"==$fila['recommendation']):
+                        if("D"==$fila['recommendation']):
                           echo 'Desechar';
                         endif;
-                        if("D"==$fila['recommendation']):
+                        if("U"==$fila['recommendation']):
                           echo 'Usar Piesas';
                         endif;
                         if("O"==$fila['recommendation']):
