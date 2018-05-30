@@ -128,31 +128,37 @@ class AssetsController extends AppController
     /**
      * Método para agregar activos por lotes
      */
-    public function batch()
+    var $placa = 1;
+    public function batch($cantidad = null)
     {
         $asset = $this->Assets->newEntity();
         if ($this->request->is('post')) {
-            $asset = $this->Assets->patchEntity($asset, $this->request->getData());
-            if ($this->Assets->save($asset)) {
-
-
-                /*Si el archivo tiene imagen, crea un thumbnail*/
-                if(!strlen($asset->image_dir) == 0){
-                    $imagine = new Imagine\Gd\Imagine();
-
-                    $size    = new Imagine\Image\Box(640, 640);
-
-                    $mode    = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
-
-                    $imagine->open('../webroot/files/Assets/image/' .  $asset->unique_id . '/' . $asset->image)
-                            ->thumbnail($size, $mode)
-                            ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
-                }
+            for ($i = 0; $i < 5; $i++){
+                /**$asset = $this->Assets->patchEntity($asset, $this->request->getData());**/
+                
+                $asset = array(
+                    'plaque' => $this->$i,
+                    'type_id' => '5b08417d8e257',
+                    'brand' => 'Silla',
+                    'model' => 'modelo1',
+                    'state' => 'Activo',
+                    'description' => 'silla generica, modelo 1',
+                    'owner_id' => 1,
+                    'responsable_id' => 1,
+                    'location_id' => 1, 
+                    'year' => '2018',
+                    'lendable' => 0
+                );
+                //$this->Assets->clear();
+                //$this->placa++;
+                $this->ModelName->create();
+                if ($this->Assets->save($asset)) {
 
                 $this->Flash->success(__('El activo fue guardado'));
                 return $this->redirect(['action' => 'index']);
-            }
+                }
             $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
+            }
         }
 
         $types = $this->Assets->Types->find('list', ['limit' => 200]);
