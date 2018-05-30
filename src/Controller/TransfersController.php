@@ -132,29 +132,17 @@ class TransfersController extends AppController
 
         if ($this->request->is(['patch', 'post', 'put'])) {
 
-        /////////////////////////////////////////////////////////////////////
-            /////////////aporte sebastián, nada más para que se vea XD//////////
-        $contador=0;
-        while($this->request->getData((string)$contador))
-        {
-            //debug( $this->request->getData(string($contador)));
-            //debug((string)$contador);
-         debug($this->request->getData((string)$contador));
-         //debug(2);
-         //debug($this->request->getData('1'));
-            $contador = $contador+1;
-        }
-        ////////////////////////////////////////////////////////////////
-
 
 
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
-            if ($this->Transfers->save($transfer)) {
-                $this->Flash->success(__('The transfer has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            }
+            //saco la lista de placas señaladas y luego las paso a Array
+            $check= $this->request->getData("checkList");
+            $check = explode(",",$check);   
+            
+            debug($check);
             $this->Flash->error(__('The transfer could not be saved. Please, try again.'));
+
         }
 
 
