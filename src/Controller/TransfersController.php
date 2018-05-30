@@ -54,7 +54,8 @@ class TransfersController extends AppController
                     ])
                     ->where(['AssetsTransfers.transfers_id'=>$id])
                     ->toList();
-        // Aqui paso el resultado de $query a un objeto
+
+        // Aqui paso el resultado de $query a un objeto para manejarlo facilmente en la vista
         $size = count($query);
         $result=   array_fill(0, $size, NULL);
         
@@ -133,15 +134,17 @@ class TransfersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
 
 
-
-            $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
-
             //saco la lista de placas señaladas y luego las paso a Array
             $check= $this->request->getData("checkList");
-            $check = explode(",",$check);   
-            
-            debug($check);
-            $this->Flash->error(__('The transfer could not be saved. Please, try again.'));
+            $check = explode(",",$check); 
+            $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
+            if ($this->Transfers->save($transfer)) {
+                $this->Flash->success(__('Los cambios han sido guardados.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+  
+            $this->Flash->error(__('El traslado no se pudo guardar, porfavor intente nuevamente'));
 
         }
 
@@ -150,7 +153,7 @@ class TransfersController extends AppController
         $assetsQuery = $assetsQuery->find()
                          ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
                          ->toList();
-        //debug($assetsQuery);
+
         $size = count($assetsQuery);
         $asset=   array_fill(0, $size, NULL);
         
@@ -158,9 +161,9 @@ class TransfersController extends AppController
         {
             $asset[$i] =(object)$assetsQuery[$i]->assets;
         }
-        /*$asset= $this->paginate($asset);*/
-        /*$assets = $this->Transfers->Assets->find('list', ['limit' => 200]);*/
-        $this->set(compact('transfer', 'asset', 'result'));
+
+        $Unidad= $this->UnidadAcadémica;
+        $this->set(compact('transfer', 'asset', 'result','Unidad'));
     }
 
     /**
