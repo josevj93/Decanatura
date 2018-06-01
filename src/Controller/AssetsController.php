@@ -134,9 +134,8 @@ class AssetsController extends AppController
         $asset = $this->Assets->newEntity();
         if ($this->request->is('post')) {
             for ($i = 0; $i < 5; $i++){
-                /**$asset = $this->Assets->patchEntity($asset, $this->request->getData());**/
                 
-                $asset = array(
+                /**$asset = array(
                     'plaque' => $this->$i,
                     'type_id' => '5b08417d8e257',
                     'brand' => 'Silla',
@@ -148,17 +147,20 @@ class AssetsController extends AppController
                     'location_id' => 1, 
                     'year' => '2018',
                     'lendable' => 0
-                );
+                );*/
                 //$this->Assets->clear();
                 //$this->placa++;
-                $this->ModelName->create();
+
+                $asset = $this->Assets->patchEntity($asset, $this->request->getData());
                 if ($this->Assets->save($asset)) {
 
-                $this->Flash->success(__('El activo fue guardado'));
-                return $this->redirect(['action' => 'index']);
+                    $this->Flash->success(__('El activo fue guardado'));
+                    return $this->redirect(['action' => 'index']);
                 }
-            $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
+                $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
             }
+
+
         }
 
         $types = $this->Assets->Types->find('list', ['limit' => 200]);
