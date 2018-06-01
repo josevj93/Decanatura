@@ -13,11 +13,11 @@
             <td><?= h($user->nombre) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Apellido1') ?></th>
+            <th scope="row"><?= __('Apellido 1') ?></th>
             <td><?= h($user->apellido1) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Apellido2') ?></th>
+            <th scope="row"><?= __('Apellido 2') ?></th>
             <td><?= h($user->apellido2) ?></td>
         </tr>
         <tr>
@@ -39,7 +39,7 @@
             <td><?= $this->Number->format($user->id_rol) ?></td>
         </tr>
 		<tr>
-            <th scope="row"><?= __('ID') ?></th>
+            <th scope="row"><?= __('Cedula') ?></th>
             <td><?= $this->Number->format($user->personal_id) ?></td>
         </tr>
         <tr>
@@ -56,7 +56,8 @@
             background-color: #ffc107;
             border-color: #ffc107;
         }
-        </style> 
+        </style>
+
 </div>
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Html->link(__('Modificar'), ['controller' => 'Users', 'action' => 'edit'], ['class' => 'btn btn-primary']) ?>

@@ -25,7 +25,7 @@
                         <th scope="col"><?= $this->Paginator->sort('Usuario') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('Estado') ?></th>
                         <!--<th scope="col"><?= $this->Paginator->sort('id_rol') ?></th>-->
-						<th scope="col"><?= $this->Paginator->sort('ID') ?></th>
+						<th scope="col"><?= $this->Paginator->sort('Cedula') ?></th>
                     </tr>
                 </thead>
                 <tbody>
