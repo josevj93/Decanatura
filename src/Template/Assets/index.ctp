@@ -70,8 +70,15 @@
 
 <br>
 
-<?= $this->Html->link(__('Insertar Activo'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
+<style>
+.btn-primary {
+  color: #fff;
+  background-color: #FF9933;
+  border-color: #FF9933;
+}
+</style>
 
+<?= $this->Html->link(__('Insertar Activo'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
 
 <script type="text/javascript">
 

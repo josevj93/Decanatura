@@ -3,9 +3,13 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Asset $asset
  */
+
 ?>
+<div class="col-md-12 col-sm-12">
+    <h3>Consultar activo</h3>
+</div>
+
 <div class="users view large-9 medium-8 columns content">
-    <h3>Consultar Activo</h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Placa') ?></th>
@@ -92,7 +96,7 @@
 
 <div class="col-12 text-right">
 
-    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+<?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $asset->plaque], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el activo # {0}?', $asset->plaque)]) ?>
 
 <?= $this->Html->link(__('Editar'), ['action' => 'edit', $asset->plaque], ['class' => 'btn btn-primary']) ?>

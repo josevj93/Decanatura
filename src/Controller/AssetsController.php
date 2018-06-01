@@ -9,19 +9,6 @@ use Imagine;
 */
 class AssetsController extends AppController
 {
-
-    /*Fix para no tener que estar autenticado*/
-
-    public function beforeFilter(Event $event)
-    {
-        parent::beforeFilter($event);
-        $this->Auth->allow(['add']);
-        $this->Auth->allow(['edit']);
-
-        $this->Auth->allow(['index']);
-
-    }
-
     /**
      * Método para desplegar una lista con un resumen de los datos de activos
      */
@@ -63,10 +50,11 @@ class AssetsController extends AppController
             $asset->unique_id = $random;
             $asset->deletable = true;
             $asset->deleted = false;
+            $asset->state = "Disponible";
             $asset = $this->Assets->patchEntity($asset, $this->request->getData()); 
 
             if ($this->Assets->save($asset)) {
-                $this->Assets->addThumbnail();
+                $this->Assets->addThumbnail($asset);
                 
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
@@ -121,15 +109,40 @@ class AssetsController extends AppController
     }
 
     /**
+     * Elimina solo logicamente los activos de la base de datos
+     * 
+     * @param asset
+     * @return 0 - archivo no se eliminó correctamente, 1 - hard delete completado, 2 - soft delete completado
+     */
+    public function softDelete($asset){
+
+        if($asset->deletable){
+            if($this->Assets->delete($asset)){
+                return 1;
+            }
+            return 0;
+        }
+        
+        $fecha = date('Y-m-d H:i:s');
+        $asset->deleted = true;
+        $asset->modified = $fecha;
+        return 2;
+    }
+
+    /**
      * Método para eliminar un activo del sistema
      */
     public function delete($id = null)
     {
         $asset = $this->Assets->get($id);
-        if ($this->Assets->softDelete($asset)) {
+        if ($this->softDelete($asset) == 1) {
             $this->Flash->success(__('El activo fue borrado exitosamente.'));
-        } else {
-            $this->Flash->error(__('El activo no se pudo borrar, solo se pueden borrar activos que no han estado en ninguna transacción'));
+        } 
+        else if($softDelete($asset) == 2) {
+            $this->Flash->error(__('El activo fue desactivado correctamente'));
+        }
+        else{
+            $this->Flash->error(__('Error al intentar eliminar el archivo'));
         }
 
         return $this->redirect(['action' => 'index']);
