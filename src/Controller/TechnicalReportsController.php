@@ -1,4 +1,4 @@
-<?php
+ <?php
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -39,13 +39,13 @@ class TechnicalReportsController extends AppController
             $rls = $roles['permissions'];
             foreach ($rls as $item){
                 //$permisos[(int)$item['id']] = 1;
-                if($item['nombre'] == 'Insertar Usuarios'){
+                if($item['nombre'] == 'Insertar Reporte Tecnico'){
                     $allowI = true;
-                }else if($item['nombre'] == 'Modificar Usuarios'){
+                }else if($item['nombre'] == 'Modificar Reporte Tecnico'){
                     $allowM = true;
-                }else if($item['nombre'] == 'Eliminar Usuarios'){
+                }else if($item['nombre'] == 'Eliminar Reporte Tecnico'){
                     $allowE = true;
-                }else if($item['nombre'] == 'Consultar Usuarios'){
+                }else if($item['nombre'] == 'Consultar Reporte Tecnico'){
                     $allowC = true;
                 }
             }

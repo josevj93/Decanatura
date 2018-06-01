@@ -89,13 +89,14 @@ class AppController extends Controller
         $session = $this->request->getSession(); 
         $user = $session->read('Auth.User');
 
-
-        $allowU = false;
-        $allowP = false;
-        $allowD = false;
-        $allowT = false;
-        $allowDes = false;
         $allowR = false;
+        $allowU = false;
+        $allowA = false;
+        $allowRT = false;
+        $allowUb = false;
+        $allowP = false;
+        $allowT = false;
+        $allowD = false;
 
         $query = $this->Roles->find('all', array(
                     'conditions' => array(
@@ -108,14 +109,18 @@ class AppController extends Controller
             foreach ($rls as $item){
                 if($item['nombre'] == 'Consultar Usuarios'){
                     $allowU = true;
+                }else if($item['nombre'] == 'Consultar Activos'){
+                    $allowA = true;
+                }else if($item['nombre'] == 'Consultar Reporte Tecnico'){
+                    $allowRT = true;
                 }else if($item['nombre'] == 'Consultar Prestamos'){
+                    $allowUb = true;
+                }else if($item['nombre'] == 'Consultar Ubicaciones'){
                     $allowP = true;
-                }else if($item['nombre'] == 'Consultar Devoluciones'){
-                    $allowD = true;
                 }else if($item['nombre'] == 'Consultar Traslados'){
                     $allowT = true;
                 }else if($item['nombre'] == 'Consultar Desechos'){
-                    $allowDes = true;
+                    $allowD = true;
                 }
 
             }
@@ -134,11 +139,14 @@ class AppController extends Controller
 
 
         $this->set('allowU',$allowU);
-        $this->set('allowP',$allowP);
-        $this->set('allowD',$allowD);
-        $this->set('allowT',$allowT);
-        $this->set('allowDes',$allowDes);
         $this->set('allowR',$allowR);
+        $this->set('allowA',$allowA);
+        $this->set('allowRT',$allowRT);
+        $this->set('allowUb',$allowUb);
+        $this->set('allowP',$allowP);
+        $this->set('allowT',$allowT);
+        $this->set('allowD',$allowD);
+
 
         $this->set('nombre', $this->Auth->user('nombre'));
         $this->set('apellido', $this->Auth->user('apellido1'));

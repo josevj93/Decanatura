@@ -71,7 +71,6 @@ $cakeDescription = 'Control de Activos';
       <?php endif; ?>
 
       <?php if($allowR) : ?>
-
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Roles">
               <?=$this->Html->link(
                   $this->Html->tag('i','' , array('class' => 'fa fa-apple')).$this->Html->tag('span', ' Roles', array('class' => 'nav-link-text')),
@@ -83,6 +82,8 @@ $cakeDescription = 'Control de Activos';
           </li>
       <?php endif; ?>
 
+      <?php if($allowA) : ?>
+
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
         <?=$this->Html->link(
           $this->Html->tag('i','' , array('class' => 'fa fa-boxes')).$this->Html->tag('span', ' Activos', array('class' => 'nav-link-text')),
@@ -93,24 +94,9 @@ $cakeDescription = 'Control de Activos';
         ?>
       </li>
 
+      <?php endif; ?>
 
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tipos de activos">
-        <?=$this->Html->link(
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Tipos de activos', array('class' => 'nav-link-text')),
-          array('controller' => 'Types','action' => 'index'),
-          array('class' => 'nav-link',
-            'escape'=> false)
-        );
-        ?>
-
-      </li>
-
-
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
-        <a class="nav-link" href="tables.html">
-          <span class="nav-link-text">Préstamos</span>
-        </a>
-      </li>
+      <?php if($allowRT) : ?>
        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reporte Técnico">
         <?=$this->Html->link(
 
@@ -120,17 +106,26 @@ $cakeDescription = 'Control de Activos';
         );
         ?>
       </li>
+      <?php endif; ?>
 
-      <?php if($allowDes) : ?>
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Desechos">
+
+      <?php if($allowUb) : ?>
+       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ubicaciones">
         <?=$this->Html->link(
 
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Desechos', array('class' => 'nav-link-text')),array('controller' => 'Residues','action' => 'index'),
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Ubicaciones', array('class' => 'nav-link-text')),array('controller' => 'Locations','action' => 'index'),
           array('class' => 'nav-link',
             'escape'=> false)
         );
         ?>
+      </li>
       <?php endif; ?>
+
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
+        <a class="nav-link" href="tables.html">
+          <span class="nav-link-text">Préstamos</span>
+        </a>
+      </li>
 
       <?php if($allowT) : ?>
       </li>
@@ -141,21 +136,17 @@ $cakeDescription = 'Control de Activos';
       </li>
       <?php endif; ?>
 
-
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="UAcademica">
-        <a class="nav-link" href="tables.html">
-          <span class="nav-link-text">Unidad Académica</span>
-        </a>
-      </li>
-       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ubicaciones">
+      <?php if($allowD) : ?>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Desechos">
         <?=$this->Html->link(
 
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Ubicaciones', array('class' => 'nav-link-text')),array('controller' => 'Locations','action' => 'index'),
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Desechos', array('class' => 'nav-link-text')),array('controller' => 'Residues','action' => 'index'),
           array('class' => 'nav-link',
             'escape'=> false)
         );
         ?>
-      </li>
+      <?php endif; ?>
+
     </ul>
     <ul class="navbar-nav sidenav-toggler">
       <li class="nav-item">

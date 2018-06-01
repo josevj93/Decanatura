@@ -25,7 +25,7 @@
         </tr>
         
       <tr>
-            <th><h5><?= __('Desechos') ?></h5></th>
+            <th><h5><?= __('Usuarios') ?></h5></th>
 
         <?php 
           for ($x = 1; $x < 5; $x++) {
@@ -44,7 +44,7 @@
       </tr>
         
       <tr>
-            <th><h5><?= __('Traslados') ?></h5></th>
+            <th><h5><?= __('Activos') ?></h5></th>
             
 
         <?php 
@@ -65,7 +65,7 @@
       </tr>
 
       <tr>
-            <th><h5><?= __('Devoluciones') ?></h5></th>
+            <th><h5><?= __('Reporte Tecnico') ?></h5></th>
             
         <?php 
           for ($x = 9; $x < 13; $x++) {
@@ -86,7 +86,7 @@
         </tr>
         
         <tr>
-            <th><h5><?= __('Prestamos') ?></h5></th>
+            <th><h5><?= __('Ubicaciones') ?></h5></th>
             
         <?php 
           for ($x = 13; $x < 17; $x++) {
@@ -105,7 +105,7 @@
         </tr>
         
         <tr>
-            <th><h5><?= __('Usuarios') ?></h5></th>
+            <th><h5><?= __('Prestamos') ?></h5></th>
             
         <?php 
           for ($x = 17; $x < 21; $x++) {
@@ -124,6 +124,48 @@
 
         </tr>
         
+        <tr>
+            <th><h5><?= __('Traslados') ?></h5></th>
+            
+        <?php 
+          for ($x = 21; $x < 25; $x++) {
+            if ($permisos[$x] == 1) {
+              echo "<td>";
+              echo $this->Form->input('', array( 'type'=>'checkbox', 'name' => $x, 'checked'=> true, 'format' => array('before', 'input', 'between', 'label', 'after', 'error' )));
+              echo "</td>";
+            } else {
+             echo "<td>";
+              echo $this->Form->input('', array( 'type'=>'checkbox', 'name' => $x, 'format' => array('before', 'input', 'between', 'label', 'after', 'error' )));
+              echo "</td>";
+            }
+          } 
+        ?>
+
+
+        <tr>
+            <th><h5><?= __('Desechos') ?></h5></th>
+            
+        <?php 
+          for ($x = 25; $x < 29; $x++) {
+            if ($permisos[$x] == 1) {
+              echo "<td>";
+              echo $this->Form->input('', array( 'type'=>'checkbox', 'name' => $x, 'checked'=> true, 'format' => array('before', 'input', 'between', 'label', 'after', 'error' )));
+              echo "</td>";
+            } else {
+             echo "<td>";
+              echo $this->Form->input('', array( 'type'=>'checkbox', 'name' => $x, 'format' => array('before', 'input', 'between', 'label', 'after', 'error' )));
+              echo "</td>";
+            }
+          } 
+        ?>
+
+
+        </tr>
+
+        </tr>
+
+
+
     </table>
 
 

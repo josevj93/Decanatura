@@ -71,7 +71,7 @@ class RolesController extends AppController
         $this->Permissions = $this->loadModel('Permissions');
         $this->RolesPermissions = $this->loadModel('RolesPermissions');
         $permisos = array();
-        for ($i = 1; $i < 25; ++$i) {
+        for ($i = 1; $i < 29; ++$i) {
             $permisos[$i] = 0;
         }
         $id = $rol->id;
@@ -92,7 +92,7 @@ class RolesController extends AppController
         if ($this->request->is('post')) {
             $checks = $this->request->data;
             $cant = 1;
-            $cant_final = 21;
+            $cant_final = 29;
             $this->RolesPermissions->deleteAll(
                 array(
                     "RolesPermissions.id_rol" => $rol_activo
