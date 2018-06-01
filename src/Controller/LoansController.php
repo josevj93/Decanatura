@@ -82,23 +82,28 @@ class LoansController extends AppController
     public function cancel($id)
     {
         $this->loadModel('Assets');
+        
         $loan = $this->Loans->get($id, [
             'contain' => []
         ]);
-
+        
+        
         $loan->estado = 'Cancelado';
+        
         if ($this->Loans->save($loan)){
-            $asset= $this->Assets->get($loan->id_assets, [
-                'contain' => []
+            
+            $assets = $this->Assets->find('list', [
+                'conditions' => ['assets.loans_id' => $id]
             ]);
+                
+            foreach($assets as $asset){
+                $asset->state = 'Disponible';
 
-            $asset->state = 'Disponible';
-
-            if($this->Assets->save($asset)){
-                $this->Flash->success(__('El préstamo fue cancelado exitosamente.'));
-                return $this->redirect(['action' => 'index']);
+                if(!($this->Assets->save($asset))){
+                    $this->Flash->success(__('Error al cancelar el préstamo'));
+                    return $this->redirect(['action' => 'index']);
+                }
             }
-
         }
         $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
         $users = $this->Loans->Users->find('list', ['limit' => 200]);

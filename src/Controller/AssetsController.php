@@ -128,26 +128,6 @@ class AssetsController extends AppController
         $asset->modified = $fecha;
         return 2;
     }
-
-    /**
-     * Método para eliminar un activo del sistema
-     */
-    public function delete($id = null)
-    {
-        $asset = $this->Assets->get($id);
-        if ($this->softDelete($asset) == 1) {
-            $this->Flash->success(__('El activo fue borrado exitosamente.'));
-        } 
-        else if($softDelete($asset) == 2) {
-            $this->Flash->error(__('El activo fue desactivado correctamente'));
-        }
-        else{
-            $this->Flash->error(__('Error al intentar eliminar el archivo'));
-        }
-
-        return $this->redirect(['action' => 'index']);
-    }
-	
 	
 	public static function storeModel($activos = null, $marca = null)
     {   
