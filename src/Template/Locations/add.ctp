@@ -4,19 +4,19 @@
         <legend><?= __('Insertar Ubicacion') ?></legend>
             <div>
                 <label>Id:</label><br>
-                <?php 
+                <?php
                 echo $this->Form->imput('location_id', ['label' => 'Id:', 'class'=>'form-control col-sm-2']);
                 ?><br>
             </div>
             <div>
                 <label>Nombre:</label><br>
-                <?php 
+                <?php
                 echo $this->Form->imput('nombre', ['label' => 'Nombre:', 'class'=>'form-control col-sm-2']);
                 ?><br>
             </div>
             <div>
                 <label>Descripción:</label><br>
-                <?php 
+                <?php
                 echo $this->Form->textarea('description', ['label' => 'Descripción:', 'class'=>'form-control col-sm-4']);
                 ?><br>
             </div>
@@ -31,9 +31,7 @@
           margin-left: 10px;
         }
     </style>
-    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-
+  </div>
+    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Locations', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-
-    
-</div>
+    <?= $this->Form->end() ?>

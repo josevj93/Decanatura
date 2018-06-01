@@ -17,8 +17,6 @@ class LocationsController extends AppController
      public function isAuthorized($user)
     {
 
-        return true;
-
         $this->Roles = $this->loadModel('Roles');
         $this->Permissions = $this->loadModel('Permissions');
         $this->RolesPermissions = $this->loadModel('RolesPermissions');
@@ -27,7 +25,7 @@ class LocationsController extends AppController
         $allowM = false;
         $allowE = false;
         $allowC = false;
-        
+
         $query = $this->Roles->find('all', array(
                     'conditions' => array(
                         'id' => $user['id_rol']
@@ -48,7 +46,7 @@ class LocationsController extends AppController
                     $allowC = true;
                 }
             }
-        } 
+        }
 
 
         $this->set('allowI',$allowI);

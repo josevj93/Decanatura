@@ -29,9 +29,9 @@ class UsersController extends AppController
             $this->Auth->deny('add');
         }
     */
-       
+
     }
-	
+
 	 public function isAuthorized($user)
     {
 
@@ -43,7 +43,7 @@ class UsersController extends AppController
         $allowM = false;
         $allowE = false;
         $allowC = false;
-        
+
         $query = $this->Roles->find('all', array(
                     'conditions' => array(
                         'id' => $user['id_rol']
@@ -64,7 +64,7 @@ class UsersController extends AppController
                     $allowC = true;
                 }
             }
-        } 
+        }
 
 
         $this->set('allowI',$allowI);
@@ -87,7 +87,7 @@ class UsersController extends AppController
 
 
     }
-	
+
 	// Allow only the view and index actions.
 
     /**
@@ -187,8 +187,8 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-	
-	
+
+
 /*public function beforeFilter(Event $event)
     {
         // allow only login

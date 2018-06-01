@@ -14,8 +14,6 @@ class AssetsController extends AppController
      public function isAuthorized($user)
     {
 
-        return true;
-        
         $this->Roles = $this->loadModel('Roles');
         $this->Permissions = $this->loadModel('Permissions');
         $this->RolesPermissions = $this->loadModel('RolesPermissions');
@@ -24,7 +22,7 @@ class AssetsController extends AppController
         $allowM = false;
         $allowE = false;
         $allowC = false;
-        
+
         $query = $this->Roles->find('all', array(
                     'conditions' => array(
                         'id' => $user['id_rol']
@@ -45,7 +43,7 @@ class AssetsController extends AppController
                     $allowC = true;
                 }
             }
-        } 
+        }
 
 
         $this->set('allowI',$allowI);
@@ -141,10 +139,10 @@ class AssetsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
-            
+
             if ($this->Assets->save($asset)) {
-            /*    
-                
+            /*
+
                 if(!strlen($asset->image_dir) == 0){
                     $imagine = new Imagine\Gd\Imagine();
 

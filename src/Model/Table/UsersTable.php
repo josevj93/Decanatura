@@ -98,6 +98,13 @@ class UsersTable extends Table
             ->requirePresence('account_status', 'create')
             ->notEmpty('account_status');
 
+        $validator
+            ->scalar('personal_id')
+            ->maxLength('apellido1', 10)
+            ->requirePresence('personal_id', 'create')
+            ->notEmpty('personal_id');
+
+
         return $validator;
     }
 
