@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
- * @property |\Cake\ORM\Association\BelongsTo $Personals
+ * @property \App\Model\Table\PersonalsTable|\Cake\ORM\Association\BelongsTo $Personals
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
@@ -97,6 +97,13 @@ class UsersTable extends Table
             ->boolean('account_status')
             ->requirePresence('account_status', 'create')
             ->notEmpty('account_status');
+
+        $validator
+            ->scalar('personal_id')
+            ->maxLength('apellido1', 10)
+            ->requirePresence('personal_id', 'create')
+            ->notEmpty('personal_id');
+
 
         return $validator;
     }

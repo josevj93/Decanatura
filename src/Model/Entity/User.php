@@ -16,6 +16,8 @@ use Cake\ORM\Entity;
  * @property int $id_rol
  * @property int $personal_id
  * @property bool $account_status
+ *
+ * @property \App\Model\Entity\Personal $personal
  */
 class User extends Entity
 {
@@ -38,7 +40,8 @@ class User extends Entity
         'password' => true,
         'id_rol' => true,
         'personal_id' => true,
-        'account_status' => true
+        'account_status' => true,
+        'personal' => true
     ];
 
     /**
