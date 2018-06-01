@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
+
 <div class="users form large-9 medium-8 columns content">
     <?= $this->Form->create($user) ?>
     <h3>Modificar Usuario</h3>
@@ -16,6 +17,8 @@
             echo $this->Form->input('username', array('type'=> 'text', 'label'=> 'Usuario', 'class' => 'form-control'));
             //echo $this->Form->input('password', array('type'=> 'password', 'label'=> 'Contraseña', 'class' => 'form-control', 'value' => ''));
             echo $this->Form->input('id_rol', array('type' => 'select','class' => 'form-control','options' => array('1' => 'Administrador', '2' => 'Estudiante', '3' => 'Director de la Escuela'), 'selected' => 'private'));
+			echo $this->Form->control('personal_id', , array('type'=> 'text', 'label'=> 'ID', 'class' => 'form-control'));
+            echo $this->Form->control('account_status', , array('type' => 'select','class' => 'form-control','options' => array('1' => 'Activo', '0' => 'Inoperante'), 'selected' => 'private'));
         ?>
     <style>
         .btn-primary {

@@ -4,7 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Event\Event;
 use Cake\Controller\Component\AuthComponent;
-//use Cake\Controller\Component;
+
 /**
  * Users Controller
  *
@@ -15,9 +15,7 @@ use Cake\Controller\Component\AuthComponent;
 class UsersController extends AppController
 {
 
-
-
-    public function beforeFilter(Event $event)
+	public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
         // Allow users to register and logout.
@@ -33,8 +31,8 @@ class UsersController extends AppController
     */
        
     }
-
-     public function isAuthorized($user)
+	
+	 public function isAuthorized($user)
     {
 
         $this->Roles = $this->loadModel('Roles');
@@ -89,9 +87,8 @@ class UsersController extends AppController
 
 
     }
-
-
-// Allow only the view and index actions.
+	
+	// Allow only the view and index actions.
 
     /**
      * Index method
@@ -100,9 +97,6 @@ class UsersController extends AppController
      */
     public function index()
     {
-
-
-
         $this->viewBuilder()->setLayout('default');
 
 
@@ -136,19 +130,16 @@ class UsersController extends AppController
      */
     public function add()
     {
-
-
-
         $user = $this->Users->newEntity();
 
 
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('EL usuario ha sido agregado.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('El usuario no pudo ser agregado, intente nuevamente'));
         }
         $this->set(compact('user'));
     }
@@ -189,30 +180,18 @@ class UsersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('El usuario ha sido borrado.'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('EL usuario no pudo ser agregado, intente nuevamente'));
         }
 
         return $this->redirect(['action' => 'index']);
     }
-
-
-
-
+	
+	
 /*public function beforeFilter(Event $event)
     {
         // allow only login
          $this->Auth->allow(['login']);
      }*/
-
-
-
- 
-
-
-
 }
-
-
-

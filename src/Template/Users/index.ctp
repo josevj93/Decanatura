@@ -1,4 +1,3 @@
-
 <?php
 /**
  * @var \App\View\AppView $this
@@ -25,6 +24,7 @@
                         <th scope="col"><?= $this->Paginator->sort('Usuario') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('Estado') ?></th>
                         <!--<th scope="col"><?= $this->Paginator->sort('id_rol') ?></th>-->
+						<th scope="col"><?= $this->Paginator->sort('ID') ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,6 +52,7 @@
                         <td><?= h($user->username) ?></td>
                         <!--<td><?= $this->Number->format($user->id_rol) ?></td>-->
                         <td><?= h($user->account_status == 1 ? 'Activo' : 'Inoperante') ?></td>
+						<td><?= $this->Number->format($user->personal_id) ?></td>
 
                     </tr>
                 <?php endforeach; ?>
@@ -112,7 +113,3 @@
 
 
 </script>
-
-
-
-

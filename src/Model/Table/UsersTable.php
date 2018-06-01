@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
- * @property |\Cake\ORM\Association\BelongsTo $Personals
+ * @property \App\Model\Table\PersonalsTable|\Cake\ORM\Association\BelongsTo $Personals
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
@@ -98,12 +98,6 @@ class UsersTable extends Table
             ->requirePresence('account_status', 'create')
             ->notEmpty('account_status');
 
-        $validator
-            ->boolean('personal_id')
-            ->maxLength('password', 60)
-            ->requirePresence('account_status', 'create')
-            ->notEmpty('account_status');
-
         return $validator;
     }
 
@@ -117,7 +111,7 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['username']));
-        
+        $rules->add($rules->existsIn(['personal_id'], 'Personals'));
 
         return $rules;
     }
