@@ -82,6 +82,31 @@ class ResiduesController extends AppController
      */
     public function add()
     {
+        //$assets = TableRegistry::get('Assets')->find('all');
+
+        $assetsQuery = TableRegistry::get('Assets');
+        $assetsQuery = $assetsQuery->find()
+                         ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
+                         ->join([
+                            'technical_reports' => [
+                                    'table' => 'technical_reports',
+                                    'type'  => 'inner',
+                                    'condition' => ['assets.plaque = technical_reports.assets_id']
+                                ]
+                                ])
+                         ->where(['technical_reports' => "D"])
+                         ->toList();
+
+        $size = count($assetsQuery);
+        $asset=   array_fill(0, $size, NULL);
+        
+        for($i=0;$i<$size;$i++)
+        {
+            $asset[$i] =(object)$assetsQuery[$i]->assets;
+        }
+        debug($asset);
+        $this->set(compact('residues','asset'));
+
 
         $residue = $this->Residues->newEntity();
         if ($this->request->is('post')) {
@@ -93,13 +118,13 @@ class ResiduesController extends AppController
                 /*debug($this->request->getData('Aid')); 
                 debug($residue->residues_id); */
 
-                $assets = TableRegistry::get('Assets')->find('all');
+                /*$assets = TableRegistry::get('Assets')->find('all');
                 //debug($assets);
 
                 $assets->update()
                 ->set(['residues_id' => $residue->residues_id])
                 ->where(['plaque' => $this->request->getData('Aid')])
-                ->execute();
+                ->execute();*/
 
 
                 return $this->redirect(['action' => 'index']);
