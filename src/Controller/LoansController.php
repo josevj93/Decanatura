@@ -109,4 +109,21 @@ class LoansController extends AppController
         $users = $this->Loans->Users->find('list', ['limit' => 200]);
         $this->set(compact('assets', 'loan', 'users'));
     }
+
+    public function search()
+    {
+        $this->loadModel('Assets');
+        $id = $_GET['id'];
+        $searchedAsset= $asset= $this->Assets->get($id, [
+                    'contain' => []
+                ]);
+        if(empty($searchedAsset) )
+        {
+            throw new NotFoundException(__('Activo no encontrado') );      
+        }
+        $this->set('serchedAsset', $searchedAsset);
+
+        /*Asocia esta función a la vista /Templates/Layout/searchAsset.ctp*/
+        $this->render('/Layout/searchAsset');
+    }
 }

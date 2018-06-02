@@ -1,98 +1,114 @@
-
-
 <?php
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Asset $asset
  */
+    use Cake\Routing\Router;
 ?>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <?php echo $this->Html->css('//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css');?>
-  <link rel="stylesheet" href="/resources/demos/style.css">
 
-  <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<div class="locations form large-8 medium-8 small-12 columns content">
+    <legend><?= __('Insertar prestamo') ?></legend>
+    
+    <br>
 
-  <style>
-        label {
-          text-align:left;
-          margin-right: 10px;
-          
-        }
-        input[type=radio] {
-          width:10px;
-          clear:left;
-          text-align:left;
-        }
-        input[name=date]{
-          width:100px;
-          margin-left: 10px;
-        }
+    <?= $this->Form->create($loan) ?>
+
+    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+        <label>Placa del activo:</label><br>
+        <div class='input-group mb-3'>
+            <?php 
+                echo $this->form->imput('assets_id',['class'=>'form-control col-sm-3', 'id'=>'assetImput'])
+            ?>
+
+            <div class= 'input-group-append'>
+                <?php 
+                    echo $this->Html->link('Buscar','#',['type'=>'button','class'=>'btn btn-outline-secondary','id'=>'assetButton','onclick'=>'return false']);
+                ?>
+            </div>
+
+        </div>
+    </div>
+
+    <div id=assetResult> 
+    </div>
+
+    <br>
         
-  </style>
+    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+        <?php echo $this->Form->control('id_responsables', array('options' => $users,'label'=>'Responsable', 'class' => 'form-control')); ?>
+    </div>
 
-</head>
+    <br>
 
-<body>
+    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+        <label>Fecha inicio:</label>
+            <?php
+            echo $this->Form->imput('fecha_inicio', ['class'=>'form-control ','id'=>'datepicker']); 
+            ?>
+    </div>
 
-<div class="col-md-12 col-sm-12">
-    <h3>Insertar préstamo</h3>
-    <?= $this->Form->create($loan, ['type' => 'file']) ?>
-</div>
+    <br>
 
-<br>
+    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+        <label>Fecha de devolución:</label>
+            <?php
+            echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control ','id'=>'datepicker2']); 
+            ?>
+    </div>
 
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('id_assets', array('options' => $assets,'label'=>'Placa', 'class' => 'form-control')); ?>
-</div>
+    <br>
 
-<br>
-    
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('id_responsables', array('options' => $users,'label'=>'Responsable', 'class' => 'form-control')); ?>
-</div>
+    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+        <?php echo $this->Form->control('observaciones', array('label'=>'Observaciones', 'class' => 'form-control', 'rows' => '3')); ?>
+    </div>
 
-<br>
+    <br>
 
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <label>Fecha inicio:</label>
-        <?php
-        echo $this->Form->imput('fecha_inicio', ['class'=>'form-control ','id'=>'datepicker']); 
-        ?>
-</div>
+    <div class="col-12 text-right">
 
-<br>
+        <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+        <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <label>Fecha de devolución:</label>
-        <?php
-        echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control ','id'=>'datepicker2']); 
-        ?>
-</div>
-
-<br>
-
-<div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-    <?php echo $this->Form->control('observaciones', array('label'=>'Observaciones', 'class' => 'form-control', 'rows' => '3')); ?>
-</div>
-
-<br>
-
-<div class="col-12 text-right">
-
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+    </div>
     
 </div>
-
-</body>
+    <?= $this->Form->end(); ?>
 
 <script>
   $( function Picker() {
     $( "#datepicker" ).datepicker({ dateFormat: 'dd-mm-y' });
     $( "#datepicker2" ).datepicker({ dateFormat: 'dd-mm-y' });
-  } );  
+  } );
+  $("document").ready(
+    function() {
+      $('#assetButton').click( function()
+      {
+        var plaque = $('#assetImput').val();
+        if(''!=plaque)
+        {
+         $.ajax({
+                type: "GET",
+                url: '<?php echo Router::url(['controller' => 'Loans', 'action' => 'search' ]); ?>',
+                data:{id:plaque},
+                beforeSend: function() {
+                     $('#assetResult').html('<label>Cargando</label><i class="fa fa-spinner fa-spin" style="font-size:25px"></i>');
+                     },
+                success: function(msg){
+                    $('#assetResult').html(msg);
+                    },
+                error: function(e) {
+                    alert("Ocurrió un error: artículo no encontrado.");
+                    console.log(e);
+                    $('#assetResult').html('Introdusca otro número de placa.');
+                    }
+              });
+          
+        }
+        else
+        {
+          $('#assetResult').html('Primero escriba un número de placa.');
+        }
+      });
+    }
+  );
 </script>
