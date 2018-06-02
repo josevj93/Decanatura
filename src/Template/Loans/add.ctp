@@ -31,6 +31,11 @@
           width:100px;
           margin-left: 10px;
         }
+
+        .btn-primary{
+  margin: 10px;
+    margin-top: 15px;
+}
         
   </style>
 

@@ -28,7 +28,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Responsable') ?></th>
-            <td><?= h($loan->id_responsables) ?></td>
+            <td><?= h($loan->user->nombre) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Fecha de inicio') ?></th>
@@ -44,6 +44,8 @@
 
 <div class="col-12 text-right">
 
-<?= $this->Html->link(__('Cancelar'), ['action' => 'cancel',$loan->id], ['class' => 'btn btn-primary']) ?>    
+ <?= $this->Html->link(__('Regresar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+
+<?= $this->Html->link(__('Cancelar Préstamo'), ['action' => 'cancel',$loan->id], ['class' => 'btn btn-primary']) ?>    
 
 </div>

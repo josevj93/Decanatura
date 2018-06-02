@@ -17,7 +17,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Tipo') ?></th>
-            <td><?= h($asset->type_id) ?></td>
+            <td><?= h($asset->type->name) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Marca') ?></th>
@@ -45,18 +45,18 @@
 
         <tr>
             <th scope="row"><?= __('Dueño') ?></th>
-            <td><?= h($asset->owner_id) ?></td>
+            <td><?= h($asset->user->nombre) ?></td>
         </tr>
 
            <tr>
             <th scope="row"><?= __('Responsable') ?></th>
-            <td><?= h($asset->responsable_id) ?></td>
+            <td><?= h($asset->user->nombre) ?></td>
         </tr>
 
 
            <tr>
             <th scope="row"><?= __('Ubicación') ?></th>
-            <td><?= h($asset->location_id) ?></td>
+            <td><?= h($asset->location->nombre) ?></td>
         </tr>
 
            <tr>

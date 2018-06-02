@@ -30,7 +30,7 @@
                                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $loan->id], array('escape'=> false)) ?>
                             </td>                            
                             <td><?= h($loan->id_assets) ?></td>
-                            <td><?= $this->Number->format($loan->id_responsables) ?></td>   
+                            <td><?= h($loan->user->nombre) ?></td>   
                             <td><?= h($loan->estado) ?></td>                         
                             <td><?= h(date("d-m-Y", strtotime($loan->fecha_inicio))) ?></td>
                             <td><?= h(date("d-m-Y", strtotime($loan->fecha_devolucion))) ?></td>
@@ -57,6 +57,8 @@
 <style>
 .btn-primary {
   color: #fff;
+      margin: 10px;
+    margin-top: 15px;
   background-color: #FF9933;
   border-color: #FF9933;
 }

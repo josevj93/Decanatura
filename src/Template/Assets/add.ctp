@@ -103,7 +103,19 @@
 
 <div class="col-12 text-right">
 
+<?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+    
     
 </div>
+
+   <style>
+        .btn-primary {
+            float: right;
+            margin: 10px;
+            margin-top: 15px;
+            color: #fff
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        </style> 
