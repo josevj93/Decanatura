@@ -20,6 +20,11 @@ class LoansController extends AppController
      */
     public function index()
     {
+
+        $this->paginate = [
+            'contain' => ['Users']
+        ];
+
         $loans = $this->paginate($this->Loans);
 
         $this->set(compact('loans'));
@@ -35,7 +40,7 @@ class LoansController extends AppController
     public function view($id = null)
     {
         $loan = $this->Loans->get($id, [
-            'contain' => []
+            'contain' => ['Users']
         ]);
 
         $this->set('loan', $loan);
@@ -57,7 +62,7 @@ class LoansController extends AppController
             $loan->estado = 'Activo';
             $loan = $this->Loans->patchEntity($loan, $this->request->getData());
             
-            if ($this->Loans->save($asset)) {
+            if ($this->Loans->save($loan)) {
                 $asset= $this->Assets->get($loan->id_assets, [
                     'contain' => []
                 ]);
