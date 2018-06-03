@@ -163,7 +163,7 @@
                 error: function(e) {
                     alert("Ocurrió un error: artículo no encontrado.");
                     console.log(e);
-                    $('#assetResult').html('Introdusca otro número de placa.');
+                    $('#assetResult').html('Introduzca otro número de placa.');
                     }
               });
           

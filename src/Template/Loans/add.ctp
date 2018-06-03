@@ -11,13 +11,33 @@
     
     <br>
 
+    <div class="col-4 float-right">
+        <label>Fecha inicio:</label>
+            <?php
+                echo $this->Form->imput('fecha_inicio', ['class'=>'form-control ','id'=>'datepicker', 'value' => date("d-m-y")]); 
+            ?>
+    </div>
+
+    <div id=userResult> 
+    </div>
+
+    <br>
+
+    <br>
+
+    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+        <?php echo $this->Form->control('id_responsables', array('options' => $users,'label'=>'Responsable', 'class' => 'form-control', 'id'=> 'userDropdown')); ?>
+    </div>
+
+    <br>
+
     <?= $this->Form->create($loan) ?>
 
     <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
         <label>Placa del activo:</label><br>
         <div class='input-group mb-3'>
             <?php 
-                echo $this->form->imput('assets_id',['class'=>'form-control col-sm-3', 'id'=>'assetImput'])
+                echo $this->Form->imput('assets_id',['class'=>'form-control col-sm-3', 'id'=>'assetImput'])
             ?>
 
             <div class= 'input-group-append'>
@@ -30,21 +50,6 @@
     </div>
 
     <div id=assetResult> 
-    </div>
-
-    <br>
-        
-    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-        <?php echo $this->Form->control('id_responsables', array('options' => $users,'label'=>'Responsable', 'class' => 'form-control')); ?>
-    </div>
-
-    <br>
-
-    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-        <label>Fecha inicio:</label>
-            <?php
-            echo $this->Form->imput('fecha_inicio', ['class'=>'form-control ','id'=>'datepicker']); 
-            ?>
     </div>
 
     <br>
@@ -75,40 +80,48 @@
     <?= $this->Form->end(); ?>
 
 <script>
-  $( function Picker() {
-    $( "#datepicker" ).datepicker({ dateFormat: 'dd-mm-y' });
-    $( "#datepicker2" ).datepicker({ dateFormat: 'dd-mm-y' });
-  } );
-  $("document").ready(
-    function() {
-      $('#assetButton').click( function()
-      {
-        var plaque = $('#assetImput').val();
-        if(''!=plaque)
+    /*prueba para autocompletar*/
+    /*
+    jQuery('#assetImput').autocomplete({
+            source:'<?php echo Router::url(array('controller' => 'Loan', 'action' => 'getPlaques')); ?>',
+            minLength: 2
+        });
+    */
+    $( function Picker() {
+        $( "#datepicker" ).datepicker({ dateFormat: 'dd-mm-y' });
+        $( "#datepicker2" ).datepicker({ dateFormat: 'dd-mm-y' });
+    } );
+    $("document").ready(
+        function() {
+        $('#assetButton').click( function()
         {
-         $.ajax({
-                type: "GET",
-                url: '<?php echo Router::url(['controller' => 'Loans', 'action' => 'search' ]); ?>',
-                data:{id:plaque},
-                beforeSend: function() {
-                     $('#assetResult').html('<label>Cargando</label><i class="fa fa-spinner fa-spin" style="font-size:25px"></i>');
-                     },
-                success: function(msg){
-                    $('#assetResult').html(msg);
-                    },
-                error: function(e) {
-                    alert("Ocurrió un error: artículo no encontrado.");
-                    console.log(e);
-                    $('#assetResult').html('Introdusca otro número de placa.');
-                    }
-              });
-          
+            var plaque = $('#assetImput').val();
+            if(''!=plaque)
+            {
+            $.ajax({
+                    type: "GET",
+                    url: '<?php echo Router::url(['controller' => 'Loans', 'action' => 'search' ]); ?>',
+                    data:{id:plaque},
+                    beforeSend: function() {
+                        $('#assetResult').html('<label>Cargando</label><i class="fa fa-spinner fa-spin" style="font-size:25px"></i>');
+                        },
+                    success: function(msg){
+                        $('#assetResult').html(msg);
+                        },
+                    error: function(e) {
+                        alert("Ocurrió un error: artículo no encontrado.");
+                        console.log(e);
+                        $('#assetResult').html('Introdusca otro número de placa.');
+                        }
+                });
+            
+            }
+            else
+            {
+            $('#assetResult').html('Primero escriba un número de placa.');
+            }
+        });
         }
-        else
-        {
-          $('#assetResult').html('Primero escriba un número de placa.');
-        }
-      });
-    }
-  );
+    );
+
 </script>

@@ -110,7 +110,34 @@ class LoansController extends AppController
         $this->set(compact('assets', 'loan', 'users'));
     }
 
-    public function search()
+    public function getPlaques()
+    {
+        pr('Sirve');
+        exit();
+        $this->loadModel('Assets');
+        if ($this->requrest->is('ajax')) {
+            $this->autoRender = false;
+
+            $plaqueRequest = $this->request->query['term'];
+            $results = $this->Assets->find($id, [
+                'conditions' => [ 'OR' => [
+                    'plaque LIKE' => $plaqueRequest . '%',
+                    ]
+                ]
+            ]);
+            
+            $resultsArr = [];
+            
+            foreach ($results as $result) {
+                $resultsArr[] =['label' => $result['plaque'], 'value' => $result->plaque];
+            }
+            
+            echo json_encode($resultsArr);
+
+        }
+    }
+
+    public function searchAsset()
     {
         $this->loadModel('Assets');
         $id = $_GET['id'];

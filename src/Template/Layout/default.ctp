@@ -27,6 +27,11 @@ $cakeDescription = 'Control de Activos';
   $this->Html->script([ 'plugins/jquery/jquery.min.js']);
   ?>
 
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <?= 
+    $this->Html->css('//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css');
+  ?>
 
 </head>
 
