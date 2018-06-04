@@ -42,7 +42,7 @@
 
 <br>
 
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+<div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
     <?php echo $this->Form->control('description', array('label'=>'Descripcion', 'class' => 'form-control','rows' => '3')); ?>
 </div>
 
@@ -97,6 +97,18 @@
 <br>        
 
 <div class="col-12 text-right">
-      <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+      <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+    
 </div>
+
+   <style>
+        .btn-primary {
+            float: right;
+            margin: 10px;
+            margin-top: 15px;
+            color: #fff
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        </style> 
