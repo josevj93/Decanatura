@@ -5,19 +5,6 @@
  */
 ?>
 
-<div class="types form large-9 medium-8 columns content">
-    <?= $this->Form->create($type) ?>
-    <h3>Insertar tipo de activo</h3>
-    
-
-    <fieldset>
-        <?php
-            echo $this->Form->input('name', array('label' => 'Nombre', 'class' => 'form-control'));
-            echo $this->Form->input('description', array('label' => 'Descripción', 'class' => 'form-control'));
-        ?>
-    </fieldset>
-
-
 <style>
     .btn-primary {
     float: right;
@@ -25,9 +12,25 @@
     margin-top: 15px;
     color: #fff
     background-color: #ffc107;
-     border-color: #ffc107;
+    border-color: #ffc107;
  }
 </style> 
+
+<div class="col-md-12 col-sm-12">
+    <?= $this->Form->create($type) ?>
+    <h3>Insertar tipo de activo</h3>
+</div>
+
+<br>
+    
+<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+    <?php echo $this->Form->input('name', array('label' => 'Nombre', 'class' => 'form-control')); ?>   
+</div>
+
+<br>
+
+<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+    <?php echo $this->Form->input('description', array('label' => 'Descripción', 'class' => 'form-control')); ?>   
 </div>
 
 <?= $this->Html->link(__('Cancelar'), ['controller' => 'Types', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>

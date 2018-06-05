@@ -27,12 +27,13 @@ $cakeDescription = 'Control de Activos';
   $this->Html->script([ 'plugins/jquery/jquery.min.js']);
   ?>
 
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <?= 
+    $this->Html->css('//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css');
+  ?>
 
 </head>
-
-
-
-
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
@@ -45,12 +46,7 @@ $cakeDescription = 'Control de Activos';
       ['escape' => false]
       );
 ?>
-
-
     <a class="navbar-brand" href="index.html">Sistema de Activos</a>
-
-
-
 
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -78,7 +74,7 @@ $cakeDescription = 'Control de Activos';
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
         <?=$this->Html->link(
-          $this->Html->tag('i','' , array('class' => 'fa fa-boxes')).$this->Html->tag('span', ' Activos', array('class' => 'nav-link-text')),
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Activos', array('class' => 'nav-link-text')),
           array('controller' => 'Assets','action' => 'index'),
           array('class' => 'nav-link',
             'escape'=> false)
@@ -98,10 +94,15 @@ $cakeDescription = 'Control de Activos';
       </li>
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
-        <a class="nav-link" href="tables.html">
-          <span class="nav-link-text">Préstamos</span>
-        </a>
+        <?=$this->Html->link(
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Préstamos', array('class' => 'nav-link-text')),
+          array('controller' => 'Loans','action' => 'index'),
+          array('class' => 'nav-link',
+            'escape'=> false)
+        );
+        ?>
       </li>
+
        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reporte Técnico">
         <?=$this->Html->link(
 

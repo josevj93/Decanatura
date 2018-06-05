@@ -24,13 +24,19 @@
 <br>
     
 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('brand', array('label'=>'Marca', 'class' => 'form-control')); ?>
+    <?php echo $this->Form->control('brand', array('id' => 'brandField', 'options' => $brands, 'label'=>'Marca', 'class' => 'form-control')); ?>
 </div>
 
 <br>
 
 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('model' , array('label'=>'Modelo', 'class' => 'form-control')); ?>
+	<?php use App\Controller\AssetsController ?>
+
+    <?php
+		$filterMod = "Apple";
+		$options = AssetsController::storeModel($assets, $filterMod);
+		echo $this->Form->control('model' , array('options' => $options,'label'=>'Modelo', 'class' => 'form-control')); 
+	?>
 </div>
 
 <br>
@@ -43,12 +49,6 @@
 
 <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
     <?php echo $this->Form->control('description', array('label'=>'Descripcion', 'class' => 'form-control', 'rows' => '3')); ?>
-</div>
-
-<br>
-
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12"> 
-    <?php  echo $this->Form->control('state', array('label'=>'Estado', 'class' => 'form-control', 'type' => 'select', 'options' => array('Activo' => 'Activo','Trasladado' => 'Trasladado', 'Desechado' => 'Desechado'), 'selected' => 'private')); ?>
 </div>
 
 <br>
@@ -103,7 +103,19 @@
 
 <div class="col-12 text-right">
 
+<?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+    
     
 </div>
+
+   <style>
+        .btn-primary {
+            float: right;
+            margin: 10px;
+            margin-top: 15px;
+            color: #fff
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+        </style> 

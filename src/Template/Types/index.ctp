@@ -50,13 +50,11 @@
 </div>
 
 <style>
-    .btn-primary {
-        float: left;
-        margin: 20px;
-        color: #fff;
-        background-color: #F2A32C;
-        border-color: #F2A32C;
-    }
+.btn-primary {
+  color: #fff;
+  background-color: #FF9933;
+  border-color: #FF9933;
+}
 </style>
 
 <?= $this->Html->link(__('Insertar Tipo'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>

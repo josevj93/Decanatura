@@ -5,8 +5,11 @@
  */
 ?>
 
-<div class="types view large-9 medium-8 columns content">
+<div class="col-md-12 col-sm-12">
     <h3>Consultar tipo de activo</h3>
+</div>
+
+<div class="types view large-9 medium-8 columns content">
 
    <table class="vertical-table">
         <tr>
