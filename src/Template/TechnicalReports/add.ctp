@@ -68,7 +68,7 @@
       <div class="col-md-8">
         <div >
           <label>Nº Reporte:</label>
-          <label><?php echo h($tmpId); ?> *</label>
+          <label><?php echo h($CompleteID); ?> *</label>
 
         </div>
       </div>

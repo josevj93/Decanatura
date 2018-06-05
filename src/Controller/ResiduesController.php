@@ -87,6 +87,34 @@ class ResiduesController extends AppController
     public function add()
     {
 
+        /*
+        //$assets = TableRegistry::get('Assets')->find('all');
+
+        $assetsQuery = TableRegistry::get('Assets');
+        $assetsQuery = $assetsQuery->find()
+                         ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
+                         ->join([
+                            'technical_reports' => [
+                                    'table' => 'technical_reports',
+                                    'type'  => 'inner',
+                                    'condition' => ['assets.plaque = technical_reports.assets_id']
+                                ]
+                                ])
+                         ->where(['technical_reports' => "D"])
+                         ->toList();
+
+        $size = count($assetsQuery);
+        $asset=   array_fill(0, $size, NULL);
+        
+        for($i=0;$i<$size;$i++)
+        {
+            $asset[$i] =(object)$assetsQuery[$i]->assets;
+        }
+        debug($asset);
+        $this->set(compact('residues','asset'));
+        */
+
+
         $residue = $this->Residues->newEntity();
         if ($this->request->is('post')) {
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());

@@ -17,18 +17,25 @@ class TechnicalReportsFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'technical_report_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'date' => ['type' => 'date', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'technical_report_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'assets_id' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'evaluation' => ['type' => 'string', 'length' => 500, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'recommendation' => ['type' => 'string', 'fixed' => true, 'length' => 1, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null],
-        'document' => ['type' => 'binary', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'date' => ['type' => 'date', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'file_name' => ['type' => 'string', 'length' => 200, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'path' => ['type' => 'string', 'length' => 200, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'residues_id' => ['type' => 'string', 'length' => 200, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'evaluator_name' => ['type' => 'string', 'length' => 100, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'year' => ['type' => 'string', 'length' => 4, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'facultyInitials' => ['type' => 'string', 'length' => 20, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_indexes' => [
             'FK_AssetsPlaque' => ['type' => 'index', 'columns' => ['assets_id'], 'length' => []],
+            'FK_ResiduesId' => ['type' => 'index', 'columns' => ['residues_id'], 'length' => []],
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['technical_report_id'], 'length' => []],
             'FK_AssetsPlaque' => ['type' => 'foreign', 'columns' => ['assets_id'], 'references' => ['assets', 'plaque'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'FK_ResiduesId' => ['type' => 'foreign', 'columns' => ['residues_id'], 'references' => ['residues', 'residues_id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -45,11 +52,16 @@ class TechnicalReportsFixture extends TestFixture
     public $records = [
         [
             'technical_report_id' => 1,
-            'date' => '2018-05-03',
             'assets_id' => 'Lorem ipsum dolor sit amet',
             'evaluation' => 'Lorem ipsum dolor sit amet',
             'recommendation' => 'Lorem ipsum dolor sit ame',
-            'document' => 'Lorem ipsum dolor sit amet'
+            'date' => '2018-06-05',
+            'file_name' => 'Lorem ipsum dolor sit amet',
+            'path' => 'Lorem ipsum dolor sit amet',
+            'residues_id' => 'Lorem ipsum dolor sit amet',
+            'evaluator_name' => 'Lorem ipsum dolor sit amet',
+            'year' => 'Lo',
+            'facultyInitials' => 'Lorem ipsum dolor '
         ],
     ];
 }

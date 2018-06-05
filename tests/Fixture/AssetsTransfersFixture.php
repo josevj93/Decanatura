@@ -17,15 +17,15 @@ class AssetsTransfersFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'transfers_id' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'transfer_id' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'assets_id' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_indexes' => [
             'FK_AssetsId' => ['type' => 'index', 'columns' => ['assets_id'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['transfers_id', 'assets_id'], 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['transfer_id', 'assets_id'], 'length' => []],
             'FK_AssetsId' => ['type' => 'foreign', 'columns' => ['assets_id'], 'references' => ['assets', 'plaque'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
-            'FK_TransferId' => ['type' => 'foreign', 'columns' => ['transfers_id'], 'references' => ['transfers', 'transfers_id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'FK_TransferId' => ['type' => 'foreign', 'columns' => ['transfer_id'], 'references' => ['transfers', 'transfers_id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -41,8 +41,8 @@ class AssetsTransfersFixture extends TestFixture
      */
     public $records = [
         [
-            'transfers_id' => '8adce641-4809-4bf0-8180-c2b684f4ed3d',
-            'assets_id' => '80800482-7f26-4319-9b67-1f21a588cb72'
+            'transfer_id' => 'e6aaa779-db6a-4549-8183-3e1d2fdd9e35',
+            'assets_id' => '0e4a807c-0c49-4f64-860d-fd9b9aa867bc'
         ],
     ];
 }
