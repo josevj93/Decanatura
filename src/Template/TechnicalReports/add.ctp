@@ -77,7 +77,8 @@
         <?php
         echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker']); 
         ?>
-  </div>
+        
+    </div>
     
 
     <label>Placa del activo:</label><br>
@@ -123,8 +124,23 @@
     </div> 
     <br>
 
+    <div class="row">
+
+      <div class="col-md-8">
+        <div >
+          <label>Nombre del evaluador</label>
+            <?php
+              echo $this->Form->imput('evaluator_name', ['class'=>'form-control ']); 
+            ?>
+        </div>
+      </div>
+      
+    </div>
+
+
     <div>
-    <label>nota * : El número de reporte es autogenerado.</label>
+      <label>nota * : El número de reporte es autogenerado.</label>
+
     </div>
     <br>
 

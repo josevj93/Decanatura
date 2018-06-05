@@ -86,6 +86,7 @@ class ResiduesController extends AppController
      */
     public function add()
     {
+
         $residue = $this->Residues->newEntity();
         if ($this->request->is('post')) {
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
@@ -96,13 +97,13 @@ class ResiduesController extends AppController
                 /*debug($this->request->getData('Aid')); 
                 debug($residue->residues_id); */
 
-                $assets = TableRegistry::get('Assets')->find('all');
+                /*$assets = TableRegistry::get('Assets')->find('all');
                 //debug($assets);
 
                 $assets->update()
                 ->set(['residues_id' => $residue->residues_id])
                 ->where(['plaque' => $this->request->getData('Aid')])
-                ->execute();
+                ->execute();*/
 
 
                 return $this->redirect(['action' => 'index']);

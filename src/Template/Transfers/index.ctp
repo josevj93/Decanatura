@@ -4,56 +4,99 @@
  * @var \App\Model\Entity\Transfer[]|\Cake\Collection\CollectionInterface $transfers
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Transfer'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Assets'), ['controller' => 'Assets', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Asset'), ['controller' => 'Assets', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+
+<style>
+.btn-primary {
+  color: #fff;
+  background-color: #FF9933;
+  border-color: #FF9933;
+}
+</style>
+
+
+
 <div class="transfers index large-9 medium-8 columns content">
-    <h3><?= __('Transfers') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+    <h3><?= __('Traslados') ?></h3>
+    <table id='transfers-grid' class="table table-striped" cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('transfers_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('date') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('Acade_Unit_recib') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('functionary') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('identification') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('functionary_recib') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('identification_recib') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col" class="actions"><?= __('Acciones') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Fecha') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Nº traslado') ?></th>                
+
             </tr>
         </thead>
         <tbody>
             <?php foreach ($transfers as $transfer): ?>
             <tr>
-                <td><?= h($transfer->transfers_id) ?></td>
-                <td><?= h($transfer->date) ?></td>
-                <td><?= h($transfer->Acade_Unit_recib) ?></td>
-                <td><?= h($transfer->functionary) ?></td>
-                <td><?= h($transfer->identification) ?></td>
-                <td><?= h($transfer->functionary_recib) ?></td>
-                <td><?= h($transfer->identification_recib) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $transfer->transfers_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $transfer->transfers_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $transfer->transfers_id], ['confirm' => __('Are you sure you want to delete # {0}?', $transfer->transfers_id)]) ?>
+                    <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $transfer->transfers_id], array('escape' => false)) ?>
+                        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $transfer->transfers_id], array('escape' => false)) ?>
+                        <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $transfer->transfers_id], ['escape' => false, 'confirm' => __('¿Seguro quiere borrar el reporte # '.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
                 </td>
+                <td>
+                    <?php 
+                    //para darle formato a la fecha
+                    $tmpdate= $transfer->date->format('d-m-Y');
+                    ?>
+
+                    <?= h($tmpdate) ?>
+                    
+                </td>
+                <td><?= h($transfer->transfers_id) ?></td>              
             </tr>
             <?php endforeach; ?>
         </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <th>Fecha</th>
+                <th>Nº Reporte</th>
+                
+            </tr>
+        </tfoot>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+    
 </div>
+
+
+<?= $this->Html->link(__('Insertar traslado'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#transfers-grid').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
+        } );
+        // Setup - add a text input to each footer cell
+        $('#transfers-grid tfoot th').each( function () {
+            var title = $(this).text();
+            $(this).html( '<input type="text" placeholder="Buscar '+title+'" />' );
+        } );
+
+        // DataTable
+        var table = $('#transfers-grid').DataTable();
+
+        // Apply the search
+        table.columns().every( function () {
+            var that = this;
+
+            $( 'input', this.footer() ).on( 'keyup change', function () {
+                if ( that.search() !== this.value ) {
+                    that
+                        .search( this.value )
+                        .draw();
+                }
+            } );
+        } );
+    } );
+
+
+</script>
+

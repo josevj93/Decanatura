@@ -14,6 +14,9 @@ use Cake\ORM\TableRegistry;
 class TransfersController extends AppController
 {
 
+
+    private $UnidadAcadémica='Ingeniería';
+
     /**
      * Index method
      *
@@ -35,11 +38,39 @@ class TransfersController extends AppController
      */
     public function view($id = null)
     {
-        $transfer = $this->Transfers->get($id, [
-            'contain' => ['Assets']
-        ]);
 
-        $this->set('transfer', $transfer);
+        $transfer = $this->Transfers->get($id);
+
+        // obtengo la tabla assets
+        $assets_transfers = TableRegistry::get('AssetsTransfers');
+
+        // reallizo un join  a assets_tranfers para obtener los activos
+        //asosiados a un traslado
+        $query = $assets_transfers->find()
+                    ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
+                    ->join([
+                      'assets'=> [
+                        'table'=>'assets',
+                        'type'=>'INNER',
+                        'conditions'=> [ 'assets.plaque= AssetsTransfers.assets_id']
+                        ]
+                    ])
+                    ->where(['AssetsTransfers.transfers_id'=>$id])
+                    ->toList();
+
+        // Aqui paso el resultado de $query a un objeto para manejarlo facilmente en la vista
+        $size = count($query);
+        $result=   array_fill(0, $size, NULL);
+        
+        for($i=0;$i<$size;$i++)
+        {
+            $result[$i] =(object)$query[$i]->assets;
+        }
+        //$user =$this->Auth->user();
+        
+        $Unidad= $this->UnidadAcadémica;
+
+        $this->set(compact('transfer','result','Unidad'));
     }
 
     /**
@@ -49,6 +80,31 @@ class TransfersController extends AppController
      */
     public function add()
     {
+
+        $transfer = $this->Transfers->newEntity();
+        if ($this->request->is('post')) {
+            $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
+            if ($this->Transfers->save($transfer)) {
+                $this->Flash->success(__('The transfer has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The transfer could not be saved. Please, try again.'));
+        }
+        $assets = $this->Transfers->Assets->find('list', ['limit' => 200]);
+        $this->set(compact('transfer', 'assets'));
+    }
+
+    /**
+     * Edit method
+     *
+     * @param string|null $id Transfer id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function edit($id = null)
+    {
+        $transfer = $this->Transfers->get($id);
 
         // obtengo la tabla assets
         $assets_transfers = TableRegistry::get('AssetsTransfers');
@@ -64,6 +120,9 @@ class TransfersController extends AppController
                         'conditions'=> [ 'assets.plaque= AssetsTransfers.assets_id']
                         ]
                     ])
+
+                    ->where(['AssetsTransfers.transfers_id'=>$id])
+
                     ->toList();
         // Aqui paso el resultado de $query a un objeto
         $size = count($query);
@@ -75,81 +134,33 @@ class TransfersController extends AppController
         }
 
 
-        //empieza el área para la función de post///////////////
+       
 
-        $transfer = $this->Transfers->newEntity();
-        $tmpId= $this->Transfers->find('all',['fields'=>'transfers_id'])->last();
-        $tmpId= $tmpId->transfers_id+1;
-        if ($this->request->is('post')) {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+
+            //saco la lista de placas señaladas y luego las paso a Array
+            $check= $this->request->getData("checkList");
+            $check = explode(",",$check);
+             
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
-            $transfer->transfers_id = $tmpId;
-
-
-            //comienza el ciclo para agregar la relación entre activos y acta.
-
-
             if ($this->Transfers->save($transfer)) {
+                $this->Flash->success(__('Los cambios han sido guardados.'));
 
-
-                
-                $contador=0;
-                //aquí se ocupa la placa
-                /*
-                
-                debug($this->request->getData((string)$contador));
-                $contador=1;
-                debug($this->request->getData((string)$contador));
-                $contador=2;
-                debug($this->request->getData((string)$contador));
-                $contador=0;
-                */
-
-                while(($this->request->getData((string)$contador)!=false) or
-                 ($this->request->getData((string)$contador) == '0') )
-                {
-                    $transferAssetTable = TableRegistry::get('AssetsTransfers');
-                $transferAsset = $transferAssetTable->newEntity();
-                //se asigna id de traslado a tabla de relación
-                $transferAsset->transfers_id = $tmpId;
-                    //debug($this->request->getData((string)$contador));
-
-                 if($this->request->getData((string)$contador) == '0')
-                 {
-                    $contador = $contador+1;
-                 }
-                 else
-                 {
-                     $transferAsset->assets_id =  $this->request->getData((string)$contador);
-                     //debug($transferAssetTable->save($transferAsset));
-                     $contador = $contador+1;
-                     //se guarda en tabla conjunta (assets y traslado)
-                     if ($transferAssetTable->save($transferAsset)) 
-                     {
-                     $this->Flash->success(__('La transferencia fue exitosa.'));
-                     }
-                     else
-                        {
-                            $this->Flash->error(__('No se pudo realizar la transferencia.'));
-                        }
-                        return $this->redirect(['action' => 'index']);
-                 }
-                
-
-                }
+                return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('No se pudo realizar la transferencia.'));
+  
+            $this->Flash->error(__('El traslado no se pudo guardar, porfavor intente nuevamente'));
+
         }
-        
-        /*
-        CÓDIGO VIEJO
-        $assets = $this->Transfers->Assets->find('list', ['limit' => 200]);//?????
-        $this->set(compact('transfer', 'assets','tmpId'));
-        */
+
+
 
         $assetsQuery = TableRegistry::get('Assets');
         $assetsQuery = $assetsQuery->find()
                          ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
                          ->toList();
+
         $size = count($assetsQuery);
         $asset=   array_fill(0, $size, NULL);
         
@@ -157,32 +168,10 @@ class TransfersController extends AppController
         {
             $asset[$i] =(object)$assetsQuery[$i]->assets;
         }
-        $this->set(compact('transfer', 'asset', 'result','tmpId'));
-    }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Transfer id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $transfer = $this->Transfers->get($id, [
-            'contain' => ['Assets']
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
-            if ($this->Transfers->save($transfer)) {
-                $this->Flash->success(__('The transfer has been saved.'));
+        $Unidad= $this->UnidadAcadémica;
+        $this->set(compact('transfer', 'asset', 'result','Unidad'));
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The transfer could not be saved. Please, try again.'));
-        }
-        $assets = $this->Transfers->Assets->find('list', ['limit' => 200]);
-        $this->set(compact('transfer', 'assets'));
     }
 
     /**

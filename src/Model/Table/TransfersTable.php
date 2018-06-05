@@ -62,12 +62,6 @@ class TransfersTable extends Table
             ->notEmpty('date');
 
         $validator
-            ->scalar('Acade_Unit_recib')
-            ->maxLength('Acade_Unit_recib', 1)
-            ->requirePresence('Acade_Unit_recib', 'create')
-            ->notEmpty('Acade_Unit_recib');
-
-        $validator
             ->scalar('functionary')
             ->maxLength('functionary', 100)
             ->requirePresence('functionary', 'create')
@@ -89,6 +83,11 @@ class TransfersTable extends Table
             ->maxLength('identification_recib', 10)
             ->allowEmpty('identification_recib');
 
+
+        $validator
+            ->scalar('Acade_Unit_recib')
+            ->maxLength('Acade_Unit_recib', 30)
+            ->allowEmpty('Acade_Unit_recib');
         return $validator;
     }
 }

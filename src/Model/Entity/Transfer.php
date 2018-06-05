@@ -8,11 +8,12 @@ use Cake\ORM\Entity;
  *
  * @property string $transfers_id
  * @property \Cake\I18n\FrozenDate $date
- * @property string $Acade_Unit_recib
  * @property string $functionary
  * @property string $identification
  * @property string $functionary_recib
  * @property string $identification_recib
+ * @property string $Acade_Unit_recib
+
  *
  * @property \App\Model\Entity\Asset[] $assets
  */
@@ -30,11 +31,12 @@ class Transfer extends Entity
      */
     protected $_accessible = [
         'date' => true,
-        'Acade_Unit_recib' => true,
+
         'functionary' => true,
         'identification' => true,
         'functionary_recib' => true,
         'identification_recib' => true,
+        'Acade_Unit_recib' => true,
         'assets' => true
     ];
 }

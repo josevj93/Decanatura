@@ -41,8 +41,8 @@ class AssetsTransfersFixture extends TestFixture
      */
     public $records = [
         [
-            'transfers_id' => 'acce7e9b-f43f-43dd-a96c-a3aa36f0989a',
-            'assets_id' => '4f6f0356-ad57-4816-a4e9-92e054dc88f7'
+            'transfers_id' => '8adce641-4809-4bf0-8180-c2b684f4ed3d',
+            'assets_id' => '80800482-7f26-4319-9b67-1f21a588cb72'
         ],
     ];
 }
