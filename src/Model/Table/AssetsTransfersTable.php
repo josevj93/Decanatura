@@ -35,7 +35,7 @@ class AssetsTransfersTable extends Table
 
         $this->setTable('assets_transfers');
         $this->setDisplayField('transfers_id');
-        $this->setPrimaryKey(['transfers_id', 'assets_id']);
+        $this->setPrimaryKey(['transfer_id', 'assets_id']);
 
         $this->belongsTo('Transfers', [
             'foreignKey' => 'transfer_id',
