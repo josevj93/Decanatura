@@ -11,13 +11,30 @@
     <fieldset>
         <legend><?= __('Consultar acta de desecho') ?></legend>
         <br>    
+        <div class="form-control sameLine" >    
+        <div class='row'>
+
+            <label>Autorización Número:</label>
+                <?php
+                    echo $this->Form->imput('residues_id',  ['class'=>'form-control col-sm-2', 'disabled']); 
+                ?>
+        </div>
         <div class='row'>
             <label>Fecha:</label>
-            <?php
-            $tmpDate= $residue->date->format('y-m-d');
-            echo $this->Form->imput('date', ['class'=>'form-control ', 'value'=>$tmpDate, 'disabled']); 
+                <?php
+                    $tmpDate= $residue->date->format('y-m-d');
+                    echo $this->Form->imput('date', ['class'=>'form-control', 'value'=>$tmpDate, 'disabled']); 
+                ?>
+        </div>
+        </div><br>
+
+        <div class='form-control row' style="border-color: transparent;">
+            <label>Unidad Custodio:</label>
+            <?php 
+                echo $this->Form->imput('Unidad', ['class'=>'form-control col-sm-4', 'value'=>$Unidad, 'disabled']);
             ?>
         </div><br>
+
         
         <label>En presencia de:</label>
         <table>
@@ -52,7 +69,13 @@
                     </div><br>
                 </td>
             </tr>
-        </table>
+        </table><br>
+
+        <div>
+            <p>
+                Se procede a levantar el Acta de Desecho de bienes muebles por haber cumplido su periodo de vida útil, de acuerdo con el Informe Técnico adjunto y la respectiva autorización por parte de la Vicerrectoría de Administración, de conformidad con el Reglamento para la Administración y Control de los Bienes Institucionales de la Universidad de Costa Rica.
+            </p>
+        </div><br>
 
     </fieldset>
     </div>
@@ -69,27 +92,46 @@
                 
             </tr>
     
-            <?php foreach ($result as $asset): ?>
-            <tr>
-                <?php
-                    //$a= (object)$asset->assets;
-                ?>
-                <td><?= h($asset->plaque) ?></td>
+            <?php 
+            //debug($result); 
+            //debug($resultRec);
 
-            </tr>
-            <?php endforeach; ?>
+            $size = count($resultRec);
+            for($i = 0; $i < $size; $i++) {
 
-            <?php foreach ($result2 as $technical_report): ?>
-            <tr>
-                <?php
-                    //$a= (object)$asset->assets;
-                ?>
-                <td><?= h($technical_report->recommendation) ?></td>
-                <td><?= h($technical_report->technical_report_id) ?></td>
-            </tr>
-            <?php endforeach; ?>
+                echo '<tr>';
+                    echo '<td>' .h($result[$i]->plaque). '</td>';
+
+                    switch ($resultRec[$i]->recommendation) {
+                        case 'C':
+                            echo '<td>' .'Reubicar'. '</td>';
+                        break;
+                        case 'R':
+                            echo '<td>' .'Reparar'. '</td>'; 
+                         break;
+                        case 'D':
+                            echo '<td>' .'Desechar'. '</td>'; 
+                        break;
+                        case 'U':   
+                            echo '<td>' .'Usar Piezas'. '</td>'; 
+                        break;
+                        case 'O':
+                            echo '<td>' .'Otros'. '</td>'; 
+                        break;
+                    } 
+                    echo '<td>' .h($resultRec[$i]->technical_report_id). '</td>';      
+                echo '</tr>';
+            }
+            
+            ?>
         </table>
-</div>
+    </div><br>
+
+    <div>
+        <p align="center">
+            (Art. 26 del Reglamento para la Administración y Control de los Bienes Institucionales de la Universidad de Costa Rica)
+        </p>
+    </div><br>
 
 
     <style>
@@ -138,6 +180,20 @@
     tr:nth-child(even) {
         background-color: #dddddd;
     }
+
+    th[class=transfer-h] {
+        border-bottom: 1px solid #000000;
+        text-align: center;
+        color:black;
+        padding: 8px;
+    }
+
+    .sameLine{
+    display: flex; 
+    justify-content: space-between; 
+    border-color: transparent;
+    }
+
     </style> 
      
      <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>

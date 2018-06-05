@@ -5,7 +5,7 @@
  */
 ?>
 <div class="technicalReports index large-9 medium-8 columns content">
-    <h3><?= __('Reportes técnicos') ?></h3>
+    <h3><?= __('Informes técnicos') ?></h3>
     <form  method="post" id="cart">
         <table id="technicalReports-grid" cellpadding="0" cellspacing="0">
             <thead>
