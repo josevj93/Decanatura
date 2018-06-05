@@ -6,7 +6,7 @@ use Cake\ORM\Entity;
 /**
  * AssetsTransfer Entity
  *
- * @property string $transfers_id
+ * @property string $transfer_id
  * @property string $assets_id
  *
  * @property \App\Model\Entity\Transfer $transfer

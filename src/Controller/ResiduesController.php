@@ -82,6 +82,7 @@ class ResiduesController extends AppController
      */
     public function add()
     {
+        /*
         //$assets = TableRegistry::get('Assets')->find('all');
 
         $assetsQuery = TableRegistry::get('Assets');
@@ -106,7 +107,7 @@ class ResiduesController extends AppController
         }
         debug($asset);
         $this->set(compact('residues','asset'));
-
+        */
 
         $residue = $this->Residues->newEntity();
         if ($this->request->is('post')) {

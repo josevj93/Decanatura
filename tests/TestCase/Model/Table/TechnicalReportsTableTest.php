@@ -25,7 +25,11 @@ class TechnicalReportsTableTest extends TestCase
      */
     public $fixtures = [
         'app.technical_reports',
-        'app.assets'
+        'app.assets',
+        'app.types',
+        'app.users',
+        'app.locations',
+        'app.residues'
     ];
 
     /**

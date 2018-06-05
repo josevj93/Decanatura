@@ -11,6 +11,7 @@
             <thead>
                 <tr>
                     <th scope="col" class="actions"><?= __('Acciones') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('Identificador') ?></th>
                     <th scope="col"><?= $this->Paginator->sort('Fecha') ?></th>
                     <th scope="col"><?= $this->Paginator->sort('Recomendación') ?></th>
                 </tr>
@@ -24,6 +25,7 @@
                         <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $technicalReport->technical_report_id], ['escape' => false, 'confirm' => __('¿Seguro quiere borrar el reporte # '.$technicalReport->technical_report_id.' ?', $technicalReport->technical_report_id)]) ?>
                     </td>
 
+                    <td><?= h($technicalReport->facultyInitials."-".$technicalReport->technical_report_id."-".$technicalReport->year) ?></td>
                     <td><?= h($technicalReport->date ) ?></td>
 
 
