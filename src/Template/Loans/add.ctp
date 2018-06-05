@@ -6,6 +6,13 @@
     use Cake\Routing\Router;
 ?>
 
+<style>
+        .btn-primary {
+            margin: 10px;
+            margin-top: 15px;
+        }
+        </style> 
+
 <div class="locations form large-8 medium-8 small-12 columns content">
     <legend><?= __('Insertar prestamo') ?></legend>
     
@@ -21,7 +28,7 @@
         <div class="col-xs-12 col-sm-12 col-md-4 offset-md-4 col-lg-4 offset-lg-4">
             <label>Fecha inicio:</label>
                 <?php
-                    echo $this->Form->imput('fecha_inicio', ['class'=>'form-control ','id'=>'datepicker', 'value' => date("d-m-y")]); 
+                    echo $this->Form->imput('fecha_inicio', ['class'=>'form-control ','id'=>'datepicker', 'value' => date("y-m-d")]); 
                 ?>
         </div>
     </div>
@@ -91,8 +98,8 @@
         });
     */
     $( function Picker() {
-        $( "#datepicker" ).datepicker({ dateFormat: 'dd-mm-y' });
-        $( "#datepicker2" ).datepicker({ dateFormat: 'dd-mm-y' });
+        $( "#datepicker" ).datepicker({ dateFormat: 'y-mm-dd' });
+        $( "#datepicker2" ).datepicker({ dateFormat: 'y-mm-dd' });
     } );
     $("document").ready(
         function() {
