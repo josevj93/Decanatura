@@ -90,6 +90,30 @@ class LoansController extends AppController
     public function cancel($id)
     {
         $this->loadModel('Assets');
+        $loan = $this->Loans->get($id, [
+            'contain' => []
+        ]);
+        $loan->estado = 'Cancelado';
+        if ($this->Loans->save($loan)){
+            $asset= $this->Assets->get($loan->id_assets, [
+                'contain' => []
+            ]);
+            $asset->state = 'Disponible';
+            if($this->Assets->save($asset)){
+                $this->Flash->success(__('El préstamo fue cancelado exitosamente.'));
+                return $this->redirect(['action' => 'index']);
+            }
+        }
+        $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
+        $users = $this->Loans->Users->find('list', ['limit' => 200]);
+        $this->set(compact('assets', 'loan', 'users'));
+    }
+
+/*Cancelar para varios activos*/
+/*
+    public function cancel($id)
+    {
+        $this->loadModel('Assets');
         
         $loan = $this->Loans->get($id, [
             'contain' => []
@@ -116,7 +140,7 @@ class LoansController extends AppController
         $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
         $users = $this->Loans->Users->find('list', ['limit' => 200]);
         $this->set(compact('assets', 'loan', 'users'));
-    }
+    }*/
 
     public function getPlaques()
     {
