@@ -57,17 +57,20 @@ class LoansController extends AppController
 
         $loan = $this->Loans->newEntity();
         if ($this->request->is('post')) {
+            
+            $data = $this->request->getData();
+            $loan->id_assets = $data['id_assets'];
             $random = uniqid();
             $loan->id = $random;
             $loan->estado = 'Activo';
-            $loan = $this->Loans->patchEntity($loan, $this->request->getData());
+            $loan = $this->Loans->patchEntity($loan, $data);
             
             if ($this->Loans->save($loan)) {
                 $asset= $this->Assets->get($loan->id_assets, [
                     'contain' => []
                 ]);
 
-                $asset->state = 'Disponible';
+                $asset->state = 'Prestado';
                 $asset->deletable = false;
 
                 if($this->Assets->save($asset)){
@@ -118,7 +121,7 @@ class LoansController extends AppController
     public function getPlaques()
     {
         pr('Sirve');
-        exit();
+        die();
         $this->loadModel('Assets');
         if ($this->requrest->is('ajax')) {
             $this->autoRender = false;

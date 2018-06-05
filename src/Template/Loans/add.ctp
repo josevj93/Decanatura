@@ -36,7 +36,7 @@
             <label>Placa del activo:</label><br>
             <div class='input-group mb-3'>
                 <?php 
-                    echo $this->Form->imput('assets_id',['class'=>'form-control col-sm-3', 'id'=>'assetImput'])
+                    echo $this->Form->text('id_assets',['class'=>'form-control col-sm-3', 'id'=>'assetImput'])
                 ?>
 
                 <div class= 'input-group-append'>
@@ -49,12 +49,8 @@
         </div>
     </div>
 
-    <br>
-
     <div id=assetResult> 
     </div>
-
-    <br>
 
     <div class="row">
         <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
@@ -105,27 +101,26 @@
             var plaque = $('#assetImput').val();
             if(''!=plaque)
             {
-            $.ajax({
+                $.ajax({
                     type: "GET",
                     url: '<?php echo Router::url(['controller' => 'Loans', 'action' => 'searchAsset' ]); ?>',
                     data:{id:plaque},
                     beforeSend: function() {
                         $('#assetResult').html('<label>Cargando</label><i class="fa fa-spinner fa-spin" style="font-size:25px"></i>');
-                        },
+                    },
                     success: function(msg){
                         $('#assetResult').html(msg);
-                        },
+                    },
                     error: function(e) {
-                        alert("Ocurrió un error: artículo no encontrado.");
                         console.log(e);
-                        $('#assetResult').html('Introdusca otro número de placa.');
-                        }
+                        $('#assetResult').html('<div class="alert alert-danger alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>¡Error!</strong> Placa no encontrada.</div>');
+                    }
                 });
             
             }
             else
             {
-            $('#assetResult').html('Primero escriba un número de placa.');
+                $('#assetResult').html('<div class="alert alert-warning alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>¡Alerta!</strong> Primero escriba un número de placa.</div>');
             }
         });
         }
