@@ -55,7 +55,7 @@ class TransfersController extends AppController
                         'conditions'=> [ 'assets.plaque= AssetsTransfers.assets_id']
                         ]
                     ])
-                    ->where(['AssetsTransfers.transfers_id'=>$id])
+                    ->where(['AssetsTransfers.transfer_id'=>$id])
                     ->toList();
 
         // Aqui paso el resultado de $query a un objeto para manejarlo facilmente en la vista
@@ -121,7 +121,7 @@ class TransfersController extends AppController
                         ]
                     ])
 
-                    ->where(['AssetsTransfers.transfers_id'=>$id])
+                    ->where(['AssetsTransfers.transfer_id'=>$id])
 
                     ->toList();
         // Aqui paso el resultado de $query a un objeto
