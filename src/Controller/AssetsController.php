@@ -114,8 +114,10 @@ class AssetsController extends AppController
      * @param asset
      * @return 0 - archivo no se eliminó correctamente, 1 - hard delete completado, 2 - soft delete completado
      */
-    public function softDelete($asset){
+    public function softDelete($plaque){
 
+        $asset = $this->Assets->get($plaque);
+        
         if($asset->deletable){
             if($this->Assets->delete($asset)){
                 return 1;
@@ -125,29 +127,27 @@ class AssetsController extends AppController
         
         $fecha = date('Y-m-d H:i:s');
         $asset->deleted = true;
+        $asset->state = 'Desactivado';
         $asset->modified = $fecha;
-        return 2;
+        
+        if ($this->Assets->save($asset)) {
+            return 2;
+        }
+
+        return 0;
     }
 
     /**
      * Método para eliminar un activo del sistema
      */
-    public function delete($id = null)
+    public function delete($asset)
     {
-        $asset = $this->Assets->get($id);
-        if ($this->softDelete($asset) == 1) {
-            $this->Flash->success(__('El activo fue borrado exitosamente.'));
-        } 
-        else if($softDelete($asset) == 2) {
-            $this->Flash->error(__('El activo fue desactivado correctamente'));
+        if ($this->Assets->delete($asset)) {
+            return 1;
+        } else {
+            return 0;
         }
-        else{
-            $this->Flash->error(__('Error al intentar eliminar el archivo'));
-        }
-
-        return $this->redirect(['action' => 'index']);
     }
-	
 	
 	public static function storeModel($activos = null, $marca = null)
     {   

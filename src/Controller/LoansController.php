@@ -57,17 +57,21 @@ class LoansController extends AppController
 
         $loan = $this->Loans->newEntity();
         if ($this->request->is('post')) {
+            
+            $data = $this->request->getData();
+            $loan->id_assets = $data['id_assets'];
             $random = uniqid();
             $loan->id = $random;
             $loan->estado = 'Activo';
-            $loan = $this->Loans->patchEntity($loan, $this->request->getData());
+            $loan = $this->Loans->patchEntity($loan, $data);
             
             if ($this->Loans->save($loan)) {
                 $asset= $this->Assets->get($loan->id_assets, [
                     'contain' => []
                 ]);
 
-                $asset->state = 'Disponible';
+                $asset->state = 'Prestado';
+                $asset->deletable = false;
 
                 if($this->Assets->save($asset)){
                     $this->Flash->success(__('El préstamo fue guardado exitosamente.'));
@@ -89,23 +93,96 @@ class LoansController extends AppController
         $loan = $this->Loans->get($id, [
             'contain' => []
         ]);
-
         $loan->estado = 'Cancelado';
         if ($this->Loans->save($loan)){
             $asset= $this->Assets->get($loan->id_assets, [
                 'contain' => []
             ]);
-
             $asset->state = 'Disponible';
-
             if($this->Assets->save($asset)){
                 $this->Flash->success(__('El préstamo fue cancelado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
-
         }
         $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
         $users = $this->Loans->Users->find('list', ['limit' => 200]);
         $this->set(compact('assets', 'loan', 'users'));
+    }
+
+/*Cancelar para varios activos*/
+/*
+    public function cancel($id)
+    {
+        $this->loadModel('Assets');
+        
+        $loan = $this->Loans->get($id, [
+            'contain' => []
+        ]);
+        
+        
+        $loan->estado = 'Cancelado';
+        
+        if ($this->Loans->save($loan)){
+            
+            $assets = $this->Assets->find('list', [
+                'conditions' => ['assets.loans_id' => $id]
+            ]);
+                
+            foreach($assets as $asset){
+                $asset->state = 'Disponible';
+
+                if(!($this->Assets->save($asset))){
+                    $this->Flash->success(__('Error al cancelar el préstamo'));
+                    return $this->redirect(['action' => 'index']);
+                }
+            }
+        }
+        $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
+        $users = $this->Loans->Users->find('list', ['limit' => 200]);
+        $this->set(compact('assets', 'loan', 'users'));
+    }*/
+
+    public function getPlaques()
+    {
+        pr('Sirve');
+        die();
+        $this->loadModel('Assets');
+        if ($this->requrest->is('ajax')) {
+            $this->autoRender = false;
+
+            $plaqueRequest = $this->request->query['term'];
+            $results = $this->Assets->find($id, [
+                'conditions' => [ 'OR' => [
+                    'plaque LIKE' => $plaqueRequest . '%',
+                    ]
+                ]
+            ]);
+            
+            $resultsArr = [];
+            
+            foreach ($results as $result) {
+                $resultsArr[] =['label' => $result['plaque'], 'value' => $result->plaque];
+            }
+            
+            echo json_encode($resultsArr);
+
+        }
+    }
+
+    public function searchAsset()
+    {
+        $this->loadModel('Assets');
+        $id = $_GET['id'];
+        $searchedAsset= $asset= $this->Assets->get($id, [
+                    'contain' => []
+                ]);
+        if(empty($searchedAsset) )
+        {
+            throw new NotFoundException(__('Activo no encontrado') );      
+        }
+        $this->set('serchedAsset', $searchedAsset);
+
+        /*Asocia esta función a la vista /Templates/Layout/searchAsset.ctp*/
+        $this->render('/Layout/searchAsset');
     }
 }

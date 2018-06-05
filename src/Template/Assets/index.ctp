@@ -33,7 +33,7 @@
                             <td class="actions">
                                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $asset->plaque], array('escape'=> false)) ?>
                                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $asset->plaque],  array('escape'=> false)) ?>
-                                <?= $this->Form->postLink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $asset->plaque],  ['escape'=> false,'confirm' => __('¿Está seguro que desea eliminar este activo? # {0}?', $asset->id)]) ?>
+                                <?= $this->Form->postLink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'softDelete', $asset->plaque],  ['escape'=> false,'confirm' => __('¿Está seguro que desea eliminar este activo? # {0}?', $asset->id)]) ?>
                             </td>
                             
                             <td><?= h($asset->plaque) ?></td>
@@ -44,7 +44,7 @@
                             <td><?= h($asset->state) ?></td>
                             <td><?= h($asset->user->nombre) ?></td>
                             <td><?= $asset->has('location') ? $this->Html->link($asset->location->nombre, ['controller' => 'Locations', 'action' => 'view', $asset->location->location_id]) : '' ?></td>
-                            <td><?= $this->Number->format($asset->year) ?></td>
+                            <td><?= h($asset->year) ?></td>
 
                         </tr>
                     <?php endforeach; ?>

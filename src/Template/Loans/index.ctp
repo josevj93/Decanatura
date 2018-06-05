@@ -33,7 +33,7 @@
                             <td><?= h($loan->user->nombre) ?></td>   
                             <td><?= h($loan->estado) ?></td>                         
                             <td><?= h(date("d-m-Y", strtotime($loan->fecha_inicio))) ?></td>
-                            <td><?= h(date("d-m-Y", strtotime($loan->fecha_devolucion))) ?></td>
+                            <td><?= $loan->has('fecha_devolucion') ? h(date("d-m-Y", strtotime($loan->fecha_devolucion))) : '' ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
