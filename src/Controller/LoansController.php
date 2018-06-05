@@ -4,19 +4,13 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 /**
- * Loans Controller
- *
- * @property \App\Model\Table\LoansTable $Loans
- *
- * @method \App\Model\Entity\Loan[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
+* Controlador para los préstamos de la aplicación
+*/
 class LoansController extends AppController
 {
 
     /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
+     * Método para desplegar una lista con un resumen de los datos de prestamos
      */
     public function index()
     {
@@ -31,11 +25,7 @@ class LoansController extends AppController
     }
 
     /**
-     * View method
-     *
-     * @param string|null $id Loan id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * Método para ver los datos completos de un activo
      */
     public function view($id = null)
     {
@@ -47,9 +37,7 @@ class LoansController extends AppController
     }
 
     /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * Método para agregar nuevos activos al sistema
      */
     public function add()
     {
@@ -58,12 +46,10 @@ class LoansController extends AppController
         $loan = $this->Loans->newEntity();
         if ($this->request->is('post')) {
             
-            $data = $this->request->getData();
-            $loan->id_assets = $data['id_assets'];
             $random = uniqid();
             $loan->id = $random;
             $loan->estado = 'Activo';
-            $loan = $this->Loans->patchEntity($loan, $data);
+            $loan = $this->Loans->patchEntity($loan, $this->request->getData());
             
             if ($this->Loans->save($loan)) {
                 $asset= $this->Assets->get($loan->id_assets, [
@@ -86,6 +72,10 @@ class LoansController extends AppController
         $users = $this->Loans->Users->find('list', ['limit' => 200]);
         $this->set(compact('assets', 'loan', 'users'));
     }
+
+    /**
+     * Método para cancelar un préstamo
+     */
 
     public function cancel($id)
     {
@@ -142,6 +132,10 @@ class LoansController extends AppController
         $this->set(compact('assets', 'loan', 'users'));
     }*/
 
+    /**
+     * Método para obtener todas las placas de activos del sistema y 
+     * enviarlas como un JSON para que lo procese AJAX
+     */
     public function getPlaques()
     {
         pr('Sirve');
@@ -169,6 +163,9 @@ class LoansController extends AppController
         }
     }
 
+    /**
+     * Método para enviar la vista parcial de búsqueda de un activo por medio de AJAX
+     */
     public function searchAsset()
     {
         $this->loadModel('Assets');
