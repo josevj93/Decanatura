@@ -133,7 +133,7 @@ class AssetsController extends AppController
     {
         $asset = $this->Assets->newEntity();
         if ($this->request->is('post')) {
-            for ($i = 0; $i < 5; $i++){
+            
                 
                 /**$asset = array(
                     'plaque' => $this->$i,
@@ -150,15 +150,33 @@ class AssetsController extends AppController
                 );*/
                 //$this->Assets->clear();
                 //$this->placa++;
+		$cantidad = $this->Post->field('quantity');
+		$placa = $this->Post->field('plaque');
+        for ($i = 0; $i < $cantidad; $i++){
+            $asset = array();
+            $asset['Asset']['plaque'] = $placa;
+            $asset['Asset']['type_id'] = '5b08417d8e257';
+            $asset['Asset']['brand'] = 'Silla';
+            $asset['Asset']['model'] = 'modelo1';
+            $asset['Asset']['state'] = 'Activo';
+            $asset['Asset']['description'] = 'silla generica, modelo 1';
+            $asset['Asset']['owner_id'] = 1;
+            $asset['Asset']['responsable_id'] = 1;
+            $asset['Asset']['location_id'] = 1;
+            $asset['Asset']['year'] = '2018';
+            $asset['Asset']['lendable'] = 0;
+        }
+        $this->Asset->saveBundle();
+		
+		/**
+        $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+        if ($this->Assets->save($asset)) {
 
-                $asset = $this->Assets->patchEntity($asset, $this->request->getData());
-                if ($this->Assets->save($asset)) {
-
-                    $this->Flash->success(__('El activo fue guardado'));
-                    return $this->redirect(['action' => 'index']);
-                }
-                $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
-            }
+        $this->Flash->success(__('El activo fue guardado'));
+        return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
+		*/
 
 
         }
