@@ -38,7 +38,7 @@ class AssetsTransfersTable extends Table
         $this->setPrimaryKey(['transfers_id', 'assets_id']);
 
         $this->belongsTo('Transfers', [
-            'foreignKey' => 'transfers_id',
+            'foreignKey' => 'transfer_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Assets', [
@@ -56,7 +56,7 @@ class AssetsTransfersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['transfers_id'], 'Transfers'));
+        $rules->add($rules->existsIn(['transfer_id'], 'Transfers'));
         $rules->add($rules->existsIn(['assets_id'], 'Assets'));
 
         return $rules;

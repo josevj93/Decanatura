@@ -89,6 +89,16 @@ class TechnicalReportsTable extends Table
             ->maxLength('evaluator_name', 100)
             ->allowEmpty('evaluator_name');
 
+        $validator
+            ->scalar('year')
+            ->maxLength('year', 4)
+            ->allowEmpty('year');
+
+        $validator
+            ->scalar('facultyInitials')
+            ->maxLength('facultyInitials', 20)
+            ->allowEmpty('facultyInitials');
+
         return $validator;
     }
 

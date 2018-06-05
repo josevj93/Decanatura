@@ -185,6 +185,7 @@ class TransfersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $transfer = $this->Transfers->get($id);
+        
         if ($this->Transfers->delete($transfer)) {
             $this->Flash->success(__('The transfer has been deleted.'));
         } else {

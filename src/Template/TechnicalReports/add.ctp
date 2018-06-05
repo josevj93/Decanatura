@@ -69,11 +69,12 @@
     <legend><?= __('Insertar informe técnico') ?></legend>
     <br>
     
+
     <div class="form-control sameLine" >
 
       <div class="row">
-        <label>Nº Reporte:</label>
-        <label><?php echo h($tmpId); ?> *</label>
+          <label>Nº Reporte:</label>
+          <label><?php echo h($CompleteID); ?> *</label>
       </div>
       
       <div class="row">

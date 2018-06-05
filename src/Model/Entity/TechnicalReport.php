@@ -15,6 +15,8 @@ use Cake\ORM\Entity;
  * @property string $path
  * @property string $residues_id
  * @property string $evaluator_name
+ * @property string $year
+ * @property string $facultyInitials
  *
  * @property \App\Model\Entity\Asset $asset
  * @property \App\Model\Entity\Residue $residue
@@ -40,6 +42,8 @@ class TechnicalReport extends Entity
         'path' => true,
         'residues_id' => true,
         'evaluator_name' => true,
+        'year' => true,
+        'facultyInitials' => true,
         'asset' => true,
         'residue' => true
     ];
