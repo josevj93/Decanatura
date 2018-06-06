@@ -128,7 +128,6 @@ class AssetsController extends AppController
     /**
      * Método para agregar activos por lotes
      */
-    var $placa = 1;
     public function batch($cantidad = null)
     {
         $asset = $this->Assets->newEntity();
@@ -150,8 +149,9 @@ class AssetsController extends AppController
                 );*/
                 //$this->Assets->clear();
                 //$this->placa++;
-		$cantidad = $this->Post->field('quantity');
-		$placa = $this->Post->field('plaque');
+                
+        $cantidad = $this->request->getData('quantity');
+		$placa = $this->request->getData('plaque');
         for ($i = 0; $i < $cantidad; $i++){
             $asset = array();
             $asset['Asset']['plaque'] = $placa;

@@ -63,8 +63,8 @@ class Asset extends Entity
     ];
 }
 
-App::Import('Model', 'BigDataModel');
+/**App::Import('Model', 'BigDataModel');
 class Frog extends BigDataModel
 {
        var $actsAs = array('BigData');
-}
+}*/
