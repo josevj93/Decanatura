@@ -38,7 +38,7 @@
             <th scope="row"><?= __('Rol') ?></th>
             <td><?= $this->Number->format($user->id_rol) ?></td>
         </tr>
-		<tr>
+        <tr>
             <th scope="row"><?= __('Cedula') ?></th>
             <td><?= $this->Number->format($user->personal_id) ?></td>
         </tr>
@@ -62,4 +62,3 @@
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Html->link(__('Modificar'), ['controller' => 'Users', 'action' => 'edit'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Html->link(__('Eliminar'), ['controller' => 'Users', 'action' => 'delete'], ['class' => 'btn btn-primary']) ?>
-
