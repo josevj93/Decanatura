@@ -28,4 +28,13 @@
     </div>
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->end() ?>
+
+
+<div class="row">
+   <hr>
+
+
+
+</div>
+
+<?= $this->Form->end() ?>
