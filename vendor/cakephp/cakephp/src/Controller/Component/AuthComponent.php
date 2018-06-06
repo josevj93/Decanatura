@@ -486,12 +486,12 @@ class AuthComponent extends Component
                 'params' => ['class' => 'error']
             ],
             'loginAction' => [
-                'controller' => 'Users',
-                'action' => 'login',
+                'controller' => 'Login',
+                'action' => 'index',
                 'plugin' => null
             ],
             'logoutRedirect' => $this->_config['loginAction'],
-            'authError' => __d('cake', 'You are not authorized to access that location.')
+            'authError' => __d('cake', 'No tiene permisos para acceder a esta sección')
         ];
 
         $config = $this->getConfig();
