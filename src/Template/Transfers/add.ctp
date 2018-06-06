@@ -45,6 +45,38 @@
           width:100px;
           margin-left: 10px;
         }
+
+        table {
+
+    border-collapse: collapse;
+    width: 100%;
+    }
+    td{
+        border: 1px solid #000000;
+        border-bottom: 1px solid #000000;
+        padding: 8px;
+    }
+    th[class=transfer-h]{
+        border-bottom: 1px solid #000000;
+        text-align: center;
+        color:black;
+        padding: 8px;
+    }
+    label[class=label-t]{
+        margin-left: 20px;
+    }
+    label {
+        text-align:left;
+        margin-right: 10px;
+          
+    }
+    .btn-primary {
+      color: #FFF;
+      background-color: #0099FF;
+      border-color: #0099FF;
+      float: right;
+      margin-left:10px;
+    }
         
   </style>
 
@@ -73,62 +105,69 @@
   </div>
     <div id=assetResult> 
     </div><br>
-   
     <div>
-
         <table>
-            <tr>
-                <th>
-                <label>Entrega:</label>
-                </th>
-                <th>
-                <label>Recibe:</label>
-                </th>
-            </tr>
-
-            <tr>
-            <th>
-              <label>Unidad:</label>  
-            <label>Unidad que entrega</label>
-            </th>
-            <th>
-                <label>Unidad:</label>  
-            <?php 
-            echo $this->Form->imput('Acade_Unit_recib', ['label' => 'Acade_Unit_recib:', 'class'=>'form-control col-sm-4']);
-            ?>
-            </th>
-            </tr>
-
-            <tr>
-            <th>
-              <label>Funcionario:</label>  
-            <?php 
+        <!-- Tabla para rellenar los datos de las unidades academicas -->
+        <tr>
+            <th class="transfer-h"><h5>Unidad que entrega<h5></th>
+            <th class="transfer-h"><h5>Unidad que recibe<h5></th>
+        </tr>
+        <tr>
+            <!-- Fila para la Unidad que entrega -->
+            <td>
+                <div class="row" >
+                    <label class="label-t">Unidad academica: </label>
+                   
+                    <label>Unidad que entrega</label>
+                </div>
+                <br>
+                <div class="row">
+                    <label class="label-t">Funcionario: </label>
+                    <?php 
             echo $this->Form->imput('functionary', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
             ?>
-            </th>
-            <th>
-                <label>Funcionario:</label>  
-            <?php 
-            echo $this->Form->imput('functionary_recib', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
-            ?>
-            </th>
-            </tr>
-
-            <tr>
-            <th>
-              <label>Cédula:</label>  
-            <?php 
+                </div>
+                <br>
+                <div class="row">
+                    <label class="label-t">Identificación:</label>
+                    <?php 
             echo $this->Form->imput('identification', ['label' => 'identification:', 'class'=>'form-control col-sm-4']);
             ?>
-            </th>
-            <th>
-                <label>Cédula:</label>  
-            <?php 
+                </div>
+            </td>
+
+
+            <!-- Fila para la Unidad que recibe -->
+            <td>
+                <div class="row">
+                    
+                        <label class="label-t">Unidad academica: </label>
+                    
+                        <?php 
+            echo $this->Form->imput('Acade_Unit_recib', ['label' => 'Acade_Unit_recib:', 'class'=>'form-control col-sm-4']);
+            ?>
+                    
+                </div>
+                <br>
+                <div class="row">
+                    <label class="label-t">Funcionario: </label>
+                    <?php 
+            echo $this->Form->imput('functionary_recib', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
+            ?>
+                </div>
+                <br>
+                <div class="row">
+                    <label class="label-t">Identificación:</label>
+                    <?php 
             echo $this->Form->imput('identification_recib', ['label' => 'identification_recib:', 'class'=>'form-control col-sm-4']);
             ?>
-            </th>
-            </tr>
-        </table>
+                </div>               
+            </td>
+            
+        </tr>
+    </table>
+
+
         <div class="related">
         <legend><?= __('Activos a trasladar') ?></legend>
 
