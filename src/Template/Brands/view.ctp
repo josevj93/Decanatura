@@ -4,25 +4,42 @@
  * @var \App\Model\Entity\Brand $brand
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Brand'), ['action' => 'edit', $brand->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Brand'), ['action' => 'delete', $brand->id], ['confirm' => __('Are you sure you want to delete # {0}?', $brand->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Brands'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Brand'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="brands view large-9 medium-8 columns content">
-    <h3><?= h($brand->name) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= h($brand->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Name') ?></th>
-            <td><?= h($brand->name) ?></td>
-        </tr>
-    </table>
+<div class="col-md-12 col-sm-12">
+    <h3>Consultar tipo de activo</h3>
 </div>
+
+<div class="types view large-9 medium-8 columns content">
+
+   <table class="vertical-table">
+        <tr>
+            <th scope="row"><?= __('Nombre') ?></th>
+            <td><?= h($type->name) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Descripción') ?></th>
+            <td><?= h($type->description) ?></td>
+        </tr>
+   </table>
+
+
+
+
+
+<style>
+.btn-primary {
+    float: right;
+    margin: 10px;
+    margin-top: 15px;
+    color: #fff
+    background-color: #ffc107;
+     border-color: #ffc107;
+    }
+</style>    
+</div>
+
+<?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+
+<?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $type->type_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el tipo de activo # {0}?', $type->type_id)]) ?>
+
+<?= $this->Html->link(__('Editar'), ['action' => 'edit', $type->type_id], ['class' => 'btn btn-primary']) ?>
+    

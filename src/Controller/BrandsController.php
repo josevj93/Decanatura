@@ -25,21 +25,6 @@ class BrandsController extends AppController
         $this->set(compact('brands'));
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Brand id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $brand = $this->Brands->get($id, [
-            'contain' => []
-        ]);
-
-        $this->set('brand', $brand);
-    }
 
     /**
      * Add method
@@ -50,13 +35,16 @@ class BrandsController extends AppController
     {
         $brand = $this->Brands->newEntity();
         if ($this->request->is('post')) {
+            $random = uniqid();
+            $brand->id = $random;
             $brand = $this->Brands->patchEntity($brand, $this->request->getData());
+            
             if ($this->Brands->save($brand)) {
-                $this->Flash->success(__('The brand has been saved.'));
+                $this->Flash->success(__('La marca fue guardada exitosamente.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The brand could not be saved. Please, try again.'));
+            $this->Flash->error(__('La marca no se pudo guardar, por favor intente nuevamente.'));
         }
         $this->set(compact('brand'));
     }
@@ -76,14 +64,15 @@ class BrandsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $brand = $this->Brands->patchEntity($brand, $this->request->getData());
             if ($this->Brands->save($brand)) {
-                $this->Flash->success(__('The brand has been saved.'));
+            $this->Flash->success(__('La marca fue guardada exitosamente.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The brand could not be saved. Please, try again.'));
+            $this->Flash->error(__('La marca no se pudo guardar, por favor intente nuevamente.'));
         }
         $this->set(compact('brand'));
     }
+
 
     /**
      * Delete method
@@ -97,11 +86,12 @@ class BrandsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $brand = $this->Brands->get($id);
         if ($this->Brands->delete($brand)) {
-            $this->Flash->success(__('The brand has been deleted.'));
+            $this->Flash->success(__('La marca se ha eliminado exitosamente'));
         } else {
-            $this->Flash->error(__('The brand could not be deleted. Please, try again.'));
+            $this->Flash->error(__('La marca no se pudo eliminar. Por favor, inténtelo de nuevo'));
         }
 
         return $this->redirect(['action' => 'index']);
     }
 }
+

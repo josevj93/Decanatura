@@ -30,9 +30,9 @@ class BrandsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('brands');
+      //  $this->setTable('brands');
         $this->setDisplayField('name');
-        $this->setPrimaryKey('id');
+      //  $this->setPrimaryKey('id');
     }
 
     /**
@@ -46,12 +46,12 @@ class BrandsTable extends Table
         $validator
             ->scalar('id')
             ->maxLength('id', 255)
-            ->allowEmpty('id', 'create');
+            ->notEmpty('id');
 
         $validator
             ->scalar('name')
             ->maxLength('name', 255)
-            ->allowEmpty('name');
+            ->notEmpty('name');
 
         return $validator;
     }
