@@ -1,8 +1,6 @@
 <?php
 namespace App\Controller;
-
 use App\Controller\AppController;
-
 /**
  * Models Controller
  *
@@ -12,7 +10,6 @@ use App\Controller\AppController;
  */
 class ModelsController extends AppController
 {
-
     /**
      * Index method
      *
@@ -20,11 +17,12 @@ class ModelsController extends AppController
      */
     public function index()
     {
+		$this->paginate = [
+            'contain' => ['Brands', 'Types']
+        ];
         $models = $this->paginate($this->Models);
-
         $this->set(compact('models'));
     }
-
     /**
      * View method
      *
@@ -37,10 +35,8 @@ class ModelsController extends AppController
         $model = $this->Models->get($id, [
             'contain' => []
         ]);
-
         $this->set('model', $model);
     }
-
     /**
      * Add method
      *
@@ -50,17 +46,21 @@ class ModelsController extends AppController
     {
         $model = $this->Models->newEntity();
         if ($this->request->is('post')) {
+			
+			$random = uniqid();
+            $model->id = $random;
             $model = $this->Models->patchEntity($model, $this->request->getData());
             if ($this->Models->save($model)) {
-                $this->Flash->success(__('The model has been saved.'));
-
+                $this->Flash->success(__('El modelo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The model could not be saved. Please, try again.'));
+            $this->Flash->error(__('El modelo no se pudo guardar, por favor intente nuevamente.'));
         }
-        $this->set(compact('model'));
+		
+		$brands = $this->Models->Brands->find('list', ['limit' => 200]);
+		$types = $this->Models->Types->find('list', ['limit' => 200]);
+        $this->set(compact('model', 'brands', 'types'));
     }
-
     /**
      * Edit method
      *
@@ -76,15 +76,16 @@ class ModelsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $model = $this->Models->patchEntity($model, $this->request->getData());
             if ($this->Models->save($model)) {
-                $this->Flash->success(__('The model has been saved.'));
-
+                $this->Flash->success(__('El modelo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The model could not be saved. Please, try again.'));
+            $this->Flash->error(__('El modelo no se pudo guardar, por favor intente nuevamente.'));
         }
-        $this->set(compact('model'));
+        
+		$brands = $this->Models->Brands->find('list', ['limit' => 200]);
+		$types = $this->Models->Types->find('list', ['limit' => 200]);
+        $this->set(compact('model', 'brands', 'types'));
     }
-
     /**
      * Delete method
      *
@@ -101,7 +102,6 @@ class ModelsController extends AppController
         } else {
             $this->Flash->error(__('The model could not be deleted. Please, try again.'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }
