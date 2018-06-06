@@ -6,6 +6,10 @@
  */
 ?>
 
+<div class="users x large-9 medium-8 columns content">
+    <h3><?= __('Usuarios') ?></h3>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="table-responsive">
@@ -20,17 +24,26 @@
                         <!--<th scope="col"><?= $this->Paginator->sort('Correo') ?></th>-->
                         <th scope="col"><?= $this->Paginator->sort('Usuario') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('Estado') ?></th>
-                        <!--<th scope="col"><?= $this->Paginator->sort('password') ?></th>-->
                         <!--<th scope="col"><?= $this->Paginator->sort('id_rol') ?></th>-->
+						<th scope="col"><?= $this->Paginator->sort('Cedula') ?></th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($users as $user): ?>
                     <tr>
                         <td class="actions">
-                            <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $user->id], array('escape'=> false)) ?>
-                            <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $user->id],  array('escape'=> false)) ?>
-                            <?= $this->Form->postLink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $user->id],  ['escape'=> false,'confirm' => __('¿Está seguro que desea eliminar este usuario? # {0}?', $user->id)]) ?>
+                            <?php if($allowC) : ?>
+                                    <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $user->id], array('escape'=> false));?>
+                            <?php endif; ?> 
+
+                            <?php if($allowM) : ?>
+                                    <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $user->id],  array('escape'=> false));?>
+                            <?php endif; ?>
+
+                            <?php if($allowE) : ?> 
+                                    <?= $this->Form->postLink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $user->id],  ['escape'=> false,'confirm' => __('¿Está seguro que desea eliminar este usuario? # {0}?', $user->id)]);?>
+                            <?php endif; ?> 
+                            
                         </td>
                         <!--<td><?= $this->Number->format($user->id) ?></td>-->
                         <td><?= h($user->nombre) ?></td>
@@ -38,9 +51,9 @@
                         <td><?= h($user->apellido2) ?></td>
                         <!--<td><?= h($user->correo) ?></td>-->
                         <td><?= h($user->username) ?></td>
-                        <!--<td><?= h($user->password) ?></td>-->
                         <!--<td><?= $this->Number->format($user->id_rol) ?></td>-->
                         <td><?= h($user->account_status == 1 ? 'Activo' : 'Inoperante') ?></td>
+						<td><?= $this->Number->format($user->personal_id) ?></td>
 
                     </tr>
                 <?php endforeach; ?>
@@ -60,8 +73,9 @@
     </div>
 </div>
 
+<?php if($allowI) : ?>
 <?= $this->Html->link(__('Nuevo Usuario'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
-
+<?php endif; ?>
 
 <script type="text/javascript">
 
@@ -100,7 +114,3 @@
 
 
 </script>
-
-
-
-
