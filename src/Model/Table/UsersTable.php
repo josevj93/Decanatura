@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
+ * @property \App\Model\Table\PersonalsTable|\Cake\ORM\Association\BelongsTo $Personals
+ *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\User[] newEntities(array $data, array $options = [])
@@ -33,6 +35,11 @@ class UsersTable extends Table
         $this->setTable('users');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+
+        $this->belongsTo('Personals', [
+            'foreignKey' => 'personal_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -50,12 +57,14 @@ class UsersTable extends Table
         $validator
             ->scalar('nombre')
             ->maxLength('nombre', 25)
-            ->allowEmpty('nombre');
+            ->requirePresence('nombre', 'create')
+            ->notEmpty('nombre');
 
         $validator
             ->scalar('apellido1')
             ->maxLength('apellido1', 25)
-            ->allowEmpty('apellido1');
+            ->requirePresence('apellido1', 'create')
+            ->notEmpty('apellido1');
 
         $validator
             ->scalar('apellido2')
@@ -65,16 +74,18 @@ class UsersTable extends Table
         $validator
             ->scalar('correo')
             ->maxLength('correo', 100)
-            ->allowEmpty('correo');
+            ->requirePresence('correo', 'create')
+            ->notEmpty('correo');
 
         $validator
-            ->scalar('usuario')
-            ->maxLength('usuario', 100)
-            ->allowEmpty('usuario');
+            ->scalar('username')
+            ->maxLength('username', 100)
+            ->requirePresence('username', 'create')
+            ->notEmpty('username');
 
         $validator
             ->scalar('password')
-            ->maxLength('password', 32)
+            ->maxLength('password', 60)
             ->allowEmpty('password');
 
         $validator
@@ -82,6 +93,33 @@ class UsersTable extends Table
             ->requirePresence('id_rol', 'create')
             ->notEmpty('id_rol');
 
+        $validator
+            ->boolean('account_status')
+            ->requirePresence('account_status', 'create')
+            ->notEmpty('account_status');
+
+        $validator
+            ->scalar('personal_id')
+            ->maxLength('apellido1', 10)
+            ->requirePresence('personal_id', 'create')
+            ->notEmpty('personal_id');
+
+
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['username']));
+        $rules->add($rules->existsIn(['personal_id'], 'Personals'));
+
+        return $rules;
     }
 }

@@ -8,7 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $id_rol
- * @property int $id_permiso
+ * @property int $id_permission
  */
 class RolesPermission extends Entity
 {
@@ -24,6 +24,6 @@ class RolesPermission extends Entity
      */
     protected $_accessible = [
         'id_rol' => true,
-        'id_permiso' => true
+        'id_permission' => true
     ];
 }
