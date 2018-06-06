@@ -113,28 +113,12 @@ class TransfersController extends AppController
         $tmpId= $tmpId->transfers_id+1;
         if ($this->request->is('post')) {
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
+            //tmpId contiene el id de la tabla de traslados.
             $transfer->transfers_id = $tmpId;
-
-
             //comienza el ciclo para agregar la relación entre activos y acta.
-
-
-            if ($this->Transfers->save($transfer)) {
-
-
-                
+            if ($this->Transfers->save($transfer)) {    
                 $contador=0;
-                //aquí se ocupa la placa
-                /*
-                
-                debug($this->request->getData((string)$contador));
-                $contador=1;
-                debug($this->request->getData((string)$contador));
-                $contador=2;
-                debug($this->request->getData((string)$contador));
-                $contador=0;
-                */
-
+                //aquí se obtiene la placa
                 while(($this->request->getData((string)$contador)!=false) or
                  ($this->request->getData((string)$contador) == '0') )
                 {
@@ -142,9 +126,8 @@ class TransfersController extends AppController
                 $transferAsset = $transferAssetTable->newEntity();
                 //se asigna id de traslado a tabla de relación
                 $transferAsset->transfer_id = $tmpId;
-
-                    //debug($this->request->getData((string)$contador));
-
+                //Si se seleccionó el activo entonces entra a la clausula del else y añade 
+                //los campos en la base de datos (transferAsset) sino sigue iterando.
                  if($this->request->getData((string)$contador) == '0')
                  {
                     $contador = $contador+1;
@@ -152,10 +135,8 @@ class TransfersController extends AppController
                  else
                  {
                      $transferAsset->assets_id =  $this->request->getData((string)$contador);
-                     //debug($transferAssetTable->save($transferAsset));
                      $contador = $contador+1;
                      //se guarda en tabla conjunta (assets y traslado)
-                     debug($transferAsset);
                      if ($transferAssetTable->save($transferAsset)) 
                      {
                      $this->Flash->success(__('La transferencia fue exitosa.'));
@@ -172,13 +153,7 @@ class TransfersController extends AppController
             }
             $this->Flash->error(__('No se pudo realizar la transferencia.'));
         }
-        
-        /*
-        CÓDIGO VIEJO
-        $assets = $this->Transfers->Assets->find('list', ['limit' => 200]);//?????
-        $this->set(compact('transfer', 'assets','tmpId'));
-        */
-
+        //Buscca los activos para cargarlos en el grid.
         $assetsQuery = TableRegistry::get('Assets');
         $assetsQuery = $assetsQuery->find()
                          ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])

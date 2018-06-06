@@ -30,12 +30,12 @@ $mysqli = new mysqli('decanatura.mysql.database.azure.com','ecci@decanatura','Ga
                     <td><?= h($residuess->date ) ?></td>
 
                     <td><?php
-                        //consulta para obtener la recomendación que proviene del informe técnico (no potimizada)
+                        //consulta para obtener la recomendación que proviene del informe técnico (no optimizada y hay que pasarla al controlador)
                         $query =  "select  technical_reports.recommendation from residues, assets, technical_reports
                             where residues.residues_id = '".$residuess->residues_id."' and residues.residues_id = assets.residues_id and technical_reports.assets_id = assets.plaque
                             order by technical_reports.date desc limit 1;";
                         $result = $mysqli->query($query);
-
+                        //se muestra la recomendación, cada letra significa una recomendación diferente.
                         foreach ($result as $fila)
                         {
                         if("C"==$fila['recommendation']):

@@ -6,7 +6,6 @@
    use Cake\Routing\Router;
 ?>
 
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,10 +15,6 @@
 
   <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-
-
  
   <style>
         .btn-primary {
@@ -69,10 +64,8 @@
         <div >
           <label>Nº Formulario:</label>
           <label><?php echo h($tmpId); ?> *</label>
-
         </div>
       </div>
-
       <label>Fecha:</label>
         <?php
         echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker']); 
@@ -81,8 +74,6 @@
     <div id=assetResult> 
     </div><br>
    
-    
-
     <div>
 
         <table>
@@ -137,13 +128,7 @@
             ?>
             </th>
             </tr>
-
-
-           
         </table>
-
-
-
         <div class="related">
         <legend><?= __('Activos a trasladar') ?></legend>
 
@@ -159,10 +144,8 @@
                 </tr>
             <thead>
             <tbody>
-                <?php //debug($asset)?>
-                <?php //debug(array_column($result, 'plaque'))?>
                 <?php 
-
+                //
                 $contador = 0;
                 foreach ($asset as $a): ?>
                 <tr>
@@ -172,27 +155,11 @@
                     <td><?= h($a->series) ?></td>
                     <td><?= h($a->state) ?></td>
                     <td><?php                        
-                        $isIn= in_array($a->plaque, array_column($result, 'plaque') );
-
-                        
-
-                        if($isIn)
-                            {
-                                echo $this->Form->checkbox('assets_id',
-                                ['value'=>htmlspecialchars($a->plaque),'checked', 'name' => 
-                                (string)$contador]
-                                );
-                                $contador =$contador+1;
-                            }
-                        else
-                            {
                                 echo $this->Form->checkbox('assets_id',
                                 ['value'=>htmlspecialchars($a->plaque), 'name' => 
                                 (string)$contador]
                                 );
                                 $contador =$contador+1;
-                            }
-
                         ?>
                         
                     </td>
@@ -200,17 +167,7 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-
     </div>
-
-
-      
-      
-
-
-
-
-
     </div>
     <br>
     <br>
@@ -218,10 +175,7 @@
     <label>nota * : El número de formulario es autogenerado.</label>
     </div>
     <br>
-
   </fieldset>
-
-
 </div>
   <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
   <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
