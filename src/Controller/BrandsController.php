@@ -83,14 +83,16 @@ class BrandsController extends AppController
      */
     public function delete($id = null)
     {
+        
         $this->request->allowMethod(['post', 'delete']);
         $brand = $this->Brands->get($id);
-        if ($this->Brands->delete($brand)) {
-            $this->Flash->success(__('La marca se ha eliminado exitosamente'));
-        } else {
-            $this->Flash->error(__('La marca no se pudo eliminar. Por favor, inténtelo de nuevo'));
+        try{
+            $this->Brands->delete($brand); 
+             $this->Flash->success(__('La marca se ha eliminado exitosamente'));
+        } catch (\PDOException $e) {
+     $this->Flash->error(__('La marca no se pudo eliminar. Puede deberse a que tiene modelos asociados a ella'));
         }
-
+        
         return $this->redirect(['action' => 'index']);
     }
 }
