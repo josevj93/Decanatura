@@ -9,8 +9,6 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
- * @property \App\Model\Table\PersonalsTable|\Cake\ORM\Association\BelongsTo $Personals
- *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\User[] newEntities(array $data, array $options = [])
@@ -35,11 +33,6 @@ class UsersTable extends Table
         $this->setTable('users');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
-
-        $this->belongsTo('Personals', [
-            'foreignKey' => 'personal_id',
-            'joinType' => 'INNER'
-        ]);
     }
 
     /**
@@ -51,7 +44,8 @@ class UsersTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('id')
+            ->scalar('id')
+            ->maxLength('id', 15)
             ->allowEmpty('id', 'create');
 
         $validator
@@ -98,13 +92,6 @@ class UsersTable extends Table
             ->requirePresence('account_status', 'create')
             ->notEmpty('account_status');
 
-        $validator
-            ->scalar('personal_id')
-            ->maxLength('apellido1', 10)
-            ->requirePresence('personal_id', 'create')
-            ->notEmpty('personal_id');
-
-
         return $validator;
     }
 
@@ -118,7 +105,6 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['username']));
-        $rules->add($rules->existsIn(['personal_id'], 'Personals'));
 
         return $rules;
     }
