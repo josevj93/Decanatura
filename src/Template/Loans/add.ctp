@@ -20,6 +20,8 @@
 
     <?= $this->Form->create($loan) ?>
 
+
+
     <div class = "row">
         <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
             <?php echo $this->Form->control('id_responsables', array('options' => $users,'label'=>'Responsable', 'class' => 'form-control', 'id'=> 'userDropdown')); ?>
@@ -38,26 +40,55 @@
 
     <br>
 
-    <div class = "row">
-        <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-            <label>Placa del activo:</label><br>
-            <div class='input-group mb-3'>
-                <?php 
-                    echo $this->Form->text('id_assets',['class'=>'form-control col-sm-3', 'id'=>'assetImput'])
-                ?>
 
-                <div class= 'input-group-append'>
+
+   
+ <!-- AQUI ESTA LO IMPORTANTE. RECUERDEN COPIAR LOS SCRIPTS -->
+        <div class="related">
+            <legend><?= __('Asignacion de activos a prestamo') ?></legend>
+
+            <!-- tabla que contiene  datos básicos de activos-->
+            <table id='assets-transfers-grid' cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="transfer-h"><?= __('Placa') ?></th>
+                        <th class="transfer-h"><?= __('Marca') ?></th>
+                        <th class="transfer-h"><?= __('Modelo') ?></th>
+                        <th class="transfer-h"><?= __('Serie') ?></th>
+                        <th class="transfer-h"><?= __('Estado') ?></th>
+                        <th class="transfer-h"><?= __('Seleccionados') ?></th>
+                    </tr>
+                <thead>
+                <tbody>
                     <?php 
-                        echo $this->Html->link('Buscar','#',['type'=>'button','class'=>'btn btn-outline-secondary','id'=>'assetButton','onclick'=>'return false']);
-                    ?>
-                </div>
+                      foreach ($result as $a): ?>
+                      <tr>
+                          <td><?= h($a->plaque) ?></td>
+                          <td><?= h($a->brand) ?></td>
+                          <td><?= h($a->model) ?></td>  
+                          <td><?= h($a->series) ?></td>
+                          <td><?= h($a->state) ?></td>
+                          <td><?php
+                        
+                                      echo $this->Form->checkbox('assets_id',
+                                      ['value'=>htmlspecialchars($a->plaque),"class"=>"chk"]
+                                      );
+                                  
+                              ?>
+                              
+                          </td>
+                      </tr>
+                    <?php endforeach; ?>
+                    
+                </tbody>
+            </table>
 
-            </div>
         </div>
-    </div>
 
-    <div id=assetResult> 
-    </div>
+    <!-- input donde coloco la lista de placas checkeadas -->
+    <input type="hidden" name="checkList" id="checkList">
+
+
 
     <div class="row">
         <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
@@ -80,8 +111,9 @@
 
     <div class="col-12 text-right">
 
-        <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+       
         <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+         <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
 
     </div>
     
@@ -101,36 +133,33 @@
         $( "#datepicker" ).datepicker({ dateFormat: 'y-mm-dd' });
         $( "#datepicker2" ).datepicker({ dateFormat: 'y-mm-dd' });
     } );
+    $(document).ready(function() 
+    {
+        $('#assets-transfers-grid').DataTable( {} );
+    } );
     $("document").ready(
-        function() {
-        $('#assetButton').click( function()
-        {
-            var plaque = $('#assetImput').val();
-            if(''!=plaque)
-            {
-                $.ajax({
-                    type: "GET",
-                    url: '<?php echo Router::url(['controller' => 'Loans', 'action' => 'searchAsset' ]); ?>',
-                    data:{id:plaque},
-                    beforeSend: function() {
-                        $('#assetResult').html('<label>Cargando</label><i class="fa fa-spinner fa-spin" style="font-size:25px"></i>');
-                    },
-                    success: function(msg){
-                        $('#assetResult').html(msg);
-                    },
-                    error: function(e) {
-                        console.log(e);
-                        $('#assetResult').html('<div class="alert alert-danger alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>¡Error!</strong> Placa no encontrada.</div>');
-                    }
-                });
-            
-            }
-            else
-            {
-                $('#assetResult').html('<div class="alert alert-warning alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>¡Alerta!</strong> Primero escriba un número de placa.</div>');
-            }
+    function() {
+      $('#acept').click( function()
+      {
+        var check = getValueUsingClass();
+        $('#checkList').val(check);
+        
         });
         }
     );
-
+/** función optenida de http://bytutorial.com/blogs/jquery/jquery-get-selected-checkboxes */
+    function getValueUsingClass(){
+    /* declare an checkbox array */
+    var chkArray = [];
+    
+    /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+    $(".chk:checked").each(function() {
+        chkArray.push($(this).val());
+    });
+    
+    /* we join the array separated by the comma */
+    var selected;
+    selected = chkArray.join(',') ;
+    return selected;
+}
 </script>
