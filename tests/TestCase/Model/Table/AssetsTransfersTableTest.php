@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\TechnicalReportsTable;
+use App\Model\Table\AssetsTransfersTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\TechnicalReportsTable Test Case
+ * App\Model\Table\AssetsTransfersTable Test Case
  */
-class TechnicalReportsTableTest extends TestCase
+class AssetsTransfersTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\TechnicalReportsTable
+     * @var \App\Model\Table\AssetsTransfersTable
      */
-    public $TechnicalReports;
+    public $AssetsTransfers;
 
     /**
      * Fixtures
@@ -24,12 +24,12 @@ class TechnicalReportsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.technical_reports',
+        'app.assets_transfers',
+        'app.transfers',
         'app.assets',
         'app.types',
         'app.users',
-        'app.locations',
-        'app.residues'
+        'app.locations'
     ];
 
     /**
@@ -40,8 +40,8 @@ class TechnicalReportsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('TechnicalReports') ? [] : ['className' => TechnicalReportsTable::class];
-        $this->TechnicalReports = TableRegistry::get('TechnicalReports', $config);
+        $config = TableRegistry::exists('AssetsTransfers') ? [] : ['className' => AssetsTransfersTable::class];
+        $this->AssetsTransfers = TableRegistry::get('AssetsTransfers', $config);
     }
 
     /**
@@ -51,7 +51,7 @@ class TechnicalReportsTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->TechnicalReports);
+        unset($this->AssetsTransfers);
 
         parent::tearDown();
     }
@@ -62,16 +62,6 @@ class TechnicalReportsTableTest extends TestCase
      * @return void
      */
     public function testInitialize()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test validationDefault method
-     *
-     * @return void
-     */
-    public function testValidationDefault()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

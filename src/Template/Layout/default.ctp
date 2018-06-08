@@ -122,9 +122,13 @@ $cakeDescription = 'Control de Activos';
         ?>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Traslados">
-        <a class="nav-link" href="tables.html">
-          <span class="nav-link-text">Traslados</span>
-        </a>
+        <?=$this->Html->link(
+
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Traslados', array('class' => 'nav-link-text')),array('controller' => 'Transfers   ','action' => 'index'),
+          array('class' => 'nav-link',
+            'escape'=> false)
+        );
+        ?>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="UAcademica">
         <a class="nav-link" href="tables.html">

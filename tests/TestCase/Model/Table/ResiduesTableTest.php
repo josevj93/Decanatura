@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\TechnicalReportsTable;
+use App\Model\Table\ResiduesTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\TechnicalReportsTable Test Case
+ * App\Model\Table\ResiduesTable Test Case
  */
-class TechnicalReportsTableTest extends TestCase
+class ResiduesTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\TechnicalReportsTable
+     * @var \App\Model\Table\ResiduesTable
      */
-    public $TechnicalReports;
+    public $Residues;
 
     /**
      * Fixtures
@@ -24,11 +24,6 @@ class TechnicalReportsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.technical_reports',
-        'app.assets',
-        'app.types',
-        'app.users',
-        'app.locations',
         'app.residues'
     ];
 
@@ -40,8 +35,8 @@ class TechnicalReportsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('TechnicalReports') ? [] : ['className' => TechnicalReportsTable::class];
-        $this->TechnicalReports = TableRegistry::get('TechnicalReports', $config);
+        $config = TableRegistry::exists('Residues') ? [] : ['className' => ResiduesTable::class];
+        $this->Residues = TableRegistry::get('Residues', $config);
     }
 
     /**
@@ -51,7 +46,7 @@ class TechnicalReportsTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->TechnicalReports);
+        unset($this->Residues);
 
         parent::tearDown();
     }
@@ -72,16 +67,6 @@ class TechnicalReportsTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     */
-    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
