@@ -33,7 +33,7 @@ class ModelsController extends AppController
     public function view($id = null)
     {
         $model = $this->Models->get($id, [
-            'contain' => []
+            'contain' => ['Brands', 'Types']
         ]);
         $this->set('model', $model);
     }
