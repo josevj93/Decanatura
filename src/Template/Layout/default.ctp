@@ -21,6 +21,7 @@ $cakeDescription = 'Control de Activos';
       'plugins/datatables/dataTables.bootstrap4.css',
       'plugins/buttons.dataTables.min.css',
       'plugins/jquery.dataTables.min.css',
+      'custom.css',
       'sb-admin.css']) ?>
 
   <?=
@@ -37,6 +38,7 @@ $cakeDescription = 'Control de Activos';
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
 
       <?=
@@ -62,36 +64,45 @@ $cakeDescription = 'Control de Activos';
         );
         ?>
       </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Roles">
-              <?=$this->Html->link(
-                  $this->Html->tag('i','' , array('class' => 'fa fa-apple')).$this->Html->tag('span', ' Roles', array('class' => 'nav-link-text')),
-                  array('controller' => 'Roles','action' => 'index'),
-                  array('class' => 'nav-link',
-                      'escape'=> false)
-              );
-              ?>
-          </li>
-
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
-        <?=$this->Html->link(
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Activos', array('class' => 'nav-link-text')),
-          array('controller' => 'Assets','action' => 'index'),
-          array('class' => 'nav-link',
-            'escape'=> false)
-        );
-        ?>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Roles">
+          <?=$this->Html->link(
+              $this->Html->tag('i','' , array('class' => 'fa fa-apple')).$this->Html->tag('span', ' Roles', array('class' => 'nav-link-text')),
+              array('controller' => 'Roles','action' => 'index'),
+              array('class' => 'nav-link',
+                  'escape'=> false)
+          );
+          ?>
+      </li>
+      
+      <li class = "nav-item" data-toggle="tooltip" data-placement="right" title="Menú de Activos">
+        <a href="#activosSubmenu" data-toggle="collapse" aria-expanded="false" class= "nav-link">
+          <i class="fa fa-users"></i><span class="nav-link-text"> Menú de activos</span>
+        </a>
       </li>
 
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tipos de activos">
-        <?=$this->Html->link(
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Tipos de activos', array('class' => 'nav-link-text')),
-          array('controller' => 'Types','action' => 'index'),
-          array('class' => 'nav-link',
-            'escape'=> false)
-        );
-        ?>
+      <ul class="collapse" id="activosSubmenu">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
+          <?=$this->Html->link(
+            $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Activos', array('class' => 'nav-link-text')),
+            array('controller' => 'Assets','action' => 'index'),
+            array('class' => 'nav-link',
+              'escape'=> false)
+          );
+          ?>
+        </li>
 
-      </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tipos de activos">
+          <?=$this->Html->link(
+            $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Tipos de activos', array('class' => 'nav-link-text')),
+            array('controller' => 'Types','action' => 'index'),
+            array('class' => 'nav-link',
+              'escape'=> false)
+          );
+          ?>
+
+        </li>
+
+      </ul>
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
         <?=$this->Html->link(
