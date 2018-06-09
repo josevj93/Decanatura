@@ -151,6 +151,15 @@ $cakeDescription = 'Control de Activos';
         );
         ?>
       </li>
+             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Marcas de activo">
+        <?=$this->Html->link(
+
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Marcas de activo', array('class' => 'nav-link-text')),array('controller' => 'Brands','action' => 'index'),
+          array('class' => 'nav-link',
+            'escape'=> false)
+        );
+        ?>
+      </li>
     </ul>
     <ul class="navbar-nav sidenav-toggler">
       <li class="nav-item">
