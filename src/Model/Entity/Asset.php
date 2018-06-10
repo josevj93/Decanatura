@@ -62,3 +62,5 @@ class Asset extends Entity
         'unique_id' => true
     ];
 }
+
+

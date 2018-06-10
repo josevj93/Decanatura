@@ -1,4 +1,4 @@
- <?php
+<?php
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -18,8 +18,6 @@ class TechnicalReportsController extends AppController
 
      public function isAuthorized($user)
     {
-        return true;
-
         $this->Roles = $this->loadModel('Roles');
         $this->Permissions = $this->loadModel('Permissions');
         $this->RolesPermissions = $this->loadModel('RolesPermissions');
@@ -28,7 +26,7 @@ class TechnicalReportsController extends AppController
         $allowM = false;
         $allowE = false;
         $allowC = false;
-        
+
         $query = $this->Roles->find('all', array(
                     'conditions' => array(
                         'id' => $user['id_rol']
@@ -49,7 +47,7 @@ class TechnicalReportsController extends AppController
                     $allowC = true;
                 }
             }
-        } 
+        }
 
 
         $this->set('allowI',$allowI);
@@ -81,7 +79,7 @@ class TechnicalReportsController extends AppController
      */
     public function index()
     {
-        
+
         $technicalReports = $this->paginate($this->TechnicalReports);
 
         $this->set(compact('technicalReports'));
@@ -186,14 +184,14 @@ class TechnicalReportsController extends AppController
         $searchedAsset= $assets->get($id);
         if(empty($searchedAsset) )
         {
-            throw new NotFoundException(__('Activo no encontrado') );      
+            throw new NotFoundException(__('Activo no encontrado') );
         }
         $this->set('serchedAsset',$searchedAsset);
     }
 
-    
+
     public function download($id = null)
-    { 
+    {
 
         $technicalReport = $this->TechnicalReports->get($id, [
             'contain' => ['Assets']
@@ -212,7 +210,7 @@ class TechnicalReportsController extends AppController
         UNIDAD DE BIENES INSTITUCIONALES
         <br>
         INFORME TÉCNICO</center><h2>
-    
+
         <table style="width:35%">
         <tr>
         <th><h3>Unidad custodio:'.$technicalReport->asset->responsable_id.'<h3></th>
@@ -265,5 +263,5 @@ class TechnicalReportsController extends AppController
         return $this->redirect(['action' => 'index']);
 
     }
-    
+
 }

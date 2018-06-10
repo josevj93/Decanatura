@@ -6,7 +6,7 @@ use Cake\ORM\Entity;
 /**
  * User Entity
  *
- * @property int $id
+ * @property string $id
  * @property string $nombre
  * @property string $apellido1
  * @property string $apellido2
@@ -14,7 +14,6 @@ use Cake\ORM\Entity;
  * @property string $username
  * @property string $password
  * @property int $id_rol
- * @property int $personal_id
  * @property bool $account_status
  *
  * @property \App\Model\Entity\Personal $personal
@@ -32,6 +31,7 @@ class User extends Entity
      * @var array
      */
     protected $_accessible = [
+        'id' => true,
         'nombre' => true,
         'apellido1' => true,
         'apellido2' => true,
@@ -39,7 +39,6 @@ class User extends Entity
         'username' => true,
         'password' => true,
         'id_rol' => true,
-        'personal_id' => true,
         'account_status' => true,
         'personal' => true
     ];

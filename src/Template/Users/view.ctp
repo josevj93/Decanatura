@@ -13,11 +13,11 @@
             <td><?= h($user->nombre) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Apellido 1') ?></th>
+            <th scope="row"><?= __('Apellido1') ?></th>
             <td><?= h($user->apellido1) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Apellido 2') ?></th>
+            <th scope="row"><?= __('Apellido2') ?></th>
             <td><?= h($user->apellido2) ?></td>
         </tr>
         <tr>
@@ -30,17 +30,19 @@
         </tr>
     <!--
         <tr>
+            <th scope="row"><?= __('Password') ?></th>
+            <td><?= h($user->password) ?></td>
+        </tr>
+    -->
+    <!--
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($user->id) ?></td>
         </tr>
     -->
         <tr>
             <th scope="row"><?= __('Rol') ?></th>
-            <td><?= $this->Number->format($user->id_rol) ?></td>
-        </tr>
-		<tr>
-            <th scope="row"><?= __('Cedula') ?></th>
-            <td><?= $this->Number->format($user->personal_id) ?></td>
+            <td><?= h($rol) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Estado') ?></th>
@@ -56,10 +58,10 @@
             background-color: #ffc107;
             border-color: #ffc107;
         }
-        </style>
-
+        </style> 
 </div>
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Html->link(__('Modificar'), ['controller' => 'Users', 'action' => 'edit'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Html->link(__('Eliminar'), ['controller' => 'Users', 'action' => 'delete'], ['class' => 'btn btn-primary']) ?>
-
+    <?= $this->Html->link(__('Modificar'), ['controller' => 'Users', 'action' => 'edit', $user->id], ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->postLink('Eliminar', ['action' => 'delete', $user->id],  ['escape'=> false, 'class' => 'btn btn-primary' ,'confirm' => __('¿Está seguro que desea eliminar este usuario? # {0}?', $user->id)]) ?>
+    s
+    <?= $this->Form->end() ?>
