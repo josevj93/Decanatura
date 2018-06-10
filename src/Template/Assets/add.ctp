@@ -84,7 +84,10 @@
 <br>
 
 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('lendable',  array('label'=>'Prestable', 'class' => 'checkbox')); ?>
+    <div class="custom-control custom-checkbox">
+        <?php echo $this->Form->checkbox('lendable',  array('id' => 'customCheck1', 'class' => 'custom-control-input')); ?>
+        <label class="custom-control-label" for="customCheck1">Prestable</label>
+    </div>
 </div>
 
 <br>
@@ -96,7 +99,7 @@
 <br>
 
 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->input('image',['label'=>'Imagen', 'type' => 'file', 'class' => 'form-control']); ?>
+    <?php echo $this->Form->input('image',['label'=>'Imagen', 'type' => 'file', 'class' => 'form-control img-thumbnail']); ?>
 </div>
 
 <br>
