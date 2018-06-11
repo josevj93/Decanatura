@@ -89,9 +89,7 @@
   <fieldset>
     <legend><?= __('Insertar acta de traslado') ?></legend>
     <br>
-    
     <div class="row">
-
       <div class="col-md-8">
         <div >
           <label>Nº Formulario:</label>
@@ -100,7 +98,8 @@
       </div>
       <label>Fecha:</label>
         <?php
-        echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker']); 
+        echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker','value' => 
+            date("y-m-d")]); 
         ?>
   </div>
     <div id=assetResult> 
@@ -118,7 +117,7 @@
                 <div class="row" >
                     <label class="label-t">Unidad academica: </label>
                    
-                    <label>Unidad que entrega</label>
+                    <label>Ingeniería</label>
                 </div>
                 <br>
                 <div class="row">
@@ -135,18 +134,13 @@
             ?>
                 </div>
             </td>
-
-
             <!-- Fila para la Unidad que recibe -->
             <td>
                 <div class="row">
-                    
                         <label class="label-t">Unidad academica: </label>
-                    
                         <?php 
             echo $this->Form->imput('Acade_Unit_recib', ['label' => 'Acade_Unit_recib:', 'class'=>'form-control col-sm-4']);
-            ?>
-                    
+            ?>       
                 </div>
                 <br>
                 <div class="row">
@@ -163,14 +157,12 @@
             ?>
                 </div>               
             </td>
-            
         </tr>
     </table>
 
-
         <div class="related">
         <legend><?= __('Activos a trasladar') ?></legend>
-
+        <!-- tabla que contiene  datos básicos de activos-->
         <table id='assets-transfers-grid' cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
@@ -184,8 +176,6 @@
             <thead>
             <tbody>
                 <?php 
-                //
-                $contador = 0;
                 foreach ($asset as $a): ?>
                 <tr>
                     <td><?= h($a->plaque) ?></td>
@@ -193,31 +183,33 @@
                     <td><?= h($a->model) ?></td>
                     <td><?= h($a->series) ?></td>
                     <td><?= h($a->state) ?></td>
-                    <td><?php                        
+                    <td><?php
                                 echo $this->Form->checkbox('assets_id',
-                                ['value'=>htmlspecialchars($a->plaque), 'name' => 
-                                (string)$contador]
+                                ['value'=>htmlspecialchars($a->plaque),"class"=>"chk"]
                                 );
-                                $contador =$contador+1;
-                        ?>
-                        
+                         ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
+
     </div>
+        <input type="hidden" name="checkList" id="checkList">
+
     </div>
     <br>
     <br>
     <div>
     <label>nota * : El número de formulario es autogenerado.</label>
+
     </div>
     <br>
   </fieldset>
 </div>
+
   <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-  <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+  <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'acept']) ?>
 </body>
 
 <script>
@@ -263,4 +255,33 @@
     {
         $('#assets-transfers-grid').DataTable( {} );
     } );
+
+    $("document").ready(
+    function() {
+      $('#acept').click( function()
+      {
+        var check = getValueUsingClass();
+        $('#checkList').val(check);
+
+        });
+        }
+    );
+
+/** función optenida de http://bytutorial.com/blogs/jquery/jquery-get-selected-checkboxes */
+
+    function getValueUsingClass(){
+    /* declare an checkbox array */
+    var chkArray = [];
+    
+    /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
+    $(".chk:checked").each(function() {
+        chkArray.push($(this).val());
+    });
+    
+    /* we join the array separated by the comma */
+    var selected;
+    selected = chkArray.join(',') ;
+    return selected;
+}
 </script>
+
