@@ -99,7 +99,7 @@
 <br>
 
 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->input('image',['label'=>'Imagen', 'type' => 'file', 'class' => 'form-control img-thumbnail']); ?>
+    <?php echo $this->Form->input('image',['label'=>'Imagen', 'type' => 'file', 'class' => 'form-control-file']); ?>
 </div>
 
 <br>
