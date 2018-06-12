@@ -33,6 +33,16 @@ class ModelsTable extends Table
         $this->setTable('models');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
+		
+		$this->belongsTo('Brands', [
+            'foreignKey' => 'id_brand',
+            'joinType' => 'INNER'
+        ]);
+		
+		$this->belongsTo('Types', [
+            'foreignKey' => 'id_type',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -56,13 +66,28 @@ class ModelsTable extends Table
         $validator
             ->scalar('id_brand')
             ->maxLength('id_brand', 255)
-            ->allowEmpty('id_brand');
+			->notEmpty('id_brand','Debe ingresar una marca');
 
         $validator
             ->scalar('id_type')
             ->maxLength('id_type', 255)
-            ->allowEmpty('id_type');
+            ->notEmpty('id_type','Debe ingresar un tipo');
 
         return $validator;
+    }
+	
+	/**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['id_type'], 'Types'));
+        $rules->add($rules->existsIn(['id_brand'], 'Brands'));
+
+        return $rules;
     }
 }

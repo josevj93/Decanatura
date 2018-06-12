@@ -4,48 +4,100 @@
  * @var \App\Model\Entity\Model[]|\Cake\Collection\CollectionInterface $models
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Model'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="models index large-9 medium-8 columns content">
-    <h3><?= __('Models') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('id_brand') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('id_type') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($models as $model): ?>
-            <tr>
-                <td><?= h($model->id) ?></td>
-                <td><?= h($model->name) ?></td>
-                <td><?= h($model->id_brand) ?></td>
-                <td><?= h($model->id_type) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $model->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $model->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $model->id], ['confirm' => __('Are you sure you want to delete # {0}?', $model->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+<div class="types index content">
+    <h3><?= __('Modelos') ?></h3>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table id="models-grid"  class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col" class="actions"><?= __('') ?></th>        
+                        <th scope="col"><?= $this->Paginator->sort('Nombre') ?></th>        
+                        <th scope="col"><?= $this->Paginator->sort('Marca') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('Tipo') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($models as $model): ?>
+                        <tr>
+                            <td class="actions">
+                                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $model->id], array('escape'=> false)) ?>
+                                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $model->id],  array('escape'=> false)) ?>
+                                <?= $this->Form->postLink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $model->id],  ['escape'=> false,'confirm' => __('¿Está seguro que desea eliminar este modelo? # {0}?', $model->id)]) ?>
+                            </td>
+                            
+                            <td><?= h($model->name) ?></td>
+                            <td><?= h($model->brand->name) ?></td>
+                            <td><?= h($model->type->name) ?></td>
+
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td></td>
+                    <th>Nombre</th>
+                    <th>Marca</th>
+                    <th>Tipo</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </div>
+
+<br>
+
+<style>
+.btn-primary {
+    margin: 10px;
+    margin-top: 15px;
+  color: #fff;
+  background-color: #FF9933;
+  border-color: #FF9933;
+}
+</style>
+
+<?= $this->Html->link(__('Insertar Modelo'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#models-grid').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
+        } );
+        // Setup - add a text input to each footer cell
+        $('#models-grid tfoot th').each( function () {
+            var title = $(this).text();
+            $(this).html( '<input type="text" placeholder="Buscar '+title+'" />' );
+        } );
+
+        // DataTable
+        var table = $('#models-grid').DataTable();
+
+        // Apply the search
+        table.columns().every( function () {
+            var that = this;
+
+            $( 'input', this.footer() ).on( 'keyup change', function () {
+                if ( that.search() !== this.value ) {
+                    that
+                        .search( this.value )
+                        .draw();
+                }
+            } );
+        } );
+    } );
+
+
+</script>
+
