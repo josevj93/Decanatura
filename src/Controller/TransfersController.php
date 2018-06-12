@@ -182,7 +182,8 @@ class TransfersController extends AppController
 
         // reallizo un join  a assets_tranfers para obtener los activos
         //asosiados a un traslado
-        $query = $assets_transfers->find()
+        $query = $assets_transfers
+                    ->find('all')
                     ->select(['assets.plaque'])
                     ->join([
                       'assets'=> [
@@ -202,21 +203,53 @@ class TransfersController extends AppController
         for($i=0;$i<$size;$i++)
         {
             $result[$i] =(object)$query[$i]->assets;
-        }
-
-
-       
-
+        }       
+        //debug($result);
         if ($this->request->is(['patch', 'post', 'put'])) {
 
 
             //saco la lista de placas señaladas y luego las paso a Array
             $check= $this->request->getData("checkList");
-            $check = explode(",",$check);
+            $checks = explode(",",$check);
+             
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             if ($this->Transfers->save($transfer)) {
                 $this->Flash->success(__('Los cambios han sido guardados.'));
 
+                
+                $temp =  array_fill(0, $size, NULL);
+                $i=0;
+                foreach ($result as $res)
+                {
+                    $temp[$i] = $res -> plaque;
+                    $i++;
+                }
+
+                $nuevos = array_diff($checks,  $temp);
+                $viejos = array_diff($temp,  $checks);
+                
+                
+                //debug($nuevos);
+                //debug($viejos);
+
+                if (count($viejos) > 0)
+                  $assets_transfers->deleteall(array('transfer_id'=>$id, 'assets_id IN' => $viejos), false);
+
+                if (count($nuevos) > 0)
+                {
+                    foreach ($nuevos as $n)
+                    {
+                        $at = TableRegistry::get('AssetsTransfers')->newEntity([
+                                'transfer_id'=> $id,
+                                'assets_id' => $n
+                        ]);
+
+                        $at->assets_id = $n;
+                        $at->transfer_id = $id;
+                        
+                        $assets_transfers->save($at);
+                    }
+                }
                 return $this->redirect(['action' => 'index']);
             }
   
