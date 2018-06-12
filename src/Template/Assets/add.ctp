@@ -85,7 +85,7 @@
 
 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
     <div class="custom-control custom-checkbox">
-        <?php echo $this->Form->checkbox('lendable',  array('id' => 'customCheck1', 'class' => 'custom-control-input')); ?>
+        <?php echo $this->Form->checkbox('lendable',  array('id' => 'customCheck1', 'class' => 'custom-control-input', 'checked' => 'checked')); ?>
         <label class="custom-control-label" for="customCheck1">Prestable</label>
     </div>
 </div>
