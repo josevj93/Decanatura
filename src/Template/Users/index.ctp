@@ -1,4 +1,3 @@
-
 <?php
 /**
  * @var \App\View\AppView $this
@@ -21,6 +20,7 @@
                         <th scope="col"><?= $this->Paginator->sort('Usuario') ?></th>
                         <!--<th scope="col"><?= $this->Paginator->sort('password') ?></th>-->
                         <!--<th scope="col"><?= $this->Paginator->sort('id_rol') ?></th>-->
+                        <th scope="col"><?= $this->Paginator->sort('Estado') ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,6 +39,7 @@
                         <td><?= h($user->username) ?></td>
                         <!--<td><?= h($user->password) ?></td>-->
                         <!--<td><?= $this->Number->format($user->id_rol) ?></td>-->
+                        <td><?= h($user->account_status == 1 ? 'Activo' : 'Inoperante') ?></td>
 
                     </tr>
                 <?php endforeach; ?>
@@ -50,14 +51,26 @@
                     <th>Apellido1</th>
                     <th>Apellido2</th>
                     <th>Usuario</th>
+                    <th>Estado</th>
                 </tr>
                 </tfoot>
             </table>
+            <div class="paginator">
+                <ul class="pagination">
+                    <?= $this->Paginator->first('<< ' . __('first')) ?>
+                    <?= $this->Paginator->prev('< ' . __('previous')) ?>
+                    <?= $this->Paginator->numbers() ?>
+                    <?= $this->Paginator->next(__('next') . ' >') ?>
+                    <?= $this->Paginator->last(__('last') . ' >>') ?>
+                </ul>
+                <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+            </div>
         </div>
     </div>
 </div>
 
 <?= $this->Html->link(__('Nuevo Usuario'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
+<?= $this->Form->end() ?>
 
 
 <script type="text/javascript">
@@ -97,7 +110,3 @@
 
 
 </script>
-
-
-
-

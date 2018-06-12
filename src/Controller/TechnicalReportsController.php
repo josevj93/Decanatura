@@ -15,6 +15,63 @@ use Dompdf\Dompdf;
 class TechnicalReportsController extends AppController
 {
 
+
+     public function isAuthorized($user)
+    {
+        $this->Roles = $this->loadModel('Roles');
+        $this->Permissions = $this->loadModel('Permissions');
+        $this->RolesPermissions = $this->loadModel('RolesPermissions');
+
+        $allowI = false;
+        $allowM = false;
+        $allowE = false;
+        $allowC = false;
+
+        $query = $this->Roles->find('all', array(
+                    'conditions' => array(
+                        'id' => $user['id_rol']
+                    )
+                ))->contain(['Permissions']);
+
+        foreach ($query as $roles) {
+            $rls = $roles['permissions'];
+            foreach ($rls as $item){
+                //$permisos[(int)$item['id']] = 1;
+                if($item['nombre'] == 'Insertar Reporte Tecnico'){
+                    $allowI = true;
+                }else if($item['nombre'] == 'Modificar Reporte Tecnico'){
+                    $allowM = true;
+                }else if($item['nombre'] == 'Eliminar Reporte Tecnico'){
+                    $allowE = true;
+                }else if($item['nombre'] == 'Consultar Reporte Tecnico'){
+                    $allowC = true;
+                }
+            }
+        }
+
+
+        $this->set('allowI',$allowI);
+        $this->set('allowM',$allowM);
+        $this->set('allowE',$allowE);
+        $this->set('allowC',$allowC);
+
+
+        if ($this->request->getParam('action') == 'add'){
+            return $allowI;
+        }else if($this->request->getParam('action') == 'edit'){
+            return $allowM;
+        }else if($this->request->getParam('action') == 'delete'){
+            return $allowE;
+        }else if($this->request->getParam('action') == 'view'){
+            return $allowC;
+        }else{
+            return $allowC;
+        }
+
+
+    }
+
+
     /**
      * Index method
      *
@@ -27,7 +84,7 @@ class TechnicalReportsController extends AppController
     
     public function index()
     {
-        
+
         $technicalReports = $this->paginate($this->TechnicalReports);
 
         $this->set(compact('technicalReports'));
@@ -153,14 +210,14 @@ class TechnicalReportsController extends AppController
         $searchedAsset= $assets->get($id);
         if(empty($searchedAsset) )
         {
-            throw new NotFoundException(__('Activo no encontrado') );      
+            throw new NotFoundException(__('Activo no encontrado') );
         }
         $this->set('serchedAsset',$searchedAsset);
     }
 
-    
+
     public function download($id = null)
-    { 
+    {
 
         $technicalReport = $this->TechnicalReports->get($id, [
             'contain' => ['Assets']
@@ -179,7 +236,7 @@ class TechnicalReportsController extends AppController
         UNIDAD DE BIENES INSTITUCIONALES
         <br>
         INFORME TÉCNICO</center><h2>
-    
+
         <table style="width:35%">
         <tr>
         <th><h3>Unidad custodio:'.$technicalReport->asset->responsable_id.'<h3></th>
@@ -232,5 +289,5 @@ class TechnicalReportsController extends AppController
         return $this->redirect(['action' => 'index']);
 
     }
-    
+
 }
