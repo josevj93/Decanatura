@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
 * Controlador para los préstamos de la aplicación
@@ -45,12 +46,12 @@ class LoansController extends AppController
 
         $loan = $this->Loans->newEntity();
         if ($this->request->is('post')) {
-            
+            $variable = $this->request->getData('checkList');
             $random = uniqid();
             $loan->id = $random;
             $loan->estado = 'Activo';
             $loan = $this->Loans->patchEntity($loan, $this->request->getData());
-            
+            /*
             if ($this->Loans->save($loan)) {
                 $asset= $this->Assets->get($loan->id_assets, [
                     'contain' => []
@@ -63,14 +64,31 @@ class LoansController extends AppController
                     $this->Flash->success(__('El préstamo fue guardado exitosamente.'));
                     return $this->redirect(['action' => 'index']);
                 }
-            }
+            } */
+            debug($variable);
             $this->Flash->error(__('El préstamo no se pudo guardar, por favor intente nuevamente.'));
-        }       
+        }
+
+        $assets = TableRegistry::get('Assets');
+
+        $query = $assets->find()
+                        ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series', 'assets.state'])
+                        ->toList();
+
+        $size = count($query);
+
+        $result = array_fill(0, $size, NULL);
+        
+        for($i = 0; $i < $size; $i++)
+        {
+            $result[$i] =(object)$query[$i]->assets;
+        }
+
         $assets = $this->Loans->Assets->find('list', [
             'conditions' => ['assets.state' => 'Disponible']
         ]);
         $users = $this->Loans->Users->find('list', ['limit' => 200]);
-        $this->set(compact('assets', 'loan', 'users'));
+        $this->set(compact('assets', 'loan', 'users', 'result'));
     }
 
     /**
