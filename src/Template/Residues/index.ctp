@@ -12,9 +12,10 @@ $mysqli = new mysqli('decanatura.mysql.database.azure.com','ecci@decanatura','Ga
             <thead>
                 <tr>
                     <th scope="col" class="actions"><?= __('Acciones') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('N° Autorización') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('Unidad Custodio') ?></th>
                     <th scope="col"><?= $this->Paginator->sort('Fecha') ?></th>
                     <th scope="col"><?= $this->Paginator->sort('Recomendación') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('N° Autorización') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +27,7 @@ $mysqli = new mysqli('decanatura.mysql.database.azure.com','ecci@decanatura','Ga
                         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $residuess->residues_id], array('escape' => false)) ?>
                         <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $residuess->residues_id], ['escape' => false, 'confirm' => __('¿Seguro quiere borrar el reporte # '.$residuess->residues_id.' ?', $residuess->residues_id)]) ?>
                     </td>
-                    <td><?= h($residuess->residues_id ) ?></td>  
+                    <td><?= h($Unidad) ?></td>  
                     <td><?= h($residuess->date ) ?></td>
 
                     <td><?php
@@ -54,7 +55,8 @@ $mysqli = new mysqli('decanatura.mysql.database.azure.com','ecci@decanatura','Ga
                           echo 'Otros';
                         endif;
                         }
-                        ?></td>  
+                        ?></td>
+                        <td><?= h($residuess->residues_id ) ?></td>    
                 </tr>
                 <?php endforeach; ?>
             </tbody>

@@ -23,7 +23,39 @@ class ResiduesController extends AppController
     public function index()
     {
         $residues = $this->paginate($this->Residues);
-        $this->set(compact('residues'));
+        /*
+                
+        $residues = TableRegistry::get('residues');
+
+            $indexQuery = $residues->find()
+                ->select(['residues.residues_id','max(residues.date)','technical_reports.recommendation '])
+                //select residues.residues_id, max(residues.date),technical_reports.date, technical_reports.recommendation 
+                //inner join assets on assets.residues_id = residues.residues_id
+                ->join([
+                            'assets' => [
+                                    'table' => 'assets',
+                                    'type'  => 'INNER',
+                                    'conditions' => ['assets.residues_id = residues.residues_id']
+                                ]
+                                ])
+                //inner join technical_reports on technical_reports.assets_id = assets.plaque
+                ->join([
+                        'technical_reports' => [
+                                    'table' => 'technical_reports',
+                                    'type'  => 'INNER',
+                                    'conditions' => ['assets.plaque= TechnicalReports.assets_id']
+                                ]
+                                ])
+                ->where(['residues.residues_id' => '1'])
+                ->toList();
+                
+
+
+                debug($indexQuery);
+                exit();   
+                */        
+        $Unidad = $this->UnidadAcadémica;
+        $this->set(compact('residues','Unidad'));
     }
 
     /**
