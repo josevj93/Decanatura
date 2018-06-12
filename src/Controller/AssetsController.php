@@ -95,7 +95,7 @@ class AssetsController extends AppController
             
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
             if ($this->Assets->save($asset)) {
-                if($asset->image_dir != NULL){
+                if($asset->image != NULL){
                     $this->Assets->addThumbnail();
                 }
 

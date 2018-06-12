@@ -30,7 +30,7 @@
         <div class="col-xs-12 col-sm-12 col-md-4 offset-md-4 col-lg-4 offset-lg-4">
             <label>Fecha inicio:</label>
                 <?php
-                    echo $this->Form->imput('fecha_inicio', ['class'=>'form-control ','id'=>'datepicker', 'value' => date("y-m-d")]); 
+                    echo $this->Form->imput('fecha_inicio', ['class'=>'form-control date', 'value' => date("y-m-d")]); 
                 ?>
         </div>
     </div>
@@ -92,7 +92,7 @@
         <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
             <label>Fecha de devolución:</label>
                 <?php
-                echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control ','id'=>'datepicker2']); 
+                echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date']); 
                 ?>
         </div>
     </div>

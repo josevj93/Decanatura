@@ -36,14 +36,14 @@
                     <?php endforeach; ?>
                 </tbody>
                 <tfoot>
-                <tr>
-                    <td></td>
-                    <th>Placa</th>
-                    <th>Responsable</th>
-                    <th>Estado</th>
-                    <th>Fecha de inicio</th>
-                    <th>Fecha de devolución</th>
-                </tr>
+                    <tr>
+                        <td></td>
+                        <th>Placa</th>
+                        <th>Responsable</th>
+                        <th>Estado</th>
+                        <th>Fecha de inicio</th>
+                        <th>Fecha de devolución</th>
+                    </tr>
                 </tfoot>
             </table>
         </div>

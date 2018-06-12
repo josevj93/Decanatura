@@ -10,7 +10,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 col-lg-12">
         <div class="table-responsive">
             <table id="assets-grid"  class="table table-striped">
                 <thead>

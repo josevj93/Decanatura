@@ -87,7 +87,7 @@ class LoansController extends AppController
         $query = $this->Assets->find()
                         ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series'])
                         ->where(['assets.state' => "Disponible"])
-                        
+                        ->where(['assets.lendable' => true])
                         ->toList();
 
         $size = count($query);
