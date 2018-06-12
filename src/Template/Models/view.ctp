@@ -4,33 +4,46 @@
  * @var \App\Model\Entity\Model $model
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Model'), ['action' => 'edit', $model->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Model'), ['action' => 'delete', $model->id], ['confirm' => __('Are you sure you want to delete # {0}?', $model->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Models'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Model'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
+
 <div class="models view large-9 medium-8 columns content">
     <h3><?= h($model->name) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
+            <th scope="row"><?= __('ID') ?></th>
             <td><?= h($model->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Name') ?></th>
+            <th scope="row"><?= __('Nombre') ?></th>
             <td><?= h($model->name) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Id Brand') ?></th>
-            <td><?= h($model->id_brand) ?></td>
+            <th scope="row"><?= __('Marca') ?></th>
+            <td><?= h($model->brand->name) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Id Type') ?></th>
-            <td><?= h($model->id_type) ?></td>
+            <th scope="row"><?= __('Tipo') ?></th>
+            <td><?= h($model->type->name) ?></td>
         </tr>
     </table>
+</div>
+
+<style>
+.btn-primary {
+    float: right;
+    margin: 10px;
+    margin-top: 15px;
+    color: #fff
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+</style> 
+
+<div class="col-12 text-right">
+
+<?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+<?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $model->id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el modelo "{0}" ?', $model->name)]) ?>
+
+<?= $this->Html->link(__('Editar'), ['action' => 'edit', $model->id], ['class' => 'btn btn-primary']) ?>
+    
+
 </div>
