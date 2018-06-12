@@ -7,7 +7,6 @@ use Cake\ORM\Entity;
  * Loan Entity
  *
  * @property string $id
- * @property string $id_assets
  * @property int $id_responsables
  * @property \Cake\I18n\FrozenDate $fecha_inicio
  * @property \Cake\I18n\FrozenDate $fecha_devolucion
@@ -27,7 +26,6 @@ class Loan extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id_assets' => true,
         'id_responsables' => true,
         'fecha_inicio' => true,
         'fecha_devolucion' => true,

@@ -34,10 +34,6 @@ class LoansTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-         $this->belongsTo('Assets', [
-            'foreignKey' => 'id_assets',
-            'joinType' => 'INNER'
-        ]);
         $this->belongsTo('Users', [
             'foreignKey' => 'id_responsables'
         ]);
@@ -56,11 +52,6 @@ class LoansTable extends Table
             ->scalar('id')
             ->maxLength('id', 255)
             ->allowEmpty('id', 'create');
-
-        $validator
-            ->scalar('id_assets')
-            ->maxLength('id_assets', 255)
-            ->notEmpty('id_assets');
 
         $validator
             ->integer('id_responsables')
@@ -96,7 +87,6 @@ class LoansTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['id_assets'], 'Assets'));
         $rules->add($rules->existsIn(['id_responsables'], 'Users'));
         return $rules;
     }
