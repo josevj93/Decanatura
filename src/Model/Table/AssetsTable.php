@@ -46,6 +46,7 @@ class AssetsTable extends Table
                     'type' => 'image_type',
                 ],
                 'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:unique_id}{DS}',
+                'nameCallback'=>'imagen_original',
             ],
         ]);
 
@@ -63,6 +64,10 @@ class AssetsTable extends Table
             'foreignKey' => 'location_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Loans', [
+            'foreignKey' => 'loan_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -76,7 +81,7 @@ class AssetsTable extends Table
         $validator
             ->scalar('plaque')
             ->maxLength('plaque', 255)
-            ->notEmpty('plaque');
+            ->notEmpty('plaque', 'Debe ingresar una placa');
 
         $validator
             ->scalar('brand')
@@ -96,12 +101,12 @@ class AssetsTable extends Table
         $validator
             ->scalar('description')
             ->maxLength('description', 255)
-            ->allowEmpty('description');
+            ->notEmpty('description','Debe ingresar una descripción');
 
         $validator
             ->scalar('state')
             ->maxLength('state', 255)
-            ->allowEmpty('state');
+            ->notEmpty('state','Debe ingresar un estado');
 
         $validator
             ->maxLength('image', 255)
@@ -113,8 +118,12 @@ class AssetsTable extends Table
             ->allowEmpty('sub_location');
 
         $validator
-            ->integer('year')
-            ->allowEmpty('year');
+            ->scalar('year')
+            ->add('year', 'validFormat',[
+                'rule' => array('custom', '/^[0-9]{4}$/'),
+                'message' => 'El año debe de tener el formato yyyy'
+                ])
+            ->notEmpty('year','Debe ingresar un año');
 
         $validator
             ->boolean('lendable')
@@ -134,9 +143,52 @@ class AssetsTable extends Table
         $validator
             ->scalar('unique_id')
             ->maxLength('unique_id', 255)
-            ->notEmpty('unique_id');
+            ->allowEmpty('unique_id');
 
+        $validator
+            ->scalar('type_id')
+            ->notEmpty('type_id');
+            
+        $validator
+            ->scalar('location_id')
+            ->notEmpty('location_id');
+
+        $validator
+            ->scalar('responsable_id')
+            ->notEmpty('responsable_id');
+
+        $validator
+            ->scalar('owner_id')
+            ->notEmpty('owner_id');
+            
         return $validator;
+    }
+
+
+    /**
+     * Crea un thumbnail con la imagen subida por el usuario
+     * 
+     * @param 
+     * @return bool
+     */
+    public function addThumbnail($asset)
+    {
+        /*Si el archivo tiene imagen, crea un thumbnail*/
+        if(!strlen($asset->image_dir) == 0){
+            $imagine = new Imagine\Gd\Imagine();
+
+            $size    = new Imagine\Image\Box(300, 300);
+
+            $mode    = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+
+            $imagine->open('../webroot/files/Assets/image/' .  $asset->unique_id . '/' . $asset->image)
+                    ->thumbnail($size, $mode)
+                    ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -152,6 +204,7 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['owner_id'], 'Users'));
         $rules->add($rules->existsIn(['responsable_id'], 'Users'));
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
+        $rules->add($rules->existsIn(['loan_id'], 'Loans'));
 
         return $rules;
     }

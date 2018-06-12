@@ -63,6 +63,12 @@
         input[name=model]{
          margin-left: 10px;
         }
+
+        .sameLine{
+          display: flex; 
+          justify-content: space-between; 
+          border-color: transparent;
+        }
   </style>
 
 </head>
@@ -76,21 +82,20 @@
     <legend><?= __('Editar informe técnico') ?></legend>
     <br>
     
-    <div class="row">
+    <div class="form-control sameLine">
 
-      <div class="col-md-8">
-        <div >
+      <div class="row">
           <label>Nº Reporte:</label>
           <label><?php echo h($technicalReport->technical_report_id); ?> </label>
-
-        </div>
       </div>
 
-      <label>Fecha:</label>
+      <div class="row">
+        <label>Fecha:</label>
         <?php
-        $tmpDate= $technicalReport->date->format('y-m-d');
+        $tmpDate= $technicalReport->date->format('Y-m-d');
         echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker','value'=>$tmpDate]); 
         ?>
+      </div>
   </div>
     
 
@@ -173,7 +178,13 @@
       ?>
     </div> 
     <br>
-    <br>
+    <div class="row col-md-8">
+          <label>Nombre del evaluador:</label>
+            <?php
+              echo $this->Form->imput('evaluator_name', ['class'=>'form-control col-md-5 ']); 
+            ?>
+      
+    </div>
 
   </fieldset>
 

@@ -5,12 +5,13 @@
  */
 ?>
 <div class="technicalReports index large-9 medium-8 columns content">
-    <h3><?= __('Reportes técnicos') ?></h3>
+    <h3><?= __('Informes técnicos') ?></h3>
     <form  method="post" id="cart">
         <table id="technicalReports-grid" cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
                     <th scope="col" class="actions"><?= __('Acciones') ?></th>
+                    <th scope="col"><?= $this->Paginator->sort('Identificador') ?></th>
                     <th scope="col"><?= $this->Paginator->sort('Fecha') ?></th>
                     <th scope="col"><?= $this->Paginator->sort('Recomendación') ?></th>
                 </tr>
@@ -30,23 +31,24 @@
                         <?php endif; ?> 
                     </td>
 
+                    <td><?= h($technicalReport->facultyInitials."-".$technicalReport->technical_report_id."-".$technicalReport->year) ?></td>
                     <td><?= h($technicalReport->date ) ?></td>
 
 
                     <td>
-                        <?php if ("U"==$technicalReport->recommendation): ?>
+                        <?php if ("C"==$technicalReport->recommendation): ?>
                           Reubicar
                         <?php endif; ?>
 
-                        <?php if("P"==$technicalReport->recommendation): ?>
+                        <?php if("R"==$technicalReport->recommendation): ?>
                           Reparar
                         <?php endif; ?>
 
-                        <?php if("E"==$technicalReport->recommendation): ?>
+                        <?php if("D"==$technicalReport->recommendation): ?>
                           Desechar
                         <?php endif; ?>
 
-                        <?php if("D"==$technicalReport->recommendation): ?>
+                        <?php if("U"==$technicalReport->recommendation): ?>
                           Usar piesas
                         <?php endif; ?>
 
