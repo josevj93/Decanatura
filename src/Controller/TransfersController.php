@@ -107,51 +107,49 @@ class TransfersController extends AppController
 
 
         //empieza el área para la función de post///////////////
-
         $transfer = $this->Transfers->newEntity();
-        $tmpId= $this->Transfers->find('all',['fields'=>'transfers_id'])->last();
-        $tmpId= $tmpId->transfers_id+1;
+        $tmpId = 1;
+        $tmpId = $this->Transfers->find('all',['fields'=>'transfers_id'])->last();
+        if($tmpId!=null)
+        {
+            $tmpId = $tmpId->transfers_id+1;
+        }
+        else
+        {
+            $tmpId = 1;
+        }
         if ($this->request->is('post')) {
+            $check= $this->request->getData("checkList");
+            $check = explode(",",$check);
+            if($check['0'] == null)
+            {
+                $this->Flash->error(__('No se pudo realizar la transferencia porque no se seleccionó ningún activo.'));
+            }
+            else
+            {
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             //tmpId contiene el id de la tabla de traslados.
             $transfer->transfers_id = $tmpId;
             //comienza el ciclo para agregar la relación entre activos y acta.
-            if ($this->Transfers->save($transfer)) {    
-                $contador=0;
-                //aquí se obtiene la placa
-                while(($this->request->getData((string)$contador)!=false) or
-                 ($this->request->getData((string)$contador) == '0') )
+            if ($this->Transfers->save($transfer)) {
+                //se saca la lista de placas señaladas y luego se pasan a Array
+                $check= $this->request->getData("checkList");
+                $check = explode(",",$check);
+                foreach($check as $placa)
                 {
-                    $transferAssetTable = TableRegistry::get('AssetsTransfers');
+                $transferAssetTable = TableRegistry::get('AssetsTransfers');
                 $transferAsset = $transferAssetTable->newEntity();
                 //se asigna id de traslado a tabla de relación
                 $transferAsset->transfer_id = $tmpId;
-                //Si se seleccionó el activo entonces entra a la clausula del else y añade 
-                //los campos en la base de datos (transferAsset) sino sigue iterando.
-                 if($this->request->getData((string)$contador) == '0')
-                 {
-                    $contador = $contador+1;
-                 }
-                 else
-                 {
-                     $transferAsset->assets_id =  $this->request->getData((string)$contador);
-                     $contador = $contador+1;
-                     //se guarda en tabla conjunta (assets y traslado)
-                     if ($transferAssetTable->save($transferAsset)) 
-                     {
-                     $this->Flash->success(__('La transferencia fue exitosa.'));
-                     }
-                     else
-                        {
-                            $this->Flash->error(__('No se pudo realizar la transferencia.'));
-                        }
-                        return $this->redirect(['action' => 'index']);
-                 }
-                
-
+                $transferAsset->assets_id = $placa;
+                //se guarda en tabla conjunta (assets y traslado)
+                $transferAssetTable->save($transferAsset);
                 }
+                $this->Flash->success(__('La transferencia fue exitosa.'));
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('No se pudo realizar la transferencia.'));
+            }
         }
         //Buscca los activos para cargarlos en el grid.
         $assetsQuery = TableRegistry::get('Assets');
@@ -184,7 +182,8 @@ class TransfersController extends AppController
 
         // reallizo un join  a assets_tranfers para obtener los activos
         //asosiados a un traslado
-        $query = $assets_transfers->find()
+        $query = $assets_transfers
+                    ->find('all')
                     ->select(['assets.plaque'])
                     ->join([
                       'assets'=> [
@@ -204,22 +203,53 @@ class TransfersController extends AppController
         for($i=0;$i<$size;$i++)
         {
             $result[$i] =(object)$query[$i]->assets;
-        }
-
-
-       
-
+        }       
+        //debug($result);
         if ($this->request->is(['patch', 'post', 'put'])) {
 
 
             //saco la lista de placas señaladas y luego las paso a Array
             $check= $this->request->getData("checkList");
-            $check = explode(",",$check);
+            $checks = explode(",",$check);
              
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             if ($this->Transfers->save($transfer)) {
                 $this->Flash->success(__('Los cambios han sido guardados.'));
 
+                
+                $temp =  array_fill(0, $size, NULL);
+                $i=0;
+                foreach ($result as $res)
+                {
+                    $temp[$i] = $res -> plaque;
+                    $i++;
+                }
+
+                $nuevos = array_diff($checks,  $temp);
+                $viejos = array_diff($temp,  $checks);
+                
+                
+                //debug($nuevos);
+                //debug($viejos);
+
+                if (count($viejos) > 0)
+                  $assets_transfers->deleteall(array('transfer_id'=>$id, 'assets_id IN' => $viejos), false);
+
+                if (count($nuevos) > 0)
+                {
+                    foreach ($nuevos as $n)
+                    {
+                        $at = TableRegistry::get('AssetsTransfers')->newEntity([
+                                'transfer_id'=> $id,
+                                'assets_id' => $n
+                        ]);
+
+                        $at->assets_id = $n;
+                        $at->transfer_id = $id;
+                        
+                        $assets_transfers->save($at);
+                    }
+                }
                 return $this->redirect(['action' => 'index']);
             }
   

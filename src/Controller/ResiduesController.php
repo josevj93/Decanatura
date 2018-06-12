@@ -23,7 +23,39 @@ class ResiduesController extends AppController
     public function index()
     {
         $residues = $this->paginate($this->Residues);
-        $this->set(compact('residues'));
+        /*
+                
+        $residues = TableRegistry::get('residues');
+
+            $indexQuery = $residues->find()
+                ->select(['residues.residues_id','max(residues.date)','technical_reports.recommendation '])
+                //select residues.residues_id, max(residues.date),technical_reports.date, technical_reports.recommendation 
+                //inner join assets on assets.residues_id = residues.residues_id
+                ->join([
+                            'assets' => [
+                                    'table' => 'assets',
+                                    'type'  => 'INNER',
+                                    'conditions' => ['assets.residues_id = residues.residues_id']
+                                ]
+                                ])
+                //inner join technical_reports on technical_reports.assets_id = assets.plaque
+                ->join([
+                        'technical_reports' => [
+                                    'table' => 'technical_reports',
+                                    'type'  => 'INNER',
+                                    'conditions' => ['assets.plaque= TechnicalReports.assets_id']
+                                ]
+                                ])
+                ->where(['residues.residues_id' => '1'])
+                ->toList();
+                
+
+
+                debug($indexQuery);
+                exit();   
+                */        
+        $Unidad = $this->UnidadAcadémica;
+        $this->set(compact('residues','Unidad'));
     }
 
     /**
@@ -61,10 +93,12 @@ class ResiduesController extends AppController
         $queryRec = $technical_reports->find()
                                     ->select(['recommendation', 'technical_report_id'])
                                     ->where(['residues_id'=>$id])
+                                    ->group(['assets_id'])
                                     ->toList();
 
         //lo paso a objeto
         $size = count($queryRec);
+
         $resultRec = array_fill(0, $size, NULL);
        // debug($queryRec);
         for($i = 0; $i < $size; $i++)
@@ -85,61 +119,55 @@ class ResiduesController extends AppController
      */
     public function add()
     {
-
-        /*
-        //$assets = TableRegistry::get('Assets')->find('all');
-
-        $assetsQuery = TableRegistry::get('Assets');
-        $assetsQuery = $assetsQuery->find()
+        $technical_reports = TableRegistry::get('TechnicalReports');
+        $assetsQuery = $technical_reports->find()
                          ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
                          ->join([
-                            'technical_reports' => [
-                                    'table' => 'technical_reports',
-                                    'type'  => 'inner',
-                                    'condition' => ['assets.plaque = technical_reports.assets_id']
+                            'assets' => [
+                                    'table' => 'assets',
+                                    'type'  => 'INNER',
+                                    'conditions' => ['assets.plaque= TechnicalReports.assets_id']
                                 ]
                                 ])
-                         ->where(['technical_reports' => "D"])
+                         ->where(['TechnicalReports.recommendation' => "D"])
+                         ->group (['assets.plaque'])
                          ->toList();
 
         $size = count($assetsQuery);
-        $asset=   array_fill(0, $size, NULL);
+        $result=   array_fill(0, $size, NULL);
         
         for($i=0;$i<$size;$i++)
         {
-            $asset[$i] =(object)$assetsQuery[$i]->assets;
+            $result[$i] =(object)$assetsQuery[$i]->assets;
         }
-        debug($asset);
-        $this->set(compact('residues','asset'));
-        */
-
-
+        $this->set(compact('residues','result'));
+        
         $residue = $this->Residues->newEntity();
         if ($this->request->is('post')) {
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
-            //debug($residue);
             if ($this->Residues->save($residue)) {
                 $this->Flash->success(__('The residue has been saved.'));
 
-                /*debug($this->request->getData('Aid')); 
-                debug($residue->residues_id); */
-
-                /*$assets = TableRegistry::get('Assets')->find('all');
-                //debug($assets);
-
+                $condicion = explode(',', $this->request->getData('checkList'));
+                
+                $assets = TableRegistry::get('Assets')->find('all');
                 $assets->update()
-                ->set(['residues_id' => $residue->residues_id])
-                ->where(['plaque' => $this->request->getData('Aid')])
-                ->execute();*/
+                    ->set(['residues_id' => $residue->residues_id])
+                    ->where(['plaque IN' => $condicion])
+                    ->execute();
 
-
+                $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
+                $technical_reports->update()
+                    ->set(['residues_id' => $residue->residues_id])
+                    ->where(['assets_id IN' => $condicion])
+                    ->execute();
+                
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The residue could not be saved. Please, try again.'));
         }
         $this->set(compact('residue'));
     }
-
     /**
      * Edit method
      *
@@ -150,6 +178,92 @@ class ResiduesController extends AppController
     public function edit($id = null)
     {
         $residue = $this->Residues->get($id);
+
+        $assets = TableRegistry::get('Assets');
+
+        //Obtengo los activos que estan en el acta de residuos
+        $query2 = $assets->find()
+                        ->select(['assets.plaque'])
+                        ->where(['assets.residues_id' => $id])
+                        ->toList();
+
+        $size = count($query2);
+
+        $result2 = array_fill(0, $size, NULL);
+        
+        for($i = 0; $i < $size; $i++)
+        {
+            $result2[$i] =(object)$query2[$i]->assets;
+        }
+
+
+        if ($this->request->is(['patch', 'post', 'put'])) { 
+
+            //saco la lista de placas señaladas y luego las paso a Array
+            $check = $this->request->getData("checkList");
+            $checksViejos = explode(",", $check);
+
+            $residue = $this->Residues->patchEntity($residue, $this->request->getData());
+            if ($this->Residues->save($residue)) {
+                $this->Flash->success(__('El acta de residuo ha sido guardada'));
+
+                //AQUI EMPIEZA LA MAGIA
+
+                $tmp = array_fill(0, $size, NULL);
+
+                $i = 0;
+
+                foreach ($result2 as $res) {
+
+                    $tmp[$i] = $res -> plaque;
+                    $i++;
+                }
+
+                $nuevos = array_diff($checksViejos, $tmp);
+                $viejos = array_diff($tmp, $checksViejos);
+
+                if (count($viejos) > 0) {
+
+                        $assets = TableRegistry::get('Assets')->find('all');
+
+                        $assets->update()
+                                ->set(['residues_id' => NULL])
+                                ->where(['plaque IN' => $viejos])
+                                ->execute();
+
+                        $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
+
+                        $technical_reports->update()
+                                            ->set(['residues_id' => NULL])
+                                            ->where(['assets_id IN' => $viejos])
+                                            ->execute();
+                }
+
+                 if (count($nuevos) > 0) {
+
+                         $assets = TableRegistry::get('Assets')->find('all');
+                        
+                         $assets->update()
+                                ->set(['residues_id' => $residue->residues_id])
+                                ->where(['plaque IN' => $nuevos])
+                                ->execute();
+
+                         $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
+
+                         $technical_reports->update()
+                                             ->set(['residues_id' => $residue->residues_id])
+                                             ->where(['assets_id IN' => $nuevos])
+                                             ->execute();
+                 }
+
+                return $this->redirect(['action' => 'index']);
+            }
+
+
+            $this->Flash->error(__('El acta de residuo no se ha guradado, intentalo de nuevo'));
+
+        }
+
 
         $technical_reports = TableRegistry::get('TechnicalReports');
 
@@ -176,36 +290,6 @@ class ResiduesController extends AppController
         }
 
         $Unidad = $this->UnidadAcadémica;
-
-
-
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $residue = $this->Residues->patchEntity($residue, $this->request->getData());
-            if ($this->Residues->save($residue)) {
-                $this->Flash->success(__('El acta de residuo ha sido guardada'));
-
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('El acta de residuo no se ha guradado, intentalo de nuevo'));
-
-        }
-
-        $assets = TableRegistry::get('Assets');
-
-        $query2 = $assets->find()
-                        ->select(['assets.plaque'])
-                        ->where(['assets.residues_id' => $id])
-                        ->toList();
-
-        $size = count($query2);
-
-        $result2 = array_fill(0, $size, NULL);
-        
-        for($i = 0; $i < $size; $i++)
-        {
-            $result2[$i] =(object)$query2[$i]->assets;
-        }
 
         $this->set(compact('residue', 'result', 'result2', 'Unidad'));
     }

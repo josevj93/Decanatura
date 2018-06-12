@@ -1,4 +1,4 @@
- <?php
+<?php
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Residue $residue
@@ -151,23 +151,6 @@
     <!-- input donde coloco la lista de placas checkeadas -->
     <input type="hidden" name="checkList" id="checkList">
 
-        <!--
-        <label>Placa del activo:</label><br>
-        <div class='input-group mb-3'>
-            
-              <?php 
-                echo $this->form->imput('assets_id',['class'=>'form-control col-sm-3', 'id'=>'assetImput', 'name' => 'Aid'])
-              ?>
-              <div class= 'input-group-append'>
-                <?php echo $this->Html->link('Buscar','#',['type'=>'button','class'=>'btn btn-default','id'=>'assetButton','onclick'=>'return false']);
-                ?>
-              </div>
-              <br>
-        </div>
-        <div id=assetResult> 
-        </div><br>
-        -->
-
 
     <div>
         <p align="center">
@@ -238,7 +221,7 @@
 </style>
     
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
     </div>
 
     
