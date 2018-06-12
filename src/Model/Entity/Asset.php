@@ -66,3 +66,5 @@ class Asset extends Entity
         'deletable' => true
     ];
 }
+
+

@@ -51,16 +51,30 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td></td>
-                    <th>Placa</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Serie</th>
-                    <th>Descripción</th>
-                    <th>Estado</th>
-                    <th>Responsable</th>
-                    <th>Ubicación</th>
-                    <th>Año</th>
+                    <td class="actions">
+                        <?php if($allowC) : ?>
+                        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $asset->plaque], array('escape' => false)) ?>
+                        <?php endif; ?>
+                        <?php if($allowM) : ?>
+                        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $asset->plaque], array('escape' => false)) ?>
+                        <?php endif; ?>
+                        <?php if($allowE) : ?>
+                        <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $asset->plaque], ['escape' => false, 'confirm' => __('Seguro que desea eliminar el tipo de activo # {0}?', $asset->plaque)]) ?>
+                        <?php endif; ?>
+                    </td>                       
+                    <td><?= h($asset->plaque) ?></td>
+                    <td><?= $asset->has('type') ? $this->Html->link($asset->type->name, ['controller' => 'Types', 'action' => 'view', $asset->type->type_id]) : '' ?></td>
+                    <td><?= h($asset->brand) ?></td>
+                
+                
+                    <td><?= h($asset->description) ?></td>
+                
+                    <td><?= $this->Number->format($asset->owner_id) ?></td>
+                    
+                    <td><?= $asset->has('location') ? $this->Html->link($asset->location->location_id, ['controller' => 'Locations', 'action' => 'view', $asset->location->location_id]) : '' ?></td>
+                
+                    <td><?= $this->Number->format($asset->year) ?></td>
+
                 </tr>
                 </tfoot>
             </table>
@@ -81,6 +95,8 @@
 </style>
 
 <?= $this->Html->link(__('Insertar Activo'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
+
+<?= $this->Html->link(__('Insertar Activos por Lote'), ['action' => 'batch'] ,['class' => 'btn btn-primary']) ?>
 
 <script type="text/javascript">
 
