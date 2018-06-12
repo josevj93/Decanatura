@@ -25,10 +25,15 @@
                 <?php foreach ($assets as $asset): ?>
                 <tr>
                     <td class="actions">
-                        
+                        <?php if($allowC) : ?>
                         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $asset->plaque], array('escape' => false)) ?>
+                        <?php endif; ?>
+                        <?php if($allowM) : ?>
                         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $asset->plaque], array('escape' => false)) ?>
+                        <?php endif; ?>
+                        <?php if($allowE) : ?>
                         <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $asset->plaque], ['escape' => false, 'confirm' => __('Seguro que desea eliminar el tipo de activo # {0}?', $asset->plaque)]) ?>
+                        <?php endif; ?>
                     </td>                       
                     <td><?= h($asset->plaque) ?></td>
                     <td><?= $asset->has('type') ? $this->Html->link($asset->type->name, ['controller' => 'Types', 'action' => 'view', $asset->type->type_id]) : '' ?></td>
@@ -50,6 +55,8 @@
    
 </div>
 <?= $this->Html->link(__('Insertar Activo'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
+
+<?= $this->Html->link(__('Insertar Activos por Lote'), ['action' => 'batch'] ,['class' => 'btn btn-primary']) ?>
 <script type="text/javascript">
     $(document).ready(function() 
     {

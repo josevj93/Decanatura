@@ -1,5 +1,4 @@
 <?php
-
 $cakeDescription = 'Control de Activos';
 ?>
 <!DOCTYPE html>
@@ -17,9 +16,12 @@ $cakeDescription = 'Control de Activos';
   <?= $this->Html->css('cake.css') ?>
 
 
-
-  <?= $this->Html->css(['plugins/bootstrap/css/bootstrap.css','plugins/bootstrap/css/bootstrap.min.css', 'plugins/font-awesome/css/font-awesome.min.css', 'plugins/datatables/dataTables.bootstrap4.css','sb-admin.css']) ?>
-
+  <?= $this->Html->css(['plugins/bootstrap/css/bootstrap.css','plugins/bootstrap/css/bootstrap.min.css',
+      'plugins/font-awesome/css/font-awesome.min.css',
+      'plugins/datatables/dataTables.bootstrap4.css',
+      'plugins/buttons.dataTables.min.css',
+      'plugins/jquery.dataTables.min.css',
+      'sb-admin.css']) ?>
 
   <?=
   $this->Html->script([ 'plugins/jquery/jquery.min.js']);
@@ -36,10 +38,14 @@ $cakeDescription = 'Control de Activos';
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
 
+      <?=
+      $this->Html->link(
+      $this->Html->image("acronimo.png", array('style' => 'max-width:100px; margin-top: -7px; margin-right: 40px;'),["alt" => "Facultad de Ingenieria"]),
+      "/Pages/display/",
+      ['escape' => false]
+      );
+?>
 
-    <a class="navbar-left" rel="home" href="#" title="Sistema de Activos">
-      <?= $this->Html->image('acronimo.png', array('style' => 'max-width:100px; margin-top: -7px; margin-right: 40px;'),['alt' => 'Facultad de Ingenieria']);?>
-    </a>
 
     <a class="navbar-brand" href="index.html">Sistema de Activos</a>
 
@@ -51,9 +57,10 @@ $cakeDescription = 'Control de Activos';
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+      
+        <?php if($allowU) : ?> 
        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
         <?=$this->Html->link(
-
 
           $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Usuarios', array('class' => 'nav-link-text')),array('controller' => 'Users','action' => 'index'),
           array('class' => 'nav-link',
@@ -61,65 +68,85 @@ $cakeDescription = 'Control de Activos';
         );
         ?>
       </li>
+      <?php endif; ?>
 
+      <?php if($allowR) : ?>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Roles">
+              <?=$this->Html->link(
+                  $this->Html->tag('i','' , array('class' => 'fa fa-apple')).$this->Html->tag('span', ' Roles', array('class' => 'nav-link-text')),
+                  array('controller' => 'Roles','action' => 'index'),
+                  array('class' => 'nav-link',
+                      'escape'=> false)
+              );
+              ?>
+          </li>
+      <?php endif; ?>
 
+      <?php if($allowA) : ?>
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
-
-
-        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Assets','action'=>'index']); ?>">
-          <span class="nav-link-text">Activos</span>
-        </a> 
-      </li>
-
-   
-
-
-
-
-
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tipos de activos">
         <?=$this->Html->link(
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Tipos de activos', array('class' => 'nav-link-text')),
-          array('controller' => 'Types','action' => 'index'),
+          $this->Html->tag('i','' , array('class' => 'fa fa-boxes')).$this->Html->tag('span', ' Activos', array('class' => 'nav-link-text')),
+          array('controller' => 'Assets','action' => 'index'),
           array('class' => 'nav-link',
             'escape'=> false)
         );
         ?>
-
-
       </li>
+
+      <?php endif; ?>
+
+      <?php if($allowRT) : ?>
+       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reporte Técnico">
+        <?=$this->Html->link(
+
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Reporte Técnico', array('class' => 'nav-link-text')),array('controller' => 'TechnicalReports','action' => 'index'),
+          array('class' => 'nav-link',
+            'escape'=> false)
+        );
+        ?>
+      </li>
+      <?php endif; ?>
+
+
+      <?php if($allowUb) : ?>
+       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ubicaciones">
+        <?=$this->Html->link(
+
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Ubicaciones', array('class' => 'nav-link-text')),array('controller' => 'Locations','action' => 'index'),
+          array('class' => 'nav-link',
+            'escape'=> false)
+        );
+        ?>
+      </li>
+      <?php endif; ?>
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
         <a class="nav-link" href="tables.html">
           <span class="nav-link-text">Préstamos</span>
         </a>
       </li>
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="InfTencnico">
-        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'TechnicalReports','action'=>'index']); ?>">
-          <span class="nav-link-text">Reportes Técnicos</span>
-        </a>
-      </li>
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Desechos">
-        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Residues','action'=>'index']); ?>">
-          <span class="nav-link-text">Desechos</span>
-        </a>
+
+      <?php if($allowT) : ?>
       </li>
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Traslados">
         <a class="nav-link" href="tables.html">
           <span class="nav-link-text">Traslados</span>
         </a>
       </li>
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="UAcademica">
-        <a class="nav-link" href="tables.html">
-          <span class="nav-link-text">Unidad Académica</span>
-        </a>
-      </li>
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ubicaciones">
-        <a class="nav-link" href="<?php echo Router::url( ['controller'=>'Locations','action'=>'index']); ?>">
-          <span class="nav-link-text">Ubicaciones</span>
-        </a>
-      </li>
+      <?php endif; ?>
+
+      <?php if($allowD) : ?>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Desechos">
+        <?=$this->Html->link(
+
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Desechos', array('class' => 'nav-link-text')),array('controller' => 'Residues','action' => 'index'),
+          array('class' => 'nav-link',
+            'escape'=> false)
+        );
+        ?>
+      <?php endif; ?>
+
     </ul>
     <ul class="navbar-nav sidenav-toggler">
       <li class="nav-item">
@@ -129,12 +156,13 @@ $cakeDescription = 'Control de Activos';
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-        <!--li class="nav-item">
+        <li class="nav-item">
             <a class="navbar-brand" style="color:white">
-                <i class="fa fa-user"></i> <?php echo "Bienvenido:" ." ". $nombre ."". $apellido; ?></a>
-        </li-->
+                <i class="fa fa-user"></i> <?php echo $nombre ." ". $apellido; ?></a>
+        </li>
 
-      <li class="nav-item">
+
+        <li class="nav-item">
         <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
           <i class="fa fa-fw fa-sign-out"></i>Salir</a>
         </li>
@@ -179,13 +207,14 @@ $cakeDescription = 'Control de Activos';
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">¿List@ para salir?</h5>
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true"></span>
         </button>
       </div>
       <div class="modal-body">Seleccione "Salir" para cerrar sesión.</div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-        <a class="btn btn-primary" href="users/logout">Salir</a>
+          <?=$this->Html->link("Salir", array('controller' => 'login','action'=> 'logout'), array( 'class' => 'btn btn-primary'))?>
+
       </div>
     </div>
   </div>
@@ -196,7 +225,9 @@ $cakeDescription = 'Control de Activos';
   <?=
   $this->Html->script([ 'plugins/jquery/jquery.min.js','plugins/bootstrap/js/bootstrap.bundle.min.js' ,'sb-admin.min.js',
     'plugins/jquery-easing/jquery.easing.min.js','plugins/datatables/jquery.dataTables.js','plugins/datatables/dataTables.bootstrap4.js',
-    'sb-admin-datatables.min.js'
+    'sb-admin-datatables.min.js',
+      'plugins/buttons.html5.min.js','plugins/datatables.buttons.min.js',
+      'plugins/jszip.min.js','plugins/pdfmake.min.js','plugins/vfs_fonts.js'
   ])
   ?>
 
