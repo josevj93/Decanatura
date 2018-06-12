@@ -130,38 +130,19 @@
                 <thead>
                 <tbody>
                     <?php 
-                      //$assets = TableRegistry::get('Assets')->find('all');
-                      //$query =  " select * from  technical_reports tr inner join assets a on tr.assets_id = a.plaque
-                      //            where tr.recommendation = 'D'; ";
-                      //$query = " select * from assets; ";
-                      //$asset = $mysqli->query($query);
-                      foreach ($asset as $a): ?>
+                      foreach ($result as $a): ?>
                       <tr>
+                          
                           <td><?= h($a->plaque) ?></td>
                           <td><?= h($a->brand) ?></td>
                           <td><?= h($a->model) ?></td>
                           <td><?= h($a->series) ?></td>
                           <td><?= h($a->state) ?></td>
-                          
-                            <?php
-                              // If que verifica si el checkbox debe ir activado o no
-                              /*$isIn= in_array($a->plaque, array_column($result, 'plaque') );
-                              if($isIn)
-                                  {
-                                      echo $this->Form->checkbox('assets_id',
-                                      ['value'=>htmlspecialchars($a->plaque),'checked', "class"=>"chk" ]
-                                      );
-
-                                  }
-                              else
-                                  {
-                                      echo $this->Form->checkbox('assets_id',
-                                      ['value'=>htmlspecialchars($a->plaque),"class"=>"chk"]
-                                      );
-                                  }
-
-                              */?>
-                              
+                          <td><?php
+                                echo $this->Form->checkbox('assets_id',
+                                        ['value'=>htmlspecialchars($a->plaque),"class"=>"chk"]
+                                );
+                              ?>
                           </td>
                       </tr>
                     <?php endforeach; ?>
@@ -174,68 +155,12 @@
     <!-- input donde coloco la lista de placas checkeadas -->
     <input type="hidden" name="checkList" id="checkList">
 
-        <!--
-        <label>Placa del activo:</label><br>
-        <div class='input-group mb-3'>
-            
-              <?php 
-                echo $this->form->imput('assets_id',['class'=>'form-control col-sm-3', 'id'=>'assetImput', 'name' => 'Aid'])
-              ?>
-              <div class= 'input-group-append'>
-                <?php echo $this->Html->link('Buscar','#',['type'=>'button','class'=>'btn btn-default','id'=>'assetButton','onclick'=>'return false']);
-                ?>
-              </div>
-              <br>
-        </div>
-        <div id=assetResult> 
-        </div><br>
-        -->
 <br>
 <br>
 <div>
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id'=>'acept']) ?>
 </div>
-
-<!--
-<script>
-  $( function Picker() {
-    $( "#datepicker" ).datepicker({ dateFormat: 'y-mm-dd' });
-  } );
-  $("document").ready(
-    function() {
-      $('#assetButton').click( function()
-      {
-        var plaque = $('#assetImput').val();
-        if(''!=plaque)
-        {
-         $.ajax({
-                type: "GET",
-                url: '<?php echo Router::url(['controller' => 'Residues', 'action' => 'search' ]); ?>',
-                data:{id:plaque},
-                beforeSend: function() {
-                     $('#assetResult').html('<label>Cargando</label><i class="fa fa-spinner fa-spin" style="font-size:25px"></i>');
-                     },
-                success: function(msg){
-                    $('#assetResult').html(msg);
-                    },
-                error: function(e) {
-                    alert("Ocurrió un error: artículo no encontrado.");
-                    console.log(e);
-                    $('#assetResult').html('Introdusca otro número de placa.');
-                    }
-              });
-          
-        }
-        else
-        {
-          $('#assetResult').html('Primero escriba un número de placa.');
-        }
-      });
-    }
-  );
-</script>
--->
 
 <script type="text/javascript">
 
@@ -276,4 +201,3 @@
     return selected;
 }
 </script>
-
