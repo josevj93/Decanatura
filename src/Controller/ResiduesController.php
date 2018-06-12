@@ -119,61 +119,55 @@ class ResiduesController extends AppController
      */
     public function add()
     {
-
-        /*
-        //$assets = TableRegistry::get('Assets')->find('all');
-
-        $assetsQuery = TableRegistry::get('Assets');
-        $assetsQuery = $assetsQuery->find()
+        $technical_reports = TableRegistry::get('TechnicalReports');
+        $assetsQuery = $technical_reports->find()
                          ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
                          ->join([
-                            'technical_reports' => [
-                                    'table' => 'technical_reports',
-                                    'type'  => 'inner',
-                                    'condition' => ['assets.plaque = technical_reports.assets_id']
+                            'assets' => [
+                                    'table' => 'assets',
+                                    'type'  => 'INNER',
+                                    'conditions' => ['assets.plaque= TechnicalReports.assets_id']
                                 ]
                                 ])
-                         ->where(['technical_reports' => "D"])
+                         ->where(['TechnicalReports.recommendation' => "D"])
+                         ->group (['assets.plaque'])
                          ->toList();
 
         $size = count($assetsQuery);
-        $asset=   array_fill(0, $size, NULL);
+        $result=   array_fill(0, $size, NULL);
         
         for($i=0;$i<$size;$i++)
         {
-            $asset[$i] =(object)$assetsQuery[$i]->assets;
+            $result[$i] =(object)$assetsQuery[$i]->assets;
         }
-        debug($asset);
-        $this->set(compact('residues','asset'));
-        */
-
-
+        $this->set(compact('residues','result'));
+        
         $residue = $this->Residues->newEntity();
         if ($this->request->is('post')) {
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
-            //debug($residue);
             if ($this->Residues->save($residue)) {
                 $this->Flash->success(__('The residue has been saved.'));
 
-                /*debug($this->request->getData('Aid')); 
-                debug($residue->residues_id); */
-
-                /*$assets = TableRegistry::get('Assets')->find('all');
-                //debug($assets);
-
+                $condicion = explode(',', $this->request->getData('checkList'));
+                
+                $assets = TableRegistry::get('Assets')->find('all');
                 $assets->update()
-                ->set(['residues_id' => $residue->residues_id])
-                ->where(['plaque' => $this->request->getData('Aid')])
-                ->execute();*/
+                    ->set(['residues_id' => $residue->residues_id])
+                    ->where(['plaque IN' => $condicion])
+                    ->execute();
 
-
+                $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
+                $technical_reports->update()
+                    ->set(['residues_id' => $residue->residues_id])
+                    ->where(['assets_id IN' => $condicion])
+                    ->execute();
+                
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The residue could not be saved. Please, try again.'));
         }
         $this->set(compact('residue'));
     }
-
     /**
      * Edit method
      *
