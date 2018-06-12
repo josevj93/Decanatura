@@ -55,7 +55,6 @@
                         <th class="transfer-h"><?= __('Marca') ?></th>
                         <th class="transfer-h"><?= __('Modelo') ?></th>
                         <th class="transfer-h"><?= __('Serie') ?></th>
-                        <th class="transfer-h"><?= __('Estado') ?></th>
                         <th class="transfer-h"><?= __('Seleccionados') ?></th>
                     </tr>
                 <thead>
@@ -67,7 +66,6 @@
                           <td><?= h($a->brand) ?></td>
                           <td><?= h($a->model) ?></td>  
                           <td><?= h($a->series) ?></td>
-                          <td><?= h($a->state) ?></td>
                           <td><?php
                         
                                       echo $this->Form->checkbox('assets_id',
@@ -129,10 +127,7 @@
             minLength: 2
         });
     */
-    $( function Picker() {
-        $( "#datepicker" ).datepicker({ dateFormat: 'y-mm-dd' });
-        $( "#datepicker2" ).datepicker({ dateFormat: 'y-mm-dd' });
-    } );
+
     $(document).ready(function() 
     {
         $('#assets-transfers-grid').DataTable( {} );

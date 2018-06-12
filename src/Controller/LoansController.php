@@ -46,33 +46,48 @@ class LoansController extends AppController
 
         $loan = $this->Loans->newEntity();
         if ($this->request->is('post')) {
-            $variable = $this->request->getData('checkList');
+            $listaPlaques = $this->request->getData('checkList');
+            $listaPlaques = explode(',', $listaPlaques);
+            
             $random = uniqid();
             $loan->id = $random;
             $loan->estado = 'Activo';
             $loan = $this->Loans->patchEntity($loan, $this->request->getData());
-            /*
+            
             if ($this->Loans->save($loan)) {
-                $asset= $this->Assets->get($loan->id_assets, [
-                    'contain' => []
-                ]);
-
-                $asset->state = 'Prestado';
-                $asset->deletable = false;
-
-                if($this->Assets->save($asset)){
-                    $this->Flash->success(__('El préstamo fue guardado exitosamente.'));
-                    return $this->redirect(['action' => 'index']);
+                
+                foreach($listaPlaques as $plaque){
+                    
+                    
+                    $asset= $this->Assets->get($plaque, [
+                        'contain' => []
+                    ]);
+                    
+                    $asset->loan_id = $random;
+                    $asset->state = 'Prestado';
+                    $asset->deletable = false;
+                    
+                    if(!($this->Assets->save($asset))){
+                        $this->Flash->error(__('El préstamo no se pudo guardar. Uno de los activos no se pudo guardar correctamente'));
+                        return $this->redirect(['action' => 'index']);
+                    }
                 }
-            } */
-            debug($variable);
+
+                $this->Flash->success(__('El activo fue guardado exitosamente.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            
+            
             $this->Flash->error(__('El préstamo no se pudo guardar, por favor intente nuevamente.'));
+            return $this->redirect(['action' => 'index']);
         }
 
-        $assets = TableRegistry::get('Assets');
+        $this->loadModel('Assets');
 
-        $query = $assets->find()
-                        ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series', 'assets.state'])
+        $query = $this->Assets->find()
+                        ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series'])
+                        ->where(['assets.state' => "Disponible"])
+                        
                         ->toList();
 
         $size = count($query);
@@ -84,7 +99,7 @@ class LoansController extends AppController
             $result[$i] =(object)$query[$i]->assets;
         }
 
-        $assets = $this->Loans->Assets->find('list', [
+        $assets = $this->Assets->find('list', [
             'conditions' => ['assets.state' => 'Disponible']
         ]);
         $users = $this->Loans->Users->find('list', ['limit' => 200]);
@@ -156,8 +171,6 @@ class LoansController extends AppController
      */
     public function getPlaques()
     {
-        pr('Sirve');
-        die();
         $this->loadModel('Assets');
         if ($this->requrest->is('ajax')) {
             $this->autoRender = false;
