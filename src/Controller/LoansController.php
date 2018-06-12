@@ -106,34 +106,7 @@ class LoansController extends AppController
         $this->set(compact('assets', 'loan', 'users', 'result'));
     }
 
-    /**
-     * Método para cancelar un préstamo
-     */
-
-    public function cancel($id)
-    {
-        $this->loadModel('Assets');
-        $loan = $this->Loans->get($id, [
-            'contain' => []
-        ]);
-        $loan->estado = 'Cancelado';
-        if ($this->Loans->save($loan)){
-            $asset= $this->Assets->get($loan->id_assets, [
-                'contain' => []
-            ]);
-            $asset->state = 'Disponible';
-            if($this->Assets->save($asset)){
-                $this->Flash->success(__('El préstamo fue cancelado exitosamente.'));
-                return $this->redirect(['action' => 'index']);
-            }
-        }
-        $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
-        $users = $this->Loans->Users->find('list', ['limit' => 200]);
-        $this->set(compact('assets', 'loan', 'users'));
-    }
-
-/*Cancelar para varios activos*/
-/*
+    /*Cancelar para varios activos*/
     public function cancel($id)
     {
         $this->loadModel('Assets');
@@ -147,23 +120,32 @@ class LoansController extends AppController
         
         if ($this->Loans->save($loan)){
             
-            $assets = $this->Assets->find('list', [
-                'conditions' => ['assets.loans_id' => $id]
-            ]);
+            $assets = $this->Assets->find()
+            ->where(['assets.loan_id' => $id])
+            ->toList();
                 
             foreach($assets as $asset){
                 $asset->state = 'Disponible';
+                $asset->loan_id = NULL;
 
                 if(!($this->Assets->save($asset))){
-                    $this->Flash->success(__('Error al cancelar el préstamo'));
+                    $this->Flash->error(__('Error al cancelar el préstamo'));
                     return $this->redirect(['action' => 'index']);
                 }
             }
+
+            $this->Flash->success(__('El activo fue guardado exitosamente.'));
+            return $this->redirect(['action' => 'index']);
+
+        }
+        else{
+            $this->Flash->error(__('Error al cancelar el préstamo'));
+            return $this->redirect(['action' => 'index']);
         }
         $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
         $users = $this->Loans->Users->find('list', ['limit' => 200]);
         $this->set(compact('assets', 'loan', 'users'));
-    }*/
+    }
 
     /**
      * Método para obtener todas las placas de activos del sistema y 
