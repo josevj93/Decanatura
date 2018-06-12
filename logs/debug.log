@@ -12412,12 +12412,27 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
+2018-05-23 17:12:20 Notice: Notice (8): Undefined variable: nombre in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /
+Referer URL: http://localhost/Decanatura/users/login
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+App\Controller\PagesController::display() - APP/Controller\PagesController.php, line 61
+=======
 2018-06-06 17:20:37 Notice: Notice (8): Undefined variable: frog in [C:\xampp\htdocs\Decanatura\src\Controller\AssetsController.php, line 226]
 Request URL: /assets/batch
 Referer URL: http://localhost:81/Decanatura/assets/batch
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 App\Controller\AssetsController::batch() - APP/Controller\AssetsController.php, line 226
+>>>>>>> 9ef56a4b35c934addcfa9f0fc7f6eb3d91fb0f6f
 Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 440
 Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 119
 Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
@@ -12437,6 +12452,20 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
+2018-05-23 17:12:20 Notice: Notice (8): Undefined variable: apellido in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /
+Referer URL: http://localhost/Decanatura/users/login
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+App\Controller\PagesController::display() - APP/Controller\PagesController.php, line 61
+=======
 2018-06-10 06:21:07 Notice: Notice (8): Undefined variable: query in [C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php, line 128]
 Request URL: /users/view/2
 Referer URL: http://127.0.0.1/Decanatura/users
@@ -12444,6 +12473,7 @@ Client IP: 127.0.0.1
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 App\Controller\UsersController::view() - APP/Controller\UsersController.php, line 128
+>>>>>>> 9ef56a4b35c934addcfa9f0fc7f6eb3d91fb0f6f
 Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 440
 Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 119
 Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
@@ -12463,6 +12493,78 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
+2018-05-23 17:12:28 Notice: Notice (8): Undefined variable: nombre in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /users
+Referer URL: http://localhost/Decanatura/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
+Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 104
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 98
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+DebugKit\Middleware\DebugKitMiddleware::__invoke() - ROOT\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php, line 52
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
+Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-05-23 17:12:28 Notice: Notice (8): Undefined variable: apellido in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /users
+Referer URL: http://localhost/Decanatura/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
+Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 104
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 98
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+DebugKit\Middleware\DebugKitMiddleware::__invoke() - ROOT\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php, line 52
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
+Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-05-23 17:17:16 Notice: Notice (8): Undefined variable: nombre in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /users/add
+Referer URL: http://localhost/Decanatura/users
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 125
+=======
 2018-06-10 06:27:26 Notice: Notice (8): Undefined index: nombre in [C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php, line 153]
 Request URL: /users/add
 Referer URL: http://127.0.0.1/Decanatura/users
@@ -12472,6 +12574,7 @@ Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php
 App\Controller\UsersController::add() - APP/Controller\UsersController.php, line 153
 Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 440
 Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 119
+>>>>>>> 9ef56a4b35c934addcfa9f0fc7f6eb3d91fb0f6f
 Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
 Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
 Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
@@ -12489,6 +12592,49 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
+2018-05-23 17:17:16 Notice: Notice (8): Undefined variable: apellido in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /users/add
+Referer URL: http://localhost/Decanatura/users
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
+Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 104
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 98
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+DebugKit\Middleware\DebugKitMiddleware::__invoke() - ROOT\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php, line 52
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
+Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-05-23 22:12:20 Notice: Notice (8): Undefined variable: nombre in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /
+Referer URL: http://localhost/Decanatura/users/login
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+App\Controller\PagesController::display() - APP/Controller\PagesController.php, line 61
+=======
 2018-06-10 06:27:26 Notice: Notice (8): Undefined index: nombre in [C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php, line 153]
 Request URL: /users/add
 Referer URL: http://127.0.0.1/Decanatura/users
@@ -12496,6 +12642,7 @@ Client IP: 127.0.0.1
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 App\Controller\UsersController::add() - APP/Controller\UsersController.php, line 153
+>>>>>>> 9ef56a4b35c934addcfa9f0fc7f6eb3d91fb0f6f
 Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 440
 Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 119
 Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
@@ -12515,6 +12662,20 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
+2018-05-23 22:12:20 Notice: Notice (8): Undefined variable: apellido in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /
+Referer URL: http://localhost/Decanatura/users/login
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+App\Controller\PagesController::display() - APP/Controller\PagesController.php, line 61
+=======
 2018-06-10 06:27:26 Notice: Notice (8): Undefined index: nombre in [C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php, line 153]
 Request URL: /users/add
 Referer URL: http://127.0.0.1/Decanatura/users
@@ -12522,6 +12683,7 @@ Client IP: 127.0.0.1
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 App\Controller\UsersController::add() - APP/Controller\UsersController.php, line 153
+>>>>>>> 9ef56a4b35c934addcfa9f0fc7f6eb3d91fb0f6f
 Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 440
 Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 119
 Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
@@ -12541,6 +12703,78 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
+2018-05-23 22:12:25 Notice: Notice (8): Undefined variable: nombre in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /users
+Referer URL: http://localhost/Decanatura/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
+Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 104
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 98
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+DebugKit\Middleware\DebugKitMiddleware::__invoke() - ROOT\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php, line 52
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
+Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-05-23 22:12:25 Notice: Notice (8): Undefined variable: apellido in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /users
+Referer URL: http://localhost/Decanatura/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
+Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 104
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 98
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+DebugKit\Middleware\DebugKitMiddleware::__invoke() - ROOT\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php, line 52
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
+Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-05-23 22:12:28 Notice: Notice (8): Undefined variable: nombre in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /users/add
+Referer URL: http://localhost/Decanatura/users
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 125
+=======
 2018-06-10 06:27:26 Notice: Notice (8): Undefined index: nombre in [C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php, line 153]
 Request URL: /users/add
 Referer URL: http://127.0.0.1/Decanatura/users
@@ -12548,6 +12782,157 @@ Client IP: 127.0.0.1
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 App\Controller\UsersController::add() - APP/Controller\UsersController.php, line 153
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 440
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 119
+>>>>>>> 9ef56a4b35c934addcfa9f0fc7f6eb3d91fb0f6f
+Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
+Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 104
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 98
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+DebugKit\Middleware\DebugKitMiddleware::__invoke() - ROOT\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php, line 52
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
+Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+<<<<<<< HEAD
+2018-05-23 22:12:29 Notice: Notice (8): Undefined variable: apellido in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /users/add
+Referer URL: http://localhost/Decanatura/users
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 125
+=======
+2018-06-10 06:27:26 Notice: Notice (8): Undefined index: nombre in [C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php, line 153]
+Request URL: /users/add
+Referer URL: http://127.0.0.1/Decanatura/users
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+App\Controller\UsersController::add() - APP/Controller\UsersController.php, line 153
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 440
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 119
+>>>>>>> 9ef56a4b35c934addcfa9f0fc7f6eb3d91fb0f6f
+Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
+Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 104
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 98
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+DebugKit\Middleware\DebugKitMiddleware::__invoke() - ROOT\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php, line 52
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
+Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+<<<<<<< HEAD
+2018-05-23 22:14:39 Notice: Notice (8): Undefined variable: nombre in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /users/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 125
+=======
+2018-06-10 06:27:26 Notice: Notice (8): Undefined index: nombre in [C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php, line 153]
+Request URL: /users/add
+Referer URL: http://127.0.0.1/Decanatura/users
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+App\Controller\UsersController::add() - APP/Controller\UsersController.php, line 153
+Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 440
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 119
+>>>>>>> 9ef56a4b35c934addcfa9f0fc7f6eb3d91fb0f6f
+Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
+Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 104
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 98
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+DebugKit\Middleware\DebugKitMiddleware::__invoke() - ROOT\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php, line 52
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
+Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+<<<<<<< HEAD
+2018-05-23 22:14:39 Notice: Notice (8): Undefined variable: apellido in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /users/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
+Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 104
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 98
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+DebugKit\Middleware\DebugKitMiddleware::__invoke() - ROOT\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php, line 52
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
+Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-05-30 15:20:52 Notice: Notice (8): Undefined variable: nombre in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /
+Referer URL: http://localhost/Decanatura/users/login
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+App\Controller\PagesController::display() - APP/Controller\PagesController.php, line 61
+=======
+2018-06-10 06:27:26 Notice: Notice (8): Undefined index: nombre in [C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php, line 153]
+Request URL: /users/add
+Referer URL: http://127.0.0.1/Decanatura/users
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+App\Controller\UsersController::add() - APP/Controller\UsersController.php, line 153
+>>>>>>> 9ef56a4b35c934addcfa9f0fc7f6eb3d91fb0f6f
 Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 440
 Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 119
 Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
@@ -12567,84 +12952,22 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
-2018-06-10 06:27:26 Notice: Notice (8): Undefined index: nombre in [C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php, line 153]
-Request URL: /users/add
-Referer URL: http://127.0.0.1/Decanatura/users
-Client IP: 127.0.0.1
+<<<<<<< HEAD
+2018-05-30 15:20:52 Notice: Notice (8): Undefined variable: apellido in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /
+Referer URL: http://localhost/Decanatura/users/login
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
-App\Controller\UsersController::add() - APP/Controller\UsersController.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
+App\Controller\PagesController::display() - APP/Controller\PagesController.php, line 61
 Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 440
 Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 119
-Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
-Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 104
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 98
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-DebugKit\Middleware\DebugKitMiddleware::__invoke() - ROOT\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php, line 52
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
-Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
-[main] - ROOT\webroot\index.php, line 40
-
-
-
-2018-06-10 06:27:26 Notice: Notice (8): Undefined index: nombre in [C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php, line 153]
-Request URL: /users/add
-Referer URL: http://127.0.0.1/Decanatura/users
-Client IP: 127.0.0.1
-Trace:
-Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
-App\Controller\UsersController::add() - APP/Controller\UsersController.php, line 153
-Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 440
-Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 119
-Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
-Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 104
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 98
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-DebugKit\Middleware\DebugKitMiddleware::__invoke() - ROOT\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php, line 52
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
-Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
-[main] - ROOT\webroot\index.php, line 40
-
-
-
-2018-06-10 06:27:26 Notice: Notice (8): Undefined index: nombre in [C:\xampp\htdocs\Decanatura\src\Controller\UsersController.php, line 153]
-Request URL: /users/add
-Referer URL: http://127.0.0.1/Decanatura/users
-Client IP: 127.0.0.1
-Trace:
-Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
-App\Controller\UsersController::add() - APP/Controller\UsersController.php, line 153
-Cake\Controller\Controller::invokeAction() - CORE\src\Controller\Controller.php, line 440
-Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 119
-Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
-Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 104
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 98
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-DebugKit\Middleware\DebugKitMiddleware::__invoke() - ROOT\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php, line 52
-Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
-Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
-Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
-[main] - ROOT\webroot\index.php, line 40
-
-
-
+=======
 2018-06-10 06:31:34 Notice: Notice (8): Undefined variable: roles in [C:\xampp\htdocs\Decanatura\src\Template\Users\add.ctp, line 20]
 Request URL: /users/add
 Referer URL: http://127.0.0.1/Decanatura/users
@@ -12657,6 +12980,7 @@ Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
 Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
 Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 125
+>>>>>>> 9ef56a4b35c934addcfa9f0fc7f6eb3d91fb0f6f
 Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
 Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 108
 Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
@@ -12674,6 +12998,18 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
+2018-05-30 15:20:57 Notice: Notice (8): Undefined variable: nombre in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /users
+Referer URL: http://localhost/Decanatura/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+=======
 2018-06-10 08:12:32 Notice: Notice (8): Trying to get property 'id' of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Users\view.ctp, line 66]
 Request URL: /users/view/1010
 Referer URL: http://127.0.0.1/Decanatura/users/
@@ -12684,6 +13020,7 @@ include - APP/Template\Users\view.ctp, line 66
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
+>>>>>>> 9ef56a4b35c934addcfa9f0fc7f6eb3d91fb0f6f
 Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
 Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 125
 Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
@@ -12703,6 +13040,18 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
+2018-05-30 15:20:57 Notice: Notice (8): Undefined variable: apellido in [C:\xampp\htdocs\Decanatura\src\Template\Layout\default.ctp, line 153]
+Request URL: /users
+Referer URL: http://localhost/Decanatura/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+include - APP/Template\Layout\default.ctp, line 153
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
+Cake\View\View::_render() - CORE\src\View\View.php, line 1164
+Cake\View\View::renderLayout() - CORE\src\View\View.php, line 819
+Cake\View\View::render() - CORE\src\View\View.php, line 777
+=======
 2018-06-10 08:12:32 Notice: Notice (8): Trying to get property 'nombre' of non-object in [C:\xampp\htdocs\Decanatura\src\Template\Users\view.ctp, line 66]
 Request URL: /users/view/1010
 Referer URL: http://127.0.0.1/Decanatura/users/
@@ -12713,6 +13062,7 @@ include - APP/Template\Users\view.ctp, line 66
 Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1203
 Cake\View\View::_render() - CORE\src\View\View.php, line 1164
 Cake\View\View::render() - CORE\src\View\View.php, line 772
+>>>>>>> 9ef56a4b35c934addcfa9f0fc7f6eb3d91fb0f6f
 Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 623
 Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 125
 Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 93
