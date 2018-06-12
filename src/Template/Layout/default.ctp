@@ -242,7 +242,7 @@ $cakeDescription = 'Control de Activos';
     'plugins/jquery-easing/jquery.easing.min.js','plugins/datatables/jquery.dataTables.js','plugins/datatables/dataTables.bootstrap4.js',
     'sb-admin-datatables.min.js',
       'plugins/buttons.html5.min.js','plugins/datatables.buttons.min.js',
-      'plugins/jszip.min.js','plugins/pdfmake.min.js','plugins/vfs_fonts.js'
+      'plugins/jszip.min.js','plugins/pdfmake.min.js','plugins/vfs_fonts.js','custom.js'
   ])
   ?>
 
