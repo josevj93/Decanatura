@@ -95,7 +95,9 @@ class AssetsController extends AppController
             
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
             if ($this->Assets->save($asset)) {
-                $this->Assets->addThumbnail();
+                if($asset->image != NULL){
+                    $this->Assets->addThumbnail();
+                }
 
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);

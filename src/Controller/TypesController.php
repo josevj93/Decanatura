@@ -98,10 +98,11 @@ class TypesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $type = $this->Types->get($id);
-        if ($this->Types->delete($type)) {
-            $this->Flash->success(__('El tipo de activo fue borrado exitosamente.'));
-        } else {
-            $this->Flash->error(__('El tipo de activo no se pudo borrar, por favor intente nuevamente.'));
+        try{
+            $this->Types->delete($type); 
+             $this->Flash->success(__('El tipo de activo se ha eliminado exitosamente'));
+        } catch (\PDOException $e) {
+     $this->Flash->error(__('El tipo de activo no se pudo eliminar. Puede deberse a que tiene activos asociados'));
         }
 
         return $this->redirect(['action' => 'index']);

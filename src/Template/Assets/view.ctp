@@ -77,7 +77,7 @@
 
             <tr>
             <th scope="row"><?= __('Imagen') ?></th>
-            <td><?= $this->Html->image('/webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png') ?></td>
+            <td><?= $this->Html->image('/webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png', array('class' => 'img-thumbnail')) ?></td>
         </tr>
 
 

@@ -4,16 +4,14 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Loan Entity
+ * Model Entity
  *
  * @property string $id
- * @property int $id_responsables
- * @property \Cake\I18n\FrozenDate $fecha_inicio
- * @property \Cake\I18n\FrozenDate $fecha_devolucion
- * @property string $observaciones
- * @property string $estado
+ * @property string $name
+ * @property string $id_brand
+ * @property string $id_type
  */
-class Loan extends Entity
+class Model extends Entity
 {
 
     /**
@@ -26,10 +24,8 @@ class Loan extends Entity
      * @var array
      */
     protected $_accessible = [
-        'id_responsables' => true,
-        'fecha_inicio' => true,
-        'fecha_devolucion' => true,
-        'observaciones' => true,
-        'estado' => true
+        'name' => true,
+        'id_brand' => true,
+        'id_type' => true
     ];
 }
