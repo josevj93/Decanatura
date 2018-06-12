@@ -93,10 +93,12 @@ class ResiduesController extends AppController
         $queryRec = $technical_reports->find()
                                     ->select(['recommendation', 'technical_report_id'])
                                     ->where(['residues_id'=>$id])
+                                    ->group(['assets_id'])
                                     ->toList();
 
         //lo paso a objeto
         $size = count($queryRec);
+
         $resultRec = array_fill(0, $size, NULL);
        // debug($queryRec);
         for($i = 0; $i < $size; $i++)
@@ -183,6 +185,92 @@ class ResiduesController extends AppController
     {
         $residue = $this->Residues->get($id);
 
+        $assets = TableRegistry::get('Assets');
+
+        //Obtengo los activos que estan en el acta de residuos
+        $query2 = $assets->find()
+                        ->select(['assets.plaque'])
+                        ->where(['assets.residues_id' => $id])
+                        ->toList();
+
+        $size = count($query2);
+
+        $result2 = array_fill(0, $size, NULL);
+        
+        for($i = 0; $i < $size; $i++)
+        {
+            $result2[$i] =(object)$query2[$i]->assets;
+        }
+
+
+        if ($this->request->is(['patch', 'post', 'put'])) { 
+
+            //saco la lista de placas señaladas y luego las paso a Array
+            $check = $this->request->getData("checkList");
+            $checksViejos = explode(",", $check);
+
+            $residue = $this->Residues->patchEntity($residue, $this->request->getData());
+            if ($this->Residues->save($residue)) {
+                $this->Flash->success(__('El acta de residuo ha sido guardada'));
+
+                //AQUI EMPIEZA LA MAGIA
+
+                $tmp = array_fill(0, $size, NULL);
+
+                $i = 0;
+
+                foreach ($result2 as $res) {
+
+                    $tmp[$i] = $res -> plaque;
+                    $i++;
+                }
+
+                $nuevos = array_diff($checksViejos, $tmp);
+                $viejos = array_diff($tmp, $checksViejos);
+
+                if (count($viejos) > 0) {
+
+                        $assets = TableRegistry::get('Assets')->find('all');
+
+                        $assets->update()
+                                ->set(['residues_id' => NULL])
+                                ->where(['plaque IN' => $viejos])
+                                ->execute();
+
+                        $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
+
+                        $technical_reports->update()
+                                            ->set(['residues_id' => NULL])
+                                            ->where(['assets_id IN' => $viejos])
+                                            ->execute();
+                }
+
+                 if (count($nuevos) > 0) {
+
+                         $assets = TableRegistry::get('Assets')->find('all');
+                        
+                         $assets->update()
+                                ->set(['residues_id' => $residue->residues_id])
+                                ->where(['plaque IN' => $nuevos])
+                                ->execute();
+
+                         $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
+
+                         $technical_reports->update()
+                                             ->set(['residues_id' => $residue->residues_id])
+                                             ->where(['assets_id IN' => $nuevos])
+                                             ->execute();
+                 }
+
+                return $this->redirect(['action' => 'index']);
+            }
+
+
+            $this->Flash->error(__('El acta de residuo no se ha guradado, intentalo de nuevo'));
+
+        }
+
+
         $technical_reports = TableRegistry::get('TechnicalReports');
 
         $query = $technical_reports->find()
@@ -208,36 +296,6 @@ class ResiduesController extends AppController
         }
 
         $Unidad = $this->UnidadAcadémica;
-
-
-
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $residue = $this->Residues->patchEntity($residue, $this->request->getData());
-            if ($this->Residues->save($residue)) {
-                $this->Flash->success(__('El acta de residuo ha sido guardada'));
-
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('El acta de residuo no se ha guradado, intentalo de nuevo'));
-
-        }
-
-        $assets = TableRegistry::get('Assets');
-
-        $query2 = $assets->find()
-                        ->select(['assets.plaque'])
-                        ->where(['assets.residues_id' => $id])
-                        ->toList();
-
-        $size = count($query2);
-
-        $result2 = array_fill(0, $size, NULL);
-        
-        for($i = 0; $i < $size; $i++)
-        {
-            $result2[$i] =(object)$query2[$i]->assets;
-        }
 
         $this->set(compact('residue', 'result', 'result2', 'Unidad'));
     }
