@@ -15,7 +15,7 @@ use Cake\Controller\Component\AuthComponent;
 class UsersController extends AppController
 {
 
-	public function beforeFilter(Event $event)
+    public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
         // Allow users to register and logout.
@@ -29,10 +29,10 @@ class UsersController extends AppController
             $this->Auth->deny('add');
         }
     */
-
+       
     }
 
-	 public function isAuthorized($user)
+    public function isAuthorized($user)
     {
 
         $this->Roles = $this->loadModel('Roles');
@@ -43,7 +43,7 @@ class UsersController extends AppController
         $allowM = false;
         $allowE = false;
         $allowC = false;
-
+        
         $query = $this->Roles->find('all', array(
                     'conditions' => array(
                         'id' => $user['id_rol']
@@ -64,7 +64,7 @@ class UsersController extends AppController
                     $allowC = true;
                 }
             }
-        }
+        } 
 
 
         $this->set('allowI',$allowI);
@@ -87,8 +87,6 @@ class UsersController extends AppController
 
 
     }
-
-	// Allow only the view and index actions.
 
     /**
      * Index method
@@ -116,9 +114,24 @@ class UsersController extends AppController
     {
         $this->viewBuilder()->setLayout('default');
 
+
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
+
+        $query = $this->Roles->find('all', array(
+                    'conditions' => array(
+                        'id' => $user['id_rol']
+                    )
+                ));
+
+        $rol = '';
+
+        foreach ($query as $items) {
+            $rol = $items['nombre'];
+        }
+
+        $this->set('rol', $rol);
 
         $this->set('user', $user);
     }
@@ -132,11 +145,21 @@ class UsersController extends AppController
     {
         $user = $this->Users->newEntity();
 
+        $query = $this->Roles->find('all');
+
+        $roles = array();
+
+        foreach ($query as $items) {
+            $roles[$items['id']] = $items['nombre'];
+        }
+
+        $this->set('roles', $roles);
 
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('EL usuario ha sido agregado.'));
+                $this->Flash->success(__('El usuario ha sido agregado.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El usuario no pudo ser agregado, intente nuevamente'));
@@ -156,8 +179,30 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
+
+        //seleccina todos los roles para desplegar
+        $query = $this->Roles->find('all');
+
+        //contiene todos los roles
+        $roles = array();
+
+        //id del rol actual del usuario
+        $rol = '';
+
+        foreach ($query as $items) {
+            $roles[$items['id']] = $items['nombre'];
+            if($items['id'] == $user['id_rol']){
+                $rol = $items['id'];
+            }
+        }
+
+        $this->set('roles', $roles);
+        $this->set('rol', $rol);
+
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('Cambios guardados.'));
 
@@ -182,16 +227,27 @@ class UsersController extends AppController
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('El usuario ha sido borrado.'));
         } else {
-            $this->Flash->error(__('EL usuario no pudo ser agregado, intente nuevamente'));
+            $this->Flash->error(__('El usuario no pudo ser borrado, intente nuevamente'));
         }
 
         return $this->redirect(['action' => 'index']);
     }
 
+    public function login(){
 
-/*public function beforeFilter(Event $event)
-    {
-        // allow only login
-         $this->Auth->allow(['login']);
-     }*/
+     $this->viewBuilder()->setLayout('login');
+
+     if($this->request->is('post')){
+        $user = $this->Auth->identify();
+        if($user){
+            $this->Auth->setUser($user);
+            return $this->redirect('/');
+        }
+        $this->Flash->error(__('Usuario o contaseña inválidos, intente otra vez'));
+        }
+    }
+
+    public function logout(){
+        return $this->redirect($this->Auth->logout());
+    }
 }
