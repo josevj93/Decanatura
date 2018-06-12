@@ -26,6 +26,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Type $type
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Location $location
+ * * @property \App\Model\Entity\Loan $loan
  */
 class Asset extends Entity
 {
@@ -42,6 +43,7 @@ class Asset extends Entity
     protected $_accessible = [
         'plaque' => true,
         'type_id' => true,
+        'loan_id' => true,
         'brand' => true,
         'model' => true,
         'series' => true,
@@ -59,6 +61,8 @@ class Asset extends Entity
         'type' => true,
         'user' => true,
         'location' => true,
-        'unique_id' => true
+        'unique_id' => true,
+        'deleted' => true,
+        'deletable' => true
     ];
 }

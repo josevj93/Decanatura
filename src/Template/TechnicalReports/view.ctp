@@ -24,13 +24,23 @@
 .btn-default {
   border-color: #FFFFFF;
 }
-
+label{
+    text-align:left;
+    margin-right: 10px;
+    display:inline-flex;    
+}
 .btn-primary {
-      color: #FFF;
-      background-color: #0099FF;
-      border-color: #0099FF;
-      float: right;
-      margin-left:10px;
+    color: #FFF;
+    background-color: #0099FF;
+    border-color: #0099FF;
+    float: right;
+    margin-left:10px;
+}
+.sameLine{
+    display: flex; 
+    justify-content: space-between; 
+    border-color: transparent;
+
 }
 </style>
 
@@ -39,53 +49,69 @@
 <div class="technicalReports view large-9 medium-8 columns content">
     <legend>Reporte técnico</legend>
             <br>
-            <div>
-                <label>Reporte Nº:</label><br>
-                <?php echo '<input type="text" class="form-control col-sm-2" readonly="readonly" name="id" value="' . htmlspecialchars($technicalReport->technical_report_id) . '">'; ?>     
+            <div class="form-control sameLine" >
+                <div class="row">
+                <label>Reporte Nº:</label>
+                <?php echo '<input type="text" class="form-control" readonly="readonly" name="id" value="' . htmlspecialchars($technicalReport->technical_report_id) . '" style="width: 120px;" >'; ?>     
+                </div>
+
+                <div class="row">
+                <label >Fecha:</label>
+                <?php echo '<input type="text" class="form-control" readonly="readonly" name="fecha" value="' . htmlspecialchars($technicalReport->date).'" style="width: 100px;">'; ?>
+
+                </div>
+
             </div>
             <br>
 
             <div>
-                <label >Fecha:</label><br>
-                <?php echo '<input type="text" class="form-control col-sm-2" readonly="readonly" name="fecha" value="' . htmlspecialchars($technicalReport->date) . '">'; ?>     
-            </div>
-            <br>
-
-            <div>
-                <label>Placa del activo:</label><br>
+                <label>Placa del activo:</label>
                 <?php echo $this->Html->link($technicalReport->asset->plaque, '#list', array(
                                       'data-toggle' => 'modal',
                                         'class' => 'btn btn-default'
                                     )); ?>
             </div><br>
 
+
+
+            <!--  Modal activado por el boton con el número de placa -->
+            <!--  Este contiene datos básicos del activo -->
             <div class="modal fade" id="list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-             <div class="modal-dialog" style="width: 80%">
+             <div class="modal-dialog" style="width: 100%">
                   <div class="modal-content">
                          <div class="modal-header modal-header-primary">
                             <h1>Datos del activo</h4>
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         </div>
                         <div class="modal-body">
-                            <div class="block">
-                                <label>Nº de placa:</label><br>
-                                    <?php echo '<input type="text" class="form-control col-sm-3" readonly="readonly" name="fecha" value="' . htmlspecialchars($technicalReport->asset->plaque) . '">'; ?>     
-                            </div><br>
 
-                            <div>
-                                <label>Nº de serie:</label><br>
-                                    <?php echo '<input type="text" class="form-control col-sm-3" readonly="readonly" name="fecha" value="' . htmlspecialchars($technicalReport->asset->series) . '">'; ?>     
-                            </div><br>
+                            <div class="form-control sameLine">
 
-                            <div>
-                                <label>Marca:</label><br>
-                                    <?php echo '<input type="text" class="form-control col-sm-3" readonly="readonly" name="fecha" value="' . htmlspecialchars($technicalReport->asset->brand) . '">'; ?>     
-                            </div><br>
+                                <div class="row">
+                                    <label>Nº de placa:</label>
+                                
+                                    <?php echo '<input type="text" class="form-control" readonly="readonly" name="plaque" value="' . htmlspecialchars($technicalReport->asset->plaque) . '" style="width: 100px;">'; ?>
+                                </div>     
 
-                            <div>
-                                <label>Modelo:</label><br>
-                                    <?php echo '<input type="text" class="form-control col-sm-3" readonly="readonly" name="fecha" value="' . htmlspecialchars($technicalReport->asset->model) . '">'; ?>     
+                                <div class="row">
+                                    <label>Nº de serie:</label>
+                                    <?php echo '<input type="text" class="form-control " readonly="readonly" name="series" value="' . htmlspecialchars($technicalReport->asset->series) . '" style="width: 100px;">'; ?> 
+                                </div>    
+                            </div>
+                     
+
+                            <div class="form-control sameLine">
+
+                                <div class="row">
+                                    <label>Marca:</label>
+                                    <?php echo '<input type="text" class="form-control" readonly="readonly" name="brand" value="' . htmlspecialchars($technicalReport->asset->brand) . '" style="width: 139px;" >'; ?>     
+                                </div>
+
+                                <div class="row">
+                                    <label>Modelo:</label>
+                                    <?php echo '<input type="text" class="form-control" readonly="readonly" name="model" value="' . htmlspecialchars($technicalReport->asset->model) . '" style="width: 100px;" >'; ?> 
+                                </div>          
                             </div><br>
 
                             <div>
@@ -107,7 +133,7 @@
             </div>
             <br>
 
-            <div>
+            <div class="row col-md-8" >
                 <label>Recomendación:</label><br>
                 <?php if ("C"==$technicalReport->recommendation): ?>
                     Reubicar
@@ -129,16 +155,23 @@
                     Otros
                 <?php endif; ?>
             </div>
+            <br>
+
+            <div class="row col-md-8"> 
+                 <label>Nombre del evaluador: </label>
+                    <?php
+                    echo $this->Form->imput('evaluator_name', ['class'=>'form-control col-md-4',"readonly"=>"readonly", "value"=>$technicalReport->evaluator_name]); 
+                    ?>   
+            </div>
             <br><br>
 
-        
+</div>
 
-    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+<?= $this->Html->link(__('Cancelar'), ['controller'=> 'TechnicalReports', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-    <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $technicalReport->technical_report_id], ['class' => 'btn btn-primary']) ?>
+<?= $this->Html->link(__('Modificar'), ['controller'=> 'TechnicalReports', 'action' => 'edit', $technicalReport->technical_report_id], ['class' => 'btn btn-primary']) ?>
     
 
-    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Seguro que desea eliminar la Ubicación #'.$technicalReport->technical_report_id.' ?', $technicalReport->technical_report_id)]) ?>
+<?= $this->Form->postLink(__('Eliminar'), ['controller'=> 'TechnicalReports', 'action' => 'delete', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Seguro que desea eliminar la Ubicación #'.$technicalReport->technical_report_id.' ?', $technicalReport->technical_report_id)]) ?>
 
-    <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]) ?>
-</div>
+<?= $this->Form->postLink(__('Generar Pdf'), ['controller'=> 'TechnicalReports', 'action' => 'download', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]) ?>

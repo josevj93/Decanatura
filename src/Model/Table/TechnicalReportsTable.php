@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * TechnicalReports Model
  *
  * @property \App\Model\Table\AssetsTable|\Cake\ORM\Association\BelongsTo $Assets
- * @property |\Cake\ORM\Association\BelongsTo $Residues
+ * @property \App\Model\Table\ResiduesTable|\Cake\ORM\Association\BelongsTo $Residues
  *
  * @method \App\Model\Entity\TechnicalReport get($primaryKey, $options = [])
  * @method \App\Model\Entity\TechnicalReport newEntity($data = null, array $options = [])
@@ -72,9 +72,7 @@ class TechnicalReportsTable extends Table
 
         $validator
             ->date('date')
-            ->requirePresence('date', 'create')
-            ->notEmpty('date');
-
+            ->allowEmpty('date');
 
         $validator
             ->scalar('file_name')
@@ -85,6 +83,21 @@ class TechnicalReportsTable extends Table
             ->scalar('path')
             ->maxLength('path', 200)
             ->allowEmpty('path');
+
+        $validator
+            ->scalar('evaluator_name')
+            ->maxLength('evaluator_name', 100)
+            ->allowEmpty('evaluator_name');
+
+        $validator
+            ->scalar('year')
+            ->maxLength('year', 4)
+            ->allowEmpty('year');
+
+        $validator
+            ->scalar('facultyInitials')
+            ->maxLength('facultyInitials', 20)
+            ->allowEmpty('facultyInitials');
 
         return $validator;
     }
