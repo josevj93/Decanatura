@@ -65,11 +65,22 @@
     label[class=label-t]{
         margin-left: 20px;
     }
+    label[class = funcionario]
+    {
+      margin-left: 20px;
+      margin-right: 57px;
+    }
+    label[class = id]
+    {
+      margin-left: 20px;
+      margin-right: 45px;
+    }
     label {
         text-align:left;
         margin-right: 10px;
           
     }
+    
     .btn-primary {
       color: #FFF;
       background-color: #0099FF;
@@ -121,14 +132,14 @@
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Funcionario: </label>
+                    <label class="funcionario">Funcionario: </label>
                     <?php 
             echo $this->Form->imput('functionary', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
             ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Identificación:</label>
+                    <label class="id">Identificación:</label>
                     <?php 
             echo $this->Form->imput('identification', ['label' => 'identification:', 'class'=>'form-control col-sm-4']);
             ?>
@@ -144,14 +155,14 @@
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Funcionario: </label>
+                    <label class="funcionario">Funcionario: </label>
                     <?php 
             echo $this->Form->imput('functionary_recib', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
             ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Identificación:</label>
+                    <label class="id">Identificación:</label>
                     <?php 
             echo $this->Form->imput('identification_recib', ['label' => 'identification_recib:', 'class'=>'form-control col-sm-4']);
             ?>
