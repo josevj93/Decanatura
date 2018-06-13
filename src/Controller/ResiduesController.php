@@ -159,7 +159,7 @@ class ResiduesController extends AppController
                 
                 $assets = TableRegistry::get('Assets')->find('all');
                 $assets->update()
-                    ->set(['residues_id' => $residue->residues_id])
+                    ->set(['residues_id' => $residue->residues_id, 'state' => "Desechado"])
                     ->where(['plaque IN' => $condicion])
                     ->execute();
 
@@ -235,7 +235,7 @@ class ResiduesController extends AppController
                         $assets = TableRegistry::get('Assets')->find('all');
 
                         $assets->update()
-                                ->set(['residues_id' => NULL])
+                                ->set(['residues_id' => NULL, 'state' => "Disponible"])
                                 ->where(['plaque IN' => $viejos])
                                 ->execute();
 
@@ -252,7 +252,7 @@ class ResiduesController extends AppController
                          $assets = TableRegistry::get('Assets')->find('all');
                         
                          $assets->update()
-                                ->set(['residues_id' => $residue->residues_id])
+                                ->set(['residues_id' => $residue->residues_id, 'state' => "Desechado"])
                                 ->where(['plaque IN' => $nuevos])
                                 ->execute();
 
