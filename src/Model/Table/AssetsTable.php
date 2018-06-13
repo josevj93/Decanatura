@@ -64,6 +64,10 @@ class AssetsTable extends Table
             'foreignKey' => 'location_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Loans', [
+            'foreignKey' => 'loan_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -200,6 +204,7 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['owner_id'], 'Users'));
         $rules->add($rules->existsIn(['responsable_id'], 'Users'));
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
+        $rules->add($rules->existsIn(['loan_id'], 'Loans'));
 
         return $rules;
     }

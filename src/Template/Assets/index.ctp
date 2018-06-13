@@ -10,7 +10,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 col-lg-12">
         <div class="table-responsive">
             <table id="assets-grid"  class="table table-striped">
                 <thead>
@@ -42,7 +42,7 @@
                             <td><?= h($asset->series) ?></td>
                             <td><?= h($asset->description) ?></td>
                             <td><?= h($asset->state) ?></td>
-                            <td><?= h($asset->user->nombre) ?></td>
+                            <td><?= h($asset->user->nombre . " " . $asset->user->apellido1) ?></td>
                             <td><?= $asset->has('location') ? $this->Html->link($asset->location->nombre, ['controller' => 'Locations', 'action' => 'view', $asset->location->location_id]) : '' ?></td>
                             <td><?= h($asset->year) ?></td>
 

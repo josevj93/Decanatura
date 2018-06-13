@@ -2,21 +2,16 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
- * Loans Controller
- *
- * @property \App\Model\Table\LoansTable $Loans
- *
- * @method \App\Model\Entity\Loan[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
+* Controlador para los préstamos de la aplicación
+*/
 class LoansController extends AppController
 {
 
     /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
+     * Método para desplegar una lista con un resumen de los datos de prestamos
      */
     public function index()
     {
@@ -31,11 +26,7 @@ class LoansController extends AppController
     }
 
     /**
-     * View method
-     *
-     * @param string|null $id Loan id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * Método para ver los datos completos de un activo
      */
     public function view($id = null)
     {
@@ -47,9 +38,7 @@ class LoansController extends AppController
     }
 
     /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * Método para agregar nuevos activos al sistema
      */
     public function add()
     {
@@ -57,60 +46,67 @@ class LoansController extends AppController
 
         $loan = $this->Loans->newEntity();
         if ($this->request->is('post')) {
+            $listaPlaques = $this->request->getData('checkList');
+            $listaPlaques = explode(',', $listaPlaques);
             
-            $data = $this->request->getData();
-            $loan->id_assets = $data['id_assets'];
             $random = uniqid();
             $loan->id = $random;
             $loan->estado = 'Activo';
-            $loan = $this->Loans->patchEntity($loan, $data);
+            $loan = $this->Loans->patchEntity($loan, $this->request->getData());
             
             if ($this->Loans->save($loan)) {
-                $asset= $this->Assets->get($loan->id_assets, [
-                    'contain' => []
-                ]);
-
-                $asset->state = 'Prestado';
-                $asset->deletable = false;
-
-                if($this->Assets->save($asset)){
-                    $this->Flash->success(__('El préstamo fue guardado exitosamente.'));
-                    return $this->redirect(['action' => 'index']);
+                
+                foreach($listaPlaques as $plaque){
+                    
+                    
+                    $asset= $this->Assets->get($plaque, [
+                        'contain' => []
+                    ]);
+                    
+                    $asset->loan_id = $random;
+                    $asset->state = 'Prestado';
+                    $asset->deletable = false;
+                    
+                    if(!($this->Assets->save($asset))){
+                        $this->Flash->error(__('El préstamo no se pudo guardar. Uno de los activos no se pudo guardar correctamente'));
+                        return $this->redirect(['action' => 'index']);
+                    }
                 }
+
+                $this->Flash->success(__('El activo fue guardado exitosamente.'));
+                return $this->redirect(['action' => 'index']);
             }
+            
+            
             $this->Flash->error(__('El préstamo no se pudo guardar, por favor intente nuevamente.'));
-        }       
-        $assets = $this->Loans->Assets->find('list', [
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $this->loadModel('Assets');
+
+        $query = $this->Assets->find()
+                        ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series'])
+                        ->where(['assets.state' => "Disponible"])
+                        ->where(['assets.lendable' => true])
+                        ->toList();
+
+        $size = count($query);
+
+        $result = array_fill(0, $size, NULL);
+        
+        for($i = 0; $i < $size; $i++)
+        {
+            $result[$i] =(object)$query[$i]->assets;
+        }
+
+        $assets = $this->Assets->find('list', [
             'conditions' => ['assets.state' => 'Disponible']
         ]);
         $users = $this->Loans->Users->find('list', ['limit' => 200]);
-        $this->set(compact('assets', 'loan', 'users'));
+        $this->set(compact('assets', 'loan', 'users', 'result'));
     }
 
-    public function cancel($id)
-    {
-        $this->loadModel('Assets');
-        $loan = $this->Loans->get($id, [
-            'contain' => []
-        ]);
-        $loan->estado = 'Cancelado';
-        if ($this->Loans->save($loan)){
-            $asset= $this->Assets->get($loan->id_assets, [
-                'contain' => []
-            ]);
-            $asset->state = 'Disponible';
-            if($this->Assets->save($asset)){
-                $this->Flash->success(__('El préstamo fue cancelado exitosamente.'));
-                return $this->redirect(['action' => 'index']);
-            }
-        }
-        $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
-        $users = $this->Loans->Users->find('list', ['limit' => 200]);
-        $this->set(compact('assets', 'loan', 'users'));
-    }
-
-/*Cancelar para varios activos*/
-/*
+    /*Cancelar para varios activos*/
     public function cancel($id)
     {
         $this->loadModel('Assets');
@@ -124,28 +120,39 @@ class LoansController extends AppController
         
         if ($this->Loans->save($loan)){
             
-            $assets = $this->Assets->find('list', [
-                'conditions' => ['assets.loans_id' => $id]
-            ]);
+            $assets = $this->Assets->find()
+            ->where(['assets.loan_id' => $id])
+            ->toList();
                 
             foreach($assets as $asset){
                 $asset->state = 'Disponible';
+                $asset->loan_id = NULL;
 
                 if(!($this->Assets->save($asset))){
-                    $this->Flash->success(__('Error al cancelar el préstamo'));
+                    $this->Flash->error(__('Error al cancelar el préstamo'));
                     return $this->redirect(['action' => 'index']);
                 }
             }
+
+            $this->Flash->success(__('El activo fue guardado exitosamente.'));
+            return $this->redirect(['action' => 'index']);
+
+        }
+        else{
+            $this->Flash->error(__('Error al cancelar el préstamo'));
+            return $this->redirect(['action' => 'index']);
         }
         $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
         $users = $this->Loans->Users->find('list', ['limit' => 200]);
         $this->set(compact('assets', 'loan', 'users'));
-    }*/
+    }
 
+    /**
+     * Método para obtener todas las placas de activos del sistema y 
+     * enviarlas como un JSON para que lo procese AJAX
+     */
     public function getPlaques()
     {
-        pr('Sirve');
-        die();
         $this->loadModel('Assets');
         if ($this->requrest->is('ajax')) {
             $this->autoRender = false;
@@ -169,6 +176,9 @@ class LoansController extends AppController
         }
     }
 
+    /**
+     * Método para enviar la vista parcial de búsqueda de un activo por medio de AJAX
+     */
     public function searchAsset()
     {
         $this->loadModel('Assets');
