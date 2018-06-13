@@ -206,6 +206,7 @@ class AssetsController extends AppController
             $prestable = $this->request->getData('lendable');
             //realiza el ciclo
             for ($i = 0; $i < $cantidad; $i++){
+                $asset = $this->Assets->newEntity();
                 $data = [
                     'plaque' => $placa,
                     'type_id' => $tipo,
@@ -224,6 +225,10 @@ class AssetsController extends AppController
                 $this->Assets->save($asset);
                 //incrementa la placa
                 $placa = $placa + 1;
+                /**if($i == 1){
+                    echo($asset);
+                    die();
+                }*/
             }
             $this->Flash->success(__('Los activos fueron guardados'));
             return $this->redirect(['action' => 'index']);
