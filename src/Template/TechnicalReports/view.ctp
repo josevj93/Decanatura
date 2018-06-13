@@ -148,7 +148,7 @@ label{
                 <?php endif; ?>
 
                 <?php if("U"==$technicalReport->recommendation): ?>
-                    Usar piesas
+                    Usar piezas
                 <?php endif; ?>
 
                 <?php if("O"==$technicalReport->recommendation): ?>

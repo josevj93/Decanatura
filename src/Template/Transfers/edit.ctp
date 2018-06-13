@@ -52,7 +52,7 @@ use Cake\Routing\Router;
         </div>
     <br>
     <table>
-        <!-- Tabla para rellenar los datos de las unidades academicas -->
+        <!-- Tabla para rellenar los datos de las unidades académicas -->
         <tr>
             <th class="transfer-h"><h5>Unidad que entrega<h5></th>
             <th class="transfer-h"><h5>Unidad que recibe<h5></th>
@@ -61,7 +61,7 @@ use Cake\Routing\Router;
             <!-- Fila para la Unidad que entrega -->
             <td>
                 <div class="row" >
-                    <label class="label-t">Unidad academica: </label>
+                    <label class="label-t">Unidad académica: </label>
                    
                     <?php echo '<input type="text" class="form-control col-sm-6"  value="' . htmlspecialchars($Unidad) . '">'; ?>
                 </div>
@@ -82,7 +82,7 @@ use Cake\Routing\Router;
             <td>
                 <div class="row">
                     
-                        <label class="label-t">Unidad academica: </label>
+                        <label class="label-t">Unidad académica: </label>
                     
                         <?php echo '<input type="text" name="Acade_Unit_recib" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->Acade_Unit_recib). '">'; ?>
                     

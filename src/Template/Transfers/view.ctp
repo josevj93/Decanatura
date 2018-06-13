@@ -56,7 +56,7 @@
         </div>
     <br>
     <table>
-        <!-- Tabla para rellenar los datos de las unidades academicas -->
+        <!-- Tabla para rellenar los datos de las unidades académicas -->
         <tr>
             <th class="transfer-h"><h5>Unidad que entrega<h5></th>
             <th class="transfer-h"><h5>Unidad que recibe<h5></th>
@@ -65,7 +65,7 @@
             <!-- Fila para la Unidad que entrega -->
             <td>
                 <div class="row" >
-                    <label class="label-t">Unidad academica: </label>
+                    <label class="label-t">Unidad académica: </label>
                    
                     <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($Unidad) . '">'; ?>
                 </div>
@@ -86,7 +86,7 @@
             <td>
                 <div class="row">
                     
-                        <label class="label-t">Unidad academica: </label>
+                        <label class="label-t">Unidad académica: </label>
                     
                         <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($transfer->Acade_Unit_recib). '">'; ?>
                     

@@ -117,7 +117,7 @@
     </div><br>
     <div>
         <table>
-        <!-- Tabla para rellenar los datos de las unidades academicas -->
+        <!-- Tabla para rellenar los datos de las unidades académicas -->
         <tr>
             <th class="transfer-h"><h5>Unidad que entrega<h5></th>
             <th class="transfer-h"><h5>Unidad que recibe<h5></th>
@@ -126,7 +126,7 @@
             <!-- Fila para la Unidad que entrega -->
             <td>
                 <div class="row" >
-                    <label class="label-t">Unidad academica: </label>
+                    <label class="label-t">Unidad académica: </label>
                    
                     <label>Ingeniería</label>
                 </div>
@@ -148,7 +148,7 @@
             <!-- Fila para la Unidad que recibe -->
             <td>
                 <div class="row">
-                        <label class="label-t">Unidad academica: </label>
+                        <label class="label-t">Unidad académica: </label>
                         <?php 
             echo $this->Form->imput('Acade_Unit_recib', ['label' => 'Acade_Unit_recib:', 'class'=>'form-control col-sm-4']);
             ?>       

@@ -124,7 +124,7 @@
            ['value'=>'C', 'text'=>'Reubicar  '],
            ['value'=>'R', 'text'=>'Reparar  '],
            ['value'=>'D', 'text'=>'Desechar  '],
-           ['value'=>'U', 'text'=>'Usar piesas  '],
+           ['value'=>'U', 'text'=>'Usar piezas  '],
            ['value'=>'O', 'text'=>'Otros'],
           ]);
       ?>
