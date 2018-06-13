@@ -94,7 +94,7 @@ $cakeDescription = 'Control de Activos';
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Marcas de activo">
           <?=$this->Html->link(
 
-            $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Marcas de activo', array('class' => 'nav-link-text')),array('controller' => 'Brands','action' => 'index'),
+            $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Marcas de activos', array('class' => 'nav-link-text')),array('controller' => 'Brands','action' => 'index'),
             array('class' => 'nav-link',
               'escape'=> false)
           );
@@ -105,6 +105,18 @@ $cakeDescription = 'Control de Activos';
           <?=$this->Html->link(
             $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Tipos de activos', array('class' => 'nav-link-text')),
             array('controller' => 'Types','action' => 'index'),
+            array('class' => 'nav-link',
+              'escape'=> false)
+          );
+          ?>
+
+        </li>
+
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Modelos de activos">
+          <?=$this->Html->link(
+            $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Modelos de activos', array('class' => 'nav-link-text')),
+            array('controller' => 'Models','action' => 'index'),
             array('class' => 'nav-link',
               'escape'=> false)
           );
