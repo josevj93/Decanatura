@@ -143,6 +143,13 @@ class ResiduesController extends AppController
         $this->set(compact('residues','result'));
         
         $residue = $this->Residues->newEntity();
+        
+        //Saco el ultimo id y le sumo 1 para generar el número consecutivo de la base de datos
+        $tmpID= $this->Residues->find('all',['fields'=>'residues_id'])->last();
+        $tmpID= $tmpID->residues_id+1;
+
+        $RID="VRA-".$tmpID;
+
         if ($this->request->is('post')) {
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
             if ($this->Residues->save($residue)) {
@@ -166,7 +173,8 @@ class ResiduesController extends AppController
             }
             $this->Flash->error(__('The residue could not be saved. Please, try again.'));
         }
-        $this->set(compact('residue'));
+
+        $this->set(compact('residue', 'RID'));
     }
     /**
      * Edit method

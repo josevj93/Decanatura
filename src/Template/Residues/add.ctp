@@ -50,10 +50,8 @@
 
         <div class="col-md-6">
             <div>
-                <label>Número de Reporte</label><br>
-                <?php 
-                echo $this->Form->imput('residues_id', ['label' => 'Numero', 'class'=>'form-control col-sm-6']);
-                ?><br>
+                <label>Número de Autorización: </label>
+                <label><?php echo h($RID); ?></label>
             </div>
         </div>    
             
