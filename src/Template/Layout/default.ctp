@@ -82,17 +82,6 @@ $cakeDescription = 'Control de Activos';
 
       <?php if($allowA) : ?>
 
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
-          <?=$this->Html->link(
-            $this->Html->tag('i','' , array('class' => 'fa fa-boxes')).$this->Html->tag('span', ' Activos', array('class' => 'nav-link-text')),
-            array('controller' => 'Assets','action' => 'index'),
-            array('class' => 'nav-link',
-              'escape'=> false)
-          );
-          ?>
-
-        </li>
-
         <li class = "nav-item" data-toggle="tooltip" data-placement="right" title="Menú de Activos">
           <a href="#activosSubmenu" data-toggle="collapse" aria-expanded="false" class= "nav-link">
             <i class="fa fa-users"></i><span class="nav-link-text"> Menú de activos</span>
