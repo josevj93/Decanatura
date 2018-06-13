@@ -50,6 +50,12 @@
           width:100px;
           margin-left: 10px;
         }
+
+        .sameLine{
+          display: flex; 
+          justify-content: space-between; 
+          border-color: transparent;
+        }
         
   </style>
 
@@ -63,21 +69,23 @@
     <legend><?= __('Insertar informe técnico') ?></legend>
     <br>
     
-    <div class="row">
 
-      <div class="col-md-8">
-        <div >
+    <div class="form-control sameLine" >
+
+      <div class="row">
           <label>Nº Reporte:</label>
-          <label><?php echo h($tmpId); ?> *</label>
-
-        </div>
+          <label><?php echo h($CompleteID); ?> *</label>
       </div>
-
-      <label>Fecha:</label>
+      
+      <div class="row">
+        <label>Fecha:</label>
         <?php
         echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker']); 
-        ?>
-  </div>
+        ?>        
+      </div>
+
+        
+    </div>
     
 
     <label>Placa del activo:</label><br>
@@ -123,8 +131,18 @@
     </div> 
     <br>
 
+    <div class="row col-md-8"> 
+      <label>Nombre del evaluador: </label>
+        <?php
+        echo $this->Form->imput('evaluator_name', ['class'=>'form-control col-md-5']); 
+        ?>   
+    </div>
+    <br><br>
+
+
     <div>
-    <label>nota * : El número de reporte es autogenerado.</label>
+      <label>nota * : El número de reporte es autogenerado.</label>
+
     </div>
     <br>
 

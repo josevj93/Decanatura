@@ -38,7 +38,6 @@
                 <tfoot>
                     <tr>
                         <td></td>
-                        <th>Placa</th>
                         <th>Responsable</th>
                         <th>Estado</th>
                         <th>Fecha de inicio</th>

@@ -42,7 +42,12 @@
     -->
         <tr>
             <th scope="row"><?= __('Rol') ?></th>
-            <td><?= $this->Number->format($user->id_rol) ?></td>
+            <td><?= h($rol) ?></td>
+
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Estado') ?></th>
+            <td><?= $user->account_status ? __('Activo') : __('Inoperante'); ?></td>
         </tr>
     </table>
         <style>
@@ -57,6 +62,8 @@
         </style> 
 </div>
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Html->link(__('Modificar'), ['controller' => 'Users', 'action' => 'edit'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Html->link(__('Eliminar'), ['controller' => 'Users', 'action' => 'delete'], ['class' => 'btn btn-primary']) ?>
+
+    <?= $this->Html->link(__('Modificar'), ['controller' => 'Users', 'action' => 'edit', $user->id], ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->postLink('Eliminar', ['action' => 'delete', $user->id],  ['escape'=> false, 'class' => 'btn btn-primary' ,'confirm' => __('¿Está seguro que desea eliminar este usuario? # {0}?', $user->id)]) ?>
+    <?= $this->Form->end() ?>
 
