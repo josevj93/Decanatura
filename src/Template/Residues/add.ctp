@@ -19,13 +19,65 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <style>
-        .btn-primary {
-          color: #FFF;
-          background-color: #0099FF;
-          border-color: #0099FF;
-          float: right;
+    .btn-primary {
+      color: #FFF;
+      background-color: #0099FF;
+      border-color: #0099FF;
+      float: right;
+      margin-left: 10px;
+    }
+
+    label {
+          text-align:left;
+          margin-right: 10px;
+          
+    }
+
+    label[class=label-t]{
+        margin-left: 20px;
+    }
+
+    input[name=date]{
+          width:100px;
           margin-left: 10px;
         }
+
+    table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    }
+
+    td {
+
+        border: 1px solid #000000;
+        border-bottom: 1px solid #000000;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    th[class=transfer-h] {
+        border-bottom: 1px solid #000000;
+        text-align: center;
+        color:black;
+        padding: 8px;
+    }
+
+    .sameLine{
+    display: flex; 
+    justify-content: space-between; 
+    border-color: transparent;
+    }
+
     </style> 
 
 </head>
@@ -46,69 +98,61 @@
     <fieldset>
         <legend><?= __('Insertar acta de desecho') ?></legend>
            
-      <div class="row">
+      <div class="form-control sameLine">
 
-        <div class="col-md-6">
-            <div>
+        <div class="row">
                 <label>Número de Autorización: </label>
                 <label><?php echo h($RID); ?></label>
-            </div>
         </div>    
             
-            <div>
-                <label>Fecha:</label><br>
-                <?php 
-                    echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker']);
-                    //echo $this->Form->control('date', ['empty' => true]);
-                ?><br>
-            </div>
+        <div class="row">
+              <label>Fecha:</label>
+              <?php 
+              echo $this->Form->imput('date', ['class'=>'form-control','id'=>'datepicker']);
+              //echo $this->Form->control('date', ['empty' => true]);
+                ?>
+        </div>
       
       </div>
-
-        <div class="row">
-
-          <div class="col-md-6">
-
-              <label>Nombre:</label>
-                <?php 
-                    echo $this->Form->imput('name1', ['class'=>'form-control col-sm-6']);
-                ?>
-          </div>
-              
-          <div class="col-md-6">
+      
+      <label>En presencia de:</label>
+        
+      <table>
+            <tr>
+                <td><br>
+                    <div class="row">
+                              <label class='label-t'>Nombre:</label>
+                              <?php 
+                                  echo $this->Form->imput('name1', ['class'=>'form-control col-sm-6']);
+                              ?>
+                    </div><br>
+                    <div class="row">
+                            <label class='label-t'>Cédula:</label>
+                            <?php 
+                                echo $this->Form->imput('identification1', ['class'=>'form-control col-sm-6']);
+                            ?>
+                    </div><br>
+                </td>
             
-            <label>Cédula:</label>
-                <?php 
-                    echo $this->Form->imput('identification1', ['class'=>'form-control col-sm-6']);
-                ?>
-          </div>
-           
-      </div>
+                <td><br>
+                    <div class="row">
+                            <label class='label-t'>Nombre:</label>
+                            <?php 
+                                echo $this->Form->imput('name2', ['class'=>'form-control col-sm-6']);
+                            ?>
+                    </div><br>
+                    <div class="row">
+                            <label class='label-t'>Cédula:</label>
+                            <?php 
+                                echo $this->Form->imput('identification2', ['class'=>'form-control col-sm-6']);
+                            ?> 
+                    </div><br>
+                </td>
+            </tr>
+        </table>
 
-        <div class="row">
-
-          <div class="col-md-6">
-
-            
-              <label >Nombre:</label>
-                <?php 
-                    echo $this->Form->imput('name2', ['class'=>'form-control col-sm-6']);
-                ?>
-            
-          </div>
-
-          <div class="col-md-6">
-            
-            <label>Cédula:  </label>
-                <?php 
-                    echo $this->Form->imput('identification2', ['class'=>'form-control col-sm-6']);
-                ?> 
-          </div>
-
-        </div>
     </fieldset>
 </div>
-<br>
 <br>
         <!-- AQUI ESTA LO IMPORTANTE. RECUERDEN COPIAR LOS SCRIPTS -->
         <div class="related">
