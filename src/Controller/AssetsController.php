@@ -204,9 +204,13 @@ class AssetsController extends AppController
             $ubicacion = $this->request->getData('location_id');
             $año = $this->request->getData('year');
             $prestable = $this->request->getData('lendable');
+            //parseo la placa con letras para dividirla en predicado+numero (asg21fa34)
+            //$predicado = asg21fa
+            //$numero = 34
             //realiza el ciclo
             for ($i = 0; $i < $cantidad; $i++){
                 $asset = $this->Assets->newEntity();
+                //agrego predicado+numero como placa
                 $data = [
                     'plaque' => $placa,
                     'type_id' => $tipo,
@@ -225,6 +229,7 @@ class AssetsController extends AppController
                 $this->Assets->save($asset);
                 //incrementa la placa
                 $placa = $placa + 1;
+                //$numero = $numero + 1
                 /**if($i == 1){
                     echo($asset);
                     die();
