@@ -189,61 +189,45 @@ class AssetsController extends AppController
     public function batch($cantidad = null)
     {
         $asset = $this->Assets->newEntity();
+        //$asset = $this->Assets->newEntity();
         if ($this->request->is('post')) {
-            
-                
-                /**$asset = array(
-                    'plaque' => $this->$i,
-                    'type_id' => '5b08417d8e257',
-                    'brand' => 'Silla',
-                    'model' => 'modelo1',
-                    'state' => 'Activo',
-                    'description' => 'silla generica, modelo 1',
-                    'owner_id' => 1,
-                    'responsable_id' => 1,
-                    'location_id' => 1, 
-                    'year' => '2018',
-                    'lendable' => 0
-                );*/
-                //$this->Assets->clear();
-                //$this->placa++;
-                
-        $cantidad = $this->request->getData('quantity');
-		$placa = $this->request->getData('plaque');
-        for ($i = 0; $i < $cantidad; $i++){
-            $asset = array();
-            $asset['Assets']['plaque'] = $placa;
-            $asset['Assets']['type_id'] = '5b08417d8e257';
-            $asset['Assets']['brand'] = 'Silla';
-            $asset['Assets']['model'] = 'modelo1';
-            $asset['Assets']['state'] = 'Activo';
-            $asset['Assets']['description'] = 'silla generica, modelo 1';
-            $asset['Assets']['owner_id'] = 1;
-            $asset['Assets']['responsable_id'] = 1;
-            $asset['Assets']['location_id'] = 1;
-            $asset['Assets']['year'] = '2018';
-            $asset['Assets']['lendable'] = 0;
-            //meter una por una a la base
-            $this->Assets->save($asset)
-            //incrementar la placa
-            $this->Assets->clear();
-        }
-        $this->Flash->success(__('Los activos fueron guardados'));
+            //guarda en variables todos los campos reutilizables
+            $cantidad = $this->request->getData('quantity');
+            $placa = $this->request->getData('plaque');
+            $tipo = $this->request->getData('type_id');
+            $marca = $this->request->getData('brand');
+            $modelo = $this->request->getData('model');
+            $estado = $this->request->getData('state');
+            $descripcion = $this->request->getData('description');
+            $dueno = $this->request->getData('owner_id');
+            $responsable = $this->request->getData('responsable_id');
+            $ubicacion = $this->request->getData('location_id');
+            $año = $this->request->getData('year');
+            $prestable = $this->request->getData('lendable');
+            //realiza el ciclo
+            for ($i = 0; $i < $cantidad; $i++){
+                $data = [
+                    'plaque' => $placa,
+                    'type_id' => $tipo,
+                    'brand' => $marca,
+                    'model' => $modelo,
+                    'state' => $estado,
+                    'description' => $descripcion,
+                    'owner_id' => $dueno,
+                    'responsable_id' => $responsable,
+                    'location_id' => $ubicacion, 
+                    'year' => $año,
+                    'lendable' => $prestable
+                ];
+                $asset = $this->Assets->patchEntity($asset, $data);
+                //meter una por una a la base
+                $this->Assets->save($asset);
+                //incrementa la placa
+                $placa = $placa + 1;
+            }
+            $this->Flash->success(__('Los activos fueron guardados'));
             return $this->redirect(['action' => 'index']);
-		
-		/**
-        $asset = $this->Assets->patchEntity($asset, $this->request->getData());
-        if ($this->Assets->save($asset)) {
-
-        $this->Flash->success(__('El activo fue guardado'));
-        return $this->redirect(['action' => 'index']);
         }
-        $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
-		*/
-
-
-        }
-
         $types = $this->Assets->Types->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
