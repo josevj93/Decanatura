@@ -155,6 +155,7 @@ class TransfersController extends AppController
         $assetsQuery = TableRegistry::get('Assets');
         $assetsQuery = $assetsQuery->find()
                          ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
+                         ->where(['assets.state = "Disponible"'])
                          ->toList();
         $size = count($assetsQuery);
         $asset=   array_fill(0, $size, NULL);
