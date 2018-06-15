@@ -155,6 +155,26 @@ class AssetsController extends AppController
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
         $this->set(compact('asset', 'types', 'users', 'locations'));
     }
+
+    /**
+     * Restaura un activo desactivado
+     */
+    public function restore($plaque){
+        $asset = $this->Assets->get($plaque);
+        $asset->deleted = false;
+        $asset->state = 'Disponible';
+        $fecha = date('Y-m-d H:i:s');
+        $asset->modified = $fecha;
+
+        if ($this->Assets->save($asset)) {
+            $this->Flash->success(__('El activo fue activado exitosamente.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('El activo no se pudo activar correctamente.'));
+        return $this->redirect(['action' => 'index']);
+    }
+
+
     /**
      * Elimina solo logicamente los activos de la base de datos
      * 
