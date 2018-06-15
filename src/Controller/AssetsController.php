@@ -206,6 +206,7 @@ class AssetsController extends AppController
             $prestable = $this->request->getData('lendable');
             //parseo la placa con letras para dividirla en predicado+numero (asg21fa34)
             //divide con una expresion regular: (\d*)$
+            //pregunta si hay letras en la placa
             if (preg_match("/\D*/", $placa)){
                 list($predicado, $numero) = preg_split("/(\d*)$/", $placa, NULL ,PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
                 echo("alfanumerico");
