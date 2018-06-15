@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
+
 <div class="users form large-9 medium-8 columns content">
     <?= $this->Form->create($user) ?>
     <h3>Modificar Usuario</h3>
@@ -14,8 +15,9 @@
             echo $this->Form->input('apellido2', array('type'=> 'text', 'label'=> 'Apellido 2', 'class' => 'form-control'));
             echo $this->Form->input('correo', array('type'=> 'text', 'label'=> 'Correo', 'class' => 'form-control'));
             echo $this->Form->input('username', array('type'=> 'text', 'label'=> 'Usuario', 'class' => 'form-control'));
-            echo $this->Form->input('password', array('type'=> 'password', 'label'=> 'Contraseña', 'class' => 'form-control'));
-            echo $this->Form->input('id_rol', array('type' => 'select','class' => 'form-control','options' => array('1' => 'Administrador', '2' => 'Estudiante', '3' => 'Director de la Escuela'), 'selected' => 'private'));
+            //echo $this->Form->input('password', array('type'=> 'password', 'label'=> 'Contraseña', 'class' => 'form-control'));
+            echo $this->Form->input('id_rol', array('type' => 'select', 'label'=> 'Rol', 'class' => 'form-control','options' => $roles , 'selected' => 'private', 'value' => $rol ));
+            echo $this->Form->control('account_status', array('type' => 'select', 'label'=> 'Estado', 'class' => 'form-control','options' => array('0' => 'Activo', '1' => 'Inoperante'), 'selected' => 'private'));
         ?>
     <style>
         .btn-primary {
