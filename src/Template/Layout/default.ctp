@@ -21,6 +21,7 @@ $cakeDescription = 'Control de Activos';
     'plugins/datatables/dataTables.bootstrap4.css',
     'plugins/buttons.dataTables.min.css',
     'plugins/jquery.dataTables.min.css',
+    'plugins/fixedHeader.dataTables.min.css',
     'custom.css',
     'sb-admin.css']) ?>
 
@@ -153,6 +154,7 @@ $cakeDescription = 'Control de Activos';
     </li>
   <?php endif; ?>
 
+<?php if($allowP) : ?>
   <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
     <?=$this->Html->link(
       $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Préstamos', array('class' => 'nav-link-text')),
@@ -162,6 +164,7 @@ $cakeDescription = 'Control de Activos';
     );
     ?>
   </li>
+  <?php endif; ?>
 
   <?php if($allowT) : ?>
   </li>
@@ -264,7 +267,7 @@ $this->Html->script([ 'plugins/jquery/jquery.min.js','plugins/bootstrap/js/boots
   'plugins/jquery-easing/jquery.easing.min.js','plugins/datatables/jquery.dataTables.js','plugins/datatables/dataTables.bootstrap4.js',
   'sb-admin-datatables.min.js',
   'plugins/buttons.html5.min.js','plugins/datatables.buttons.min.js',
-  'plugins/jszip.min.js','plugins/pdfmake.min.js','plugins/vfs_fonts.js','custom.js'
+  'plugins/jszip.min.js','plugins/pdfmake.min.js','plugins/vfs_fonts.js','plugins/dataTables.fixedHeader.min.js','custom.js'
 ])
 ?>
 

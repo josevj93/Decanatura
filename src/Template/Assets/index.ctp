@@ -25,6 +25,7 @@
                         <th scope="col"><?= $this->Paginator->sort('Responsable') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('Ubicación') ?></th>                
                         <th scope="col"><?= $this->Paginator->sort('Año') ?></th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -50,34 +51,22 @@
                     <?php endforeach; ?>
                 </tbody>
                 <tfoot>
-                <tr>
-                    <td class="actions">
-                        <?php if($allowC) : ?>
-                        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $asset->plaque], array('escape' => false)) ?>
-                        <?php endif; ?>
-                        <?php if($allowM) : ?>
-                        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $asset->plaque], array('escape' => false)) ?>
-                        <?php endif; ?>
-                        <?php if($allowE) : ?>
-                        <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $asset->plaque], ['escape' => false, 'confirm' => __('Seguro que desea eliminar el tipo de activo # {0}?', $asset->plaque)]) ?>
-                        <?php endif; ?>
-                    </td>                       
-                    <td><?= h($asset->plaque) ?></td>
-                    <td><?= $asset->has('type') ? $this->Html->link($asset->type->name, ['controller' => 'Types', 'action' => 'view', $asset->type->type_id]) : '' ?></td>
-                    <td><?= h($asset->brand) ?></td>
-                
-                
-                    <td><?= h($asset->description) ?></td>
-                
-                    <td><?= $this->Number->format($asset->owner_id) ?></td>
-                    
-                    <td><?= $asset->has('location') ? $this->Html->link($asset->location->location_id, ['controller' => 'Locations', 'action' => 'view', $asset->location->location_id]) : '' ?></td>
-                
-                    <td><?= $this->Number->format($asset->year) ?></td>
+                    <tr>
+                        <td></td>
+                        <th>Placa</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Serie</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Responsable</th>
+                        <th>Ubicación</th>
+                        <th>Año</th>
+                    </tr>
 
-                </tr>
                 </tfoot>
             </table>
+           
         </div>
     </div>
 </div>
@@ -88,9 +77,9 @@
 .btn-primary {
     margin: 10px;
     margin-top: 15px;
-  color: #fff;
-  background-color: #FF9933;
-  border-color: #FF9933;
+    color: #fff;
+    background-color: #FF9933;
+    border-color: #FF9933;
 }
 </style>
 
@@ -101,23 +90,60 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-        $('#assets-grid').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
+        var table = $('#assets-grid').DataTable( {
+          dom: 'Bfrtip',
+                buttons: [
                 'copyHtml5',
                 'excelHtml5',
                 'csvHtml5',
                 'pdfHtml5'
-            ]
-        } );
+                ],
+                "iDisplayLength": 10,
+                "paging": true,
+                "pageLength": 10,
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "decimal": ",",
+                    "thousands": ".",
+                    "sSelect": "1 fila seleccionada",
+                    "select": {
+                        rows: {
+                            _: "Ha seleccionado %d filas",
+                            0: "Dele click a una fila para seleccionarla",
+                            1: "1 fila seleccionada"
+                        }
+                    },
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            } );
         // Setup - add a text input to each footer cell
         $('#assets-grid tfoot th').each( function () {
             var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Buscar '+title+'" />' );
+            $(this).html( '<input type="text" placeholder="&#xF002; '+title+'" style="font-family:Arial, FontAwesome" />' );
         } );
 
         // DataTable
-        var table = $('#assets-grid').DataTable();
+       // var table = $('#assets-grid').DataTable();
 
         // Apply the search
         table.columns().every( function () {
@@ -126,8 +152,8 @@
             $( 'input', this.footer() ).on( 'keyup change', function () {
                 if ( that.search() !== this.value ) {
                     that
-                        .search( this.value )
-                        .draw();
+                    .search( this.value )
+                    .draw();
                 }
             } );
         } );
