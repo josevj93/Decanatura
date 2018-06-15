@@ -218,7 +218,9 @@ class ResiduesController extends AppController
 
         if ($this->request->is('post')) {
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
-            $residue->residues_id = $this->$RID;
+            $residue->residues_id = $RID;
+            debug($RID);
+            debug($residue);
             if ($this->Residues->save($residue)) {
                 $this->Flash->success(__('El acta de desecho fue guardada.'));
 
