@@ -166,9 +166,11 @@ class AssetsController extends AppController
         
         if($asset->deletable){
             if($this->Assets->delete($asset)){
-                return 1;
+                $this->Flash->success(__('El activo fue eliminado exitosamente.'));
+                return $this->redirect(['action' => 'index']);
             }
-            return 0;
+            $this->Flash->error(__('El activo no se pudo eliminar correctamente.'));
+            return $this->redirect(['action' => 'index']);
         }
         
         $fecha = date('Y-m-d H:i:s');
@@ -177,10 +179,13 @@ class AssetsController extends AppController
         $asset->modified = $fecha;
         
         if ($this->Assets->save($asset)) {
-            return 2;
+            $this->Flash->success(__('El activo fue desactivado exitosamente.'));
+            return $this->redirect(['action' => 'index']);
         }
-        return 0;
+        $this->Flash->error(__('El activo no se pudo desactivar correctamente.'));
+        return $this->redirect(['action' => 'index']);
     }
+    
     /**
      * Método para eliminar un activo del sistema
      */
