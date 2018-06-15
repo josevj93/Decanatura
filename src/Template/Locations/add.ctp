@@ -39,8 +39,8 @@
           margin-left: 15px;
         }
     </style>
-    
-</div>
+  </div>
+    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Locations', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->end() ?>
 
- <?= $this->Html->link(__('Cancelar'), ['controller'=> 'Locations', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
- <?= $this->Form->button(__('Aceptar'), ['controller'=> 'Locations', 'class' => 'btn btn-primary']) ?>
