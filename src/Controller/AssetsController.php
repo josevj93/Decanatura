@@ -205,30 +205,52 @@ class AssetsController extends AppController
             $año = $this->request->getData('year');
             $prestable = $this->request->getData('lendable');
             //parseo la placa con letras para dividirla en predicado+numero (asg21fa34)
+            //divide con una expresion regular: (\d*)$
+            list($predicado, $numero) = preg_split("/(\d*)$/", $placa);
+            echo($predicado);
+            echo($numero);
             //$predicado = asg21fa
             //$numero = 34
             //realiza el ciclo
             for ($i = 0; $i < $cantidad; $i++){
                 $asset = $this->Assets->newEntity();
-                //agrego predicado+numero como placa
-                $data = [
-                    'plaque' => $placa,
-                    'type_id' => $tipo,
-                    'brand' => $marca,
-                    'model' => $modelo,
-                    'state' => $estado,
-                    'description' => $descripcion,
-                    'owner_id' => $dueno,
-                    'responsable_id' => $responsable,
-                    'location_id' => $ubicacion, 
-                    'year' => $año,
-                    'lendable' => $prestable
-                ];
+                if($predicado == null){
+                    $data = [
+                        'plaque' => $placa,
+                        'type_id' => $tipo,
+                        'brand' => $marca,
+                        'model' => $modelo,
+                        'state' => $estado,
+                        'description' => $descripcion,
+                        'owner_id' => $dueno,
+                        'responsable_id' => $responsable,
+                        'location_id' => $ubicacion, 
+                        'year' => $año,
+                        'lendable' => $prestable
+                    ];
+                    $placa = $placa + 1;
+                }
+                else{ //agrego predicado+numero como placa
+                    $data = [
+                        'plaque' => $predicado . $numero,
+                        'type_id' => $tipo,
+                        'brand' => $marca,
+                        'model' => $modelo,
+                        'state' => $estado,
+                        'description' => $descripcion,
+                        'owner_id' => $dueno,
+                        'responsable_id' => $responsable,
+                        'location_id' => $ubicacion, 
+                        'year' => $año,
+                        'lendable' => $prestable
+                    ];
+                    $numero = $numero + 1;
+                }
+                
                 $asset = $this->Assets->patchEntity($asset, $data);
                 //meter una por una a la base
                 $this->Assets->save($asset);
                 //incrementa la placa
-                $placa = $placa + 1;
                 //$numero = $numero + 1
                 /**if($i == 1){
                     echo($asset);
