@@ -208,8 +208,9 @@ class ResiduesController extends AppController
 
         if ($this->request->is('post')) {
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
+            $residue->residues_id = $this->$RID;
             if ($this->Residues->save($residue)) {
-                $this->Flash->success(__('The residue has been saved.'));
+                $this->Flash->success(__('El acta de desecho fue guardada.'));
 
                 $condicion = explode(',', $this->request->getData('checkList'));
                 
@@ -227,7 +228,7 @@ class ResiduesController extends AppController
                 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The residue could not be saved. Please, try again.'));
+            $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Intentolo de nuevo.'));
         }
 
         $this->set(compact('residue', 'RID'));
