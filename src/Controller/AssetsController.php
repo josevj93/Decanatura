@@ -150,9 +150,10 @@ class AssetsController extends AppController
                 );*/
                 //$this->Assets->clear();
                 //$this->placa++;
-		$cantidad = $this->Post->field('quantity');
-		$placa = $this->Post->field('plaque');
-        for ($i = 0; $i < $cantidad; $i++){
+		//$cantidad = $this->Session->read('quantity');
+		//$placa = $this->Post->field('plaque');
+
+        /**for ($i = 0; $i < $cantidad; $i++){
             $asset = array();
             $asset['Asset']['plaque'] = $placa;
             $asset['Asset']['type_id'] = '5b08417d8e257';
@@ -167,16 +168,16 @@ class AssetsController extends AppController
             $asset['Asset']['lendable'] = 0;
         }
         $this->Asset->saveBundle();
-		
-		/**
-        $asset = $this->Assets->patchEntity($asset, $this->request->getData());
-        if ($this->Assets->save($asset)) {
-
-        $this->Flash->success(__('El activo fue guardado'));
-        return $this->redirect(['action' => 'index']);
-        }
-        $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
 		*/
+		for ($i = 0; $i < 5; $i++){
+            $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+            if ($this->Assets->save($asset)) {
+
+            $this->Flash->success(__('El activo fue guardado'));
+            return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
+		}
 
 
         }

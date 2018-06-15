@@ -62,9 +62,9 @@ class Asset extends Entity
         'unique_id' => true
     ];
 }
-
+/**
 App::Import('Model', 'BigDataModel');
 class Frog extends BigDataModel
 {
        var $actsAs = array('BigData');
-}
+}*/
