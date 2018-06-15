@@ -21,6 +21,7 @@ $cakeDescription = 'Control de Activos';
     'plugins/datatables/dataTables.bootstrap4.css',
     'plugins/buttons.dataTables.min.css',
     'plugins/jquery.dataTables.min.css',
+    'plugins/fixedHeader.dataTables.min.css',
     'custom.css',
     'sb-admin.css']) ?>
 
@@ -48,7 +49,11 @@ $cakeDescription = 'Control de Activos';
       ['escape' => false]
     );
     ?>
-    <a class="navbar-brand" href="index.html">Sistema de Activos</a>
+     
+    <a class="navbar-brand" style="color:white">
+      Sistema de Activos</a>
+   
+  
 
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -71,7 +76,7 @@ $cakeDescription = 'Control de Activos';
       <?php if($allowR) : ?>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Roles">
           <?=$this->Html->link(
-            $this->Html->tag('i','' , array('class' => 'fa fa-apple')).$this->Html->tag('span', ' Roles', array('class' => 'nav-link-text')),
+            $this->Html->tag('i','' , array('class' => 'fa fa-cog')).$this->Html->tag('span', ' Roles', array('class' => 'nav-link-text')),
             array('controller' => 'Roles','action' => 'index'),
             array('class' => 'nav-link',
               'escape'=> false)
@@ -84,7 +89,7 @@ $cakeDescription = 'Control de Activos';
 
         <li class = "nav-item" data-toggle="tooltip" data-placement="right" title="Menú de Activos">
           <a href="#activosSubmenu" data-toggle="collapse" aria-expanded="false" class= "nav-link">
-            <i class="fa fa-users"></i><span class="nav-link-text"> Menú de activos</span>
+            <i class="fa fa-wrench"></i><span class="nav-link-text"> Menú de activos</span>
           </a>
         </li>
 
@@ -132,7 +137,7 @@ $cakeDescription = 'Control de Activos';
        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reporte Técnico">
         <?=$this->Html->link(
 
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Reporte Técnico', array('class' => 'nav-link-text')),array('controller' => 'TechnicalReports','action' => 'index'),
+          $this->Html->tag('i','' , array('class' => 'fa fa-file')).$this->Html->tag('span', ' Reporte Técnico', array('class' => 'nav-link-text')),array('controller' => 'TechnicalReports','action' => 'index'),
           array('class' => 'nav-link',
             'escape'=> false)
         );
@@ -145,7 +150,7 @@ $cakeDescription = 'Control de Activos';
      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ubicaciones">
       <?=$this->Html->link(
 
-        $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Ubicaciones', array('class' => 'nav-link-text')),array('controller' => 'Locations','action' => 'index'),
+        $this->Html->tag('i','' , array('class' => 'fa fa-globe')).$this->Html->tag('span', ' Ubicaciones', array('class' => 'nav-link-text')),array('controller' => 'Locations','action' => 'index'),
         array('class' => 'nav-link',
           'escape'=> false)
       );
@@ -153,22 +158,28 @@ $cakeDescription = 'Control de Activos';
     </li>
   <?php endif; ?>
 
+<?php if($allowP) : ?>
   <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
     <?=$this->Html->link(
-      $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Préstamos', array('class' => 'nav-link-text')),
+      $this->Html->tag('i','' , array('class' => 'fa fa-book')).$this->Html->tag('span', ' Préstamos', array('class' => 'nav-link-text')),
       array('controller' => 'Loans','action' => 'index'),
       array('class' => 'nav-link',
         'escape'=> false)
     );
     ?>
   </li>
+  <?php endif; ?>
 
   <?php if($allowT) : ?>
-  </li>
-  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Traslados">
-    <a class="nav-link" href="tables.html">
-      <span class="nav-link-text">Traslados</span>
-    </a>
+
+<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Traslados">
+    <?=$this->Html->link(
+      $this->Html->tag('i','' , array('class' => 'fa fa-map-signs')).$this->Html->tag('span', ' Traslados', array('class' => 'nav-link-text')),
+      array('controller' => 'Transfers','action' => 'index'),
+      array('class' => 'nav-link',
+        'escape'=> false)
+    );
+    ?>
   </li>
 <?php endif; ?>
 
@@ -176,7 +187,7 @@ $cakeDescription = 'Control de Activos';
   <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Desechos">
     <?=$this->Html->link(
 
-      $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Desechos', array('class' => 'nav-link-text')),array('controller' => 'Residues','action' => 'index'),
+      $this->Html->tag('i','' , array('class' => 'fa fa-trash')).$this->Html->tag('span', ' Desechos', array('class' => 'nav-link-text')),array('controller' => 'Residues','action' => 'index'),
       array('class' => 'nav-link',
         'escape'=> false)
     );
@@ -264,7 +275,7 @@ $this->Html->script([ 'plugins/jquery/jquery.min.js','plugins/bootstrap/js/boots
   'plugins/jquery-easing/jquery.easing.min.js','plugins/datatables/jquery.dataTables.js','plugins/datatables/dataTables.bootstrap4.js',
   'sb-admin-datatables.min.js',
   'plugins/buttons.html5.min.js','plugins/datatables.buttons.min.js',
-  'plugins/jszip.min.js','plugins/pdfmake.min.js','plugins/vfs_fonts.js','custom.js'
+  'plugins/jszip.min.js','plugins/pdfmake.min.js','plugins/vfs_fonts.js','plugins/dataTables.fixedHeader.min.js','custom.js'
 ])
 ?>
 
