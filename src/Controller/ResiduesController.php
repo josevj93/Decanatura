@@ -315,14 +315,19 @@ class ResiduesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
 
         $assets = TableRegistry::get('Assets')->find()->where(['residues_id' => $id]);
-        
+        //se actualiza el estado del activo en la tabla de activos
         $assets->update()
-        ->set(['residues_id' => null])
+        ->set(['residues_id' => null, 'state' => "Disponible"])
         ->where(['residues_id' => $id])
         ->execute();
-
         $residue = $this->Residues->get($id);
-        debug($this->Residues->get($id));
+        //se quita la llave foránea para poder borrar el activo.
+        $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
+
+                         $technical_reports->update()
+                                             ->set(['residues_id' => null])
+                                             ->where(['residues_id' => $residue->residues_id])
+                                             ->execute();
         if ($this->Residues->delete($residue)) {
             $this->Flash->success(__('The residue has been deleted.'));
         } else {
