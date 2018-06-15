@@ -202,7 +202,17 @@ class ResiduesController extends AppController
         
         //Saco el ultimo id y le sumo 1 para generar el número consecutivo de la base de datos
         $tmpID= $this->Residues->find('all',['fields'=>'residues_id'])->last();
-        $tmpID= $tmpID->residues_id+1;
+        
+        // En caso de que no haya ningúnn entry, se agrega un #1
+        if($tmpID->residues_id == null){
+
+            $tmpID=1;
+
+        }
+        else{
+
+            $tmpID= $tmpID->residues_id+1;    
+        }
 
         $RID="VRA-".$tmpID;
 

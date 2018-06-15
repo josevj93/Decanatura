@@ -2,24 +2,24 @@
     <?= $this->Form->create($location) ?>
     <fieldset>
         <legend><?= __('Consultar Ubicación') ?></legend><br>
-            <div>
-                <label>Id:</label><br>
+            <div class = 'row'>
+                <label class='align'>Id:</label><br>
                 <?php 
                 echo $this->Form->imput('location_id',  ['label' => 'Id:', 'class'=>'form-control col-sm-2', 'disabled']);
-                ?><br>
-            </div>
-            <div>
-                <label>Nombre:</label><br>
+                ?>
+            </div> <br>
+            <div class = 'row'>
+                <label class='align'>Nombre:</label><br>
                 <?php 
                 echo $this->Form->imput('nombre', ['label' => 'Nombre:', 'class'=>'form-control col-sm-2', 'disabled']);
-                ?><br>
-            </div>
-            <div>
-                <label>Descripción:</label><br>
+                ?>
+            </div><br>
+            <div class = 'row'>
+                <label class='align'>Descripción:</label><br>
                 <?php 
                 echo $this->Form->textarea('description', ['label' => 'Descripción:', 'class'=>'form-control col-sm-4', 'disabled']);
-                ?><br>
-            </div>
+                ?>
+            </div><br>
     </fieldset>
 
 <style>
@@ -29,6 +29,14 @@
       border-color: #0099FF;
       float: right;
       margin-left:10px;
+    }
+
+    label {
+        width: 100px;
+    }
+
+    label[class=align] {
+        margin-left: 15px;
     }
 </style> 
 
