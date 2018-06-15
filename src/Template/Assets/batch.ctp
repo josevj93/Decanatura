@@ -22,7 +22,7 @@ $random = uniqid();
     </div>
 
         <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-        <?php echo $this->Form->input('plaque',array('type' => 'text','label'=>'Cantidad', 'class' => 'form-control')); ?>   
+        <?php echo $this->Form->input('quantity',array('type' => 'text','label'=>'Cantidad', 'class' => 'form-control')); ?>   
     </div>
     
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">

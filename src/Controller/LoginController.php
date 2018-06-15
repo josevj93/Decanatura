@@ -19,90 +19,38 @@ class LoginController extends AppController
      */
     public function index()
     {
+     $this->viewBuilder()->setLayout('login');
 
-        $this->viewBuilder()->setLayout('login');
-       // $login = $this->paginate($this->Login);
-
-  //      $this->set(compact('login'));
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Login id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $login = $this->Login->get($id, [
-            'contain' => []
-        ]);
-
-        $this->set('login', $login);
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $login = $this->Login->newEntity();
-        if ($this->request->is('post')) {
-            $login = $this->Login->patchEntity($login, $this->request->getData());
-            if ($this->Login->save($login)) {
-                $this->Flash->success(__('The login has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The login could not be saved. Please, try again.'));
+     if($this->request->is('post')){
+        $user = $this->Auth->identify();
+        if($user){
+            $this->Auth->setUser($user);
+            return $this->redirect('/');
         }
-        $this->set(compact('login'));
+        $this->Flash->error(__('Usuario o contaseña inválidos, intente otra vez'));
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Login id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $login = $this->Login->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $login = $this->Login->patchEntity($login, $this->request->getData());
-            if ($this->Login->save($login)) {
-                $this->Flash->success(__('The login has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The login could not be saved. Please, try again.'));
-        }
-        $this->set(compact('login'));
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Login id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
+
+public function logout(){
+
+    return $this->redirect($this->Auth->logout());
+}
+
+
+    public function isAuthorized($user)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $login = $this->Login->get($id);
-        if ($this->Login->delete($login)) {
-            $this->Flash->success(__('The login has been deleted.'));
-        } else {
-            $this->Flash->error(__('The login could not be deleted. Please, try again.'));
+
+        // Admin can access every action
+        if (true) {
+            return true;
         }
 
-        return $this->redirect(['action' => 'index']);
+        // Default deny
+        return false;
     }
+
+
+
 }

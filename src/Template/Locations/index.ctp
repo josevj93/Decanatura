@@ -14,10 +14,15 @@
                 <?php foreach ($locations as $location): ?>
                 <tr>
                     <td class="actions">
-                        
+                        <?php if($allowC) : ?>
                         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $location->location_id], array('escape' => false)) ?>
+                        <?php endif; ?>
+                        <?php if($allowM) : ?>
                         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $location->location_id], array('escape' => false)) ?>
+                        <?php endif; ?>
+                        <?php if($allowE) : ?>
                         <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $location->location_id], ['escape' => false, 'confirm' => __('Seguro que desea eliminar la Ubicación # {0}?', $location->location_id)]) ?>
+                        <?php endif; ?>
                     </td>
                     <td><?= h($location->location_id) ?></td>
                     <td><?= h($location->description) ?></td>

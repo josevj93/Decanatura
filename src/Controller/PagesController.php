@@ -67,5 +67,17 @@ class PagesController extends AppController
         }
     }
 
+    public function isAuthorized($user)
+    {
+
+        // Admin can access every action
+        if (true) {
+            return true;
+        }
+
+        // Default deny
+        return false;
+    }
+
     
 }

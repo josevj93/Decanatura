@@ -57,6 +57,8 @@ $cakeDescription = 'Control de Activos';
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+      
+        <?php if($allowU) : ?> 
        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
         <?=$this->Html->link(
 
@@ -66,6 +68,9 @@ $cakeDescription = 'Control de Activos';
         );
         ?>
       </li>
+      <?php endif; ?>
+
+      <?php if($allowR) : ?>
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Roles">
               <?=$this->Html->link(
                   $this->Html->tag('i','' , array('class' => 'fa fa-apple')).$this->Html->tag('span', ' Roles', array('class' => 'nav-link-text')),
@@ -75,6 +80,9 @@ $cakeDescription = 'Control de Activos';
               );
               ?>
           </li>
+      <?php endif; ?>
+
+      <?php if($allowA) : ?>
 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activos">
         <?=$this->Html->link(
@@ -86,22 +94,9 @@ $cakeDescription = 'Control de Activos';
         ?>
       </li>
 
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tipos de activos">
-        <?=$this->Html->link(
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Tipos de activos', array('class' => 'nav-link-text')),
-          array('controller' => 'Types','action' => 'index'),
-          array('class' => 'nav-link',
-            'escape'=> false)
-        );
-        ?>
+      <?php endif; ?>
 
-      </li>
-
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
-        <a class="nav-link" href="tables.html">
-          <span class="nav-link-text">Préstamos</span>
-        </a>
-      </li>
+      <?php if($allowRT) : ?>
        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reporte Técnico">
         <?=$this->Html->link(
 
@@ -111,25 +106,10 @@ $cakeDescription = 'Control de Activos';
         );
         ?>
       </li>
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Desechos">
-        <?=$this->Html->link(
+      <?php endif; ?>
 
-          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Desechos', array('class' => 'nav-link-text')),array('controller' => 'Residues','action' => 'index'),
-          array('class' => 'nav-link',
-            'escape'=> false)
-        );
-        ?>
-      </li>
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Traslados">
-        <a class="nav-link" href="tables.html">
-          <span class="nav-link-text">Traslados</span>
-        </a>
-      </li>
-      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="UAcademica">
-        <a class="nav-link" href="tables.html">
-          <span class="nav-link-text">Unidad Académica</span>
-        </a>
-      </li>
+
+      <?php if($allowUb) : ?>
        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ubicaciones">
         <?=$this->Html->link(
 
@@ -139,6 +119,34 @@ $cakeDescription = 'Control de Activos';
         );
         ?>
       </li>
+      <?php endif; ?>
+
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Prestamos">
+        <a class="nav-link" href="tables.html">
+          <span class="nav-link-text">Préstamos</span>
+        </a>
+      </li>
+
+      <?php if($allowT) : ?>
+      </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Traslados">
+        <a class="nav-link" href="tables.html">
+          <span class="nav-link-text">Traslados</span>
+        </a>
+      </li>
+      <?php endif; ?>
+
+      <?php if($allowD) : ?>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Desechos">
+        <?=$this->Html->link(
+
+          $this->Html->tag('i','' , array('class' => 'fa fa-users')).$this->Html->tag('span', ' Desechos', array('class' => 'nav-link-text')),array('controller' => 'Residues','action' => 'index'),
+          array('class' => 'nav-link',
+            'escape'=> false)
+        );
+        ?>
+      <?php endif; ?>
+
     </ul>
     <ul class="navbar-nav sidenav-toggler">
       <li class="nav-item">
@@ -148,10 +156,10 @@ $cakeDescription = 'Control de Activos';
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-        <!--li class="nav-item">
+        <li class="nav-item">
             <a class="navbar-brand" style="color:white">
-                <i class="fa fa-user"></i> <?php echo "Bienvenido:" ." ". $nombre ."". $apellido; ?></a>
-        </li-->
+                <i class="fa fa-user"></i> <?php echo $nombre ." ". $apellido; ?></a>
+        </li>
 
 
         <li class="nav-item">
@@ -197,15 +205,15 @@ $cakeDescription = 'Control de Activos';
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Â¿List@ para salir?</h5>
+        <h5 class="modal-title" id="exampleModalLabel">¿List@ para salir?</h5>
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">Ã—</span>
+          <span aria-hidden="true"></span>
         </button>
       </div>
-      <div class="modal-body">Seleccione "Salir" para cerrar sesiÃ³n.</div>
+      <div class="modal-body">Seleccione "Salir" para cerrar sesión.</div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <?=$this->Html->link("Salir", array('controller' => 'users','action'=> 'logout'), array( 'class' => 'btn btn-primary'))?>
+          <?=$this->Html->link("Salir", array('controller' => 'login','action'=> 'logout'), array( 'class' => 'btn btn-primary'))?>
 
       </div>
     </div>
