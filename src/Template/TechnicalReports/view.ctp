@@ -47,7 +47,7 @@ label{
 
 
 <div class="technicalReports view large-9 medium-8 columns content">
-    <legend>Reporte técnico</legend>
+    <legend>Informe técnico</legend>
             <br>
             <div class="form-control sameLine" >
                 <div class="row">
