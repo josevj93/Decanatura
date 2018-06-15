@@ -23,6 +23,7 @@
     }
     label[class=label-t]{
         margin-left: 20px;
+        width: 150px;
     }
     label {
         text-align:left;
@@ -37,22 +38,34 @@
       margin-left:10px;
     }
 
+    .sameLine{
+    display: flex; 
+    justify-content: space-between; 
+    border-color: transparent;
+    }
+
 </style>
-<div class="transfers view large-9 medium-8 columns content">
-    <legend>Traslado</legend>
+<div class="transfers view large-9 medium-8 columns justify-content">
+    <legend><?=__('Traslado')?></legend>
     <br>
-        <div class= 'row'>
-            <div class ="col-md-8">                
-                    <label>Nº traslado:</label>
-                    <?php //echo '<input type="text" class="form-control col-sm-2" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?> 
+        <div class= 'form-control sameLine' style="border-color: grey;">
+
+            <div class =" row">                
+                    <label  for="transfer_id">Nº traslado:</label>
+                    <?php echo '<input type="text" id="transfer_id" class="form-control col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?>
+                   
             </div>
 
-            <label>Fecha:</label>
-            <?php
-            // para dar formato a la fecha
-            $tmpDate= $transfer->date->format('d-m-Y');
-            ?>  
-            <?php echo '<input type="text" class="form-control col-sm-2" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?> 
+            <div class="row" >
+                <label for="transfer_date">Fecha:</label>
+                <?php
+                // para dar formato a la fecha
+                $tmpDate= $transfer->date->format('d-m-Y');
+                ?>
+                <?php echo '<input type="text" id="transfer_date" style="margin-left:2px;" class="form-control  col-xs-2 col-sm-2 col-md-6 col-lg-9" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?>
+
+            </div> 
+
         </div>
     <br>
     <table>

@@ -299,8 +299,17 @@ class TransfersController extends AppController
                 //debug($nuevos);
                 //debug($viejos);
 
+                $assets = TableRegistry::get('Assets')->find('all');
+
                 if (count($viejos) > 0)
+                {
                   $assets_transfers->deleteall(array('transfer_id'=>$id, 'assets_id IN' => $viejos), false);
+
+                  $assets->update()
+                    ->set(['state' => "Disponible"])
+                    ->where(['plaque IN' => $viejos])
+                    ->execute();
+                }
 
                 if (count($nuevos) > 0)
                 {
@@ -316,6 +325,11 @@ class TransfersController extends AppController
                         
                         $assets_transfers->save($at);
                     }
+
+                    $assets->update()
+                    ->set(['state' => "Trasladado"])
+                    ->where(['plaque IN' => $nuevos])
+                    ->execute();
                 }
                 return $this->redirect(['action' => 'index']);
             }

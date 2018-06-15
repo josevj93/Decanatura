@@ -121,10 +121,8 @@ use Cake\Routing\Router;
                     <th class="transfer-h"><?= __('Seleccionados') ?></th>
                 </tr>
             <thead>
-            <tbody>
-                <?php 
-
-                foreach ($asset as $a): ?>
+            <tbody> 
+                
                 <tr>
                     <td><?= h($a->plaque) ?></td>
                     <td><?= h($a->brand) ?></td>
@@ -133,6 +131,7 @@ use Cake\Routing\Router;
                     <td><?= h($a->state) ?></td>
                     <td><?php
                         // If que verifica si el checkbox debe ir activado o no
+
                         $isIn= in_array($a->plaque, array_column($result, 'plaque') );
                         if($isIn)
                             {

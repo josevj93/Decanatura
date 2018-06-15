@@ -202,14 +202,27 @@ class ResiduesController extends AppController
         
         //Saco el ultimo id y le sumo 1 para generar el número consecutivo de la base de datos
         $tmpID= $this->Residues->find('all',['fields'=>'residues_id'])->last();
-        $tmpID= $tmpID->residues_id+1;
+        
+        // En caso de que no haya ningúnn entry, se agrega un #1
+        if($tmpID->residues_id == null){
+
+            $tmpID=1;
+
+        }
+        else{
+
+            $tmpID= $tmpID->residues_id+1;    
+        }
 
         $RID="VRA-".$tmpID;
 
         if ($this->request->is('post')) {
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
+            $residue->residues_id = $RID;
+            debug($RID);
+            debug($residue);
             if ($this->Residues->save($residue)) {
-                $this->Flash->success(__('The residue has been saved.'));
+                $this->Flash->success(__('El acta de desecho fue guardada.'));
 
                 $condicion = explode(',', $this->request->getData('checkList'));
                 
@@ -227,7 +240,7 @@ class ResiduesController extends AppController
                 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The residue could not be saved. Please, try again.'));
+            $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Intentolo de nuevo.'));
         }
 
         $this->set(compact('residue', 'RID'));
