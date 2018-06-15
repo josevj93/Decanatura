@@ -204,6 +204,7 @@ class ResiduesController extends AppController
         $tmpID= $this->Residues->find('all',['fields'=>'residues_id'])->last();
         
         // En caso de que no haya ningúnn entry, se agrega un #1
+        
         if($tmpID->residues_id == null){
 
             $tmpID=1;
@@ -211,7 +212,8 @@ class ResiduesController extends AppController
         }
         else{
 
-            $tmpID= $tmpID->residues_id+1;    
+            $numero = explode("-", $tmpID);
+            $tmpID= (int)$numero[1]+1;
         }
 
         $RID="VRA-".$tmpID;
@@ -219,8 +221,7 @@ class ResiduesController extends AppController
         if ($this->request->is('post')) {
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
             $residue->residues_id = $RID;
-            debug($RID);
-            debug($residue);
+            
             if ($this->Residues->save($residue)) {
                 $this->Flash->success(__('El acta de desecho fue guardada.'));
 
