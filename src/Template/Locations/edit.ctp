@@ -1,7 +1,7 @@
 <div class="locations edit large-9 medium-8 columns content">
     <?= $this->Form->create($location) ?>
     <fieldset>
-        <legend><?= __('Modificar Ubicacion') ?></legend><br>
+        <legend><?= __('Modificar Ubicación') ?></legend><br>
             <div class = 'row'>
                 <label class='align'>Id:</label><br>
                 <?php 
