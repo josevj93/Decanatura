@@ -5,7 +5,7 @@
  */
 ?>
 <div class="roles x large-9 medium-8 columns content">
-    <h3><?= __('Roles') ?></h3>
+    <h3><?= __('Informe técnico') ?></h3>
 </div>
 
 <div class="row">
