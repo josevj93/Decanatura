@@ -134,7 +134,7 @@ label{
             <br>
 
             <div class="row col-md-8" >
-                <label>Recomendación:</label><br>
+                <label>Recomendación:</label>
                 <?php if ("C"==$technicalReport->recommendation): ?>
                     Reubicar
                 <?php endif; ?>
