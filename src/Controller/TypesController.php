@@ -13,6 +13,64 @@ use App\Controller\AppController;
 class TypesController extends AppController
 {
 
+
+     public function isAuthorized($user)
+    {
+
+        $this->Roles = $this->loadModel('Roles');
+        $this->Permissions = $this->loadModel('Permissions');
+        $this->RolesPermissions = $this->loadModel('RolesPermissions');
+
+        $allowI = false;
+        $allowM = false;
+        $allowE = false;
+        $allowC = false;
+
+        $query = $this->Roles->find('all', array(
+                    'conditions' => array(
+                        'id' => $user['id_rol']
+                    )
+                ))->contain(['Permissions']);
+
+        foreach ($query as $roles) {
+            $rls = $roles['permissions'];
+            foreach ($rls as $item){
+                //$permisos[(int)$item['id']] = 1;
+                if($item['nombre'] == 'Insertar Usuarios'){
+                    $allowI = true;
+                }else if($item['nombre'] == 'Modificar Usuarios'){
+                    $allowM = true;
+                }else if($item['nombre'] == 'Eliminar Usuarios'){
+                    $allowE = true;
+                }else if($item['nombre'] == 'Consultar Usuarios'){
+                    $allowC = true;
+                }
+            }
+        }
+
+
+        $this->set('allowI',$allowI);
+        $this->set('allowM',$allowM);
+        $this->set('allowE',$allowE);
+        $this->set('allowC',$allowC);
+
+
+        if ($this->request->getParam('action') == 'add'){
+            return $allowI;
+        }else if($this->request->getParam('action') == 'edit'){
+            return $allowM;
+        }else if($this->request->getParam('action') == 'delete'){
+            return $allowE;
+        }else if($this->request->getParam('action') == 'view'){
+            return $allowC;
+        }else{
+            return $allowC;
+        }
+
+
+    }
+
+
     /**
      * Index method
      *
@@ -49,13 +107,16 @@ class TypesController extends AppController
     {
         $type = $this->Types->newEntity();
         if ($this->request->is('post')) {
+            $random = uniqid();
+            $type->type_id = $random;
             $type = $this->Types->patchEntity($type, $this->request->getData());
+            
             if ($this->Types->save($type)) {
-                $this->Flash->success(__('The type has been saved.'));
+                $this->Flash->success(__('El tipo de activo fue guardado exitosamente.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The type could not be saved. Please, try again.'));
+            $this->Flash->error(__('El tipo de activo no se pudo guardar, por favor intente nuevamente.'));
         }
         $this->set(compact('type'));
     }
@@ -75,11 +136,11 @@ class TypesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $type = $this->Types->patchEntity($type, $this->request->getData());
             if ($this->Types->save($type)) {
-                $this->Flash->success(__('Tipo de activo fue guardado'));
+            $this->Flash->success(__('El tipo de activo fue guardado exitosamente.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('El tipo de activo no se pudo guardar, porfavor intente nuevamente'));
+            $this->Flash->error(__('El tipo de activo no se pudo guardar, por favor intente nuevamente.'));
         }
         $this->set(compact('type'));
     }
@@ -95,10 +156,11 @@ class TypesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $type = $this->Types->get($id);
-        if ($this->Types->delete($type)) {
-            $this->Flash->success(__('The type has been deleted.'));
-        } else {
-            $this->Flash->error(__('The type could not be deleted. Please, try again.'));
+        try{
+            $this->Types->delete($type); 
+             $this->Flash->success(__('El tipo de activo se ha eliminado exitosamente'));
+        } catch (\PDOException $e) {
+     $this->Flash->error(__('El tipo de activo no se pudo eliminar. Puede deberse a que tiene activos asociados'));
         }
 
         return $this->redirect(['action' => 'index']);
