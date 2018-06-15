@@ -207,7 +207,7 @@ class AssetsController extends AppController
             //parseo la placa con letras para dividirla en predicado+numero (asg21fa34)
             //divide con una expresion regular: (\d*)$
             //pregunta si hay letras en la placa
-            if (preg_match("/\D*/", $placa)){
+            if (preg_match("/([a-z])\w+/", $placa)){
                 list($predicado, $numero) = preg_split("/(\d*)$/", $placa, NULL ,PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
                 echo("alfanumerico");
             }
@@ -216,7 +216,7 @@ class AssetsController extends AppController
             //realiza el ciclo
             for ($i = 0; $i < $cantidad; $i++){
                 $asset = $this->Assets->newEntity();
-                if(!preg_match("/\D*/", $placa)){
+                if(!preg_match("/([a-z])\w+/", $placa)){
                     $data = [
                         'plaque' => $placa,
                         'type_id' => $tipo,
