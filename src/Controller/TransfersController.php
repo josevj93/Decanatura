@@ -144,6 +144,16 @@ class TransfersController extends AppController
                 $transferAsset->assets_id = $placa;
                 //se guarda en tabla conjunta (assets y traslado)
                 $transferAssetTable->save($transferAsset);
+
+                //Se le cambia el estado al activo.
+                $assets = TableRegistry::get('Assets')->find('all');
+                        
+                         $assets->update()
+                                ->set(['state' => "Trasladado"])
+                                ->where(['plaque IN' => $placa])
+                                ->execute();
+
+
                 }
                 $this->Flash->success(__('La transferencia fue exitosa.'));
                 return $this->redirect(['action' => 'index']);
