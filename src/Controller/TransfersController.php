@@ -368,8 +368,33 @@ class TransfersController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
+        
+        // Obtengo el transfer que necesito eliminar
         $transfer = $this->Transfers->get($id);
         
+        // Con el ID del transfer, obtengo el todos los Transfers_Assets Relacionados al mismo transfer desde la tabla 
+        // intermedia Assets_Transfers
+        $assets_transfers = TableRegistry::get('AssetsTransfers')->find()->where(['transfer_id' => $transfer->transfers_id]);
+        
+        // Proceseo para actualizar el estado del activo en la tabla de activos
+        
+        // Itero sobre cada Asset_Transfer en la variable indTransfer
+        foreach ($assets_transfers as $indTransfer) {
+                
+                // Obtengo el asset ID associado a éste transfer particular
+                $assetID = $indTransfer->assets_id;
+                
+                // Obtengo el asset correspondiente a éste transfer
+                $assets = TableRegistry::get('Assets')->find()->where(['plaque' => $assetID]);
+                  
+                //se actualiza el estado del activo en la tabla de activos
+                $assets->update()
+                ->set(['state' => "Disponible"])
+                ->where(['plaque' => $assetID])
+                ->execute();
+                
+            }    
+
         if ($this->Transfers->delete($transfer)) {
             $this->Flash->success(__('The transfer has been deleted.'));
         } else {
