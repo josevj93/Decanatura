@@ -206,15 +206,16 @@ class AssetsController extends AppController
             $prestable = $this->request->getData('lendable');
             //parseo la placa con letras para dividirla en predicado+numero (asg21fa34)
             //divide con una expresion regular: (\d*)$
-            list($predicado, $numero) = preg_split("/(\d*)$/", $placa);
-            echo($predicado);
-            echo($numero);
+            if (preg_match("/\D*/", $placa)){
+                list($predicado, $numero) = preg_split("/(\d*)$/", $placa, NULL ,PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+                echo("alfanumerico");
+            }
             //$predicado = asg21fa
             //$numero = 34
             //realiza el ciclo
             for ($i = 0; $i < $cantidad; $i++){
                 $asset = $this->Assets->newEntity();
-                if($predicado == null){
+                if(!preg_match("/\D*/", $placa)){
                     $data = [
                         'plaque' => $placa,
                         'type_id' => $tipo,
@@ -246,6 +247,7 @@ class AssetsController extends AppController
                     ];
                     $numero = $numero + 1;
                 }
+                
                 $asset = $this->Assets->patchEntity($asset, $data);
                 //meter una por una a la base
                 $this->Assets->save($asset);
@@ -259,10 +261,9 @@ class AssetsController extends AppController
             $this->Flash->success(__('Los activos fueron guardados'));
             return $this->redirect(['action' => 'index']);
         }
-          $types = $this->Assets->Types->find('list', ['limit' => 200]);
+        $types = $this->Assets->Types->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
         $this->set(compact('asset', 'types', 'users', 'locations'));
     }
 }
-
