@@ -132,7 +132,7 @@
     <br>
 
     <div class="row col-md-8"> 
-      <label>Nombre del evaluador: </label>
+      <label>Nombre del Técnico Especializado: </label>
         <?php
         echo $this->Form->imput('evaluator_name', ['class'=>'form-control col-md-5']); 
         ?>   
