@@ -218,19 +218,6 @@ class AssetsController extends AppController
         }
     }
     
-    public static function storeModel($activos = null, $marca = null)
-    {   
-        $models = array(); 
-        //$marca = "Apple";
-       
-        foreach ($activos as $filterModel) {
-            if ($filterModel->brand == $marca && !in_array($filterModel->model, $models)){
-                array_push($models, $filterModel->model);
-            }
-        }
-        return $models;
-        
-    }
 
 
     /**
@@ -240,6 +227,23 @@ class AssetsController extends AppController
     {
         $asset = $this->Assets->newEntity();
         if ($this->request->is('post')) {
+            
+                
+                /**$asset = array(
+                    'plaque' => $this->$i,
+                    'type_id' => '5b08417d8e257',
+                    'brand' => 'Silla',
+                    'model' => 'modelo1',
+                    'state' => 'Activo',
+                    'description' => 'silla generica, modelo 1',
+                    'owner_id' => 1,
+                    'responsable_id' => 1,
+                    'location_id' => 1, 
+                    'year' => '2018',
+                    'lendable' => 0
+                );*/
+                //$this->Assets->clear();
+                //$this->placa++;
                 
         $cantidad = $this->request->getData('quantity');
         $placa = $this->request->getData('plaque');
