@@ -5,6 +5,7 @@
  */
 ?>
 
+
 <head>
 	<style>
         .btn-primary {
@@ -74,6 +75,5 @@
 
 <?= $this->Html->link(__('Cancelar'), ['controller' => 'Models', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
 <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-    
     
 </div>

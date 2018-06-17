@@ -4,15 +4,16 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Myguest Entity
+ * Residue Entity
  *
- * @property int $id
- * @property string $firstname
- * @property string $lastname
- * @property string $email
- * @property \Cake\I18n\FrozenTime $reg_date
+ * @property string $residues_id
+ * @property string $name1
+ * @property string $identification1
+ * @property string $name2
+ * @property string $identification2
+ * @property \Cake\I18n\FrozenDate $date
  */
-class Myguest extends Entity
+class Residue extends Entity
 {
 
     /**
@@ -25,9 +26,11 @@ class Myguest extends Entity
      * @var array
      */
     protected $_accessible = [
-        'firstname' => true,
-        'lastname' => true,
-        'email' => true,
-        'reg_date' => true
+        'residues_id' => true,
+        'name1' => true,
+        'identification1' => true,
+        'name2' => true,
+        'identification2' => true,
+        'date' => true
     ];
 }

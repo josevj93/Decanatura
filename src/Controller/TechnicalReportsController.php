@@ -15,14 +15,76 @@ use Dompdf\Dompdf;
 class TechnicalReportsController extends AppController
 {
 
+
+     public function isAuthorized($user)
+    {
+        $this->Roles = $this->loadModel('Roles');
+        $this->Permissions = $this->loadModel('Permissions');
+        $this->RolesPermissions = $this->loadModel('RolesPermissions');
+
+        $allowI = false;
+        $allowM = false;
+        $allowE = false;
+        $allowC = false;
+
+        $query = $this->Roles->find('all', array(
+                    'conditions' => array(
+                        'id' => $user['id_rol']
+                    )
+                ))->contain(['Permissions']);
+
+        foreach ($query as $roles) {
+            $rls = $roles['permissions'];
+            foreach ($rls as $item){
+                //$permisos[(int)$item['id']] = 1;
+                if($item['nombre'] == 'Insertar Reporte Tecnico'){
+                    $allowI = true;
+                }else if($item['nombre'] == 'Modificar Reporte Tecnico'){
+                    $allowM = true;
+                }else if($item['nombre'] == 'Eliminar Reporte Tecnico'){
+                    $allowE = true;
+                }else if($item['nombre'] == 'Consultar Reporte Tecnico'){
+                    $allowC = true;
+                }
+            }
+        }
+
+
+        $this->set('allowI',$allowI);
+        $this->set('allowM',$allowM);
+        $this->set('allowE',$allowE);
+        $this->set('allowC',$allowC);
+
+
+        if ($this->request->getParam('action') == 'add'){
+            return $allowI;
+        }else if($this->request->getParam('action') == 'edit'){
+            return $allowM;
+        }else if($this->request->getParam('action') == 'delete'){
+            return $allowE;
+        }else if($this->request->getParam('action') == 'view'){
+            return $allowC;
+        }else{
+            return $allowC;
+        }
+
+
+    }
+
+
     /**
      * Index method
      *
      * @return \Cake\Http\Response|void
      */
+
+    // Esta es la variable que se utiliza para generar los reportes
+    // Es la sigla de la escuelta que va a utilizar el sistema
+    public $escuela = 'INGELEC';
+    
     public function index()
     {
-        
+
         $technicalReports = $this->paginate($this->TechnicalReports);
 
         $this->set(compact('technicalReports'));
@@ -51,21 +113,42 @@ class TechnicalReportsController extends AppController
     public function add()
     {
         $technicalReport = $this->TechnicalReports->newEntity();
+
+        //Saco el ultimo id y le sumo 1 para generar el número consecutivo de la base de datos
+        $tmpId= $this->TechnicalReports->find('all',['fields'=>'technical_report_id'])->last();
+        $tmpId= $tmpId->technical_report_id+1;
+        
+        // Obtengo el valor para el año actual
+        $date = date('Y');
+
+        // Formo el ID completo que se va a desplegar en la vista
+        $CompleteID = $this->escuela."-".$tmpId."-".$date;
+
+        // En caso de que la solicitud sea post, o sea, luego de darle aceptar en la vista 
         if ($this->request->is('post')) {
+            
+            // Obtengo los datos generados desde la vista
             $technicalReport = $this->TechnicalReports->patchEntity($technicalReport, $this->request->getData());
+
+            // Hago las inserciones de las partes adicionales del ID en el reporte tecnico antes de guardarlo
+            // Agrego el año actual
+            $technicalReport->year = $date;
+            // Agrego la sigal de la escuela correspondiente
+            $technicalReport->facultyInitials = $this->escuela;
+
             if ($this->TechnicalReports->save($technicalReport)) {
                 $this->Flash->success(__('The technical report has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('No se pudo guardar el reporte.'));
-        }
-        //Saco el ultimo id y le sumo 1
-        $tmpId= $this->TechnicalReports->find('all',['fields'=>'technical_report_id'])->last();
-        $tmpId= $tmpId->technical_report_id+1;
-
+        }// if post
+        
+        // En caso de que la acción sea simplemente cargar la vista
         $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
-        $this->set(compact('technicalReport', 'assets','tmpId'));
+        
+        // Le paso a la vista los valores de assets y el ID que se va a desplegar.
+        $this->set(compact('technicalReport', 'assets','CompleteID'));
 
     }
 
@@ -127,14 +210,14 @@ class TechnicalReportsController extends AppController
         $searchedAsset= $assets->get($id);
         if(empty($searchedAsset) )
         {
-            throw new NotFoundException(__('Activo no encontrado') );      
+            throw new NotFoundException(__('Activo no encontrado') );
         }
         $this->set('serchedAsset',$searchedAsset);
     }
 
-    
+
     public function download($id = null)
-    { 
+    {
 
         $technicalReport = $this->TechnicalReports->get($id, [
             'contain' => ['Assets']
@@ -153,7 +236,7 @@ class TechnicalReportsController extends AppController
         UNIDAD DE BIENES INSTITUCIONALES
         <br>
         INFORME TÉCNICO</center><h2>
-    
+
         <table style="width:35%">
         <tr>
         <th><h3>Unidad custodio:'.$technicalReport->asset->responsable_id.'<h3></th>
@@ -206,5 +289,5 @@ class TechnicalReportsController extends AppController
         return $this->redirect(['action' => 'index']);
 
     }
-    
+
 }
