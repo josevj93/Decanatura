@@ -216,7 +216,7 @@ class AssetsController extends AppController
             //realiza el ciclo
             for ($i = 0; $i < $cantidad; $i++){
                 $asset = $this->Assets->newEntity();
-                if(!preg_match("/([a-z])\w+/", $placa)){
+                if(!preg_match("/([a-z])\w+/ß", $placa)){
                     $data = [
                         'plaque' => $placa,
                         'type_id' => $tipo,
