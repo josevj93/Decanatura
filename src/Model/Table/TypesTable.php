@@ -44,7 +44,7 @@ class TypesTable extends Table
         $validator
             ->scalar('name')
             ->maxLength('name', 255)
-            ->allowEmpty('name');
+            ->notEmpty('name','Debe ingresar un nombre');
 
         $validator
             ->scalar('description')
