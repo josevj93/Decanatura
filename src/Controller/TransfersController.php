@@ -396,9 +396,9 @@ class TransfersController extends AppController
             }    
 
         if ($this->Transfers->delete($transfer)) {
-            $this->Flash->success(__('The transfer has been deleted.'));
+            $this->Flash->success(__('El traslado a sido eliminado.'));
         } else {
-            $this->Flash->error(__('The transfer could not be deleted. Please, try again.'));
+            $this->Flash->error(__('El traslado no pudo ser eliminado. Por favor, intente de nuevo.'));
         }
 
         return $this->redirect(['action' => 'index']);

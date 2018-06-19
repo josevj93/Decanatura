@@ -12,7 +12,8 @@
         <legend><?= __('Consultar acta de desecho') ?></legend>
         <br>    
         <div class="form-control sameLine" >    
-        <div class='row'>
+            <div class='row'>
+
 
             <label>Autorización Número:</label>
                 <label><?php echo h($residue->residues_id); ?></label>
@@ -20,10 +21,10 @@
         <div class='row'>
             <label>Fecha:</label>
                 <?php
-                    $tmpDate= $residue->date->format('y-m-d');
+                    $tmpDate= $residue->date->format('yy-m-d');
                     echo $this->Form->imput('date', ['class'=>'form-control', 'value'=>$tmpDate, 'disabled']); 
                 ?>
-        </div>
+            </div>
         </div><br>
 
         <div class='row'>
