@@ -12,20 +12,45 @@ use Cake\Routing\Router;
 <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js" type="text/javascript"></script>
 
 <style>
-    .btn-primary[type=submit]{
-        color: #fff;
-        background-color: #0099FF;
-        border-color: #0099FF;
-        float: right;
-        margin-left: 10px;
+    
+
+    .btn-primary{
+      color: #FFF;
+      background-color: #0099FF;
+      border-color: #0099FF;
+      float: right;
+      margin-left:10px;
+      text-transform: capitalize;
     }
-    .btn-primary {
+    .btn-primary:hover{
         color: #fff;
         background-color: #0099FF;
-        border-color: #0099FF;
-        float: right;
-        margin-left: 10px;
-        }
+
+    }
+    .btn[type="submit"]:not{
+        text-transform: capitalize;
+    }
+    .btn[type="submit"]:hover{
+        text-transform: capitalize;
+        color: #fff;
+        background-color: #0099FF;
+    }
+
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    }
+    td{
+        border: 1px solid #000000;
+        border-bottom: 1px solid #000000;
+        padding: 8px;
+    }
+    th[class=transfer-h]{
+        border-bottom: 1px solid #000000;
+        text-align: center;
+        color:black;
+        padding: 8px;
+    }
        
 </style>
 
@@ -122,23 +147,22 @@ use Cake\Routing\Router;
                 </tr>
             <thead>
             <tbody> 
-                
+                <?php foreach ($asset as $a): ?>
                 <tr>
                     <td><?= h($a->plaque) ?></td>
                     <td><?= h($a->brand) ?></td>
                     <td><?= h($a->model) ?></td>
                     <td><?= h($a->series) ?></td>
                     <td><?= h($a->state) ?></td>
-                    <td><?php
+                    <td>
+                        <?php
                         // If que verifica si el checkbox debe ir activado o no
-
                         $isIn= in_array($a->plaque, array_column($result, 'plaque') );
                         if($isIn)
                             {
                                 echo $this->Form->checkbox('assets_id',
                                 ['value'=>htmlspecialchars($a->plaque),'checked', "class"=>"chk" ]
                                 );
-
                             }
                         else
                             {
@@ -146,7 +170,6 @@ use Cake\Routing\Router;
                                 ['value'=>htmlspecialchars($a->plaque),"class"=>"chk"]
                                 );
                             }
-
                         ?>
                         
                     </td>
@@ -160,7 +183,7 @@ use Cake\Routing\Router;
     <!-- input donde coloco la lista de placas checkeadas -->
     <input type="hidden" name="checkList" id="checkList">
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'acept']) ?>
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'aceptar']) ?>
     <?= $this->Form->end() ?>
 
 
@@ -172,7 +195,9 @@ use Cake\Routing\Router;
     $(document).ready(function() 
     {
         $('#assets-transfers-grid').DataTable( {
-              dom: "iDisplayLength": 10,
+              dom: 'Bfrtip',
+                    buttons: [],
+                   "iDisplayLength": 10,
                    "paging": true,
                    "pageLength": 10,
                     "language": {
@@ -214,7 +239,7 @@ use Cake\Routing\Router;
 
     $("document").ready(
     function() {
-      $('#acept').click( function()
+      $('#aceptar').click( function()
       {
         var check = getValueUsingClass();
         $('#checkList').val(check);
