@@ -23,10 +23,6 @@
 <div class="users view large-9 medium-8 columns content">
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Placa') ?></th>
-            <td><?= h($loan->id_assets) ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Responsable') ?></th>
             <td><?= h($loan->user->nombre) ?></td>
         </tr>
@@ -40,6 +36,35 @@
         </tr>
     </table>
         
+</div>
+
+<div class="related">
+    <legend><?= __('Activos prestados') ?></legend>
+
+    <!-- tabla que contiene  datos básicos de activos-->
+    <table id='assets-borrowed-grid' cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th class="transfer-h"><?= __('Placa') ?></th>
+                <th class="transfer-h"><?= __('Marca') ?></th>
+                <th class="transfer-h"><?= __('Modelo') ?></th>
+                <th class="transfer-h"><?= __('Serie') ?></th>
+            </tr>
+        <thead>
+        <tbody>
+            <?php 
+                foreach ($result as $a): ?>
+                <tr>
+                    <td><?= h($a->plaque) ?></td>
+                    <td><?= h($a->brand) ?></td>
+                    <td><?= h($a->model) ?></td>  
+                    <td><?= h($a->series) ?></td>
+                </tr>
+            <?php endforeach; ?>
+            
+        </tbody>
+    </table>
+
 </div>
 
 <div class="col-12 text-right">
