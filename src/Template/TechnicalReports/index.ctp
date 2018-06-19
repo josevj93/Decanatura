@@ -34,14 +34,14 @@
                             <?php endif; ?>         
                         <?php endif; ?> 
                         <?php if($allowE) : ?> 
-                            <?php if($technicalReport->file_name == null) : ?> 
+                            <?php if($technicalReport->descargado == null) : ?> 
 
                             <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $technicalReport->technical_report_id], ['escape' => false, 'confirm' => __('¿Seguro quiere borrar el reporte # '.$technicalReport->technical_report_id.' ?', $technicalReport->technical_report_id)]) ?>
                             <?php endif; ?> 
                         <?php endif; ?> 
                     </td>
 
-                    <td><?= h($technicalReport->facultyInitials."-".$technicalReport->technical_report_id."-".$technicalReport->year) ?></td>
+                    <td><?= h($technicalReport->facultyInitials."-".$technicalReport->internal_id."-".$technicalReport->year) ?></td>
                     <td><?= h($technicalReport->date ) ?></td>
 
 

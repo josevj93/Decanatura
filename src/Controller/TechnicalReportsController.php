@@ -111,16 +111,31 @@ class TechnicalReportsController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
     public function add()
-    {
+    {   
+        // Creo la nueva entidad de tipo reporte técnico que voy a usar
         $technicalReport = $this->TechnicalReports->newEntity();
 
-        //Saco el ultimo id y le sumo 1 para generar el número consecutivo de la base de datos
-        $tmpId= $this->TechnicalReports->find('all',['fields'=>'technical_report_id'])->last();
-        $tmpId= $tmpId->technical_report_id+1;
-        
         // Obtengo el valor para el año actual
         $date = date('Y');
 
+        //Obtengo todos los reportes técnicos del año actual
+        $techRepts = TableRegistry::get('TechnicalReports')->find()->where(['year' => $date]);
+
+        // De los reportes técnicos que obtuve, saco el ID más alto
+        $tmpId = $techRepts->find('all',['fields'=>'internal_id'])->max('internal_id');
+        
+        // Si el id que resultó es null (porque la tabla está vacía o no hay records para el año actual)
+        if ($tmpId == null) {
+            
+            // Asigno el ID como 1
+            $tmpId = 1;            
+        }
+        else{
+
+            // De lo contrario, le sumo 1 al ID más grande
+            $tmpId= $tmpId->internal_id+1;
+        }
+        
         // Formo el ID completo que se va a desplegar en la vista
         $CompleteID = $this->escuela."-".$tmpId."-".$date;
 
@@ -131,17 +146,22 @@ class TechnicalReportsController extends AppController
             $technicalReport = $this->TechnicalReports->patchEntity($technicalReport, $this->request->getData());
 
             // Hago las inserciones de las partes adicionales del ID en el reporte tecnico antes de guardarlo
+            
             // Agrego el año actual
             $technicalReport->year = $date;
+            
             // Agrego la sigal de la escuela correspondiente
             $technicalReport->facultyInitials = $this->escuela;
 
+            // Agrego el ID interno de acuerdo al cálculo hecho antes (este ID se reinicia con el año mientras que el otro no)
+            $technicalReport->internal_id = $tmpId;
+
             if ($this->TechnicalReports->save($technicalReport)) {
-                $this->Flash->success(__('The technical report has been saved.'));
+                $this->Flash->success(__('El informe técnico se ha guardado.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('No se pudo guardar el reporte.'));
+            $this->Flash->error(__('No se pudo guardar el informe.'));
         }// if post
         
         // En caso de que la acción sea simplemente cargar la vista
@@ -194,9 +214,9 @@ class TechnicalReportsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $technicalReport = $this->TechnicalReports->get($id);
         if ($this->TechnicalReports->delete($technicalReport)) {
-            $this->Flash->success(__('The technical report has been deleted.'));
+            $this->Flash->success(__('El informe técnico se ha eliminado.'));
         } else {
-            $this->Flash->error(__('The technical report could not be deleted. Please, try again.'));
+            $this->Flash->error(__('El informe técnico no se pudo eliminar, por favor intente de nuevo'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -222,6 +242,13 @@ class TechnicalReportsController extends AppController
         $technicalReport = $this->TechnicalReports->get($id, [
             'contain' => ['Assets']
         ]);
+
+        // linea para marcar el reporte tecnico como descargado, haciendo que ya no se pueda borrar
+        $technicalReport->descargado = true;
+
+        // Actualizo el reporte técnico, guardando el valor de descargado como true
+        $this->TechnicalReports->save($technicalReport);
+
          require_once 'dompdf/autoload.inc.php';
         //initialize dompdf class
         $document = new Dompdf();

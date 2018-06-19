@@ -29,7 +29,9 @@ class TechnicalReportsTableTest extends TestCase
         'app.types',
         'app.users',
         'app.locations',
-        'app.residues'
+        'app.loans',
+        'app.residues',
+        'app.internals'
     ];
 
     /**
