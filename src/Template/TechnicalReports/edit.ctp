@@ -199,7 +199,10 @@
 
 <script>
   $( function Picker() {
-    $( "#datepicker" ).datepicker({ dateFormat: 'y-mm-dd' });
+    $( "#datepicker" ).datepicker({ 
+          dateFormat: 'y-mm-dd',
+          monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+          dayNamesMin: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'] });
   } );
   $("document").ready(
     function() {
