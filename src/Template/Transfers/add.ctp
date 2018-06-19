@@ -89,7 +89,7 @@
       margin-left:10px;
     }
         
-{  </style>
+  </style>
 
 </head>
 
@@ -265,10 +265,13 @@
     $(document).ready(function() 
     {
         $('#assets-transfers-grid').DataTable( {
-             dom: "iDisplayLength": 10,
-                   "paging": true,
-                   "pageLength": 10,
-                    "language": {
+                dom: 'Bfrtip',
+                buttons: [
+                ],
+                "iDisplayLength": 10,
+                "paging": true,
+                "pageLength": 10,
+                "language": {
                     "sProcessing": "Procesando...",
                     "sLengthMenu": "Mostrar _MENU_ registros",
                     "sZeroRecords": "No se encontraron resultados",
@@ -302,6 +305,7 @@
                         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                     }
                 }
+
         } );
     } );
 
@@ -333,4 +337,6 @@
     return selected;
 }
 </script>
+
+
 
