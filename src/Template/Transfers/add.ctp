@@ -65,11 +65,22 @@
     label[class=label-t]{
         margin-left: 20px;
     }
+    label[class = funcionario]
+    {
+      margin-left: 20px;
+      margin-right: 57px;
+    }
+    label[class = id]
+    {
+      margin-left: 20px;
+      margin-right: 45px;
+    }
     label {
         text-align:left;
         margin-right: 10px;
           
     }
+    
     .btn-primary {
       color: #FFF;
       background-color: #0099FF;
@@ -106,7 +117,7 @@
     </div><br>
     <div>
         <table>
-        <!-- Tabla para rellenar los datos de las unidades academicas -->
+        <!-- Tabla para rellenar los datos de las unidades académicas -->
         <tr>
             <th class="transfer-h"><h5>Unidad que entrega<h5></th>
             <th class="transfer-h"><h5>Unidad que recibe<h5></th>
@@ -115,20 +126,20 @@
             <!-- Fila para la Unidad que entrega -->
             <td>
                 <div class="row" >
-                    <label class="label-t">Unidad academica: </label>
+                    <label class="label-t">Unidad académica: </label>
                    
                     <label>Ingeniería</label>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Funcionario: </label>
+                    <label class="funcionario">Funcionario: </label>
                     <?php 
             echo $this->Form->imput('functionary', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
             ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Identificación:</label>
+                    <label class="id">Identificación:</label>
                     <?php 
             echo $this->Form->imput('identification', ['label' => 'identification:', 'class'=>'form-control col-sm-4']);
             ?>
@@ -137,21 +148,21 @@
             <!-- Fila para la Unidad que recibe -->
             <td>
                 <div class="row">
-                        <label class="label-t">Unidad academica: </label>
+                        <label class="label-t">Unidad académica: </label>
                         <?php 
             echo $this->Form->imput('Acade_Unit_recib', ['label' => 'Acade_Unit_recib:', 'class'=>'form-control col-sm-4']);
             ?>       
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Funcionario: </label>
+                    <label class="funcionario">Funcionario: </label>
                     <?php 
             echo $this->Form->imput('functionary_recib', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
             ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Identificación:</label>
+                    <label class="id">Identificación:</label>
                     <?php 
             echo $this->Form->imput('identification_recib', ['label' => 'identification_recib:', 'class'=>'form-control col-sm-4']);
             ?>
@@ -214,7 +225,11 @@
 
 <script>
   $( function Picker() {
-    $( "#datepicker" ).datepicker({ dateFormat: 'y-mm-dd' });
+    $( "#datepicker" ).datepicker({ 
+            dateFormat: 'y-mm-dd',
+            monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+            dayNamesMin: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do']
+     });
   } );
   $("document").ready(
     function() {
@@ -253,7 +268,49 @@
 <script type="text/javascript">
     $(document).ready(function() 
     {
-        $('#assets-transfers-grid').DataTable( {} );
+        $('#assets-transfers-grid').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                ],
+                "iDisplayLength": 10,
+                "paging": true,
+                "pageLength": 10,
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "decimal": ",",
+                    "thousands": ".",
+                    "sSelect": "1 fila seleccionada",
+                    "select": {
+                        rows: {
+                            _: "Ha seleccionado %d filas",
+                            0: "Dele click a una fila para seleccionarla",
+                            1: "1 fila seleccionada"
+                        }
+                    },
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+
+        } );
     } );
 
     $("document").ready(
@@ -284,4 +341,6 @@
     return selected;
 }
 </script>
+
+
 

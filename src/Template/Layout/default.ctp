@@ -134,10 +134,10 @@ $cakeDescription = 'Control de Activos';
 
 
       <?php if($allowRT) : ?>
-       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reporte Técnico">
+       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Informe Técnico">
         <?=$this->Html->link(
 
-          $this->Html->tag('i','' , array('class' => 'fa fa-file')).$this->Html->tag('span', ' Reporte Técnico', array('class' => 'nav-link-text')),array('controller' => 'TechnicalReports','action' => 'index'),
+          $this->Html->tag('i','' , array('class' => 'fa fa-file')).$this->Html->tag('span', ' Informe Técnico', array('class' => 'nav-link-text')),array('controller' => 'TechnicalReports','action' => 'index'),
           array('class' => 'nav-link',
             'escape'=> false)
         );

@@ -47,7 +47,7 @@ label{
 
 
 <div class="technicalReports view large-9 medium-8 columns content">
-    <legend>Reporte técnico</legend>
+    <legend>Informe técnico</legend>
             <br>
             <div class="form-control sameLine" >
                 <div class="row">
@@ -134,7 +134,7 @@ label{
             <br>
 
             <div class="row col-md-8" >
-                <label>Recomendación:</label><br>
+                <label>Recomendación:</label>
                 <?php if ("C"==$technicalReport->recommendation): ?>
                     Reubicar
                 <?php endif; ?>
@@ -148,7 +148,7 @@ label{
                 <?php endif; ?>
 
                 <?php if("U"==$technicalReport->recommendation): ?>
-                    Usar piesas
+                    Usar piezas
                 <?php endif; ?>
 
                 <?php if("O"==$technicalReport->recommendation): ?>
@@ -158,7 +158,7 @@ label{
             <br>
 
             <div class="row col-md-8"> 
-                 <label>Nombre del evaluador: </label>
+                 <label>Nombre del Técnico Especializado: </label>
                     <?php
                     echo $this->Form->imput('evaluator_name', ['class'=>'form-control col-md-4',"readonly"=>"readonly", "value"=>$technicalReport->evaluator_name]); 
                     ?>   

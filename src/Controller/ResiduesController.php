@@ -199,16 +199,37 @@ class ResiduesController extends AppController
         $this->set(compact('residues','result'));
         
         $residue = $this->Residues->newEntity();
+        
+        //Saco el ultimo id y le sumo 1 para generar el número consecutivo de la base de datos
+        $tmpID= $this->Residues->find('all',['fields'=>'residues_id'])->last();
+        
+        // En caso de que no haya ningúnn entry, se agrega un #1
+        
+        if($tmpID->residues_id == null){
+
+            $tmpID=1;
+
+        }
+        else{
+
+            $numero = explode("-", $tmpID);
+            $tmpID= (int)$numero[1]+1;
+        }
+
+        $RID="VRA-".$tmpID;
+
         if ($this->request->is('post')) {
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
+            $residue->residues_id = $RID;
+            
             if ($this->Residues->save($residue)) {
-                $this->Flash->success(__('The residue has been saved.'));
+                $this->Flash->success(__('El acta de desecho fue guardada.'));
 
                 $condicion = explode(',', $this->request->getData('checkList'));
                 
                 $assets = TableRegistry::get('Assets')->find('all');
                 $assets->update()
-                    ->set(['residues_id' => $residue->residues_id])
+                    ->set(['residues_id' => $residue->residues_id, 'state' => "Desechado"])
                     ->where(['plaque IN' => $condicion])
                     ->execute();
 
@@ -220,9 +241,10 @@ class ResiduesController extends AppController
                 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The residue could not be saved. Please, try again.'));
+            $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Intentolo de nuevo.'));
         }
-        $this->set(compact('residue'));
+
+        $this->set(compact('residue', 'RID'));
     }
     /**
      * Edit method
@@ -283,7 +305,7 @@ class ResiduesController extends AppController
                         $assets = TableRegistry::get('Assets')->find('all');
 
                         $assets->update()
-                                ->set(['residues_id' => NULL])
+                                ->set(['residues_id' => NULL, 'state' => "Disponible"])
                                 ->where(['plaque IN' => $viejos])
                                 ->execute();
 
@@ -300,7 +322,7 @@ class ResiduesController extends AppController
                          $assets = TableRegistry::get('Assets')->find('all');
                         
                          $assets->update()
-                                ->set(['residues_id' => $residue->residues_id])
+                                ->set(['residues_id' => $residue->residues_id, 'state' => "Desechado"])
                                 ->where(['plaque IN' => $nuevos])
                                 ->execute();
 
@@ -363,14 +385,19 @@ class ResiduesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
 
         $assets = TableRegistry::get('Assets')->find()->where(['residues_id' => $id]);
-        
+        //se actualiza el estado del activo en la tabla de activos
         $assets->update()
-        ->set(['residues_id' => null])
+        ->set(['residues_id' => null, 'state' => "Disponible"])
         ->where(['residues_id' => $id])
         ->execute();
-
         $residue = $this->Residues->get($id);
-        debug($this->Residues->get($id));
+        //se quita la llave foránea para poder borrar el activo.
+        $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
+
+                         $technical_reports->update()
+                                             ->set(['residues_id' => null])
+                                             ->where(['residues_id' => $residue->residues_id])
+                                             ->execute();
         if ($this->Residues->delete($residue)) {
             $this->Flash->success(__('The residue has been deleted.'));
         } else {

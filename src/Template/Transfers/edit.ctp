@@ -12,47 +12,82 @@ use Cake\Routing\Router;
 <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js" type="text/javascript"></script>
 
 <style>
-    .btn-primary[type=submit]{
-        color: #fff;
-        background-color: #0099FF;
-        border-color: #0099FF;
-        float: right;
-        margin-left: 10px;
+    
+
+    .btn-primary{
+      color: #FFF;
+      background-color: #0099FF;
+      border-color: #0099FF;
+      float: right;
+      margin-left:10px;
+      text-transform: capitalize;
     }
-    .btn-primary {
+    .btn-primary:hover{
         color: #fff;
         background-color: #0099FF;
-        border-color: #0099FF;
-        float: right;
-        margin-left: 10px;
-        }
+
+    }
+    .btn[type="submit"]:not{
+        text-transform: capitalize;
+    }
+    .btn[type="submit"]:hover{
+        text-transform: capitalize;
+        color: #fff;
+        background-color: #0099FF;
+    }
+
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    }
+    td{
+        border: 1px solid #000000;
+        border-bottom: 1px solid #000000;
+        padding: 8px;
+    }
+    th[class=transfer-h]{
+        border-bottom: 1px solid #000000;
+        text-align: center;
+        color:black;
+        padding: 8px;
+    }
+    label[class=label-t]{
+        margin-left: 20px;
+        width: 150px;
+    }
+    .sameLine{
+    display: flex; 
+    justify-content: space-between; 
+    border-color: transparent;
+    }
        
 </style>
 
 
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-
-</nav>
 <div class="transfers form large-9 medium-8 columns content">
+  <fieldset>
     <?= $this->Form->create($transfer) ?>
     <legend>Traslado</legend>
     <br>
-        <div class= 'row'>
-            <div class ="col-md-8">                
+        <div class= 'form-control sameLine' style="border-color: transparent;">
+            <div class ="row">                
                 <label>Nº traslado:</label>
-                <?php echo '<input type="text" class="form-control col-sm-4" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?> 
+                <?php echo '<input type="text" class="form-control col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?> 
             </div>
 
-            <label>Fecha:</label>
-            <?php
-            // para dar formato a la fecha
-            $tmpDate= $transfer->date->format('d-m-Y');
-            ?>  
-            <?php echo '<input type="text" class="form-control col-sm-2" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?> 
+            <div  class="row" >
+                <label>Fecha:</label>
+                <?php
+                // para dar formato a la fecha
+                $tmpDate= $transfer->date->format('d-m-Y');
+                ?>  
+                <?php echo '<input type="text" class="form-control col-xs-2 col-sm-2 col-md-6 col-lg-9" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?>
+            </div>
+ 
         </div>
     <br>
     <table>
-        <!-- Tabla para rellenar los datos de las unidades academicas -->
+        <!-- Tabla para rellenar los datos de las unidades académicas -->
         <tr>
             <th class="transfer-h"><h5>Unidad que entrega<h5></th>
             <th class="transfer-h"><h5>Unidad que recibe<h5></th>
@@ -61,7 +96,7 @@ use Cake\Routing\Router;
             <!-- Fila para la Unidad que entrega -->
             <td>
                 <div class="row" >
-                    <label class="label-t">Unidad academica: </label>
+                    <label class="label-t">Unidad académica: </label>
                    
                     <?php echo '<input type="text" class="form-control col-sm-6"  value="' . htmlspecialchars($Unidad) . '">'; ?>
                 </div>
@@ -82,7 +117,7 @@ use Cake\Routing\Router;
             <td>
                 <div class="row">
                     
-                        <label class="label-t">Unidad academica: </label>
+                        <label class="label-t">Unidad académica: </label>
                     
                         <?php echo '<input type="text" name="Acade_Unit_recib" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->Acade_Unit_recib). '">'; ?>
                     
@@ -121,25 +156,23 @@ use Cake\Routing\Router;
                     <th class="transfer-h"><?= __('Seleccionados') ?></th>
                 </tr>
             <thead>
-            <tbody>
-                <?php 
-
-                foreach ($asset as $a): ?>
+            <tbody> 
+                <?php foreach ($asset as $a): ?>
                 <tr>
                     <td><?= h($a->plaque) ?></td>
                     <td><?= h($a->brand) ?></td>
                     <td><?= h($a->model) ?></td>
                     <td><?= h($a->series) ?></td>
                     <td><?= h($a->state) ?></td>
-                    <td><?php
+                    <td>
+                        <?php
                         // If que verifica si el checkbox debe ir activado o no
-                        $isIn= in_array($a->plaque, array_column($result, 'plaque') );
-                        if($isIn)
+                        
+                        if(in_array($a->plaque, array_column($result, 'plaque'),true) )
                             {
                                 echo $this->Form->checkbox('assets_id',
                                 ['value'=>htmlspecialchars($a->plaque),'checked', "class"=>"chk" ]
                                 );
-
                             }
                         else
                             {
@@ -147,7 +180,6 @@ use Cake\Routing\Router;
                                 ['value'=>htmlspecialchars($a->plaque),"class"=>"chk"]
                                 );
                             }
-
                         ?>
                         
                     </td>
@@ -161,10 +193,10 @@ use Cake\Routing\Router;
     <!-- input donde coloco la lista de placas checkeadas -->
     <input type="hidden" name="checkList" id="checkList">
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'acept']) ?>
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'aceptar','style'=>'text-transform: capitalize;']) ?>
     <?= $this->Form->end() ?>
 
-
+  </fieldset>
 </div>
 
 
@@ -172,12 +204,52 @@ use Cake\Routing\Router;
 <script type="text/javascript">
     $(document).ready(function() 
     {
-        $('#assets-transfers-grid').DataTable( {} );
+        $('#assets-transfers-grid').DataTable( {
+              dom: 'Bfrtip',
+                    buttons: [],
+                   "iDisplayLength": 10,
+                   "paging": true,
+                   "pageLength": 10,
+                    "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "decimal": ",",
+                    "thousands": ".",
+                    "sSelect": "1 fila seleccionada",
+                    "select": {
+                        rows: {
+                            _: "Ha seleccionado %d filas",
+                            0: "Dele click a una fila para seleccionarla",
+                            1: "1 fila seleccionada"
+                        }
+                    },
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+        } );
     } );
 
     $("document").ready(
     function() {
-      $('#acept').click( function()
+      $('#aceptar').click( function()
       {
         var check = getValueUsingClass();
         $('#checkList').val(check);

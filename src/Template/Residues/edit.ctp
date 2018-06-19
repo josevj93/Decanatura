@@ -28,9 +28,7 @@
         <div class='row'>
 
             <label>Autorización Número:</label>
-                <?php
-                    echo $this->Form->imput('residues_id',  ['class'=>'form-control col-sm-2', 'disabled']); 
-                ?>
+                <label><?php echo h($residue->residues_id); ?></label>
         </div>
         <div class='row'>
             <label>Fecha:</label>
@@ -41,8 +39,8 @@
         </div>
         </div><br>
 
-        <div class='form-control row' style="border-color: transparent;">
-            <label>Unidad Custodio:</label>
+        <div class='row'>
+            <label class='align'>Unidad Custodio:</label>
             <?php 
                 echo $this->Form->imput('Unidad', ['class'=>'form-control col-sm-4', 'value'=>$Unidad, 'disabled']);
             ?>
@@ -174,8 +172,13 @@
           
     }
 
+    label[class=align]{
+        margin-left: 14px;
+    }
+
     label[class=label-t]{
         margin-left: 20px;
+        width: 70px;
     }
 
     input[name=date]{

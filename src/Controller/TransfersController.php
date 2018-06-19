@@ -200,6 +200,16 @@ class TransfersController extends AppController
                 $transferAsset->assets_id = $placa;
                 //se guarda en tabla conjunta (assets y traslado)
                 $transferAssetTable->save($transferAsset);
+
+                //Se le cambia el estado al activo.
+                $assets = TableRegistry::get('Assets')->find('all');
+                        
+                         $assets->update()
+                                ->set(['state' => "Trasladado"])
+                                ->where(['plaque IN' => $placa])
+                                ->execute();
+
+
                 }
                 $this->Flash->success(__('La transferencia fue exitosa.'));
                 return $this->redirect(['action' => 'index']);
@@ -211,6 +221,7 @@ class TransfersController extends AppController
         $assetsQuery = TableRegistry::get('Assets');
         $assetsQuery = $assetsQuery->find()
                          ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
+                         ->where(['assets.state = "Disponible"'])
                          ->toList();
         $size = count($assetsQuery);
         $asset=   array_fill(0, $size, NULL);
@@ -288,8 +299,17 @@ class TransfersController extends AppController
                 //debug($nuevos);
                 //debug($viejos);
 
+                $assets = TableRegistry::get('Assets')->find('all');
+
                 if (count($viejos) > 0)
+                {
                   $assets_transfers->deleteall(array('transfer_id'=>$id, 'assets_id IN' => $viejos), false);
+
+                  $assets->update()
+                    ->set(['state' => "Disponible"])
+                    ->where(['plaque IN' => $viejos])
+                    ->execute();
+                }
 
                 if (count($nuevos) > 0)
                 {
@@ -305,6 +325,11 @@ class TransfersController extends AppController
                         
                         $assets_transfers->save($at);
                     }
+
+                    $assets->update()
+                    ->set(['state' => "Trasladado"])
+                    ->where(['plaque IN' => $nuevos])
+                    ->execute();
                 }
                 return $this->redirect(['action' => 'index']);
             }
@@ -343,12 +368,37 @@ class TransfersController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
+        
+        // Obtengo el transfer que necesito eliminar
         $transfer = $this->Transfers->get($id);
         
+        // Con el ID del transfer, obtengo el todos los Transfers_Assets Relacionados al mismo transfer desde la tabla 
+        // intermedia Assets_Transfers
+        $assets_transfers = TableRegistry::get('AssetsTransfers')->find()->where(['transfer_id' => $transfer->transfers_id]);
+        
+        // Proceseo para actualizar el estado del activo en la tabla de activos
+        
+        // Itero sobre cada Asset_Transfer en la variable indTransfer
+        foreach ($assets_transfers as $indTransfer) {
+                
+                // Obtengo el asset ID associado a éste transfer particular
+                $assetID = $indTransfer->assets_id;
+                
+                // Obtengo el asset correspondiente a éste transfer
+                $assets = TableRegistry::get('Assets')->find()->where(['plaque' => $assetID]);
+                  
+                //se actualiza el estado del activo en la tabla de activos
+                $assets->update()
+                ->set(['state' => "Disponible"])
+                ->where(['plaque' => $assetID])
+                ->execute();
+                
+            }    
+
         if ($this->Transfers->delete($transfer)) {
-            $this->Flash->success(__('The transfer has been deleted.'));
+            $this->Flash->success(__('El traslado a sido eliminado.'));
         } else {
-            $this->Flash->error(__('The transfer could not be deleted. Please, try again.'));
+            $this->Flash->error(__('El traslado no pudo ser eliminado. Por favor, intente de nuevo.'));
         }
 
         return $this->redirect(['action' => 'index']);
