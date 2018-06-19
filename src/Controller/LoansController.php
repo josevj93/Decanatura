@@ -88,8 +88,21 @@ class LoansController extends AppController
         $loan = $this->Loans->get($id, [
             'contain' => ['Users']
         ]);
+        $this->loadModel('Assets');
+        $query = $this->Assets->find()
+                        ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series'])
+                        ->where(['assets.loan_id' => $id])
+                        ->toList();
 
-        $this->set('loan', $loan);
+        $size = count($query);
+
+        $result = array_fill(0, $size, NULL);
+        
+        for($i = 0; $i < $size; $i++)
+        {
+            $result[$i] =(object)$query[$i]->assets;
+        }
+        $this->set(compact('loan', 'result'));
     }
 
     /**
@@ -143,6 +156,7 @@ class LoansController extends AppController
                         ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series'])
                         ->where(['assets.state' => "Disponible"])
                         ->where(['assets.lendable' => true])
+                        ->where(['assets.deleted' => false])
                         ->toList();
 
         $size = count($query);
