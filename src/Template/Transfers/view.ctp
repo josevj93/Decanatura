@@ -46,13 +46,14 @@
 
 </style>
 <div class="transfers view large-9 medium-8 columns justify-content">
+  <fieldset>
     <legend><?=__('Traslado')?></legend>
     <br>
-        <div class= 'form-control sameLine' style="border-color: grey;">
+        <div class= 'form-control sameLine' style="border-color: transparent;">
 
             <div class =" row">                
                     <label  for="transfer_id">Nº traslado:</label>
-                    <?php echo '<input type="text" id="transfer_id" class="form-control col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?>
+                    <?php echo '<input type="text" id="transfer_id" class="form-control col-sm-4 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?>
                    
             </div>
 
@@ -62,7 +63,7 @@
                 // para dar formato a la fecha
                 $tmpDate= $transfer->date->format('d-m-Y');
                 ?>
-                <?php echo '<input type="text" id="transfer_date" style="margin-left:2px;" class="form-control  col-xs-2 col-sm-2 col-md-6 col-lg-9" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?>
+                <?php echo '<input type="text" id="transfer_date" style="margin-left:2px;" class="form-control  col-xs-2 col-sm-6    col-md-6 col-lg-9" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?>
 
             </div> 
 
@@ -151,12 +152,12 @@
         </table>
 
     </div>
-
+  </fieldset>
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
     <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $transfer->transfers_id], ['class' => 'btn btn-primary']) ?>
     
 
-    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Seguro que desea eliminar la Ubicación #'.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
+    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Está eeguro que desea eliminar el traslado #'.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
 
 </div>

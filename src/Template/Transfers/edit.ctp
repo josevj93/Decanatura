@@ -51,29 +51,39 @@ use Cake\Routing\Router;
         color:black;
         padding: 8px;
     }
+    label[class=label-t]{
+        margin-left: 20px;
+        width: 150px;
+    }
+    .sameLine{
+    display: flex; 
+    justify-content: space-between; 
+    border-color: transparent;
+    }
        
 </style>
 
 
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-
-</nav>
 <div class="transfers form large-9 medium-8 columns content">
+  <fieldset>
     <?= $this->Form->create($transfer) ?>
     <legend>Traslado</legend>
     <br>
-        <div class= 'row'>
-            <div class ="col-md-8">                
+        <div class= 'form-control sameLine' style="border-color: transparent;">
+            <div class ="row">                
                 <label>Nº traslado:</label>
-                <?php echo '<input type="text" class="form-control col-sm-4" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?> 
+                <?php echo '<input type="text" class="form-control col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?> 
             </div>
 
-            <label>Fecha:</label>
-            <?php
-            // para dar formato a la fecha
-            $tmpDate= $transfer->date->format('d-m-Y');
-            ?>  
-            <?php echo '<input type="text" class="form-control col-sm-2" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?> 
+            <div  class="row" >
+                <label>Fecha:</label>
+                <?php
+                // para dar formato a la fecha
+                $tmpDate= $transfer->date->format('d-m-Y');
+                ?>  
+                <?php echo '<input type="text" class="form-control col-xs-2 col-sm-2 col-md-6 col-lg-9" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?>
+            </div>
+ 
         </div>
     <br>
     <table>
@@ -157,8 +167,8 @@ use Cake\Routing\Router;
                     <td>
                         <?php
                         // If que verifica si el checkbox debe ir activado o no
-                        $isIn= in_array($a->plaque, array_column($result, 'plaque') );
-                        if($isIn)
+                        
+                        if(in_array($a->plaque, array_column($result, 'plaque'),true) )
                             {
                                 echo $this->Form->checkbox('assets_id',
                                 ['value'=>htmlspecialchars($a->plaque),'checked', "class"=>"chk" ]
@@ -183,10 +193,10 @@ use Cake\Routing\Router;
     <!-- input donde coloco la lista de placas checkeadas -->
     <input type="hidden" name="checkList" id="checkList">
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'aceptar']) ?>
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'aceptar','style'=>'text-transform: capitalize;']) ?>
     <?= $this->Form->end() ?>
 
-
+  </fieldset>
 </div>
 
 
