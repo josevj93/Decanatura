@@ -229,6 +229,8 @@ class AssetsController extends AppController
             $ubicacion = $this->request->getData('location_id');
             $año = $this->request->getData('year');
             $prestable = $this->request->getData('lendable');
+            $series = $this->request->getData('series');
+            $listaSeries = preg_split("/(, )| /", $series, -1);
             //parseo la placa con letras para dividirla en predicado+numero (asg21fa34)
             //divide con una expresion regular: (\d*)$
             //pregunta si hay letras en la placa
@@ -240,6 +242,11 @@ class AssetsController extends AppController
             //realiza el ciclo
             for ($i = 0; $i < $cantidad; $i++){
                 $asset = $this->Assets->newEntity();
+                if (array_key_exists($i, $listaSeries)){
+                        $serie = $listaSeries[$i];
+                    } else{
+                        $serie = null;
+                    }
                 if(!preg_match("/([a-z])\w+/", $placa)){
                     $data = [
                         'plaque' => $placa,
@@ -252,7 +259,8 @@ class AssetsController extends AppController
                         'responsable_id' => $responsable,
                         'location_id' => $ubicacion, 
                         'year' => $año,
-                        'lendable' => $prestable
+                        'lendable' => $prestable,
+                        'series' => $serie
                     ];
                     $placa = $placa + 1;
                 }
@@ -268,7 +276,8 @@ class AssetsController extends AppController
                         'responsable_id' => $responsable,
                         'location_id' => $ubicacion, 
                         'year' => $año,
-                        'lendable' => $prestable
+                        'lendable' => $prestable,
+                        'series' => $serie
                     ];
                     $numero = $numero + 1;
                 }
