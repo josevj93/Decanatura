@@ -235,6 +235,12 @@ class TechnicalReportsController extends AppController
         $this->set('serchedAsset',$searchedAsset);
     }
 
+    /*// linea para marcar el reporte tecnico como descargado, haciendo que ya no se pueda borrar
+        $technicalReport->descargado = true;
+
+        // Actualizo el reporte técnico, guardando el valor de descargado como true
+        $this->TechnicalReports->save($technicalReport);
+    */
 
     public function download($id = null)
     {
