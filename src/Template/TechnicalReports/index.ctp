@@ -18,6 +18,7 @@
                 <th scope="col"><?= $this->Paginator->sort('Identificador') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Fecha') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Recomendación') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Estado') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -68,6 +69,20 @@
                       <?php endif; ?>
 
                   </td>           
+
+                  <td>
+                      <?php if ((null == $technicalReport->file_name) && (null == $technicalReport->descargado)): ?>
+                          Pendiente
+                      <?php endif; ?>
+
+                      <?php if ((null == $technicalReport->file_name) && (null != $technicalReport->descargado)): ?>
+                          Pendiente Aprobación
+                      <?php endif; ?>
+
+                      <?php if ((null != $technicalReport->file_name) && (null != $technicalReport->descargado)): ?>
+                          Completado
+                      <?php endif; ?>
+                  </td>>
 
               </tr>
           <?php endforeach; ?>
