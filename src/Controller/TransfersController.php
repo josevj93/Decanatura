@@ -136,6 +136,7 @@ class TransfersController extends AppController
      */
     public function add()
     {
+        $paramUnidad = $this->UnidadAcadémica;
 
         // obtengo la tabla assets
         $assets_transfers = TableRegistry::get('AssetsTransfers');
@@ -230,7 +231,7 @@ class TransfersController extends AppController
         {
             $asset[$i] =(object)$assetsQuery[$i]->assets;
         }
-        $this->set(compact('transfer', 'asset', 'result','tmpId'));
+        $this->set(compact('transfer', 'asset', 'result','tmpId','paramUnidad'));
     }
 
     /**
