@@ -5,96 +5,147 @@
  */
 
 ?>
-<div class="col-md-12 col-sm-12">
-    <h3>Consultar activo</h3>
-</div>
 
-<div class="users view large-9 medium-8 columns content">
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Placa') ?></th>
-            <td><?= h($asset->plaque) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Tipo') ?></th>
-            <td><?= h($asset->type->name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Marca') ?></th>
-            <td><?= h($asset->brand) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Modelo') ?></th>
-            <td><?= h($asset->model) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Serie') ?></th>
-            <td><?= h($asset->series) ?></td>
-        </tr>
-    
-        <tr>
-            <th scope="row"><?= __('Descripción') ?></th>
-            <td><?= h($asset->description) ?></td>
-        </tr>
-    
-
-        <tr>
-            <th scope="row"><?= __('Estado') ?></th>
-            <td><?= h($asset->state) ?></td>
-        </tr>
-
-        <tr>
-            <th scope="row"><?= __('Dueño') ?></th>
-            <td><?= h($asset->user->nombre) ?></td>
-        </tr>
-
-           <tr>
-            <th scope="row"><?= __('Responsable') ?></th>
-            <td><?= h($asset->user->nombre) ?></td>
-        </tr>
-
-
-           <tr>
-            <th scope="row"><?= __('Ubicación') ?></th>
-            <td><?= h($asset->location->nombre) ?></td>
-        </tr>
-
-           <tr>
-            <th scope="row"><?= __('Sub-ubicación') ?></th>
-            <td><?= h($asset->sub_location) ?></td>
-        </tr>
-
-            <tr>
-            <th scope="row"><?= __('Observaciones') ?></th>
-            <td><?= h($asset->observations) ?></td>
-        </tr>
-
-            <tr>
-            <th scope="row"><?= __('Año') ?></th>
-            <td><?= h($asset->year) ?></td>
-        </tr>
-
-
-            <tr>
-            <th scope="row"><?= __('Imagen') ?></th>
-            <td><?= $this->Html->image('/webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png', array('class' => 'img-thumbnail')) ?></td>
-        </tr>
-
-
-    </table>
-        <style>
+<head>
+ 
+  <style>
         .btn-primary {
-            float: right;
-            margin: 10px;
-            margin-top: 15px;
-            color: #fff
-            background-color: #ffc107;
-            border-color: #ffc107;
+          color: #fff;
+          background-color: #0099FF;
+          border-color: #0099FF;
+          float: right;
+          margin-left: 10px;
         }
-        </style> 
-</div>
+		
+		.btn-default {
+          color: #000;
+          background-color: #7DC7EF;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+		
+        label {
+          text-align:left;
+          margin-right: 10px;
+          
+        }
 
-<div class="col-12 text-right">
+        .sameLine{
+          display: flex; 
+          justify-content: space-between; 
+          border-color: transparent;
+        }
+   
+  </style>
+
+</head>
+
+<body>
+<div class="locations form large-9 medium-8 columns content">
+  <?= $this->Form->create($asset) ?>
+  <fieldset>
+    <legend><?= __('Consultar activo') ?></legend>
+    <br>
+
+    <div class="form-control sameLine" >
+	
+      <div class="row">
+          <label> <b>Placa:</b><b style="color:red;">*</b> </label>
+		  <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->plaque) . '">'; ?> 
+      </div>
+      
+      <div class="row col-md-4">
+        <label> <b>Tipo:</b><b style="color:red;">*</b> </label>
+        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->type->name) . '">'; ?>        
+      </div>
+	  
+	  <div class="col-lg-2">   </div>
+        
+    </div> <br>
+	
+	<div class="form-control sameLine" >
+
+      <div class="row">
+        <label>Marca:</label>
+        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->brand) . '">'; ?>       
+      </div>
+      
+      <div class="row">
+        <label>Modelo:</label>
+        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->model) . '">'; ?>      
+      </div>
+	  
+	  <div class="row">
+        <label>Serie:</label>
+        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->series) . '">'; ?>         
+      </div>
+
+    </div> <br>
+	
+	<div>
+      <label> <b>Descripción:</b><b style="color:red;">*</b> </label>
+      <?php echo $this->Form->textarea('description', ['class'=>'form-control col-md-8', 'disabled']); ?>
+    </div> <br>
+	
+	<div class="form-control sameLine" >
+
+      <div class="row">
+        <label> <b>Dueño:</b><b style="color:red;">*</b> </label>
+        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->user->nombre) . '">'; ?>        
+      </div>
+      
+      <div class="row">
+        <label><b>Responsable:</b><b style="color:red;">*</b> </label>
+        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->user->nombre) . '">'; ?>       
+      </div>
+	  
+	  <div class="row">
+        <label> <b>Ubicación:</b><b style="color:red;">*</b></label>
+        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->location->nombre) . '">'; ?>        
+      </div>
+
+    </div> <br>
+	
+	<div class="form-control sameLine" >
+
+      <div class="row">
+        <label> Sub-ubicación: </label>
+        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->sub_location) . '">'; ?>       
+      </div>
+	  
+      
+      <div class="row">
+        <label class="col-lg-3"> <b>Año:</b><b style="color:red;">*</b> </label>
+        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->year) . '">'; ?>        
+      </div>
+	  
+	  <div class="row col-lg-1">
+        <div class="custom-control custom-checkbox">
+			<?php echo $this->Form->checkbox('lendable',  array('id' => 'customCheck1', 'class' => 'custom-control-input', 'checked' => 'checked', 'disabled')); ?>
+			<label class="custom-control-label" for="customCheck1">Prestable</label>
+		</div>       
+      </div>
+	  
+	  <div class="col-lg-1">   </div>
+
+    </div> <br>
+	
+	<div>
+      <label> Observaciones: </label>
+      <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8', 'disabled']); ?>
+    </div> <br>
+	
+	<div>
+		<label> Imagen: </label> <br>
+		<td><?= $this->Html->image('/webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png', array('class' => 'img-thumbnail')) ?></td>
+	</div>
+	
+	
+	
+	
+	
+	<br> <br>
+	<div class="col-12 text-right">
 
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $asset->plaque], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el activo # {0}?', $asset->plaque)]) ?>
@@ -108,4 +159,6 @@
     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $asset->plaque], ['class' => 'btn btn-primary']) ?>
     
 
-</div>
+	</div> <br>
+
+ </fieldset>
