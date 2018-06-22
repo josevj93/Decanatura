@@ -113,20 +113,8 @@ class AssetsController extends AppController
         $types = $this->Assets->Types->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
-        
-        
-        $brands = array(); 
-        $this->paginate = [
-            'contain' => ['Types', 'Users', 'Locations']
-        ];
-        $assets = $this->paginate($this->Assets);
-        foreach ($assets as $filterBrand) {
-            if (!in_array($filterBrand->brand, $brands)){
-                array_push($brands, $filterBrand->brand);
-            }
-        }
-        
-        $this->set(compact('asset', 'types', 'users', 'locations', 'brands', 'assets'));
+                
+        $this->set(compact('asset', 'types', 'users', 'locations'));
     }
     /**
      * Método para editar un activo en el sistema
