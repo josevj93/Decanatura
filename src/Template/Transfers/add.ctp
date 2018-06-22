@@ -128,7 +128,7 @@
                 <div class="row" >
                     <label class="label-t">Unidad académica: </label>
                    
-                    <label>Ingeniería</label>
+                    <label><?php echo h($paramUnidad); ?></label>
                 </div>
                 <br>
                 <div class="row">
