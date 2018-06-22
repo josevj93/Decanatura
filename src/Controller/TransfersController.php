@@ -404,4 +404,20 @@ class TransfersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+     public function download($id = null)
+    {
+
+        $transfer = $this->Transfers->get($id, [
+            'contain' => ['Assets']
+        ]);
+
+        // linea para marcar el traslado como descargado, haciendo que ya no se pueda borrar
+        $transfer->descargado = true;
+
+        // Actualizo el traslado, guardando el valor de descargado como true
+        $this->Transfers->save($transfer);
+
+        return $this->redirect(['action' => 'index']);
+    }
 }

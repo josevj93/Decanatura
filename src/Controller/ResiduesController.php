@@ -418,4 +418,20 @@ class ResiduesController extends AppController
         }
         $this->set('serchedAsset',$searchedAsset);
     }
+
+    public function download($id = null)
+    {
+
+        $residue = $this->Residues->get($id, [
+            'contain' => ['Assets']
+        ]);
+
+        // linea para marcar el desecho como descargado, haciendo que ya no se pueda borrar
+        $residue->descargado = true;
+
+        // Actualizo el desecho, guardando el valor de descargado como true
+        $this->Residues->save($residue);
+
+        return $this->redirect(['action' => 'index']);
+    }
 }

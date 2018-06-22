@@ -46,7 +46,7 @@ class ResiduesTable extends Table
         $validator
             ->scalar('residues_id')
             ->maxLength('residues_id', 200)
-            ->notEmpty('residues_id', 'create');
+            ->allowEmpty('residues_id', 'create');
 
         $validator
             ->scalar('name1')
@@ -74,7 +74,21 @@ class ResiduesTable extends Table
 
         $validator
             ->date('date')
-            ->notEmpty('date');
+            ->allowEmpty('date');
+
+        $validator
+            ->boolean('descargado')
+            ->allowEmpty('descargado');
+
+        $validator
+            ->scalar('file_name')
+            ->maxLength('file_name', 100)
+            ->allowEmpty('file_name');
+
+        $validator
+            ->scalar('path')
+            ->maxLength('path', 100)
+            ->allowEmpty('path');
 
         return $validator;
     }
