@@ -76,7 +76,7 @@ class TechnicalReportsTable extends Table
 
         $validator
             ->date('date')
-            ->allowEmpty('date');
+            ->notEmpty('date');
 
         $validator
             ->scalar('file_name')

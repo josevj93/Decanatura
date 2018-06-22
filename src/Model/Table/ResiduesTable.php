@@ -74,7 +74,7 @@ class ResiduesTable extends Table
 
         $validator
             ->date('date')
-            ->allowEmpty('date');
+            ->notEmpty('date');
 
         return $validator;
     }

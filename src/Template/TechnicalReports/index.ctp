@@ -82,7 +82,7 @@
                       <?php if ((null != $technicalReport->file_name) && (null != $technicalReport->descargado)): ?>
                           Completado
                       <?php endif; ?>
-                  </td>>
+                  </td>
 
               </tr>
           <?php endforeach; ?>
@@ -93,6 +93,7 @@
                         <th>Identificador</th>
                         <th>Fecha</th>
                         <th>Recomendación</th>
+                        <th>Estado</th>
                     </tr>
 
                 </tfoot>
