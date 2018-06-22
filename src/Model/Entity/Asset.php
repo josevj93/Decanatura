@@ -14,7 +14,7 @@ use Cake\ORM\Entity;
  * @property string $description
  * @property string $state
  * @property string $image
- * @property int $owner_id
+ * @property int $assigned_to
  * @property int $responsable_id
  * @property string $location_id
  * @property string $sub_location
@@ -50,8 +50,8 @@ class Asset extends Entity
         'description' => true,
         'state' => true,
         'image' => true,
-        'owner_id' => true,
         'responsable_id' => true,
+        'assigned_to' => true,
         'location_id' => true,
         'sub_location' => true,
         'year' => true,

@@ -44,12 +44,12 @@
         </tr>
 
         <tr>
-            <th scope="row"><?= __('Dueño') ?></th>
+            <th scope="row"><?= __('Responsable') ?></th>
             <td><?= h($asset->user->nombre) ?></td>
         </tr>
 
            <tr>
-            <th scope="row"><?= __('Responsable') ?></th>
+            <th scope="row"><?= __('Asignado a') ?></th>
             <td><?= h($asset->user->nombre) ?></td>
         </tr>
 

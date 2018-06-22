@@ -22,7 +22,7 @@
                         <th scope="col"><?= $this->Paginator->sort('Serie') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('Descripción') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('Estado') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('Responsable') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('Asignado') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('Ubicación') ?></th>                
                         <th scope="col"><?= $this->Paginator->sort('Año') ?></th>
                         
@@ -59,7 +59,7 @@
                         <th>Serie</th>
                         <th>Descripción</th>
                         <th>Estado</th>
-                        <th>Responsable</th>
+                        <th>Asignado a</th>
                         <th>Ubicación</th>
                         <th>Año</th>
                     </tr>

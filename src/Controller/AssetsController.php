@@ -224,8 +224,8 @@ class AssetsController extends AppController
                     'model' => 'modelo1',
                     'state' => 'Activo',
                     'description' => 'silla generica, modelo 1',
-                    'owner_id' => 1,
                     'responsable_id' => 1,
+                    'assigned_to' => 1,
                     'location_id' => 1, 
                     'year' => '2018',
                     'lendable' => 0
@@ -243,8 +243,8 @@ class AssetsController extends AppController
             $asset['Assets']['model'] = 'modelo1';
             $asset['Assets']['state'] = 'Activo';
             $asset['Assets']['description'] = 'silla generica, modelo 1';
-            $asset['Assets']['owner_id'] = 1;
             $asset['Assets']['responsable_id'] = 1;
+            $asset['Assets']['assigned_to'] = 1;
             $asset['Assets']['location_id'] = 1;
             $asset['Assets']['year'] = '2018';
             $asset['Assets']['lendable'] = 0;

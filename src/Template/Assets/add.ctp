@@ -89,13 +89,13 @@
 	<div class="form-control sameLine" >
 
       <div class="row">
-        <label> <b>Dueño:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('owner_id', $users, ['class'=>'form-control col-md-7']); ?>        
+        <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
+        <?php echo $this->Form->select('responsable_id', $users, ['class'=>'form-control col-md-7']); ?>        
       </div>
       
       <div class="row">
-        <label><b>Responsable:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('responsable_id', $users, ['class'=>'form-control col-md-7']); ?>        
+        <label><b>Asignado a:</b><b style="color:red;">*</b> </label>
+        <?php echo $this->Form->select('assigned_to', $users, ['class'=>'form-control col-md-7']); ?>        
       </div>
 	  
 	  <div class="row">
