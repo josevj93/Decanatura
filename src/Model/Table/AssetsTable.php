@@ -55,10 +55,10 @@ class AssetsTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Users', [
-            'foreignKey' => 'owner_id'
+            'foreignKey' => 'responsable_id'
         ]);
         $this->belongsTo('Users', [
-            'foreignKey' => 'responsable_id'
+            'foreignKey' => 'assigned_to'
         ]);
         $this->belongsTo('Locations', [
             'foreignKey' => 'location_id',
@@ -154,12 +154,12 @@ class AssetsTable extends Table
             ->notEmpty('location_id');
 
         $validator
-            ->scalar('responsable_id')
-            ->notEmpty('responsable_id');
+            ->scalar('assigned_to')
+            ->notEmpty('assigned_to');
 
         $validator
-            ->scalar('owner_id')
-            ->notEmpty('owner_id');
+            ->scalar('responsable_id')
+            ->notEmpty('responsable_id');
             
         return $validator;
     }
@@ -201,8 +201,8 @@ class AssetsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['type_id'], 'Types'));
-        $rules->add($rules->existsIn(['owner_id'], 'Users'));
         $rules->add($rules->existsIn(['responsable_id'], 'Users'));
+        $rules->add($rules->existsIn(['assigned_to'], 'Users'));
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['loan_id'], 'Loans'));
 
