@@ -5,110 +5,146 @@
  */
 ?>
 
-<div class="col-md-12 col-sm-12">
-    <h3>Editar activo</h3>
-    <?= $this->Form->create($asset, ['type' => 'file']) ?>
-</div>
-
-<br>
-
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->input('plaque',array('type' => 'text','label'=>'Placa', 'class' => 'form-control')); ?>   
-</div>
-
-<br>
-
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('type_id', array('options' => $types,'label'=>'Tipo', 'class' => 'form-control')); ?>
-</div>
-
-<br>
-    
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('brand', array('label'=>'Marca', 'class' => 'form-control')); ?>
-</div>
-
-<br>
-
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('model' , array('label'=>'Modelo', 'class' => 'form-control')); ?>
-</div>
-
-<br>
-
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('series', array('label'=>'Serie', 'class' => 'form-control')); ?>
-</div>
-
-<br>
-
-<div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-    <?php echo $this->Form->control('description', array('label'=>'Descripcion', 'class' => 'form-control','rows' => '3')); ?>
-</div>
-
-<br>
-
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('owner_id', array('options' => $users,'label'=>'Dueño', 'class' => 'form-control')); ?>
-</div>
-
-<br>
-
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('responsable_id', array('options' => $users, 'empty' => true,'label'=>'Responsable', 'class' => 'form-control')); ?>
-</div>
-
-<br>
-
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('location_id',  array('options' => $locations,'label'=>'Ubicacion', 'class' => 'form-control')); ?>
-</div>
-
-<br>
-    
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('sub_location', array('label'=>'Sub-ubicacion', 'class' => 'form-control')); ?>
-</div>
-
-<br>
-
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->control('year',  array('label'=>'Año', 'class' => 'form-control')); ?>
-</div>
-
-<br>
-
-<div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-    <?php echo $this->Form->control('lendable',  array('label'=>'Prestable', 'class' => 'checkbox')); ?>
-</div>
-
-<br>
-
-<div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-    <?php echo $this->Form->control('observations', array('label'=>'Observaciones', 'class' => 'form-control'));?>
-</div>
-
-<br>
-
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->input('image',['label'=>'Imagen', 'type' => 'file', 'class' => 'form-control']); ?>
-</div>
-
-<br>        
-
-<div class="col-12 text-right">
-    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
-      <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-    
-</div>
-
-   <style>
+<head>
+ 
+  <style>
         .btn-primary {
-            float: right;
-            margin: 10px;
-            margin-top: 15px;
-            color: #fff
-            background-color: #ffc107;
-            border-color: #ffc107;
+          color: #fff;
+          background-color: #0099FF;
+          border-color: #0099FF;
+          float: right;
+          margin-left: 10px;
         }
-        </style> 
+		
+		.btn-default {
+          color: #000;
+          background-color: #7DC7EF;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+		
+        label {
+          text-align:left;
+          margin-right: 10px;
+          
+        }
+
+        .sameLine{
+          display: flex; 
+          justify-content: space-between; 
+          border-color: transparent;
+        }
+   
+  </style>
+
+</head>
+
+<body>
+<div class="locations form large-9 medium-8 columns content">
+  <?= $this->Form->create($asset) ?>
+  <fieldset>
+    <legend><?= __('Editar activo') ?></legend>
+    <br>
+
+    <div class="form-control sameLine" >
+	
+      <div class="row">
+          <label> <b>Placa:</b><b style="color:red;">*</b> </label>
+		  <?php echo $this->Form->imput('plaque', ['class'=>'form-control col-md-9']); ?> 
+      </div>
+      
+      <div class="row col-md-4">
+        <label> <b>Tipo:</b><b style="color:red;">*</b> </label>
+        <?php echo $this->Form->select('type_id', $types, ['class'=>'form-control col-md-7']); ?>        
+      </div>
+	  
+	  <div class="col-lg-2">   </div>
+        
+    </div> <br>
+	
+	<div class="form-control sameLine" >
+
+      <div class="row">
+        <label>Marca:</label>
+        <?php echo $this->Form->imput('brand', ['class'=>'form-control col-md-9']); ?>        
+      </div>
+      
+      <div class="row">
+        <label>Modelo:</label>
+        <?php echo $this->Form->imput('model', ['class'=>'form-control col-md-8']); ?>        
+      </div>
+	  
+	  <div class="row">
+        <label>Serie:</label>
+        <?php echo $this->Form->imput('series', ['label' => 'Serie:', 'class'=>'form-control col-md-9']); ?>        
+      </div>
+
+    </div> <br>
+	
+	<div>
+      <label> <b>Descripción:</b><b style="color:red;">*</b> </label>
+      <?php echo $this->Form->textarea('description', ['class'=>'form-control col-md-8']); ?>
+    </div> <br>
+	
+	<div class="form-control sameLine" >
+
+      <div class="row">
+        <label> <b>Dueño:</b><b style="color:red;">*</b> </label>
+        <?php echo $this->Form->select('owner_id', $users, ['class'=>'form-control col-md-7']); ?>        
+      </div>
+      
+      <div class="row">
+        <label><b>Responsable:</b><b style="color:red;">*</b> </label>
+        <?php echo $this->Form->select('responsable_id', $users, ['class'=>'form-control col-md-7']); ?>        
+      </div>
+	  
+	  <div class="row">
+        <label> <b>Ubicación:</b><b style="color:red;">*</b></label>
+        <?php echo $this->Form->select('location_id', $locations, ['label' => 'Serie:', 'class'=>'form-control col-md-7']); ?>        
+      </div>
+
+    </div> <br>
+	
+	<div class="form-control sameLine" >
+
+      <div class="row">
+        <label> Sub-ubicación: </label>
+        <?php echo $this->Form->imput('sub_location', ['class'=>'form-control col-md-7']); ?>       
+      </div>
+	  
+      
+      <div class="row">
+        <label class="col-lg-3"> <b>Año:</b><b style="color:red;">*</b> </label>
+        <?php echo $this->Form->imput('year',['class'=>'form-control col-md-7']); ?>        
+      </div>
+	  
+	  <div class="row col-lg-1">
+        <div class="custom-control custom-checkbox">
+			<?php echo $this->Form->checkbox('lendable',  array('id' => 'customCheck1', 'class' => 'custom-control-input', 'checked' => 'checked')); ?>
+			<label class="custom-control-label" for="customCheck1">Prestable</label>
+		</div>       
+      </div>
+	  
+	  <div class="col-lg-1">   </div>
+
+    </div> <br>
+	
+	<div>
+      <label> Observaciones: </label>
+      <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8']); ?>
+    </div> <br>
+	
+	<div>
+		<label> Imagen: </label>
+		<?php echo $this->Form->imput('image',['type' => 'file', 'class' => 'form-control-file']); ?>
+	</div>
+
+  </fieldset>
+
+
+</div>
+  <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+  <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+
+
+</body>
