@@ -1,24 +1,25 @@
 <div class="locations edit large-9 medium-8 columns content">
     <?= $this->Form->create($location) ?>
     <fieldset>
-        <legend><?= __('Modificar Ubicacion') ?></legend><br>
-            <div>
-                <label>Id:</label><br>
+        <legend><?= __('Modificar Ubicación') ?></legend><br>
+            <div class = 'row'>
+                <label class='align'>Id:</label><br>
                 <?php 
                 echo $this->Form->imput('location_id', ['label' => 'Id:', 'class'=>'form-control col-sm-2', 'disabled']);
-                ?><br>
-            </div>
-            <div>
+                ?>
+            </div><br>
+            <div class = 'row'>
+                <label class='align'>Nombre:</label><br>
                 <?php 
-                echo $this->Form->control('nombre', ['label' => 'Nombre:', 'class'=>'form-control col-sm-2']);
-                ?><br>
-            </div>
-            <div>
-                <label>Descripción:</label><br>
+                echo $this->Form->imput('nombre', ['label' => 'Nombre:', 'class'=>'form-control col-sm-2']);
+                ?>
+            </div><br>
+            <div class = 'row'>
+                <label class='align'>Descripción:</label><br>
                 <?php 
                 echo $this->Form->textarea('description', ['label' => 'Descripción:', 'class'=>'form-control col-sm-4']);
-                ?><br>
-            </div>
+                ?>
+            </div><br>
     </fieldset>
 
     <style>
@@ -29,9 +30,18 @@
       float: right;
       margin-left: 10px;
     }
-</style> 
+
+    label {
+        width: 100px;
+    }
+
+    label[class=align] {
+        margin-left: 15px;
+    }
+    </style> 
 
 </div>
+
 
 <?= $this->Html->link(__('Cancelar'), ['controller'=> 'Locations', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
 <?= $this->Form->button(__('Aceptar'), ['controller'=> 'Locations', 'class' => 'btn btn-primary']) ?>
