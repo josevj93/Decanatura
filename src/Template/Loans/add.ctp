@@ -37,7 +37,7 @@
 
         <div class="row">
             <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('responsable_id', $users, array('empty' => true, 'class' => 'form-control col-md-7')); ?>        
+        <?php echo $this->Form->select('id_responsables', $users, array('empty' => true, 'class' => 'form-control col-md-7')); ?>        
         </div>
 
 
@@ -121,8 +121,9 @@
     <div class="col-12 text-right">
 
        
+        <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
         <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
-         <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
+        
 
     </div>
     
