@@ -7,11 +7,23 @@
 ?>
 
 <style>
-        .btn-primary {
-            margin: 10px;
-            margin-top: 15px;
+    .btn-primary {
+          color: #fff;
+          background-color: #0099FF;
+          border-color: #0099FF;
+          margin-left: 10px;
+          margin: 10px;
+          margin-top: 15px;
         }
+		
+		.btn-default {
+          color: #000;
+          background-color: #7DC7EF;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
 
+        }
+		
         label {
           text-align:left;
           margin-right: 10px;
@@ -23,8 +35,12 @@
           justify-content: space-between; 
           border-color: transparent;
         }
-
-        </style> 
+		
+		.date{
+          width:100px;
+          margin-left: 10px;
+        }
+</style> 
 
 <div class="locations form large-9 medium-8 columns content">
     <legend><?= __('Insertar préstamo') ?></legend>
@@ -35,31 +51,25 @@
 
     <div class="form-control sameLine" >
 
-        <div class="row">
+		   <div class="row">
             <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('id_responsables', $users, array('empty' => true, 'class' => 'form-control col-md-7')); ?>        
+        <?php echo $this->Form->select('id_responsables', $users, array('empty' => true, 'class' => 'form-control col-md-7', 'id'=> 'userDropdown')); ?>        
         </div>
 
-
-
-
-
-        <div class="row col-md-4">
+		 <div class="row col-md-4">
              <label> <b>Fecha inicio:</b><b style="color:red;">*</b> </label>
                 <?php
-                    echo $this->Form->imput('fecha_inicio', ['class'=>'form-control date col-md-7', 'value' => date("y-m-d")]); 
+                    echo $this->Form->imput('fecha_inicio', ['class'=>'form-control date col-md-7', 'value' => date("y-m-d"), 'id'=>'datepicker']); 
                 ?>
         </div>
 
     </div> <br>
 
-
-
    
  <!-- AQUI ESTA LO IMPORTANTE. RECUERDEN COPIAR LOS SCRIPTS -->
         <div class="related">
-            <legend><?= __('Asignacion de activos a prestamo') ?></legend>
-
+            <legend><?= __('Asignación de activos a préstamo') ?></legend>
+			<br>
             <!-- tabla que contiene  datos básicos de activos-->
             <table id='assets-transfers-grid' cellpadding="0" cellspacing="0">
                 <thead>
@@ -100,29 +110,28 @@
     <input type="hidden" name="checkList" id="checkList">
 
 
-
     <div class="row col-md-6">
             <label>Fecha de devolución:</label>
                 <?php
-                echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date col-md-4']); 
+                echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date col-md-4', 'id'=>'datepicker2']); 
                 ?>
     </div>
-
     <br>
 
-    <div class="row">
-        <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-            <?php echo $this->Form->control('observaciones', array('label'=>'Observaciones:', 'class' => 'form-control', 'rows' => '3')); ?>
-        </div>
-    </div>
+    <div>
+      <label> Observaciones: </label>
+      <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8']); ?>
+    </div> <br>
 
     <br>
 
     <div class="col-12 text-right">
 
-       <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
+       
         <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
-        
+         <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
+
+
 
     </div>
     
@@ -131,6 +140,22 @@
 </div>
 
 <script>
+
+	$( function Picker() {
+    $( "#datepicker" ).datepicker({ 
+            dateFormat: 'y-mm-dd',
+            monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+            dayNamesMin: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do']
+     });
+  } );
+  
+	$( function Picker() {
+    $( "#datepicker2" ).datepicker({ 
+            dateFormat: 'y-mm-dd',
+            monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+            dayNamesMin: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do']
+     });
+  } );
     /*prueba para autocompletar*/
     /*
     jQuery('#assetImput').autocomplete({
@@ -141,7 +166,7 @@
 
     $(document).ready(function() 
     {
-       var table = $('#assets-transfers-grid').DataTable( {
+        var table = $('#assets-transfers-grid').DataTable( {
         "language": {
                     "sProcessing": "Procesando...",
                     "sLengthMenu": "Mostrar _MENU_ registros",
