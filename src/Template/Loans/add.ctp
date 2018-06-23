@@ -24,7 +24,7 @@
 
     <div class = "row">
         <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-            <?php echo $this->Form->control('id_responsables', array('options' => $users,'label'=>'Responsable', 'class' => 'form-control', 'id'=> 'userDropdown')); ?>
+            <?php echo $this->Form->control('id_responsables', array('options' => $users, 'empty' => true,'label'=>'Responsable', 'class' => 'form-control', 'id'=> 'userDropdown')); ?>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-4 offset-md-4 col-lg-4 offset-lg-4">

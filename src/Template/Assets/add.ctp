@@ -55,7 +55,7 @@
       
       <div class="row col-md-4">
         <label> <b>Tipo:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('type_id', $types, ['class'=>'form-control col-md-7']); ?>        
+        <?php echo $this->Form->select('type_id', $types, array('empty' => true, 'class' => 'form-control col-md-7')); ?>        
       </div>
 	  
 	  <div class="col-lg-2">   </div>
@@ -90,17 +90,17 @@
 
       <div class="row">
         <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('responsable_id', $users, ['class'=>'form-control col-md-7']); ?>        
+        <?php echo $this->Form->select('responsable_id', $users, array('empty' => true, 'class' => 'form-control col-md-7')); ?>        
       </div>
       
       <div class="row">
         <label><b>Asignado a:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('assigned_to', $users, ['class'=>'form-control col-md-7']); ?>        
+        <?php echo $this->Form->select('assigned_to', $users, array('empty' => true, 'class' => 'form-control col-md-7')); ?>        
       </div>
 	  
 	  <div class="row">
         <label> <b>Ubicación:</b><b style="color:red;">*</b></label>
-        <?php echo $this->Form->select('location_id', $locations, ['label' => 'Serie:', 'class'=>'form-control col-md-7']); ?>        
+        <?php echo $this->Form->select('location_id', $locations, array('empty' => true, 'class' => 'form-control col-md-7')); ?>        
       </div>
 
     </div> <br>
