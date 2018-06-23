@@ -11,34 +11,47 @@
             margin: 10px;
             margin-top: 15px;
         }
+
+        label {
+          text-align:left;
+          margin-right: 10px;
+          
+        }
+
+        .sameLine{
+          display: flex; 
+          justify-content: space-between; 
+          border-color: transparent;
+        }
+
         </style> 
 
-<div class="locations form large-8 medium-8 small-12 columns content">
-    <legend><?= __('Insertar prestamo') ?></legend>
+<div class="locations form large-9 medium-8 columns content">
+    <legend><?= __('Insertar préstamo') ?></legend>
     
     <br>
 
     <?= $this->Form->create($loan) ?>
 
+    <div class="form-control sameLine" >
 
-
-    <div class = "row">
-        <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-            <?php echo $this->Form->control('id_responsables', array('options' => $users, 'empty' => true,'label'=>'Responsable', 'class' => 'form-control', 'id'=> 'userDropdown')); ?>
+        <div class="row">
+            <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
+        <?php echo $this->Form->select('responsable_id', $users, array('empty' => true, 'class' => 'form-control col-md-7')); ?>        
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-4 offset-md-4 col-lg-4 offset-lg-4">
-            <label>Fecha inicio:</label>
+
+
+
+
+        <div class="row col-md-4">
+             <label> <b>Fecha inicio:</b><b style="color:red;">*</b> </label>
                 <?php
-                    echo $this->Form->imput('fecha_inicio', ['class'=>'form-control date', 'value' => date("y-m-d")]); 
+                    echo $this->Form->imput('fecha_inicio', ['class'=>'form-control date col-md-7', 'value' => date("y-m-d")]); 
                 ?>
         </div>
-    </div>
 
-    <div id=userResult> 
-    </div>
-
-    <br>
+    </div> <br>
 
 
 
@@ -88,20 +101,18 @@
 
 
 
-    <div class="row">
-        <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-            <label>Fecha de devolución:</label>
+    <div class="row col-md-6">
+            <label><b>Fecha de devolución:</b><b style="color:red;">*</b> </label>
                 <?php
-                echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date']); 
+                echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date col-md-4']); 
                 ?>
-        </div>
     </div>
 
     <br>
 
     <div class="row">
         <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-            <?php echo $this->Form->control('observaciones', array('label'=>'Observaciones', 'class' => 'form-control', 'rows' => '3')); ?>
+            <?php echo $this->Form->control('observaciones', array('label'=>'Observaciones:', 'class' => 'form-control', 'rows' => '3')); ?>
         </div>
     </div>
 
