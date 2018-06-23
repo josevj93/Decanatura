@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Dompdf\Dompdf;
 use Cake\ORM\TableRegistry;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Transfers Controller
@@ -360,13 +361,23 @@ class TransfersController extends AppController
 public function download($id = null)
     {
 
-        
+        $this->Assets = $this->loadModel('Assets');
+        $this->AssetsTransfers = $this->loadModel('AssetsTransfers');
+
+        $conn = ConnectionManager::get('default');
+        $stmt = $conn->execute('SELECT * FROM assets
+            inner join assets_transfers on plaque = assets_id
+            inner join transfers on transfer_id = transfers_id
+            where transfers_id =' . $id . ';');
+
+        $results = $stmt ->fetchAll('assoc');
+
+
          require_once 'dompdf/autoload.inc.php';
         //initialize dompdf class
         $document = new Dompdf();
-        $html = '';
-        $document->loadHtml('
-        <p><strong><sup>&nbsp;</sup></strong></p>
+        $html = 
+        '<p><strong><sup>&nbsp;</sup></strong></p>
 <p><strong>Universidad de Costa Rica</strong></p>
 <p><strong>Vicerrector&iacute;a de Administraci&oacute;n</strong></p>
 <p><strong>Oficina de Administraci&oacute;n Financiera</strong></p>
@@ -377,7 +388,7 @@ public function download($id = null)
 <h1>Fecha: 13/06/2015&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No.__________________</h1>
 <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><strong>(Lo asigna el usuario)</strong></p>
 <p><strong>&nbsp;</strong></p>
-<table width="0">
+<table width="0" border="1">
 <tbody>
 <tr>
 <td width="360">
@@ -419,17 +430,42 @@ public function download($id = null)
 <h2>Detalle de los bienes a trasladar</h2>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+<table width="0" border="1">
+<tbody>
+<tr>
+<th>Placa</th>
+<th>Marca</th>
+<th>Modelo</th>
+<th>Serie</th>
+<th>Estado Actual</th>
+</tr>';
+
+        foreach ($results as $item) {
+            $html .= 
+            '<tr>
+             <td>' . $item['plaque'] . '</td>
+             <td>' . $item['brand'] . '</td>
+             <td>' . $item['model'] . '</td>
+             <td>' . $item['series'] . '</td>
+             <td>' . $item['state'] . '</td>
+             </tr>';
+        }
 
 
+$html .=
 
-
+'</table>
+<br><br><br>
 <p><strong>&nbsp;</strong></p>
 <p><strong>&nbsp;</strong></p>
 <p><strong>Observaciones: </strong></p>
 <p><strong>Nota: El formulario debe estar firmado por el encargado de activos fijos u otro funcionario autorizado en cada unidad.</strong></p>
 <h3>&nbsp;</h3>
 <h3>Original: Oficina de Administraci&oacute;n Financiera&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Copia: Unidad que entrega&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Copia: Unidad que recibe</h3>
-        ');
+    ';
+
+
+        $document->loadHtml($html);
 
         //set page size and orientation
         $document->setPaper('A3', 'landscape');
