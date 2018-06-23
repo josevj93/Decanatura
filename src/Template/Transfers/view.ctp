@@ -146,4 +146,8 @@
 
     <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Seguro que desea eliminar la Ubicación #'.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
 
+    <?= $this->Form->postLink(__('Generar Formulario'), ['controller'=> 'Transfers', 'action' => 'download', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $transfer->transfer_id)]) ?>
+
+    <br><br>
+
 </div>

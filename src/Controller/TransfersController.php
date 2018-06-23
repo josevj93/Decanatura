@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Dompdf\Dompdf;
 use Cake\ORM\TableRegistry;
 
 /**
@@ -13,6 +14,7 @@ use Cake\ORM\TableRegistry;
  */
 class TransfersController extends AppController
 {
+
 
 
     private $UnidadAcadémica='Ingeniería';
@@ -353,4 +355,97 @@ class TransfersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+
+public function download($id = null)
+    {
+
+        
+         require_once 'dompdf/autoload.inc.php';
+        //initialize dompdf class
+        $document = new Dompdf();
+        $html = '';
+        $document->loadHtml('
+        <p><strong><sup>&nbsp;</sup></strong></p>
+<p><strong>Universidad de Costa Rica</strong></p>
+<p><strong>Vicerrector&iacute;a de Administraci&oacute;n</strong></p>
+<p><strong>Oficina de Administraci&oacute;n Financiera</strong></p>
+<h1>Unidad de Control de Activos Fijos y Seguros</h1>
+<p><strong>***Tel. 207-5045 / 2075759 ** Fax 253-4630***</strong></p>
+<h2>FORMULARIO PARA TRASLADO DE ACTIVOS FIJOS</h2>
+<h1>&nbsp;</h1>
+<h1>Fecha: 13/06/2015&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No.__________________</h1>
+<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><strong>(Lo asigna el usuario)</strong></p>
+<p><strong>&nbsp;</strong></p>
+<table width="0">
+<tbody>
+<tr>
+<td width="360">
+<p><strong>ENTREGA</strong></p>
+</td>
+<td width="324">
+<p><strong>RECIBE</strong></p>
+</td>
+</tr>
+<tr>
+<td width="360">
+<p><strong>Unidad: Decanato de la Facultad Ingenier&iacute;a</strong></p>
+<p><strong>&nbsp;</strong></p>
+</td>
+<td width="324">
+<p><strong>Unidad:</strong></p>
+</td>
+</tr>
+<tr>
+<td width="360">
+<p><strong>Nombre del Funcionario:</strong></p>
+<p><strong>&nbsp;</strong></p>
+</td>
+<td width="324">
+<p><strong>Nombre del Funcionario:</strong></p>
+</td>
+</tr>
+<tr>
+<td width="360">
+<p><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C&eacute;dula:</strong></p>
+<p><strong>&nbsp;</strong></p>
+</td>
+<td width="324">
+<p><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C&eacute;dula:</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h2>Detalle de los bienes a trasladar</h2>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+
+<p><strong>&nbsp;</strong></p>
+<p><strong>&nbsp;</strong></p>
+<p><strong>Observaciones: </strong></p>
+<p><strong>Nota: El formulario debe estar firmado por el encargado de activos fijos u otro funcionario autorizado en cada unidad.</strong></p>
+<h3>&nbsp;</h3>
+<h3>Original: Oficina de Administraci&oacute;n Financiera&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Copia: Unidad que entrega&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Copia: Unidad que recibe</h3>
+        ');
+
+        //set page size and orientation
+        $document->setPaper('A3', 'landscape');
+        //Render the HTML as PDF
+        $document->render();
+        //Get output of generated pdf in Browser
+        $document->stream("Formulario de Traslado", array("Attachment"=>1));
+        //1  = Download
+        //0 = Preview
+        return $this->redirect(['action' => 'index']);
+
+    }
+
+
+
+
+
+
 }
