@@ -17,7 +17,7 @@
             echo $this->Form->input('username', array('type'=> 'text', 'label'=> 'Usuario', 'class' => 'form-control'));
             //echo $this->Form->input('password', array('type'=> 'password', 'label'=> 'Contraseña', 'class' => 'form-control'));
             echo $this->Form->input('id_rol', array('type' => 'select', 'label'=> 'Rol', 'class' => 'form-control','options' => $roles , 'selected' => 'private', 'value' => $rol ));
-            echo $this->Form->control('account_status', array('type' => 'select', 'label'=> 'Estado', 'class' => 'form-control','options' => array('0' => 'Activo', '1' => 'Inoperante'), 'selected' => 'private'));
+            echo $this->Form->control('account_status', array('type' => 'select', 'label'=> 'Estado', 'class' => 'form-control','options' => array('0' => 'Inoperante', '1' => 'Activo'), 'selected' => 'private', 'value' => $my_status));
         ?>
     <style>
         .btn-primary {

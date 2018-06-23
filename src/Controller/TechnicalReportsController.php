@@ -21,7 +21,7 @@ class TechnicalReportsController extends AppController
         $this->Roles = $this->loadModel('Roles');
         $this->Permissions = $this->loadModel('Permissions');
         $this->RolesPermissions = $this->loadModel('RolesPermissions');
-
+ 
         $allowI = false;
         $allowM = false;
         $allowE = false;
@@ -62,7 +62,7 @@ class TechnicalReportsController extends AppController
             return $allowM;
         }else if($this->request->getParam('action') == 'delete'){
             return $allowE;
-        }else if($this->request->getParam('action') == 'view'){
+        }else if($this->request->getParam('action') == 'view' or $this->request->getParam('action') == 'download'){
             return $allowC;
         }else{
             return $allowC;

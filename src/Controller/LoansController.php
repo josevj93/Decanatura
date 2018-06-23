@@ -31,13 +31,13 @@ class LoansController extends AppController
             $rls = $roles['permissions'];
             foreach ($rls as $item){
                 //$permisos[(int)$item['id']] = 1;
-                if($item['nombre'] == 'Insertar Usuarios'){
+                if($item['nombre'] == 'Insertar Prestamos'){
                     $allowI = true;
-                }else if($item['nombre'] == 'Modificar Usuarios'){
+                }else if($item['nombre'] == 'Modificar Prestamos'){
                     $allowM = true;
-                }else if($item['nombre'] == 'Eliminar Usuarios'){
+                }else if($item['nombre'] == 'Eliminar Prestamos'){
                     $allowE = true;
-                }else if($item['nombre'] == 'Consultar Usuarios'){
+                }else if($item['nombre'] == 'Consultar Prestamos'){
                     $allowC = true;
                 }
             }
@@ -88,8 +88,21 @@ class LoansController extends AppController
         $loan = $this->Loans->get($id, [
             'contain' => ['Users']
         ]);
+        $this->loadModel('Assets');
+        $query = $this->Assets->find()
+                        ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series'])
+                        ->where(['assets.loan_id' => $id])
+                        ->toList();
 
-        $this->set('loan', $loan);
+        $size = count($query);
+
+        $result = array_fill(0, $size, NULL);
+        
+        for($i = 0; $i < $size; $i++)
+        {
+            $result[$i] =(object)$query[$i]->assets;
+        }
+        $this->set(compact('loan', 'result'));
     }
 
     /**
@@ -143,6 +156,7 @@ class LoansController extends AppController
                         ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series'])
                         ->where(['assets.state' => "Disponible"])
                         ->where(['assets.lendable' => true])
+                        ->where(['assets.deleted' => false])
                         ->toList();
 
         $size = count($query);
@@ -189,7 +203,7 @@ class LoansController extends AppController
                 }
             }
 
-            $this->Flash->success(__('El activo fue guardado exitosamente.'));
+            $this->Flash->success(__('El préstamo ha sido cancelado.'));
             return $this->redirect(['action' => 'index']);
 
         }

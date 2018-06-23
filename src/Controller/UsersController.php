@@ -196,13 +196,20 @@ class UsersController extends AppController
             }
         }
 
+        //estado actual
+        $my_status = $user['account_status'];
+
+
         $this->set('roles', $roles);
         $this->set('rol', $rol);
-
+        $this->set('my_status', $my_status);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            
+            $data = $this->request->getData();
+            $user = $this->Users->patchEntity($user, $data);
+            $user['account_status'] = $data['account_status'];
+            //print_r($this->request->getData());
+            //die();
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('Cambios guardados.'));
 
