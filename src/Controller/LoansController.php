@@ -203,7 +203,7 @@ class LoansController extends AppController
                 }
             }
 
-            $this->Flash->success(__('El activo fue guardado exitosamente.'));
+            $this->Flash->success(__('El préstamo ha sido cancelado.'));
             return $this->redirect(['action' => 'index']);
 
         }
