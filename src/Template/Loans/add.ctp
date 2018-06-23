@@ -102,7 +102,7 @@
 
 
     <div class="row col-md-6">
-            <label><b>Fecha de devolución:</b><b style="color:red;">*</b> </label>
+            <label>Fecha de devolución:</label>
                 <?php
                 echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date col-md-4']); 
                 ?>
@@ -120,8 +120,7 @@
 
     <div class="col-12 text-right">
 
-       
-        <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
+       <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
         <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
         
 
