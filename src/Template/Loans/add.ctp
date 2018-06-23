@@ -11,8 +11,9 @@
           color: #fff;
           background-color: #0099FF;
           border-color: #0099FF;
-          float: right;
           margin-left: 10px;
+          margin: 10px;
+          margin-top: 15px;
         }
 		
 		.btn-default {
@@ -20,6 +21,7 @@
           background-color: #7DC7EF;
           border-top-right-radius: 5px;
           border-bottom-right-radius: 5px;
+
         }
 		
         label {
@@ -40,38 +42,28 @@
         }
 </style> 
 
-<div class="residues form large-9 medium-8 columns content">
-	<?= $this->Form->create($loan) ?>
-	<fieldset>
-        <legend><?= __('Insertar préstamo') ?></legend>
+<div class="locations form large-9 medium-8 columns content">
+    <legend><?= __('Insertar préstamo') ?></legend>
     
-		<br>
+    <br>
 
-		<div class="form-control sameLine">
-			<div class="row col-lg-5">
-				<label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-				<?php echo $this->Form->select('id_responsables', $users, array('class' => 'form-control col-md-8', 'id'=> 'userDropdown')); ?>
-			</div>
+    <?= $this->Form->create($loan) ?>
 
-			<div class="row">
-				<label> <b>Fecha inicio:</b><b style="color:red;">*</b> </label>
-				<?php echo $this->Form->imput('fecha_inicio', ['class'=>'form-control date', 'value' => date("y-m-d"), 'id'=>'datepicker']); ?>
-			</div>
-			
-			<div class="row">
-				<label> <b>Fecha de devolución:</b><b style="color:red;">*</b> </label>
-                <?php echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date', 'id'=>'datepicker2']); ?>
-			</div>
-			
-		</div>
+    <div class="form-control sameLine" >
 
-		
-	
-	</fieldset>
-    <br> <br>
-</div>
+		   <div class="row">
+            <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
+        <?php echo $this->Form->select('id_responsables', $users, array('empty' => true, 'class' => 'form-control col-md-7', 'id'=> 'userDropdown')); ?>        
+        </div>
 
+		 <div class="row col-md-4">
+             <label> <b>Fecha inicio:</b><b style="color:red;">*</b> </label>
+                <?php
+                    echo $this->Form->imput('fecha_inicio', ['class'=>'form-control date col-md-7', 'value' => date("y-m-d"), 'id'=>'datepicker']); 
+                ?>
+        </div>
 
+    </div> <br>
 
    
  <!-- AQUI ESTA LO IMPORTANTE. RECUERDEN COPIAR LOS SCRIPTS -->
@@ -118,6 +110,12 @@
     <input type="hidden" name="checkList" id="checkList">
 
 
+    <div class="row col-md-6">
+            <label>Fecha de devolución:</label>
+                <?php
+                echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date col-md-4', 'id'=>'datepicker2']); 
+                ?>
+    </div>
     <br>
 
     <div>
@@ -133,10 +131,13 @@
         <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
          <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
 
+
+
     </div>
     
     <?= $this->Form->end(); ?>
 
+</div>
 
 <script>
 
@@ -165,7 +166,42 @@
 
     $(document).ready(function() 
     {
-        $('#assets-transfers-grid').DataTable( {} );
+        var table = $('#assets-transfers-grid').DataTable( {
+        "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "decimal": ",",
+                    "thousands": ".",
+                    "sSelect": "1 fila seleccionada",
+                    "select": {
+                        rows: {
+                            _: "Ha seleccionado %d filas",
+                            0: "Dele click a una fila para seleccionarla",
+                            1: "1 fila seleccionada"
+                        }
+                    },
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+       } );
     } );
     $("document").ready(
     function() {
