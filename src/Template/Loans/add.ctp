@@ -7,46 +7,77 @@
 ?>
 
 <style>
-        .btn-primary {
-            margin: 10px;
-            margin-top: 15px;
+    .btn-primary {
+          color: #fff;
+          background-color: #0099FF;
+          border-color: #0099FF;
+          float: right;
+          margin-left: 10px;
         }
-        </style> 
+		
+		.btn-default {
+          color: #000;
+          background-color: #7DC7EF;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+		
+        label {
+          text-align:left;
+          margin-right: 10px;
+          
+        }
 
-<div class="locations form large-8 medium-8 small-12 columns content">
-    <legend><?= __('Insertar prestamo') ?></legend>
+        .sameLine{
+          display: flex; 
+          justify-content: space-between; 
+          border-color: transparent;
+        }
+		
+		.date{
+          width:100px;
+          margin-left: 10px;
+        }
+</style> 
+
+<div class="residues form large-9 medium-8 columns content">
+	<?= $this->Form->create($loan) ?>
+	<fieldset>
+        <legend><?= __('Insertar préstamo') ?></legend>
     
-    <br>
+		<br>
 
-    <?= $this->Form->create($loan) ?>
+		<div class="form-control sameLine">
+			<div class="row col-lg-5">
+				<label> <b>Responsable:</b><b style="color:red;">*</b> </label>
+				<?php echo $this->Form->select('id_responsables', $users, array('class' => 'form-control col-md-8', 'id'=> 'userDropdown')); ?>
+			</div>
 
+			<div class="row">
+				<label> <b>Fecha inicio:</b><b style="color:red;">*</b> </label>
+				<?php echo $this->Form->imput('fecha_inicio', ['class'=>'form-control date', 'value' => date("y-m-d"), 'id'=>'datepicker']); ?>
+			</div>
+			
+			<div class="row">
+				<label> <b>Fecha de devolución:</b><b style="color:red;">*</b> </label>
+                <?php echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date', 'id'=>'datepicker2']); ?>
+			</div>
+			
+		</div>
 
-
-    <div class = "row">
-        <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-            <?php echo $this->Form->control('id_responsables', array('options' => $users,'label'=>'Responsable', 'class' => 'form-control', 'id'=> 'userDropdown')); ?>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-4 offset-md-4 col-lg-4 offset-lg-4">
-            <label>Fecha inicio:</label>
-                <?php
-                    echo $this->Form->imput('fecha_inicio', ['class'=>'form-control date', 'value' => date("y-m-d")]); 
-                ?>
-        </div>
-    </div>
-
-    <div id=userResult> 
-    </div>
-
-    <br>
+		
+	
+	</fieldset>
+    <br> <br>
+</div>
 
 
 
    
  <!-- AQUI ESTA LO IMPORTANTE. RECUERDEN COPIAR LOS SCRIPTS -->
         <div class="related">
-            <legend><?= __('Asignacion de activos a prestamo') ?></legend>
-
+            <legend><?= __('Asignación de activos a préstamo') ?></legend>
+			<br>
             <!-- tabla que contiene  datos básicos de activos-->
             <table id='assets-transfers-grid' cellpadding="0" cellspacing="0">
                 <thead>
@@ -87,23 +118,12 @@
     <input type="hidden" name="checkList" id="checkList">
 
 
-
-    <div class="row">
-        <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-            <label>Fecha de devolución:</label>
-                <?php
-                echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date']); 
-                ?>
-        </div>
-    </div>
-
     <br>
 
-    <div class="row">
-        <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-            <?php echo $this->Form->control('observaciones', array('label'=>'Observaciones', 'class' => 'form-control', 'rows' => '3')); ?>
-        </div>
-    </div>
+    <div>
+      <label> Observaciones: </label>
+      <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8']); ?>
+    </div> <br>
 
     <br>
 
@@ -117,9 +137,24 @@
     
     <?= $this->Form->end(); ?>
 
-</div>
 
 <script>
+
+	$( function Picker() {
+    $( "#datepicker" ).datepicker({ 
+            dateFormat: 'y-mm-dd',
+            monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+            dayNamesMin: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do']
+     });
+  } );
+  
+	$( function Picker() {
+    $( "#datepicker2" ).datepicker({ 
+            dateFormat: 'y-mm-dd',
+            monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+            dayNamesMin: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do']
+     });
+  } );
     /*prueba para autocompletar*/
     /*
     jQuery('#assetImput').autocomplete({

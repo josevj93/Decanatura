@@ -50,12 +50,12 @@
     <div class="form-control sameLine" >
 	
       <div class="row">
-          <label> <b>Placa:</b><b style="color:red;">*</b> </label>
+          <label> Placa: </label>
 		  <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->plaque) . '">'; ?> 
       </div>
       
       <div class="row col-md-4">
-        <label> <b>Tipo:</b><b style="color:red;">*</b> </label>
+        <label> Tipo: </label>
         <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->type->name) . '">'; ?>        
       </div>
 	  
@@ -83,24 +83,24 @@
     </div> <br>
 	
 	<div>
-      <label> <b>Descripción:</b><b style="color:red;">*</b> </label>
+      <label> Descripción: </label>
       <?php echo $this->Form->textarea('description', ['class'=>'form-control col-md-8', 'disabled']); ?>
     </div> <br>
 	
 	<div class="form-control sameLine" >
 
       <div class="row">
-        <label> <b>Dueño:</b><b style="color:red;">*</b> </label>
+        <label> Dueño: </label>
         <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->user->nombre) . '">'; ?>        
       </div>
       
       <div class="row">
-        <label><b>Responsable:</b><b style="color:red;">*</b> </label>
+        <label> Responsable: </label>
         <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->user->nombre) . '">'; ?>       
       </div>
 	  
 	  <div class="row">
-        <label> <b>Ubicación:</b><b style="color:red;">*</b></label>
+        <label> Ubicación: </label>
         <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->location->nombre) . '">'; ?>        
       </div>
 
@@ -115,7 +115,7 @@
 	  
       
       <div class="row">
-        <label class="col-lg-3"> <b>Año:</b><b style="color:red;">*</b> </label>
+        <label class="col-lg-3"> Año: </label>
         <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->year) . '">'; ?>        
       </div>
 	  

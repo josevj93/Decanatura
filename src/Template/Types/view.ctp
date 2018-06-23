@@ -5,6 +5,48 @@
  */
 ?>
 
+<head>
+ 
+	<style>
+        .btn-primary {
+          color: #fff;
+          background-color: #0099FF;
+          border-color: #0099FF;
+          float: right;
+          margin-left: 10px;
+        }
+	</style>
+
+</head>
+
+<div class="locations form large-9 medium-8 columns content">
+  <?= $this->Form->create($asset) ?>
+  <fieldset>
+    <legend><?= __('Insertar tipo de activo') ?></legend>
+    <br>
+
+    <div class="form-control sameLine" >
+	
+      <div class="row">
+          <label> <b>Nombre:</b><b style="color:red;">*</b> </label>
+		  <?php echo $this->Form->imput('plaque', ['class'=>'form-control col-md-9']); ?> 
+      </div>
+        
+    </div> <br>
+	
+	<div>
+      <label> Descripción: </label>
+      <?php echo $this->Form->textarea('description', ['class'=>'form-control col-md-8']); ?>
+    </div> <br>
+
+  </fieldset>
+
+</div>
+
+
+
+
+
 <div class="col-md-12 col-sm-12">
     <h3>Consultar tipo de activo</h3>
 </div>
