@@ -361,6 +361,7 @@ class TransfersController extends AppController
 public function download($id = null)
     {
 
+        die();
         $this->Assets = $this->loadModel('Assets');
         $this->AssetsTransfers = $this->loadModel('AssetsTransfers');
 
@@ -438,6 +439,7 @@ public function download($id = null)
 <table width="0" border="1">
 <tbody>
 <tr>
+<th align="center">Descripcion del Activo</th>
 <th align="center">Placa</th>
 <th align="center">Marca</th>
 <th align="center">Modelo</th>
@@ -448,6 +450,7 @@ public function download($id = null)
         foreach ($results as $item) {
             $html .= 
             '<tr>
+            <td align="center">' . $item['description'] . '</td>
              <td align="center">' . $item['plaque'] . '</td>
              <td align="center">' . $item['brand'] . '</td>
              <td align="center">' . $item['model'] . '</td>

@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Dompdf\Dompdf;
+use Cake\Datasource\ConnectionManager;
+
 
 /**
 * Controlador para los préstamos de la aplicación
@@ -264,4 +267,136 @@ class LoansController extends AppController
         /*Asocia esta función a la vista /Templates/Layout/searchAsset.ctp*/
         $this->render('/Layout/searchAsset');
     }
+
+
+    /**
+     * Método para generar formulario
+     */
+
+    public function download($id = null)
+    {
+
+        $this->loadModel('Assets');
+        
+
+        $this->Assets = $this->loadModel('Assets');
+        $this->AssetsTransfers = $this->loadModel('AssetsTransfers');
+
+        $conn = ConnectionManager::get('default');
+        $stmt = $conn->execute('SELECT * FROM assets
+            inner join loans on loan_id = id
+            where id =\'' . $id . '\';');
+
+        $results = $stmt ->fetchAll('assoc');
+
+
+         require_once 'dompdf/autoload.inc.php';
+        //initialize dompdf class
+        $document = new Dompdf();
+        $html = 
+        '
+        <style>
+        #element1 {float:left;margin-right:10px;} #element2 {float:right;} 
+        table, td, th {
+            border: 1px solid black;
+        }
+        body {
+            border: 5px double;
+            width:100%;
+            height:100%;
+            display:block;
+            overflow:hidden;
+            padding:30px 30px 30px 30px
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th {
+            height: 50px;
+        }
+        </style>
+
+
+<p><strong><sup>&nbsp;</sup></strong></p>
+<h2 align="center">Universidad de Costa Rica</h2>
+<h2 align="center">Vicerrector&iacute;a de Administraci&oacute;n</h2>
+<h2 align="center">Oficina de Administraci&oacute;n Financiera</h2>
+<p align="center">Unidad de Control de Activos Fijos y Seguros</p>
+<p align="center"><strong>***Tel. 207-5045 / 2075759 ** Fax 253-4630***</strong></p>
+<h2 align="center">FORMULARIO PARA TRASLADO DE ACTIVOS FIJOS</h2>
+<h1>&nbsp;</h1>
+<div id="element1" align="left">  Fecha: __________________ </div> <div id="element2" align="right"> No.__________________ </div> 
+<p align="right">(Lo asigna el usuario)</p>
+<p><strong>&nbsp;</strong></p>
+
+<table>
+  <tr>
+    <th align="center"><span style="font-weight:bold">ENTREGA</span></th>
+    <th align="center"><span style="font-weight:bold">RECIBE</span></th>
+  </tr>
+  <tr>
+    <td height="50"><strong>Unidad: Decanato de la Facultad Ingenieria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+    <td height="50"><strong>Unidad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+  </tr>
+  <tr>
+    <td height="50"><strong>Nombre del Funcionario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+    <td height="50"><strong>Nombre del Funcionario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+  </tr>
+  <tr>
+    <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+    <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+  </tr>
+</table>
+
+<h2 align="center">Detalle de los bienes a trasladar</h2>
+<table width="0" border="1">
+<tbody>
+<tr>
+<th align="center">Placa</th>
+<th align="center">Descripcion del Activo</th>
+<th align="center">Marca</th>
+<th align="center">Modelo</th>
+<th align="center">Serie</th>
+</tr>';
+
+        foreach ($results as $item) {
+            $html .= 
+            '<tr>
+             <td align="center">' . $item['plaque'] . '</td>
+             <td align="center">' . $item['description'] . '</td>
+             <td align="center">' . $item['brand'] . '</td>
+             <td align="center">' . $item['model'] . '</td>
+             <td align="center">' . $item['series'] . '</td>
+             </tr>';
+        }
+
+
+$html .=
+
+'</table>
+<br><br><br>
+<p><strong>Observaciones: </strong></p>
+<p><strong>Nota: El formulario debe estar firmado por el encargado de activos fijos u otro funcionario autorizado en cada unidad.</strong></p>
+<p><strong>Original: Oficina de Administraci&oacute;n Financiera&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copia: Unidad que entrega&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copia: Unidad que recibe</strong></p>
+        ';
+
+
+        $document->loadHtml($html);
+
+        //set page size and orientation
+        $document->setPaper('A3', 'portrait');
+        //Render the HTML as PDF
+        $document->render();
+        //Get output of generated pdf in Browser
+        $document->stream("Formulario de Traslado", array("Attachment"=>1));
+        //1  = Download
+        //0 = Preview
+        return $this->redirect(['action' => 'index']);
+
+    }
+
+
 }

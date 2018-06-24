@@ -13,14 +13,14 @@
           float: right;
           margin-left: 10px;
         }
-        
-        .btn-default {
+    
+    .btn-default {
           color: #000;
           background-color: #7DC7EF;
           border-top-right-radius: 5px;
           border-bottom-right-radius: 5px;
         }
-        
+    
         label {
           text-align:left;
           margin-right: 10px;
@@ -32,40 +32,42 @@
           justify-content: space-between; 
           border-color: transparent;
         }
-        
-        .date{
+    
+    .date{
           width:100px;
           margin-left: 10px;
         }
 </style> 
 
 <div class="residues form large-9 medium-8 columns content">
-    <?= $this->Form->create($loan) ?>
-    <fieldset>
+  <?= $this->Form->create($loan) ?>
+  <fieldset>
         <legend><?= __('Insertar préstamo') ?></legend>
     
-        <br>
+    <br>
 
-        <div class="form-control sameLine">
-            <div class="row col-lg-5">
-                <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-                <?php echo $this->Form->imput('id_responsables', array('class' => 'form-control col-md-8', 'id'=> 'userDropdown', 'disabled')); ?>
-            </div>
+    <div class="form-control sameLine">
+      <div class="row col-lg-5">
+        <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
+        <?php echo $this->Form->imput('id_responsables', array('class' => 'form-control col-md-8', 'id'=> 'userDropdown', 'disabled')); ?>
+      </div>
 
-            <div class="row">
-                <label> <b>Fecha inicio:</b><b style="color:red;">*</b> </label>
-                <?php echo $this->Form->imput('fecha_inicio', ['class'=>'form-control date', 'value' => date("y-m-d"), 'id'=>'datepicker', 'disabled']); ?>
-            </div>
-            
-            <div class="row">
-                <label> <b>Fecha de devolución:</b><b style="color:red;">*</b> </label>
+      <div class="row">
+        <label> <b>Fecha inicio:</b><b style="color:red;">*</b> </label>
+        <?php echo $this->Form->imput('fecha_inicio', ['class'=>'form-control date', 'value' => date("y-m-d"), 'id'=>'datepicker', 'disabled']); ?>
+      </div>
+      
+      <div class="row">
+        <label> <b>Fecha de devolución:</b><b style="color:red;">*</b> </label>
                 <?php echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date', 'id'=>'datepicker2', 'disabled']); ?>
-            </div>
-            
-        </div>
-    
-    </fieldset>
+      </div>
+      
+    </div>
+  
+  </fieldset>
     <br> <br>
+
+    <?= $this->Form->end() ?>
 </div>
 
 <div class="related">
@@ -106,6 +108,8 @@
 
  <?= $this->Html->link(__('Regresar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-<?= $this->Html->link(__('Cancelar Préstamo'), ['action' => 'cancel',$loan->id], ['class' => 'btn btn-primary']) ?>    
+<?= $this->Html->link(__('Cancelar Préstamo'), ['action' => 'cancel',$loan->id], ['class' => 'btn btn-primary']) ?>   
+
+<?= $this->Form->postLink(__('Generar Formulario'), ['controller'=> 'Loans', 'action' => 'download',$loan->id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $loan->id)]) ?> 
 
 </div>
