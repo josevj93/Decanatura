@@ -180,6 +180,8 @@ class UsersController extends AppController
             'contain' => []
         ]);
 
+
+
         //seleccina todos los roles para desplegar
         $query = $this->Roles->find('all');
 
@@ -206,10 +208,14 @@ class UsersController extends AppController
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
+            
+            if($data['password'] == ''){
+                unset($data['password']);
+            }
             $user = $this->Users->patchEntity($user, $data);
             $user['account_status'] = $data['account_status'];
-            //print_r($this->request->getData());
-            //die();
+        
+            
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('Cambios guardados.'));
 
