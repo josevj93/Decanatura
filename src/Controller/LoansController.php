@@ -391,7 +391,7 @@ $html .=
         //Render the HTML as PDF
         $document->render();
         //Get output of generated pdf in Browser
-        $document->stream("Formulario de Traslado", array("Attachment"=>1));
+        $document->stream("Formulario de Prestamo", array("Attachment"=>1));
         //1  = Download
         //0 = Preview
         return $this->redirect(['action' => 'index']);
