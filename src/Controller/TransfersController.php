@@ -377,77 +377,82 @@ public function download($id = null)
         //initialize dompdf class
         $document = new Dompdf();
         $html = 
-        '<p><strong><sup>&nbsp;</sup></strong></p>
-<p><strong>Universidad de Costa Rica</strong></p>
-<p><strong>Vicerrector&iacute;a de Administraci&oacute;n</strong></p>
-<p><strong>Oficina de Administraci&oacute;n Financiera</strong></p>
-<h1>Unidad de Control de Activos Fijos y Seguros</h1>
-<p><strong>***Tel. 207-5045 / 2075759 ** Fax 253-4630***</strong></p>
-<h2>FORMULARIO PARA TRASLADO DE ACTIVOS FIJOS</h2>
+        '
+        <style>
+        #element1 {float:left;margin-right:10px;} #element2 {float:right;} 
+        table, td, th {
+            border: 1px solid black;
+        }
+        body {
+            border: 5px double;
+            width:100%;
+            height:100%;
+            display:block;
+            overflow:hidden;
+            padding:30px 30px 30px 30px
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th {
+            height: 50px;
+        }
+        </style>
+
+
+<p><strong><sup>&nbsp;</sup></strong></p>
+<h2 align="center">Universidad de Costa Rica</h2>
+<h2 align="center">Vicerrector&iacute;a de Administraci&oacute;n</h2>
+<h2 align="center">Oficina de Administraci&oacute;n Financiera</h2>
+<p align="center">Unidad de Control de Activos Fijos y Seguros</p>
+<p align="center"><strong>***Tel. 207-5045 / 2075759 ** Fax 253-4630***</strong></p>
+<h2 align="center">FORMULARIO PARA TRASLADO DE ACTIVOS FIJOS</h2>
 <h1>&nbsp;</h1>
-<h1>Fecha: 13/06/2015&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; No.__________________</h1>
-<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><strong>(Lo asigna el usuario)</strong></p>
+<div id="element1" align="left">  Fecha: __________________ </div> <div id="element2" align="right"> No.__________________ </div> 
+<p align="right">(Lo asigna el usuario)</p>
 <p><strong>&nbsp;</strong></p>
-<table width="0" border="1">
-<tbody>
-<tr>
-<td width="360">
-<p><strong>ENTREGA</strong></p>
-</td>
-<td width="324">
-<p><strong>RECIBE</strong></p>
-</td>
-</tr>
-<tr>
-<td width="360">
-<p><strong>Unidad: Decanato de la Facultad Ingenier&iacute;a</strong></p>
-<p><strong>&nbsp;</strong></p>
-</td>
-<td width="324">
-<p><strong>Unidad:</strong></p>
-</td>
-</tr>
-<tr>
-<td width="360">
-<p><strong>Nombre del Funcionario:</strong></p>
-<p><strong>&nbsp;</strong></p>
-</td>
-<td width="324">
-<p><strong>Nombre del Funcionario:</strong></p>
-</td>
-</tr>
-<tr>
-<td width="360">
-<p><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C&eacute;dula:</strong></p>
-<p><strong>&nbsp;</strong></p>
-</td>
-<td width="324">
-<p><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C&eacute;dula:</strong></p>
-</td>
-</tr>
-</tbody>
+
+<table>
+  <tr>
+    <th align="center"><span style="font-weight:bold">ENTREGA</span></th>
+    <th align="center"><span style="font-weight:bold">RECIBE</span></th>
+  </tr>
+  <tr>
+    <td height="50"><strong>Unidad: Decanato de la Facultad Ingenieria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+    <td height="50"><strong>Unidad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+  </tr>
+  <tr>
+    <td height="50"><strong>Nombre del Funcionario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+    <td height="50"><strong>Nombre del Funcionario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+  </tr>
+  <tr>
+    <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+    <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+  </tr>
 </table>
-<h2>Detalle de los bienes a trasladar</h2>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+
+<h2 align="center">Detalle de los bienes a trasladar</h2>
 <table width="0" border="1">
 <tbody>
 <tr>
-<th>Placa</th>
-<th>Marca</th>
-<th>Modelo</th>
-<th>Serie</th>
-<th>Estado Actual</th>
+<th align="center">Placa</th>
+<th align="center">Marca</th>
+<th align="center">Modelo</th>
+<th align="center">Serie</th>
+<th align="center">Estado Actual</th>
 </tr>';
 
         foreach ($results as $item) {
             $html .= 
             '<tr>
-             <td>' . $item['plaque'] . '</td>
-             <td>' . $item['brand'] . '</td>
-             <td>' . $item['model'] . '</td>
-             <td>' . $item['series'] . '</td>
-             <td>' . $item['state'] . '</td>
+             <td align="center">' . $item['plaque'] . '</td>
+             <td align="center">' . $item['brand'] . '</td>
+             <td align="center">' . $item['model'] . '</td>
+             <td align="center">' . $item['series'] . '</td>
+             <td align="center">' . $item['state'] . '</td>
              </tr>';
         }
 
@@ -456,19 +461,16 @@ $html .=
 
 '</table>
 <br><br><br>
-<p><strong>&nbsp;</strong></p>
-<p><strong>&nbsp;</strong></p>
 <p><strong>Observaciones: </strong></p>
 <p><strong>Nota: El formulario debe estar firmado por el encargado de activos fijos u otro funcionario autorizado en cada unidad.</strong></p>
-<h3>&nbsp;</h3>
-<h3>Original: Oficina de Administraci&oacute;n Financiera&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Copia: Unidad que entrega&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Copia: Unidad que recibe</h3>
-    ';
+<p><strong>Original: Oficina de Administraci&oacute;n Financiera&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copia: Unidad que entrega&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copia: Unidad que recibe</strong></p>
+        ';
 
 
         $document->loadHtml($html);
 
         //set page size and orientation
-        $document->setPaper('A3', 'landscape');
+        $document->setPaper('A3', 'portrait');
         //Render the HTML as PDF
         $document->render();
         //Get output of generated pdf in Browser
@@ -478,10 +480,4 @@ $html .=
         return $this->redirect(['action' => 'index']);
 
     }
-
-
-
-
-
-
 }
