@@ -91,7 +91,7 @@ class TechnicalReportsTable extends Table
         $validator
             ->scalar('evaluator_name')
             ->maxLength('evaluator_name', 100)
-            ->allowEmpty('evaluator_name');
+            ->notEmpty('evaluator_name');
 
         $validator
             ->scalar('year')
