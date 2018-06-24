@@ -1,55 +1,62 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Asset[]|\Cake\Collection\CollectionInterface $assets
+ * @var \App\Model\Entity\Transfer[]|\Cake\Collection\CollectionInterface $transfers
  */
 ?>
 
-<div class="types index content">
-    <h3><?= __('Préstamos') ?></h3>
+<style>
+.btn-primary {
+  color: #fff;
+  background-color: #FF9933;
+  border-color: #FF9933;
+}
+</style>
+
+<div class="transfers index large-9 medium-8 columns content">
+    <h3><?= __('Traslados') ?></h3>
+    <table id='transfers-grid' class="table table-striped" cellpadding="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th scope="col" class="actions"><?= __('Acciones') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Fecha') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Nº traslado') ?></th>                
+
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($transfers as $transfer): ?>
+            <tr>
+                <td class="actions">
+                    <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $transfer->transfers_id], array('escape' => false)) ?>
+                        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $transfer->transfers_id], array('escape' => false)) ?>
+                        <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $transfer->transfers_id], ['escape' => false, 'confirm' => __('¿Seguro quiere borrar el reporte # '.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
+                </td>
+                <td>
+                    <?php 
+                    //para darle formato a la fecha
+                    $tmpdate= $transfer->date->format('d-m-Y');
+                    ?>
+
+                    <?= h($tmpdate) ?>
+                    
+                </td>
+                <td><?= h($transfer->transfers_id) ?></td>              
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <th>Fecha</th>
+                <th>Nº Reporte</th>
+                
+            </tr>
+        </tfoot>
+    </table>
+    
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="table-responsive">
-            <table id="loans-grid"  class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col" class="actions"><?= __('') ?></th>             
-                        <th scope="col"><?= $this->Paginator->sort('Responsable') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('Estado') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('Fecha de inicio') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('Fecha de devolución') ?></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($loans as $loan): ?>
-                        <tr>
-                            <td class="actions">
-                                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $loan->id], array('escape'=> false)) ?>
-                            </td>                            
-                            <td><?= h($loan->user->nombre . " " . $loan->user->apellido1) ?></td>   
-                            <td><?= h($loan->estado) ?></td>                         
-                            <td><?= h(date("d-m-Y", strtotime($loan->fecha_inicio))) ?></td>
-                            <td><?= $loan->has('fecha_devolucion') ? h(date("d-m-Y", strtotime($loan->fecha_devolucion))) : '' ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <th>Responsable</th>
-                        <th>Estado</th>
-                        <th>Fecha de inicio</th>
-                        <th>Fecha de devolución</th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
-</div>
-
-<br>
 
 <style>
 .btn-primary {
@@ -61,13 +68,14 @@
 }
 </style>
 
-<?= $this->Html->link(__('Insertar Préstamo'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
+
+<?= $this->Html->link(__('Insertar traslado'), ['action' => 'add'] ,['class' => 'btn btn-primary']) ?>
 
 <script type="text/javascript">
 
     $(document).ready(function() {
-        var table= $('#loans-grid').DataTable( {
-             dom: 'Bfrtip',
+        var table = $('#transfers-grid').DataTable( {
+           dom: 'Bfrtip',
                 buttons: [
                 'copyHtml5',
                 'excelHtml5',
@@ -112,15 +120,14 @@
                     }
                 }
             } );
-
         // Setup - add a text input to each footer cell
-        $('#loans-grid tfoot th').each( function () {
+        $('#transfers-grid tfoot th').each( function () {
             var title = $(this).text();
-           $(this).html( '<input type="text" placeholder="&#xF002; '+title+'" style="font-family:Arial, FontAwesome" />' );
+     $(this).html( '<input type="text" placeholder="&#xF002; '+title+'" style="font-family:Arial, FontAwesome" />' );
         } );
 
         // DataTable
-        //var table = $('#roles-grid').DataTable();
+        //var table = $('#transfers-grid').DataTable();
 
         // Apply the search
         table.columns().every( function () {

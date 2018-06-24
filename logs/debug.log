@@ -14506,9 +14506,16 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-06-24 03:37:54 Notice: Notice (8): Undefined variable: loans in [C:\xampp\htdocs\Decanatura\src\Template\Transfers\index.ctp, line 26]
 Request URL: /transfers
 Referer URL: http://localhost/Decanatura/
+=======
+2018-06-24 02:23:25 Notice: Notice (8): Undefined variable: loans in [C:\xampp\htdocs\Decanatura\src\Template\Transfers\index.ctp, line 26]
+Request URL: /transfers
+Referer URL: http://127.0.0.1/Decanatura/loans/view/5b1f741b28839
+Client IP: 127.0.0.1
+>>>>>>> 1416ae71940970ef805a17db349b9e813986dffc
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Transfers\index.ctp, line 26
@@ -14534,9 +14541,16 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-06-24 03:38:04 Notice: Notice (8): Undefined variable: loans in [C:\xampp\htdocs\Decanatura\src\Template\Transfers\index.ctp, line 26]
 Request URL: /transfers
 Referer URL: http://localhost/Decanatura/transfers
+=======
+2018-06-24 02:24:09 Notice: Notice (8): Undefined variable: loans in [C:\xampp\htdocs\Decanatura\src\Template\Transfers\index.ctp, line 26]
+Request URL: /transfers
+Referer URL: http://127.0.0.1/Decanatura/transfers
+Client IP: 127.0.0.1
+>>>>>>> 1416ae71940970ef805a17db349b9e813986dffc
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Transfers\index.ctp, line 26
@@ -14562,6 +14576,7 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 
 
 
+<<<<<<< HEAD
 2018-06-24 03:38:10 Notice: Notice (8): Undefined variable: loans in [C:\xampp\htdocs\Decanatura\src\Template\Transfers\index.ctp, line 26]
 Request URL: /transfers
 Referer URL: http://localhost/Decanatura/transfers
@@ -14593,6 +14608,12 @@ Cake\Http\Server::run() - CORE\src\Http\Server.php, line 81
 2018-06-24 03:38:17 Notice: Notice (8): Undefined variable: loans in [C:\xampp\htdocs\Decanatura\src\Template\Transfers\index.ctp, line 26]
 Request URL: /transfers
 Referer URL: http://localhost/Decanatura/loans
+=======
+2018-06-24 02:31:28 Notice: Notice (8): Undefined variable: loans in [C:\xampp\htdocs\Decanatura\src\Template\Transfers\index.ctp, line 26]
+Request URL: /transfers
+Referer URL: http://127.0.0.1/Decanatura/transfers
+Client IP: 127.0.0.1
+>>>>>>> 1416ae71940970ef805a17db349b9e813986dffc
 Trace:
 Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
 include - APP/Template\Transfers\index.ctp, line 26
