@@ -46,35 +46,48 @@ class ResiduesTable extends Table
         $validator
             ->scalar('residues_id')
             ->maxLength('residues_id', 200)
-            ->allowEmpty('residues_id', 'create');
+            ->allowEmpty('residues_id', 'create')
+            ->alphaNumeric('residues_id');
 
         $validator
             ->scalar('name1')
             ->maxLength('name1', 50)
             ->requirePresence('name1', 'create')
-            ->notEmpty('name1');
+            ->notEmpty('name1','Este campo es requerido');
 
         $validator
             ->scalar('identification1')
-            ->maxLength('identification1', 10)
+            ->maxLength('identification1', 9)
             ->requirePresence('identification1', 'create')
-            ->notEmpty('identification1');
+            /*->add('identification1',[
+                'maxLength'=>'9',
+                'minLength'=>'9',
+                'message'=>'La cédula debe tener 9 dígitos'
+            ])*/
+            //->lengthBetween('identification1',9,9)
+            ->notEmpty('identification1','Este campo es requerido');
 
         $validator
             ->scalar('name2')
             ->maxLength('name2', 50)
             ->requirePresence('name2', 'create')
-            ->notEmpty('name2');
+            ->notEmpty('name2','Este campo es requerido');
 
         $validator
             ->scalar('identification2')
-            ->maxLength('identification2', 10)
+            //->numElements('identification2', 'equal',9)
             ->requirePresence('identification2', 'create')
-            ->notEmpty('identification2');
+            ->add('identification2', [
+                [
+                'rule' => ['numElements', 'equal', 9],
+                'message' => 'La cédula debe tener 9 dígitos',
+                ]
+            ])
+            ->notEmpty('identification2','Este campo es requerido');
 
         $validator
-            ->date('date')
-            ->allowEmpty('date');
+            ->date('date','dmy')
+            ->allowEmpty('date','Este campo es requerido');
 
         $validator
             ->boolean('descargado')
