@@ -361,7 +361,6 @@ class TransfersController extends AppController
 public function download($id = null)
     {
 
-        die();
         $this->Assets = $this->loadModel('Assets');
         $this->AssetsTransfers = $this->loadModel('AssetsTransfers');
 
@@ -404,7 +403,7 @@ public function download($id = null)
         </style>
 
 
-<p><strong><sup>&nbsp;</sup></strong></p>
+<center><img src="C:\xampp\htdocs\Decanatura\src\Controller\images\logoucr.png"></center>
 <h2 align="center">Universidad de Costa Rica</h2>
 <h2 align="center">Vicerrector&iacute;a de Administraci&oacute;n</h2>
 <h2 align="center">Oficina de Administraci&oacute;n Financiera</h2>
