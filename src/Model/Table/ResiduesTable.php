@@ -46,13 +46,14 @@ class ResiduesTable extends Table
         $validator
             ->scalar('residues_id')
             ->maxLength('residues_id', 200)
-            ->allowEmpty('residues_id', 'create')
+            ->notEmpty('residues_id', 'El número de autorización es requerido')
             ->alphaNumeric('residues_id');
 
         $validator
             ->scalar('name1')
             ->maxLength('name1', 50)
             ->requirePresence('name1', 'create')
+            ->alphaNumeric('name1','El nombre debe tener caracteres alfanuméricos')
             ->notEmpty('name1','Este campo es requerido');
 
         $validator
@@ -87,7 +88,7 @@ class ResiduesTable extends Table
 
         $validator
             ->date('date','dmy')
-            ->allowEmpty('date','Este campo es requerido');
+            ->notEmpty('date','Este campo es requerido');
 
         $validator
             ->boolean('descargado')

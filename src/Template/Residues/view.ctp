@@ -96,7 +96,6 @@
             //debug($resultRec);
 
             $size = count($resultRec);
-            
             for($i = 0; $i < $size; $i++) {
 
                 echo '<tr>';

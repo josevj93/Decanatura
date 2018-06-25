@@ -39,7 +39,7 @@
     }
 
     input[name=date]{
-          width:100px;
+          width:120px;
           margin-left: 10px;
         }
 
@@ -95,23 +95,25 @@
 ?>
 
 <div class="residues form large-9 medium-8 columns content">
-    <?= $this->Form->create($residue) ?>
+    <?= $this->Form->create($residue,['novalidate','onsubmit'=>'return validateCheck()']) ?>
     <fieldset>
         <legend><?= __('Insertar acta de desecho') ?></legend>
            
       <div class="form-control sameLine">
 
         <div class="row">
-                <label>Número de Autorización: </label>
-                <label><?php echo h($RID); ?></label>
+                <label>Número de Autorización: VRA-</label>
+                <!--<input type="imput" id ="residues_id" name="residues_id" class ="form-control col-lg-4"> -->
+                <?php  
+                    echo $this->Form->control('residues_id',['class'=>'form-control col-lg-4'])
+                ?>
         </div>    
             
         <div class="row">
               <label>Fecha:</label>
               <?php 
               echo $this->Form->imput('date', ['class'=>'form-control','id'=>'datepicker']);
-              //echo $this->Form->control('date', ['empty' => true]);
-                ?>
+              ?>
         </div>
       
       </div>
@@ -121,12 +123,21 @@
       <table>
             <tr>
                 <td><br>
-                    <div class="row">
-                              <label class='label-t'>Nombre:</label>
+                    
+                              <!--<label class='label-t'>Nombre:</label>-->
                               <?php 
-                                  echo $this->Form->imput('name1', ['class'=>'form-control col-sm-6']);
+                                  echo $this->Form->control('name1', 
+                                    [
+                                        'templates' => [
+                                        'inputContainer' => '<div class="row">{{content}}</div>',
+                                        'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                                        ],
+
+                                        'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
+                                        'class'=>'form-control col-sm-6'
+                                    ]);
                               ?>
-                    </div><br>
+                    <br>
                     <div class="row">
                             <label class='label-t'>Cédula:</label>
                             <?php 
@@ -158,6 +169,9 @@
         <!-- AQUI ESTA LO IMPORTANTE. RECUERDEN COPIAR LOS SCRIPTS -->
         <div class="related">
             <legend><?= __('Activos a desechar') ?></legend>
+
+            <!--  Sirve para mostrar el mensaje que se debe seleccionar un activo -->
+            <p id="errorMsg"></p>
 
             <!-- tabla que contiene  datos básicos de activos-->
             <table id='assets-transfers-grid' cellpadding="0" cellspacing="0">
@@ -210,7 +224,7 @@
 
  $( function Picker() {
     $( "#datepicker" ).datepicker({ 
-            dateFormat: 'y-mm-dd',
+            dateFormat: 'dd-mm-yy',
             monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
             dayNamesMin: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do']
      });
@@ -262,6 +276,25 @@
         } );
     } );
 
+
+    function validateCheck() {
+    var checks, error;
+
+    // Get the value of the input field with id="numb"
+    checks = getValueUsingClass();
+
+
+    // If x is Not a Number or less than one or greater than 10
+    if ( checks.length == 0 ) {
+        error = "Seleccione al menos un activo";
+        document.getElementById("errorMsg").innerHTML = error;
+        return false;
+    } else {
+        return true;
+    }
+    
+}
+
     $("document").ready(
     function() {
       $('#acept').click( function()
@@ -272,6 +305,7 @@
         });
         }
     );
+
 
 /** función optenida de http://bytutorial.com/blogs/jquery/jquery-get-selected-checkboxes */
 
