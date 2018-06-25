@@ -179,7 +179,7 @@ class ResiduesController extends AppController
         if ($this->request->is('post')) {
 
             $residue = $this->Residues->patchEntity($residue, $this->request->getData(),['validationDefault'=>'residues_id']);
-            //debug($residue);
+            debug($residue);
 
             
             if ($this->Residues->save($residue)) {
