@@ -203,8 +203,11 @@
 
      <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el acta de Residuo # {0}?', $residue->residues_id)]) ?>
 
+     <?= $this->Form->postLink(__('Generar Formulario'), ['controller'=> 'Loans', 'action' => 'download',$residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $residue->residues_id)]) ?>
+
     </div>
 
     <script>
             
     </script>
+

@@ -361,7 +361,6 @@ class TransfersController extends AppController
 public function download($id = null)
     {
 
-        die();
         $this->Assets = $this->loadModel('Assets');
         $this->AssetsTransfers = $this->loadModel('AssetsTransfers');
 
