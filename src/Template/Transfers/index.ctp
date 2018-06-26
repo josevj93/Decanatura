@@ -19,9 +19,9 @@
         <thead>
             <tr>
                 <th scope="col" class="actions"><?= __('Acciones') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Nº traslado') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Fecha') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('Nº traslado') ?></th>                
-
+                <th scope="col"><?= $this->Paginator->sort('Recibe') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +32,7 @@
                         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $transfer->transfers_id], array('escape' => false)) ?>
                         <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $transfer->transfers_id], ['escape' => false, 'confirm' => __('¿Está seguro que quiere borrar el traslado # '.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
                 </td>
+                <td><?= h($transfer->transfers_id) ?></td> 
                 <td>
                     <?php 
                     //para darle formato a la fecha
@@ -40,17 +41,17 @@
 
                     <?= h($tmpdate) ?>
                     
-                </td>
-                <td><?= h($transfer->transfers_id) ?></td>              
+                </td> 
+                <td><?= h($transfer->Acade_Unit_recib) ?></td>              
             </tr>
             <?php endforeach; ?>
         </tbody>
         <tfoot>
             <tr>
                 <td></td>
+                <th>Nº Traslado</th>
                 <th>Fecha</th>
-                <th>Nº Reporte</th>
-                
+                <th>Recibe</th>
             </tr>
         </tfoot>
     </table>

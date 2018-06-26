@@ -55,6 +55,9 @@ use Cake\Routing\Router;
         margin-left: 20px;
         width: 150px;
     }
+    label[class=label-h]{
+        margin-right: 10px;
+    }
     .sameLine{
     display: flex; 
     justify-content: space-between; 
@@ -67,16 +70,16 @@ use Cake\Routing\Router;
 <div class="transfers form large-9 medium-8 columns content">
   <fieldset>
     <?= $this->Form->create($transfer) ?>
-    <legend>Traslado</legend>
+    <legend><?= __('Modificar traslado') ?></legend>
     <br>
         <div class= 'form-control sameLine' style="border-color: transparent;">
             <div class ="row">                
-                <label>Nº traslado:</label>
+                <label class="label-h">Nº traslado:</label>
                 <?php echo '<input type="text" class="form-control col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?> 
             </div>
 
             <div  class="row" >
-                <label>Fecha:</label>
+                <label class="label-h">Fecha:</label>
                 <?php
                 // para dar formato a la fecha
                 $tmpDate= $transfer->date->format('d-m-Y');
@@ -102,12 +105,12 @@ use Cake\Routing\Router;
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Funcionario: </label>
+                    <label class="label-t">Funcionario1: </label>
                     <?php echo '<input type="text" name="functionary" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->functionary) . '">'; ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Identificación:</label>
+                    <label class="label-t">Cédula:</label>
                     <?php echo '<input type="text" name="identification" class="form-control col-sm-4"  value="' . htmlspecialchars($transfer->identification) . '">'; ?>
                 </div>
             </td>
@@ -129,7 +132,7 @@ use Cake\Routing\Router;
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Identificación:</label>
+                    <label class="label-t">Cédula:</label>
                     <?php echo '<input type="text" name="identification_recib" class="form-control col-sm-4"  value="' . htmlspecialchars($transfer->identification_recib) . '">'; ?>
                 </div>               
             </td>
@@ -188,7 +191,7 @@ use Cake\Routing\Router;
             </tbody>
         </table>
 
-    </div>
+    </div><br>
 
     <!-- input donde coloco la lista de placas checkeadas -->
     <input type="hidden" name="checkList" id="checkList">
@@ -197,7 +200,7 @@ use Cake\Routing\Router;
     <?= $this->Form->end() ?>
 
   </fieldset>
-</div>
+</div><br>
 
 
 

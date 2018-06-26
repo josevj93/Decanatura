@@ -74,6 +74,7 @@
     {
       margin-left: 20px;
       margin-right: 45px;
+      width: 100px;
     }
     label {
         text-align:left;
@@ -98,7 +99,7 @@
 <div class="locations form large-9 medium-8 columns content">
   <?= $this->Form->create($transfer)?>
   <fieldset>
-    <legend><?= __('Insertar acta de traslado') ?></legend>
+    <legend><?= __('Insertar traslado') ?></legend>
     <br>
     <div class="row">
       <div class="col-md-8">
@@ -139,7 +140,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    <label class="id">Identificación:</label>
+                    <label class="id">Cédula:</label>
                     <?php 
             echo $this->Form->imput('identification', ['label' => 'identification:', 'class'=>'form-control col-sm-4']);
             ?>
@@ -162,7 +163,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    <label class="id">Identificación:</label>
+                    <label class="id">Cédula:</label>
                     <?php 
             echo $this->Form->imput('identification_recib', ['label' => 'identification_recib:', 'class'=>'form-control col-sm-4']);
             ?>
@@ -210,12 +211,7 @@
 
     </div>
     <br>
-    <br>
-    <div>
-    <label>nota * : El número de formulario es autogenerado.</label>
-
-    </div>
-    <br>
+    
   </fieldset>
 </div>
 
