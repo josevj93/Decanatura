@@ -31,13 +31,13 @@ class AssetsController extends AppController
             $rls = $roles['permissions'];
             foreach ($rls as $item){
                 //$permisos[(int)$item['id']] = 1;
-                if($item['nombre'] == 'Insertar Activos'){
+                if($item['nombre'] == 'Insertar Usuarios'){
                     $allowI = true;
-                }else if($item['nombre'] == 'Modificar Activos'){
+                }else if($item['nombre'] == 'Modificar Usuarios'){
                     $allowM = true;
-                }else if($item['nombre'] == 'Eliminar Activos'){
+                }else if($item['nombre'] == 'Eliminar Usuarios'){
                     $allowE = true;
-                }else if($item['nombre'] == 'Consultar Activos'){
+                }else if($item['nombre'] == 'Consultar Usuarios'){
                     $allowC = true;
                 }
             }
@@ -50,11 +50,11 @@ class AssetsController extends AppController
         $this->set('allowC',$allowC);
 
 
-        if ($this->request->getParam('action') == 'add' or $this->request->getParam('action') == 'batch'){
+        if ($this->request->getParam('action') == 'add'){
             return $allowI;
         }else if($this->request->getParam('action') == 'edit'){
             return $allowM;
-        }else if($this->request->getParam('action') == 'delete' or $this->request->getParam('action') == 'softdelete'){
+        }else if($this->request->getParam('action') == 'delete'){
             return $allowE;
         }else if($this->request->getParam('action') == 'view'){
             return $allowC;
