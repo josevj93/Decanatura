@@ -17600,9 +17600,14 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-21 23:02:14 Error: [PDOException] SQLSTATE[HY000]: General error: 11 database disk image is malformed in C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Statement\StatementDecorator.php on line 174
 Request URL: /Login/
 Client IP: 127.0.0.1
+=======
+2018-06-20 15:44:27 Error: [PDOException] SQLSTATE[HY000]: General error: 11 database disk image is malformed in C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Statement\StatementDecorator.php on line 174
+Request URL: /
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Statement\StatementDecorator.php(174): PDOStatement->execute(NULL)
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Database\Statement\StatementDecorator.php(174): Cake\Database\Statement\StatementDecorator->execute(NULL)
@@ -17626,15 +17631,24 @@ Stack Trace:
 #19 {main}
 
 
+<<<<<<< HEAD
 2018-06-21 23:03:14 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 15:45:44 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
   'prefix' => false,
   '_ext' => false,
 )
+<<<<<<< HEAD
 Request URL: /css/images/sort_both.png
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Request URL: /css/images/sort_asc.png
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -17654,15 +17668,24 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-21 23:03:17 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 15:45:45 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
   'prefix' => false,
   '_ext' => false,
 )
+<<<<<<< HEAD
 Request URL: /css/images/sort_asc.png
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Request URL: /css/images/sort_both.png
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -17682,7 +17705,11 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-21 23:05:23 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 15:47:46 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -17690,7 +17717,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_both.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -17710,7 +17741,11 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-21 23:05:25 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 15:47:46 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -17718,7 +17753,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_asc.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -17738,7 +17777,32 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-21 23:05:59 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 15:48:36 Error: [LogicException] Controller actions can only return Cake\Http\Response or null.
+Request URL: /assets/soft-delete/aaw1
+Referer URL: http://localhost:81/Decanatura/assets
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\AssetsController))
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#13 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#14 {main}
+
+
+2018-06-20 15:48:44 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -17746,7 +17810,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_both.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -17766,7 +17834,11 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-21 23:06:01 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 15:48:44 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -17774,7 +17846,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_asc.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -17794,7 +17870,32 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-21 23:07:02 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 15:48:50 Error: [LogicException] Controller actions can only return Cake\Http\Response or null.
+Request URL: /assets/soft-delete/aaw1
+Referer URL: http://localhost:81/Decanatura/assets
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\AssetsController))
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#13 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#14 {main}
+
+
+2018-06-20 15:48:53 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -17802,7 +17903,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_both.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -17822,7 +17927,11 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-21 23:07:04 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 15:48:54 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -17830,7 +17939,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_asc.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -17850,15 +17963,62 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 02:36:06 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 16:26:18 Error: Fatal Error (4): syntax error, unexpected '>' in [C:\xampp\htdocs\Decanatura\src\Controller\AssetsController.php, line 265]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE\src\Error\BaseErrorHandler.php, line 223
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE\src\Error\BaseErrorHandler.php, line 105
+[main] - [internal], line ??
+
+
+
+2018-06-20 16:26:18 Error: [Cake\Error\FatalErrorException] syntax error, unexpected '>' in C:\xampp\htdocs\Decanatura\src\Controller\AssetsController.php on line 265
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\BaseErrorHandler.php(105): Cake\Error\BaseErrorHandler->handleFatalError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 265)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2018-06-20 16:31:01 Error: Fatal Error (1): Call to undefined function App\Controller\print_f() in [C:\xampp\htdocs\Decanatura\src\Controller\AssetsController.php, line 244]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE\src\Error\BaseErrorHandler.php, line 223
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE\src\Error\BaseErrorHandler.php, line 105
+[main] - [internal], line ??
+
+
+
+2018-06-20 16:31:01 Error: [Cake\Error\FatalErrorException] Call to undefined function App\Controller\print_f() in C:\xampp\htdocs\Decanatura\src\Controller\AssetsController.php on line 244
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\BaseErrorHandler.php(105): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Call to undefin...', 'C:\\xampp\\htdocs...', 244)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2018-06-20 16:38:54 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
   'prefix' => false,
   '_ext' => false,
 )
+<<<<<<< HEAD
 Request URL: /css/images/sort_asc.png
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Request URL: /css/images/sort_both.png
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -17878,15 +18038,24 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 02:36:09 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 16:38:54 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
   'prefix' => false,
   '_ext' => false,
 )
+<<<<<<< HEAD
 Request URL: /css/images/sort_both.png
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Request URL: /css/images/sort_asc.png
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -17906,7 +18075,32 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 02:53:36 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 16:39:30 Error: [LogicException] Controller actions can only return Cake\Http\Response or null.
+Request URL: /assets/soft-delete/e1
+Referer URL: http://localhost:81/Decanatura/assets
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\AssetsController))
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#13 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#14 {main}
+
+
+2018-06-20 16:40:55 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -17914,7 +18108,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_both.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -17934,7 +18132,11 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 02:53:38 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 16:40:55 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -17942,7 +18144,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_asc.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -17962,7 +18168,74 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 02:53:56 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 16:41:55 Warning: Warning (512): Unable to emit headers. Headers sent in file=C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php line=850 in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 48]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 48
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:41:55 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php:850) in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 149]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitStatusLine() - CORE\src\Http\ResponseEmitter.php, line 149
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 54
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:41:55 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php:850) in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 181]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 181
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:41:55 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php:850) in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 181]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 181
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:41:55 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php:850) in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 181]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 181
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:42:12 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -17970,7 +18243,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_both.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -17990,7 +18267,11 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 02:53:59 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 16:42:13 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -17998,7 +18279,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_asc.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -18018,7 +18303,137 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 02:54:09 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 16:43:58 Warning: Warning (512): Unable to emit headers. Headers sent in file=C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php line=850 in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 48]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 48
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:43:58 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php:850) in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 149]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitStatusLine() - CORE\src\Http\ResponseEmitter.php, line 149
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 54
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:43:58 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php:850) in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 181]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 181
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:43:58 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php:850) in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 181]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 181
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:43:58 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php:850) in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 181]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 181
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:47:21 Warning: Warning (512): Unable to emit headers. Headers sent in file=C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php line=850 in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 48]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 48
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:47:21 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php:850) in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 149]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitStatusLine() - CORE\src\Http\ResponseEmitter.php, line 149
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 54
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:47:21 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php:850) in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 181]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 181
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:47:21 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php:850) in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 181]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 181
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 16:47:21 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Debugger.php:850) in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 181]
+Request URL: /assets/batch
+Referer URL: http://localhost:81/Decanatura/assets/batch
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 153
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 181
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
+[main] - ROOT\webroot\index.php, line 40
+
+
+
+2018-06-20 17:00:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -18026,7 +18441,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_both.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -18046,7 +18465,11 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 02:54:11 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 17:00:34 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -18054,7 +18477,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_asc.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -18074,7 +18501,11 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 02:54:39 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 17:02:00 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -18082,7 +18513,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_both.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -18102,7 +18537,11 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 02:54:41 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 17:02:00 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -18110,7 +18549,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_asc.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -18130,15 +18573,24 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 03:15:36 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 17:06:28 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
   'prefix' => false,
   '_ext' => false,
 )
+<<<<<<< HEAD
 Request URL: /css/images/sort_asc.png
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Request URL: /css/images/sort_both.png
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -18158,15 +18610,24 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 03:15:37 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 17:06:29 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
   'prefix' => false,
   '_ext' => false,
 )
+<<<<<<< HEAD
 Request URL: /css/images/sort_both.png
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Request URL: /css/images/sort_asc.png
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -18186,7 +18647,32 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 03:19:03 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 17:07:06 Error: [LogicException] Controller actions can only return Cake\Http\Response or null.
+Request URL: /assets/soft-delete/h2
+Referer URL: http://localhost:81/Decanatura/assets
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\AssetsController))
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#13 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#14 {main}
+
+
+2018-06-20 17:07:11 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -18194,7 +18680,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_both.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -18214,7 +18704,11 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 03:19:05 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 17:07:11 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
@@ -18222,7 +18716,11 @@ Exception Attributes: array (
   '_ext' => false,
 )
 Request URL: /css/images/sort_asc.png
+<<<<<<< HEAD
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -18242,6 +18740,7 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 03:42:48 Error: [Error] Call to undefined function App\Controller\uses()
 Request URL: /residues/pdf
 Referer URL: http://127.0.0.1/Decanatura/residues/view/VRA-1
@@ -18266,14 +18765,22 @@ Stack Trace:
 
 
 2018-06-23 04:17:54 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 17:09:25 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
   'prefix' => false,
   '_ext' => false,
 )
+<<<<<<< HEAD
 Request URL: /css/images/sort_asc.png
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Request URL: /css/images/sort_both.png
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -18293,15 +18800,24 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 04:17:56 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 17:09:26 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
   'prefix' => false,
   '_ext' => false,
 )
+<<<<<<< HEAD
 Request URL: /css/images/sort_both.png
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Request URL: /css/images/sort_asc.png
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -18321,6 +18837,7 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 04:20:48 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'VRA' in 'where clause'
 Request URL: /residues/pdf/VRA-1
 Referer URL: http://127.0.0.1/Decanatura/residues/view/VRA-1
@@ -18356,14 +18873,22 @@ Stack Trace:
 
 
 2018-06-23 04:31:31 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 17:18:51 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
   'prefix' => false,
   '_ext' => false,
 )
+<<<<<<< HEAD
 Request URL: /css/images/sort_asc.png
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Request URL: /css/images/sort_both.png
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -18383,15 +18908,24 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 04:31:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+=======
+2018-06-20 17:18:52 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Exception Attributes: array (
   'class' => 'Css',
   'plugin' => false,
   'prefix' => false,
   '_ext' => false,
 )
+<<<<<<< HEAD
 Request URL: /css/images/sort_both.png
 Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+=======
+Request URL: /css/images/sort_asc.png
+Referer URL: http://localhost:81/Decanatura/css/plugins/jquery.dataTables.min.css
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
 Stack Trace:
 #0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
 #1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
@@ -18411,6 +18945,7 @@ Stack Trace:
 #15 {main}
 
 
+<<<<<<< HEAD
 2018-06-23 04:32:10 Warning: Warning (512): Unable to emit headers. Headers sent in file= line=0 in [C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 48]
 Request URL: /technical-reports/download/13
 Referer URL: http://127.0.0.1/Decanatura/technical-reports/view/13
@@ -30391,3 +30926,5 @@ Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 106
 
 
 
+=======
+>>>>>>> e72cfb9ce8696161fccc030be080dccd4e3373f0
