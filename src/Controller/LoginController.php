@@ -23,7 +23,7 @@ class LoginController extends AppController
 
      if($this->request->is('post')){
         $user = $this->Auth->identify();
-        if($user){
+        if($user and $user['account_status'] == 1){
             $this->Auth->setUser($user);
             return $this->redirect('/');
         }

@@ -175,3 +175,4 @@ label{
 <?= $this->Form->postLink(__('Eliminar'), ['controller'=> 'TechnicalReports', 'action' => 'delete', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Seguro que desea eliminar la Ubicación #'.$technicalReport->technical_report_id.' ?', $technicalReport->technical_report_id)]) ?>
 
 <?= $this->Form->postLink(__('Generar Pdf'), ['controller'=> 'TechnicalReports', 'action' => 'download', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]) ?>
+
