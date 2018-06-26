@@ -208,7 +208,7 @@
             <p id="errorMsg" style="color: red;"></p>
 
             <!-- tabla que contiene  datos básicos de activos-->
-            <table id='assets-transfers-grid' cellpadding="0" cellspacing="0">
+            <table id='assets-residues-grid' cellpadding="0" cellspacing="0">
                 <thead>
                     <tr>
                         <th class="transfer-h"><?= __('Placa') ?></th>
@@ -269,7 +269,7 @@
 **/
 $(document).ready(function() 
 {
-    var equipmentTable = $('#assets-transfers-grid').DataTable( {
+    var equipmentTable = $('#assets-residues-grid').DataTable( {
           dom: 'Bfrtip',
                 buttons: [
                 ],
@@ -313,7 +313,7 @@ $(document).ready(function()
         } );
 
     // Listen to change event from checkbox to trigger re-sorting
-    $('#assets-transfers-grid input[type="checkbox"]').on('change', function() {
+    $('#assets-residues-grid input[type="checkbox"]').on('change', function() {
     // Update data-sort on closest <td>
     $(this).closest('td').attr('data-order', this.checked ? 1 : 0);
     

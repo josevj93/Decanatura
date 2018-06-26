@@ -337,11 +337,13 @@ class ResiduesController extends AppController
 
         }
 
+        // aqui pasa a sacar los valores de result2 e indexarlos
+        $lastPlaques =array_column($result2, 'plaque');
 
         $technical_reports = TableRegistry::get('TechnicalReports');
-
+        debug($lastPlaques);
         $query = $technical_reports->find()
-                        ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series', 'assets.state'])
+                        ->select(['assets.plaque', 'brands.name', 'models.name', 'assets.series', 'assets.state'])
                         ->join ([
                             'assets'=> [
                                 'table'=>'assets',
@@ -349,7 +351,22 @@ class ResiduesController extends AppController
                                 'conditions'=> ['assets.plaque= TechnicalReports.assets_id']
                             ]
                         ])
+                        ->join([
+                            'models' => [
+                                    'table' => 'models',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.models_id= models.id']
+                                ]
+                                ])
+                         ->join([
+                            'brands' => [
+                                    'table' => 'brands',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['models.id_brand = brands.id']
+                                ]
+                                ])
                         ->where(['TechnicalReports.recommendation' => "D"])
+                        //->where(['or assets.plaque in'=>$result2 ])
                         ->group(['assets.plaque'])
                         ->toList();
 

@@ -104,7 +104,7 @@
             <legend><?= __('Bienes a desechar') ?></legend>
 
             <!-- tabla que contiene  datos básicos de activos-->
-            <table id='assets-transfers-grid' cellpadding="0" cellspacing="0">
+            <table id='assets-residues-grid' cellpadding="0" cellspacing="0">
                 <thead>
                     <tr>
                         <th class="transfer-h"><?= __('Placa') ?></th>
@@ -124,24 +124,29 @@
                           <td><?= h($a->model) ?></td>  
                           <td><?= h($a->series) ?></td>
                           <td><?= h($a->state) ?></td>
-                          <td><?php
+                          <?php
                               // If que verifica si el checkbox debe ir activado o no
                               $isIn= in_array($a->plaque, array_column($result2, 'plaque') );
                               if($isIn)
                                   {
+                                      echo '<td data-order="1">';
                                       echo $this->Form->checkbox('assets_id',
                                       ['value'=>htmlspecialchars($a->plaque),'checked', "class"=>"chk" ]
                                       );
+                                      echo '</td>';
                                   }
                               else
                                   {
+                                      echo '<td data-order="0">';
                                       echo $this->Form->checkbox('assets_id',
                                       ['value'=>htmlspecialchars($a->plaque),"class"=>"chk"]
                                       );
+                                      echo '</td>';
                                   }
-                              ?>
                               
-                          </td>
+                              
+                          
+                          ?>
                       </tr>
                     <?php endforeach; ?>
                     
@@ -232,11 +237,16 @@
     <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $residue->residues_id)]) ?>
     </div>
 
+
+
+/** método extraido de https://stackoverflow.com/questions/46590217/jquery-datatable-order-table-based-on-checkbox
+para poder ordenar los checksbox
+**/
     
 <script type="text/javascript">
-    $(document).ready(function() 
-    {
-        $('#assets-transfers-grid').DataTable( {
+$(document).ready(function() 
+{
+    var equipmentTable = $('#assets-residues-grid').DataTable( {
          dom: 'Bfrtip',
                 buttons: [
                 ],
@@ -277,8 +287,24 @@
                         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                     }
                 }
-        } );
     } );
+     // Listen to change event from checkbox to trigger re-sorting
+    $('#assets-residues-grid input[type="checkbox"]').on('change', function() {
+    // Update data-sort on closest <td>
+    $(this).closest('td').attr('data-order', this.checked ? 1 : 0);
+    
+    // Store row reference so we can reset its data
+    var $tr = $(this).closest('tr');
+    
+    // Force resorting
+    equipmentTable
+    .row($tr)
+    .invalidate()
+    .order([ 5, 'desc' ])
+    .draw();
+    } );
+        
+} );
 
     $("document").ready(
     function() {
