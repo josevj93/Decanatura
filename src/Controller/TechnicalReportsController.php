@@ -21,7 +21,7 @@ class TechnicalReportsController extends AppController
         $this->Roles = $this->loadModel('Roles');
         $this->Permissions = $this->loadModel('Permissions');
         $this->RolesPermissions = $this->loadModel('RolesPermissions');
- 
+
         $allowI = false;
         $allowM = false;
         $allowE = false;
@@ -62,7 +62,7 @@ class TechnicalReportsController extends AppController
             return $allowM;
         }else if($this->request->getParam('action') == 'delete'){
             return $allowE;
-        }else if($this->request->getParam('action') == 'view' or $this->request->getParam('action') == 'download'){
+        }else if($this->request->getParam('action') == 'view'){
             return $allowC;
         }else{
             return $allowC;
@@ -228,69 +228,58 @@ class TechnicalReportsController extends AppController
         $html = '';
         $document->loadHtml('
         <html>
-        <style>
-        #element1 {float:left;margin-right:10px;margin-left:30px;} #element2 {float:right;margin-right:30px;}
-        table, td, th {
-            border: 1px solid black;
-        }
-        body {
-            border: 5px double;
-            width:100%;
-            height:100%;
-            display:block;
-            overflow:hidden;
-            padding:30px 30px 30px 30px
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th {
-            height: 50px;
-        }
-        </style>
-        <center><img src="C:\xampp\htdocs\Decanatura\src\Controller\images\logoucr.png"></center>
         <title>Informe Técnico</title>
-        <h2 align="center">UNIVERSIDAD DE COSTA RICA</h2>
-        <h2 align="center">UNIDAD DE ACTIVOS FIJOS</h2>
-        <h2 align="center">PRESTAMO DE ACTIVO FIJO</h2>
-        <p>&nbsp;</p>
-        <div id="element1" align="left"><strong>Unidad custodio:</strong>'.$technicalReport->asset->responsable_id.'</div> <div id="element2" align="right"><strong>Fecha:</strong>'.$technicalReport->date.'</div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left"><strong>Descripción del bien</strong></div>
-        <p>&nbsp;</p>
-        <div style="width:960px;height:200px;border:1px solid #000;"></div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left"><strong>N° Placa:&nbsp;</strong>'.$technicalReport->asset->plaque.'</div> <div id="element2" align="right"><strong>Modelo:</strong>&nbsp;'.$technicalReport->asset->model.'</div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left"><strong>Marca:</strong>&nbsp;'.$technicalReport->asset->brand.'</div> <div id="element2" align="right"><strong>Serie:</strong>&nbsp;'.$technicalReport->asset->series.'</div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left" ><strong>Evaluación del activo:</strong>&nbsp;'.$technicalReport->evaluation.'</div>
-        <p>&nbsp;</p>
-        <div id="element2" align="right"><strong>¿Cuál?</strong>&nbsp;_____________________</div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left"><strong>Tecnico Especializado </strong></div> <div id="element2" align="right"><strong>Responsable de bienes de la Unidad Custodio <strong></div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left">Nombre:&nbsp;___________________________</div> <div id="element2" align="right">Nombre:&nbsp;___________________________</div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left">Firma:&nbsp;___________________________</div> <div id="element2" align="right">Firma:&nbsp;___________________________</div>
-        <p>&nbsp;</p>
-        <p align="center"><strong> Autoridad Universitaria</strong></p> 
-        <p align="center">Nombre:&nbsp;___________________________</p> 
-        <p align="center">Firma:&nbsp;___________________________</p>
-        <p>&nbsp;</p>
-        <p align="left">Original: Unidad de Bienes Institucionales&nbsp;&nbsp;(OAF)</p>
-        <p align="left">Copia: Bodega de Activos Recuperados&nbsp;&nbsp;(OSG)</p>
-        <p align="left">Copia: Unidad responsable</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p align="center">Tels: 2511 5759/1149 www.oaf.ucr.ac.cr correo electrónico: activosfijos.oaf@ucr.ac.cr</p>
+        <body style="margin-left:100">
+        <h2><center>
+        UNIVERSIDAD DE COSTA RICA
+        <br>
+        UNIDAD DE BIENES INSTITUCIONALES
+        <br>
+        INFORME TÉCNICO</center><h2>
+
+        <table style="width:35%">
+        <tr>
+        <th><h3>Unidad custodio:'.$technicalReport->asset->responsable_id.'<h3></th>
+        <th><h3>Fecha:'.$technicalReport->date.'<h3></th>
+        </tr>
+        <tr>
+        <th><br><h3>Evaluación del activo:'.$technicalReport->recommendation.'<h3></th>
+        </tr>
+        <tr>
+        <th><h3><br>N° Placa:'.$technicalReport->asset->plaque.'<h3></th>
+        <th><h3>Modelo:'.$technicalReport->asset->model.'<h3></th>
+        </tr>
+        <tr>
+        <th><h3>Marca:'.$technicalReport->asset->brand.'<h3></th>
+        <th><h3>Serie:'.$technicalReport->asset->series.'<h3></th>
+        </tr>
+        <tr>
+        <th><h3><br>Evualuación del activo:'.$technicalReport->evaluation.'<h3></th>
+        </tr>
+        </table>
+        <table style="width:100%">
+        <th>
+        <h3>Técnico Especializado<h3>
+        <h4>Nombre___________________<h4>
+        <h4>Firma____________________<h4>
+        </th>
+        <th>
+        <h3>Responsable de bienes de la Unidad Custodio<h3>
+        <h4>Nombre___________________<h4>
+        <h4>Firma____________________<h4>
+        </th>
+        <th>
+        <h3>Responsable de bienes de la Unidad Custodio<h3>
+        <h4>Nombre___________________<h4>
+        <h4>Firma____________________<h4>
+        </th>
+        </table>
+        </body>
+        </html>
         ');
 
         //set page size and orientation
-        $document->setPaper('A3', 'portrait');
+        $document->setPaper('A3', 'landscape');
         //Render the HTML as PDF
         $document->render();
         //Get output of generated pdf in Browser
