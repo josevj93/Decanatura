@@ -46,35 +46,74 @@ class ResiduesTable extends Table
         $validator
             ->scalar('residues_id')
             ->maxLength('residues_id', 200)
-            ->notEmpty('residues_id', 'create');
+            ->notEmpty('residues_id', 'El número de autorización es requerido.')
+            ->alphaNumeric('residues_id', 'El número de autorización sólo debe contener caracteres alfanuméricos.');
 
         $validator
             ->scalar('name1')
             ->maxLength('name1', 50)
             ->requirePresence('name1', 'create')
-            ->notEmpty('name1');
+            ->add('name1',[ 
+                [
+                'rule'=>['custom', ' /^[a-zA-ZÀ-ÖØ-öø-ÿ]+$/ '],
+                'message'=>'Debe contener sólo caracteres del alfabeto.'
+                ]
+            ])
+            ->notEmpty('name1','Este campo es requerido.');
 
         $validator
             ->scalar('identification1')
-            ->maxLength('identification1', 10)
+            ->maxLength('identification1', 9)
             ->requirePresence('identification1', 'create')
-            ->notEmpty('identification1');
+            ->add('identification2', [
+                [
+                'rule' => ['numElements', 'not equal', 9],
+                'message' => 'La cédula debe tener 9 dígitos',
+                ]
+            ])
+            ->notEmpty('identification1','Este campo es requerido');
 
         $validator
             ->scalar('name2')
             ->maxLength('name2', 50)
-            ->requirePresence('name2', 'create')
-            ->notEmpty('name2');
+            ->requirePresence('name2', 'create')            
+            ->add('name1',[ 
+                [
+                'rule'=>['custom', ' /^[a-zA-ZÀ-ÖØ-öø-ÿ]+$/ '],
+                'message'=>'Debe contener sólo caracteres del alfabeto.'
+                ]
+            ])
+            ->notEmpty('name2','Este campo es requerido');
 
         $validator
             ->scalar('identification2')
-            ->maxLength('identification2', 10)
+            //->numElements('identification2', 'equal',9)
             ->requirePresence('identification2', 'create')
-            ->notEmpty('identification2');
+            ->add('identification2', [
+                [
+                'rule' => ['numElements', 'not equal', 9],
+                'message' => 'La cédula debe tener 9 dígitos',
+                ]
+            ])
+            ->notEmpty('identification2','Este campo es requerido');
 
         $validator
-            ->date('date')
-            ->allowEmpty('date');
+            ->date('date','dmy', 'Formato de fecha no válido.')
+            ->notEmpty('date','Este campo es requerido');
+
+        $validator
+            ->boolean('descargado')
+            ->allowEmpty('descargado');
+
+        $validator
+            ->scalar('file_name')
+            ->maxLength('file_name', 100)
+            ->allowEmpty('file_name');
+
+        $validator
+            ->scalar('path')
+            ->maxLength('path', 100)
+            ->allowEmpty('path');
 
         return $validator;
     }

@@ -28,9 +28,20 @@
             <?php foreach ($transfers as $transfer): ?>
             <tr>
                 <td class="actions">
+
                     <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $transfer->transfers_id], array('escape' => false)) ?>
+                    
+                    <?php if($transfer->file_name == null) : ?> 
+
                         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $transfer->transfers_id], array('escape' => false)) ?>
-                        <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $transfer->transfers_id], ['escape' => false, 'confirm' => __('¿Está seguro que quiere borrar el traslado # '.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
+                    <?php endif; ?>  
+
+                    <?php if(($transfer->descargado == null) && ($transfer->file_name == null )) : ?> 
+
+                    <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $transfer->transfers_id], ['escape' => false, 'confirm' => __('¿Está seguro que quiere borrar el traslado # '.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
+                    
+                    <?php endif; ?>  
+
                 </td>
                 <td><?= h($transfer->transfers_id) ?></td> 
                 <td>

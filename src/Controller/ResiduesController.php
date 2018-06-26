@@ -175,52 +175,10 @@ class ResiduesController extends AppController
      */
     public function add()
     {
-        $technical_reports = TableRegistry::get('TechnicalReports');
-        $assetsQuery = $technical_reports->find()
-                         ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
-                         ->join([
-                            'assets' => [
-                                    'table' => 'assets',
-                                    'type'  => 'INNER',
-                                    'conditions' => ['assets.plaque= TechnicalReports.assets_id']
-                                ]
-                                ])
-                         ->where(['TechnicalReports.recommendation' => "D"])
-                         ->group (['assets.plaque'])
-                         ->toList();
-
-        $size = count($assetsQuery);
-        $result=   array_fill(0, $size, NULL);
-        
-        for($i=0;$i<$size;$i++)
-        {
-            $result[$i] =(object)$assetsQuery[$i]->assets;
-        }
-        $this->set(compact('residues','result'));
-        
         $residue = $this->Residues->newEntity();
-        
-        //Saco el ultimo id y le sumo 1 para generar el número consecutivo de la base de datos
-        $tmpID= $this->Residues->find('all',['fields'=>'residues_id'])->last();
-        
-        // En caso de que no haya ningúnn entry, se agrega un #1
-        
-        if($tmpID->residues_id == null){
-
-            $tmpID=1;
-
-        }
-        else{
-
-            $numero = explode("-", $tmpID);
-            $tmpID= (int)$numero[1]+1;
-        }
-
-        $RID="VRA-".$tmpID;
-
         if ($this->request->is('post')) {
-            $residue = $this->Residues->patchEntity($residue, $this->request->getData());
-            $residue->residues_id = $RID;
+
+            $residue = $this->Residues->patchEntity($residue, $this->request->getData(),['validationDefault'=>'residues_id']);
             
             if ($this->Residues->save($residue)) {
                 $this->Flash->success(__('El acta de desecho fue guardada.'));
@@ -244,7 +202,44 @@ class ResiduesController extends AppController
             $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Intentolo de nuevo.'));
         }
 
-        $this->set(compact('residue', 'RID'));
+
+        $technical_reports = TableRegistry::get('TechnicalReports');
+        $assetsQuery = $technical_reports->find()
+                         ->select(['assets.plaque','brands.name','models.name','assets.series','assets.state'])
+                         ->join([
+                            'assets' => [
+                                    'table' => 'assets',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.plaque= TechnicalReports.assets_id']
+                                ]
+                                ])
+                         ->join([
+                            'models' => [
+                                    'table' => 'models',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.models_id= models.id']
+                                ]
+                                ])
+                         ->join([
+                            'brands' => [
+                                    'table' => 'brands',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['models.id_brand = brands.id']
+                                ]
+                                ])
+                         ->where(['TechnicalReports.recommendation' => "D"])
+                         //->where(['assets.state !='=>'Desechado'])
+                         ->group (['assets.plaque'])
+                         ->toList();
+
+        $size = count($assetsQuery);
+        $result=   array_fill(0, $size, NULL);
+        
+        for($i=0;$i<$size;$i++)
+        {
+            $result[$i] =(object)$assetsQuery[$i]->assets;
+        }
+        $this->set(compact('residue', 'result'));
     }
     /**
      * Edit method
@@ -342,11 +337,13 @@ class ResiduesController extends AppController
 
         }
 
+        // aqui pasa a sacar los valores de result2 e indexarlos
+        $lastPlaques =array_column($result2, 'plaque');
 
         $technical_reports = TableRegistry::get('TechnicalReports');
-
+        debug($lastPlaques);
         $query = $technical_reports->find()
-                        ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series', 'assets.state'])
+                        ->select(['assets.plaque', 'brands.name', 'models.name', 'assets.series', 'assets.state'])
                         ->join ([
                             'assets'=> [
                                 'table'=>'assets',
@@ -354,7 +351,22 @@ class ResiduesController extends AppController
                                 'conditions'=> ['assets.plaque= TechnicalReports.assets_id']
                             ]
                         ])
+                        ->join([
+                            'models' => [
+                                    'table' => 'models',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.models_id= models.id']
+                                ]
+                                ])
+                         ->join([
+                            'brands' => [
+                                    'table' => 'brands',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['models.id_brand = brands.id']
+                                ]
+                                ])
                         ->where(['TechnicalReports.recommendation' => "D"])
+                        //->where(['or assets.plaque in'=>$result2 ])
                         ->group(['assets.plaque'])
                         ->toList();
 
@@ -417,5 +429,21 @@ class ResiduesController extends AppController
             throw new NotFoundException(__('Activo no encontrado') );      
         }
         $this->set('serchedAsset',$searchedAsset);
+    }
+
+    public function download($id = null)
+    {
+
+        $residue = $this->Residues->get($id, [
+            'contain' => ['Assets']
+        ]);
+
+        // linea para marcar el desecho como descargado, haciendo que ya no se pueda borrar
+        $residue->descargado = true;
+
+        // Actualizo el desecho, guardando el valor de descargado como true
+        $this->Residues->save($residue);
+
+        return $this->redirect(['action' => 'index']);
     }
 }

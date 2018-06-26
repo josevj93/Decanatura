@@ -155,9 +155,18 @@
   </fieldset>
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-    <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $transfer->transfers_id], ['class' => 'btn btn-primary']) ?>
-    
+    <?php if($transfer->file_name == null) : ?>
 
-    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Está eeguro que desea eliminar el traslado #'.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
+        <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $transfer->transfers_id], ['class' => 'btn btn-primary']) ?>
+    
+    <?php endif; ?> 
+
+    <?php if(($transfer->descargado == null) && ($transfer->file_name == null )) : ?> 
+
+        <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Está eeguro que desea eliminar el traslado #'.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
+
+    <?php endif; ?> 
+
+      <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $transfer->transfers_id)]) ?>
 
 </div>
