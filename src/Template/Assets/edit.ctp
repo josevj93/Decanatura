@@ -50,12 +50,7 @@
 	
       <div class="row">
           <label> <b>Placa:</b><b style="color:red;">*</b> </label>
-		  <?php echo $this->Form->imput('plaque', ['class'=>'form-control col-md-9']); ?> 
-      </div>
-      
-      <div class="row col-md-4">
-        <label> <b>Tipo:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('type_id', $types, ['class'=>'form-control col-md-7']); ?>        
+		  <?php echo $this->Form->imput('plaque', ['class'=>'form-control col-md-9', 'disabled']); ?> 
       </div>
 	  
 	  <div class="col-lg-2">   </div>
@@ -90,7 +85,7 @@
 
       <div class="row">
         <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('responsable_id', $users, ['class'=>'form-control col-md-7']); ?>        
+        <?php echo $this->Form->select('responsable_id', $users, ['class'=>'form-control col-md-7', 'disabled']); ?>
       </div>
       
       <div class="row">
