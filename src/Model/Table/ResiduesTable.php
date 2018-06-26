@@ -67,7 +67,7 @@ class ResiduesTable extends Table
             ->requirePresence('identification1', 'create')
             ->add('identification2', [
                 [
-                'rule' => ['numElements', 'equal', 9],
+                'rule' => ['numElements', 'not equal', 9],
                 'message' => 'La cédula debe tener 9 dígitos',
                 ]
             ])
@@ -76,8 +76,13 @@ class ResiduesTable extends Table
         $validator
             ->scalar('name2')
             ->maxLength('name2', 50)
-            ->requirePresence('name2', 'create')
-            ->ascii('name2','Debe contener sólo caracteres del alfabeto')
+            ->requirePresence('name2', 'create')            
+            ->add('name1',[ 
+                [
+                'rule'=>['custom', ' /^[a-zA-ZÀ-ÖØ-öø-ÿ]+$/ '],
+                'message'=>'Debe contener sólo caracteres del alfabeto.'
+                ]
+            ])
             ->notEmpty('name2','Este campo es requerido');
 
         $validator

@@ -5,7 +5,7 @@
  */
     use Cake\Routing\Router;
 
-    $mysqli = new mysqli('decanatura.mysql.database.azure.com','ecci@decanatura','Gaby1234','decanatura');
+
 ?>
 
 <head>
@@ -17,6 +17,7 @@
 
   <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
     <style>
     .btn-primary {
@@ -228,7 +229,7 @@
                           <td><?= h($a->model) ?></td>
                           <td><?= h($a->series) ?></td>
                           <td><?= h($a->state) ?></td>
-                          <td><?php
+                          <td data-order="0"><?php
                                 echo $this->Form->checkbox('assets_id',
                                         ['value'=>htmlspecialchars($a->plaque),"class"=>"chk"]
                                 );
@@ -263,9 +264,12 @@
      });
   } );
 
-    $(document).ready(function() 
-    {
-        $('#assets-transfers-grid').DataTable( {
+
+/** método extraido de https://stackoverflow.com/questions/46590217/jquery-datatable-order-table-based-on-checkbox
+**/
+$(document).ready(function() 
+{
+    var equipmentTable = $('#assets-transfers-grid').DataTable( {
           dom: 'Bfrtip',
                 buttons: [
                 ],
@@ -307,7 +311,23 @@
                     }
                 }
         } );
+
+    // Listen to change event from checkbox to trigger re-sorting
+    $('#assets-transfers-grid input[type="checkbox"]').on('change', function() {
+    // Update data-sort on closest <td>
+    $(this).closest('td').attr('data-order', this.checked ? 1 : 0);
+    
+    // Store row reference so we can reset its data
+    var $tr = $(this).closest('tr');
+    
+    // Force resorting
+    equipmentTable
+    .row($tr)
+    .invalidate()
+    .order([ 5, 'desc' ])
+    .draw();
     } );
+} );
 
 
     function validateCheck() {
