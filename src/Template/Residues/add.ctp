@@ -5,7 +5,7 @@
  */
     use Cake\Routing\Router;
 
-    $mysqli = new mysqli('decanatura.mysql.database.azure.com','ecci@decanatura','Gaby1234','decanatura');
+
 ?>
 
 <head>
@@ -17,6 +17,7 @@
 
   <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
     <style>
     .btn-primary {
@@ -38,7 +39,7 @@
         width: 70px;
     }
 
-    input[name=date]{
+    input[id=datepicker]{
           width:120px;
           margin-left: 10px;
         }
@@ -100,22 +101,36 @@
         <legend><?= __('Insertar acta de desecho') ?></legend>
            
       <div class="form-control sameLine">
-
-        <div class="row">
-                <label>Número de Autorización: VRA-</label>
-                <!--<input type="imput" id ="residues_id" name="residues_id" class ="form-control col-lg-4"> -->
-                <?php  
-                    echo $this->Form->control('residues_id',['class'=>'form-control col-lg-4'])
-                ?>
+        <div>
+        <?php 
+            echo $this->Form->control('residues_id', 
+                [
+                    'templates' => [
+                    'inputContainer' => '<div class="row">{{content}}</div>',
+                    'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                    ],
+                'label'=>['text'=>'Número de autorización: VRA-', 'style'=>'margin-left= 10px;'],
+                'class'=>'form-control col-sm-4',
+                'type'=>'text'
+                ]);
+        ?>
         </div>    
-            
-        <div class="row">
-              <label>Fecha:</label>
-              <?php 
-              echo $this->Form->imput('date', ['class'=>'form-control','id'=>'datepicker']);
-              ?>
+        <br>
+        <div>
+        <?php 
+            echo $this->Form->control('date', 
+                [
+                    'templates' => [
+                    'inputContainer' => '<div class="row">{{content}}</div>',
+                    'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                    ],
+                'label'=>['text'=>'Fecha:', 'style'=>'margin-left= 10px;'],
+                'class'=>'form-control',
+                'type'=>'text',
+                'id'=>'datepicker'
+                ]);
+        ?>
         </div>
-      
       </div>
       
       <label>En presencia de:</label>
@@ -124,41 +139,60 @@
             <tr>
                 <td><br>
                     
-                              <!--<label class='label-t'>Nombre:</label>-->
-                              <?php 
-                                  echo $this->Form->control('name1', 
-                                    [
-                                        'templates' => [
-                                        'inputContainer' => '<div class="row">{{content}}</div>',
-                                        'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
-                                        ],
+                    <!-- Se modificó la clase del div (a travez de la plantilla) y la del label
+                                  Este mismo proceso se aplica en las demás geberaciones -->
+                    <?php 
+                        echo $this->Form->control('name1', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                                ],
 
-                                        'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
-                                        'class'=>'form-control col-sm-6'
-                                    ]);
-                              ?>
+                            'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?>
                     <br>
-                    <div class="row">
-                            <label class='label-t'>Cédula:</label>
-                            <?php 
-                                echo $this->Form->imput('identification1', ['class'=>'form-control col-sm-6']);
-                            ?>
-                    </div><br>
+                    <?php 
+                        echo $this->Form->control('identification1', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+
+                            'label'=>['class'=>'label-t','text'=>'Cédula:', 'style'=>'margin-left= 10px;'],
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?><br>
                 </td>
             
                 <td><br>
-                    <div class="row">
-                            <label class='label-t'>Nombre:</label>
-                            <?php 
-                                echo $this->Form->imput('name2', ['class'=>'form-control col-sm-6']);
-                            ?>
-                    </div><br>
-                    <div class="row">
-                            <label class='label-t'>Cédula:</label>
-                            <?php 
-                                echo $this->Form->imput('identification2', ['class'=>'form-control col-sm-6']);
-                            ?> 
-                    </div><br>
+                    <?php 
+                        echo $this->Form->control('name2', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+
+                            'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?><br>
+                    <?php 
+                        echo $this->Form->control('identification2', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+
+                            'label'=>['class'=>'label-t','text'=>'Cédula:', 'style'=>'margin-left= 10px;'],
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?><br>
                 </td>
             </tr>
         </table>
@@ -171,10 +205,10 @@
             <legend><?= __('Activos a desechar') ?></legend>
 
             <!--  Sirve para mostrar el mensaje que se debe seleccionar un activo -->
-            <p id="errorMsg"></p>
+            <p id="errorMsg" style="color: red;"></p>
 
             <!-- tabla que contiene  datos básicos de activos-->
-            <table id='assets-transfers-grid' cellpadding="0" cellspacing="0">
+            <table id='assets-residues-grid' cellpadding="0" cellspacing="0">
                 <thead>
                     <tr>
                         <th class="transfer-h"><?= __('Placa') ?></th>
@@ -195,7 +229,7 @@
                           <td><?= h($a->model) ?></td>
                           <td><?= h($a->series) ?></td>
                           <td><?= h($a->state) ?></td>
-                          <td><?php
+                          <td data-order="0"><?php
                                 echo $this->Form->checkbox('assets_id',
                                         ['value'=>htmlspecialchars($a->plaque),"class"=>"chk"]
                                 );
@@ -230,9 +264,12 @@
      });
   } );
 
-    $(document).ready(function() 
-    {
-        $('#assets-transfers-grid').DataTable( {
+
+/** método extraido de https://stackoverflow.com/questions/46590217/jquery-datatable-order-table-based-on-checkbox
+**/
+$(document).ready(function() 
+{
+    var equipmentTable = $('#assets-residues-grid').DataTable( {
           dom: 'Bfrtip',
                 buttons: [
                 ],
@@ -274,7 +311,23 @@
                     }
                 }
         } );
+
+    // Listen to change event from checkbox to trigger re-sorting
+    $('#assets-residues-grid input[type="checkbox"]').on('change', function() {
+    // Update data-sort on closest <td>
+    $(this).closest('td').attr('data-order', this.checked ? 1 : 0);
+    
+    // Store row reference so we can reset its data
+    var $tr = $(this).closest('tr');
+    
+    // Force resorting
+    equipmentTable
+    .row($tr)
+    .invalidate()
+    .order([ 5, 'desc' ])
+    .draw();
     } );
+} );
 
 
     function validateCheck() {
