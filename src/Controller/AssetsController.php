@@ -71,7 +71,7 @@ class AssetsController extends AppController
     {
         
         $this->paginate = [
-            'contain' => ['Types', 'Users', 'Locations']
+            'contain' => ['Users', 'Locations','Models']
         ];
         $assets = $this->paginate($this->Assets);
         $this->set(compact('assets'));
@@ -104,17 +104,19 @@ class AssetsController extends AppController
             $asset = $this->Assets->patchEntity($asset, $this->request->getData()); 
             if ($this->Assets->save($asset)) {
                 $this->Assets->addThumbnail($asset);
-                
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
-        $types = $this->Assets->Types->find('list', ['limit' => 200]);
+        
+        $this->loadModel('Brands');
+        $brands = $this->Brands->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
-                
-        $this->set(compact('asset', 'types', 'users', 'locations'));
+        
+        
+        $this->set(compact('asset', 'brands', 'users', 'locations'));
     }
     /**
      * Método para editar un activo en el sistema
@@ -205,8 +207,38 @@ class AssetsController extends AppController
             return 0;
         }
     }
-    
 
+    /**
+     * Método para mostrar listas dependientes
+     */
+    public function dependentList()
+    {
+        $this->loadModel('Models');
+        $this->loadModel('Brands');
+        
+        $brand_id = $_GET['brand_id'];
+        
+        $brand = $this->Brands->get($brand_id);
+
+        if($brand == NULL)
+        {
+            throw new NotFoundException(__('Marca no encontrada') );      
+        }
+        
+        $models = $this->Models->find('list')
+            ->where(['models.id_brand' => $brand->id]);
+        
+        if(empty($models))
+        {
+            throw new NotFoundException(__('Modelos no encontrados') );      
+        }
+
+        $this->set('models', $models);
+
+        /*Asocia esta función a la vista /Templates/Layout/model_list.ctp*/
+        $this->render('/Layout/model_list');
+    }
+    
 
     /**
      * Método para agregar activos por lotes

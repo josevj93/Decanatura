@@ -50,10 +50,10 @@ class AssetsTable extends Table
             ],
         ]);
 
-        $this->belongsTo('Types', [
-            'foreignKey' => 'type_id',
-            'joinType' => 'INNER'
+        $this->belongsTo('Models', [
+            'foreignKey' => 'models_id'
         ]);
+
         $this->belongsTo('Users', [
             'foreignKey' => 'responsable_id'
         ]);
@@ -82,16 +82,6 @@ class AssetsTable extends Table
             ->scalar('plaque')
             ->maxLength('plaque', 255)
             ->notEmpty('plaque', 'Debe ingresar una placa');
-
-        $validator
-            ->scalar('brand')
-            ->maxLength('brand', 255)
-            ->allowEmpty('brand');
-
-        $validator
-            ->scalar('model')
-            ->maxLength('model', 255)
-            ->allowEmpty('model');
 
         $validator
             ->scalar('series')
@@ -145,9 +135,6 @@ class AssetsTable extends Table
             ->maxLength('unique_id', 255)
             ->allowEmpty('unique_id');
 
-        $validator
-            ->scalar('type_id')
-            ->notEmpty('type_id');
             
         $validator
             ->scalar('location_id')
@@ -200,11 +187,11 @@ class AssetsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['type_id'], 'Types'));
         $rules->add($rules->existsIn(['responsable_id'], 'Users'));
         $rules->add($rules->existsIn(['assigned_to'], 'Users'));
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['loan_id'], 'Loans'));
+        $rules->add($rules->existsIn(['models_id'], 'Loans'));
 
         return $rules;
     }

@@ -1,8 +1,9 @@
 <?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Asset $asset
- */
+    /**
+     * @var \App\View\AppView $this
+     * @var \App\Model\Entity\Asset $asset
+     */
+    use Cake\Routing\Router;
 ?>
 
 <head>
@@ -48,15 +49,10 @@
 
     <div class="form-control sameLine" >
 	
-      <div class="row">
-          <label> <b>Placa:</b><b style="color:red;">*</b> </label>
-		  <?php echo $this->Form->imput('plaque', ['class'=>'form-control col-md-9']); ?> 
-      </div>
-      
-      <div class="row col-md-4">
-        <label> <b>Tipo:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('type_id', $types, ['class'=>'form-control col-md-7']); ?>        
-      </div>
+    <div class="row">
+        <label> <b>Placa:</b><b style="color:red;">*</b> </label>
+    <?php echo $this->Form->imput('plaque', ['class'=>'form-control col-md-9']); ?> 
+    </div>
 	  
 	  <div class="col-lg-2">   </div>
         
@@ -66,31 +62,32 @@
 
       <div class="row">
         <label>Marca:</label>
-        <?php echo $this->Form->imput('brand', ['class'=>'form-control col-md-9']); ?>        
+        <?php echo $this->Form->select('brand', $brands, ['id' => 'brand-list', 'onChange' => 'getBrand(this.value);', 'empty' => '-- Seleccione Marca --',  'class'=>'form-control col-md-9']); ?>        
       </div>
       
       <div class="row">
         <label>Modelo:</label>
-        <?php echo $this->Form->imput('model', ['class'=>'form-control col-md-8']); ?>        
+        <?php echo $this->Form->select('model', '', ['id' => 'model-list', 'empty' => '-- Seleccione Modelo --', 'class'=>'form-control col-md-8']); ?>        
       </div>
 	  
 	  <div class="row">
         <label>Serie:</label>
         <?php echo $this->Form->imput('series', ['label' => 'Serie:', 'class'=>'form-control col-md-9']); ?>        
-      </div>
+    </div>
 
-    </div> <br>
+  </div> 
+  <br>
 	
 	<div>
-      <label> <b>Descripción:</b><b style="color:red;">*</b> </label>
-      <?php echo $this->Form->textarea('description', ['class'=>'form-control col-md-8']); ?>
-    </div> <br>
+    <label> <b>Descripción:</b><b style="color:red;">*</b> </label>
+    <?php echo $this->Form->textarea('description', ['class'=>'form-control col-md-8']); ?>
+  </div> <br>
 	
 	<div class="form-control sameLine" >
 
       <div class="row">
         <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('responsable_id', $users, ['class'=>'form-control col-md-7']); ?>        
+        <?php echo $this->Form->imput('responsable_id', ['class'=>'form-control col-md-7']); ?>        
       </div>
       
       <div class="row">
@@ -103,8 +100,10 @@
         <?php echo $this->Form->select('location_id', $locations, ['label' => 'Serie:', 'class'=>'form-control col-md-7']); ?>        
       </div>
 
-    </div> <br>
+  </div> 
+  <br>
 	
+
 	<div class="form-control sameLine" >
 
       <div class="row">
@@ -120,31 +119,55 @@
 	  
 	  <div class="row col-lg-1">
         <div class="custom-control custom-checkbox">
-			<?php echo $this->Form->checkbox('lendable',  array('id' => 'customCheck1', 'class' => 'custom-control-input', 'checked' => 'checked')); ?>
-			<label class="custom-control-label" for="customCheck1">Prestable</label>
-		</div>       
-      </div>
+			    <?php echo $this->Form->checkbox('lendable',  array('id' => 'customCheck1', 'class' => 'custom-control-input', 'checked' => 'checked')); ?>
+			    <label class="custom-control-label" for="customCheck1">Prestable</label>
+		    </div>       
+    </div>
 	  
-	  <div class="col-lg-1">   </div>
+	  <div class="col-lg-1">   
+    </div>
 
-    </div> <br>
+  </div> 
+  <br>
 	
 	<div>
       <label> Observaciones: </label>
       <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8']); ?>
-    </div> <br>
+  </div> <br>
 	
 	<div>
 		<label> Imagen: </label>
-		<?php echo $this->Form->imput('image',['type' => 'file', 'class' => 'form-control-file']); ?>
+		<?php echo $this->Form->imput('image',['class' => 'form-control-file']); ?>
 	</div>
 
   </fieldset>
 
 
-</div>
   <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
   <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
 
+<?= $this->Form->end(); ?>
 
 </body>
+
+<script>
+    function getBrand(val) {
+        console.log(val);
+        $.ajax({
+            type: "GET",
+            url: '<?php echo Router::url(['controller' => 'Assets', 'action' => 'dependentList' ]); ?>',
+            data:{brand_id:val},
+            
+            success: function(data){
+                $("#model-list").html(data);
+            },
+
+            error: function(e) {
+                    alert("Ocurrió un error: artículo no encontrado.");
+                    console.log(e);
+                    $("#model-list").html('Introduzca otro número de placa.');
+                    }
+        
+        });
+    }
+</script>
