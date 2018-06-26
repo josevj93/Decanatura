@@ -67,4 +67,3 @@ class Asset extends Entity
     ];
 }
 
-
