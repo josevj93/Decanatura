@@ -87,7 +87,7 @@
 
       <div class="row">
         <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->imput('responsable_id', ['class'=>'form-control col-md-7']); ?>        
+        <?php echo $this->Form->select('responsable_id', $users, array('empty' => true, 'class' => 'form-control col-md-7')); ?>            
       </div>
       
       <div class="row">
@@ -136,12 +136,14 @@
   </div> <br>
 	
 	<div>
-		<label> Imagen: </label>
-		<?php echo $this->Form->imput('image',['class' => 'form-control-file']); ?>
+    <label> Imagen: </label>
+    <?php echo $this->Form->imput('image',['type' => 'file', 'class' => 'form-control-file']); ?>
 	</div>
 
   </fieldset>
 
+</div>
+<br>
 
   <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
   <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
