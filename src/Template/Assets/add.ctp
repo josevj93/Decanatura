@@ -67,7 +67,7 @@
       
       <div class="row">
         <label>Modelo:</label>
-        <?php echo $this->Form->select('model', '', ['id' => 'model-list', 'empty' => '-- Seleccione Modelo --', 'class'=>'form-control col-md-8']); ?>        
+        <?php echo $this->Form->select('models_id', '', ['id' => 'model-list', 'empty' => '-- Seleccione Modelo --', 'class'=>'form-control col-md-8']); ?>        
       </div>
 	  
 	  <div class="row">
