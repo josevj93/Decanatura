@@ -134,8 +134,11 @@
                 <div class="row">
                     <label class="funcionario">Funcionario: </label>
                     <?php 
-            echo $this->Form->imput('functionary', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
-            ?>
+                    echo $this->Form->select('field',
+                      $users,
+                      ['empty' => '(Escoja un usuario)','class'=>'form-control', 'style'=>'width:220px;']
+                    );
+                    ?>
                 </div>
                 <br>
                 <div class="row">
@@ -194,7 +197,7 @@
                     <td><?= h($a->model) ?></td>
                     <td><?= h($a->series) ?></td>
                     <td><?= h($a->state) ?></td>
-                    <td><?php
+                    <td data-order="0"><?php
                                 echo $this->Form->checkbox('assets_id',
                                 ['value'=>htmlspecialchars($a->plaque),"class"=>"chk"]
                                 );
@@ -262,9 +265,9 @@
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function() 
-    {
-        $('#assets-transfers-grid').DataTable( {
+$(document).ready(function() 
+{
+    var equipmentTable = $('#assets-transfers-grid').DataTable( {
                 dom: 'Bfrtip',
                 buttons: [
                 ],
@@ -305,9 +308,22 @@
                         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                     }
                 }
-
         } );
-    } );
+    $('#assets-transfers-grid input[type="checkbox"]').on('change', function() {
+    // Update data-sort on closest <td>
+    $(this).closest('td').attr('data-order', this.checked ? 1 : 0);
+     
+        // Store row reference so we can reset its data
+        var $tr = $(this).closest('tr');
+     
+        // Force resorting
+        equipmentTable
+        .row($tr)
+        .invalidate()
+        .order([ 5, 'desc' ])
+        .draw();
+        } );
+} );
 
     $("document").ready(
     function() {

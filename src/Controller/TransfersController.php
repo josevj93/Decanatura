@@ -136,32 +136,6 @@ class TransfersController extends AppController
      */
     public function add()
     {
-
-        // obtengo la tabla assets
-        $assets_transfers = TableRegistry::get('AssetsTransfers');
-
-        // reallizo un join  a assets_tranfers para obtener los activos
-        //asosiados a un traslado
-        $query = $assets_transfers->find()
-                    ->select(['assets.plaque'])
-                    ->join([
-                      'assets'=> [
-                        'table'=>'assets',
-                        'type'=>'INNER',
-                        'conditions'=> [ 'assets.plaque= AssetsTransfers.assets_id']
-                        ]
-                    ])
-                    ->toList();
-        // Aqui paso el resultado de $query a un objeto
-        $size = count($query);
-        $result=   array_fill(0, $size, NULL);
-        
-        for($i=0;$i<$size;$i++)
-        {
-            $result[$i] =(object)$query[$i]->assets;
-        }
-
-
         //empieza el área para la función de post///////////////
         $transfer = $this->Transfers->newEntity();
         $tmpId = 1;
@@ -217,12 +191,52 @@ class TransfersController extends AppController
             $this->Flash->error(__('No se pudo realizar la transferencia.'));
             }
         }
+
+
+        // obtengo la tabla assets
+        $assets_transfers = TableRegistry::get('AssetsTransfers');
+
+        // reallizo un join  a assets_tranfers para obtener los activos
+        //asosiados a un traslado
+        $query = $assets_transfers->find()
+                    ->select(['assets.plaque'])
+                    ->join([
+                      'assets'=> [
+                        'table'=>'assets',
+                        'type'=>'INNER',
+                        'conditions'=> [ 'assets.plaque= AssetsTransfers.assets_id']
+                        ]
+                    ])
+                    ->toList();
+        // Aqui paso el resultado de $query a un objeto
+        $size = count($query);
+        $result=   array_fill(0, $size, NULL);
+        
+        for($i=0;$i<$size;$i++)
+        {
+            $result[$i] =(object)$query[$i]->assets;
+        }
+
         //Buscca los activos para cargarlos en el grid.
         $assetsQuery = TableRegistry::get('Assets');
         $assetsQuery = $assetsQuery->find()
-                         ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
-                         ->where(['assets.state = "Disponible"'])
-                         ->toList();
+                        ->select(['assets.plaque','brands.name','models.name','assets.series','assets.state'])
+                        ->join([
+                            'models' => [
+                                    'table' => 'models',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.models_id= models.id']
+                                ]
+                                ])
+                        ->join([
+                            'brands' => [
+                                    'table' => 'brands',
+                                    'type'  => 'LEFT',
+                                   'conditions' => ['models.id_brand = brands.id']
+                                ]
+                        ])
+                        ->where(['assets.state = "Disponible"'])
+                        ->toList();
         $size = count($assetsQuery);
         $asset=   array_fill(0, $size, NULL);
         
@@ -230,7 +244,22 @@ class TransfersController extends AppController
         {
             $asset[$i] =(object)$assetsQuery[$i]->assets;
         }
-        $this->set(compact('transfer', 'asset', 'result','tmpId'));
+
+        /** obtengo una lista de usuarios para cargar un dropdown list en la vista */
+        $usersTable= TableRegistry::get('Users');
+        $queryUsers = $usersTable->find()
+                        ->select(['users.nombre','users.apellido1','users.apellido2'])
+                        ->toList();
+
+        $size = count($queryUsers);
+        //$users=  array_column($queryUsers, 'users');    //array_fill(0, $size, NULL);
+        //$users=  (object)$queryUsers;
+        $users= array_fill(0, $size, NULL);
+        for($i=0;$i<$size;$i++)
+        {
+            $users[$i] =$queryUsers[$i]->users['nombre'] ." ".$queryUsers[$i]->users['apellido1']." ".$queryUsers[$i]->users['apellido2'];
+        }
+        $this->set(compact('transfer', 'asset', 'result','tmpId','users'));
     }
 
     /**
