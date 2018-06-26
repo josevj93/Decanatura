@@ -185,7 +185,7 @@ class LoansController extends AppController
         ]);
         
         
-        $loan->estado = 'Cancelado';
+        $loan->estado = 'Terminado';
         
         if ($this->Loans->save($loan)){
             
@@ -198,51 +198,22 @@ class LoansController extends AppController
                 $asset->loan_id = NULL;
 
                 if(!($this->Assets->save($asset))){
-                    $this->Flash->error(__('Error al cancelar el préstamo'));
+                    $this->Flash->error(__('Error al finalizar préstamo'));
                     return $this->redirect(['action' => 'index']);
                 }
             }
 
-            $this->Flash->success(__('El activo fue guardado exitosamente.'));
+            $this->Flash->success(__('El préstamo fue finalizado correctamente.'));
             return $this->redirect(['action' => 'index']);
 
         }
         else{
-            $this->Flash->error(__('Error al cancelar el préstamo'));
+            $this->Flash->error(__('Error al finalizar el préstamo'));
             return $this->redirect(['action' => 'index']);
         }
         $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
         $users = $this->Loans->Users->find('list', ['limit' => 200]);
         $this->set(compact('assets', 'loan', 'users'));
-    }
-
-    /**
-     * Método para obtener todas las placas de activos del sistema y 
-     * enviarlas como un JSON para que lo procese AJAX
-     */
-    public function getPlaques()
-    {
-        $this->loadModel('Assets');
-        if ($this->requrest->is('ajax')) {
-            $this->autoRender = false;
-
-            $plaqueRequest = $this->request->query['term'];
-            $results = $this->Assets->find($id, [
-                'conditions' => [ 'OR' => [
-                    'plaque LIKE' => $plaqueRequest . '%',
-                    ]
-                ]
-            ]);
-            
-            $resultsArr = [];
-            
-            foreach ($results as $result) {
-                $resultsArr[] =['label' => $result['plaque'], 'value' => $result->plaque];
-            }
-            
-            echo json_encode($resultsArr);
-
-        }
     }
 
     /**
