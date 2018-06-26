@@ -38,8 +38,8 @@
                             </td>
                             
                             <td><?= h($asset->plaque) ?></td>
-                            <td><?= h($asset->brand) ?></td>
-                            <td><?= h($asset->model) ?></td>
+                            <td><?= h($asset->model->brand->name) ?></td>
+                            <td><?= h($asset->model->name) ?></td>
                             <td><?= h($asset->series) ?></td>
                             <td><?= h($asset->description) ?></td>
                             <td><?= h($asset->state) ?></td>
@@ -157,7 +157,8 @@
                 }
             } );
         } );
-    } );
+    }
+    );
 
 
 </script>

@@ -42,10 +42,8 @@ class Asset extends Entity
      */
     protected $_accessible = [
         'plaque' => true,
-        'type_id' => true,
         'loan_id' => true,
-        'brand' => true,
-        'model' => true,
+        'models_id' => true,
         'series' => true,
         'description' => true,
         'state' => true,

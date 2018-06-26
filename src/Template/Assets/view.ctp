@@ -54,10 +54,6 @@
 		  <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->plaque) . '">'; ?> 
       </div>
       
-      <div class="row col-md-4">
-        <label> Tipo: </label>
-        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->type->name) . '">'; ?>        
-      </div>
 	  
 	  <div class="col-lg-2">   </div>
         

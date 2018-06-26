@@ -25,9 +25,6 @@ $random = uniqid();
         <?php echo $this->Form->input('quantity',array('type' => 'text','label'=>'Cantidad:', 'class' => 'form-control')); ?>   
     </div>
     
-    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-        <?php echo $this->Form->control('type_id', array('options' => $types,'label'=>'Tipo:', 'class' => 'form-control')); ?>
-    </div>
         
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
         <?php echo $this->Form->control('brand', array('label'=>'Marca:', 'class' => 'form-control')); ?>
