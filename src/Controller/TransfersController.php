@@ -138,16 +138,7 @@ class TransfersController extends AppController
     {
         //empieza el área para la función de post///////////////
         $transfer = $this->Transfers->newEntity();
-        $tmpId = 1;
-        $tmpId = $this->Transfers->find('all',['fields'=>'transfers_id'])->last();
-        if($tmpId!=null)
-        {
-            $tmpId = $tmpId->transfers_id+1;
-        }
-        else
-        {
-            $tmpId = 1;
-        }
+        
         if ($this->request->is('post')) {
             $check= $this->request->getData("checkList");
             $check = explode(",",$check);
@@ -159,7 +150,7 @@ class TransfersController extends AppController
             {
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             //tmpId contiene el id de la tabla de traslados.
-            $transfer->transfers_id = $tmpId;
+            $transfer->transfers_id = "VRA-".$tmpId;
             //comienza el ciclo para agregar la relación entre activos y acta.
             if ($this->Transfers->save($transfer)) {
                 //se saca la lista de placas señaladas y luego se pasan a Array

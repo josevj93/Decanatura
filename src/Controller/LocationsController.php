@@ -107,8 +107,29 @@ class LocationsController extends AppController
     public function add()
     {
         $location = $this->Locations->newEntity();
+
+        // De las locations, saco el ID más alto
+        $tmpId = $this->Locations->find('all',['fields'=>'location_id'])->max('location_id');
+        
+        // Si el id que resultó es null (porque la tabla está vacía o no hay records para el año actual)
+        if ($tmpId == null) {
+            
+            // Asigno el ID como 1
+            $tmpId = 1;            
+        }
+        else{
+
+            // De lo contrario, le sumo 1 al ID más grande
+            $tmpId= $tmpId->location_id+1;
+        }
+
         if ($this->request->is('post')) {
+
             $location = $this->Locations->patchEntity($location, $this->request->getData());
+
+            // Asigno el ID nuevo
+            $location->location_id = $tmpId;
+
             if ($this->Locations->save($location)) {
                 $this->Flash->success(__('Ubicación guardada.'));
 

@@ -2,12 +2,7 @@
     <?= $this->Form->create($location) ?>
     <fieldset>
         <legend><?= __('Insertar Ubicacion') ?></legend><br>
-            <div class='row'>
-                <label class='align'>Id:</label><br>
-                <?php 
-                echo $this->Form->imput('location_id', ['label' => 'Id:', 'class'=>'form-control col-sm-2']);
-                ?>
-            </div><br>
+            
             <div class='row'>
                 <label class='align'>Nombre:</label><br>
                 <?php 

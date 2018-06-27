@@ -101,10 +101,12 @@
     <legend><?= __('Insertar acta de traslado') ?></legend>
     <br>
     <div class="row">
-      <div class="col-md-8">
-        <div >
-          <label>Nº Formulario:</label>
-          <label><?php echo h($tmpId); ?> *</label>
+      <div class="col-md-10">
+        <div class = "row">
+          <label>Nº Formulario: VRA-</label>
+            <?php 
+                echo $this->Form->imput('transfers_id', ['label' => 'Nombre:', 'class'=>'form-control col-sm-2']);
+            ?>
         </div>
       </div>
       <label>Fecha:</label>
