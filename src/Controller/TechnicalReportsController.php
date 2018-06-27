@@ -294,7 +294,7 @@ class TechnicalReportsController extends AppController
         //Render the HTML as PDF
         $document->render();
         //Get output of generated pdf in Browser
-        $document->stream("Informe técnico", array("Attachment"=>1));
+        $document->stream("Informe Tecnico", array("Attachment"=>1));
         //1  = Download
         //0 = Preview
         return $this->redirect(['action' => 'index']);
