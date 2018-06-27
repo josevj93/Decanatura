@@ -33,7 +33,7 @@ $random = uniqid();
 
 <div class="row">
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-        <?php echo $this->Form->control('model' , array('label'=>'Modelo:', 'class' => 'form-control')); ?>
+        <?php echo $this->Form->control('models_id' , array('label'=>'Modelo:', 'class' => 'form-control')); ?>
     </div>
 
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">

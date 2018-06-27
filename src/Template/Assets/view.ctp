@@ -68,7 +68,7 @@
       
       <div class="row">
         <label>Modelo:</label>
-        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->model) . '">'; ?>      
+        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->models_id) . '">'; ?>      
       </div>
 	  
 	  <div class="row">
