@@ -147,6 +147,11 @@ class AssetsTable extends Table
         $validator
             ->scalar('responsable_id')
             ->notEmpty('responsable_id');
+			
+		$validator
+            ->scalar('models_id')
+            ->maxLength('models_id', 255)
+            ->allowEmpty('models_id');
             
         return $validator;
     }
@@ -191,7 +196,7 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['assigned_to'], 'Users'));
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['loan_id'], 'Loans'));
-        $rules->add($rules->existsIn(['models_id'], 'Loans'));
+        $rules->add($rules->existsIn(['models_id'], 'Models'));
 
         return $rules;
     }

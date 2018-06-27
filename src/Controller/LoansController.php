@@ -90,7 +90,7 @@ class LoansController extends AppController
         ]);
         $this->loadModel('Assets');
         $query = $this->Assets->find()
-                        ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series'])
+                        ->select(['assets.plaque', 'assets.models_id', 'assets.series'])
                         ->where(['assets.loan_id' => $id])
                         ->toList();
 
@@ -153,7 +153,7 @@ class LoansController extends AppController
         $this->loadModel('Assets');
 
         $query = $this->Assets->find()
-                        ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series'])
+                        ->select(['assets.plaque', 'assets.models_id', 'assets.series'])
                         ->where(['assets.state' => "Disponible"])
                         ->where(['assets.lendable' => true])
                         ->where(['assets.deleted' => false])
@@ -176,7 +176,7 @@ class LoansController extends AppController
     }
 
     /*Cancelar para varios activos*/
-    public function cancel($id)
+    public function terminar($id)
     {
         $this->loadModel('Assets');
         
@@ -185,7 +185,7 @@ class LoansController extends AppController
         ]);
         
         
-        $loan->estado = 'Cancelado';
+        $loan->estado = 'Terminado';
         
         if ($this->Loans->save($loan)){
             
@@ -198,17 +198,17 @@ class LoansController extends AppController
                 $asset->loan_id = NULL;
 
                 if(!($this->Assets->save($asset))){
-                    $this->Flash->error(__('Error al cancelar el préstamo'));
+                    $this->Flash->error(__('Error al terminar el préstamo'));
                     return $this->redirect(['action' => 'index']);
                 }
             }
 
-            $this->Flash->success(__('El préstamo ha sido cancelado.'));
+            $this->Flash->success(__('El préstamo ha sido finalizado.'));
             return $this->redirect(['action' => 'index']);
 
         }
         else{
-            $this->Flash->error(__('Error al cancelar el préstamo'));
+            $this->Flash->error(__('Error al finalizar el préstamo'));
             return $this->redirect(['action' => 'index']);
         }
         $assets = $this->Loans->Assets->find('list', ['limit' => 200]);

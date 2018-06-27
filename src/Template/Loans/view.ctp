@@ -42,7 +42,7 @@
 <div class="residues form large-9 medium-8 columns content">
 	<?= $this->Form->create($loan) ?>
 	<fieldset>
-        <legend><?= __('Insertar préstamo') ?></legend>
+        <legend><?= __('Consultar préstamo') ?></legend>
     
 		<br>
 
@@ -58,7 +58,7 @@
 			</div>
 			
 			<div class="row">
-				<label> <b>Fecha de devolución:</b><b style="color:red;">*</b> </label>
+				<label> Fecha de devolución: </label>
                 <?php echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date', 'id'=>'datepicker2', 'disabled']); ?>
 			</div>
 			
@@ -76,7 +76,6 @@
         <thead>
             <tr>
                 <th class="transfer-h"><?= __('Placa') ?></th>
-                <th class="transfer-h"><?= __('Marca') ?></th>
                 <th class="transfer-h"><?= __('Modelo') ?></th>
                 <th class="transfer-h"><?= __('Serie') ?></th>
             </tr>
@@ -86,8 +85,7 @@
                 foreach ($result as $a): ?>
                 <tr>
                     <td><?= h($a->plaque) ?></td>
-                    <td><?= h($a->brand) ?></td>
-                    <td><?= h($a->model) ?></td>  
+                    <td><?= h($a->models_id) ?></td>  
                     <td><?= h($a->series) ?></td>
                 </tr>
             <?php endforeach; ?>
@@ -104,8 +102,8 @@
 
 <div class="col-12 text-right">
 
- <?= $this->Html->link(__('Regresar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+ <?= $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-<?= $this->Html->link(__('Cancelar Préstamo'), ['action' => 'cancel',$loan->id], ['class' => 'btn btn-primary']) ?>    
+<?= $this->Html->link(__('Finalizar Préstamo'), ['action' => 'terminar',$loan->id], ['class' => 'btn btn-primary']) ?>    
 
 </div>
