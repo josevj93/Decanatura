@@ -86,7 +86,7 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th class="transfer-h" scope="col"><?= __('Placa') ?></th>
-                <th class="transfer-h" scope="col"><?= __('Descripción') ?></th>
+                <th class="transfer-h" scope="col"><?= __('Recomendacion') ?></th>
                 <th class="transfer-h" scope="col"><?= __('Informe Técnico') ?></th>
                 
             </tr>

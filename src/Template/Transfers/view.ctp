@@ -134,8 +134,6 @@
                 <th class="transfer-h" scope="col"><?= __('Estado') ?></th>
                 
             </tr>
-            <?php //debug ($result) ?>
-
             <?php foreach ($result as $asset): ?>
             <tr>
                 <?php
