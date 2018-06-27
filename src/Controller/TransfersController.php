@@ -408,7 +408,6 @@ public function download($id = null)
 <h2 align="center">Vicerrector&iacute;a de Administraci&oacute;n</h2>
 <h2 align="center">Oficina de Administraci&oacute;n Financiera</h2>
 <p align="center">Unidad de Control de Activos Fijos y Seguros</p>
-<p align="center"><strong>***Tel. 207-5045 / 2075759 ** Fax 253-4630***</strong></p>
 <h2 align="center">FORMULARIO PARA TRASLADO DE ACTIVOS FIJOS</h2>
 <h1>&nbsp;</h1>
 <div id="element1" align="left">  Fecha: __________________ </div> <div id="element2" align="right"> No.__________________ </div> 
@@ -466,6 +465,7 @@ $html .=
 <p><strong>Observaciones: </strong></p>
 <p><strong>Nota: El formulario debe estar firmado por el encargado de activos fijos u otro funcionario autorizado en cada unidad.</strong></p>
 <p><strong>Original: Oficina de Administraci&oacute;n Financiera&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copia: Unidad que entrega&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copia: Unidad que recibe</strong></p>
+<p align="center">Tels: 2511 5759/1149      www.oaf.ucr.ac.cr     correo electrónico: activosfijos.oaf@ucr.ac.cr</p>
         ';
 
 

@@ -255,7 +255,7 @@ class TechnicalReportsController extends AppController
         <title>Informe Técnico</title>
         <h2 align="center">UNIVERSIDAD DE COSTA RICA</h2>
         <h2 align="center">UNIDAD DE ACTIVOS FIJOS</h2>
-        <h2 align="center">PRESTAMO DE ACTIVO FIJO</h2>
+        <h2 align="center">INFORME TECNICO</h2>
         <p>&nbsp;</p>
         <div id="element1" align="left"><strong>Unidad custodio:</strong>'.$technicalReport->asset->responsable_id.'</div> <div id="element2" align="right"><strong>Fecha:</strong>'.$technicalReport->date.'</div>
         <p>&nbsp;</p>
