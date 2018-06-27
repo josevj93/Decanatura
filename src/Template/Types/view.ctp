@@ -22,7 +22,7 @@
 <div class="locations form large-9 medium-8 columns content">
   <?= $this->Form->create($asset) ?>
   <fieldset>
-    <legend><?= __('Insertar tipo de activo') ?></legend>
+    <legend><?= __('Consulta de tipo de activo') ?></legend>
     <br>
 
     <div class="form-control sameLine" >
