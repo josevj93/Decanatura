@@ -197,22 +197,20 @@
                 }
        } );
     } );
+    $(document).ready(function() 
+    {
+        $('#assets-transfers-grid').DataTable( {} );
+    } );
     $("document").ready(
     function() {
       $('#acept').click( function()
       {
         var check = getValueUsingClass();
         $('#checkList').val(check);
-        var nombre = document.getElementById('userDropdown').value;
-		if(confirm("¿Está seguro que desea agregar este préstamo?\nRecuerde que al dar Aceptar no podrá borrarlo.\n\nNombre: {0}", nombre)) {
-			this.form.submit();
-		}
-		else{ alert('Operacion Cancelada') ;
-			'action' => 'index';
-		}
+        
         });
-    }
-	);
+        }
+    );
 /** función optenida de http://bytutorial.com/blogs/jquery/jquery-get-selected-checkboxes */
     function getValueUsingClass(){
     /* declare an checkbox array */

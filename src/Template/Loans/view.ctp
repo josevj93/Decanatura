@@ -49,7 +49,7 @@
 		<div class="form-control sameLine">
 			<div class="row col-lg-5">
 				<label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-				<?php echo $this->Form->imput('id_responsables', array('class' => 'form-control col-md-8', 'id'=> 'userDropdown', 'disabled')); ?>
+				<?php echo '<input type="text" id="id_responsables" class="form-control col-sm-4 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($loan->user->nombre). '">'; ?>
 			</div>
 
 			<div class="row">
@@ -97,7 +97,7 @@
 
 <div>
       <label> Observaciones: </label>
-      <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8', 'disabled']); ?>
+      <?php echo '<input type="text" id="observaciones" class="form-control col-sm-4 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($loan->observaciones). '">'; ?>
     </div> <br>
 
 <div class="col-12 text-right">
