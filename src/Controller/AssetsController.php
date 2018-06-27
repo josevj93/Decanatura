@@ -69,7 +69,6 @@ class AssetsController extends AppController
      */
     public function index()
     {
-        
         $this->paginate = [
             'contain' => ['Users', 'Locations','Models']
         ];
@@ -82,7 +81,7 @@ class AssetsController extends AppController
     public function view($id = null)
     {
         $asset = $this->Assets->get($id, [
-            'contain' => ['Types', 'Users', 'Locations']
+            'contain' => ['Users', 'Locations']
         ]);
         $this->set('asset', $asset);
     }
@@ -140,10 +139,12 @@ class AssetsController extends AppController
             }
             $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
-        $types = $this->Assets->Types->find('list', ['limit' => 200]);
+
+        $this->loadModel('Brands');
+        $brands = $this->Brands->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('asset', 'types', 'users', 'locations'));
+        $this->set(compact('asset', 'brands', 'users', 'locations','models'));
     }
 
     /**
@@ -270,7 +271,6 @@ class AssetsController extends AppController
         for ($i = 0; $i < $cantidad; $i++){
             $asset = array();
             $asset['Assets']['plaque'] = $placa;
-            $asset['Assets']['type_id'] = '5b08417d8e257';
             $asset['Assets']['brand'] = 'Silla';
             $asset['Assets']['model'] = 'modelo1';
             $asset['Assets']['state'] = 'Activo';
@@ -301,10 +301,9 @@ class AssetsController extends AppController
 
         }
 
-        $types = $this->Assets->Types->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('asset', 'types', 'users', 'locations'));
+        $this->set(compact('asset', 'users', 'locations'));
     }
 }
 
