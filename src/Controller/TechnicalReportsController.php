@@ -228,10 +228,52 @@ class TechnicalReportsController extends AppController
         $id= $_GET['id'];
         $assets = TableRegistry::get('Assets');
         $searchedAsset= $assets->get($id);
-        if(empty($searchedAsset) )
+        /*$assetsQuery = $assets->find()
+                         ->select(['assets.plaque','brands.name','models.name','assets.series','assets.state'])
+                         ->join([
+                            'assets' => [
+                                    'table' => 'assets',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.plaque= TechnicalReports.assets_id']
+                                ]
+                                ])
+                         ->join([
+                            'models' => [
+                                    'table' => 'models',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.models_id= models.id']
+                                ]
+                                ])
+                         ->join([
+                            'brands' => [
+                                    'table' => 'brands',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['models.id_brand = brands.id']
+                                ]
+                                ])
+                         ->where(['assets.plaque' => $id])
+                         ->toList();
+        debug($assetsQuery);
+        if(empty($assetsQuery) )
         {
             throw new NotFoundException(__('Activo no encontrado') );
         }
+
+        $size = count($assetsQuery);
+        $searchedAsset=   array_fill(0, $size, NULL);
+        for($i=0;$i<$size;$i++)
+        {
+            //* se acomodan los valores dentro de un mismo [$i]
+            $searchedAsset[$i]['plaque']= $assetsQuery[$i]->assets['plaque'];
+            $searchedAsset[$i]['brand']= $assetsQuery[$i]->brands['name'];
+            $searchedAsset[$i]['model']= $assetsQuery[$i]->models['name'];
+            $searchedAsset[$i]['series']= $assetsQuery[$i]->assets['series'];
+            $searchedAsset[$i]['state']= $assetsQuery[$i]->assets['state'];
+
+            // se realiza una conversion a objeto para que la vista lo use sin problemas
+            $searchedAsset[$i]= (object)$searchedAsset[$i];
+        }*/
+
         $this->set('serchedAsset',$searchedAsset);
     }
 

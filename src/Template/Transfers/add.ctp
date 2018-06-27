@@ -88,6 +88,12 @@
       float: right;
       margin-left:10px;
     }
+
+    .sameLine{
+    display: flex; 
+    justify-content: space-between; 
+    border-color: transparent;
+    }
         
   </style>
 
@@ -100,6 +106,7 @@
   <fieldset>
     <legend><?= __('Insertar acta de traslado') ?></legend>
     <br>
+<<<<<<< HEAD
     <div class="row">
       <div class="col-md-10">
         <div class = "row">
@@ -108,12 +115,39 @@
                 echo $this->Form->imput('transfers_id', ['label' => 'Nombre:', 'class'=>'form-control col-sm-2']);
             ?>
         </div>
+=======
+    <div class="form-control sameLine">
+      <div>
+      <?php 
+        echo $this->Form->control('transfers_id', 
+          [
+            'templates' => [
+              'inputContainer' => '<div class="row">{{content}}</div>',
+              'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+              ],
+            'label'=>['text'=>'Número de traslado:', 'style'=>'margin-left= 10px;'],
+            'class'=>'form-control col-sm-4',
+            'type'=>'text'
+          ]);
+      ?>
       </div>
-      <label>Fecha:</label>
-        <?php
-        echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker','value' => 
-            date("y-m-d")]); 
-        ?>
+      <br>
+      <div>
+      <?php 
+        echo $this->Form->control('date', 
+          [
+            'templates' => [
+              'inputContainer' => '<div class="row">{{content}}</div>',
+              'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+            ],
+            'label'=>['text'=>'Fecha:', 'style'=>'margin-left= 10px;'],
+            'class'=>'form-control',
+            'type'=>'text',
+            'id'=>'datepicker'
+          ]);
+      ?>
+>>>>>>> c1c0f19a284e90b4ae8d7149bbe1840500ad1e90
+      </div>
   </div>
     <div id=assetResult> 
     </div><br>
@@ -193,6 +227,7 @@
             <tbody>
                 <?php 
                 foreach ($asset as $a): ?>
+                <?php //debug($a)?>
                 <tr>
                     <td><?= h($a->plaque) ?></td>
                     <td><?= h($a->brand) ?></td>
