@@ -451,7 +451,7 @@ public function download($id = null)
             <td align="center">' . $item['description'] . '</td>
              <td align="center">' . $item['plaque'] . '</td>
              <td align="center">' . $item['brand'] . '</td>
-             <td align="center">' . $item['model'] . '</td>
+             <td align="center">' . $item['models_id'] . '</td>
              <td align="center">' . $item['series'] . '</td>
              <td align="center">' . $item['state'] . '</td>
              </tr>';

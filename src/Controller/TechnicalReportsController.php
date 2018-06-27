@@ -263,7 +263,7 @@ class TechnicalReportsController extends AppController
         <p>&nbsp;</p>
         <div style="width:960px;height:200px;border:1px solid #000;"></div>
         <p>&nbsp;</p>
-        <div id="element1" align="left"><strong>N° Placa:&nbsp;</strong>'.$technicalReport->asset->plaque.'</div> <div id="element2" align="right"><strong>Modelo:</strong>&nbsp;'.$technicalReport->asset->model.'</div>
+        <div id="element1" align="left"><strong>N° Placa:&nbsp;</strong>'.$technicalReport->asset->plaque.'</div> <div id="element2" align="right"><strong>Modelo:</strong>&nbsp;'.$technicalReport->asset->models_id.'</div>
         <p>&nbsp;</p>
         <div id="element1" align="left"><strong>Marca:</strong>&nbsp;'.$technicalReport->asset->brand.'</div> <div id="element2" align="right"><strong>Serie:</strong>&nbsp;'.$technicalReport->asset->series.'</div>
         <p>&nbsp;</p>
