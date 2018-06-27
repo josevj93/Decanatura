@@ -116,7 +116,7 @@ class AssetsController extends AppController
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
         
         
-        $this->set(compact('asset', 'brands', 'users', 'locations'));
+        $this->set(compact('asset', 'brands', 'users', 'locations','models'));
     }
     /**
      * Método para editar un activo en el sistema

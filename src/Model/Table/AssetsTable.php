@@ -152,6 +152,11 @@ class AssetsTable extends Table
             ->scalar('models_id')
             ->maxLength('models_id', 255)
             ->allowEmpty('models_id');
+
+        $validator
+            ->scalar('brand')
+            ->maxLength('brand', 255)
+            ->allowEmpty('brand');
             
         return $validator;
     }

@@ -61,7 +61,8 @@ class Asset extends Entity
         'location' => true,
         'unique_id' => true,
         'deleted' => true,
-        'deletable' => true
+        'deletable' => true,
+        'brand' => true
     ];
 }
 
