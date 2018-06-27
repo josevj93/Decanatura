@@ -154,7 +154,9 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $user_action = '';
+                AppController::insertLog($user);
+
+                /*$user_action = '';
                 if ($this->request->getParam('action') == 'add'){
                     $user_action = 'Agregar';
                 }else if($this->request->getParam('action') == 'edit'){
@@ -167,6 +169,7 @@ class UsersController extends AppController
                 $dateAndTime = date("Y-m-d H:i:s");
                 $conn = ConnectionManager::get('default');
                 $stmt = $conn->execute('INSERT INTO activity_logs (DateAndTime,idUser,userAction,message) values(\'' . $dateAndTime . '\', \'' . $current_user['id'] . '\', \'' . $user_action . '\', \'se ha insertado el usuario ' . $user['nombre'] . '\');');
+*/
 
                 /* $myData = $this->ActivityLogs;
                  $myData['DateAndTime'] = $dateAndTime;

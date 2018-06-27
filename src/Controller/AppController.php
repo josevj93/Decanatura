@@ -15,6 +15,7 @@
 namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Datasource\ConnectionManager;
 /**
  * Application Controller
  *
@@ -79,6 +80,24 @@ class AppController extends Controller
         return false;
     }*/
 
+    public function insertLog($pUser = null){
+
+        $user_action = '';
+        if ($this->request->getParam('action') == 'add'){
+            $user_action = 'Agregar';
+        }else if($this->request->getParam('action') == 'edit'){
+            $user_action = 'Modificar';
+        }else if($this->request->getParam('action') == 'delete'){
+            $user_action = 'Eliminar';
+        }
+        $session = $this->request->getSession();
+        $current_user = $session->read('Auth.User');
+        $dateAndTime = date("Y-m-d H:i:s");
+        $conn = ConnectionManager::get('default');
+        $stmt = $conn->execute('INSERT INTO activity_logs (DateAndTime,idUser,userAction,message) values(\'' . $dateAndTime . '\', \'' . $current_user['id'] . '\', \'' . $user_action . '\', \'se ha insertado el usuario ' . $pUser['nombre'] . '\');');
+
+
+    }
     public function beforeFilter(Event $event)
     {
 
