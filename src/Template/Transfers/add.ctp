@@ -111,15 +111,16 @@
       <div>
       <?php 
         echo $this->Form->control('transfers_id', 
-          [
-            'templates' => [
-              'inputContainer' => '<div class="row">{{content}}</div>',
-              'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
-              ],
-            'label'=>['text'=>'Número de traslado: VRA-', 'style'=>'margin-left= 10px;'],
-            'class'=>'form-control col-sm-4',
-            'type'=>'text'
-          ]);
+                [
+                    'templates' => [
+                    'inputContainer' => '<div class="row">{{content}}</div>',
+                    'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                    ],
+                'label'=>['text'=>'Número de traslado: VRA-', 'style'=>'margin-left= 10px;'],
+                'class'=>'form-control col-sm-4',
+                'type'=>'text',
+                'id' =>'transfers_id'
+                ]);
       ?>
       </div>
       <br>

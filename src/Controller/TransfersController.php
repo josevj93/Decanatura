@@ -173,9 +173,9 @@ class TransfersController extends AppController
             {
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             //tmpId contiene el id de la tabla de traslados.
-            debug($transfer->transfers_id);
+            //debug($transfer);
+            //exit();
             $transfer->transfers_id = "VRA-".(string)$transfer->transfers_id;
-            debug($transfer->transfers_id);
             //comienza el ciclo para agregar la relación entre activos y acta.
             if ($this->Transfers->save($transfer)) {
                 //se saca la lista de placas señaladas y luego se pasan a Array
