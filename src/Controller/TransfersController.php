@@ -171,11 +171,20 @@ class TransfersController extends AppController
             }
             else
             {
+
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             //tmpId contiene el id de la tabla de traslados.
             //debug($transfer);
             //exit();
-            $transfer->transfers_id = "VRA-".(string)$transfer->transfers_id;
+
+            $transfer->transfers_id = "VRA-".$this->request->getData('transfers_id');
+
+            $tmpId = $this->Transfers->find('all',['fields'=>'transfers_id'])
+            ->where(['transfers_id'=> $transfer->transfers_id])->toList();
+            if($tmpId == null)
+            {
+
+
             //comienza el ciclo para agregar la relación entre activos y acta.
             if ($this->Transfers->save($transfer)) {
                 //se saca la lista de placas señaladas y luego se pasan a Array
@@ -204,10 +213,16 @@ class TransfersController extends AppController
                 $this->Flash->success(__('La transferencia fue exitosa.'));
                 return $this->redirect(['action' => 'index']);
             }
+
            
             $this->Flash->error(__('No se pudo realizar la transferencia.'));
+        }
+        else{
+                $this->Flash->error(__('No se pudo realizar la transferencia porque el id está duplicado.'));
+            }
             }
         }
+        
 
 
         // obtengo la tabla assets
