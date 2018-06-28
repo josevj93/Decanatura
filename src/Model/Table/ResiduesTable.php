@@ -55,7 +55,7 @@ class ResiduesTable extends Table
             ->requirePresence('name1', 'create')
             ->add('name1',[ 
                 [
-                'rule'=>['custom', ' /^[a-zA-ZÀ-ÖØ-öø-ÿ]+$/ '],
+                'rule'=>['custom', ' /^[a-zA-ZÀ-ÖØ-öø-ÿ ]+$/ '],
                 'message'=>'Debe contener sólo caracteres del alfabeto.'
                 ]
             ])
@@ -63,23 +63,18 @@ class ResiduesTable extends Table
 
         $validator
             ->scalar('identification1')
-            ->maxLength('identification1', 9)
+            //->maxLength('identification1', 9)
             ->requirePresence('identification1', 'create')
-            ->add('identification2', [
-                [
-                'rule' => ['numElements', 'not equal', 9],
-                'message' => 'La cédula debe tener 9 dígitos',
-                ]
-            ])
+            ->lengthBetween('indetification1',[9,9])
             ->notEmpty('identification1','Este campo es requerido');
 
         $validator
             ->scalar('name2')
             ->maxLength('name2', 50)
             ->requirePresence('name2', 'create')            
-            ->add('name1',[ 
+            ->add('name2',[ 
                 [
-                'rule'=>['custom', ' /^[a-zA-ZÀ-ÖØ-öø-ÿ]+$/ '],
+                'rule'=>['custom', ' /^[a-zA-ZÀ-ÖØ-öø-ÿ ]+$/ '],
                 'message'=>'Debe contener sólo caracteres del alfabeto.'
                 ]
             ])
@@ -87,14 +82,9 @@ class ResiduesTable extends Table
 
         $validator
             ->scalar('identification2')
-            //->numElements('identification2', 'equal',9)
+
             ->requirePresence('identification2', 'create')
-            ->add('identification2', [
-                [
-                'rule' => ['numElements', 'not equal', 9],
-                'message' => 'La cédula debe tener 9 dígitos',
-                ]
-            ])
+            ->lengthBetween('indetification2',[9,9])
             ->notEmpty('identification2','Este campo es requerido');
 
         $validator
