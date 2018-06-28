@@ -159,7 +159,8 @@ class ResiduesController extends AppController
        // debug($queryRec);
         for($i = 0; $i < $size; $i++)
         {
-            $resultRec[$i] =(object)$queryRec[$i];
+            // se realiza una conversion a objeto para que la vista lo use sin problemas
+            $resultRec[$i]= (object)$queryRec[$i];
         }
 
         $Unidad = $this->UnidadAcadémica;
@@ -228,7 +229,7 @@ class ResiduesController extends AppController
                                 ]
                                 ])
                          ->where(['TechnicalReports.recommendation' => "D"])
-                         //->where(['assets.state !='=>'Desechado'])
+                         ->where(['assets.state !='=>'Desechado'])
                          ->group (['assets.plaque'])
                          ->toList();
 
@@ -237,7 +238,15 @@ class ResiduesController extends AppController
         
         for($i=0;$i<$size;$i++)
         {
-            $result[$i] =(object)$assetsQuery[$i]->assets;
+            //* se acomodan los valores dentro de un mismo [$i]
+            $result[$i]['plaque']= $assetsQuery[$i]->assets['plaque'];
+            $result[$i]['brand']= $assetsQuery[$i]->brands['name'];
+            $result[$i]['model']= $assetsQuery[$i]->models['name'];
+            $result[$i]['series']= $assetsQuery[$i]->assets['series'];
+            $result[$i]['state']= $assetsQuery[$i]->assets['state'];
+
+            // se realiza una conversion a objeto para que la vista lo use sin problemas
+            $result[$i]= (object)$result[$i];
         }
         $this->set(compact('residue', 'result'));
     }
@@ -340,8 +349,8 @@ class ResiduesController extends AppController
         // aqui pasa a sacar los valores de result2 e indexarlos
         $lastPlaques =array_column($result2, 'plaque');
 
+        /** se obtienen los datos de los activos que se quieren desechar*/
         $technical_reports = TableRegistry::get('TechnicalReports');
-        debug($lastPlaques);
         $query = $technical_reports->find()
                         ->select(['assets.plaque', 'brands.name', 'models.name', 'assets.series', 'assets.state'])
                         ->join ([
@@ -376,7 +385,15 @@ class ResiduesController extends AppController
         
         for($i = 0; $i < $size; $i++)
         {
-            $result[$i] =(object)$query[$i]->assets;
+            //* se acomodan los valores dentro de un mismo [$i]
+            $result[$i]['plaque']= $query[$i]->assets['plaque'];
+            $result[$i]['brand']= $query[$i]->brands['name'];
+            $result[$i]['model']= $query[$i]->models['name'];
+            $result[$i]['series']= $query[$i]->assets['series'];
+            $result[$i]['state']= $query[$i]->assets['state'];
+
+            // se realiza una conversion a objeto para que la vista lo use sin problemas
+            $result[$i]= (object)$result[$i];
         }
 
         $Unidad = $this->UnidadAcadémica;

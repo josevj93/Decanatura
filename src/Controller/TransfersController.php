@@ -103,7 +103,7 @@ class TransfersController extends AppController
         // reallizo un join  a assets_tranfers para obtener los activos
         //asosiados a un traslado
         $query = $assets_transfers->find()
-                    ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
+                    ->select(['assets.plaque','brands.name','models.name','assets.series','assets.state'])
                     ->join([
                       'assets'=> [
                         'table'=>'assets',
@@ -111,16 +111,39 @@ class TransfersController extends AppController
                         'conditions'=> [ 'assets.plaque= AssetsTransfers.assets_id']
                         ]
                     ])
+                    ->join([
+                            'models' => [
+                                    'table' => 'models',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.models_id= models.id']
+                                ]
+                                ])
+                    ->join([
+                            'brands' => [
+                                    'table' => 'brands',
+                                    'type'  => 'LEFT',
+                                   'conditions' => ['models.id_brand = brands.id']
+                                ]
+                    ])
                     ->where(['AssetsTransfers.transfer_id'=>$id])
                     ->toList();
 
-        // Aqui paso el resultado de $query a un objeto para manejarlo facilmente en la vista
+        
         $size = count($query);
         $result=   array_fill(0, $size, NULL);
         
         for($i=0;$i<$size;$i++)
         {
-            $result[$i] =(object)$query[$i]->assets;
+            //* se acomodan los valores dentro de un mismo [$i]
+            $result[$i]['plaque']= $query[$i]->assets['plaque'];
+            $result[$i]['brand']= $query[$i]->brands['name'];
+            $result[$i]['model']= $query[$i]->models['name'];
+            $result[$i]['series']= $query[$i]->assets['series'];
+            $result[$i]['state']= $query[$i]->assets['state'];
+
+            // se realiza una conversion a objeto para que la vista lo use sin problemas
+            $result[$i]= (object)$result[$i];
+
         }
         //$user =$this->Auth->user();
         
@@ -138,16 +161,7 @@ class TransfersController extends AppController
     {
         //empieza el área para la función de post///////////////
         $transfer = $this->Transfers->newEntity();
-        $tmpId = 1;
-        $tmpId = $this->Transfers->find('all',['fields'=>'transfers_id'])->last();
-        if($tmpId!=null)
-        {
-            $tmpId = $tmpId->transfers_id+1;
-        }
-        else
-        {
-            $tmpId = 1;
-        }
+        
         if ($this->request->is('post')) {
             $check= $this->request->getData("checkList");
             $check = explode(",",$check);
@@ -159,7 +173,9 @@ class TransfersController extends AppController
             {
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             //tmpId contiene el id de la tabla de traslados.
-            $transfer->transfers_id = $tmpId;
+            //debug($transfer);
+            //exit();
+            $transfer->transfers_id = "VRA-".(string)$transfer->transfers_id;
             //comienza el ciclo para agregar la relación entre activos y acta.
             if ($this->Transfers->save($transfer)) {
                 //se saca la lista de placas señaladas y luego se pasan a Array
@@ -170,7 +186,7 @@ class TransfersController extends AppController
                 $transferAssetTable = TableRegistry::get('AssetsTransfers');
                 $transferAsset = $transferAssetTable->newEntity();
                 //se asigna id de traslado a tabla de relación
-                $transferAsset->transfer_id = $tmpId;
+                $transferAsset->transfer_id =  $transfer->transfers_id;
                 $transferAsset->assets_id = $placa;
                 //se guarda en tabla conjunta (assets y traslado)
                 $transferAssetTable->save($transferAsset);
@@ -188,6 +204,7 @@ class TransfersController extends AppController
                 $this->Flash->success(__('La transferencia fue exitosa.'));
                 return $this->redirect(['action' => 'index']);
             }
+           
             $this->Flash->error(__('No se pudo realizar la transferencia.'));
             }
         }
@@ -242,9 +259,16 @@ class TransfersController extends AppController
         
         for($i=0;$i<$size;$i++)
         {
-            $asset[$i] =(object)$assetsQuery[$i]->assets;
-        }
+            //* se acomodan los valores dentro de un mismo [$i]
+            $asset[$i]['plaque']= $assetsQuery[$i]->assets['plaque'];
+            $asset[$i]['brand']= $assetsQuery[$i]->brands['name'];
+            $asset[$i]['model']= $assetsQuery[$i]->models['name'];
+            $asset[$i]['series']= $assetsQuery[$i]->assets['series'];
+            $asset[$i]['state']= $assetsQuery[$i]->assets['state'];
 
+            // se realiza una conversion a objeto para que la vista lo use sin problemas
+            $asset[$i]= (object)$asset[$i];
+        }
 
         /** obtengo una lista de usuarios para cargar un dropdown list en la vista */
         $usersTable= TableRegistry::get('Users');
@@ -253,14 +277,15 @@ class TransfersController extends AppController
                         ->toList();
 
         $size = count($queryUsers);
-        //$users=  array_column($queryUsers, 'users');    //array_fill(0, $size, NULL);
-        //$users=  (object)$queryUsers;
         $users= array_fill(0, $size, NULL);
+        /** se concatena el nombre y se coloca en un mismo array*/
         for($i=0;$i<$size;$i++)
         {
             $users[$i] =$queryUsers[$i]->users['nombre'] ." ".$queryUsers[$i]->users['apellido1']." ".$queryUsers[$i]->users['apellido2'];
         }
-        $this->set(compact('transfer', 'asset', 'result','tmpId','users'));
+        // variable para colocar la unidad que entrega
+        $paramUnidad = $this->UnidadAcadémica;
+        $this->set(compact('transfer', 'asset', 'result','tmpId','users','paramUnidad'));
 
     }
 
@@ -278,7 +303,7 @@ class TransfersController extends AppController
         // obtengo la tabla assets
         $assets_transfers = TableRegistry::get('AssetsTransfers');
 
-        // reallizo un join  a assets_tranfers para obtener los activos
+        // realizo un join  a assets_tranfers para obtener los activos
         //asosiados a un traslado
         $query = $assets_transfers
                     ->find('all')
@@ -294,6 +319,7 @@ class TransfersController extends AppController
                     ->where(['AssetsTransfers.transfer_id'=>$id])
 
                     ->toList();
+
         // Aqui paso el resultado de $query a un objeto
         $size = count($query);
         $result=   array_fill(0, $size, NULL);
@@ -302,7 +328,20 @@ class TransfersController extends AppController
         {
             $result[$i] =(object)$query[$i]->assets;
         }       
-        //debug($result);
+
+         /** Se colocan el contenido de $result en un array llamado $temp de manera
+        que se pueda usar el método arrar_diff facilmente y para consultar los activos
+        que previamente pertenecen al traslado que se edita*/
+
+
+        $temp =  array_fill(0, $size, NULL);
+        $i=0;
+        foreach ($result as $res)
+        {
+            $temp[$i] = $res -> plaque;
+            $i++;
+        }
+
         if ($this->request->is(['patch', 'post', 'put'])) {
 
 
@@ -314,14 +353,7 @@ class TransfersController extends AppController
             if ($this->Transfers->save($transfer)) {
                 $this->Flash->success(__('Los cambios han sido guardados.'));
 
-                
-                $temp =  array_fill(0, $size, NULL);
-                $i=0;
-                foreach ($result as $res)
-                {
-                    $temp[$i] = $res -> plaque;
-                    $i++;
-                }
+
 
                 $nuevos = array_diff($checks,  $temp);
                 $viejos = array_diff($temp,  $checks);
@@ -373,15 +405,45 @@ class TransfersController extends AppController
 
         $assetsQuery = TableRegistry::get('Assets');
         $assetsQuery = $assetsQuery->find()
-                         ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
-                         ->toList();
+                        ->select(['assets.plaque','brands.name','models.name','assets.series','assets.state'])
+                        ->join([
+                            'models' => [
+                                    'table' => 'models',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.models_id= models.id']
+                                ]
+                                ])
+                        ->join([
+                            'brands' => [
+                                    'table' => 'brands',
+                                    'type'  => 'LEFT',
+                                   'conditions' => ['models.id_brand = brands.id']
+                                ]
+                        ])
+                        ->join([
+                      'assets_transfers'=> [
+                        'table'=>'assets_transfers',
+                        'type'=>'LEFT',
+                        'conditions'=> [ 'assets.plaque= assets_transfers.assets_id']
+                        ]
+                        ])
 
+                        ->where(['assets.state = "Disponible" or assets_transfers.transfer_id = "'.$id.'"'])
+                        ->toList();
         $size = count($assetsQuery);
         $asset=   array_fill(0, $size, NULL);
         
         for($i=0;$i<$size;$i++)
         {
-            $asset[$i] =(object)$assetsQuery[$i]->assets;
+            //* se acomodan los valores dentro de un mismo [$i]
+            $asset[$i]['plaque']= $assetsQuery[$i]->assets['plaque'];
+            $asset[$i]['brand']= $assetsQuery[$i]->brands['name'];
+            $asset[$i]['model']= $assetsQuery[$i]->models['name'];
+            $asset[$i]['series']= $assetsQuery[$i]->assets['series'];
+            $asset[$i]['state']= $assetsQuery[$i]->assets['state'];
+
+            // se realiza una conversion a objeto para que la vista lo use sin problemas
+            $asset[$i]= (object)$asset[$i];
         }
 
         $Unidad= $this->UnidadAcadémica;

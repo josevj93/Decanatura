@@ -222,8 +222,8 @@
                 <tbody>
                     <?php 
                       foreach ($result as $a): ?>
+
                       <tr>
-                          
                           <td><?= h($a->plaque) ?></td>
                           <td><?= h($a->brand) ?></td>
                           <td><?= h($a->model) ?></td>

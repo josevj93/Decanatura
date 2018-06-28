@@ -89,6 +89,12 @@
       float: right;
       margin-left:10px;
     }
+
+    .sameLine{
+    display: flex; 
+    justify-content: space-between; 
+    border-color: transparent;
+    }
         
   </style>
 
@@ -101,18 +107,40 @@
   <fieldset>
     <legend><?= __('Insertar traslado') ?></legend>
     <br>
-    <div class="row">
-      <div class="col-md-8">
-        <div >
-          <label>Nº Formulario:</label>
-          <label><?php echo h($tmpId); ?> *</label>
-        </div>
+
+    <div class="form-control sameLine">
+      <div>
+      <?php 
+        echo $this->Form->control('transfers_id', 
+                [
+                    'templates' => [
+                    'inputContainer' => '<div class="row">{{content}}</div>',
+                    'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                    ],
+                'label'=>['text'=>'Número de traslado: VRA-', 'style'=>'margin-left= 10px;'],
+                'class'=>'form-control col-sm-4',
+                'type'=>'text',
+                'id' =>'transfers_id'
+                ]);
+      ?>
       </div>
-      <label>Fecha:</label>
-        <?php
-        echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker','value' => 
-            date("y-m-d")]); 
-        ?>
+      <br>
+      <div>
+      <?php 
+        echo $this->Form->control('date', 
+          [
+            'templates' => [
+              'inputContainer' => '<div class="row">{{content}}</div>',
+              'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+            ],
+            'label'=>['text'=>'Fecha:', 'style'=>'margin-left= 10px;'],
+            'class'=>'form-control',
+            'type'=>'text',
+            'id'=>'datepicker'
+          ]);
+      ?>
+
+      </div>
   </div>
     <div id=assetResult> 
     </div><br>
@@ -135,7 +163,7 @@
                 <div class="row">
                     <label class="funcionario">Funcionario: </label>
                     <?php 
-                    echo $this->Form->select('field',
+                    echo $this->Form->select('functionary',
                       $users,
                       ['empty' => '(Escoja un usuario)','class'=>'form-control', 'style'=>'width:220px;']
                     );
@@ -192,6 +220,7 @@
             <tbody>
                 <?php 
                 foreach ($asset as $a): ?>
+                <?php //debug($a)?>
                 <tr>
                     <td><?= h($a->plaque) ?></td>
                     <td><?= h($a->brand) ?></td>
