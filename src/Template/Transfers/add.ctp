@@ -161,7 +161,7 @@
                 <div class="row">
                     <label class="funcionario">Funcionario: </label>
                     <?php 
-                    echo $this->Form->select('field',
+                    echo $this->Form->select('functionary',
                       $users,
                       ['empty' => '(Escoja un usuario)','class'=>'form-control', 'style'=>'width:220px;']
                     );

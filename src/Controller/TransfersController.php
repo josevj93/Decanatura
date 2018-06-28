@@ -173,7 +173,9 @@ class TransfersController extends AppController
             {
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             //tmpId contiene el id de la tabla de traslados.
-            $transfer->transfers_id = "VRA-".$transfer->transfers_id;
+            debug($transfer->transfers_id);
+            $transfer->transfers_id = "VRA-".(string)$transfer->transfers_id;
+            debug($transfer->transfers_id);
             //comienza el ciclo para agregar la relación entre activos y acta.
             if ($this->Transfers->save($transfer)) {
                 //se saca la lista de placas señaladas y luego se pasan a Array
@@ -184,7 +186,7 @@ class TransfersController extends AppController
                 $transferAssetTable = TableRegistry::get('AssetsTransfers');
                 $transferAsset = $transferAssetTable->newEntity();
                 //se asigna id de traslado a tabla de relación
-                $transferAsset->transfer_id = $tmpId;
+                $transferAsset->transfer_id =  $transfer->transfers_id;
                 $transferAsset->assets_id = $placa;
                 //se guarda en tabla conjunta (assets y traslado)
                 $transferAssetTable->save($transferAsset);
@@ -202,6 +204,7 @@ class TransfersController extends AppController
                 $this->Flash->success(__('La transferencia fue exitosa.'));
                 return $this->redirect(['action' => 'index']);
             }
+           
             $this->Flash->error(__('No se pudo realizar la transferencia.'));
             }
         }
