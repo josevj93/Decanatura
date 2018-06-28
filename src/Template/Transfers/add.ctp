@@ -106,6 +106,7 @@
   <fieldset>
     <legend><?= __('Insertar acta de traslado') ?></legend>
     <br>
+
     <div class="form-control sameLine">
       <div>
       <?php 
@@ -115,7 +116,7 @@
               'inputContainer' => '<div class="row">{{content}}</div>',
               'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
               ],
-            'label'=>['text'=>'Número de traslado:', 'style'=>'margin-left= 10px;'],
+            'label'=>['text'=>'Número de traslado: VRA-', 'style'=>'margin-left= 10px;'],
             'class'=>'form-control col-sm-4',
             'type'=>'text'
           ]);
@@ -136,6 +137,7 @@
             'id'=>'datepicker'
           ]);
       ?>
+
       </div>
   </div>
     <div id=assetResult> 
