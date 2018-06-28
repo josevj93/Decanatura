@@ -200,7 +200,7 @@ class ResiduesController extends AppController
                 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Intentolo de nuevo.'));
+            $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Inténtelo de nuevo.'));
         }
 
 
@@ -342,7 +342,7 @@ class ResiduesController extends AppController
             }
 
 
-            $this->Flash->error(__('El acta de residuo no se ha guradado, intentalo de nuevo'));
+            $this->Flash->error(__('El acta de residuo no se ha guardado, inténtalo de nuevo'));
 
         }
 
@@ -428,9 +428,9 @@ class ResiduesController extends AppController
                                              ->where(['residues_id' => $residue->residues_id])
                                              ->execute();
         if ($this->Residues->delete($residue)) {
-            $this->Flash->success(__('The residue has been deleted.'));
+            $this->Flash->success(__('El acta ed residuo ha sido eliminada.'));
         } else {
-            $this->Flash->error(__('The residue could not be deleted. Please, try again.'));
+            $this->Flash->error(__('El acta de residuo no puede ser eliminada, inténtalo de nuevo'));
         }
 
         return $this->redirect(['action' => 'index']);

@@ -239,9 +239,9 @@
 
 
 
-/** método extraido de https://stackoverflow.com/questions/46590217/jquery-datatable-order-table-based-on-checkbox
+<!-- método extraido de https://stackoverflow.com/questions/46590217/jquery-datatable-order-table-based-on-checkbox
 para poder ordenar los checksbox
-**/
+-->
     
 <script type="text/javascript">
 $(document).ready(function() 
