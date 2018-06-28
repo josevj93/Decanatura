@@ -29,6 +29,7 @@ class Residue extends Entity
      * @var array
      */
     protected $_accessible = [
+        'residues_id'=>true,
         'name1' => true,
         'identification1' => true,
         'name2' => true,
