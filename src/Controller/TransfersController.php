@@ -417,10 +417,16 @@ class TransfersController extends AppController
                                    'conditions' => ['models.id_brand = brands.id']
                                 ]
                         ])
-                        ->where(['assets.state = "Disponible"'])
-                        ->where(['or assets.plaque in'=>$tmp])
-                        ->toList();
+                        ->join([
+                      'assets_transfers'=> [
+                        'table'=>'assets_transfers',
+                        'type'=>'LEFT',
+                        'conditions'=> [ 'assets.plaque= assets_transfers.assets_id']
+                        ]
+                        ])
 
+                        ->where(['assets.state = "Disponible" or assets_transfers.transfer_id = "'.$id.'"'])
+                        ->toList();
         $size = count($assetsQuery);
         $asset=   array_fill(0, $size, NULL);
         
