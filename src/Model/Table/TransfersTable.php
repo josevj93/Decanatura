@@ -54,7 +54,7 @@ class TransfersTable extends Table
         $validator
             ->scalar('transfers_id')
             ->maxLength('transfers_id', 100)
-            ->allowEmpty('transfers_id', 'create');
+            ->notEmpty('transfers_id', 'create');
 
         $validator
             ->date('date')

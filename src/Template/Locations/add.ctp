@@ -1,8 +1,7 @@
 <div class="locations form large-9 medium-8 columns content">
     <?= $this->Form->create($location) ?>
     <fieldset>
-        <legend><?= __('Insertar Ubicacion') ?></legend><br>
-            
+        <legend><?= __('Insertar Ubicación') ?></legend><br>
             <div class='row'>
                 <label class='align'>Nombre:</label><br>
                 <?php 

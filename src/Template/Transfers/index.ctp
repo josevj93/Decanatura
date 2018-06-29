@@ -19,9 +19,9 @@
         <thead>
             <tr>
                 <th scope="col" class="actions"><?= __('Acciones') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Nº traslado') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Fecha') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('Nº traslado') ?></th>                
-
+                <th scope="col"><?= $this->Paginator->sort('Recibe') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -43,6 +43,7 @@
                     <?php endif; ?>  
 
                 </td>
+                <td><?= h($transfer->transfers_id) ?></td> 
                 <td>
                     <?php 
                     //para darle formato a la fecha
@@ -51,17 +52,17 @@
 
                     <?= h($tmpdate) ?>
                     
-                </td>
-                <td><?= h($transfer->transfers_id) ?></td>              
+                </td> 
+                <td><?= h($transfer->Acade_Unit_recib) ?></td>              
             </tr>
             <?php endforeach; ?>
         </tbody>
         <tfoot>
             <tr>
                 <td></td>
+                <th>Nº Traslado</th>
                 <th>Fecha</th>
-                <th>Nº Reporte</th>
-                
+                <th>Recibe</th>
             </tr>
         </tfoot>
     </table>

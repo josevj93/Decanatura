@@ -37,7 +37,7 @@
         <div class='row'>
             <label>Fecha:</label>
                 <?php
-                    $tmpDate= $residue->date->format('y-m-d');
+                    $tmpDate= $residue->date->format('d-m-y');
                     echo $this->Form->imput('date', ['class'=>'form-control', 'value'=>$tmpDate, 'disabled']); 
                 ?>
         </div>
@@ -242,6 +242,7 @@
 /** método extraido de https://stackoverflow.com/questions/46590217/jquery-datatable-order-table-based-on-checkbox
 para poder ordenar los checksbox
 **/
+
 $(document).ready(function() 
 {
     var equipmentTable = $('#assets-residues-grid').DataTable( {

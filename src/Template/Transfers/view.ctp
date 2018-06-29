@@ -45,9 +45,9 @@
     }
 
 </style>
-<div class="transfers view large-9 medium-8 columns justify-content">
+<div class="transfers form large-9 medium-8 columns content">
   <fieldset>
-    <legend><?=__('Traslado')?></legend>
+    <legend><?=__(' Consultar traslado')?></legend>
     <br>
         <div class= 'form-control sameLine' style="border-color: transparent;">
 
@@ -90,7 +90,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Identificación:</label>
+                    <label class="label-t">Cédula:</label>
                     <?php echo '<input type="text" class="form-control col-sm-4" readonly="readonly" value="' . htmlspecialchars($transfer->identification) . '">'; ?>
                 </div>
             </td>
@@ -112,7 +112,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Identificación:</label>
+                    <label class="label-t">Cédula:</label>
                     <?php echo '<input type="text" class="form-control col-sm-4" readonly="readonly" value="' . htmlspecialchars($transfer->identification_recib) . '">'; ?>
                 </div>               
             </td>

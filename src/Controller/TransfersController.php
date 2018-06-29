@@ -171,9 +171,26 @@ class TransfersController extends AppController
             }
             else
             {
+
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             //tmpId contiene el id de la tabla de traslados.
-            $transfer->transfers_id = "VRA-".$transfer->transfers_id;
+            //debug($transfer);
+            //exit();
+
+            $transfer->transfers_id = "VRA-".$this->request->getData('transfers_id');
+
+            $users = TableRegistry::get('users');
+
+            $users_query = $users->find()
+            ->select(['users.nombre','users.apellido1','users.apellido2'])->toList();
+
+            $array_funcionario = $users_query[$transfer->functionary];
+            $transfer->functionary = $array_funcionario->nombre.' '.$array_funcionario->apellido1.' '.$array_funcionario->apellido2;
+            //Se verifica que el id no esté duplicado.
+            $tmpId = $this->Transfers->find('all',['fields'=>'transfers_id'])
+            ->where(['transfers_id'=> $transfer->transfers_id])->toList();
+            if($tmpId == null)
+            {
             //comienza el ciclo para agregar la relación entre activos y acta.
             if ($this->Transfers->save($transfer)) {
                 //se saca la lista de placas señaladas y luego se pasan a Array
@@ -184,7 +201,7 @@ class TransfersController extends AppController
                 $transferAssetTable = TableRegistry::get('AssetsTransfers');
                 $transferAsset = $transferAssetTable->newEntity();
                 //se asigna id de traslado a tabla de relación
-                $transferAsset->transfer_id = $tmpId;
+                $transferAsset->transfer_id =  $transfer->transfers_id;
                 $transferAsset->assets_id = $placa;
                 //se guarda en tabla conjunta (assets y traslado)
                 $transferAssetTable->save($transferAsset);
@@ -202,11 +219,15 @@ class TransfersController extends AppController
                 $this->Flash->success(__('La transferencia fue exitosa.'));
                 return $this->redirect(['action' => 'index']);
             }
+
+           
             $this->Flash->error(__('No se pudo realizar la transferencia.'));
+        }
+        else{
+                $this->Flash->error(__('No se pudo realizar la transferencia porque ya hay un traslado con ese número de traslado.'));
+            }
             }
         }
-
-
         // obtengo la tabla assets
         $assets_transfers = TableRegistry::get('AssetsTransfers');
 
@@ -417,10 +438,16 @@ class TransfersController extends AppController
                                    'conditions' => ['models.id_brand = brands.id']
                                 ]
                         ])
-                        ->where(['assets.state = "Disponible"'])
-                        ->where(['or assets.plaque in'=>$tmp])
-                        ->toList();
+                        ->join([
+                      'assets_transfers'=> [
+                        'table'=>'assets_transfers',
+                        'type'=>'LEFT',
+                        'conditions'=> [ 'assets.plaque= assets_transfers.assets_id']
+                        ]
+                        ])
 
+                        ->where(['assets.state = "Disponible" or assets_transfers.transfer_id = "'.$id.'"'])
+                        ->toList();
         $size = count($assetsQuery);
         $asset=   array_fill(0, $size, NULL);
         
