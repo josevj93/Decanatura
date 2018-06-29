@@ -142,7 +142,6 @@ class ResiduesController extends AppController
             $result[$i] =(object)$assetsquery[$i]->assets;
         }
 
-       
         //obtengo la tabla technical_reports
         $technical_reports = TableRegistry::get('TechnicalReports');
         //busco los datos que necesito
@@ -152,11 +151,9 @@ class ResiduesController extends AppController
                                     ->group(['assets_id'])
                                     ->toList();
 
-        //lo paso a objeto
         $size = count($queryRec);
 
         $resultRec = array_fill(0, $size, NULL);
-       // debug($queryRec);
         for($i = 0; $i < $size; $i++)
         {
             // se realiza una conversion a objeto para que la vista lo use sin problemas
@@ -180,9 +177,11 @@ class ResiduesController extends AppController
         if ($this->request->is('post')) {
 
             $residue = $this->Residues->patchEntity($residue, $this->request->getData(),['validationDefault'=>'residues_id']);
-            
+
+            debug($residue);
+
             if ($this->Residues->save($residue)) {
-                $this->Flash->success(__('El acta de desecho fue guardada.'));
+                
 
                 $condicion = explode(',', $this->request->getData('checkList'));
                 
@@ -197,9 +196,10 @@ class ResiduesController extends AppController
                     ->set(['residues_id' => $residue->residues_id])
                     ->where(['assets_id IN' => $condicion])
                     ->execute();
-                
+                $this->Flash->success(__('El acta de desecho fue guardada.'));
                 return $this->redirect(['action' => 'index']);
             }
+
             $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Intentolo de nuevo.'));
         }
 
@@ -342,7 +342,7 @@ class ResiduesController extends AppController
             }
 
 
-            $this->Flash->error(__('El acta de residuo no se ha guradado, intentalo de nuevo'));
+            $this->Flash->error(__('El acta de residuo no se ha guardado, inténtalo de nuevo'));
 
         }
 
@@ -428,9 +428,9 @@ class ResiduesController extends AppController
                                              ->where(['residues_id' => $residue->residues_id])
                                              ->execute();
         if ($this->Residues->delete($residue)) {
-            $this->Flash->success(__('The residue has been deleted.'));
+            $this->Flash->success(__('El acta de residuo ha sido eliminada.'));
         } else {
-            $this->Flash->error(__('The residue could not be deleted. Please, try again.'));
+            $this->Flash->error(__('El acta de residuo no puede ser eliminada, inténtalo de nuevo'));
         }
 
         return $this->redirect(['action' => 'index']);

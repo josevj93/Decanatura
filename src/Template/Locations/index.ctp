@@ -9,7 +9,9 @@
                 <thead>
                     <tr>
                         <th scope="col" class="actions"><?= __('Acciones') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('Nombre') ?></th>
+
+                        <th scope="col"><?= $this->Paginator->sort('Ubicación') ?></th>
+
                         <th scope="col"><?= $this->Paginator->sort('Descripción') ?></th>
                     </tr>
                 </thead>
@@ -31,19 +33,17 @@
                                 <?php endif; ?>
 
                             </td>
-                            
+
                             <td><?= h($location->nombre) ?></td>
                             <td><?= h($location->description) ?></td>
-                            
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
                 <tfoot>
                     <tr>
                         <td></td>
-                        <th>Nombre</th>
+                        <th>Ubicación</th>
                         <th>Descripción</th>
-                        
                     </tr>
 
                 </tfoot>

@@ -74,6 +74,7 @@
     {
       margin-left: 20px;
       margin-right: 45px;
+      width: 100px;
     }
     label {
         text-align:left;
@@ -104,22 +105,23 @@
 <div class="locations form large-9 medium-8 columns content">
   <?= $this->Form->create($transfer)?>
   <fieldset>
-    <legend><?= __('Insertar acta de traslado') ?></legend>
+    <legend><?= __('Insertar traslado') ?></legend>
     <br>
 
     <div class="form-control sameLine">
       <div>
       <?php 
         echo $this->Form->control('transfers_id', 
-          [
-            'templates' => [
-              'inputContainer' => '<div class="row">{{content}}</div>',
-              'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
-              ],
-            'label'=>['text'=>'Número de traslado: VRA-', 'style'=>'margin-left= 10px;'],
-            'class'=>'form-control col-sm-4',
-            'type'=>'text'
-          ]);
+                [
+                    'templates' => [
+                    'inputContainer' => '<div class="row">{{content}}</div>',
+                    'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                    ],
+                'label'=>['text'=>'Número de traslado: VRA-', 'style'=>'margin-left= 10px;'],
+                'class'=>'form-control col-sm-4',
+                'type'=>'text',
+                'id' =>'transfers_id'
+                ]);
       ?>
       </div>
       <br>
@@ -161,7 +163,7 @@
                 <div class="row">
                     <label class="funcionario">Funcionario: </label>
                     <?php 
-                    echo $this->Form->select('field',
+                    echo $this->Form->select('functionary',
                       $users,
                       ['empty' => '(Escoja un usuario)','class'=>'form-control', 'style'=>'width:220px;']
                     );
@@ -169,7 +171,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    <label class="id">Identificación:</label>
+                    <label class="id">Cédula:</label>
                     <?php 
             echo $this->Form->imput('identification', ['label' => 'identification:', 'class'=>'form-control col-sm-4']);
             ?>
@@ -192,7 +194,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    <label class="id">Identificación:</label>
+                    <label class="id">Cédula:</label>
                     <?php 
             echo $this->Form->imput('identification_recib', ['label' => 'identification_recib:', 'class'=>'form-control col-sm-4']);
             ?>
@@ -241,12 +243,7 @@
 
     </div>
     <br>
-    <br>
-    <div>
-    <label>nota * : El número de formulario es autogenerado.</label>
-
-    </div>
-    <br>
+    
   </fieldset>
 </div>
 

@@ -21,7 +21,7 @@
         <div class='row'>
             <label>Fecha:</label>
                 <?php
-                    $tmpDate= $residue->date->format('yy-m-d');
+                    $tmpDate= $residue->date->format('d-m-y');
                     echo $this->Form->imput('date', ['class'=>'form-control', 'value'=>$tmpDate, 'disabled']); 
                 ?>
             </div>
@@ -91,13 +91,10 @@
                 
             </tr>
     
-            <?php 
-            //debug($result); 
-            //debug($resultRec);
+            <?php
 
             $size = count($resultRec);
-            for($i = 0; $i < $size; $i++) {
-
+            for ($i=0; $i< $size;$i++){
                 echo '<tr>';
                     echo '<td>' .h($result[$i]->plaque). '</td>';
 

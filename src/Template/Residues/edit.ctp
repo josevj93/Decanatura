@@ -37,7 +37,7 @@
         <div class='row'>
             <label>Fecha:</label>
                 <?php
-                    $tmpDate= $residue->date->format('y-m-d');
+                    $tmpDate= $residue->date->format('d-m-y');
                     echo $this->Form->imput('date', ['class'=>'form-control', 'value'=>$tmpDate, 'disabled']); 
                 ?>
         </div>
@@ -237,13 +237,12 @@
     <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $residue->residues_id)]) ?>
     </div>
 
-
-
+    
+<script type="text/javascript">
 /** método extraido de https://stackoverflow.com/questions/46590217/jquery-datatable-order-table-based-on-checkbox
 para poder ordenar los checksbox
 **/
-    
-<script type="text/javascript">
+
 $(document).ready(function() 
 {
     var equipmentTable = $('#assets-residues-grid').DataTable( {
@@ -286,7 +285,9 @@ $(document).ready(function()
                         "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
                         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                     }
-                }
+
+                },
+                "order": [[ 5, "desc" ]]
     } );
      // Listen to change event from checkbox to trigger re-sorting
     $('#assets-residues-grid input[type="checkbox"]').on('change', function() {

@@ -111,25 +111,26 @@
                     ],
                 'label'=>['text'=>'Número de autorización: VRA-', 'style'=>'margin-left= 10px;'],
                 'class'=>'form-control col-sm-4',
-                'type'=>'text'
+                'type'=>'text',
+                'id' =>'residues_id'
                 ]);
         ?>
         </div>    
         <br>
         <div>
         <?php 
-            echo $this->Form->control('date', 
-                [
-                    'templates' => [
-                    'inputContainer' => '<div class="row">{{content}}</div>',
-                    'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
-                    ],
-                'label'=>['text'=>'Fecha:', 'style'=>'margin-left= 10px;'],
-                'class'=>'form-control',
-                'type'=>'text',
-                'id'=>'datepicker'
-                ]);
-        ?>
+        echo $this->Form->control('date', 
+          [
+            'templates' => [
+              'inputContainer' => '<div class="row">{{content}}</div>',
+              'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+            ],
+            'label'=>['text'=>'Fecha:', 'style'=>'margin-left= 10px;'],
+            'class'=>'form-control',
+            'type'=>'text',
+            'id'=>'datepicker'
+          ]);
+      ?>
         </div>
       </div>
       
@@ -222,7 +223,7 @@
                 <tbody>
                     <?php 
                       foreach ($result as $a): ?>
-                    <?php debug($a) ?>
+
                       <tr>
                           <td><?= h($a->plaque) ?></td>
                           <td><?= h($a->brand) ?></td>
