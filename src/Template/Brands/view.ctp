@@ -5,7 +5,7 @@
  */
 ?>
 <div class="col-md-12 col-sm-12">
-    <h3>Consultar marca de activo</h3>
+    <h3>Consultar marca</h3>
 </div>
 
 <div class="types view large-9 medium-8 columns content">
