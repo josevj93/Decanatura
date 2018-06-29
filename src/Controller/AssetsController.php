@@ -69,9 +69,8 @@ class AssetsController extends AppController
      */
     public function index()
     {
-        
         $this->paginate = [
-            'contain' => ['Types', 'Users', 'Locations']
+            'contain' => ['Users', 'Locations','Models']
         ];
         $assets = $this->paginate($this->Assets);
         $this->set(compact('assets'));
@@ -82,7 +81,7 @@ class AssetsController extends AppController
     public function view($id = null)
     {
         $asset = $this->Assets->get($id, [
-            'contain' => ['Types', 'Users', 'Locations']
+            'contain' => ['Users', 'Locations']
         ]);
         $this->set('asset', $asset);
     }
@@ -103,30 +102,19 @@ class AssetsController extends AppController
             $asset->state = "Disponible";
             $asset = $this->Assets->patchEntity($asset, $this->request->getData()); 
             if ($this->Assets->save($asset)) {
-                $this->Assets->addThumbnail($asset);
-                
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
-        $types = $this->Assets->Types->find('list', ['limit' => 200]);
+        
+        $this->loadModel('Brands');
+        $brands = $this->Brands->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
         
         
-        $brands = array(); 
-        $this->paginate = [
-            'contain' => ['Types', 'Users', 'Locations']
-        ];
-        $assets = $this->paginate($this->Assets);
-        foreach ($assets as $filterBrand) {
-            if (!in_array($filterBrand->brand, $brands)){
-                array_push($brands, $filterBrand->brand);
-            }
-        }
-        
-        $this->set(compact('asset', 'types', 'users', 'locations', 'brands', 'assets'));
+        $this->set(compact('asset', 'brands', 'users', 'locations','models'));
     }
     /**
      * Método para editar un activo en el sistema
@@ -142,18 +130,17 @@ class AssetsController extends AppController
             
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
             if ($this->Assets->save($asset)) {
-                if($asset->image != NULL){
-                    $this->Assets->addThumbnail();
-                }
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
-        $types = $this->Assets->Types->find('list', ['limit' => 200]);
+
+        $this->loadModel('Brands');
+        $brands = $this->Brands->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('asset', 'types', 'users', 'locations'));
+        $this->set(compact('asset', 'brands', 'users', 'locations','models'));
     }
 
     /**
@@ -217,8 +204,38 @@ class AssetsController extends AppController
             return 0;
         }
     }
-    
 
+    /**
+     * Método para mostrar listas dependientes
+     */
+    public function dependentList()
+    {
+        $this->loadModel('Models');
+        $this->loadModel('Brands');
+        
+        $brand_id = $_GET['brand_id'];
+        
+        $brand = $this->Brands->get($brand_id);
+
+        if($brand == NULL)
+        {
+            throw new NotFoundException(__('Marca no encontrada') );      
+        }
+        
+        $models = $this->Models->find('list')
+            ->where(['models.id_brand' => $brand->id]);
+        
+        if(empty($models))
+        {
+            throw new NotFoundException(__('Modelos no encontrados') );      
+        }
+
+        $this->set('models', $models);
+
+        /*Asocia esta función a la vista /Templates/Layout/model_list.ctp*/
+        $this->render('/Layout/model_list');
+    }
+    
 
     /**
      * Método para agregar activos por lotes
@@ -236,8 +253,8 @@ class AssetsController extends AppController
                     'model' => 'modelo1',
                     'state' => 'Activo',
                     'description' => 'silla generica, modelo 1',
-                    'owner_id' => 1,
                     'responsable_id' => 1,
+                    'assigned_to' => 1,
                     'location_id' => 1, 
                     'year' => '2018',
                     'lendable' => 0
@@ -250,13 +267,12 @@ class AssetsController extends AppController
         for ($i = 0; $i < $cantidad; $i++){
             $asset = array();
             $asset['Assets']['plaque'] = $placa;
-            $asset['Assets']['type_id'] = '5b08417d8e257';
             $asset['Assets']['brand'] = 'Silla';
             $asset['Assets']['model'] = 'modelo1';
             $asset['Assets']['state'] = 'Activo';
             $asset['Assets']['description'] = 'silla generica, modelo 1';
-            $asset['Assets']['owner_id'] = 1;
             $asset['Assets']['responsable_id'] = 1;
+            $asset['Assets']['assigned_to'] = 1;
             $asset['Assets']['location_id'] = 1;
             $asset['Assets']['year'] = '2018';
             $asset['Assets']['lendable'] = 0;
@@ -281,10 +297,9 @@ class AssetsController extends AppController
 
         }
 
-        $types = $this->Assets->Types->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('asset', 'types', 'users', 'locations'));
+        $this->set(compact('asset', 'users', 'locations'));
     }
 }
 

@@ -5,7 +5,7 @@
  */
 ?>
 <div class="col-md-12 col-sm-12">
-    <h3>Consultar tipo de activo</h3>
+    <h3>Consultar marca</h3>
 </div>
 
 <div class="types view large-9 medium-8 columns content">
@@ -13,11 +13,7 @@
    <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Nombre') ?></th>
-            <td><?= h($type->name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Descripción') ?></th>
-            <td><?= h($type->description) ?></td>
+            <td><?= h($brand->name) ?></td>
         </tr>
    </table>
 

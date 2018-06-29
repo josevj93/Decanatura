@@ -1,9 +1,10 @@
 <?php
-    /**
-     * @var \App\View\AppView $this
-     * @var \App\Model\Entity\Asset $asset
-     */
-    use Cake\Routing\Router;
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\Asset $asset
+ */
+
+ use Cake\Routing\Router;
 ?>
 
 <head>
@@ -42,17 +43,17 @@
 
 <body>
 <div class="locations form large-9 medium-8 columns content">
-  <?= $this->Form->create($asset, ['type' => 'file']) ?>
+  <?= $this->Form->create($asset) ?>
   <fieldset>
-    <legend><?= __('Insertar activo') ?></legend>
+    <legend><?= __('Editar activo') ?></legend>
     <br>
 
     <div class="form-control sameLine" >
 	
-    <div class="row">
-        <label> <b>Placa:</b><b style="color:red;">*</b> </label>
-    <?php echo $this->Form->imput('plaque', ['class'=>'form-control col-md-9']); ?> 
-    </div>
+      <div class="row">
+          <label> <b>Placa:</b><b style="color:red;">*</b> </label>
+		  <?php echo $this->Form->imput('plaque', ['class'=>'form-control col-md-9', 'disabled']); ?> 
+      </div>
 	  
 	  <div class="col-lg-2">   </div>
         
@@ -60,7 +61,7 @@
 	
 	<div class="form-control sameLine" >
 
-      <div class="row">
+  <div class="row">
         <label>Marca:</label>
         <?php echo $this->Form->select('brand', $brands, ['id' => 'brand-list', 'onChange' => 'getBrand(this.value);', 'empty' => '-- Seleccione Marca --',  'class'=>'form-control col-md-9']); ?>        
       </div>
@@ -73,21 +74,20 @@
 	  <div class="row">
         <label>Serie:</label>
         <?php echo $this->Form->imput('series', ['label' => 'Serie:', 'class'=>'form-control col-md-9']); ?>        
-    </div>
+      </div>
 
-  </div> 
-  <br>
+    </div> <br>
 	
 	<div>
-    <label> <b>Descripción:</b><b style="color:red;">*</b> </label>
-    <?php echo $this->Form->textarea('description', ['class'=>'form-control col-md-8']); ?>
-  </div> <br>
+      <label> <b>Descripción:</b><b style="color:red;">*</b> </label>
+      <?php echo $this->Form->textarea('description', ['class'=>'form-control col-md-8']); ?>
+    </div> <br>
 	
 	<div class="form-control sameLine" >
 
       <div class="row">
         <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('responsable_id', $users, array('empty' => true, 'class' => 'form-control col-md-7')); ?>            
+        <?php echo $this->Form->select('responsable_id', $users, ['class'=>'form-control col-md-7', 'disabled']); ?>
       </div>
       
       <div class="row">
@@ -100,10 +100,8 @@
         <?php echo $this->Form->select('location_id', $locations, ['label' => 'Serie:', 'class'=>'form-control col-md-7']); ?>        
       </div>
 
-  </div> 
-  <br>
+    </div> <br>
 	
-
 	<div class="form-control sameLine" >
 
       <div class="row">
@@ -119,43 +117,32 @@
 	  
 	  <div class="row col-lg-1">
         <div class="custom-control custom-checkbox">
-			    <?php echo $this->Form->checkbox('lendable',  array('id' => 'customCheck1', 'class' => 'custom-control-input', 'checked' => 'checked')); ?>
-			    <label class="custom-control-label" for="customCheck1">Prestable</label>
-		    </div>       
-    </div>
+			<?php echo $this->Form->checkbox('lendable',  array('id' => 'customCheck1', 'class' => 'custom-control-input', 'checked' => 'checked')); ?>
+			<label class="custom-control-label" for="customCheck1">Prestable</label>
+		</div>       
+      </div>
 	  
-	  <div class="col-lg-1">   
-    </div>
+	  <div class="col-lg-1">   </div>
 
-  </div> 
-  <br>
+    </div> <br>
 	
 	<div>
       <label> Observaciones: </label>
       <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8']); ?>
-  </div> <br>
+    </div> <br>
 	
-	<div class = "row">
-    <div class = "col-md-4">
-      <label> Imagen: </label>
-      <?php echo $this->Form->imput('image',['type' => 'file', 'class' => 'form-control-file']); ?>
-    </div>
-
-    <div class = "offset-md-1 col-md-4">
-      <label> Archivo adjunto: </label>
-      <?php echo $this->Form->imput('file',['type' => 'file', 'class' => 'form-control-file']); ?>
-    </div>
-  </div>
+	<div>
+		<label> Imagen: </label>
+		<?php echo $this->Form->imput('image',['type' => 'file', 'class' => 'form-control-file']); ?>
+	</div>
 
   </fieldset>
 
-</div>
-<br>
 
+</div>
   <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
   <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
 
-<?= $this->Form->end(); ?>
 
 </body>
 

@@ -154,10 +154,10 @@ class ModelsController extends AppController
 			
             if ($_POST['new_Brand'] == '') {
 				if ($this->Models->save($model)) {
-					$this->Flash->success(__('El modelo fue guardado exitosamente.'));
+					$this->Flash->success(__('El modelo fue modificado exitosamente.'));
 					return $this->redirect(['action' => 'index']);
 				}
-				$this->Flash->error(__('El modelo no se pudo guardar, por favor intente nuevamente.'));
+				$this->Flash->error(__('El modelo no se pudo modificar, por favor intente nuevamente.'));
 				
 			} else {
 				$brand = $this->Models->Brands->newEntity();
@@ -168,10 +168,10 @@ class ModelsController extends AppController
 				if ($this->Models->Brands->save($brand)) {
 					$model->id_brand = $brand->id;
 					if ($this->Models->save($model)) {
-						$this->Flash->success(__('El modelo y la marca fueron guardados exitosamente.'));
+						$this->Flash->success(__('El modelo y la marca fueron modificados exitosamente.'));
 						return $this->redirect(['action' => 'index']);
 					}
-					$this->Flash->error(__('El modelo y la marca no se pudieron guardar, por favor intente nuevamente.'));
+					$this->Flash->error(__('El modelo y la marca no se pudieron modificar, por favor intente nuevamente.'));
 				}
 			}
         }
