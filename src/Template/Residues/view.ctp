@@ -91,9 +91,7 @@
                 
             </tr>
     
-            <?php 
-            debug($result); 
-            debug($resultRec);
+            <?php
 
             $size = count($resultRec);
             for ($i=0; $i< $size;$i++){
