@@ -3,6 +3,8 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Asset $asset
  */
+
+ use Cake\Routing\Router;
 ?>
 
 <head>
@@ -59,14 +61,14 @@
 	
 	<div class="form-control sameLine" >
 
-      <div class="row">
+  <div class="row">
         <label>Marca:</label>
-        <?php echo $this->Form->imput('brand', ['class'=>'form-control col-md-9']); ?>        
+        <?php echo $this->Form->select('brand', $brands, ['id' => 'brand-list', 'onChange' => 'getBrand(this.value);', 'empty' => '-- Seleccione Marca --',  'class'=>'form-control col-md-9']); ?>        
       </div>
       
       <div class="row">
         <label>Modelo:</label>
-        <?php echo $this->Form->imput('model', ['class'=>'form-control col-md-8']); ?>        
+        <?php echo $this->Form->select('models_id', '', ['id' => 'model-list', 'empty' => '-- Seleccione Modelo --', 'class'=>'form-control col-md-8']); ?>        
       </div>
 	  
 	  <div class="row">
@@ -143,3 +145,25 @@
 
 
 </body>
+
+<script>
+    function getBrand(val) {
+        console.log(val);
+        $.ajax({
+            type: "GET",
+            url: '<?php echo Router::url(['controller' => 'Assets', 'action' => 'dependentList' ]); ?>',
+            data:{brand_id:val},
+            
+            success: function(data){
+                $("#model-list").html(data);
+            },
+
+            error: function(e) {
+                    alert("Ocurrió un error: artículo no encontrado.");
+                    console.log(e);
+                    $("#model-list").html('Introduzca otro número de placa.');
+                    }
+        
+        });
+    }
+</script>

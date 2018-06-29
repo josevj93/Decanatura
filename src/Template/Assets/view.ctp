@@ -68,7 +68,7 @@
       
       <div class="row">
         <label>Modelo:</label>
-        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->model) . '">'; ?>      
+        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->models_id) . '">'; ?>      
       </div>
 	  
 	  <div class="row">
@@ -131,16 +131,32 @@
       <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8', 'disabled']); ?>
     </div> <br>
 	
-	<div>
-		<label> Imagen: </label> <br>
-		<td><?= $this->Html->image('/webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png', array('class' => 'img-thumbnail')) ?></td>
-	</div>
-	
-	
-	
-	
-	
-	<br> <br>
+  <?php
+    if($asset->image != NULL){
+      echo "<div><label> Imagen: </label> <br><td>";
+      echo $this->Html->link( 
+        $this->Html->image('/webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail-' . $asset->image, array('class' => 'img-thumbnail')),
+        '/webroot/files/Assets/image/' . $asset->unique_id . '/' . $asset->image,
+        array('escape' => false, 'target' => '_blank'));
+      
+      echo "</td></div>";
+    }
+  ?>
+
+  <?php
+    if($asset->file != NULL){
+      echo "<div><br><td>";
+      echo $this->Html->link( 
+        "Ver archivo adjunto",
+        '/webroot/files/Assets/file/' . $asset->unique_id . '/' . $asset->file,
+        array('escape' => false, 'target' => '_blank'));
+      
+      echo "</td></div>";
+    }
+  ?>
+
+	<br> 
+  <br>
 	<div class="col-12 text-right">
 
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>

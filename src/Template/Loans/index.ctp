@@ -5,6 +5,15 @@
  */
 ?>
 
+<style>
+
+    .my_class {
+        background-color: Red;
+    }
+
+</style>
+
+
 <div class="types index content">
     <h3><?= __('Préstamos') ?></h3>
 </div>
@@ -29,7 +38,22 @@
                                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $loan->id], array('escape'=> false)) ?>
                             </td>                            
                             <td><?= h($loan->user->nombre . " " . $loan->user->apellido1) ?></td>   
-                            <td><?= h($loan->estado) ?></td>                         
+                            
+                            <?php
+                                if($loan->estado === 'Atrasado'){
+                                    echo '<td> <i class="fa fa-calendar-times-o" aria-hidden="true"></i> '. $loan->estado . '</td>';
+                                }
+                                
+                                else if($loan->estado === 'Activo'){
+                                    echo '<td> <i class="fa fa-calendar-minus-o" aria-hidden="true"></i> '. $loan->estado . '</td>';
+                                }
+                                
+                                else{
+                                    echo '<td> <i class="fa fa-calendar-check-o" aria-hidden="true"></i> '. $loan->estado . '</td>';
+                                }
+
+                            ?>                        
+                            
                             <td><?= h(date("d-m-Y", strtotime($loan->fecha_inicio))) ?></td>
                             <td><?= $loan->has('fecha_devolucion') ? h(date("d-m-Y", strtotime($loan->fecha_devolucion))) : '' ?></td>
                         </tr>
@@ -111,6 +135,7 @@
                         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                     }
                 }
+                
             } );
 
         // Setup - add a text input to each footer cell

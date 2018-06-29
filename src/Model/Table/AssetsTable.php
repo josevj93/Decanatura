@@ -5,6 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Imagine;
 
 /**
  * Assets Model
@@ -46,7 +47,55 @@ class AssetsTable extends Table
                     'type' => 'image_type',
                 ],
                 'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:unique_id}{DS}',
-                'nameCallback'=>'imagen_original',
+                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
+                    return strtolower($data['name']);
+                },
+                'transformer' =>  function ($table, $entity, $data, $field, $settings) {
+                    $extension = pathinfo($data['name'], PATHINFO_EXTENSION);
+
+                    // Store the thumbnail in a temporary file
+                    $tmp = tempnam(sys_get_temp_dir(), 'upload') . '.' . $extension;
+
+                    // Use the Imagine library to DO THE THING
+                    $size = new \Imagine\Image\Box(160, 160);
+                    $mode = \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+                    $imagine = new \Imagine\Gd\Imagine();
+
+                    // Save that modified file to our temp file
+                    $imagine->open($data['tmp_name'])
+                        ->thumbnail($size, $mode)
+                        ->save($tmp);
+
+                    // Now return the original *and* the thumbnail
+                    return [
+                        $data['tmp_name'] => $data['name'],
+                        $tmp => 'thumbnail-' . $data['name'],
+                    ];
+                },
+                'deleteCallback' => function ($path, $entity, $field, $settings) {
+                    // When deleting the entity, both the original and the thumbnail will be removed
+                    // when keepFilesOnDelete is set to false
+                    return [
+                        $path . $entity->{$field},
+                        $path . 'thumbnail-' . $entity->{$field}
+                    ];
+                },
+
+                'keepFilesOnDelete' => false
+            ],
+
+            'file' => [
+                'fields' => [
+                    'dir' => 'file_dir',
+                    'size' => 'file_size',
+                    'type' => 'file_type',
+                ],
+                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:unique_id}{DS}',
+                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
+                    return strtolower($data['name']);
+                },
+
+                'keepFilesOnDelete' => false
             ],
         ]);
 
@@ -99,10 +148,6 @@ class AssetsTable extends Table
             ->notEmpty('state','Debe ingresar un estado');
 
         $validator
-            ->maxLength('image', 255)
-            ->allowEmpty('image');
-
-        $validator
             ->scalar('sub_location')
             ->maxLength('sub_location', 255)
             ->allowEmpty('sub_location');
@@ -126,15 +171,27 @@ class AssetsTable extends Table
             ->allowEmpty('observations');
 
         $validator
+            ->maxLength('image', 255)
+            ->allowEmpty('image');
+
+        $validator
             ->scalar('image_dir')
             ->maxLength('image_dir', 255)
             ->allowEmpty('image_dir');
 
         $validator
+            ->maxLength('file', 255)
+            ->allowEmpty('file');
+
+        $validator
+            ->scalar('file_dir')
+            ->maxLength('file_dir', 255)
+            ->allowEmpty('file_dir');
+        
+        $validator
             ->scalar('unique_id')
             ->maxLength('unique_id', 255)
             ->allowEmpty('unique_id');
-
             
         $validator
             ->scalar('location_id')
@@ -147,35 +204,18 @@ class AssetsTable extends Table
         $validator
             ->scalar('responsable_id')
             ->notEmpty('responsable_id');
+			
+		$validator
+            ->scalar('models_id')
+            ->maxLength('models_id', 255)
+            ->allowEmpty('models_id');
+
+        $validator
+            ->scalar('brand')
+            ->maxLength('brand', 255)
+            ->allowEmpty('brand');
             
         return $validator;
-    }
-
-
-    /**
-     * Crea un thumbnail con la imagen subida por el usuario
-     * 
-     * @param 
-     * @return bool
-     */
-    public function addThumbnail($asset)
-    {
-        /*Si el archivo tiene imagen, crea un thumbnail*/
-        if(!strlen($asset->image_dir) == 0){
-            $imagine = new Imagine\Gd\Imagine();
-
-            $size    = new Imagine\Image\Box(300, 300);
-
-            $mode    = Imagine\Image\ImageInterface::THUMBNAIL_INSET;
-
-            $imagine->open('../webroot/files/Assets/image/' .  $asset->unique_id . '/' . $asset->image)
-                    ->thumbnail($size, $mode)
-                    ->save('../webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png');
-
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -191,7 +231,7 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['assigned_to'], 'Users'));
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['loan_id'], 'Loans'));
-        $rules->add($rules->existsIn(['models_id'], 'Loans'));
+        $rules->add($rules->existsIn(['models_id'], 'Models'));
 
         return $rules;
     }

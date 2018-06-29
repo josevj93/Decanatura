@@ -42,7 +42,7 @@
 
 <body>
 <div class="locations form large-9 medium-8 columns content">
-  <?= $this->Form->create($asset) ?>
+  <?= $this->Form->create($asset, ['type' => 'file']) ?>
   <fieldset>
     <legend><?= __('Insertar activo') ?></legend>
     <br>
@@ -67,7 +67,7 @@
       
       <div class="row">
         <label>Modelo:</label>
-        <?php echo $this->Form->select('model', '', ['id' => 'model-list', 'empty' => '-- Seleccione Modelo --', 'class'=>'form-control col-md-8']); ?>        
+        <?php echo $this->Form->select('models_id', '', ['id' => 'model-list', 'empty' => '-- Seleccione Modelo --', 'class'=>'form-control col-md-8']); ?>        
       </div>
 	  
 	  <div class="row">
@@ -135,10 +135,17 @@
       <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8']); ?>
   </div> <br>
 	
-	<div>
-    <label> Imagen: </label>
-    <?php echo $this->Form->imput('image',['type' => 'file', 'class' => 'form-control-file']); ?>
-	</div>
+	<div class = "row">
+    <div class = "col-md-4">
+      <label> Imagen: </label>
+      <?php echo $this->Form->imput('image',['type' => 'file', 'class' => 'form-control-file']); ?>
+    </div>
+
+    <div class = "offset-md-1 col-md-4">
+      <label> Archivo adjunto: </label>
+      <?php echo $this->Form->imput('file',['type' => 'file', 'class' => 'form-control-file']); ?>
+    </div>
+  </div>
 
   </fieldset>
 

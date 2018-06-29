@@ -24,6 +24,7 @@ class Model extends Entity
      * @var array
      */
     protected $_accessible = [
+		'id' => true,
         'name' => true,
         'id_brand' => true,
         'id_type' => true

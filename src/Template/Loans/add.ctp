@@ -49,21 +49,23 @@
 
     <?= $this->Form->create($loan) ?>
 
-    <div class="form-control sameLine" >
+    <div class="form-control sameLine">
+			<div class="row col-lg-5">
+				<label> <b>Responsable:</b><b style="color:red;">*</b> </label>
+				<?php echo $this->Form->select('id_responsables', $users, array('empty' => true, 'class' => 'form-control col-md-7', 'id'=> 'userDropdown')); ?>
+			</div>
 
-		   <div class="row">
-            <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('id_responsables', $users, array('empty' => true, 'class' => 'form-control col-md-7', 'id'=> 'userDropdown')); ?>        
-        </div>
-
-		 <div class="row col-md-4">
-             <label> <b>Fecha inicio:</b><b style="color:red;">*</b> </label>
-                <?php
-                    echo $this->Form->imput('fecha_inicio', ['class'=>'form-control date col-md-7', 'value' => date("y-m-d"), 'id'=>'datepicker']); 
-                ?>
-        </div>
-
-    </div> <br>
+			<div class="row">
+				<label> <b>Fecha inicio:</b><b style="color:red;">*</b> </label>
+				<?php echo $this->Form->imput('fecha_inicio', ['class'=>'form-control date', 'value' => date("y-m-d"), 'id'=>'datepicker']); ?>
+			</div>
+			
+			<div class="row">
+				<label> Fecha de devolución: </label>
+                <?php echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date', 'id'=>'datepicker2']); ?>
+			</div>
+			
+		</div> <br>
 
    
  <!-- AQUI ESTA LO IMPORTANTE. RECUERDEN COPIAR LOS SCRIPTS -->
@@ -75,7 +77,6 @@
                 <thead>
                     <tr>
                         <th class="transfer-h"><?= __('Placa') ?></th>
-                        <th class="transfer-h"><?= __('Marca') ?></th>
                         <th class="transfer-h"><?= __('Modelo') ?></th>
                         <th class="transfer-h"><?= __('Serie') ?></th>
                         <th class="transfer-h"><?= __('Seleccionados') ?></th>
@@ -86,8 +87,7 @@
                       foreach ($result as $a): ?>
                       <tr>
                           <td><?= h($a->plaque) ?></td>
-                          <td><?= h($a->brand) ?></td>
-                          <td><?= h($a->model) ?></td>  
+                          <td><?= h($a->models_id) ?></td>  
                           <td><?= h($a->series) ?></td>
                           <td><?php
                         
@@ -109,13 +109,7 @@
     <!-- input donde coloco la lista de placas checkeadas -->
     <input type="hidden" name="checkList" id="checkList">
 
-
-    <div class="row col-md-6">
-            <label>Fecha de devolución:</label>
-                <?php
-                echo $this->Form->imput('fecha_devolucion', ['class'=>'form-control date col-md-4', 'id'=>'datepicker2']); 
-                ?>
-    </div>
+	
     <br>
 
     <div>
@@ -128,7 +122,7 @@
     <div class="col-12 text-right">
 
        
-        <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
          <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
 
 
@@ -202,6 +196,10 @@
                     }
                 }
        } );
+    } );
+    $(document).ready(function() 
+    {
+        $('#assets-transfers-grid').DataTable( {} );
     } );
     $("document").ready(
     function() {
