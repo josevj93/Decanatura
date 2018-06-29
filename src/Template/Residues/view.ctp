@@ -92,14 +92,13 @@
             </tr>
     
             <?php 
-            //debug($result); 
-            //debug($resultRec);
+            debug($result); 
+            debug($resultRec);
 
             $size = count($resultRec);
-            for($i = 0; $i < $size; $i++) {
-
+            foreach ($result as $r) {
                 echo '<tr>';
-                    echo '<td>' .h($result[$i]->plaque). '</td>';
+                    echo '<td>' .h($r->plaque). '</td>';
 
                     switch ($resultRec[$i]->recommendation) {
                         case 'C':

@@ -142,7 +142,6 @@ class ResiduesController extends AppController
             $result[$i] =(object)$assetsquery[$i]->assets;
         }
 
-       
         //obtengo la tabla technical_reports
         $technical_reports = TableRegistry::get('TechnicalReports');
         //busco los datos que necesito
@@ -152,11 +151,9 @@ class ResiduesController extends AppController
                                     ->group(['assets_id'])
                                     ->toList();
 
-        //lo paso a objeto
         $size = count($queryRec);
 
         $resultRec = array_fill(0, $size, NULL);
-       // debug($queryRec);
         for($i = 0; $i < $size; $i++)
         {
             // se realiza una conversion a objeto para que la vista lo use sin problemas

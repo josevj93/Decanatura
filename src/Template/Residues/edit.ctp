@@ -237,13 +237,11 @@
     <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $residue->residues_id)]) ?>
     </div>
 
-
-
+    
+<script type="text/javascript">
 /** método extraido de https://stackoverflow.com/questions/46590217/jquery-datatable-order-table-based-on-checkbox
 para poder ordenar los checksbox
 **/
-    
-<script type="text/javascript">
 $(document).ready(function() 
 {
     var equipmentTable = $('#assets-residues-grid').DataTable( {
