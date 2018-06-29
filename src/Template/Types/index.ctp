@@ -26,7 +26,7 @@
                     <?php foreach ($types as $type): ?>
                         <tr>
                             <td class="actions">
-                                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'view', $type->type_id],  array('escape'=> false)) ?>                                
+                                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $type->type_id],  array('escape'=> false)) ?>                                
                                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $type->type_id],  array('escape'=> false)) ?>
                                 <?= $this->Form->postLink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $type->type_id],  ['escape'=> false,'confirm' => __('¿Está seguro que desea eliminar este tipo de activo? # {0}?', $type->type_id)]) ?>
                             </td>
