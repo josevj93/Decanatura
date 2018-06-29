@@ -32,7 +32,7 @@
     <?= $this->Form->create($brand) ?>
 	
     <fieldset>
-		<legend><?= __('Insertar activo') ?></legend>
+		<legend><?= __('Modificar marca') ?></legend>
 		<br>
 		
 		<div class="form-control sameLine" >
