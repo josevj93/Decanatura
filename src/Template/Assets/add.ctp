@@ -42,7 +42,7 @@
 
 <body>
 <div class="locations form large-9 medium-8 columns content">
-  <?= $this->Form->create($asset) ?>
+  <?= $this->Form->create($asset, ['type' => 'file']) ?>
   <fieldset>
     <legend><?= __('Insertar activo') ?></legend>
     <br>
