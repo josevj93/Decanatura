@@ -29,13 +29,15 @@ $random = uniqid();
         <?php echo $this->Form->control('type_id', array('options' => $types,'label'=>'Tipo', 'class' => 'form-control')); ?>
     </div>
         
-    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-        <?php echo $this->Form->control('brand', array('label'=>'Marca', 'class' => 'form-control')); ?>
-    </div>
+    <div class="row">
+        <label>Marca:</label>
+        <?php echo $this->Form->select('brand', $brands, ['id' => 'brand-list', 'onChange' => 'getBrand(this.value);', 'empty' => '-- Seleccione Marca --',  'class'=>'form-control col-md-9']); ?>        
+      </div>
 
-    <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-        <?php echo $this->Form->control('model' , array('label'=>'Modelo', 'class' => 'form-control')); ?>
-    </div>
+   <div class="row">
+        <label>Modelo:</label>
+        <?php echo $this->Form->select('models_id', '', ['id' => 'model-list', 'empty' => '-- Seleccione Modelo --', 'class'=>'form-control col-md-8']); ?>        
+      </div>
 
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
         <?php echo $this->Form->control('description', array('label'=>'Descripcion', 'class' => 'form-control')); ?>
@@ -97,3 +99,26 @@ $random = uniqid();
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Assets', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
 </div>
+
+<?= $this->Form->end(); ?>
+
+<script>
+    function getBrand(val) {
+        console.log(val);
+        $.ajax({
+            type: "GET",
+            url: '<?php echo Router::url(['controller' => 'Assets', 'action' => 'dependentList' ]); ?>',
+            data:{brand_id:val},
+            
+            success: function(data){
+                $("#model-list").html(data);
+            },
+            error: function(e) {
+                    alert("Ocurrió un error: artículo no encontrado.");
+                    console.log(e);
+                    $("#model-list").html('Introduzca otro número de placa.');
+                    }
+        
+        });
+    }
+</script>

@@ -221,7 +221,7 @@ class AssetsController extends AppController
             $placa = $this->request->getData('plaque');
             $tipo = $this->request->getData('type_id');
             $marca = $this->request->getData('brand');
-            $modelo = $this->request->getData('model');
+            $modelo = $this->request->getData('models_id');
             $estado = $this->request->getData('state');
             $descripcion = $this->request->getData('description');
             $dueno = $this->request->getData('owner_id');
@@ -247,7 +247,7 @@ class AssetsController extends AppController
                     } else{
                         $serie = null;
                     }
-                if(!preg_match("/([a-z])\w+/", $placa)){
+                if(!preg_match("/([a-z])\w+/", $placa)){ //pregunto si las placas solo son de numeros
                     $data = [
                         'plaque' => $placa,
                         'type_id' => $tipo,
@@ -264,7 +264,7 @@ class AssetsController extends AppController
                     ];
                     $placa = $placa + 1;
                 }
-                else{ //agrego predicado+numero como placa
+                else{ //entonces las placas son alfanumericas, agrego predicado+numero como placa
                     $data = [
                         'plaque' => $predicado . $numero,
                         'type_id' => $tipo,
@@ -291,9 +291,11 @@ class AssetsController extends AppController
             $this->Flash->success(__('Los activos fueron guardados'));
             return $this->redirect(['action' => 'index']);
         }
-        $types = $this->Assets->Types->find('list', ['limit' => 200]);
+        $this->loadModel('Brands');
+        $brands = $this->Brands->find('list', ['limit' => 200]);
+        //$types = $this->Assets->Types->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('asset', 'types', 'users', 'locations'));
+        $this->set(compact('asset', 'brands', 'users', 'locations','models'));
     }
 }
