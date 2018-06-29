@@ -429,7 +429,7 @@ class ResiduesController extends AppController
                                              ->where(['residues_id' => $residue->residues_id])
                                              ->execute();
         if ($this->Residues->delete($residue)) {
-            $this->Flash->success(__('El acta ed residuo ha sido eliminada.'));
+            $this->Flash->success(__('El acta de residuo ha sido eliminada.'));
         } else {
             $this->Flash->error(__('El acta de residuo no puede ser eliminada, inténtalo de nuevo'));
         }
