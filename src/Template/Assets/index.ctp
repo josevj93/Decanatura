@@ -39,7 +39,7 @@
                             
                             <td><?= h($asset->plaque) ?></td>
                             <td><?= h($asset->brand) ?></td>
-                            <td><?= h($asset->model->name) ?></td>
+                            <td><?= $asset->has('model') ? h($asset->model->name) : '' ?></td>
                             <td><?= h($asset->series) ?></td>
                             <td><?= h($asset->description) ?></td>
                             <td><?= h($asset->state) ?></td>
