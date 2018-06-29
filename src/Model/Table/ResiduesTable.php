@@ -46,8 +46,7 @@ class ResiduesTable extends Table
         $validator
             ->scalar('residues_id')
             ->maxLength('residues_id', 200)
-            ->notEmpty('residues_id', 'El número de autorización es requerido.')
-            ->alphaNumeric('residues_id', 'El número de autorización sólo debe contener caracteres alfanuméricos.');
+            ->notEmpty('residues_id', 'El número de autorización es requerido.');
 
         $validator
             ->scalar('name1')
