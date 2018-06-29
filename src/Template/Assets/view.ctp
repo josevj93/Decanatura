@@ -131,16 +131,20 @@
       <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8', 'disabled']); ?>
     </div> <br>
 	
-	<div>
-		<label> Imagen: </label> <br>
-		<td><?= $this->Html->image('/webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail.png', array('class' => 'img-thumbnail')) ?></td>
-	</div>
-	
-	
-	
-	
-	
-	<br> <br>
+  <?php
+    if($asset->image != NULL){
+      echo "<div><label> Imagen: </label> <br><td>";
+      echo $this->Html->link( 
+        $this->Html->image('/webroot/files/Assets/image/' . $asset->unique_id . '/' . 'thumbnail-' . $asset->image, array('class' => 'img-thumbnail')),
+        '/webroot/files/Assets/image/' . $asset->unique_id . '/' . $asset->image,
+        array('escape' => false, 'target' => '_blank'));
+      
+      echo "</td></div>";
+    }
+  ?>
+
+	<br> 
+  <br>
 	<div class="col-12 text-right">
 
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
