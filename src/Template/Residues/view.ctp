@@ -96,9 +96,9 @@
             debug($resultRec);
 
             $size = count($resultRec);
-            foreach ($result as $r) {
+            for ($i=0; $i< $size;$i++){
                 echo '<tr>';
-                    echo '<td>' .h($r->plaque). '</td>';
+                    echo '<td>' .h($result[$i]->plaque). '</td>';
 
                     switch ($resultRec[$i]->recommendation) {
                         case 'C':
