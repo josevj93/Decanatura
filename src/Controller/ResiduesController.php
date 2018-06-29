@@ -180,9 +180,10 @@ class ResiduesController extends AppController
         if ($this->request->is('post')) {
 
             $residue = $this->Residues->patchEntity($residue, $this->request->getData(),['validationDefault'=>'residues_id']);
-            
+
+            $residue->residues_id = $this->request->getData('residues_id');
             if ($this->Residues->save($residue)) {
-                $this->Flash->success(__('El acta de desecho fue guardada.'));
+                
 
                 $condicion = explode(',', $this->request->getData('checkList'));
                 
@@ -197,7 +198,7 @@ class ResiduesController extends AppController
                     ->set(['residues_id' => $residue->residues_id])
                     ->where(['assets_id IN' => $condicion])
                     ->execute();
-                
+                $this->Flash->success(__('El acta de desecho fue guardada.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Inténtelo de nuevo.'));
