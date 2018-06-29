@@ -171,22 +171,17 @@ class TransfersController extends AppController
             }
             else
             {
-
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
-            //tmpId contiene el id de la tabla de traslados.
-            //debug($transfer);
-            //exit();
-
+            //Se concatena el id de la vista con la constante en este caso (VRA-) que es diferente para cada unidad académica
             $transfer->transfers_id = "VRA-".$this->request->getData('transfers_id');
-
             $users = TableRegistry::get('users');
-
+            //se obtiene el nombre del usuario con la posición del dropdown
             $users_query = $users->find()
             ->select(['users.nombre','users.apellido1','users.apellido2'])->toList();
 
             $array_funcionario = $users_query[$transfer->functionary];
             $transfer->functionary = $array_funcionario->nombre.' '.$array_funcionario->apellido1.' '.$array_funcionario->apellido2;
-            //Se verifica que el id no esté duplicado.
+            //Se verifica que el id no esté duplicado, por alguna razón la base de datos no lo estaba haciendo.
             $tmpId = $this->Transfers->find('all',['fields'=>'transfers_id'])
             ->where(['transfers_id'=> $transfer->transfers_id])->toList();
             if($tmpId == null)
