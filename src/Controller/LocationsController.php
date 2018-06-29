@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Locations Controller
@@ -174,12 +175,25 @@ class LocationsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
+        
         $location = $this->Locations->get($id);
-        if ($this->Locations->delete($location)) {
-            $this->Flash->success(__('Se eliminó la ubicación.'));
-        } else {
-            $this->Flash->error(__('La ubicación no pudo ser eliminada.'));
+
+        //Obtengo todos los assets que tengan como location el que quiero borrar
+        $assets = TableRegistry::get('Assets')->find()->where(['location_id' => $location->location_id]);
+
+        // De las locations que obtuve, saco el ID más alto, solo con la intención de confirmar que es null o no
+        $tmpId = $assets->find('all',['fields'=>'plaque'])->max('plaque');
+
+        // Si el resultado del query anterior es nulo, entonces lo puedo borrar
+        if($tmpId == null){
+
+            if ($this->Locations->delete($location)) {
+                $this->Flash->success(__('Se eliminó la ubicación.'));
+            } 
         }
+        else {
+                $this->Flash->error(__('La ubicación no se puede eliminar, ya que esisten activos asignados a ella.'));
+            }
 
         return $this->redirect(['action' => 'index']);
     }
