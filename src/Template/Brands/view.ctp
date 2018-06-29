@@ -13,11 +13,7 @@
    <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Nombre') ?></th>
-            <td><?= h($type->name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Descripción') ?></th>
-            <td><?= h($type->description) ?></td>
+            <td><?= h($brand->name) ?></td>
         </tr>
    </table>
 
