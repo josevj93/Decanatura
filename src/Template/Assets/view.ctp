@@ -143,6 +143,18 @@
     }
   ?>
 
+  <?php
+    if($asset->file != NULL){
+      echo "<div><br><td>";
+      echo $this->Html->link( 
+        "Ver archivo adjunto",
+        '/webroot/files/Assets/file/' . $asset->unique_id . '/' . $asset->file,
+        array('escape' => false, 'target' => '_blank'));
+      
+      echo "</td></div>";
+    }
+  ?>
+
 	<br> 
   <br>
 	<div class="col-12 text-right">

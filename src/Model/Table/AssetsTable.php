@@ -83,6 +83,20 @@ class AssetsTable extends Table
 
                 'keepFilesOnDelete' => false
             ],
+
+            'file' => [
+                'fields' => [
+                    'dir' => 'file_dir',
+                    'size' => 'file_size',
+                    'type' => 'file_type',
+                ],
+                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:unique_id}{DS}',
+                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
+                    return strtolower($data['name']);
+                },
+
+                'keepFilesOnDelete' => false
+            ],
         ]);
 
         $this->belongsTo('Models', [
@@ -134,10 +148,6 @@ class AssetsTable extends Table
             ->notEmpty('state','Debe ingresar un estado');
 
         $validator
-            ->maxLength('image', 255)
-            ->allowEmpty('image');
-
-        $validator
             ->scalar('sub_location')
             ->maxLength('sub_location', 255)
             ->allowEmpty('sub_location');
@@ -161,15 +171,27 @@ class AssetsTable extends Table
             ->allowEmpty('observations');
 
         $validator
+            ->maxLength('image', 255)
+            ->allowEmpty('image');
+
+        $validator
             ->scalar('image_dir')
             ->maxLength('image_dir', 255)
             ->allowEmpty('image_dir');
 
         $validator
+            ->maxLength('file', 255)
+            ->allowEmpty('file');
+
+        $validator
+            ->scalar('file_dir')
+            ->maxLength('file_dir', 255)
+            ->allowEmpty('file_dir');
+        
+        $validator
             ->scalar('unique_id')
             ->maxLength('unique_id', 255)
             ->allowEmpty('unique_id');
-
             
         $validator
             ->scalar('location_id')

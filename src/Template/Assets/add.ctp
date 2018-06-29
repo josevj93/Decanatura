@@ -135,10 +135,17 @@
       <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8']); ?>
   </div> <br>
 	
-	<div>
-    <label> Imagen: </label>
-    <?php echo $this->Form->imput('image',['type' => 'file', 'class' => 'form-control-file']); ?>
-	</div>
+	<div class = "row">
+    <div class = "col-md-4">
+      <label> Imagen: </label>
+      <?php echo $this->Form->imput('image',['type' => 'file', 'class' => 'form-control-file']); ?>
+    </div>
+
+    <div class = "offset-md-1 col-md-4">
+      <label> Archivo adjunto: </label>
+      <?php echo $this->Form->imput('file',['type' => 'file', 'class' => 'form-control-file']); ?>
+    </div>
+  </div>
 
   </fieldset>
 

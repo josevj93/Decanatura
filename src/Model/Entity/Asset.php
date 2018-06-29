@@ -48,6 +48,8 @@ class Asset extends Entity
         'description' => true,
         'state' => true,
         'image' => true,
+        'file' => true,
+        'file_dir' => true,
         'responsable_id' => true,
         'assigned_to' => true,
         'location_id' => true,
