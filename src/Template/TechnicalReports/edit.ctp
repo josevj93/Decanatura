@@ -172,14 +172,14 @@
            ['value'=>'C', 'text'=>'Reubicar  '],
            ['value'=>'R', 'text'=>'Reparar  '],
            ['value'=>'D', 'text'=>'Desechar  '],
-           ['value'=>'U', 'text'=>'Usar piesas  '],
+           ['value'=>'U', 'text'=>'Usar piezas  '],
            ['value'=>'O', 'text'=>'Otros'],
           ]);
       ?>
     </div> 
     <br>
     <div class="row col-md-8">
-          <label>Nombre del evaluador:</label>
+          <label>Nombre del Técnico Especializado:</label>
             <?php
               echo $this->Form->imput('evaluator_name', ['class'=>'form-control col-md-5 ']); 
             ?>
@@ -199,7 +199,10 @@
 
 <script>
   $( function Picker() {
-    $( "#datepicker" ).datepicker({ dateFormat: 'y-mm-dd' });
+    $( "#datepicker" ).datepicker({ 
+          dateFormat: 'y-mm-dd',
+          monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+          dayNamesMin: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'] });
   } );
   $("document").ready(
     function() {
