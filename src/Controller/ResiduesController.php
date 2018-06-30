@@ -228,8 +228,7 @@ class ResiduesController extends AppController
                                     'conditions' => ['models.id_brand = brands.id']
                                 ]
                                 ])
-                         ->where(['TechnicalReports.recommendation' => "D"])
-                         ->where(['assets.state !='=>'Desechado'])
+                         ->where(['TechnicalReports.recommendation' => "D", 'assets.state' => "Disponible"])
                          ->group (['assets.plaque'])
                          ->toList();
 
@@ -286,7 +285,7 @@ class ResiduesController extends AppController
             $checksViejos = explode(",", $check);
 
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
-            //debug($residue);
+
             if ($this->Residues->save($residue)) {
                 $this->Flash->success(__('El acta de residuo ha sido guardada'));
 
@@ -304,7 +303,7 @@ class ResiduesController extends AppController
 
                 $nuevos = array_diff($checksViejos, $tmp);
                 $viejos = array_diff($tmp, $checksViejos);
-
+                
                 if (count($viejos) > 0) {
 
                         $assets = TableRegistry::get('Assets')->find('all');
