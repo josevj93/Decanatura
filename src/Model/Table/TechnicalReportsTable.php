@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\AssetsTable|\Cake\ORM\Association\BelongsTo $Assets
  * @property \App\Model\Table\ResiduesTable|\Cake\ORM\Association\BelongsTo $Residues
+ * @property \App\Model\Table\InternalsTable|\Cake\ORM\Association\BelongsTo $Internals
  *
  * @method \App\Model\Entity\TechnicalReport get($primaryKey, $options = [])
  * @method \App\Model\Entity\TechnicalReport newEntity($data = null, array $options = [])
@@ -44,6 +45,9 @@ class TechnicalReportsTable extends Table
         $this->belongsTo('Residues', [
             'foreignKey' => 'residues_id'
         ]);
+        $this->belongsTo('Internals', [
+            'foreignKey' => 'internal_id'
+        ]);
     }
 
     /**
@@ -72,7 +76,7 @@ class TechnicalReportsTable extends Table
 
         $validator
             ->date('date')
-            ->allowEmpty('date');
+            ->notEmpty('date');
 
         $validator
             ->scalar('file_name')
@@ -87,7 +91,7 @@ class TechnicalReportsTable extends Table
         $validator
             ->scalar('evaluator_name')
             ->maxLength('evaluator_name', 100)
-            ->allowEmpty('evaluator_name');
+            ->notEmpty('evaluator_name');
 
         $validator
             ->scalar('year')
@@ -98,6 +102,10 @@ class TechnicalReportsTable extends Table
             ->scalar('facultyInitials')
             ->maxLength('facultyInitials', 20)
             ->allowEmpty('facultyInitials');
+
+        $validator
+            ->boolean('descargado')
+            ->allowEmpty('descargado');
 
         return $validator;
     }
@@ -113,6 +121,7 @@ class TechnicalReportsTable extends Table
     {
         $rules->add($rules->existsIn(['assets_id'], 'Assets'));
         $rules->add($rules->existsIn(['residues_id'], 'Residues'));
+        //$rules->add($rules->existsIn(['internal_id'], 'Internals'));
 
         return $rules;
     }

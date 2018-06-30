@@ -17,9 +17,12 @@ use Cake\ORM\Entity;
  * @property string $evaluator_name
  * @property string $year
  * @property string $facultyInitials
+ * @property int $internal_id
+ * @property bool $descargado
  *
  * @property \App\Model\Entity\Asset $asset
  * @property \App\Model\Entity\Residue $residue
+ * @property \App\Model\Entity\Internal $internal
  */
 class TechnicalReport extends Entity
 {
@@ -44,7 +47,10 @@ class TechnicalReport extends Entity
         'evaluator_name' => true,
         'year' => true,
         'facultyInitials' => true,
+        'internal_id' => true,
+        'descargado' => true,
         'asset' => true,
-        'residue' => true
+        'residue' => true,
+        'internal' => true
     ];
 }

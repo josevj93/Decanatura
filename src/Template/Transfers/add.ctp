@@ -74,6 +74,7 @@
     {
       margin-left: 20px;
       margin-right: 45px;
+      width: 100px;
     }
     label {
         text-align:left;
@@ -88,6 +89,12 @@
       float: right;
       margin-left:10px;
     }
+
+    .sameLine{
+    display: flex; 
+    justify-content: space-between; 
+    border-color: transparent;
+    }
         
   </style>
 
@@ -98,20 +105,42 @@
 <div class="locations form large-9 medium-8 columns content">
   <?= $this->Form->create($transfer)?>
   <fieldset>
-    <legend><?= __('Insertar acta de traslado') ?></legend>
+    <legend><?= __('Insertar traslado') ?></legend>
     <br>
-    <div class="row">
-      <div class="col-md-8">
-        <div >
-          <label>Nº Formulario:</label>
-          <label><?php echo h($tmpId); ?> *</label>
-        </div>
+
+    <div class="form-control sameLine">
+      <div>
+      <?php 
+        echo $this->Form->control('transfers_id', 
+                [
+                    'templates' => [
+                    'inputContainer' => '<div class="row">{{content}}</div>',
+                    'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                    ],
+                'label'=>['text'=>'Número de traslado: VRA-', 'style'=>'margin-left= 10px;'],
+                'class'=>'form-control col-sm-4',
+                'type'=>'text',
+                'id' =>'transfers_id'
+                ]);
+      ?>
       </div>
-      <label>Fecha:</label>
-        <?php
-        echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker','value' => 
-            date("y-m-d")]); 
-        ?>
+      <br>
+      <div>
+      <?php 
+        echo $this->Form->control('date', 
+          [
+            'templates' => [
+              'inputContainer' => '<div class="row">{{content}}</div>',
+              'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+            ],
+            'label'=>['text'=>'Fecha:', 'style'=>'margin-left= 10px;'],
+            'class'=>'form-control',
+            'type'=>'text',
+            'id'=>'datepicker'
+          ]);
+      ?>
+
+      </div>
   </div>
     <div id=assetResult> 
     </div><br>
@@ -128,18 +157,21 @@
                 <div class="row" >
                     <label class="label-t">Unidad académica: </label>
                    
-                    <label>Ingeniería</label>
+                    <label><?php echo h($paramUnidad); ?></label>
                 </div>
                 <br>
                 <div class="row">
                     <label class="funcionario">Funcionario: </label>
                     <?php 
-            echo $this->Form->imput('functionary', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
-            ?>
+                    echo $this->Form->select('functionary',
+                      $users,
+                      ['empty' => '(Escoja un usuario)','class'=>'form-control', 'style'=>'width:220px;']
+                    );
+                    ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="id">Identificación:</label>
+                    <label class="id">Cédula:</label>
                     <?php 
             echo $this->Form->imput('identification', ['label' => 'identification:', 'class'=>'form-control col-sm-4']);
             ?>
@@ -162,7 +194,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    <label class="id">Identificación:</label>
+                    <label class="id">Cédula:</label>
                     <?php 
             echo $this->Form->imput('identification_recib', ['label' => 'identification_recib:', 'class'=>'form-control col-sm-4']);
             ?>
@@ -188,13 +220,14 @@
             <tbody>
                 <?php 
                 foreach ($asset as $a): ?>
+                <?php //debug($a)?>
                 <tr>
                     <td><?= h($a->plaque) ?></td>
                     <td><?= h($a->brand) ?></td>
                     <td><?= h($a->model) ?></td>
                     <td><?= h($a->series) ?></td>
                     <td><?= h($a->state) ?></td>
-                    <td><?php
+                    <td data-order="0"><?php
                                 echo $this->Form->checkbox('assets_id',
                                 ['value'=>htmlspecialchars($a->plaque),"class"=>"chk"]
                                 );
@@ -210,17 +243,13 @@
 
     </div>
     <br>
-    <br>
-    <div>
-    <label>nota * : El número de formulario es autogenerado.</label>
-
-    </div>
-    <br>
+    
   </fieldset>
 </div>
 
   <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
   <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'acept']) ?>
+  <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $transfer->transfers_id)]) ?>
 </body>
 
 <script>
@@ -266,9 +295,9 @@
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function() 
-    {
-        $('#assets-transfers-grid').DataTable( {
+$(document).ready(function() 
+{
+    var equipmentTable = $('#assets-transfers-grid').DataTable( {
                 dom: 'Bfrtip',
                 buttons: [
                 ],
@@ -309,9 +338,22 @@
                         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                     }
                 }
-
         } );
-    } );
+    $('#assets-transfers-grid input[type="checkbox"]').on('change', function() {
+    // Update data-sort on closest <td>
+    $(this).closest('td').attr('data-order', this.checked ? 1 : 0);
+     
+        // Store row reference so we can reset its data
+        var $tr = $(this).closest('tr');
+     
+        // Force resorting
+        equipmentTable
+        .row($tr)
+        .invalidate()
+        .order([ 5, 'desc' ])
+        .draw();
+        } );
+} );
 
     $("document").ready(
     function() {

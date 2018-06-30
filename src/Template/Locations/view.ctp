@@ -3,13 +3,7 @@
     <fieldset>
         <legend><?= __('Consultar Ubicación') ?></legend><br>
             <div class = 'row'>
-                <label class='align'>Id:</label><br>
-                <?php 
-                echo $this->Form->imput('location_id',  ['label' => 'Id:', 'class'=>'form-control col-sm-2', 'disabled']);
-                ?>
-            </div> <br>
-            <div class = 'row'>
-                <label class='align'>Nombre:</label><br>
+                <label class='align'>Ubicación:</label><br>
                 <?php 
                 echo $this->Form->imput('nombre', ['label' => 'Nombre:', 'class'=>'form-control col-sm-2', 'disabled']);
                 ?>

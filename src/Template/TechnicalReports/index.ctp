@@ -18,6 +18,7 @@
                 <th scope="col"><?= $this->Paginator->sort('Identificador') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Fecha') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Recomendación') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Estado') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -34,14 +35,14 @@
                             <?php endif; ?>         
                         <?php endif; ?> 
                         <?php if($allowE) : ?> 
-                            <?php if($technicalReport->file_name == null) : ?> 
+                            <?php if(($technicalReport->descargado == null) && ($technicalReport->file_name == null )) : ?> 
 
                             <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $technicalReport->technical_report_id], ['escape' => false, 'confirm' => __('¿Seguro quiere borrar el reporte # '.$technicalReport->technical_report_id.' ?', $technicalReport->technical_report_id)]) ?>
                             <?php endif; ?> 
                         <?php endif; ?> 
                     </td>
 
-                    <td><?= h($technicalReport->facultyInitials."-".$technicalReport->technical_report_id."-".$technicalReport->year) ?></td>
+                    <td><?= h($technicalReport->facultyInitials."-".$technicalReport->internal_id."-".$technicalReport->year) ?></td>
                     <td><?= h($technicalReport->date ) ?></td>
 
 
@@ -69,6 +70,20 @@
 
                   </td>           
 
+                  <td>
+                      <?php if ((null == $technicalReport->file_name) && (null == $technicalReport->descargado)): ?>
+                          Pendiente
+                      <?php endif; ?>
+
+                      <?php if ((null == $technicalReport->file_name) && (null != $technicalReport->descargado)): ?>
+                          Pendiente Aprobación
+                      <?php endif; ?>
+
+                      <?php if ((null != $technicalReport->file_name) && (null != $technicalReport->descargado)): ?>
+                          Completado
+                      <?php endif; ?>
+                  </td>
+
               </tr>
           <?php endforeach; ?>
       </tbody>
@@ -78,6 +93,7 @@
                         <th>Identificador</th>
                         <th>Fecha</th>
                         <th>Recomendación</th>
+                        <th>Estado</th>
                     </tr>
 
                 </tfoot>
