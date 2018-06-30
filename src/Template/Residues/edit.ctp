@@ -31,8 +31,8 @@
          <div class="form-control sameLine" >    
         <div class='row'>
 
-            <label>Autorización Número:</label>
-                <label><?php echo h($residue->residues_id); ?></label>
+            <label>Autorización Número: VRA-</label>
+            <?php echo '<input type="text" class="form-control col-sm-4" disabled value="'.h($residue->residues_id).'">'; ?>
         </div>
         <div class='row'>
             <label>Fecha:</label>
@@ -46,7 +46,7 @@
         <div class='row'>
             <label class='align'>Unidad Custodio:</label>
             <?php 
-                echo $this->Form->imput('Unidad', ['class'=>'form-control col-sm-4', 'value'=>$Unidad, 'disabled']);
+                echo $this->Form->imput('Unidad', ['class'=>'form-control col-sm-3', 'value'=>$Unidad, 'disabled']);
             ?>
         </div><br>
 
@@ -55,33 +55,59 @@
         <table>
             <tr>
                 <td><br>
-                    <div class="row">
-                            <label class='label-t'>Nombre:  </label>
-                                <?php 
-                                    echo $this->Form->imput('name1', ['class'=>'form-control col-sm-6']);
-                                ?>
-                    </div><br>
-                    <div class="row">
-                            <label class='label-t'>Cédula:  </label>
-                                <?php 
-                                    echo $this->Form->imput('identification1', ['class'=>'form-control col-sm-6']);
-                                ?>
-                    </div><br>
+                    <!-- Se modificó la clase del div (a travez de la plantilla) y la del label
+                    Este mismo proceso se aplica en las demás geberaciones -->
+                    <?php 
+                        echo $this->Form->control('name1', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+
+                            'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?><br>
+                    <?php 
+                        echo $this->Form->control('identification1', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+
+                            'label'=>['class'=>'label-t','text'=>'Cédula:', 'style'=>'margin-left= 10px;'],
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?><br>
                 </td>
             
                 <td><br>
-                    <div class="row">
-                            <label class='label-t'>Nombre:</label>
-                                <?php 
-                                    echo $this->Form->imput('name2', ['class'=>'form-control col-sm-6']);
-                                ?>
-                    </div><br>
-                    <div class="row">
-                            <label class='label-t'>Cédula:  </label>
-                                <?php 
-                                    echo $this->Form->imput('identification2', ['class'=>'form-control col-sm-6']);
-                                ?> 
-                    </div><br>
+                    <?php 
+                        echo $this->Form->control('name2', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+
+                            'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?><br>
+                    <?php 
+                        echo $this->Form->control('identification2', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+
+                            'label'=>['class'=>'label-t','text'=>'Cédula:', 'style'=>'margin-left= 10px;'],
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?><br>
                 </td>
             </tr>
         </table><br>

@@ -178,7 +178,7 @@ class ResiduesController extends AppController
 
             $residue = $this->Residues->patchEntity($residue, $this->request->getData(),['validationDefault'=>'residues_id']);
 
-            debug($residue);
+            //debug($residue);
 
             if ($this->Residues->save($residue)) {
                 
@@ -200,7 +200,7 @@ class ResiduesController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
 
-            $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Intentolo de nuevo.'));
+            $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Inténtelo de nuevo.'));
         }
 
 
@@ -286,6 +286,7 @@ class ResiduesController extends AppController
             $checksViejos = explode(",", $check);
 
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
+            //debug($residue);
             if ($this->Residues->save($residue)) {
                 $this->Flash->success(__('El acta de residuo ha sido guardada'));
 
@@ -342,7 +343,7 @@ class ResiduesController extends AppController
             }
 
 
-            $this->Flash->error(__('El acta de residuo no se ha guardado, inténtalo de nuevo'));
+            $this->Flash->error(__('El acta de residuo no se ha guardado, inténtelo de nuevo'));
 
         }
 
@@ -374,10 +375,21 @@ class ResiduesController extends AppController
                                     'conditions' => ['models.id_brand = brands.id']
                                 ]
                                 ])
-                        ->where(['TechnicalReports.recommendation' => "D"])
+                        ->where(['OR'=>[
+                                        ['AND'=>[
+                                                 ['TechnicalReports.recommendation' => "D"],
+                                                 ['assets.state not like' => 'Des%']
+                                                ]
+                                        ],
+                                        ['assets.plaque in'=>array_column($result2, 'plaque')]
+                                       ]
+                                ])
+                        //->where(['assets.state not like' => 'Des%'])
+                        //->where(['TechnicalReports.recommendation' => "D"])
                         //->where(['or assets.plaque in'=>$result2 ])
                         ->group(['assets.plaque'])
                         ->toList();
+        //debug($query);
 
         $size = count($query);
 

@@ -13,10 +13,11 @@
         <br>    
         <div class="form-control sameLine" >    
             <div class='row'>
-
-
-            <label>Autorización Número:</label>
-                <label><?php echo h($residue->residues_id); ?></label>
+            <?php
+            /*<label>Autorización Número: VRA-</label>
+                <label><?php echo h($residue->residues_id); ?></label>*/
+            echo '<label>Autorización Número: VRA-'.h($residue->residues_id).'</label>';
+            ?>
         </div>
         <div class='row'>
             <label>Fecha:</label>

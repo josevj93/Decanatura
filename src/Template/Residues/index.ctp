@@ -71,7 +71,7 @@ $mysqli = new mysqli('decanatura.mysql.database.azure.com','ecci@decanatura','Ga
                               endif;
                           }
                           ?></td>
-                          <td><?= h($residuess->residues_id ) ?></td>    
+                          <td><?= h('VRA-'.$residuess->residues_id ) ?></td>    
                       </tr>
                   <?php endforeach; ?>
               </tbody>

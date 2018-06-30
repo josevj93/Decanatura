@@ -63,9 +63,10 @@ class ResiduesTable extends Table
 
         $validator
             ->scalar('identification1')
-            //->maxLength('identification1', 9)
+            ->maxLength('identification1', 9,'La cédula debe contener 9 dígitos' )
+            ->minLength('identification1', 9,'La cédula debe contener 9 dígitos' )
+            ->numeric('identification1','La cédula debe contener sólo digitos')
             ->requirePresence('identification1', 'create')
-            ->lengthBetween('indetification1',[9,9])
             ->notEmpty('identification1','Este campo es requerido');
 
         $validator
@@ -82,9 +83,10 @@ class ResiduesTable extends Table
 
         $validator
             ->scalar('identification2')
-
             ->requirePresence('identification2', 'create')
-            ->lengthBetween('indetification2',[9,9])
+            ->numeric('identification2','La cédula debe contener sólo digitos')
+            ->maxLength('identification2', 9,'La cédula debe contener 9 dígitos' )
+            ->minLength('identification2', 9,'La cédula debe contener 9 dígitos' )
             ->notEmpty('identification2','Este campo es requerido');
 
         $validator

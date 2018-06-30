@@ -197,6 +197,11 @@
                 </td>
             </tr>
         </table>
+         <div>
+            <p>
+                Se procede a levantar el Acta de Desecho de bienes muebles por haber cumplido su periodo de vida útil, de acuerdo con el Informe Técnico adjunto y la respectiva autorización por parte de la Vicerrectoría de Administración, de conformidad con el Reglamento para la Administración y Control de los Bienes Institucionales de la Universidad de Costa Rica.
+            </p>
+        </div><br>
 
     </fieldset>
 </div>
@@ -242,10 +247,16 @@
                 </tbody>
             </table>
 
+
         </div>
 
     <!-- input donde coloco la lista de placas checkeadas -->
     <input type="hidden" name="checkList" id="checkList">
+    <div>
+        <p align="center">
+            (Art. 26 del Reglamento para la Administración y Control de los Bienes Institucionales de la Universidad de Costa Rica)
+        </p>
+    </div><br>
 
 <br>
 <br>
