@@ -24,6 +24,9 @@ class TransfersFixture extends TestFixture
         'functionary_recib' => ['type' => 'string', 'length' => 100, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'identification_recib' => ['type' => 'string', 'length' => 10, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'Acade_Unit_recib' => ['type' => 'string', 'length' => 30, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'path' => ['type' => 'string', 'length' => 100, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'file_name' => ['type' => 'string', 'length' => 100, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'descargado' => ['type' => 'boolean', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['transfers_id'], 'length' => []],
         ],
@@ -41,13 +44,16 @@ class TransfersFixture extends TestFixture
      */
     public $records = [
         [
-            'transfers_id' => 'eb68c19b-c65b-48e0-b9ff-380f2dac6237',
-            'date' => '2018-05-30',
+            'transfers_id' => '02f7bd7c-0408-4c5d-bc3e-a39e22a6911a',
+            'date' => '2018-06-22',
             'functionary' => 'Lorem ipsum dolor sit amet',
             'identification' => 'Lorem ip',
             'functionary_recib' => 'Lorem ipsum dolor sit amet',
             'identification_recib' => 'Lorem ip',
-            'Acade_Unit_recib' => 'Lorem ipsum dolor sit amet'
+            'Acade_Unit_recib' => 'Lorem ipsum dolor sit amet',
+            'path' => 'Lorem ipsum dolor sit amet',
+            'file_name' => 'Lorem ipsum dolor sit amet',
+            'descargado' => 1
         ],
     ];
 }

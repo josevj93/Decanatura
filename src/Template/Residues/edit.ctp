@@ -16,6 +16,10 @@
   <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+
+  <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js" type="text/javascript"></script>
+
 
 
 
@@ -27,24 +31,22 @@
          <div class="form-control sameLine" >    
         <div class='row'>
 
-            <label>Autorización Número:</label>
-                <?php
-                    echo $this->Form->imput('residues_id',  ['class'=>'form-control col-sm-2', 'disabled']); 
-                ?>
+            <label>Autorización Número: VRA-</label>
+            <?php echo '<input type="text" class="form-control col-sm-4" disabled value="'.h($residue->residues_id).'">'; ?>
         </div>
         <div class='row'>
             <label>Fecha:</label>
                 <?php
-                    $tmpDate= $residue->date->format('y-m-d');
+                    $tmpDate= $residue->date->format('d-m-y');
                     echo $this->Form->imput('date', ['class'=>'form-control', 'value'=>$tmpDate, 'disabled']); 
                 ?>
         </div>
         </div><br>
 
-        <div class='form-control row' style="border-color: transparent;">
-            <label>Unidad Custodio:</label>
+        <div class='row'>
+            <label class='align'>Unidad Custodio:</label>
             <?php 
-                echo $this->Form->imput('Unidad', ['class'=>'form-control col-sm-4', 'value'=>$Unidad, 'disabled']);
+                echo $this->Form->imput('Unidad', ['class'=>'form-control col-sm-3', 'value'=>$Unidad, 'disabled']);
             ?>
         </div><br>
 
@@ -53,33 +55,59 @@
         <table>
             <tr>
                 <td><br>
-                    <div class="row">
-                            <label class='label-t'>Nombre:  </label>
-                                <?php 
-                                    echo $this->Form->imput('name1', ['class'=>'form-control col-sm-6']);
-                                ?>
-                    </div><br>
-                    <div class="row">
-                            <label class='label-t'>Cédula:  </label>
-                                <?php 
-                                    echo $this->Form->imput('identification1', ['class'=>'form-control col-sm-6']);
-                                ?>
-                    </div><br>
+                    <!-- Se modificó la clase del div (a travez de la plantilla) y la del label
+                    Este mismo proceso se aplica en las demás geberaciones -->
+                    <?php 
+                        echo $this->Form->control('name1', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+
+                            'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?><br>
+                    <?php 
+                        echo $this->Form->control('identification1', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+
+                            'label'=>['class'=>'label-t','text'=>'Cédula:', 'style'=>'margin-left= 10px;'],
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?><br>
                 </td>
             
                 <td><br>
-                    <div class="row">
-                            <label class='label-t'>Nombre:</label>
-                                <?php 
-                                    echo $this->Form->imput('name2', ['class'=>'form-control col-sm-6']);
-                                ?>
-                    </div><br>
-                    <div class="row">
-                            <label class='label-t'>Cédula:  </label>
-                                <?php 
-                                    echo $this->Form->imput('identification2', ['class'=>'form-control col-sm-6']);
-                                ?> 
-                    </div><br>
+                    <?php 
+                        echo $this->Form->control('name2', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+
+                            'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?><br>
+                    <?php 
+                        echo $this->Form->control('identification2', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+
+                            'label'=>['class'=>'label-t','text'=>'Cédula:', 'style'=>'margin-left= 10px;'],
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?><br>
                 </td>
             </tr>
         </table><br>
@@ -102,7 +130,7 @@
             <legend><?= __('Bienes a desechar') ?></legend>
 
             <!-- tabla que contiene  datos básicos de activos-->
-            <table id='assets-transfers-grid' cellpadding="0" cellspacing="0">
+            <table id='assets-residues-grid' cellpadding="0" cellspacing="0">
                 <thead>
                     <tr>
                         <th class="transfer-h"><?= __('Placa') ?></th>
@@ -122,24 +150,29 @@
                           <td><?= h($a->model) ?></td>  
                           <td><?= h($a->series) ?></td>
                           <td><?= h($a->state) ?></td>
-                          <td><?php
+                          <?php
                               // If que verifica si el checkbox debe ir activado o no
                               $isIn= in_array($a->plaque, array_column($result2, 'plaque') );
                               if($isIn)
                                   {
+                                      echo '<td data-order="1">';
                                       echo $this->Form->checkbox('assets_id',
                                       ['value'=>htmlspecialchars($a->plaque),'checked', "class"=>"chk" ]
                                       );
+                                      echo '</td>';
                                   }
                               else
                                   {
+                                      echo '<td data-order="0">';
                                       echo $this->Form->checkbox('assets_id',
                                       ['value'=>htmlspecialchars($a->plaque),"class"=>"chk"]
                                       );
+                                      echo '</td>';
                                   }
-                              ?>
                               
-                          </td>
+                              
+                          
+                          ?>
                       </tr>
                     <?php endforeach; ?>
                     
@@ -174,8 +207,13 @@
           
     }
 
+    label[class=align]{
+        margin-left: 14px;
+    }
+
     label[class=label-t]{
         margin-left: 20px;
+        width: 70px;
     }
 
     input[name=date]{
@@ -222,14 +260,79 @@
     
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
+    <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $residue->residues_id)]) ?>
     </div>
 
     
 <script type="text/javascript">
-    $(document).ready(function() 
-    {
-        $('#assets-transfers-grid').DataTable( {} );
+/** método extraido de https://stackoverflow.com/questions/46590217/jquery-datatable-order-table-based-on-checkbox
+para poder ordenar los checksbox
+**/
+
+$(document).ready(function() 
+{
+    var equipmentTable = $('#assets-residues-grid').DataTable( {
+         dom: 'Bfrtip',
+                buttons: [
+                ],
+                "iDisplayLength": 10,
+                "paging": true,
+                "pageLength": 10,
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "decimal": ",",
+                    "thousands": ".",
+                    "sSelect": "1 fila seleccionada",
+                    "select": {
+                        rows: {
+                            _: "Ha seleccionado %d filas",
+                            0: "Dele click a una fila para seleccionarla",
+                            1: "1 fila seleccionada"
+                        }
+                    },
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+
+                },
+                "order": [[ 5, "desc" ]]
     } );
+     // Listen to change event from checkbox to trigger re-sorting
+    $('#assets-residues-grid input[type="checkbox"]').on('change', function() {
+    // Update data-sort on closest <td>
+    $(this).closest('td').attr('data-order', this.checked ? 1 : 0);
+    
+    // Store row reference so we can reset its data
+    var $tr = $(this).closest('tr');
+    
+    // Force resorting
+    equipmentTable
+    .row($tr)
+    .invalidate()
+    .order([ 5, 'desc' ])
+    .draw();
+    } );
+        
+} );
+
     $("document").ready(
     function() {
       $('#acept').click( function()
