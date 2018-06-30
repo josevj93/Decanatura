@@ -78,6 +78,7 @@ class ResiduesController extends AppController
      */
     public function index()
     {
+
         $residues = $this->paginate($this->Residues);
         /*
                 
