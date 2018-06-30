@@ -19,6 +19,7 @@ class ActivityLogsFixture extends TestFixture
     public $fields = [
         'idLog' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'DateAndTime' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'currentModule' => ['type' => 'string', 'length' => 50, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'idUser' => ['type' => 'string', 'length' => 15, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'userAction' => ['type' => 'string', 'length' => 100, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'message' => ['type' => 'string', 'length' => 500, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
@@ -44,7 +45,8 @@ class ActivityLogsFixture extends TestFixture
     public $records = [
         [
             'idLog' => 1,
-            'DateAndTime' => '2018-06-27 15:43:01',
+            'DateAndTime' => '2018-06-29 16:30:14',
+            'currentModule' => 'Lorem ipsum dolor sit amet',
             'idUser' => 'Lorem ipsum d',
             'userAction' => 'Lorem ipsum dolor sit amet',
             'message' => 'Lorem ipsum dolor sit amet'

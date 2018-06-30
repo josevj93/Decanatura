@@ -16,7 +16,8 @@ class ActivityLogsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.activity_logs'
+        'app.activity_logs',
+        'app.users'
     ];
 
     /**

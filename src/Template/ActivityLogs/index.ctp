@@ -8,6 +8,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Activity Log'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="activityLogs index large-9 medium-8 columns content">
@@ -17,6 +19,7 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('idLog') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('DateAndTime') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('currentModule') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('idUser') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('userAction') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('message') ?></th>
@@ -28,7 +31,8 @@
             <tr>
                 <td><?= $this->Number->format($activityLog->idLog) ?></td>
                 <td><?= h($activityLog->DateAndTime) ?></td>
-                <td><?= h($activityLog->idUser) ?></td>
+                <td><?= h($activityLog->currentModule) ?></td>
+                <td><?= $activityLog->has('user') ? $this->Html->link($activityLog->user->username, ['controller' => 'Users', 'action' => 'view', $activityLog->user->id]) : '' ?></td>
                 <td><?= h($activityLog->userAction) ?></td>
                 <td><?= h($activityLog->message) ?></td>
                 <td class="actions">

@@ -53,6 +53,11 @@ class ActivityLogsTable extends Table
             ->notEmpty('DateAndTime');
 
         $validator
+            ->scalar('currentModule')
+            ->maxLength('currentModule', 50)
+            ->allowEmpty('currentModule');
+
+        $validator
             ->scalar('idUser')
             ->maxLength('idUser', 15)
             ->requirePresence('idUser', 'create')

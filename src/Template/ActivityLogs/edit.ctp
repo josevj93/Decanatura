@@ -14,6 +14,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Activity Logs'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="activityLogs form large-9 medium-8 columns content">
@@ -22,7 +24,8 @@
         <legend><?= __('Edit Activity Log') ?></legend>
         <?php
             echo $this->Form->control('DateAndTime');
-            echo $this->Form->control('idUser');
+            echo $this->Form->control('currentModule');
+            echo $this->Form->control('idUser', ['options' => $users]);
             echo $this->Form->control('userAction');
             echo $this->Form->control('message');
         ?>

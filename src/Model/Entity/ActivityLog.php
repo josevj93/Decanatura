@@ -8,9 +8,12 @@ use Cake\ORM\Entity;
  *
  * @property int $idLog
  * @property \Cake\I18n\FrozenTime $DateAndTime
+ * @property string $currentModule
  * @property string $idUser
  * @property string $userAction
  * @property string $message
+ *
+ * @property \App\Model\Entity\User $user
  */
 class ActivityLog extends Entity
 {
@@ -26,8 +29,10 @@ class ActivityLog extends Entity
      */
     protected $_accessible = [
         'DateAndTime' => true,
+        'currentModule' => true,
         'idUser' => true,
         'userAction' => true,
-        'message' => true
+        'message' => true,
+        'user' => true
     ];
 }

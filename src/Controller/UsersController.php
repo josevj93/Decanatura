@@ -154,7 +154,15 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
+
+                //print_r( $this->name );
                 AppController::insertLog($user);
+
+
+
+
+
+                //die();
 
                 /*$user_action = '';
                 if ($this->request->getParam('action') == 'add'){

@@ -24,7 +24,8 @@ class ActivityLogsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.activity_logs'
+        'app.activity_logs',
+        'app.users'
     ];
 
     /**
@@ -67,6 +68,16 @@ class ActivityLogsTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
