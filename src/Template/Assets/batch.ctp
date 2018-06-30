@@ -32,9 +32,7 @@ $random = uniqid();
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
         <?php echo $this->Form->control('brand', array('label'=>'Marca', 'class' => 'form-control')); ?>
     </div>
-</div>
 
-<div class="row">
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
         <?php echo $this->Form->control('model' , array('label'=>'Modelo', 'class' => 'form-control')); ?>
     </div>
@@ -45,12 +43,18 @@ $random = uniqid();
 </div>    
 
 <div class="row">
+    <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">                         
+        <?php echo $this->Form->control('series', array('label'=>'Series', 'class' => 'form-control'));?>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
         <?php echo $this->Form->control('state', array('label'=>'Estado', 'class' => 'form-control')); ?>
     </div>
 
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-        <?php echo $this->Form->control('owner_id', array('label'=>'Dueño', 'class' => 'form-control')); ?>
+        <?php echo $this->Form->control('owner_id', array('options' => $users, 'empty' => true,'label'=>'Dueño', 'class' => 'form-control')); ?>
     </div>
 
     <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
