@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Event\Event;
 use Cake\Controller\Component\AuthComponent;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Users Controller
@@ -144,21 +145,47 @@ class UsersController extends AppController
     public function add()
     {
         $user = $this->Users->newEntity();
-
         $query = $this->Roles->find('all');
-
         $roles = array();
-
         foreach ($query as $items) {
             $roles[$items['id']] = $items['nombre'];
         }
-
         $this->set('roles', $roles);
-
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            
             if ($this->Users->save($user)) {
+
+                //print_r( $this->name );
+                AppController::insertLog($user);
+
+
+
+
+
+                //die();
+
+                /*$user_action = '';
+                if ($this->request->getParam('action') == 'add'){
+                    $user_action = 'Agregar';
+                }else if($this->request->getParam('action') == 'edit'){
+                    $user_action = 'Modificar';
+                }else if($this->request->getParam('action') == 'delete'){
+                    $user_action = 'Eliminar';
+                }
+                $session = $this->request->getSession();
+                $current_user = $session->read('Auth.User');
+                $dateAndTime = date("Y-m-d H:i:s");
+                $conn = ConnectionManager::get('default');
+                $stmt = $conn->execute('INSERT INTO activity_logs (DateAndTime,idUser,userAction,message) values(\'' . $dateAndTime . '\', \'' . $current_user['id'] . '\', \'' . $user_action . '\', \'se ha insertado el usuario ' . $user['nombre'] . '\');');
+*/
+
+                /* $myData = $this->ActivityLogs;
+                 $myData['DateAndTime'] = $dateAndTime;
+                 $myData['idUser'] = $user['id'];
+                 $myData['userAction'] = 'insertar';
+                 $myData['message'] = 'se ha insertado el usuario' .$current_user['nombre'];
+                 $this->al->save($myData);*/
+
                 $this->Flash->success(__('El usuario ha sido agregado.'));
                 return $this->redirect(['action' => 'index']);
             }
@@ -229,7 +256,6 @@ class UsersController extends AppController
         } else {
             $this->Flash->error(__('El usuario no pudo ser borrado, intente nuevamente'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 
