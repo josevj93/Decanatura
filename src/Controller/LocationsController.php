@@ -192,7 +192,7 @@ class LocationsController extends AppController
             } 
         }
         else {
-                $this->Flash->error(__('La ubicación no se puede eliminar, ya que esisten activos asignados a ella.'));
+                $this->Flash->error(__('La ubicación no se puede eliminar, hay activos asignados a ella.'));
             }
 
         return $this->redirect(['action' => 'index']);
