@@ -10,7 +10,8 @@
     <?= $this->Form->create($residue) ?>
     <fieldset>
         <legend><?= __('Consultar acta de desecho') ?></legend>
-        <br>    
+        <br> 
+        <!-- Sección de entrada de datos --> 
         <div class="form-control sameLine" >    
             <div class='row'>
             <?php
@@ -35,7 +36,7 @@
             ?>
         </div><br>
 
-        
+        <!-- Sección de cuadro para entrada de datos -->
         <label>En presencia de:</label>
         <table>
             <tr>
@@ -80,7 +81,7 @@
     </fieldset>
     </div>
 
-
+    <!-- Sección para grid con activos asignado al acta -->
     <div class="related">
         <legend><?= __('Listado de Bienes') ?></legend>
 
@@ -130,7 +131,7 @@
         </p>
     </div><br>
 
-
+    <!-- Sección para el estilo de la pantalla -->
     <style>
     .btn-primary {
       color: #FFF;
@@ -199,7 +200,7 @@
     </style> 
      
     
-
+    <!-- Sección de botones -->
      <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
      <?php if($residue->file_name == null) : ?> 

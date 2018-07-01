@@ -151,6 +151,7 @@ class ResiduesController extends AppController
                                     ->group(['assets_id'])
                                     ->toList();
 
+        //lo paso a objeto para manejarlo en vista
         $size = count($queryRec);
 
         $resultRec = array_fill(0, $size, NULL);
@@ -268,6 +269,7 @@ class ResiduesController extends AppController
                         ->where(['assets.residues_id' => $id])
                         ->toList();
 
+        //lo paso a objeto para manejarlo en vista
         $size = count($query2);
 
         $result2 = array_fill(0, $size, NULL);
@@ -289,8 +291,8 @@ class ResiduesController extends AppController
             if ($this->Residues->save($residue)) {
                 $this->Flash->success(__('El acta de residuo ha sido guardada'));
 
-                //AQUI EMPIEZA LA MAGIA
-
+                //Sección para grid con checks
+                //Se crea un temporal con los activos en el acta
                 $tmp = array_fill(0, $size, NULL);
 
                 $i = 0;
@@ -301,13 +303,16 @@ class ResiduesController extends AppController
                     $i++;
                 }
 
+                //Se crea arreglo con nuevos activos en el acta
                 $nuevos = array_diff($checksViejos, $tmp);
+                //Se crea arreglo con activos que ya estaban en el acta
                 $viejos = array_diff($tmp, $checksViejos);
                 
                 if (count($viejos) > 0) {
 
                         $assets = TableRegistry::get('Assets')->find('all');
 
+                        //Se modifican los campos en activos para asegurar consistencia
                         $assets->update()
                                 ->set(['residues_id' => NULL, 'state' => "Disponible"])
                                 ->where(['plaque IN' => $viejos])
@@ -315,6 +320,7 @@ class ResiduesController extends AppController
 
                         $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
 
+                        //Se modifican los campos en informe técnico para asegurar consistencia
                         $technical_reports->update()
                                             ->set(['residues_id' => NULL])
                                             ->where(['assets_id IN' => $viejos])
@@ -325,6 +331,7 @@ class ResiduesController extends AppController
 
                          $assets = TableRegistry::get('Assets')->find('all');
                         
+                        //Se modifican los campos en activos para asegurar consistencia
                          $assets->update()
                                 ->set(['residues_id' => $residue->residues_id, 'state' => "Desechado"])
                                 ->where(['plaque IN' => $nuevos])
@@ -332,6 +339,7 @@ class ResiduesController extends AppController
 
                          $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
 
+                         //Se modifican los campos en informe técnico para asegurar consistencia
                          $technical_reports->update()
                                              ->set(['residues_id' => $residue->residues_id])
                                              ->where(['assets_id IN' => $nuevos])

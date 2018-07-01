@@ -6,6 +6,8 @@
     use Cake\Routing\Router;
     $mysqli = new mysqli('decanatura.mysql.database.azure.com','ecci@decanatura','Gaby1234','decanatura');
 ?>
+
+<!-- Sección de scripts utilizados por la pantalla -->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +29,8 @@
     <?= $this->Form->create($residue) ?>
     <fieldset>
         <legend><?= __('Modificar acta de desecho') ?></legend>
-        <br>    
+        <br> 
+        <!-- Sección de entrada de datos -->   
          <div class="form-control sameLine" >    
         <div class='row'>
 
@@ -50,13 +53,13 @@
             ?>
         </div><br>
 
-        
+        <!-- Sección de cuadro para entrada de datos -->
         <label>En presencia de:</label>
         <table>
             <tr>
                 <td><br>
                     <!-- Se modificó la clase del div (a travez de la plantilla) y la del label
-                    Este mismo proceso se aplica en las demás geberaciones -->
+                    Este mismo proceso se aplica en las demás generaciones -->
                     <?php 
                         echo $this->Form->control('name1', 
                             [
@@ -125,7 +128,7 @@
 
 
 
- <!-- AQUI ESTA LO IMPORTANTE. RECUERDEN COPIAR LOS SCRIPTS -->
+ <!-- Sección de grid para agregar o eliminar activos al acta de desecho -->
         <div class="related">
             <legend><?= __('Bienes a desechar') ?></legend>
 
@@ -191,7 +194,7 @@
         </p>
     </div><br>
     
-
+<!-- Sección de estilo para la pantalla -->
  <style>
     .btn-primary {
       color: #FFF;
@@ -257,7 +260,8 @@
     border-color: transparent;
     }
 </style>
-    
+
+    <!-- Sección de botones -->    
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
     <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $residue->residues_id)]) ?>
