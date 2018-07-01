@@ -29,6 +29,7 @@ class TransfersTableTest extends TestCase
         'app.types',
         'app.users',
         'app.locations',
+        'app.loans',
         'app.assets_transfers'
     ];
 

@@ -13,15 +13,16 @@
         <br>    
         <div class="form-control sameLine" >    
             <div class='row'>
-
-
-            <label>Autorización Número:</label>
-                <label><?php echo h($residue->residues_id); ?></label>
+            <?php
+            /*<label>Autorización Número: VRA-</label>
+                <label><?php echo h($residue->residues_id); ?></label>*/
+            echo '<label>Autorización Número: VRA-'.h($residue->residues_id).'</label>';
+            ?>
         </div>
         <div class='row'>
             <label>Fecha:</label>
                 <?php
-                    $tmpDate= $residue->date->format('yy-m-d');
+                    $tmpDate= $residue->date->format('d-m-y');
                     echo $this->Form->imput('date', ['class'=>'form-control', 'value'=>$tmpDate, 'disabled']); 
                 ?>
             </div>
@@ -86,19 +87,15 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th class="transfer-h" scope="col"><?= __('Placa') ?></th>
-                <th class="transfer-h" scope="col"><?= __('Descripción') ?></th>
+                <th class="transfer-h" scope="col"><?= __('Recomendacion') ?></th>
                 <th class="transfer-h" scope="col"><?= __('Informe Técnico') ?></th>
                 
             </tr>
     
-            <?php 
-            //debug($result); 
-            //debug($resultRec);
+            <?php
 
             $size = count($resultRec);
-            
-            for($i = 0; $i < $size; $i++) {
-
+            for ($i=0; $i< $size;$i++){
                 echo '<tr>';
                     echo '<td>' .h($result[$i]->plaque). '</td>';
 
@@ -201,12 +198,25 @@
 
     </style> 
      
+    
+
      <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-     <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $residue->residues_id], ['class' => 'btn btn-primary']) ?> 
+     <?php if($residue->file_name == null) : ?> 
 
-     <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el acta de Residuo # {0}?', $residue->residues_id)]) ?>
+        <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $residue->residues_id], ['class' => 'btn btn-primary']) ?> 
+    
+    <?php endif; ?> 
 
+
+    
+    <?php if(($residue->descargado == null) && ($residue->file_name == null )) : ?> 
+
+        <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el acta de Residuo # {0}?', $residue->residues_id)]) ?>
+    
+    <?php endif; ?> 
+    <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $residue->residues_id)]) ?>
+    
     </div>
 
     <script>

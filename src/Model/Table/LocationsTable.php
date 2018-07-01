@@ -52,12 +52,12 @@ class LocationsTable extends Table
             ->scalar('description')
             ->maxLength('description', 200)
             ->requirePresence('description', 'create')
-            ->notEmpty('description');
+            ->allowEmpty('description');
 
         $validator
             ->scalar('nombre')
             ->maxLength('nombre', 50)
-            ->allowEmpty('nombre');
+            ->notEmpty('nombre');
 
         return $validator;
     }

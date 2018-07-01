@@ -183,7 +183,7 @@
                     $('#assetResult').html(msg);
                     },
                 error: function(e) {
-                    alert("Ocurrió un error: artículo no encontrado.");
+                    alert("Ocurrió un error: Activo no encontrado.");
                     console.log(e);
                     $('#assetResult').html('Introduzca otro número de placa.');
                     }

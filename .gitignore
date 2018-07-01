@@ -90,3 +90,4 @@ logs/error.log
 vendor/seld/cli-prompt/res/hiddeninput.exe
 vendor/symfony/console/Resources/bin/hiddeninput.exe
 
+logs/error.log

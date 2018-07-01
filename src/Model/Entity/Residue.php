@@ -12,6 +12,9 @@ use Cake\ORM\Entity;
  * @property string $name2
  * @property string $identification2
  * @property \Cake\I18n\FrozenDate $date
+ * @property bool $descargado
+ * @property string $file_name
+ * @property string $path
  */
 class Residue extends Entity
 {
@@ -26,11 +29,14 @@ class Residue extends Entity
      * @var array
      */
     protected $_accessible = [
-        'residues_id' => true,
+        'residues_id'=>true,
         'name1' => true,
         'identification1' => true,
         'name2' => true,
         'identification2' => true,
-        'date' => true
+        'date' => true,
+        'descargado' => true,
+        'file_name' => true,
+        'path' => true
     ];
 }
