@@ -29,7 +29,7 @@
                                 <?php endif; ?>
                                 
                                 <?php if($allowE) : ?>
-                                    <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $location->location_id], ['escape' => false, 'confirm' => __('Seguro que desea eliminar la Ubicación # {0}?', $location->location_id)]) ?>
+                                    <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $location->location_id], ['escape' => false, 'confirm' => __('Seguro que desea eliminar la Ubicación: "{0}"?', $location->nombre)]) ?>
                                 <?php endif; ?>
 
                             </td>
