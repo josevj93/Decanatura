@@ -145,6 +145,7 @@ class LoansController extends AppController
                 }
 
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
+                download($loan->id);
                 return $this->redirect(['action' => 'index']);
             }
             
