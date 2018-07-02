@@ -23,6 +23,7 @@
     }
     label[class=label-t]{
         margin-left: 20px;
+        width: 150px;
     }
     label {
         text-align:left;
@@ -37,26 +38,39 @@
       margin-left:10px;
     }
 
+    .sameLine{
+    display: flex; 
+    justify-content: space-between; 
+    border-color: transparent;
+    }
+
 </style>
-<div class="transfers view large-9 medium-8 columns content">
-    <legend>Traslado</legend>
+<div class="transfers form large-9 medium-8 columns content">
+  <fieldset>
+    <legend><?=__(' Consultar traslado')?></legend>
     <br>
-        <div class= 'row'>
-            <div class ="col-md-8">                
-                    <label>Nº traslado:</label>
-                    <?php //echo '<input type="text" class="form-control col-sm-2" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?> 
+        <div class= 'form-control sameLine' style="border-color: transparent;">
+
+            <div class =" row">                
+                    <label  for="transfer_id">Nº traslado:</label>
+                    <?php echo '<input type="text" id="transfer_id" class="form-control col-sm-4 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?>
+                   
             </div>
 
-            <label>Fecha:</label>
-            <?php
-            // para dar formato a la fecha
-            $tmpDate= $transfer->date->format('d-m-Y');
-            ?>  
-            <?php echo '<input type="text" class="form-control col-sm-2" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?> 
+            <div class="row" >
+                <label for="transfer_date">Fecha:</label>
+                <?php
+                // para dar formato a la fecha
+                $tmpDate= $transfer->date->format('d-m-Y');
+                ?>
+                <?php echo '<input type="text" id="transfer_date" style="margin-left:2px;" class="form-control  col-xs-2 col-sm-6    col-md-6 col-lg-9" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?>
+
+            </div> 
+
         </div>
     <br>
     <table>
-        <!-- Tabla para rellenar los datos de las unidades academicas -->
+        <!-- Tabla para rellenar los datos de las unidades académicas -->
         <tr>
             <th class="transfer-h"><h5>Unidad que entrega<h5></th>
             <th class="transfer-h"><h5>Unidad que recibe<h5></th>
@@ -65,7 +79,7 @@
             <!-- Fila para la Unidad que entrega -->
             <td>
                 <div class="row" >
-                    <label class="label-t">Unidad academica: </label>
+                    <label class="label-t">Unidad académica: </label>
                    
                     <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($Unidad) . '">'; ?>
                 </div>
@@ -76,7 +90,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Identificación:</label>
+                    <label class="label-t">Cédula:</label>
                     <?php echo '<input type="text" class="form-control col-sm-4" readonly="readonly" value="' . htmlspecialchars($transfer->identification) . '">'; ?>
                 </div>
             </td>
@@ -86,7 +100,7 @@
             <td>
                 <div class="row">
                     
-                        <label class="label-t">Unidad academica: </label>
+                        <label class="label-t">Unidad académica: </label>
                     
                         <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($transfer->Acade_Unit_recib). '">'; ?>
                     
@@ -98,7 +112,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Identificación:</label>
+                    <label class="label-t">Cédula:</label>
                     <?php echo '<input type="text" class="form-control col-sm-4" readonly="readonly" value="' . htmlspecialchars($transfer->identification_recib) . '">'; ?>
                 </div>               
             </td>
@@ -120,8 +134,6 @@
                 <th class="transfer-h" scope="col"><?= __('Estado') ?></th>
                 
             </tr>
-            <?php //debug ($result) ?>
-
             <?php foreach ($result as $asset): ?>
             <tr>
                 <?php
@@ -138,12 +150,21 @@
         </table>
 
     </div>
-
+  </fieldset>
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-    <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $transfer->transfers_id], ['class' => 'btn btn-primary']) ?>
-    
+    <?php if($transfer->file_name == null) : ?>
 
-    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Seguro que desea eliminar la Ubicación #'.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
+        <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $transfer->transfers_id], ['class' => 'btn btn-primary']) ?>
+    
+    <?php endif; ?> 
+
+    <?php if(($transfer->descargado == null) && ($transfer->file_name == null )) : ?> 
+
+        <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Está eeguro que desea eliminar el traslado #'.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
+
+    <?php endif; ?> 
+
+      <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $transfer->transfers_id)]) ?>
 
 </div>

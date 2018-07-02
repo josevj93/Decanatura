@@ -263,3 +263,5 @@ Configure::write('CakePdf', [
         'download' => true
     ]);
 
+
+Plugin::load('Josegonzalez/Upload');
