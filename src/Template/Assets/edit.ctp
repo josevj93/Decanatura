@@ -92,12 +92,12 @@
       
       <div class="row">
         <label><b>Asignado a:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('assigned_to', $users, ['class'=>'form-control col-md-7']); ?>        
+        <?php echo $this->Form->select('assigned_to', $users, ['empty' => true, 'class'=>'form-control col-md-7']); ?>        
       </div>
 	  
 	  <div class="row">
         <label> <b>Ubicación:</b><b style="color:red;">*</b></label>
-        <?php echo $this->Form->select('location_id', $locations, ['label' => 'Serie:', 'class'=>'form-control col-md-7']); ?>        
+        <?php echo $this->Form->select('location_id', $locations, ['empty' => true, 'label' => 'Serie:', 'class'=>'form-control col-md-7']); ?>        
       </div>
 
     </div> <br>
@@ -131,10 +131,17 @@
       <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8']); ?>
     </div> <br>
 	
-	<div>
-		<label> Imagen: </label>
-		<?php echo $this->Form->imput('image',['type' => 'file', 'class' => 'form-control-file']); ?>
-	</div>
+	<div class = "row">
+    <div class = "col-md-4">
+      <label> Imagen: </label>
+      <?php echo $this->Form->imput('image',['type' => 'file', 'class' => 'form-control-file']); ?>
+    </div>
+
+    <div class = "offset-md-1 col-md-4">
+      <label> Archivo adjunto: </label>
+      <?php echo $this->Form->imput('file',['type' => 'file', 'class' => 'form-control-file']); ?>
+    </div>
+  </div>
 
   </fieldset>
 
