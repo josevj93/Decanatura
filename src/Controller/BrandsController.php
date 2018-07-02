@@ -120,11 +120,11 @@ class BrandsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $brand = $this->Brands->patchEntity($brand, $this->request->getData());
             if ($this->Brands->save($brand)) {
-            $this->Flash->success(__('La marca fue guardada exitosamente.'));
+            $this->Flash->success(__('La marca fue modificada exitosamente.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('La marca no se pudo guardar, por favor intente nuevamente.'));
+            $this->Flash->error(__('La marca no se pudo modificar, por favor intente nuevamente.'));
         }
         $this->set(compact('brand'));
     }

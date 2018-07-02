@@ -5,34 +5,65 @@
  */
 ?>
 
-<style>
-    .btn-primary {
-    float: right;
-    margin: 10px;
-    margin-top: 15px;
-    color: #fff
-    background-color: #ffc107;
-    border-color: #ffc107;
- }
-</style> 
+<head>
+ 
+	<style>
+        .btn-primary {
+          color: #fff;
+          background-color: #0099FF;
+          border-color: #0099FF;
+          float: right;
+          margin-left: 10px;
+        }
+		
+		.sameLine{
+          display: flex; 
+          justify-content: space-between; 
+          border-color: transparent;
+        }
+		
+		.btn-default {
+          color: #000;
+          background-color: #7DC7EF;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+		
+        label {
+          text-align:left;
+          margin-right: 10px;
+          
+        }
+		
+	</style>
 
-<div class="col-md-12 col-sm-12">
-    <?= $this->Form->create($type) ?>
-    <h3>Editar tipo de activo</h3>
-</div>
+</head>
 
-<br>
-    
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->input('name', array('label' => 'Nombre', 'class' => 'form-control')); ?>   
-</div>
+<div class="locations form large-9 medium-8 columns content">
+  <?= $this->Form->create($type) ?>
+  <fieldset>
+    <legend><?= __('Editar tipo de activo') ?></legend>
+    <br>
 
-<br>
+    <div class="form-control sameLine" >
+	
+      <div class="row">
+          <label> <b>Nombre:</b><b style="color:red;">*</b> </label>
+		  <?php echo $this->Form->imput('name', ['class'=>'form-control col-lg-8']); ?> 
+      </div>
+        
+    </div> <br>
+	
+	<div>
+      <label> Descripción: </label>
+      <?php echo $this->Form->textarea('description', ['class'=>'form-control col-md-8']); ?>
+    </div> <br>
 
-<div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-    <?php echo $this->Form->input('description', array('label' => 'Descripción', 'class' => 'form-control')); ?>   
-</div>
+  </fieldset>
 
-<?= $this->Html->link(__('Cancelar'), ['controller' => 'Types', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+</div> 
+
+
+<?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
 <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
