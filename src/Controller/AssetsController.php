@@ -8,14 +8,11 @@ use Imagine;
 */
 class AssetsController extends AppController
 {
-
     public function isAuthorized($user)
     {
-
         $this->Roles = $this->loadModel('Roles');
         $this->Permissions = $this->loadModel('Permissions');
         $this->RolesPermissions = $this->loadModel('RolesPermissions');
-
         $allowI = false;
         $allowM = false;
         $allowE = false;
@@ -26,7 +23,6 @@ class AssetsController extends AppController
                         'id' => $user['id_rol']
                     )
                 ))->contain(['Permissions']);
-
         foreach ($query as $roles) {
             $rls = $roles['permissions'];
             foreach ($rls as $item){
@@ -42,14 +38,10 @@ class AssetsController extends AppController
                 }
             }
         } 
-
-
         $this->set('allowI',$allowI);
         $this->set('allowM',$allowM);
         $this->set('allowE',$allowE);
         $this->set('allowC',$allowC);
-
-
         if ($this->request->getParam('action') == 'add'){
             return $allowI;
         }else if($this->request->getParam('action') == 'edit'){
@@ -61,17 +53,14 @@ class AssetsController extends AppController
         }else{
             return $allowC;
         }
-
-
     }
     /**
      * Método para desplegar una lista con un resumen de los datos de activos
      */
     public function index()
     {
-        
         $this->paginate = [
-            'contain' => ['Types', 'Users', 'Locations']
+            'contain' => ['Users', 'Locations','Models']
         ];
         $assets = $this->paginate($this->Assets);
         $this->set(compact('assets'));
@@ -82,7 +71,7 @@ class AssetsController extends AppController
     public function view($id = null)
     {
         $asset = $this->Assets->get($id, [
-            'contain' => ['Types', 'Users', 'Locations']
+            'contain' => ['Users', 'Locations']
         ]);
         $this->set('asset', $asset);
     }
@@ -103,30 +92,19 @@ class AssetsController extends AppController
             $asset->state = "Disponible";
             $asset = $this->Assets->patchEntity($asset, $this->request->getData()); 
             if ($this->Assets->save($asset)) {
-                $this->Assets->addThumbnail($asset);
-                
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
-        $types = $this->Assets->Types->find('list', ['limit' => 200]);
+        
+        $this->loadModel('Brands');
+        $brands = $this->Brands->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
         
         
-        $brands = array(); 
-        $this->paginate = [
-            'contain' => ['Types', 'Users', 'Locations']
-        ];
-        $assets = $this->paginate($this->Assets);
-        foreach ($assets as $filterBrand) {
-            if (!in_array($filterBrand->brand, $brands)){
-                array_push($brands, $filterBrand->brand);
-            }
-        }
-        
-        $this->set(compact('asset', 'types', 'users', 'locations', 'brands', 'assets'));
+        $this->set(compact('asset', 'brands', 'users', 'locations','models'));
     }
     /**
      * Método para editar un activo en el sistema
@@ -142,18 +120,32 @@ class AssetsController extends AppController
             
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
             if ($this->Assets->save($asset)) {
-                if($asset->image != NULL){
-                    $this->Assets->addThumbnail();
-                }
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
-        $types = $this->Assets->Types->find('list', ['limit' => 200]);
+        $this->loadModel('Brands');
+        $brands = $this->Brands->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('asset', 'types', 'users', 'locations'));
+        $this->set(compact('asset', 'brands', 'users', 'locations','models'));
+    }
+    /**
+     * Restaura un activo desactivado
+     */
+    public function restore($plaque){
+        $asset = $this->Assets->get($plaque);
+        $asset->deleted = false;
+        $asset->state = 'Disponible';
+        $fecha = date('Y-m-d H:i:s');
+        $asset->modified = $fecha;
+        if ($this->Assets->save($asset)) {
+            $this->Flash->success(__('El activo fue activado exitosamente.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('El activo no se pudo activar correctamente.'));
+        return $this->redirect(['action' => 'index']);
     }
     /**
      * Elimina solo logicamente los activos de la base de datos
@@ -166,9 +158,11 @@ class AssetsController extends AppController
         
         if($asset->deletable){
             if($this->Assets->delete($asset)){
-                return 1;
+                $this->Flash->success(__('El activo fue eliminado exitosamente.'));
+                return $this->redirect(['action' => 'index']);
             }
-            return 0;
+            $this->Flash->error(__('El activo no se pudo eliminar correctamente.'));
+            return $this->redirect(['action' => 'index']);
         }
         
         $fecha = date('Y-m-d H:i:s');
@@ -177,10 +171,13 @@ class AssetsController extends AppController
         $asset->modified = $fecha;
         
         if ($this->Assets->save($asset)) {
-            return 2;
+            $this->Flash->success(__('El activo fue desactivado exitosamente.'));
+            return $this->redirect(['action' => 'index']);
         }
-        return 0;
+        $this->Flash->error(__('El activo no se pudo desactivar correctamente.'));
+        return $this->redirect(['action' => 'index']);
     }
+    
     /**
      * Método para eliminar un activo del sistema
      */
@@ -192,19 +189,32 @@ class AssetsController extends AppController
             return 0;
         }
     }
-    
-    public static function storeModel($activos = null, $marca = null)
-    {   
-        $models = array(); 
-        //$marca = "Apple";
-       
-        foreach ($activos as $filterModel) {
-            if ($filterModel->brand == $marca && !in_array($filterModel->model, $models)){
-                array_push($models, $filterModel->model);
-            }
-        }
-        return $models;
+    /**
+     * Método para mostrar listas dependientes
+     */
+    public function dependentList()
+    {
+        $this->loadModel('Models');
+        $this->loadModel('Brands');
         
+        $brand_id = $_GET['brand_id'];
+        
+        $brand = $this->Brands->get($brand_id);
+        if($brand == NULL)
+        {
+            throw new NotFoundException(__('Marca no encontrada') );      
+        }
+        
+        $models = $this->Models->find('list')
+            ->where(['models.id_brand' => $brand->id]);
+        
+        if(empty($models))
+        {
+            throw new NotFoundException(__('Modelos no encontrados') );      
+        }
+        $this->set('models', $models);
+        /*Asocia esta función a la vista /Templates/Layout/model_list.ctp*/
+        $this->render('/Layout/model_list');
     }
 
 
@@ -219,7 +229,6 @@ class AssetsController extends AppController
             //guarda en variables todos los campos reutilizables
             $cantidad = $this->request->getData('quantity');
             $placa = $this->request->getData('plaque');
-            $tipo = $this->request->getData('type_id');
             $marca = $this->request->getData('brand');
             $modelo = $this->request->getData('models_id');
             $estado = $this->request->getData('state');
@@ -250,7 +259,6 @@ class AssetsController extends AppController
                 if(!preg_match("/([a-z])\w+/", $placa)){ //pregunto si las placas solo son de numeros
                     $data = [
                         'plaque' => $placa,
-                        'type_id' => $tipo,
                         'brand' => $marca,
                         'model' => $modelo,
                         'state' => $estado,
@@ -267,7 +275,6 @@ class AssetsController extends AppController
                 else{ //entonces las placas son alfanumericas, agrego predicado+numero como placa
                     $data = [
                         'plaque' => $predicado . $numero,
-                        'type_id' => $tipo,
                         'brand' => $marca,
                         'model' => $modelo,
                         'state' => $estado,
