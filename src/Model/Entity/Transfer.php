@@ -13,7 +13,9 @@ use Cake\ORM\Entity;
  * @property string $functionary_recib
  * @property string $identification_recib
  * @property string $Acade_Unit_recib
-
+ * @property string $path
+ * @property string $file_name
+ * @property bool $descargado
  *
  * @property \App\Model\Entity\Asset[] $assets
  */
@@ -31,12 +33,14 @@ class Transfer extends Entity
      */
     protected $_accessible = [
         'date' => true,
-
         'functionary' => true,
         'identification' => true,
         'functionary_recib' => true,
         'identification_recib' => true,
         'Acade_Unit_recib' => true,
+        'path' => true,
+        'file_name' => true,
+        'descargado' => true,
         'assets' => true
     ];
 }

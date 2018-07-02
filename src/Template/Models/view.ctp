@@ -5,38 +5,53 @@
  */
 ?>
 
-<div class="models view large-9 medium-8 columns content">
-    <h3><?= h($model->name) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('ID') ?></th>
-            <td><?= h($model->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Nombre') ?></th>
-            <td><?= h($model->name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Marca') ?></th>
-            <td><?= h($model->brand->name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Tipo') ?></th>
-            <td><?= h($model->type->name) ?></td>
-        </tr>
-    </table>
-</div>
+<head>
+	<style>
+        .btn-primary {
+          color: #fff;
+          background-color: #0099FF;
+          border-color: #0099FF;
+          float: right;
+          margin-left: 10px;
+        }
+   </style>
+</head>
 
-<style>
-.btn-primary {
-    float: right;
-    margin: 10px;
-    margin-top: 15px;
-    color: #fff
-    background-color: #ffc107;
-    border-color: #ffc107;
-}
-</style> 
+
+<div class="locations form large-9 medium-8 columns content">
+    <?= $this->Form->create($model) ?>
+
+	<fieldset>
+    <legend><?= __('Consultar modelo') ?></legend>
+    <br>
+
+		<div class='row'>
+			<div class="col-md-4 col-xs-12 col-lg-5 col-sm-1 ">
+				<label> Nombre: </label> <br>
+				<?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($model->name) . '">'; ?> 
+			</div>
+			<div class="col-md-4 col-xs-12 col-lg-2 col-sm-12 ">   </div>
+			<div class="col-md-4 col-xs-12 col-lg-5 col-sm-12">
+				<label> Tipo: </label> <br>
+				<?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($model->type->name) . '">'; ?>
+			</div>
+		</div>
+
+		<br>
+
+		<div class='row'>
+			<div class="col-md-4 col-xs-12 col-lg-5 col-sm-12">
+				<label> Nombre: </label> <br>
+				<?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($model->brand->name) . '">'; ?>
+			</div>
+			<br>
+		</div>
+
+		<br>
+
+	</fieldset>
+
+</div>
 
 <div class="col-12 text-right">
 

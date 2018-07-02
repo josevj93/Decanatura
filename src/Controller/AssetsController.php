@@ -147,6 +147,8 @@ class AssetsController extends AppController
         $this->Flash->error(__('El activo no se pudo activar correctamente.'));
         return $this->redirect(['action' => 'index']);
     }
+
+
     /**
      * Elimina solo logicamente los activos de la base de datos
      * 
@@ -216,7 +218,12 @@ class AssetsController extends AppController
         /*Asocia esta función a la vista /Templates/Layout/model_list.ctp*/
         $this->render('/Layout/model_list');
     }
+        $this->set('models', $models);
 
+        /*Asocia esta función a la vista /Templates/Layout/model_list.ctp*/
+        $this->render('/Layout/model_list');
+    }
+    
 
     /**
      * Método para agregar activos por lotes
@@ -288,14 +295,45 @@ class AssetsController extends AppController
                     ];
                     $numero = $numero + 1;
                 }
+
+            
                 
-                $asset = $this->Assets->patchEntity($asset, $data);
-                //meter una por una a la base
-                $this->Assets->save($asset);
-                //incrementa la placa
-                //$numero = $numero + 1
-            }
-            $this->Flash->success(__('Los activos fueron guardados'));
+                /**$asset = array(
+                    'plaque' => $this->$i,
+                    'type_id' => '5b08417d8e257',
+                    'brand' => 'Silla',
+                    'model' => 'modelo1',
+                    'state' => 'Activo',
+                    'description' => 'silla generica, modelo 1',
+                    'responsable_id' => 1,
+                    'assigned_to' => 1,
+                    'location_id' => 1, 
+                    'year' => '2018',
+                    'lendable' => 0
+                );
+                //$this->Assets->clear();
+                //$this->placa++;
+                
+        $cantidad = $this->request->getData('quantity');
+        $placa = $this->request->getData('plaque');
+        for ($i = 0; $i < $cantidad; $i++){
+            $asset = array();
+            $asset['Assets']['plaque'] = $placa;
+            $asset['Assets']['brand'] = 'Silla';
+            $asset['Assets']['model'] = 'modelo1';
+            $asset['Assets']['state'] = 'Activo';
+            $asset['Assets']['description'] = 'silla generica, modelo 1';
+            $asset['Assets']['responsable_id'] = 1;
+            $asset['Assets']['assigned_to'] = 1;
+            $asset['Assets']['location_id'] = 1;
+            $asset['Assets']['year'] = '2018';
+            $asset['Assets']['lendable'] = 0;
+            //meter una por una a la base
+            $this->Assets->save($asset);
+            //incrementar la placa
+            $this->Assets->clear();
+        }
+        $this->Flash->success(__('Los activos fueron guardados'));
             return $this->redirect(['action' => 'index']);
         }
         $this->loadModel('Brands');
@@ -304,5 +342,15 @@ class AssetsController extends AppController
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
         $this->set(compact('asset', 'brands', 'users', 'locations','models'));
+
+        $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
+        */
+
+
+        }
+
+        $users = $this->Assets->Users->find('list', ['limit' => 200]);
+        $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
+        $this->set(compact('asset', 'users', 'locations'));
     }
 }

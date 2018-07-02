@@ -5,7 +5,7 @@
  */
 ?>
 <div class="roles x large-9 medium-8 columns content">
-    <h3><?= __('Roles') ?></h3>
+    <h3><?= __('Informe técnico') ?></h3>
 </div>
 
 <div class="row">
@@ -18,6 +18,7 @@
                 <th scope="col"><?= $this->Paginator->sort('Identificador') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Fecha') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('Recomendación') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Estado') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -28,19 +29,25 @@
                             <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $technicalReport->technical_report_id], array('escape' => false)) ?>
                         <?php endif; ?> 
                         <?php if($allowM) : ?>
-                            <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $technicalReport->technical_report_id], array('escape' => false)) ?>
+                            <?php if($technicalReport->file_name == null) : ?> 
+
+                                <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $technicalReport->technical_report_id], array('escape' => false)) ?>
+                            <?php endif; ?>         
                         <?php endif; ?> 
                         <?php if($allowE) : ?> 
+                            <?php if(($technicalReport->descargado == null) && ($technicalReport->file_name == null )) : ?> 
+
                             <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $technicalReport->technical_report_id], ['escape' => false, 'confirm' => __('¿Seguro quiere borrar el reporte # '.$technicalReport->technical_report_id.' ?', $technicalReport->technical_report_id)]) ?>
+                            <?php endif; ?> 
                         <?php endif; ?> 
                     </td>
 
-                    <td><?= h($technicalReport->facultyInitials."-".$technicalReport->technical_report_id."-".$technicalReport->year) ?></td>
+                    <td><?= h($technicalReport->facultyInitials."-".$technicalReport->internal_id."-".$technicalReport->year) ?></td>
                     <td><?= h($technicalReport->date ) ?></td>
 
 
                     <td>
-                        <?php if ("C"==$technicalReport->recommendation): ?>
+                      <?php if ("C"==$technicalReport->recommendation): ?>
                           Reubicar
                       <?php endif; ?>
 
@@ -56,11 +63,26 @@
                           Usar piesas
                       <?php endif; ?>
 
+
                       <?php if("O"==$technicalReport->recommendation): ?>
                           Otros
                       <?php endif; ?>
 
                   </td>           
+
+                  <td>
+                      <?php if ((null == $technicalReport->file_name) && (null == $technicalReport->descargado)): ?>
+                          Pendiente
+                      <?php endif; ?>
+
+                      <?php if ((null == $technicalReport->file_name) && (null != $technicalReport->descargado)): ?>
+                          Pendiente Aprobación
+                      <?php endif; ?>
+
+                      <?php if ((null != $technicalReport->file_name) && (null != $technicalReport->descargado)): ?>
+                          Completado
+                      <?php endif; ?>
+                  </td>
 
               </tr>
           <?php endforeach; ?>
@@ -71,6 +93,7 @@
                         <th>Identificador</th>
                         <th>Fecha</th>
                         <th>Recomendación</th>
+                        <th>Estado</th>
                     </tr>
 
                 </tfoot>
