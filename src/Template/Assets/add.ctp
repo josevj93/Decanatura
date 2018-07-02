@@ -16,106 +16,19 @@
           float: right;
           margin-left: 10px;
         }
-<<<<<<< HEAD
-        
-        .btn-default {
-=======
 		
 		.btn-default {
->>>>>>> 21c3bc3b1909a5fb1eeea37b783f37f22f446fec
           color: #000;
           background-color: #7DC7EF;
           border-top-right-radius: 5px;
           border-bottom-right-radius: 5px;
         }
-<<<<<<< HEAD
-        
-=======
 		
->>>>>>> 21c3bc3b1909a5fb1eeea37b783f37f22f446fec
         label {
           text-align:left;
           margin-right: 10px;
           
         }
-<<<<<<< HEAD
-
-        .sameLine{
-          display: flex; 
-          justify-content: space-between; 
-          border-color: transparent;
-        }
-   
-  </style>
-
-</head>
-
-<body>
-<div class="locations form large-9 medium-8 columns content">
-  <?= $this->Form->create($asset, ['type' => 'file']) ?>
-  <fieldset>
-    <legend><?= __('Insertar activo') ?></legend>
-    <br>
-
-    <div class="form-control sameLine" >
-    
-    <div class="row">
-        <label> <b>Placa:</b><b style="color:red;">*</b> </label>
-    <?php echo $this->Form->imput('plaque', ['class'=>'form-control col-md-9']); ?> 
-    </div>
-      
-      <div class="col-lg-2">   </div>
-        
-    </div> <br>
-    
-    <div class="form-control sameLine" >
-
-      <div class="row">
-        <label>Marca:</label>
-        <?php echo $this->Form->select('brand', $brands, ['id' => 'brand-list', 'onChange' => 'getBrand(this.value);', 'empty' => '-- Seleccione Marca --',  'class'=>'form-control col-md-9']); ?>        
-      </div>
-      
-      <div class="row">
-        <label>Modelo:</label>
-        <?php echo $this->Form->select('models_id', '', ['id' => 'model-list', 'empty' => '-- Seleccione Modelo --', 'class'=>'form-control col-md-8']); ?>        
-      </div>
-      
-      <div class="row">
-        <label>Serie:</label>
-        <?php echo $this->Form->imput('series', ['label' => 'Serie:', 'class'=>'form-control col-md-9']); ?>        
-    </div>
-
-  </div> 
-  <br>
-    
-    <div>
-    <label> <b>Descripción:</b><b style="color:red;">*</b> </label>
-    <?php echo $this->Form->textarea('description', ['class'=>'form-control col-md-8']); ?>
-  </div> <br>
-    
-    <div class="form-control sameLine" >
-
-      <div class="row">
-        <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('responsable_id', $users, array('empty' => true, 'class' => 'form-control col-md-7')); ?>            
-      </div>
-      
-      <div class="row">
-        <label><b>Asignado a:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('assigned_to', $users, ['class'=>'form-control col-md-7']); ?>        
-      </div>
-      
-      <div class="row">
-        <label> <b>Ubicación:</b><b style="color:red;">*</b></label>
-        <?php echo $this->Form->select('location_id', $locations, ['label' => 'Serie:', 'class'=>'form-control col-md-7']); ?>        
-      </div>
-
-  </div> 
-  <br>
-    
-
-    <div class="form-control sameLine" >
-=======
 
         .sameLine{
           display: flex; 
@@ -192,33 +105,17 @@
 	
 
 	<div class="form-control sameLine" >
->>>>>>> 21c3bc3b1909a5fb1eeea37b783f37f22f446fec
 
       <div class="row">
         <label> Sub-ubicación: </label>
         <?php echo $this->Form->imput('sub_location', ['class'=>'form-control col-md-7']); ?>       
       </div>
-<<<<<<< HEAD
-      
-=======
 	  
->>>>>>> 21c3bc3b1909a5fb1eeea37b783f37f22f446fec
       
       <div class="row">
         <label class="col-lg-3"> <b>Año:</b><b style="color:red;">*</b> </label>
         <?php echo $this->Form->imput('year',['class'=>'form-control col-md-7']); ?>        
       </div>
-<<<<<<< HEAD
-      
-      <div class="row col-lg-1">
-        <div class="custom-control custom-checkbox">
-                <?php echo $this->Form->checkbox('lendable',  array('id' => 'customCheck1', 'class' => 'custom-control-input', 'checked' => 'checked')); ?>
-                <label class="custom-control-label" for="customCheck1">Prestable</label>
-            </div>       
-    </div>
-      
-      <div class="col-lg-1">   
-=======
 	  
 	  <div class="row col-lg-1">
         <div class="custom-control custom-checkbox">
@@ -228,20 +125,10 @@
     </div>
 	  
 	  <div class="col-lg-1">   
->>>>>>> 21c3bc3b1909a5fb1eeea37b783f37f22f446fec
     </div>
 
   </div> 
   <br>
-<<<<<<< HEAD
-    
-    <div>
-      <label> Observaciones: </label>
-      <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8']); ?>
-  </div> <br>
-    
-    <div class = "row">
-=======
 	
 	<div>
       <label> Observaciones: </label>
@@ -249,7 +136,6 @@
   </div> <br>
 	
 	<div class = "row">
->>>>>>> 21c3bc3b1909a5fb1eeea37b783f37f22f446fec
     <div class = "col-md-4">
       <label> Imagen: </label>
       <?php echo $this->Form->imput('image',['type' => 'file', 'class' => 'form-control-file']); ?>
@@ -293,8 +179,4 @@
         
         });
     }
-<<<<<<< HEAD
 </script>
-=======
-</script>
->>>>>>> 21c3bc3b1909a5fb1eeea37b783f37f22f446fec

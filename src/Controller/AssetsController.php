@@ -8,11 +8,14 @@ use Imagine;
 */
 class AssetsController extends AppController
 {
+
     public function isAuthorized($user)
     {
+
         $this->Roles = $this->loadModel('Roles');
         $this->Permissions = $this->loadModel('Permissions');
         $this->RolesPermissions = $this->loadModel('RolesPermissions');
+
         $allowI = false;
         $allowM = false;
         $allowE = false;
@@ -23,6 +26,7 @@ class AssetsController extends AppController
                         'id' => $user['id_rol']
                     )
                 ))->contain(['Permissions']);
+
         foreach ($query as $roles) {
             $rls = $roles['permissions'];
             foreach ($rls as $item){
@@ -38,10 +42,14 @@ class AssetsController extends AppController
                 }
             }
         } 
+
+
         $this->set('allowI',$allowI);
         $this->set('allowM',$allowM);
         $this->set('allowE',$allowE);
         $this->set('allowC',$allowC);
+
+
         if ($this->request->getParam('action') == 'add'){
             return $allowI;
         }else if($this->request->getParam('action') == 'edit'){
@@ -53,6 +61,8 @@ class AssetsController extends AppController
         }else{
             return $allowC;
         }
+
+
     }
     /**
      * Método para desplegar una lista con un resumen de los datos de activos
@@ -125,12 +135,14 @@ class AssetsController extends AppController
             }
             $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
+
         $this->loadModel('Brands');
         $brands = $this->Brands->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
         $this->set(compact('asset', 'brands', 'users', 'locations','models'));
     }
+
     /**
      * Restaura un activo desactivado
      */
@@ -140,6 +152,7 @@ class AssetsController extends AppController
         $asset->state = 'Disponible';
         $fecha = date('Y-m-d H:i:s');
         $asset->modified = $fecha;
+
         if ($this->Assets->save($asset)) {
             $this->Flash->success(__('El activo fue activado exitosamente.'));
             return $this->redirect(['action' => 'index']);
@@ -191,6 +204,7 @@ class AssetsController extends AppController
             return 0;
         }
     }
+
     /**
      * Método para mostrar listas dependientes
      */
@@ -202,6 +216,7 @@ class AssetsController extends AppController
         $brand_id = $_GET['brand_id'];
         
         $brand = $this->Brands->get($brand_id);
+
         if($brand == NULL)
         {
             throw new NotFoundException(__('Marca no encontrada') );      
@@ -214,10 +229,7 @@ class AssetsController extends AppController
         {
             throw new NotFoundException(__('Modelos no encontrados') );      
         }
-        $this->set('models', $models);
-        /*Asocia esta función a la vista /Templates/Layout/model_list.ctp*/
-        $this->render('/Layout/model_list');
-    }
+
         $this->set('models', $models);
 
         /*Asocia esta función a la vista /Templates/Layout/model_list.ctp*/
@@ -233,20 +245,25 @@ class AssetsController extends AppController
         $asset = $this->Assets->newEntity();
         //$asset = $this->Assets->newEntity();
         if ($this->request->is('post')) {
+
             //guarda en variables todos los campos reutilizables
             $cantidad = $this->request->getData('quantity');
             $placa = $this->request->getData('plaque');
             $marca = $this->request->getData('brand');
             $modelo = $this->request->getData('models_id');
-            $estado = $this->request->getData('state');
             $descripcion = $this->request->getData('description');
             $dueno = $this->request->getData('owner_id');
             $responsable = $this->request->getData('responsable_id');
+            $asignado = $this->request->getData('assigned_to');
             $ubicacion = $this->request->getData('location_id');
+            $subUbicacion = $this->request->getData('sub_location');
             $año = $this->request->getData('year');
             $prestable = $this->request->getData('lendable');
+            $observaciones = $this->request->getData('observations');
+            $imagen = $this->request->getData('image');
+            $archivo = $this->request->getData('file');
             $series = $this->request->getData('series');
-            $listaSeries = preg_split("/(, )| /", $series, -1);
+            $listaSeries = preg_split("/(, )| |,/", $series, -1);
             //parseo la placa con letras para dividirla en predicado+numero (asg21fa34)
             //divide con una expresion regular: (\d*)$
             //pregunta si hay letras en la placa
@@ -263,77 +280,62 @@ class AssetsController extends AppController
                     } else{
                         $serie = null;
                     }
+                $random = uniqid();
+                $fecha = date('Y-m-d H:i:s');
+                $asset->created = $fecha;
+                $asset->modified = $fecha;
+                $asset->unique_id = $random;
+                $asset->deletable = true;
+                $asset->deleted = false;
+                $asset->state = "Disponible";
                 if(!preg_match("/([a-z])\w+/", $placa)){ //pregunto si las placas solo son de numeros
                     $data = [
                         'plaque' => $placa,
                         'brand' => $marca,
-                        'model' => $modelo,
-                        'state' => $estado,
+                        'models_id' => $modelo,
+                        'series' => $serie,
                         'description' => $descripcion,
                         'owner_id' => $dueno,
                         'responsable_id' => $responsable,
-                        'location_id' => $ubicacion, 
+                        'assigned_to' => $asignado,
+                        'location_id' => $ubicacion,
+                        'sub_location' => $subUbicacion, 
                         'year' => $año,
                         'lendable' => $prestable,
-                        'series' => $serie
+                        'observations' => $observaciones,
+                        'image' => $imagen,
+                        'file' => $archivo
                     ];
+                    //incrementa la placa
                     $placa = $placa + 1;
                 }
                 else{ //entonces las placas son alfanumericas, agrego predicado+numero como placa
                     $data = [
                         'plaque' => $predicado . $numero,
                         'brand' => $marca,
-                        'model' => $modelo,
-                        'state' => $estado,
+                        'models_id' => $modelo,
+                        'series' => $serie,
                         'description' => $descripcion,
                         'owner_id' => $dueno,
                         'responsable_id' => $responsable,
+                        'assigned_to' => $asignado,
                         'location_id' => $ubicacion, 
+                        'sub_location' => $subUbicacion, 
                         'year' => $año,
                         'lendable' => $prestable,
-                        'series' => $serie
+                        'observations' => $observaciones,
+                        'image' => $imagen,
+                        'file' => $archivo
                     ];
+                    //incrementa la placa
                     $numero = $numero + 1;
                 }
-
-            
                 
-                /**$asset = array(
-                    'plaque' => $this->$i,
-                    'type_id' => '5b08417d8e257',
-                    'brand' => 'Silla',
-                    'model' => 'modelo1',
-                    'state' => 'Activo',
-                    'description' => 'silla generica, modelo 1',
-                    'responsable_id' => 1,
-                    'assigned_to' => 1,
-                    'location_id' => 1, 
-                    'year' => '2018',
-                    'lendable' => 0
-                );
-                //$this->Assets->clear();
-                //$this->placa++;
-                
-        $cantidad = $this->request->getData('quantity');
-        $placa = $this->request->getData('plaque');
-        for ($i = 0; $i < $cantidad; $i++){
-            $asset = array();
-            $asset['Assets']['plaque'] = $placa;
-            $asset['Assets']['brand'] = 'Silla';
-            $asset['Assets']['model'] = 'modelo1';
-            $asset['Assets']['state'] = 'Activo';
-            $asset['Assets']['description'] = 'silla generica, modelo 1';
-            $asset['Assets']['responsable_id'] = 1;
-            $asset['Assets']['assigned_to'] = 1;
-            $asset['Assets']['location_id'] = 1;
-            $asset['Assets']['year'] = '2018';
-            $asset['Assets']['lendable'] = 0;
-            //meter una por una a la base
-            $this->Assets->save($asset);
-            //incrementar la placa
-            $this->Assets->clear();
-        }
-        $this->Flash->success(__('Los activos fueron guardados'));
+                $asset = $this->Assets->patchEntity($asset, $data);
+                //meter una por una a la base
+                $this->Assets->save($asset);
+            }
+            $this->Flash->success(__('Los activos fueron guardados'));
             return $this->redirect(['action' => 'index']);
         }
         $this->loadModel('Brands');
@@ -342,15 +344,6 @@ class AssetsController extends AppController
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
         $this->set(compact('asset', 'brands', 'users', 'locations','models'));
-
-        $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
-        */
-
-
-        }
-
-        $users = $this->Assets->Users->find('list', ['limit' => 200]);
-        $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('asset', 'users', 'locations'));
     }
 }
+

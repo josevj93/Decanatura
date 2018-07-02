@@ -131,6 +131,7 @@ class AssetsTable extends Table
             ->scalar('plaque')
             ->maxLength('plaque', 255)
             ->notEmpty('plaque', 'Debe ingresar una placa');
+
         $validator
             ->scalar('series')
             ->maxLength('series', 255)
@@ -139,12 +140,13 @@ class AssetsTable extends Table
         $validator
             ->scalar('description')
             ->maxLength('description', 255)
-            ->allowEmpty('description','Debe ingresar una descripción');
+            ->notEmpty('description','Debe ingresar una descripción');
 
         $validator
             ->scalar('state')
             ->maxLength('state', 255)
             ->notEmpty('state','Debe ingresar un estado');
+
         $validator
             ->scalar('sub_location')
             ->maxLength('sub_location', 255)
@@ -173,10 +175,6 @@ class AssetsTable extends Table
             ->allowEmpty('image');
 
         $validator
-            ->maxLength('image', 255)
-            ->allowEmpty('image');
-
-        $validator
             ->scalar('image_dir')
             ->maxLength('image_dir', 255)
             ->allowEmpty('image_dir');
@@ -191,25 +189,13 @@ class AssetsTable extends Table
             ->allowEmpty('file_dir');
         
         $validator
-            ->maxLength('file', 255)
-            ->allowEmpty('file');
-
-        $validator
-            ->scalar('file_dir')
-            ->maxLength('file_dir', 255)
-            ->allowEmpty('file_dir');
-        
-        $validator
             ->scalar('unique_id')
             ->maxLength('unique_id', 255)
             ->allowEmpty('unique_id');
+            
         $validator
             ->scalar('location_id')
             ->notEmpty('location_id');
-
-        $validator
-            ->scalar('assigned_to')
-            ->notEmpty('assigned_to');
 
         $validator
             ->scalar('assigned_to')
@@ -220,8 +206,6 @@ class AssetsTable extends Table
             ->notEmpty('responsable_id');
             
         $validator
-			
-		$validator
             ->scalar('models_id')
             ->maxLength('models_id', 255)
             ->allowEmpty('models_id');
@@ -248,6 +232,7 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['loan_id'], 'Loans'));
         $rules->add($rules->existsIn(['models_id'], 'Models'));
+
         return $rules;
     }
 }
