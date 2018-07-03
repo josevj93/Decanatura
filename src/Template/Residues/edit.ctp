@@ -5,6 +5,7 @@
  */
     use Cake\Routing\Router;
     $mysqli = new mysqli('decanatura.mysql.database.azure.com','ecci@decanatura','Gaby1234','decanatura');
+    use Cake\I18n\Date;
 ?>
 
 <!-- Sección de scripts utilizados por la pantalla -->
@@ -26,7 +27,7 @@
 
 
  <div class="residues form large-9 medium-8 columns content">
-    <?= $this->Form->create($residue) ?>
+    <?= $this->Form->create($residue,['novalidate','onsubmit'=>'return validateCheck()']) ?>
     <fieldset>
         <legend><?= __('Modificar acta de desecho') ?></legend>
         <br> 
@@ -35,13 +36,13 @@
         <div class='row'>
 
             <label>Autorización Número: VRA-</label>
-            <?php echo '<input type="text" class="form-control col-sm-4" disabled value="'.h($residue->residues_id).'">'; ?>
+            <?php echo '<input type="text" id="residues_id" class="form-control col-sm-4" disabled value="'.h($residue->residues_id).'">'; ?>
         </div>
         <div class='row'>
             <label>Fecha:</label>
                 <?php
-                    $tmpDate= $residue->date->format('d-m-y');
-                    echo $this->Form->imput('date', ['class'=>'form-control', 'value'=>$tmpDate, 'disabled']); 
+                    $tmpDate= $residue->date->format('d-m-Y');
+                    echo $this->Form->imput('date', ['class'=>'form-control', 'value'=>$residue->date, 'disabled']); 
                 ?>
         </div>
         </div><br>
@@ -49,7 +50,7 @@
         <div class='row'>
             <label class='align'>Unidad Custodio:</label>
             <?php 
-                echo $this->Form->imput('Unidad', ['class'=>'form-control col-sm-3', 'value'=>$Unidad, 'disabled']);
+                echo $this->Form->imput('Unidad', ['class'=>'form-control col-sm-3', 'value'=>$Unidad, 'disabled','id'=>'unit']);
             ?>
         </div><br>
 
@@ -130,8 +131,10 @@
 
  <!-- Sección de grid para agregar o eliminar activos al acta de desecho -->
         <div class="related">
-            <legend><?= __('Bienes a desechar') ?></legend>
+            <legend><?= __('Activos a desechar') ?></legend>
 
+            <!--  Sirve para mostrar el mensaje que se debe seleccionar un activo -->
+            <p id="errorMsg" style="color: red;"></p>
             <!-- tabla que contiene  datos básicos de activos-->
             <table id='assets-residues-grid' cellpadding="0" cellspacing="0">
                 <thead>
@@ -336,6 +339,24 @@ $(document).ready(function()
     } );
         
 } );
+
+function validateCheck() {
+    var checks, error;
+
+    // Get the value of the input field with id="numb"
+    checks = getValueUsingClass();
+
+
+    // If x is Not a Number or less than one or greater than 10
+    if ( checks.length == 0 ) {
+        error = "Seleccione al menos un activo";
+        document.getElementById("errorMsg").innerHTML = error;
+        return false;
+    } else {
+        return true;
+    }
+    
+}
 
     $("document").ready(
     function() {

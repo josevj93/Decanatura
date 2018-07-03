@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\I18n\Date;
 //use Cake\ORM\Query;
 
 /**
@@ -179,8 +180,10 @@ class ResiduesController extends AppController
 
             $residue = $this->Residues->patchEntity($residue, $this->request->getData(),['validationDefault'=>'residues_id']);
 
+            // le doy formato a la fecha para que mysql pueda guardarla correctamente
+            $date = new Date($residue->date);
+            $residue->date= $date->format('Y-m-d');
             //debug($residue);
-
             if ($this->Residues->save($residue)) {
                 
 
@@ -288,6 +291,9 @@ class ResiduesController extends AppController
 
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
 
+            // le doy formato a la fecha para que mysql pueda guardarla correctamente
+            $date = new Date($residue->date);
+            $residue->date= $date->format('Y-m-d');
             if ($this->Residues->save($residue)) {
                 $this->Flash->success(__('El acta de residuo ha sido guardada'));
 
