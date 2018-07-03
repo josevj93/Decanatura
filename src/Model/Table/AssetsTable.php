@@ -99,6 +99,7 @@ class AssetsTable extends Table
             ],
         ]);
 
+
         $this->belongsTo('Models', [
             'foreignKey' => 'models_id'
         ]);
