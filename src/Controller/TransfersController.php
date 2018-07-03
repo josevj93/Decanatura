@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Dompdf\Dompdf;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Transfers Controller
@@ -212,7 +214,7 @@ class TransfersController extends AppController
 
                 }
                 $this->Flash->success(__('La transferencia fue exitosa.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $transfer->transfers_id]);
             }
 
            

@@ -97,6 +97,7 @@ class AssetsTable extends Table
         ]);
 
 
+
         $this->belongsTo('Models', [
             'foreignKey' => 'models_id'
         ]);
@@ -219,7 +220,6 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['loan_id'], 'Loans'));
         $rules->add($rules->existsIn(['models_id'], 'Models'));
 
->>>>>>> 7a35f33dbb155692bdd60ecadab96c6f9b116462
         return $rules;
     }
 }

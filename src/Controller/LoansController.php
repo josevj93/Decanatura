@@ -144,10 +144,10 @@ class LoansController extends AppController
                         return $this->redirect(['action' => 'index']);
                     }
                 }
-
+                
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
-                download($loan->id);
-                return $this->redirect(['action' => 'index']);
+                //$this->download($loan->id);
+                return $this->redirect(['action' => 'view',$loan->id]);
             }
             
             
@@ -176,7 +176,7 @@ class LoansController extends AppController
         $assets = $this->Assets->find('list', [
             'conditions' => ['assets.state' => 'Disponible']
         ]);
-        $users = $this->Loans->Users->find('list', ['limit' => 200]);
+        $users = $this->Loans->Users->find('list', ['limit' => PHP_INT_MAX ]);
         $this->set(compact('assets', 'loan', 'users', 'result'));
     }
 
@@ -216,8 +216,8 @@ class LoansController extends AppController
             $this->Flash->error(__('Error al finalizar el préstamo'));
             return $this->redirect(['action' => 'index']);
         }
-        $assets = $this->Loans->Assets->find('list', ['limit' => 200]);
-        $users = $this->Loans->Users->find('list', ['limit' => 200]);
+        $assets = $this->Loans->Assets->find('list', ['limit' => PHP_INT_MAX]);
+        $users = $this->Loans->Users->find('list', ['limit' => PHP_INT_MAX ]);
         $this->set(compact('assets', 'loan', 'users'));
     }
 
@@ -369,7 +369,7 @@ $html .=
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p><strong>Nota:</strong></p>
-<p>El original de este documento sera entregado al solicitante despues de que se haya recibido</p>
+<p>El original de este documento sera entregado al solicitante despues de que se haya recibido satisfactoriamente el o los equipos.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -384,11 +384,14 @@ $html .=
         $document->setPaper('A3', 'portrait');
         //Render the HTML as PDF
         $document->render();
+
+        header( "refresh:5;url=index.php" );
         //Get output of generated pdf in Browser
         $document->stream("Formulario de Prestamo", array("Attachment"=>1));
         //1  = Download
         //0 = Preview
-        return $this->redirect(['action' => 'index']);
+
+ 
 
     }
 
