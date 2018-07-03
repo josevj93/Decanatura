@@ -99,7 +99,10 @@ class AssetsController extends AppController
             $asset->deletable = true;
             $asset->deleted = false;
             $asset->state = "Disponible";
-            $asset = $this->Assets->patchEntity($asset, $this->request->getData()); 
+            $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+			if ($_POST['models_id'] == '') {
+				$asset->models_id = null;
+			}
             if ($this->Assets->save($asset)) {
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
@@ -129,6 +132,9 @@ class AssetsController extends AppController
             $asset->modified = $fecha;
             
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+			if ($_POST['models_id'] == '') {
+				$asset->models_id = null;
+			}
             if ($this->Assets->save($asset)) {
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
@@ -253,7 +259,11 @@ class AssetsController extends AppController
             $placa = $this->request->getData('plaque');
 			$type = $this->request->getData('type_id');
             $marca = $this->request->getData('brand');
-            $modelo = $this->request->getData('models_id');
+			if ($_POST['models_id'] == '') {
+				$asset->models_id = null;
+			} else {
+				$modelo = $this->request->getData('models_id');
+			}
             $descripcion = $this->request->getData('description');
             $dueno = $this->request->getData('owner_id');
             $responsable = $this->request->getData('responsable_id');
