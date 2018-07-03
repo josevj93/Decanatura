@@ -41,7 +41,7 @@
 
 		<div class='row'>
 			<div class="col-md-4 col-xs-12 col-lg-5 col-sm-12">
-				<label> Nombre: </label> <br>
+				<label> Marca: </label> <br>
 				<?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($model->brand->name) . '">'; ?>
 			</div>
 			<br>
