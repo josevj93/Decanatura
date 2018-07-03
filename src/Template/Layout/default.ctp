@@ -280,7 +280,7 @@ $cakeDescription = 'Control de Activos';
             <div class="modal-body">Seleccione "Salir" para cerrar sesión.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                <?= $this->Html->link("Salir", array('controller' => 'login', 'action' => 'logout' , $nombre), array('class' => 'btn btn-primary')) ?>
+                <?= $this->Html->link("Salir", array('controller' => 'login', 'action' => 'logout', $nombre), array('class' => 'btn btn-primary')) ?>
 
             </div>
         </div>
