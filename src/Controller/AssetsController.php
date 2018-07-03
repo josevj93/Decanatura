@@ -102,6 +102,7 @@ class AssetsController extends AppController
             $asset->state = "Disponible";
             $asset = $this->Assets->patchEntity($asset, $this->request->getData()); 
             if ($this->Assets->save($asset)) {
+
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }

@@ -33,6 +33,13 @@ class ActivityLogsTable extends Table
         $this->setTable('activity_logs');
         $this->setDisplayField('idLog');
         $this->setPrimaryKey('idLog');
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'idUser',
+        ]);
+
+
+
     }
 
     /**
