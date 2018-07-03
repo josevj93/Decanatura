@@ -280,75 +280,41 @@ class TechnicalReportsController extends AppController
 
     public function download($id = null)
     {
-
         $technicalReport = $this->TechnicalReports->get($id, [
             'contain' => ['Assets']
         ]);
-
-        // linea para marcar el reporte tecnico como descargado, haciendo que ya no se pueda borrar
-        $technicalReport->descargado = true;
-
-        // Actualizo el reporte técnico, guardando el valor de descargado como true
-        $this->TechnicalReports->save($technicalReport);
-
          require_once 'dompdf/autoload.inc.php';
         //initialize dompdf class
         $document = new Dompdf();
         $html = '';
         $document->loadHtml('
         <html>
+        <style>
+        #element1 {float:left;margin-right:10px;margin-left:30px;} #element2 {float:right;margin-right:30px;}
+        table, td, th {
+            border: 1px solid black;
+        }
+        body {
+            border: 5px double;
+            width:100%;
+            height:100%;
+            display:block;
+            overflow:hidden;
+            padding:30px 30px 30px 30px
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th {
+            height: 50px;
+        }
+        </style>
+        <center><img src="C:\xampp\htdocs\Decanatura\src\Controller\images\logoucr.png"></center>
         <title>Informe Técnico</title>
-        <body style="margin-left:100">
-        <h2><center>
-        UNIVERSIDAD DE COSTA RICA
-        <br>
-        UNIDAD DE BIENES INSTITUCIONALES
-        <br>
-        INFORME TÉCNICO</center><h2>
-
-        <table style="width:35%">
-        <tr>
-        <th><h3>Unidad custodio:'.$technicalReport->asset->responsable_id.'<h3></th>
-        <th><h3>Fecha:'.$technicalReport->date.'<h3></th>
-        </tr>
-        <tr>
-        <th><br><h3>Evaluación del activo:'.$technicalReport->recommendation.'<h3></th>
-        </tr>
-        <tr>
-        <th><h3><br>N° Placa:'.$technicalReport->asset->plaque.'<h3></th>
-        <th><h3>Modelo:'.$technicalReport->asset->model.'<h3></th>
-        </tr>
-        <tr>
-        <th><h3>Marca:'.$technicalReport->asset->brand.'<h3></th>
-        <th><h3>Serie:'.$technicalReport->asset->series.'<h3></th>
-        </tr>
-        <tr>
-        <th><h3><br>Evualuación del activo:'.$technicalReport->evaluation.'<h3></th>
-        </tr>
-        </table>
-        <table style="width:100%">
-        <th>
-        <h3>Técnico Especializado<h3>
-        <h4>Nombre___________________<h4>
-        <h4>Firma____________________<h4>
-        </th>
-        <th>
-        <h3>Responsable de bienes de la Unidad Custodio<h3>
-        <h4>Nombre___________________<h4>
-        <h4>Firma____________________<h4>
-        </th>
-        <th>
-        <h3>Responsable de bienes de la Unidad Custodio<h3>
-        <h4>Nombre___________________<h4>
-        <h4>Firma____________________<h4>
-        </th>
-        </table>
-        </body>
-        </html>
-=======
         <h2 align="center">UNIVERSIDAD DE COSTA RICA</h2>
         <h2 align="center">UNIDAD DE ACTIVOS FIJOS</h2>
-        <h2 align="center">INFORME TECNICO</h2>
+        <h2 align="center">PRESTAMO DE ACTIVO FIJO</h2>
         <p>&nbsp;</p>
         <div id="element1" align="left"><strong>Unidad custodio:</strong>'.$technicalReport->asset->responsable_id.'</div> <div id="element2" align="right"><strong>Fecha:</strong>'.$technicalReport->date.'</div>
         <p>&nbsp;</p>
@@ -356,7 +322,7 @@ class TechnicalReportsController extends AppController
         <p>&nbsp;</p>
         <div style="width:960px;height:200px;border:1px solid #000;"></div>
         <p>&nbsp;</p>
-        <div id="element1" align="left"><strong>N° Placa:&nbsp;</strong>'.$technicalReport->asset->plaque.'</div> <div id="element2" align="right"><strong>Modelo:</strong>&nbsp;'.$technicalReport->asset->models_id.'</div>
+        <div id="element1" align="left"><strong>N° Placa:&nbsp;</strong>'.$technicalReport->asset->plaque.'</div> <div id="element2" align="right"><strong>Modelo:</strong>&nbsp;'.$technicalReport->asset->model.'</div>
         <p>&nbsp;</p>
         <div id="element1" align="left"><strong>Marca:</strong>&nbsp;'.$technicalReport->asset->brand.'</div> <div id="element2" align="right"><strong>Serie:</strong>&nbsp;'.$technicalReport->asset->series.'</div>
         <p>&nbsp;</p>
@@ -381,9 +347,8 @@ class TechnicalReportsController extends AppController
         <p>&nbsp;</p>
         <p align="center">Tels: 2511 5759/1149 www.oaf.ucr.ac.cr correo electrónico: activosfijos.oaf@ucr.ac.cr</p>
         ');
-
         //set page size and orientation
-        $document->setPaper('A3', 'landscape');
+        $document->setPaper('A3', 'portrait');
         //Render the HTML as PDF
         $document->render();
         //Get output of generated pdf in Browser
@@ -391,7 +356,6 @@ class TechnicalReportsController extends AppController
         //1  = Download
         //0 = Preview
         return $this->redirect(['action' => 'index']);
-
     }
 
 }
