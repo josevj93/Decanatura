@@ -345,6 +345,41 @@ class TechnicalReportsController extends AppController
         </table>
         </body>
         </html>
+=======
+        <h2 align="center">UNIVERSIDAD DE COSTA RICA</h2>
+        <h2 align="center">UNIDAD DE ACTIVOS FIJOS</h2>
+        <h2 align="center">INFORME TECNICO</h2>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Unidad custodio:</strong>'.$technicalReport->asset->responsable_id.'</div> <div id="element2" align="right"><strong>Fecha:</strong>'.$technicalReport->date.'</div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Descripción del bien</strong></div>
+        <p>&nbsp;</p>
+        <div style="width:960px;height:200px;border:1px solid #000;"></div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>N° Placa:&nbsp;</strong>'.$technicalReport->asset->plaque.'</div> <div id="element2" align="right"><strong>Modelo:</strong>&nbsp;'.$technicalReport->asset->models_id.'</div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Marca:</strong>&nbsp;'.$technicalReport->asset->brand.'</div> <div id="element2" align="right"><strong>Serie:</strong>&nbsp;'.$technicalReport->asset->series.'</div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left" ><strong>Evaluación del activo:</strong>&nbsp;'.$technicalReport->evaluation.'</div>
+        <p>&nbsp;</p>
+        <div id="element2" align="right"><strong>¿Cuál?</strong>&nbsp;_____________________</div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Tecnico Especializado </strong></div> <div id="element2" align="right"><strong>Responsable de bienes de la Unidad Custodio <strong></div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left">Nombre:&nbsp;___________________________</div> <div id="element2" align="right">Nombre:&nbsp;___________________________</div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left">Firma:&nbsp;___________________________</div> <div id="element2" align="right">Firma:&nbsp;___________________________</div>
+        <p>&nbsp;</p>
+        <p align="center"><strong> Autoridad Universitaria</strong></p> 
+        <p align="center">Nombre:&nbsp;___________________________</p> 
+        <p align="center">Firma:&nbsp;___________________________</p>
+        <p>&nbsp;</p>
+        <p align="left">Original: Unidad de Bienes Institucionales&nbsp;&nbsp;(OAF)</p>
+        <p align="left">Copia: Bodega de Activos Recuperados&nbsp;&nbsp;(OSG)</p>
+        <p align="left">Copia: Unidad responsable</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p align="center">Tels: 2511 5759/1149 www.oaf.ucr.ac.cr correo electrónico: activosfijos.oaf@ucr.ac.cr</p>
         ');
 
         //set page size and orientation
@@ -352,7 +387,7 @@ class TechnicalReportsController extends AppController
         //Render the HTML as PDF
         $document->render();
         //Get output of generated pdf in Browser
-        $document->stream("Informe técnico", array("Attachment"=>1));
+        $document->stream("Informe Tecnico", array("Attachment"=>1));
         //1  = Download
         //0 = Preview
         return $this->redirect(['action' => 'index']);

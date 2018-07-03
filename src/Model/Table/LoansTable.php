@@ -34,6 +34,24 @@ class LoansTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'file_solicitud' => [
+                'fields' => [
+                    'dir' => 'file_solicitud_dir',
+                    'size' => 'file_solicitud_size',
+                    'type' => 'file_solicitud_type',
+                ],
+                'path' => 'webroot{DS}files{DS}{model}{DS}',
+                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
+                    return strtolower($data['name']);
+                },
+
+                'keepFilesOnDelete' => false
+            ],
+        ]);
+
+
+
         $this->belongsTo('Users', [
             'foreignKey' => 'id_responsables'
         ]);

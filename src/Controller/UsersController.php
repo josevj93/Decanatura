@@ -216,6 +216,54 @@ class UsersController extends AppController
         $this->set(compact('user'));
     }
 
+
+
+    public function profile($id = null)
+    {
+        $success = TRUE;
+        $user = $this->Users->get($id, [
+            'contain' => []
+        ]);
+
+        //seleccina todos los roles para desplegar
+        $query = $this->Roles->find('all');
+
+        //contiene todos los roles
+        $roles = array();
+
+        //id del rol actual del usuario
+        $rol = '';
+
+        foreach ($query as $items) {
+            $roles[$items['id']] = $items['nombre'];
+            if($items['id'] == $user['id_rol']){
+                $rol = $items['id'];
+            }
+        }
+
+        $this->set('roles', $roles);
+        $this->set('rol', $rol);
+
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            
+            if ($this->Users->save($user)) {
+                AppController::insertLog($user['nombre'], $success);
+                $this->Flash->success(__('Cambios guardados.'));
+
+            }else{
+                $success = FALSE;
+                AppController::insertLog($user['nombre'], $success);
+                $this->Flash->error(__('Los cambios no pudieron ser guardados. Por favor vuelva a intentarlo.')); 
+            }
+            
+        }
+        $this->set(compact('user'));
+    }
+
+
+
     /**
      * Delete method
      *
