@@ -464,7 +464,7 @@ class ResiduesController extends AppController
     }
 
 
-        public function download($id = null)
+         public function download($id = null)
     {
 
 

@@ -112,6 +112,8 @@
 
  <?= $this->Form->postLink(__('Generar Formulario'), ['controller'=> 'Loans', 'action' => 'download',$loan->id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $loan->id)]) ?>
 
+  <?= $this->Form->postLink(__('Test'), ['controller'=> 'Loans', 'action' => 'terminar',$loan->id], ['class' => 'btn btn-primary']) ?>
+
 </div>
 
 
