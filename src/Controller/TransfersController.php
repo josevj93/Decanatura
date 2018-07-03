@@ -217,10 +217,11 @@ class TransfersController extends AppController
                 return $this->redirect(['action' => 'view', $transfer->transfers_id]);
             }
 
-           
+           AppController::insertLog($transfer['transfers_id'], TRUE);
             $this->Flash->error(__('No se pudo realizar la transferencia.'));
         }
         else{
+                AppController::insertLog($transfer['transfers_id'], FALSE);
                 $this->Flash->error(__('No se pudo realizar la transferencia porque ya hay un traslado con ese número de traslado.'));
             }
             }
@@ -366,6 +367,7 @@ class TransfersController extends AppController
              
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             if ($this->Transfers->save($transfer)) {
+                AppController::insertLog($transfer['transfers_id'], TRUE);
                 $this->Flash->success(__('Los cambios han sido guardados.'));
 
 
@@ -381,6 +383,7 @@ class TransfersController extends AppController
 
                 if (count($viejos) > 0)
                 {
+
                   $assets_transfers->deleteall(array('transfer_id'=>$id, 'assets_id IN' => $viejos), false);
 
                   $assets->update()
@@ -411,7 +414,7 @@ class TransfersController extends AppController
                 }
                 return $this->redirect(['action' => 'index']);
             }
-  
+            AppController::insertLog($transfer['transfers_id'], FALSE);
             $this->Flash->error(__('El traslado no se pudo guardar, porfavor intente nuevamente'));
 
         }
@@ -504,8 +507,10 @@ class TransfersController extends AppController
             }    
 
         if ($this->Transfers->delete($transfer)) {
+            AppController::insertLog($transfer['transfers_id'], TRUE);
             $this->Flash->success(__('El traslado a sido eliminado.'));
         } else {
+            AppController::insertLog($transfer['transfers_id'], FALSE);
             $this->Flash->error(__('El traslado no pudo ser eliminado. Por favor, intente de nuevo.'));
         }
 

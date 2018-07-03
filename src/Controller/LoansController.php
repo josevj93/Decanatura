@@ -140,11 +140,12 @@ class LoansController extends AppController
                     $asset->deletable = false;
                     
                     if(!($this->Assets->save($asset))){
+                        AppController::insertLog($loan['id'], FALSE);
                         $this->Flash->error(__('El préstamo no se pudo guardar. Uno de los activos no se pudo guardar correctamente'));
                         return $this->redirect(['action' => 'index']);
                     }
                 }
-                
+                AppController::insertLog($loan['id'], TRUE);
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 //$this->download($loan->id);
                 return $this->redirect(['action' => 'view',$loan->id]);

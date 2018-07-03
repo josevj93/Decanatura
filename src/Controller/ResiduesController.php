@@ -200,10 +200,11 @@ class ResiduesController extends AppController
                     ->set(['residues_id' => $residue->residues_id])
                     ->where(['assets_id IN' => $condicion])
                     ->execute();
+                    AppController::insertLog($residue['residues_id'], TRUE);
                 $this->Flash->success(__('El acta de desecho fue guardada.'));
                 return $this->redirect(['action' => 'view', $residue->residues_id]);
             }
-
+            AppController::insertLog($model['residues_id'], FALSE);
             $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Inténtelo de nuevo.'));
         }
 
@@ -291,6 +292,7 @@ class ResiduesController extends AppController
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
 
             if ($this->Residues->save($residue)) {
+                AppController::insertLog($residue['residues_id'], TRUE);
                 $this->Flash->success(__('El acta de residuo ha sido guardada'));
 
                 //AQUI EMPIEZA LA MAGIA
@@ -345,7 +347,7 @@ class ResiduesController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
 
-
+            AppController::insertLog($residue['residues_id'], FALSE);
             $this->Flash->error(__('El acta de residuo no se ha guardado, inténtelo de nuevo'));
 
         }
@@ -443,8 +445,10 @@ class ResiduesController extends AppController
                                              ->where(['residues_id' => $residue->residues_id])
                                              ->execute();
         if ($this->Residues->delete($residue)) {
+            AppController::insertLog($residue['residues_id'], TRUE);
             $this->Flash->success(__('El acta de residuo ha sido eliminada.'));
         } else {
+            AppController::insertLog($residue['residues_id'], FALSE);
             $this->Flash->error(__('El acta de residuo no puede ser eliminada, inténtalo de nuevo'));
         }
 
