@@ -156,7 +156,7 @@ class UsersController extends AppController
             if ($this->Users->save($user)) {
 
                 //print_r( $this->name );
-                AppController::insertLog($user);
+                AppController::insertLog($user['nombre']);
 
 
 
