@@ -227,7 +227,8 @@ $cakeDescription = 'Control de Activos';
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="navbar-brand" style="color:white">
-                    <i class="fa fa-user"></i> <?php echo $nombre . " " . $apellido; ?></a>
+                    <i class="fa fa-user"></i> <?= $this->Html->link(__($nombre . " " . $apellido), ['controller' => 'Users',$uid, 'action' => 'profile']) ?>
+                    
             </li>
 
 
