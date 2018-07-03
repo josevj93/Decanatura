@@ -68,7 +68,7 @@
       
       <div class="row">
         <label>Modelo:</label>
-        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->models_id) . '">'; ?>      
+        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->model->name) . '">'; ?>      
       </div>
 	  
 	  <div class="row">
@@ -86,12 +86,12 @@
 	<div class="form-control sameLine" >
 
       <div class="row">
-        <label> Dueño: </label>
+        <label> Responsable: </label>
         <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->user->nombre) . '">'; ?>        
       </div>
       
       <div class="row">
-        <label> Responsable: </label>
+        <label> Asignado a: </label>
         <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->user->nombre) . '">'; ?>       
       </div>
 	  
@@ -111,7 +111,7 @@
 	  
       
       <div class="row">
-        <label class="col-lg-3"> Año: </label>
+        <label class="col-lg-2"> Año: </label>
         <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->year) . '">'; ?>        
       </div>
 	  
@@ -160,7 +160,7 @@
 	<div class="col-12 text-right">
 
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $asset->plaque], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el activo # {0}?', $asset->plaque)]) ?>
+    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'softDelete', $asset->plaque], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el activo # {0}?', $asset->plaque)]) ?>
     
     <?php 
         if($asset->deleted == true){

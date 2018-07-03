@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Asset[]|\Cake\Collection\CollectionInterface $assets
+ * @var \App\Model\Entity\Asset[]|\Cake\Collection\CollectionInterface $loans
  */
 ?>
 

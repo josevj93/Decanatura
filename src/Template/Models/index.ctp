@@ -66,7 +66,7 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-        $('#models-grid').DataTable( {
+        var table = $('#models-grid').DataTable( {
             dom: 'Bfrtip',
                 buttons: [
                 'copyHtml5',
