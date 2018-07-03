@@ -51,11 +51,16 @@
 	
       <div class="row">
           <label> Placa: </label>
-		  <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->plaque) . '">'; ?> 
+		  <?php echo '<input type="text" class="form-control col-sm-9" readonly="readonly" value="' . htmlspecialchars($asset->plaque) . '">'; ?> 
       </div>
       
-	  
-	  <div class="col-lg-2">   </div>
+	  <div class="row">
+        <label> Tipo: </label>
+        <?php echo '<input type="text" class="form-control col-sm-9" readonly="readonly" value="' . htmlspecialchars($asset->type->name) . '">'; ?>            
+      </div>
+        
+		
+	  <div class="col-lg-3">   </div>
         
     </div> <br>
 	
@@ -63,17 +68,17 @@
 
       <div class="row">
         <label>Marca:</label>
-        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->brand) . '">'; ?>       
+        <?php echo '<input type="text" class="form-control col-sm-9" readonly="readonly" value="' . htmlspecialchars($asset->brand) . '">'; ?>       
       </div>
       
       <div class="row">
         <label>Modelo:</label>
-        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->model->name) . '">'; ?>      
+        <?php echo '<input type="text" class="form-control col-sm-8" readonly="readonly" value="' . htmlspecialchars($asset->model->name) . '">'; ?>      
       </div>
 	  
 	  <div class="row">
         <label>Serie:</label>
-        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->series) . '">'; ?>         
+        <?php echo '<input type="text" class="form-control col-sm-9" readonly="readonly" value="' . htmlspecialchars($asset->series) . '">'; ?>         
       </div>
 
     </div> <br>
