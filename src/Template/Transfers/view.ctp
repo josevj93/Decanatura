@@ -151,7 +151,9 @@
 
     </div>
   </fieldset>
-    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+</div>
+
+<?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
     <?php if($transfer->file_name == null) : ?>
 
@@ -166,5 +168,3 @@
     <?php endif; ?> 
 
       <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $transfer->transfers_id)]) ?>
-
-</div>
