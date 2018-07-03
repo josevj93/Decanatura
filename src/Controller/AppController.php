@@ -104,7 +104,6 @@ class AppController extends Controller
     }
     public function beforeFilter(Event $event)
     {
-
         $this->Roles = $this->loadModel('Roles');
         $this->Permissions = $this->loadModel('Permissions');
         $this->RolesPermissions = $this->loadModel('RolesPermissions');
