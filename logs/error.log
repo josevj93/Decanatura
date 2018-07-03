@@ -40136,3 +40136,208 @@ Stack Trace:
 #15 {main}
 
 
+2018-07-03 12:01:04 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/images/sort_both.png
+Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(97): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#13 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#14 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#15 {main}
+
+
+2018-07-03 12:01:07 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/images/sort_asc.png
+Referer URL: http://127.0.0.1/Decanatura/css/plugins/jquery.dataTables.min.css
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(38): Cake\Http\ControllerFactory->missingController(Object(Cake\Http\ServerRequest))
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(97): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#13 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#14 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#15 {main}
+
+
+2018-07-03 12:03:14 Error: [ParseError] syntax error, unexpected ')', expecting ']'
+Request URL: /loans/view/5b3b3626b1584
+Referer URL: http://127.0.0.1/Decanatura/loans
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\View\View.php(1164): Cake\View\View->_evaluate('C:\\xampp\\htdocs...', Array)
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\View\View.php(772): Cake\View\View->_render('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Controller.php(623): Cake\View\View->render(NULL, NULL)
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(125): Cake\Controller\Controller->render()
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\LoansController))
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#13 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#14 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#15 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#16 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#17 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#18 {main}
+
+
+2018-07-03 12:03:50 Error: [ArgumentCountError] Too few arguments to function App\Controller\LoansController::terminar(), 0 passed in C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Controller.php on line 440 and exactly 1 expected
+Request URL: /loans/terminar
+Referer URL: http://127.0.0.1/Decanatura/loans/view/5b3b3626b1584
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Controller.php(440): App\Controller\LoansController->terminar()
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(119): Cake\Controller\Controller->invokeAction()
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\LoansController))
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#13 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#14 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#15 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#16 {main}
+
+
+2018-07-03 12:04:58 Error: [ArgumentCountError] Too few arguments to function App\Controller\LoansController::terminar(), 0 passed in C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Controller.php on line 440 and exactly 1 expected
+Request URL: /loans/terminar
+Referer URL: http://127.0.0.1/Decanatura/loans/view/5b3b3626b1584
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Controller.php(440): App\Controller\LoansController->terminar()
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(119): Cake\Controller\Controller->invokeAction()
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\LoansController))
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#13 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#14 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#15 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#16 {main}
+
+
+2018-07-03 12:14:47 Error: [ParseError] syntax error, unexpected ';', expecting ',' or ')'
+Request URL: /loans/view/5b3b3626b1584
+Referer URL: http://127.0.0.1/Decanatura/loans
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\composer\ClassLoader.php(322): Composer\Autoload\includeFile('C:\\xampp\\htdocs...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Core\App.php(152): class_exists('App\\Controller\\...')
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Core\App.php(64): Cake\Core\App::_classExistsInBase('\\Controller\\Loa...', 'App')
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(88): Cake\Core\App::className('Loans', 'Controller', 'Controller')
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(36): Cake\Http\ControllerFactory->getControllerClass(Object(Cake\Http\ServerRequest))
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(90): Cake\Http\ControllerFactory->create(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#13 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#14 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#15 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#16 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#17 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#18 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#19 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#20 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#21 {main}
+
+
+2018-07-03 12:18:42 Error: [ParseError] syntax error, unexpected '?>', expecting ',' or ')'
+Request URL: /loans/view/5b3b3626b1584
+Referer URL: http://127.0.0.1/Decanatura/loans
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\View\View.php(1164): Cake\View\View->_evaluate('C:\\xampp\\htdocs...', Array)
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\View\View.php(772): Cake\View\View->_render('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Controller.php(623): Cake\View\View->render(NULL, NULL)
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(125): Cake\Controller\Controller->render()
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\LoansController))
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#13 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#14 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#15 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#16 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#17 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#18 {main}
+
+
+2018-07-03 12:18:44 Error: [ParseError] syntax error, unexpected '?>', expecting ',' or ')'
+Request URL: /loans/view/5b3b3626b1584
+Referer URL: http://127.0.0.1/Decanatura/loans
+Stack Trace:
+#0 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\View\View.php(1164): Cake\View\View->_evaluate('C:\\xampp\\htdocs...', Array)
+#1 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\View\View.php(772): Cake\View\View->_render('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Controller\Controller.php(623): Cake\View\View->render(NULL, NULL)
+#3 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(125): Cake\Controller\Controller->render()
+#4 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\LoansController))
+#5 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\BaseApplication.php(108): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#6 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#7 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(104): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#8 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#9 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#10 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#11 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(98): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#12 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#13 C:\xampp\htdocs\Decanatura\vendor\cakephp\debug_kit\src\Middleware\DebugKitMiddleware.php(52): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#14 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(65): DebugKit\Middleware\DebugKitMiddleware->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response), Object(Cake\Http\Runner))
+#15 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#16 C:\xampp\htdocs\Decanatura\vendor\cakephp\cakephp\src\Http\Server.php(81): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Cake\Http\ServerRequest), Object(Cake\Http\Response))
+#17 C:\xampp\htdocs\Decanatura\webroot\index.php(40): Cake\Http\Server->run()
+#18 {main}
+
+

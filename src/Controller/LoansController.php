@@ -183,6 +183,10 @@ class LoansController extends AppController
     /*Cancelar para varios activos*/
     public function terminar($id)
     {
+        if ($this->request->is('post')) {
+            print_r($this->request->getData());
+        }
+        die();
         $this->loadModel('Assets');
         
         $loan = $this->Loans->get($id, [

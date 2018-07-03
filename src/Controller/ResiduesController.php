@@ -464,7 +464,7 @@ class ResiduesController extends AppController
     }
 
 
-        public function download($id = null)
+         public function download($id = null)
     {
 
 
@@ -508,6 +508,7 @@ class ResiduesController extends AppController
 
         table {
             border-collapse: collapse;
+            border: none;
             width: 100%;
         }
 
@@ -517,44 +518,33 @@ class ResiduesController extends AppController
         </style>
 
 
-<p><strong><sup>&nbsp;</sup></strong></p>
-<h2 align="center">Universidad de Costa Rica</h2>
-<h2 align="center">Vicerrector&iacute;a de Administraci&oacute;n</h2>
-<h2 align="center">Oficina de Administraci&oacute;n Financiera</h2>
-<p align="center">Unidad de Control de Activos Fijos y Seguros</p>
-<p align="center"><strong>***Tel. 207-5045 / 2075759 ** Fax 253-4630***</strong></p>
-<h2 align="center">ACTA DE DESECHO</h2>
-<h1>&nbsp;</h1>
-<div id="element1" align="left">  Fecha: __________________ </div> <div id="element2" align="right"> No.__________________ </div> 
-<p align="right">(Lo asigna el usuario)</p>
-<p><strong>&nbsp;</strong></p>
+        <center><img src="C:\xampp\htdocs\Decanatura\src\Controller\images\logoucr.png"></center>
+        <title>Informe Técnico</title>
+        <h2 align="center">UNIVERSIDAD DE COSTA RICA</h2>
+        <h2 align="center">UNIDAD DE ACTIVOS FIJOS</h2>
+        <h2 align="center">ACTA DE DESECHO</h2>
+        <p>&nbsp;</p>
+        <div id="element2" align="left"><strong>Autorización N.º VRA-'.$residue->residues_id.'</strong></div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Unidad de Custodio:________________________________________________________</strong></div>
+        <p>&nbsp;</p>
+        <p align="left">El dia <strong>'.$residue->date.'</strong> en presencia de los señores:</p>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Nombre:</strong>'.$residue->name1.'</div> <div id="element2" align="right"><strong>Cedula:</strong>'.$residue->identification1.'</div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Nombre:</strong>'.$residue->name2.'</div> <div id="element2" align="right"><strong>Cedula:</strong>'.$residue->identification2.'</div>
+        <p>&nbsp;</p>
+        <p>Se procede a levantar el <strong>Acta de Desecho</strong> de bienes muebles por haber cumplido su periodo de vida útil, de acuerdo con el <strong>Informe Técnico</strong> adjunto y la respectiva autorización por parte de la Vicerrectoría de Administración, de conformidad con el Reglamento para la Administración y Control de los Bienes Institucionales de la Universidad de Costa Rica</p>
 
-<table>
-  <tr>
-    <th align="center"><span style="font-weight:bold">ENTREGA</span></th>
-    <th align="center"><span style="font-weight:bold">RECIBE</span></th>
-  </tr>
-  <tr>
-    <td height="50"><strong>Unidad: Decanato de la Facultad Ingenieria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-    <td height="50"><strong>Unidad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-  </tr>
-  <tr>
-    <td height="50"><strong>Nombre del Funcionario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-    <td height="50"><strong>Nombre del Funcionario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-  </tr>
-  <tr>
-    <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-    <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-  </tr>
-</table>
-
-<h2 align="center">Detalle de los bienes a trasladar</h2>
-<table width="0" border="1">
-<tbody>
-<tr>
-<th align="center">Descripcion del Bien</th>
-<th align="center">Placa</th>
-</tr>';
+        <p align="left">Los bienes son los siguientes:</p>
+        <p>&nbsp;</p>
+        </table>
+        <table width="0" border="1">
+        <tbody>
+        <tr>
+        <th align="center"><strong>DESCRIPCIÓN DEL BIEN</strong></th>
+        <th align="center"><strong>N.º PLACA</strong></th>
+        </tr>';
 
         foreach ($results as $item) {
             $html .= 
@@ -563,15 +553,25 @@ class ResiduesController extends AppController
              <td align="center">' . $item['plaque'] . '</td>
              </tr>';
         }
-
-
-$html .=
-
-'</table>
-<br><br><br>
-<p><strong>Observaciones: </strong></p>
-<p><strong>Nota: El formulario debe estar firmado por el encargado de activos fijos u otro funcionario autorizado en cada unidad.</strong></p>
-<p><strong>Original: Oficina de Administraci&oacute;n Financiera&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copia: Unidad que entrega&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copia: Unidad que recibe</strong></p>
+        $html .=
+        '</table>
+        <p>&nbsp;</p>
+        <div id="element1" align="left">____________________________________________</div> <div id="element2" align="right">____________________________________________</div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Autoridad Universitaria / Jefatura Administrativa</strong></div> <div id="element2" align="right"><strong>RESPONSABLE AUTORIZADO</strong></div>        
+        <p>&nbsp;</p>
+        <div id="element2" align="left"><strong>Oficina de Servicios Generales<strong></div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left">____________________________________________</div> <div id="element2" align="right">____________________________________________</div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Testigo N°1</strong></div> <div id="element2" align="right"><strong>Testigo N°2</strong></div>
+        <p>&nbsp;</p>
+        <p>(Art. 26 del Reglamento para la Administración y Control de los Bienes Institucionales de la Universidad de Costa Rica)</p>
+        <p>Original: Unidad de Bienes Institucionales (OAF)</p>
+        <p>Copia: Bodega de Activos Recuperados (OSG)</p>
+        <p>Copia: Unidad responsable</p>        
+        <p>&nbsp;</p>
+        <p align="center">Tels: 2511 5759/1149      www.oaf.ucr.ac.cr     correo electrónico: activosfijos.oaf@ucr.ac.cr</p>
         ';
 
         // linea para marcar el desecho como descargado, haciendo que ya no se pueda borrar
