@@ -191,10 +191,11 @@ class ModelsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $model = $this->Models->get($id);
-        if ($this->Models->delete($model)) {
+        try{
+            $this->Models->delete($model); 
             $this->Flash->success(__('El modelo de activo se ha eliminado exitosamente.'));
-        } else {
-            $this->Flash->error(__('El modelo de activo no pudo ser eliminado. Por favor, intente de nuevo.'));
+        } catch (\PDOException $e) {
+            $this->Flash->error(__('El modelo de activo no se pudo eliminar. Puede deberse a que tiene activos asociados.'));
         }
         return $this->redirect(['action' => 'index']);
     }

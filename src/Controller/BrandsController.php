@@ -146,7 +146,7 @@ class BrandsController extends AppController
             $this->Brands->delete($brand); 
              $this->Flash->success(__('La marca se ha eliminado exitosamente'));
         } catch (\PDOException $e) {
-     $this->Flash->error(__('La marca no se pudo eliminar. Puede deberse a que tiene modelos asociados a ella'));
+     $this->Flash->error(__('La marca no se pudo eliminar. Puede deberse a que tiene modelos asociados.'));
         }
         
         return $this->redirect(['action' => 'index']);
