@@ -258,9 +258,14 @@ class AssetsController extends AppController
             $cantidad = $this->request->getData('quantity');
             $placa = $this->request->getData('plaque');
 			$type = $this->request->getData('type_id');
-            $marca = $this->request->getData('brand');
+            if ($_POST['brand'] == '') {
+                $marca = null;
+            } else {
+                $marca = $this->request->getData('brand');
+            }
+            
 			if ($_POST['models_id'] == '') {
-				$asset->models_id = null;
+				$modelo = null;
 			} else {
 				$modelo = $this->request->getData('models_id');
 			}
