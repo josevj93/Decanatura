@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Dompdf\Dompdf;
+use Cake\Datasource\ConnectionManager;
+
 //use Cake\ORM\Query;
 
 /**
@@ -78,6 +81,7 @@ class ResiduesController extends AppController
      */
     public function index()
     {
+
         $residues = $this->paginate($this->Residues);
         /*
                 
@@ -142,7 +146,6 @@ class ResiduesController extends AppController
             $result[$i] =(object)$assetsquery[$i]->assets;
         }
 
-       
         //obtengo la tabla technical_reports
         $technical_reports = TableRegistry::get('TechnicalReports');
         //busco los datos que necesito
@@ -152,14 +155,13 @@ class ResiduesController extends AppController
                                     ->group(['assets_id'])
                                     ->toList();
 
-        //lo paso a objeto
         $size = count($queryRec);
 
         $resultRec = array_fill(0, $size, NULL);
-       // debug($queryRec);
         for($i = 0; $i < $size; $i++)
         {
-            $resultRec[$i] =(object)$queryRec[$i];
+            // se realiza una conversion a objeto para que la vista lo use sin problemas
+            $resultRec[$i]= (object)$queryRec[$i];
         }
 
         $Unidad = $this->UnidadAcadémica;
@@ -175,40 +177,21 @@ class ResiduesController extends AppController
      */
     public function add()
     {
-        $technical_reports = TableRegistry::get('TechnicalReports');
-        $assetsQuery = $technical_reports->find()
-                         ->select(['assets.plaque','assets.brand','assets.model','assets.series','assets.state'])
-                         ->join([
-                            'assets' => [
-                                    'table' => 'assets',
-                                    'type'  => 'INNER',
-                                    'conditions' => ['assets.plaque= TechnicalReports.assets_id']
-                                ]
-                                ])
-                         ->where(['TechnicalReports.recommendation' => "D"])
-                         ->group (['assets.plaque'])
-                         ->toList();
-
-        $size = count($assetsQuery);
-        $result=   array_fill(0, $size, NULL);
-        
-        for($i=0;$i<$size;$i++)
-        {
-            $result[$i] =(object)$assetsQuery[$i]->assets;
-        }
-        $this->set(compact('residues','result'));
-        
         $residue = $this->Residues->newEntity();
         if ($this->request->is('post')) {
-            $residue = $this->Residues->patchEntity($residue, $this->request->getData());
+
+            $residue = $this->Residues->patchEntity($residue, $this->request->getData(),['validationDefault'=>'residues_id']);
+
+            //debug($residue);
+
             if ($this->Residues->save($residue)) {
-                $this->Flash->success(__('The residue has been saved.'));
+                
 
                 $condicion = explode(',', $this->request->getData('checkList'));
                 
                 $assets = TableRegistry::get('Assets')->find('all');
                 $assets->update()
-                    ->set(['residues_id' => $residue->residues_id])
+                    ->set(['residues_id' => $residue->residues_id, 'state' => "Desechado"])
                     ->where(['plaque IN' => $condicion])
                     ->execute();
 
@@ -217,12 +200,59 @@ class ResiduesController extends AppController
                     ->set(['residues_id' => $residue->residues_id])
                     ->where(['assets_id IN' => $condicion])
                     ->execute();
-                
-                return $this->redirect(['action' => 'index']);
+                    AppController::insertLog($residue['residues_id'], TRUE);
+                $this->Flash->success(__('El acta de desecho fue guardada.'));
+                return $this->redirect(['action' => 'view', $residue->residues_id]);
             }
-            $this->Flash->error(__('The residue could not be saved. Please, try again.'));
+            AppController::insertLog($model['residues_id'], FALSE);
+            $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Inténtelo de nuevo.'));
         }
-        $this->set(compact('residue'));
+
+
+        $technical_reports = TableRegistry::get('TechnicalReports');
+        $assetsQuery = $technical_reports->find()
+                         ->select(['assets.plaque','brands.name','models.name','assets.series','assets.state'])
+                         ->join([
+                            'assets' => [
+                                    'table' => 'assets',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.plaque= TechnicalReports.assets_id']
+                                ]
+                                ])
+                         ->join([
+                            'models' => [
+                                    'table' => 'models',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.models_id= models.id']
+                                ]
+                                ])
+                         ->join([
+                            'brands' => [
+                                    'table' => 'brands',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['models.id_brand = brands.id']
+                                ]
+                                ])
+                         ->where(['TechnicalReports.recommendation' => "D", 'assets.state' => "Disponible"])
+                         ->group (['assets.plaque'])
+                         ->toList();
+
+        $size = count($assetsQuery);
+        $result=   array_fill(0, $size, NULL);
+        
+        for($i=0;$i<$size;$i++)
+        {
+            //* se acomodan los valores dentro de un mismo [$i]
+            $result[$i]['plaque']= $assetsQuery[$i]->assets['plaque'];
+            $result[$i]['brand']= $assetsQuery[$i]->brands['name'];
+            $result[$i]['model']= $assetsQuery[$i]->models['name'];
+            $result[$i]['series']= $assetsQuery[$i]->assets['series'];
+            $result[$i]['state']= $assetsQuery[$i]->assets['state'];
+
+            // se realiza una conversion a objeto para que la vista lo use sin problemas
+            $result[$i]= (object)$result[$i];
+        }
+        $this->set(compact('residue', 'result'));
     }
     /**
      * Edit method
@@ -260,7 +290,9 @@ class ResiduesController extends AppController
             $checksViejos = explode(",", $check);
 
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
+
             if ($this->Residues->save($residue)) {
+                AppController::insertLog($residue['residues_id'], TRUE);
                 $this->Flash->success(__('El acta de residuo ha sido guardada'));
 
                 //AQUI EMPIEZA LA MAGIA
@@ -277,13 +309,13 @@ class ResiduesController extends AppController
 
                 $nuevos = array_diff($checksViejos, $tmp);
                 $viejos = array_diff($tmp, $checksViejos);
-
+                
                 if (count($viejos) > 0) {
 
                         $assets = TableRegistry::get('Assets')->find('all');
 
                         $assets->update()
-                                ->set(['residues_id' => NULL])
+                                ->set(['residues_id' => NULL, 'state' => "Disponible"])
                                 ->where(['plaque IN' => $viejos])
                                 ->execute();
 
@@ -300,7 +332,7 @@ class ResiduesController extends AppController
                          $assets = TableRegistry::get('Assets')->find('all');
                         
                          $assets->update()
-                                ->set(['residues_id' => $residue->residues_id])
+                                ->set(['residues_id' => $residue->residues_id, 'state' => "Desechado"])
                                 ->where(['plaque IN' => $nuevos])
                                 ->execute();
 
@@ -315,16 +347,18 @@ class ResiduesController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
 
-
-            $this->Flash->error(__('El acta de residuo no se ha guradado, intentalo de nuevo'));
+            AppController::insertLog($residue['residues_id'], FALSE);
+            $this->Flash->error(__('El acta de residuo no se ha guardado, inténtelo de nuevo'));
 
         }
 
+        // aqui pasa a sacar los valores de result2 e indexarlos
+        $lastPlaques =array_column($result2, 'plaque');
 
+        /** se obtienen los datos de los activos que se quieren desechar*/
         $technical_reports = TableRegistry::get('TechnicalReports');
-
         $query = $technical_reports->find()
-                        ->select(['assets.plaque', 'assets.brand', 'assets.model', 'assets.series', 'assets.state'])
+                        ->select(['assets.plaque', 'brands.name', 'models.name', 'assets.series', 'assets.state'])
                         ->join ([
                             'assets'=> [
                                 'table'=>'assets',
@@ -332,9 +366,35 @@ class ResiduesController extends AppController
                                 'conditions'=> ['assets.plaque= TechnicalReports.assets_id']
                             ]
                         ])
-                        ->where(['TechnicalReports.recommendation' => "D"])
+                        ->join([
+                            'models' => [
+                                    'table' => 'models',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.models_id= models.id']
+                                ]
+                                ])
+                         ->join([
+                            'brands' => [
+                                    'table' => 'brands',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['models.id_brand = brands.id']
+                                ]
+                                ])
+                        ->where(['OR'=>[
+                                        ['AND'=>[
+                                                 ['TechnicalReports.recommendation' => "D"],
+                                                 ['assets.state not like' => 'Des%']
+                                                ]
+                                        ],
+                                        ['assets.plaque in'=>array_column($result2, 'plaque')]
+                                       ]
+                                ])
+                        //->where(['assets.state not like' => 'Des%'])
+                        //->where(['TechnicalReports.recommendation' => "D"])
+                        //->where(['or assets.plaque in'=>$result2 ])
                         ->group(['assets.plaque'])
                         ->toList();
+        //debug($query);
 
         $size = count($query);
 
@@ -342,7 +402,15 @@ class ResiduesController extends AppController
         
         for($i = 0; $i < $size; $i++)
         {
-            $result[$i] =(object)$query[$i]->assets;
+            //* se acomodan los valores dentro de un mismo [$i]
+            $result[$i]['plaque']= $query[$i]->assets['plaque'];
+            $result[$i]['brand']= $query[$i]->brands['name'];
+            $result[$i]['model']= $query[$i]->models['name'];
+            $result[$i]['series']= $query[$i]->assets['series'];
+            $result[$i]['state']= $query[$i]->assets['state'];
+
+            // se realiza una conversion a objeto para que la vista lo use sin problemas
+            $result[$i]= (object)$result[$i];
         }
 
         $Unidad = $this->UnidadAcadémica;
@@ -363,18 +431,25 @@ class ResiduesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
 
         $assets = TableRegistry::get('Assets')->find()->where(['residues_id' => $id]);
-        
+        //se actualiza el estado del activo en la tabla de activos
         $assets->update()
-        ->set(['residues_id' => null])
+        ->set(['residues_id' => null, 'state' => "Disponible"])
         ->where(['residues_id' => $id])
         ->execute();
-
         $residue = $this->Residues->get($id);
-        debug($this->Residues->get($id));
+        //se quita la llave foránea para poder borrar el activo.
+        $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
+
+                         $technical_reports->update()
+                                             ->set(['residues_id' => null])
+                                             ->where(['residues_id' => $residue->residues_id])
+                                             ->execute();
         if ($this->Residues->delete($residue)) {
-            $this->Flash->success(__('The residue has been deleted.'));
+            AppController::insertLog($residue['residues_id'], TRUE);
+            $this->Flash->success(__('El acta de residuo ha sido eliminada.'));
         } else {
-            $this->Flash->error(__('The residue could not be deleted. Please, try again.'));
+            AppController::insertLog($residue['residues_id'], FALSE);
+            $this->Flash->error(__('El acta de residuo no puede ser eliminada, inténtalo de nuevo'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -391,4 +466,136 @@ class ResiduesController extends AppController
         }
         $this->set('serchedAsset',$searchedAsset);
     }
+
+    public function download($id = null)
+    {
+
+
+        $residue = $this->Residues->get($id);
+
+        //$residue['id']                    Autorizacion
+        //$residue['date']                  Fecha
+        //$residue['name1']                 Nombre1
+        //$residue['identification1']       Cedula1
+        //$residue['name2']                 Nombre2
+        //$residue['identification2']       Cedula2
+
+
+        $conn = ConnectionManager::get('default');
+        $stmt = $conn->execute('SELECT * FROM assets
+            inner join residues on assets.residues_id = residues.residues_id
+            where residues.residues_id =\'' . $id . '\';');
+
+        $results = $stmt ->fetchAll('assoc');
+
+
+
+         require_once 'dompdf/autoload.inc.php';
+        //initialize dompdf class
+        $document = new Dompdf();
+        $html = 
+        '
+        <style>
+        #element1 {float:left;margin-right:10px;} #element2 {float:right;} 
+        table, td, th {
+            border: 1px solid black;
+        }
+        body {
+            border: 5px double;
+            width:100%;
+            height:100%;
+            display:block;
+            overflow:hidden;
+            padding:30px 30px 30px 30px
+        }
+
+        table {
+            border-collapse: collapse;
+            border: none;
+            width: 100%;
+        }
+
+        th {
+            height: 50px;
+        }
+        </style>
+
+
+        <center><img src="C:\xampp\htdocs\Decanatura\src\Controller\images\logoucr.png"></center>
+        <title>Informe Técnico</title>
+        <h2 align="center">UNIVERSIDAD DE COSTA RICA</h2>
+        <h2 align="center">UNIDAD DE ACTIVOS FIJOS</h2>
+        <h2 align="center">ACTA DE DESECHO</h2>
+        <p>&nbsp;</p>
+        <div id="element2" align="left"><strong>Autorización N.º VRA-'.$residue->residues_id.'</strong></div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Unidad de Custodio:________________________________________________________</strong></div>
+        <p>&nbsp;</p>
+        <p align="left">El dia <strong>'.$residue->date.'</strong> en presencia de los señores:</p>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Nombre:</strong>'.$residue->name1.'</div> <div id="element2" align="right"><strong>Cedula:</strong>'.$residue->identification1.'</div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Nombre:</strong>'.$residue->name2.'</div> <div id="element2" align="right"><strong>Cedula:</strong>'.$residue->identification2.'</div>
+        <p>&nbsp;</p>
+        <p>Se procede a levantar el <strong>Acta de Desecho</strong> de bienes muebles por haber cumplido su periodo de vida útil, de acuerdo con el <strong>Informe Técnico</strong> adjunto y la respectiva autorización por parte de la Vicerrectoría de Administración, de conformidad con el Reglamento para la Administración y Control de los Bienes Institucionales de la Universidad de Costa Rica</p>
+
+        <p align="left">Los bienes son los siguientes:</p>
+        <p>&nbsp;</p>
+        </table>
+        <table width="0" border="1">
+        <tbody>
+        <tr>
+        <th align="center"><strong>DESCRIPCIÓN DEL BIEN</strong></th>
+        <th align="center"><strong>N.º PLACA</strong></th>
+        </tr>';
+
+        foreach ($results as $item) {
+            $html .= 
+            '<tr>
+            <td align="center">' . $item['description'] . '</td>
+             <td align="center">' . $item['plaque'] . '</td>
+             </tr>';
+        }
+        $html .=
+        '</table>
+        <p>&nbsp;</p>
+        <div id="element1" align="left">____________________________________________</div> <div id="element2" align="right">____________________________________________</div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Autoridad Universitaria / Jefatura Administrativa</strong></div> <div id="element2" align="right"><strong>RESPONSABLE AUTORIZADO</strong></div>        
+        <p>&nbsp;</p>
+        <div id="element2" align="left"><strong>Oficina de Servicios Generales<strong></div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left">____________________________________________</div> <div id="element2" align="right">____________________________________________</div>
+        <p>&nbsp;</p>
+        <div id="element1" align="left"><strong>Testigo N°1</strong></div> <div id="element2" align="right"><strong>Testigo N°2</strong></div>
+        <p>&nbsp;</p>
+        <p>(Art. 26 del Reglamento para la Administración y Control de los Bienes Institucionales de la Universidad de Costa Rica)</p>
+        <p>Original: Unidad de Bienes Institucionales (OAF)</p>
+        <p>Copia: Bodega de Activos Recuperados (OSG)</p>
+        <p>Copia: Unidad responsable</p>        
+        <p>&nbsp;</p>
+        <p align="center">Tels: 2511 5759/1149      www.oaf.ucr.ac.cr     correo electrónico: activosfijos.oaf@ucr.ac.cr</p>
+        ';
+
+        // linea para marcar el desecho como descargado, haciendo que ya no se pueda borrar
+        $residue->descargado = true;
+
+        // Actualizo el desecho, guardando el valor de descargado como true
+        $this->Residues->save($residue);
+
+
+        $document->loadHtml($html);
+
+        //set page size and orientation
+        $document->setPaper('A3', 'portrait');
+        //Render the HTML as PDF
+        $document->render();
+        //Get output of generated pdf in Browser
+        $document->stream("Acta de Desecho", array("Attachment"=>1));
+        //1  = Download
+        //0 = Preview
+        return $this->redirect(['action' => 'index']);
+
+    }
+
 }

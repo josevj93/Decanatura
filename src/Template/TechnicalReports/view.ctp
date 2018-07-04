@@ -47,12 +47,12 @@ label{
 
 
 <div class="technicalReports view large-9 medium-8 columns content">
-    <legend>Reporte técnico</legend>
+    <legend>Informe técnico</legend>
             <br>
             <div class="form-control sameLine" >
                 <div class="row">
                 <label>Reporte Nº:</label>
-                <?php echo '<input type="text" class="form-control" readonly="readonly" name="id" value="' . htmlspecialchars($technicalReport->technical_report_id) . '" style="width: 120px;" >'; ?>     
+                <?php echo '<input type="text" class="form-control" readonly="readonly" name="id" value="' . htmlspecialchars($technicalReport->internal_id) . '" style="width: 120px;" >'; ?>     
                 </div>
 
                 <div class="row">
@@ -134,7 +134,7 @@ label{
             <br>
 
             <div class="row col-md-8" >
-                <label>Recomendación:</label><br>
+                <label>Recomendación:</label>
                 <?php if ("C"==$technicalReport->recommendation): ?>
                     Reubicar
                 <?php endif; ?>
@@ -148,7 +148,7 @@ label{
                 <?php endif; ?>
 
                 <?php if("U"==$technicalReport->recommendation): ?>
-                    Usar piesas
+                    Usar piezas
                 <?php endif; ?>
 
                 <?php if("O"==$technicalReport->recommendation): ?>
@@ -158,7 +158,7 @@ label{
             <br>
 
             <div class="row col-md-8"> 
-                 <label>Nombre del evaluador: </label>
+                 <label>Nombre del Técnico Especializado: </label>
                     <?php
                     echo $this->Form->imput('evaluator_name', ['class'=>'form-control col-md-4',"readonly"=>"readonly", "value"=>$technicalReport->evaluator_name]); 
                     ?>   
@@ -169,9 +169,16 @@ label{
 
 <?= $this->Html->link(__('Cancelar'), ['controller'=> 'TechnicalReports', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-<?= $this->Html->link(__('Modificar'), ['controller'=> 'TechnicalReports', 'action' => 'edit', $technicalReport->technical_report_id], ['class' => 'btn btn-primary']) ?>
-    
+<?php if($technicalReport->file_name == null) : ?> 
 
-<?= $this->Form->postLink(__('Eliminar'), ['controller'=> 'TechnicalReports', 'action' => 'delete', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Seguro que desea eliminar la Ubicación #'.$technicalReport->technical_report_id.' ?', $technicalReport->technical_report_id)]) ?>
+    <?= $this->Html->link(__('Modificar'), ['controller'=> 'TechnicalReports', 'action' => 'edit', $technicalReport->technical_report_id], ['class' => 'btn btn-primary']) ?>
+
+<?php endif; ?> 
+
+<?php if(($technicalReport->descargado == null) && ($technicalReport->file_name == null )) : ?> 
+
+    <?= $this->Form->postLink(__('Eliminar'), ['controller'=> 'TechnicalReports', 'action' => 'delete', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Seguro que desea eliminar la Ubicación #'.$technicalReport->technical_report_id.' ?', $technicalReport->technical_report_id)]) ?>
+
+<?php endif; ?> 
 
 <?= $this->Form->postLink(__('Generar Pdf'), ['controller'=> 'TechnicalReports', 'action' => 'download', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]) ?>

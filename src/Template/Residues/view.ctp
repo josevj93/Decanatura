@@ -12,24 +12,24 @@
         <legend><?= __('Consultar acta de desecho') ?></legend>
         <br>    
         <div class="form-control sameLine" >    
-        <div class='row'>
-
-            <label>Autorización Número:</label>
-                <?php
-                    echo $this->Form->imput('residues_id',  ['class'=>'form-control col-sm-2', 'disabled']); 
-                ?>
+            <div class='row'>
+            <?php
+            /*<label>Autorización Número: VRA-</label>
+                <label><?php echo h($residue->residues_id); ?></label>*/
+            echo '<label>Autorización Número: VRA-'.h($residue->residues_id).'</label>';
+            ?>
         </div>
         <div class='row'>
             <label>Fecha:</label>
                 <?php
-                    $tmpDate= $residue->date->format('y-m-d');
+                    $tmpDate= $residue->date->format('d-m-y');
                     echo $this->Form->imput('date', ['class'=>'form-control', 'value'=>$tmpDate, 'disabled']); 
                 ?>
-        </div>
+            </div>
         </div><br>
 
-        <div class='form-control row' style="border-color: transparent;">
-            <label>Unidad Custodio:</label>
+        <div class='row'>
+            <label class='align'>Unidad Custodio:</label>
             <?php 
                 echo $this->Form->imput('Unidad', ['class'=>'form-control col-sm-4', 'value'=>$Unidad, 'disabled']);
             ?>
@@ -87,19 +87,15 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th class="transfer-h" scope="col"><?= __('Placa') ?></th>
-                <th class="transfer-h" scope="col"><?= __('Descripción') ?></th>
+                <th class="transfer-h" scope="col"><?= __('Recomendacion') ?></th>
                 <th class="transfer-h" scope="col"><?= __('Informe Técnico') ?></th>
                 
             </tr>
     
-            <?php 
-            //debug($result); 
-            //debug($resultRec);
+            <?php
 
             $size = count($resultRec);
-            
-            for($i = 0; $i < $size; $i++) {
-
+            for ($i=0; $i< $size;$i++){
                 echo '<tr>';
                     echo '<td>' .h($result[$i]->plaque). '</td>';
 
@@ -152,6 +148,11 @@
 
     label[class=label-t]{
         margin-left: 20px;
+        width: 70px;
+    }
+
+    label[class=align]{
+        margin-left: 14px;
     }
 
     input[name=date]{
@@ -196,15 +197,30 @@
     }
 
     </style> 
+
+    <div >
+      <?php echo $this->Form->input('file_solicitud',['type' => 'file','label' => 'Subir Acta de Desechos', 'class' => 'form-control-file']); ?>
+    </div>
      
+    
+
      <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-     <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $residue->residues_id], ['class' => 'btn btn-primary']) ?> 
+     <?php if($residue->file_name == null) : ?> 
 
-     <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el acta de Residuo # {0}?', $residue->residues_id)]) ?>
+        <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $residue->residues_id], ['class' => 'btn btn-primary']) ?> 
+    
+    <?php endif; ?> 
+    
+    <?php if(($residue->descargado == null) && ($residue->file_name == null )) : ?> 
 
+        <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el acta de Residuo # {0}?', $residue->residues_id)]) ?>
+    
+    <?php endif; ?> 
+    <?= $this->Form->postLink(__('Descargar Acta'), ['action' => 'download', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $residue->residues_id)]) ?>
+    
     </div>
-
+<br><br>
     <script>
             
     </script>

@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Locations Controller
@@ -107,13 +108,36 @@ class LocationsController extends AppController
     public function add()
     {
         $location = $this->Locations->newEntity();
+
+        // De las locations, saco el ID más alto
+        $tmpId = $this->Locations->find('all',['fields'=>'location_id'])->max('location_id');
+        
+        // Si el id que resultó es null (porque la tabla está vacía o no hay records para el año actual)
+        if ($tmpId == null) {
+            
+            // Asigno el ID como 1
+            $tmpId = 1;            
+        }
+        else{
+
+            // De lo contrario, le sumo 1 al ID más grande
+            $tmpId= $tmpId->location_id+1;
+        }
+
         if ($this->request->is('post')) {
+
             $location = $this->Locations->patchEntity($location, $this->request->getData());
+
+            // Asigno el ID nuevo
+            $location->location_id = $tmpId;
+
             if ($this->Locations->save($location)) {
+                AppController::insertLog($location['location_id'], TRUE);
                 $this->Flash->success(__('Ubicación guardada.'));
 
                 return $this->redirect(['action' => 'index']);
             }
+            AppController::insertLog($location['location_id'], FALSE);
             $this->Flash->error(__('Ocurrió un error.'));
         }
         $this->set(compact('location'));
@@ -134,10 +158,12 @@ class LocationsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $location = $this->Locations->patchEntity($location, $this->request->getData());
             if ($this->Locations->save($location)) {
+                AppController::insertLog($location['location_id'], TRUE);
                 $this->Flash->success(__('Ubicación guardada.'));
 
                 return $this->redirect(['action' => 'index']);
             }
+            AppController::insertLog($location['location_id'], FALSE);
             $this->Flash->error(__('Ocurrió un error.'));
         }
         $this->set(compact('location'));
@@ -153,12 +179,27 @@ class LocationsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
+        
         $location = $this->Locations->get($id);
-        if ($this->Locations->delete($location)) {
-            $this->Flash->success(__('Se eliminó la ubicación.'));
-        } else {
-            $this->Flash->error(__('La ubicación no pudo ser eliminada.'));
+
+        //Obtengo todos los assets que tengan como location el que quiero borrar
+        $assets = TableRegistry::get('Assets')->find()->where(['location_id' => $location->location_id]);
+
+        // De las locations que obtuve, saco el ID más alto, solo con la intención de confirmar que es null o no
+        $tmpId = $assets->find('all',['fields'=>'plaque'])->max('plaque');
+
+        // Si el resultado del query anterior es nulo, entonces lo puedo borrar
+        if($tmpId == null){
+
+            if ($this->Locations->delete($location)) {
+                AppController::insertLog($location['location_id'], TRUE);
+                $this->Flash->success(__('Se eliminó la ubicación.'));
+            } 
         }
+        else {
+            AppController::insertLog($location['location_id'], FALSE);
+                $this->Flash->error(__('La ubicación no se puede eliminar, ya que esisten activos asignados a ella.'));
+            }
 
         return $this->redirect(['action' => 'index']);
     }
