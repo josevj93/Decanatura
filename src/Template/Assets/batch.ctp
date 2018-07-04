@@ -60,6 +60,7 @@
     </div>
       
       <div class="col-lg-2">   </div>
+        
     </div> <br>
     
     <div class="form-control sameLine" >
@@ -80,6 +81,7 @@
         <label>Series:</label>
         <?php echo $this->Form->textarea('series', ['label' => 'Serie:', 'class'=>'form-control col-md-9']); ?>        
     </div>
+
   </div> 
   
   <br>

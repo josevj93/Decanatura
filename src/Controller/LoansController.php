@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Dompdf\Dompdf;
+use Cake\Datasource\ConnectionManager;
+
 
 /**
 * Controlador para los préstamos de la aplicación
@@ -31,13 +34,13 @@ class LoansController extends AppController
             $rls = $roles['permissions'];
             foreach ($rls as $item){
                 //$permisos[(int)$item['id']] = 1;
-                if($item['nombre'] == 'Insertar Usuarios'){
+                if($item['nombre'] == 'Insertar Prestamos'){
                     $allowI = true;
-                }else if($item['nombre'] == 'Modificar Usuarios'){
+                }else if($item['nombre'] == 'Modificar Prestamos'){
                     $allowM = true;
-                }else if($item['nombre'] == 'Eliminar Usuarios'){
+                }else if($item['nombre'] == 'Eliminar Prestamos'){
                     $allowE = true;
-                }else if($item['nombre'] == 'Consultar Usuarios'){
+                }else if($item['nombre'] == 'Consultar Prestamos'){
                     $allowC = true;
                 }
             }
@@ -95,7 +98,15 @@ class LoansController extends AppController
                         ->where(['assets.loan_id' => $id])
                         ->toList();
 
-        $this->set('loan', $loan);
+        $size = count($query);
+
+        $result = array_fill(0, $size, NULL);
+        
+        for($i = 0; $i < $size; $i++)
+        {
+            $result[$i] =(object)$query[$i]->assets;
+        }
+        $this->set(compact('loan', 'result'));
     }
 
     /**
@@ -151,6 +162,7 @@ class LoansController extends AppController
                         ->select(['assets.plaque', 'assets.models_id', 'assets.series'])
                         ->where(['assets.state' => "Disponible"])
                         ->where(['assets.lendable' => true])
+                        ->where(['assets.deleted' => false])
                         ->toList();
 
         $size = count($query);
@@ -262,6 +274,7 @@ class LoansController extends AppController
         /*Asocia esta función a la vista /Templates/Layout/searchAsset.ctp*/
         $this->render('/Layout/searchAsset');
     }
+
 
     /**
      * Método para generar formulario
@@ -389,3 +402,4 @@ $html .=
 
 
 }
+

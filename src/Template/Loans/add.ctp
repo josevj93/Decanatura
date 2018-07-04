@@ -7,11 +7,16 @@
 ?>
 
 <style>
-        .btn-primary {
-            margin: 10px;
-            margin-top: 15px;
+    .btn-primary {
+          color: #fff;
+          background-color: #0099FF;
+          border-color: #0099FF;
+          margin-left: 10px;
+          margin: 10px;
+          margin-top: 15px;
         }
-		    .btn-default {
+		
+		.btn-default {
           color: #000;
           background-color: #7DC7EF;
           border-top-right-radius: 5px;
@@ -43,6 +48,7 @@
     <br>
 
     <?= $this->Form->create($loan) ?>
+
     <div class="form-control sameLine">
 			<div class="row col-lg-5">
 				<label> <b>Responsable:</b><b style="color:red;">*</b> </label>
@@ -60,6 +66,7 @@
 			</div>
 			
 		</div> <br>
+
    
  <!-- AQUI ESTA LO IMPORTANTE. RECUERDEN COPIAR LOS SCRIPTS -->
         <div class="related">
@@ -102,13 +109,13 @@
     <!-- input donde coloco la lista de placas checkeadas -->
     <input type="hidden" name="checkList" id="checkList">
 
+	
     <br>
 
-    <div class="row">
-        <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
-            <?php echo $this->Form->control('observaciones', array('label'=>'Observaciones', 'class' => 'form-control', 'rows' => '3')); ?>
-        </div>
-    </div>
+    <div>
+      <label> Observaciones: </label>
+      <?php echo $this->Form->textarea('observations', ['class'=>'form-control col-md-8']); ?>
+    </div> <br>
 
     <br>
 
@@ -117,6 +124,8 @@
        
         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
          <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
+
+
 
     </div>
     
@@ -141,7 +150,6 @@
             dayNamesMin: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do']
      });
   } );
-
     /*prueba para autocompletar*/
     /*
     jQuery('#assetImput').autocomplete({
@@ -152,7 +160,42 @@
 
     $(document).ready(function() 
     {
-        $('#assets-transfers-grid').DataTable( {} );
+        var table = $('#assets-transfers-grid').DataTable( {
+        "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "decimal": ",",
+                    "thousands": ".",
+                    "sSelect": "1 fila seleccionada",
+                    "select": {
+                        rows: {
+                            _: "Ha seleccionado %d filas",
+                            0: "Dele click a una fila para seleccionarla",
+                            1: "1 fila seleccionada"
+                        }
+                    },
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+       } );
     } );
     $(document).ready(function() 
     {
