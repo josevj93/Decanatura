@@ -92,7 +92,7 @@
             
         </tbody>
     </table>
-
+        
 </div>
 
 <div>
@@ -115,5 +115,3 @@
   <?= $this->Form->postLink(__('Test'), ['controller'=> 'Loans', 'action' => 'terminar',$loan->id], ['class' => 'btn btn-primary']) ?>
 
 </div>
-
-

@@ -358,7 +358,7 @@ class TechnicalReportsController extends AppController
         <p align="center">Tels: 2511 5759/1149 www.oaf.ucr.ac.cr correo electrónico: activosfijos.oaf@ucr.ac.cr</p>
         ');
         //set page size and orientation
-        $document->setPaper('A3', 'portrait');
+        $document->setPaper('A3', 'landscape');
         //Render the HTML as PDF
         $document->render();
         //Get output of generated pdf in Browser

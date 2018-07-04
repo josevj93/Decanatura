@@ -249,9 +249,7 @@ class AssetsController extends AppController
     public function batch($cantidad = null)
     {
         $asset = $this->Assets->newEntity();
-        //$asset = $this->Assets->newEntity();
         if ($this->request->is('post')) {
-
             //guarda en variables todos los campos reutilizables
             $cantidad = $this->request->getData('quantity');
             $placa = $this->request->getData('plaque');
@@ -347,6 +345,7 @@ class AssetsController extends AppController
         $this->loadModel('Brands');
         $brands = $this->Brands->find('list', ['limit' => 200]);
         //$types = $this->Assets->Types->find('list', ['limit' => 200]);
+
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
         $this->set(compact('asset', 'brands', 'users', 'locations','models'));

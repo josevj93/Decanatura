@@ -211,8 +211,6 @@
         <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $residue->residues_id], ['class' => 'btn btn-primary']) ?> 
     
     <?php endif; ?> 
-
-
     
     <?php if(($residue->descargado == null) && ($residue->file_name == null )) : ?> 
 

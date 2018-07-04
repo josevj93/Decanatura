@@ -62,6 +62,7 @@
                 <tfoot>
                     <tr>
                         <td></td>
+                        <th>Placa</th>
                         <th>Responsable</th>
                         <th>Estado</th>
                         <th>Fecha de inicio</th>
@@ -77,11 +78,11 @@
 
 <style>
 .btn-primary {
-    margin: 10px;
+  color: #fff;
+      margin: 10px;
     margin-top: 15px;
-    color: #fff;
-    background-color: #FF9933;
-    border-color: #FF9933;
+  background-color: #FF9933;
+  border-color: #FF9933;
 }
 </style>
 
@@ -90,9 +91,9 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-        var table= $('#loans-grid').DataTable( {
-             dom: 'Bfrtip',
-                buttons: [
+        $('#loans-grid').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
                 'copyHtml5',
                 'excelHtml5',
                 'csvHtml5',
@@ -137,15 +138,14 @@
                 }
                 
             } );
-
         // Setup - add a text input to each footer cell
         $('#loans-grid tfoot th').each( function () {
             var title = $(this).text();
-           $(this).html( '<input type="text" placeholder="&#xF002; '+title+'" style="font-family:Arial, FontAwesome" />' );
+            $(this).html( '<input type="text" placeholder="Buscar '+title+'" />' );
         } );
 
         // DataTable
-        //var table = $('#roles-grid').DataTable();
+        var table = $('#loans-grid').DataTable();
 
         // Apply the search
         table.columns().every( function () {
@@ -160,6 +160,5 @@
             } );
         } );
     } );
-
 
 </script>

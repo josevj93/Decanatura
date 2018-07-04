@@ -171,9 +171,8 @@
 
     <?php endif; ?> 
 
-      <?= $this->Form->postLink(__('Descargar Acta'), ['action' => 'download', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $transfer->transfers_id)]) ?>
+    <?= $this->Form->postLink(__('Descargar Acta'), ['action' => 'download', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $transfer->transfers_id)]) ?>
 
-  </div>
+    </div>
       <br><br> 
-
 </div>

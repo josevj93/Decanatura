@@ -467,8 +467,7 @@ class ResiduesController extends AppController
         $this->set('serchedAsset',$searchedAsset);
     }
 
-
-         public function download($id = null)
+    public function download($id = null)
     {
 
 

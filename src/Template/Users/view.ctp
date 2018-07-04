@@ -43,6 +43,7 @@
         <tr>
             <th scope="row"><?= __('Rol') ?></th>
             <td><?= h($rol) ?></td>
+
         </tr>
         <tr>
             <th scope="row"><?= __('Estado') ?></th>
@@ -61,7 +62,8 @@
         </style> 
 </div>
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+
     <?= $this->Html->link(__('Modificar'), ['controller' => 'Users', 'action' => 'edit', $user->id], ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->postLink('Eliminar', ['action' => 'delete', $user->id],  ['escape'=> false, 'class' => 'btn btn-primary' ,'confirm' => __('¿Está seguro que desea eliminar este usuario? # {0}?', $user->id)]) ?>
-    s
     <?= $this->Form->end() ?>
+
