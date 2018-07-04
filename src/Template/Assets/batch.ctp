@@ -49,19 +49,19 @@
 
     <div class="form-control sameLine" >
     
-    <div class="row">
-        <label> <b>Placa Inicial:</b><b style="color:red;">*</b> </label>
-    <?php echo $this->Form->imput('plaque', ['class'=>'form-control col-md-9']); ?> 
-    </div>
+      <div class="row">
+          <label> <b>Placa Inicial:</b><b style="color:red;">*</b> </label>
+          <?php echo $this->Form->imput('plaque', ['class'=>'form-control col-md-8']); ?> 
+      </div>
 
-    <div class="row">
-        <label> <b>Cantidad:</b><b style="color:red;">*</b> </label>
-    <?php echo $this->Form->imput('quantity', ['class'=>'form-control col-md-9']); ?> 
-    </div>
-      
-    <div class="row">
-        <label> <b>Tipo:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('type_id', $types, array('empty' => '-- Seleccione Tipo --', 'class' => 'form-control col-md-9')); ?>            
+      <div class="row">
+          <label> <b>Cantidad:</b><b style="color:red;">*</b> </label>
+        <?php echo $this->Form->imput('quantity', ['class'=>'form-control col-md-6']); ?> 
+      </div>
+        
+      <div class="row">
+          <label> <b>Tipo:</b><b style="color:red;">*</b> </label>
+          <?php echo $this->Form->select('type_id', $types, array('empty' => '-- Seleccione Tipo --', 'class' => 'form-control col-md-9')); ?>          
       </div>
         
     </div> <br>
@@ -77,37 +77,35 @@
         <label>Modelo:</label>
         <?php echo $this->Form->select('models_id', '', ['id' => 'model-list', 'empty' => '-- Seleccione Modelo --', 'class'=>'form-control col-md-8']); ?>        
       </div>
-    </div>
 
-    <br>
-    <div class="row">
-        <label>Series:</label>
-        <?php echo $this->Form->textarea('series', ['label' => 'Serie:', 'class'=>'form-control col-md-9']); ?>        
-    </div>
+      <div class="col-lg-2">   </div>
+    </div> <br>
 
-  </div> 
-  
-  <br>
     <div>
-    <label> <b>Descripción:</b><b style="color:red;">*</b> </label>
-    <?php echo $this->Form->textarea('description', ['class'=>'form-control col-md-8']); ?>
-  </div> <br>
+        <label>Series:</label>
+        <?php echo $this->Form->textarea('series', ['label' => 'Serie:', 'class'=>'form-control col-md-8']); ?>        
+    </div> <br>
+
+    <div>
+      <label> <b>Descripción:</b><b style="color:red;">*</b> </label>
+      <?php echo $this->Form->textarea('description', ['class'=>'form-control col-md-8']); ?>
+    </div> <br>
     
     <div class="form-control sameLine" >
 
       <div class="row">
         <label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('responsable_id', $users, array('empty' => true, 'class' => 'form-control col-md-7')); ?>            
+        <?php echo $this->Form->select('responsable_id', $users, array('empty' => '-- Seleccione Responsable --', 'class' => 'form-control col-md-7')); ?>            
       </div>
       
       <div class="row">
         <label><b>Asignado a:</b><b style="color:red;">*</b> </label>
-        <?php echo $this->Form->select('assigned_to', $users, ['class'=>'form-control col-md-7']); ?>        
+        <?php echo $this->Form->select('assigned_to', $users, ['empty' => '-- Seleccione Asignado --', 'class'=>'form-control col-md-7']); ?>        
       </div>
       
       <div class="row">
         <label> <b>Ubicación:</b><b style="color:red;">*</b></label>
-        <?php echo $this->Form->select('location_id', $locations, ['label' => 'Serie:', 'class'=>'form-control col-md-7']); ?>        
+        <?php echo $this->Form->select('location_id', $locations, ['empty' => '-- Seleccione Ubicación --', 'class'=>'form-control col-md-7']); ?>        
       </div>
 
   </div> 
