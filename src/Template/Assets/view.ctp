@@ -166,6 +166,9 @@
 
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 	
+  <div class="col-12 text-right" hidden>
+    <?= $this->Form->postLink(__('Eliminar2'), ['action' => 'delete', $asset->plaque], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el activo "{0}" ?', $asset->plaque)]) ?>
+  </div>
     <?= $this->Form->postLink(__('Eliminar'), ['action' => 'softDelete', $asset->plaque], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el activo # {0}?', $asset->plaque)]) ?>
     
     <?php 
