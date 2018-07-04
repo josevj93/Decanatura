@@ -55,7 +55,13 @@
 		  <?php echo $this->Form->imput('plaque', ['class'=>'form-control col-md-9', 'disabled']); ?> 
       </div>
 	  
-	  <div class="col-lg-2">   </div>
+	  <div class="row">
+        <label> <b>Tipo:</b><b style="color:red;">*</b> </label>
+        <?php echo $this->Form->select('type_id', $types, array('empty' => '-- Seleccione Tipo --', 'class' => 'form-control col-md-9')); ?>            
+      </div>
+        
+		
+	  <div class="col-lg-3">   </div>
         
     </div> <br>
 	

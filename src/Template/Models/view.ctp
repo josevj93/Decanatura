@@ -56,8 +56,11 @@
 <div class="col-12 text-right">
 
 <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-<?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $model->id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el modelo "{0}" ?', $model->name)]) ?>
 
+<div class="col-12 text-right" hidden>
+	<?= $this->Form->postLink(__('Eliminar2'), ['action' => 'delete', $model->id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el modelo "{0}" ?', $model->name)]) ?>
+</div>
+<?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $model->id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el modelo "{0}" ?', $model->name)]) ?>
 <?= $this->Html->link(__('Editar'), ['action' => 'edit', $model->id], ['class' => 'btn btn-primary']) ?>
     
 

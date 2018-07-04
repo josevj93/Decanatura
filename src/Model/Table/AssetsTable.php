@@ -117,6 +117,10 @@ class AssetsTable extends Table
             'foreignKey' => 'loan_id',
             'joinType' => 'INNER'
         ]);
+		$this->belongsTo('Types', [
+            'foreignKey' => 'type_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -214,6 +218,11 @@ class AssetsTable extends Table
             ->scalar('brand')
             ->maxLength('brand', 255)
             ->allowEmpty('brand');
+			
+		$validator
+            ->scalar('type_id')
+			->maxLength('type_id', 255)
+            ->notEmpty('type_id');
             
         return $validator;
     }
@@ -232,6 +241,7 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['loan_id'], 'Loans'));
         $rules->add($rules->existsIn(['models_id'], 'Models'));
+		$rules->add($rules->existsIn(['type_id'], 'Types'));
 
         return $rules;
     }

@@ -51,11 +51,16 @@
 	
       <div class="row">
           <label> Placa: </label>
-		  <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->plaque) . '">'; ?> 
+		  <?php echo '<input type="text" class="form-control col-sm-9" readonly="readonly" value="' . htmlspecialchars($asset->plaque) . '">'; ?> 
       </div>
       
-	  
-	  <div class="col-lg-2">   </div>
+	  <div class="row">
+        <label> Tipo: </label>
+        <?php echo '<input type="text" class="form-control col-sm-9" readonly="readonly" value="' . htmlspecialchars($asset->type->name) . '">'; ?>            
+      </div>
+        
+		
+	  <div class="col-lg-3">   </div>
         
     </div> <br>
 	
@@ -63,17 +68,17 @@
 
       <div class="row">
         <label>Marca:</label>
-        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->brand) . '">'; ?>       
+        <?php echo '<input type="text" class="form-control col-sm-9" readonly="readonly" value="' . htmlspecialchars($asset->brand) . '">'; ?>       
       </div>
       
       <div class="row">
         <label>Modelo:</label>
-        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->model->name) . '">'; ?>      
+        <?php echo '<input type="text" class="form-control col-sm-8" readonly="readonly" value="' . htmlspecialchars($asset->model->name) . '">'; ?>      
       </div>
 	  
 	  <div class="row">
         <label>Serie:</label>
-        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->series) . '">'; ?>         
+        <?php echo '<input type="text" class="form-control col-sm-9" readonly="readonly" value="' . htmlspecialchars($asset->series) . '">'; ?>         
       </div>
 
     </div> <br>
@@ -160,6 +165,10 @@
 	<div class="col-12 text-right">
 
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+	
+  <div class="col-12 text-right" hidden>
+    <?= $this->Form->postLink(__('Eliminar2'), ['action' => 'delete', $asset->plaque], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el activo "{0}" ?', $asset->plaque)]) ?>
+  </div>
     <?= $this->Form->postLink(__('Eliminar'), ['action' => 'softDelete', $asset->plaque], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el activo # {0}?', $asset->plaque)]) ?>
     
     <?php 
@@ -167,7 +176,7 @@
             echo $this->Form->postLink(__('Activar'), ['action' => 'restore', $asset->plaque], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea restaurar el activo # {0}?', $asset->plaque)]);
         }
     ?>
-
+	
     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $asset->plaque], ['class' => 'btn btn-primary']) ?>
     
 
