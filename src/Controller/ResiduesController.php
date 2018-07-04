@@ -187,14 +187,17 @@ class ResiduesController extends AppController
             if ($this->Residues->save($residue)) {
                 
 
+                //Se obtienen los seleccionados y se convierte a string separado en , 
                 $condicion = explode(',', $this->request->getData('checkList'));
                 
+                //Actualiza  los Activos seleccionados
                 $assets = TableRegistry::get('Assets')->find('all');
                 $assets->update()
                     ->set(['residues_id' => $residue->residues_id, 'state' => "Desechado"])
                     ->where(['plaque IN' => $condicion])
                     ->execute();
 
+                //Actualiza los reportes technicos donde tengan los Activos seleccionados
                 $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
                 $technical_reports->update()
                     ->set(['residues_id' => $residue->residues_id])
@@ -208,6 +211,7 @@ class ResiduesController extends AppController
         }
 
 
+        //Hace la seleccion de los Activos usando Join para unir los datos
         $technical_reports = TableRegistry::get('TechnicalReports');
         $assetsQuery = $technical_reports->find()
                          ->select(['assets.plaque','brands.name','models.name','assets.series','assets.state'])
