@@ -102,10 +102,11 @@ class AssetsController extends AppController
             $asset->state = "Disponible";
             $asset = $this->Assets->patchEntity($asset, $this->request->getData()); 
             if ($this->Assets->save($asset)) {
-
+                AppController::insertLog($asset['plaque'], TRUE);
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
+            AppController::insertLog($asset['plaque'], FALSE);
             $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
         
@@ -131,9 +132,11 @@ class AssetsController extends AppController
             
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
             if ($this->Assets->save($asset)) {
+                AppController::insertLog($asset['plaque'], TRUE);
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
+            AppController::insertLog($asset['plaque'], FALSE);
             $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
 
@@ -174,9 +177,11 @@ class AssetsController extends AppController
         
         if($asset->deletable){
             if($this->Assets->delete($asset)){
+                AppController::insertLog($asset['plaque'], TRUE);
                 $this->Flash->success(__('El activo fue eliminado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
+            AppController::insertLog($asset['plaque'], FALSE);
             $this->Flash->error(__('El activo no se pudo eliminar correctamente.'));
             return $this->redirect(['action' => 'index']);
         }

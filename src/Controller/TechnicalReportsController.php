@@ -157,10 +157,12 @@ class TechnicalReportsController extends AppController
             $technicalReport->internal_id = $tmpId;
 
             if ($this->TechnicalReports->save($technicalReport)) {
+                AppController::insertLog($technicalReport['technical_report_id'], TRUE);
                 $this->Flash->success(__('El informe técnico se ha guardado.'));
 
                 return $this->redirect(['action' => 'index']);
             }
+            AppController::insertLog($technicalReport['technical_report_id'], FALSE);
             $this->Flash->error(__('No se pudo guardar el informe.'));
         }// if post
         
@@ -187,10 +189,12 @@ class TechnicalReportsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $technicalReport = $this->TechnicalReports->patchEntity($technicalReport, $this->request->getData());
             if ($this->TechnicalReports->save($technicalReport)) {
+                AppController::insertLog($technicalReport['technical_report_id'], TRUE);
                 $this->Flash->success(__('Los cambios han sido guardados.'));
 
                 return $this->redirect(['action' => 'index']);
             }
+            AppController::insertLog($technicalReport['technical_report_id'], FALSE);
             $this->Flash->error(__('El reporte técnico no se pudo guardar.'));
             debug($technicalReport->errors());
 
@@ -214,8 +218,10 @@ class TechnicalReportsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $technicalReport = $this->TechnicalReports->get($id);
         if ($this->TechnicalReports->delete($technicalReport)) {
+            AppController::insertLog($technicalReport['technical_report_id'], TRUE);
             $this->Flash->success(__('El informe técnico se ha eliminado.'));
         } else {
+            AppController::insertLog($technicalReport['technical_report_id'], FALSE);
             $this->Flash->error(__('El informe técnico no se pudo eliminar, por favor intente de nuevo'));
         }
 
