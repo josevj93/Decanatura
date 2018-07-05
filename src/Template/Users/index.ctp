@@ -16,15 +16,15 @@
                 <thead>
                     <tr>
                         <!--<th scope="col"><?= $this->Paginator->sort('id') ?></th>-->
-                        <th scope="col" class="actions"><?= __('') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('Nombre') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('Apellido 1') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('Apellido 2') ?></th>
+                        <th scope="col" class="actions">Acciones</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido 1</th>
+                        <th scope="col">Apellido 2</th>
                         <!--<th scope="col"><?= $this->Paginator->sort('Correo') ?></th>-->
-                        <th scope="col"><?= $this->Paginator->sort('Usuario') ?></th>
+                        <th scope="col">Usuario</th>
                         <!--<th scope="col"><?= $this->Paginator->sort('password') ?></th>-->
                         <!--<th scope="col"><?= $this->Paginator->sort('id_rol') ?></th>-->
-                        <th scope="col"><?= $this->Paginator->sort('Estado') ?></th>
+                        <th scope="col">Estado</th>
                     </tr>
                 </thead>
                 <tbody>

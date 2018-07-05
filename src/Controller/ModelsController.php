@@ -8,7 +8,7 @@ use App\Controller\AAppController;
  *
  * @method \App\Model\Entity\Model[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class ModelsController extends AAppController
+class ModelsController extends AppController
 {
 	
 	public function isAuthorized($user)
@@ -119,19 +119,38 @@ class ModelsController extends AAppController
 				$this->Flash->error(__('El modelo no se pudo guardar, por favor intente nuevamente.'));
 				
 			} else {
-				$brand = $this->Models->Brands->newEntity();
-				$random_id = uniqid();
-				$brand->id = $random_id;
-				$brand->name = $_POST['new_Brand'];
 
-				if ($this->Models->Brands->save($brand)) {
-					$model->id_brand = $brand->id;
-					if ($this->Models->save($model)) {
-						$this->Flash->success(__('El modelo y la marca fueron guardados exitosamente.'));
-						return $this->redirect(['action' => 'index']);
-					}
-					$this->Flash->error(__('El modelo y la marca no se pudieron guardar, por favor intente nuevamente.'));
-				}
+                $brand = $this->Models->Brands->newEntity();
+                $random_id = uniqid();
+                $brand->id = $random_id;
+                $brand->name = $_POST['new_Brand'];
+
+                $allBrands = $this->Models->Brands->find('all');
+                foreach ($allBrands as $b) {
+                   if ($b->name == $brand->name){
+                        $brand->id = $b->id;
+                        $brand->name = null;
+                   }
+                }
+				
+                if($brand->name == null){
+                    $model->id_brand = $brand->id;
+                    if ($this->Models->save($model)) {
+                        $this->Flash->success(__('El modelo y la marca fueron guardados exitosamente.'));
+                        return $this->redirect(['action' => 'index']);
+                    }
+                    $this->Flash->error(__('El modelo y la marca no se pudieron guardar, por favor intente nuevamente.'));
+                }
+                else {
+                    if ($this->Models->Brands->save($brand)) {
+                        $model->id_brand = $brand->id;
+                        if ($this->Models->save($model)) {
+                            $this->Flash->success(__('El modelo y la marca fueron guardados exitosamente.'));
+                            return $this->redirect(['action' => 'index']);
+                        }
+                        $this->Flash->error(__('El modelo y la marca no se pudieron guardar, por favor intente nuevamente.'));
+                    }
+                }
 			}
         }
 		
@@ -205,3 +224,4 @@ class ModelsController extends AAppController
         return $this->redirect(['action' => 'index']);
     }
 }
+
