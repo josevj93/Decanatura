@@ -197,6 +197,10 @@
     }
 
     </style> 
+
+    <div >
+      <?php echo $this->Form->input('file_solicitud',['type' => 'file','label' => 'Subir Acta de Desechos', 'class' => 'form-control-file']); ?>
+    </div>
      
     
 
@@ -215,10 +219,10 @@
         <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea eliminar el acta de Residuo # {0}?', $residue->residues_id)]) ?>
     
     <?php endif; ?> 
-    <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $residue->residues_id)]) ?>
+    <?= $this->Form->postLink(__('Descargar Acta'), ['action' => 'download', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $residue->residues_id)]) ?>
     
     </div>
-
+<br><br>
     <script>
             
     </script>

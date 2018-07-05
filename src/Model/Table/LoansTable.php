@@ -35,21 +35,6 @@ class LoansTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Josegonzalez/Upload.Upload', [
-            'file_devolucion' => [
-                'fields' => [
-                    'dir' => 'file_devolucion_dir',
-                    'size' => 'file_devolucion_size',
-                    'type' => 'file_devolucion_type',
-                ],
-                
-                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:unique_id}{DS}',
-                
-                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
-                    return strtolower($data['name']);
-                },
-
-                'keepFilesOnDelete' => false
-            ],
 
             'file_solicitud' => [
                 'fields' => [
@@ -57,9 +42,7 @@ class LoansTable extends Table
                     'size' => 'file_solicitud_size',
                     'type' => 'file_solicitud_type',
                 ],
-                
                 'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:unique_id}{DS}',
-                
                 'nameCallback' => function ($table, $entity, $data, $field, $settings) {
                     return strtolower($data['name']);
                 },

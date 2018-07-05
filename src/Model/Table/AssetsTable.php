@@ -99,6 +99,7 @@ class AssetsTable extends Table
             ],
         ]);
 
+
         $this->belongsTo('Models', [
             'foreignKey' => 'models_id'
         ]);
@@ -208,8 +209,8 @@ class AssetsTable extends Table
         $validator
             ->scalar('responsable_id')
             ->notEmpty('responsable_id');
-			
-		$validator
+            
+        $validator
             ->scalar('models_id')
             ->maxLength('models_id', 255)
             ->allowEmpty('models_id');

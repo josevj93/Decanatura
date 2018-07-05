@@ -104,9 +104,11 @@ class AssetsController extends AppController
 				$asset->models_id = null;
 			}
             if ($this->Assets->save($asset)) {
+                AppController::insertLog($asset['plaque'], TRUE);
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
+            AppController::insertLog($asset['plaque'], FALSE);
             $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
         
@@ -136,9 +138,11 @@ class AssetsController extends AppController
 				$asset->models_id = null;
 			}
             if ($this->Assets->save($asset)) {
+                AppController::insertLog($asset['plaque'], TRUE);
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
+            AppController::insertLog($asset['plaque'], FALSE);
             $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
 
@@ -181,9 +185,11 @@ class AssetsController extends AppController
         
         if($asset->deletable){
             if($this->Assets->delete($asset)){
+                AppController::insertLog($asset['plaque'], TRUE);
                 $this->Flash->success(__('El activo fue eliminado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
+            AppController::insertLog($asset['plaque'], FALSE);
             $this->Flash->error(__('El activo no se pudo eliminar correctamente.'));
             return $this->redirect(['action' => 'index']);
         }
@@ -257,7 +263,9 @@ class AssetsController extends AppController
             //guarda en variables todos los campos reutilizables
             $cantidad = $this->request->getData('quantity');
             $placa = $this->request->getData('plaque');
-			$type = $this->request->getData('type_id');
+            $marca = $this->request->getData('brand');
+            $modelo = $this->request->getData('models_id');
+			//$type = $this->request->getData('type_id');
             if ($_POST['brand'] == '') {
                 $marca = null;
             } else {
@@ -309,7 +317,6 @@ class AssetsController extends AppController
                 if(!preg_match("/([a-z])\w+/", $placa)){ //pregunto si las placas solo son de numeros
                     $data = [
                         'plaque' => $placa,
-						'type_id' => $type,
                         'brand' => $marca,
                         'models_id' => $modelo,
                         'series' => $serie,
@@ -331,7 +338,6 @@ class AssetsController extends AppController
                 else{ //entonces las placas son alfanumericas, agrego predicado+numero como placa
                     $data = [
                         'plaque' => $predicado . $numero,
-						'type_id' => $type,
                         'brand' => $marca,
                         'models_id' => $modelo,
                         'series' => $serie,
@@ -360,10 +366,11 @@ class AssetsController extends AppController
         }
         $this->loadModel('Brands');
         $brands = $this->Brands->find('list', ['limit' => 200]);
-        $types = $this->Assets->Types->find('list', ['limit' => 200]);
+        //$types = $this->Assets->Types->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('asset', 'brands', 'users', 'locations', 'models', 'types'));
+        $this->set(compact('asset', 'brands', 'users', 'locations','models'));
     }
 }
+
 

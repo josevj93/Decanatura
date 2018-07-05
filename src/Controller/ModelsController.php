@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller;
-use App\Controller\AppController;
+use App\Controller\AAppController;
 /**
  * Models Controller
  *
@@ -111,9 +111,11 @@ class ModelsController extends AppController
 			
 			if ($_POST['new_Brand'] == '') {
 				if ($this->Models->save($model)) {
+                    AppController::insertLog($model['id'], TRUE);
 					$this->Flash->success(__('El modelo fue guardado exitosamente.'));
 					return $this->redirect(['action' => 'index']);
 				}
+                AppController::insertLog($model['id'], FALSE);
 				$this->Flash->error(__('El modelo no se pudo guardar, por favor intente nuevamente.'));
 				
 			} else {
@@ -173,9 +175,11 @@ class ModelsController extends AppController
 			
             if ($_POST['new_Brand'] == '') {
 				if ($this->Models->save($model)) {
+                    AppController::insertLog($model['id'], TRUE);
 					$this->Flash->success(__('El modelo fue modificado exitosamente.'));
 					return $this->redirect(['action' => 'index']);
 				}
+                AppController::insertLog($model['id'], FALSE);
 				$this->Flash->error(__('El modelo no se pudo modificar, por favor intente nuevamente.'));
 				
 			} else {
@@ -210,12 +214,14 @@ class ModelsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $model = $this->Models->get($id);
-        try{
-            $this->Models->delete($model); 
+        if ($this->Models->delete($model)) {
+            AppController::insertLog($model['id'], TRUE);
             $this->Flash->success(__('El modelo de activo se ha eliminado exitosamente.'));
-        } catch (\PDOException $e) {
-            $this->Flash->error(__('El modelo de activo no se pudo eliminar. Puede deberse a que tiene activos asociados.'));
+        } else {
+            AppController::insertLog($model['id'], FALSE);
+            $this->Flash->error(__('El modelo de activo no pudo ser eliminado. Por favor, intente de nuevo.'));
         }
         return $this->redirect(['action' => 'index']);
     }
 }
+
