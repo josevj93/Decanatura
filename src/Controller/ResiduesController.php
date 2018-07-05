@@ -465,15 +465,20 @@ class ResiduesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    // busca los activos que tengan un id
     public function search()
     {
         $id= $_GET['id'];
+        //se obtiene el id de la vista
         $assets = TableRegistry::get('Assets');
+        //se busca el activo con ese id en la base
         $searchedAsset= $assets->get($id);
+        //verifica si se encontré el activo
         if(empty($searchedAsset) )
         {
             throw new NotFoundException(__('Activo no encontrado') );      
         }
+        //se envía el activo a la vista.
         $this->set('serchedAsset',$searchedAsset);
     }
 
