@@ -181,7 +181,7 @@ class LoansController extends AppController
         $this->set(compact('assets', 'loan', 'users', 'result'));
     }
 
-    /*Cancelar para varios activos*/
+    /*Terminar para varios activos*/
     public function terminar($id)
     {
         if ($this->request->is('post')) {
