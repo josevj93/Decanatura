@@ -3,8 +3,10 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+
 use Dompdf\Dompdf;
 use Cake\Datasource\ConnectionManager;
+use Cake\I18n\Date;
 
 //use Cake\ORM\Query;
 
@@ -155,6 +157,7 @@ class ResiduesController extends AppController
                                     ->group(['assets_id'])
                                     ->toList();
 
+        //lo paso a objeto para manejarlo en vista
         $size = count($queryRec);
 
         $resultRec = array_fill(0, $size, NULL);
@@ -182,19 +185,24 @@ class ResiduesController extends AppController
 
             $residue = $this->Residues->patchEntity($residue, $this->request->getData(),['validationDefault'=>'residues_id']);
 
+            // le doy formato a la fecha para que mysql pueda guardarla correctamente
+            $date = new Date($residue->date);
+            $residue->date= $date->format('Y-m-d');
             //debug($residue);
-
             if ($this->Residues->save($residue)) {
                 
 
+                //Se obtienen los seleccionados y se convierte a string separado en , 
                 $condicion = explode(',', $this->request->getData('checkList'));
                 
+                //Actualiza  los Activos seleccionados
                 $assets = TableRegistry::get('Assets')->find('all');
                 $assets->update()
                     ->set(['residues_id' => $residue->residues_id, 'state' => "Desechado"])
                     ->where(['plaque IN' => $condicion])
                     ->execute();
 
+                //Actualiza los reportes technicos donde tengan los Activos seleccionados
                 $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
                 $technical_reports->update()
                     ->set(['residues_id' => $residue->residues_id])
@@ -209,6 +217,7 @@ class ResiduesController extends AppController
         }
 
 
+        //Hace la seleccion de los Activos usando Join para unir los datos
         $technical_reports = TableRegistry::get('TechnicalReports');
         $assetsQuery = $technical_reports->find()
                          ->select(['assets.plaque','brands.name','models.name','assets.series','assets.state'])
@@ -273,6 +282,7 @@ class ResiduesController extends AppController
                         ->where(['assets.residues_id' => $id])
                         ->toList();
 
+        //lo paso a objeto para manejarlo en vista
         $size = count($query2);
 
         $result2 = array_fill(0, $size, NULL);
@@ -291,12 +301,15 @@ class ResiduesController extends AppController
 
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
 
+            // le doy formato a la fecha para que mysql pueda guardarla correctamente
+            $date = new Date($residue->date);
+            $residue->date= $date->format('Y-m-d');
             if ($this->Residues->save($residue)) {
                 AppController::insertLog($residue['residues_id'], TRUE);
                 $this->Flash->success(__('El acta de residuo ha sido guardada'));
 
-                //AQUI EMPIEZA LA MAGIA
-
+                //Sección para grid con checks
+                //Se crea un temporal con los activos en el acta
                 $tmp = array_fill(0, $size, NULL);
 
                 $i = 0;
@@ -307,13 +320,16 @@ class ResiduesController extends AppController
                     $i++;
                 }
 
+                //Se crea arreglo con nuevos activos en el acta
                 $nuevos = array_diff($checksViejos, $tmp);
+                //Se crea arreglo con activos que ya estaban en el acta
                 $viejos = array_diff($tmp, $checksViejos);
                 
                 if (count($viejos) > 0) {
 
                         $assets = TableRegistry::get('Assets')->find('all');
 
+                        //Se modifican los campos en activos para asegurar consistencia
                         $assets->update()
                                 ->set(['residues_id' => NULL, 'state' => "Disponible"])
                                 ->where(['plaque IN' => $viejos])
@@ -321,6 +337,7 @@ class ResiduesController extends AppController
 
                         $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
 
+                        //Se modifican los campos en informe técnico para asegurar consistencia
                         $technical_reports->update()
                                             ->set(['residues_id' => NULL])
                                             ->where(['assets_id IN' => $viejos])
@@ -331,6 +348,7 @@ class ResiduesController extends AppController
 
                          $assets = TableRegistry::get('Assets')->find('all');
                         
+                        //Se modifican los campos en activos para asegurar consistencia
                          $assets->update()
                                 ->set(['residues_id' => $residue->residues_id, 'state' => "Desechado"])
                                 ->where(['plaque IN' => $nuevos])
@@ -338,6 +356,7 @@ class ResiduesController extends AppController
 
                          $technical_reports = TableRegistry::get('TechnicalReports')->find('all');
 
+                         //Se modifican los campos en informe técnico para asegurar consistencia
                          $technical_reports->update()
                                              ->set(['residues_id' => $residue->residues_id])
                                              ->where(['assets_id IN' => $nuevos])
@@ -455,15 +474,20 @@ class ResiduesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    // busca los activos que tengan un id
     public function search()
     {
         $id= $_GET['id'];
+        //se obtiene el id de la vista
         $assets = TableRegistry::get('Assets');
+        //se busca el activo con ese id en la base
         $searchedAsset= $assets->get($id);
+        //verifica si se encontré el activo
         if(empty($searchedAsset) )
         {
             throw new NotFoundException(__('Activo no encontrado') );      
         }
+        //se envía el activo a la vista.
         $this->set('serchedAsset',$searchedAsset);
     }
 
