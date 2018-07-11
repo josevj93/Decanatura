@@ -88,6 +88,57 @@ class LoansController extends AppController
      */
     public function view($id = null)
     {
+
+
+        if($this->request->is(['patch', 'post', 'put'])){
+
+
+            $this->loadModel('Assets');
+            
+            $loan = $this->Loans->get($id, [
+                'contain' => []
+            ]);
+    
+            
+            $loan->file_devolucion = $this->request->getData()['file_devolucion'];
+            $loan->estado = 'Terminado';
+
+            print_r($loan);
+            die();
+            
+            if ($this->Loans->save($loan)){
+                
+                $assets = $this->Assets->find()
+                ->where(['assets.loan_id' => $id])
+                ->toList();
+                    
+                foreach($assets as $asset){
+                    $asset->state = 'Disponible';
+                    $asset->loan_id = NULL;
+
+                    if(!($this->Assets->save($asset))){
+                        $this->Flash->error(__('Error al terminar el préstamo'));
+                        return $this->redirect(['action' => 'index']);
+                    }
+                }
+
+                $this->Flash->success(__('El préstamo ha sido finalizado.'));
+                return $this->redirect(['action' => 'index']);
+
+            }
+            else{
+                $this->Flash->error(__('Error al finalizar el préstamo'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $assets = $this->Loans->Assets->find('list', ['limit' => PHP_INT_MAX]);
+            $users = $this->Loans->Users->find('list', ['limit' => PHP_INT_MAX ]);
+            $this->set(compact('assets', 'loan', 'users'));
+
+
+
+
+        }
+
         $loan = $this->Loans->get($id, [
             'contain' => ['Users']
         ]);
