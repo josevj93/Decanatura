@@ -5,63 +5,101 @@
  */
 ?>
 
-<div class="users view large-9 medium-8 columns content">
-    <h3>Consultar Usuario</h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Nombre') ?></th>
-            <td><?= h($user->nombre) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Apellido1') ?></th>
-            <td><?= h($user->apellido1) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Apellido2') ?></th>
-            <td><?= h($user->apellido2) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Correo') ?></th>
-            <td><?= h($user->correo) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Usuario') ?></th>
-            <td><?= h($user->username) ?></td>
-        </tr>
-    <!--
-        <tr>
-            <th scope="row"><?= __('Password') ?></th>
-            <td><?= h($user->password) ?></td>
-        </tr>
-    -->
-    <!--
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($user->id) ?></td>
-        </tr>
-    -->
-        <tr>
-            <th scope="row"><?= __('Rol') ?></th>
-            <td><?= h($rol) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Estado') ?></th>
-            <td><?= $user->account_status ? __('Activo') : __('Inoperante'); ?></td>
-        </tr>
-    </table>
-        <style>
+<head>
+  <style>
         .btn-primary {
-            float: right;
-            margin: 10px;
-            margin-top: 15px;
-            color: #fff
-            background-color: #ffc107;
-            border-color: #ffc107;
+          color: #fff;
+          background-color: #0099FF;
+          border-color: #0099FF;
+          float: right;
+          margin-left: 10px;
         }
-        </style> 
+
+        .btn-default {
+          color: #000;
+          background-color: #7DC7EF;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+
+        label {
+          text-align:left;
+          margin-right: 10px;
+
+        }
+
+        .sameLine{
+          display: flex;
+          justify-content: space-between;
+          border-color: transparent;
+        }
+
+  </style>
+</head>
+
+<body>
+<div class="users form large-9 medium-8 columns content">
+  <?= $this->Form->create($user) ?>
+  <fieldset>
+    <legend><?= __('Consultar Usuario') ?></legend>
+    <br>
+      <div class="form-control sameLine" >
+        <div class="row">
+          <label> <b>Nombre:</b><b style="color:red;"></b> </label>
+          <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($user->nombre) . '">'; ?>
+        </div>
+
+        <div class="row">
+          <label> <b>Primer Apellido:</b><b style="color:red;"></b> </label>
+          <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($user->apellido1) . '">'; ?>
+        </div>
+
+        <div class="row">
+          <label> <b>Segundo Apellido:</b><b style="color:red;"></b> </label>
+          <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($user->apellido2) . '">'; ?>
+        </div>
+      </div>
+      <br>
+
+      <div class="form-control sameLine" >
+        <div class="row">
+          <label> <b>Cédula:</b><b style="color:red;"></b> </label>
+          <?php echo '<input type="text" class="form-control col-sm-7" readonly="readonly" value="' . htmlspecialchars($user->id) . '">'; ?>
+        </div>
+
+        <div class="row">
+          <label> <b>Rol:</b><b style="color:red;"></b> </label>
+          <?php echo '<input type="text" class="form-control col-sm-7" readonly="readonly" value="' . htmlspecialchars($user->id_rol) . '">'; ?>
+        </div>
+
+        <div class="row">
+          <label> <b>Estado:</b><b style="color:red;"></b> </label>
+          <?php echo '<input type="text" class="form-control col-sm-7" readonly="readonly" value="' . htmlspecialchars($user->account_status) . '">'; ?>
+        </div>
+
+      </div>
+      <br>
+
+      <label> <b>Correo:</b><b style="color:red;"></b> </label>
+      <?php echo '<input type="text" class="form-control col-sm-7" readonly="readonly" value="' . htmlspecialchars($user->correo) . '">'; ?>
+      <br>
+
+      <div class="form-control sameLine" >
+        <div class="row">
+          <label> <b>Usuario:</b><b style="color:red;"></b> </label>
+          <?php echo '<input type="text" class="form-control col-sm-7" readonly="readonly" value="' . htmlspecialchars($user->username) . '">'; ?>
+        </div>
+
+      </div>
+      <br>
+  </fieldset>
 </div>
-    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Html->link(__('Modificar'), ['controller' => 'Users', 'action' => 'edit', $user->id], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->postLink('Eliminar', ['action' => 'delete', $user->id],  ['escape'=> false, 'class' => 'btn btn-primary' ,'confirm' => __('¿Está seguro que desea eliminar este usuario? # {0}?', $user->id)]) ?>
-    s
-    <?= $this->Form->end() ?>
+<br>
+
+  <?= $this->Html->link(__('Cancelar'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+  <?= $this->Html->link(__('Modificar'), ['controller' => 'Users', 'action' => 'edit', $user->id], ['class' => 'btn btn-primary']) ?>
+  <?= $this->Form->postLink('Eliminar', ['action' => 'delete', $user->id],  ['escape'=> false, 'class' => 'btn btn-primary' ,'confirm' => __('¿Está seguro que desea eliminar este usuario? # {0}?', $user->id)]) ?>
+
+<?= $this->Form->end(); ?>
+
+</body>
