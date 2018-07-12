@@ -21,11 +21,11 @@
             <table id="activity-grid" class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col"><?= $this->Paginator->sort('Fecha/Hora') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('Modulo') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('Usuario') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('Acción') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('Mensaje') ?></th>
+                    <th scope="col">Fecha/Hora</th>
+                    <th scope="col">Modulo</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Acción</th>
+                    <th scope="col">Mensaje</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -213,7 +213,7 @@ class AppController extends Controller
         $this->set('allowD', $allowD);
         $this->set('allowL', $allowL);
 
-
+        $this->set('uid', $this->Auth->user('id'));
         $this->set('nombre', $this->Auth->user('nombre'));
         $this->set('apellido', $this->Auth->user('apellido1'));
 

@@ -12,7 +12,6 @@ use Imagine;
  *
  * @property \App\Model\Table\TypesTable|\Cake\ORM\Association\BelongsTo $Types
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\LocationsTable|\Cake\ORM\Association\BelongsTo $Locations
  *
  * @method \App\Model\Entity\Asset get($primaryKey, $options = [])
@@ -99,6 +98,7 @@ class AssetsTable extends Table
             ],
         ]);
 
+
         $this->belongsTo('Models', [
             'foreignKey' => 'models_id'
         ]);
@@ -115,6 +115,10 @@ class AssetsTable extends Table
         ]);
         $this->belongsTo('Loans', [
             'foreignKey' => 'loan_id',
+            'joinType' => 'INNER'
+        ]);
+		$this->belongsTo('Types', [
+            'foreignKey' => 'type_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -214,8 +218,25 @@ class AssetsTable extends Table
             ->scalar('brand')
             ->maxLength('brand', 255)
             ->allowEmpty('brand');
+			
+		$validator
+            ->scalar('type_id')
+			->maxLength('type_id', 255)
+            ->notEmpty('type_id');
             
         return $validator;
+    }
+
+    public function uniqueId($id){
+        $returnId = $this->find('all')
+        ->where([
+            'Assets.plaque' => $id,
+        ])
+        ->first();
+        if($returnId){
+        return false;
+        }
+        return true;
     }
 
     /**
@@ -232,7 +253,19 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['loan_id'], 'Loans'));
         $rules->add($rules->existsIn(['models_id'], 'Models'));
+		$rules->add($rules->existsIn(['type_id'], 'Types'));
+        $rules->add(function ($entity, $options) {
+
+        return $this->uniqueId($entity->plaque);
+        },
+        'uniqueId',
+        [
+        'errorField' => 'id',
+        'message' => 'El numero de placa ya existe.'
+        ]
+        );
 
         return $rules;
+
     }
 }

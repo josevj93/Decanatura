@@ -55,12 +55,12 @@ class Asset extends Entity
         'lendable' => true,
         'observations' => true,
         'image_dir' => true,
-        'type' => true,
         'user' => true,
         'location' => true,
         'unique_id' => true,
         'deleted' => true,
         'deletable' => true,
-        'brand' => true
+        'brand' => true,
+		'type_id' => true
     ];
 }
