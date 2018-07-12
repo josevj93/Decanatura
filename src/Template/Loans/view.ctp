@@ -40,6 +40,7 @@
 </style> 
   
 <div class="residues form large-9 medium-8 columns content">
+  <?= $this->Form->create($loan) ?>
 
 	<fieldset>
         <legend><?= __('Consultar préstamo') ?></legend>
@@ -108,6 +109,8 @@
 
  <?= $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
+ <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+
  <?php 
         if($loan->estado != 'Terminado'){
 			echo $this->Html->link(__('Finalizar Préstamo'), ['action' => 'terminar',$loan->id], ['class' => 'btn btn-primary']);
@@ -117,7 +120,6 @@
 
  <?= $this->Form->postLink(__('Generar Formulario'), ['controller'=> 'Loans', 'action' => 'download',$loan->id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $loan->id)]) ?>
 
-  <?= $this->Form->postLink(__('Test'), ['controller'=> 'Loans', 'action' => 'terminar',$loan->id], ['class' => 'btn btn-primary']) ?>
 
 </div>
 

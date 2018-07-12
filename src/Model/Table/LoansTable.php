@@ -42,7 +42,7 @@ class LoansTable extends Table
                     'size' => 'file_solicitud_size',
                     'type' => 'file_solicitud_type',
                 ],
-                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:unique_id}{DS}',
+                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}',
                 'nameCallback' => function ($table, $entity, $data, $field, $settings) {
                     return strtolower($data['name']);
                 },

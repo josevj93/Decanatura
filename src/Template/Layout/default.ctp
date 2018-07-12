@@ -16,7 +16,7 @@ $cakeDescription = 'Control de Activos';
     <?= $this->Html->css('cake.css') ?>
 
 
-    <?= $this->Html->css(['plugins/bootstrap/css/bootstrap.css', 'plugins/bootstrap/css/bootstrap.min.css',
+    <?= $this->Html->css(['plugins/bootstrap/css/bootstrap.css', 
         'plugins/font-awesome/css/font-awesome.min.css',
         'plugins/datatables/dataTables.bootstrap4.css',
         'plugins/buttons.dataTables.min.css',
@@ -60,7 +60,7 @@ $cakeDescription = 'Control de Activos';
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <ul class="navbar-nav navbar-sidenav bg-light" id="exampleAccordion">
 
             <?php if ($allowU) : ?>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
@@ -217,7 +217,7 @@ $cakeDescription = 'Control de Activos';
 
         </ul>
 
-        <ul class="navbar-nav sidenav-toggler">
+        <ul class="navbar-nav sidenav-toggler bg-light">
             <li class="nav-item">
                 <a class="nav-link text-center" id="sidenavToggler">
                     <i class="fa fa-fw fa-angle-left"></i>

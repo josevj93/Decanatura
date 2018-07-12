@@ -216,7 +216,7 @@ class UsersController extends AppController
         $this->set(compact('user'));
     }
 
-
+ 
 
     public function profile($id = null)
     {
@@ -251,18 +251,14 @@ class UsersController extends AppController
             if ($this->Users->save($user)) {
                 AppController::insertLog($user['nombre'], $success);
                 $this->Flash->success(__('Cambios guardados.'));
-
             }else{
                 $success = FALSE;
                 AppController::insertLog($user['nombre'], $success);
                 $this->Flash->error(__('Los cambios no pudieron ser guardados. Por favor vuelva a intentarlo.')); 
-            }
-            
+            } 
         }
         $this->set(compact('user'));
     }
-
-
 
     /**
      * Delete method
