@@ -228,6 +228,18 @@ class AssetsTable extends Table
         return $validator;
     }
 
+    public function uniqueId($id){
+        $returnId = $this->find('all')
+        ->where([
+            'Assets.plaque' => $id,
+        ])
+        ->first();
+        if($returnId){
+        return false;
+        }
+        return true;
+    }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -243,7 +255,18 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['loan_id'], 'Loans'));
         $rules->add($rules->existsIn(['models_id'], 'Models'));
 		$rules->add($rules->existsIn(['type_id'], 'Types'));
+        $rules->add(function ($entity, $options) {
+
+        return $this->uniqueId($entity->plaque);
+        },
+        'uniqueId',
+        [
+        'errorField' => 'id',
+        'message' => 'El numero de placa ya existe.'
+        ]
+        );
 
         return $rules;
+
     }
 }

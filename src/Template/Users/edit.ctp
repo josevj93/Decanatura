@@ -64,7 +64,7 @@
       <div class="form-control sameLine" >
         <div class="row">
           <label> <b>Cédula:</b><b style="color:red;">*</b> </label>
-          <?php echo $this->Form->imput('id', ['class'=>'form-control col-md-6']); ?>
+          <?php echo $this->Form->imput('id', ['class'=>'form-control col-md-6', 'disabled']); ?>
         </div>
 
         <div class="row">
@@ -92,12 +92,12 @@
 
         <div class="row">
           <label> <b>Contraseña:</b><b style="color:red;">*</b> </label>
-          <?php echo $this->Form->imput('password', ['class'=>'form-control col-md-6']); ?>
+          <?php echo $this->Form->imput('password', ['type'=> 'password', 'class'=>'form-control col-md-6', 'disabled']); ?>
         </div>
 
         <div class="row">
           <label> <b>Confirmar Contraseña:</b><b style="color:red;">*</b> </label>
-          <?php echo $this->Form->imput('apellido2', ['class'=>'form-control col-md-6']); ?>
+          <?php echo $this->Form->imput('password', ['type'=> 'password', 'class'=>'form-control col-md-6', 'disabled']); ?>
         </div>
       </div>
       <br>
