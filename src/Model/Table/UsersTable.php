@@ -106,9 +106,47 @@ class UsersTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
+    /**public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['username']));
+
+
+        return $rules;
+    }**/
+
+    public function uniqueId($id){
+        $returnId = $this->find('all')
+        ->where([
+            'Users.id' => $id,
+        ])
+        ->first();
+        if($returnId){
+        return false;
+        }
+        return true;
+    }
+    
+    public function buildRules(RulesChecker $rules)
+    {
+        /*$rules->addCreate($rules->isUnique(
+        ['residues_id'],
+        'El número de acta ya existe'));*/
+
+        /*$rules->add([$this, 'uniqueId'], 'residues_id', [
+        'errorField' => 'status',
+        'message' => 'This invoice cannot be moved to that status.'
+        ]);*/
+        $rules->add($rules->isUnique(['username']));
+        $rules->add(function ($entity, $options) {
+
+        return $this->uniqueId($entity->id);
+        },
+        'uniqueId',
+        [
+        'errorField' => 'id',
+        'message' => 'El numero de cedula ya existe.'
+        ]
+        );
 
         return $rules;
     }

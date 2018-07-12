@@ -26,7 +26,7 @@
                         <!--<th scope="col"><?= $this->Paginator->sort('password') ?></th>-->
                         <!--<th scope="col"><?= $this->Paginator->sort('id_rol') ?></th>-->
                         <th scope="col">Estado</th>
-                        <th scope="col">Rol</th>
+                        <!--<th scope="col">Rol</th>-->
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +47,7 @@
                             <!--<td><?= h($user->password) ?></td>-->
                             <!--<td><?= $this->Number->format($user->id_rol) ?></td>-->
                             <td><?= h($user->account_status == 1 ? 'Activo' : 'Inoperante') ?></td>
-                            <td><?= h($user->id_rol) ?></td>
+                            <!--<td><?= $user->has('roles') ? h($user->roles->nombre) : '' ?></td>-->
 
                         </tr>
                     <?php endforeach; ?>
@@ -61,7 +61,7 @@
                         <th>Apellido2</th>
                         <th>Usuario</th>
                         <th>Estado</th>
-                        <th>Rol</th>
+                        <!--<th>Rol</th>-->
                     </tr>
                 </tfoot>
             </table>
