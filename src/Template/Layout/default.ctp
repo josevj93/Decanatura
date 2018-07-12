@@ -16,7 +16,7 @@ $cakeDescription = 'Control de Activos';
     <?= $this->Html->css('cake.css') ?>
 
 
-    <?= $this->Html->css(['plugins/bootstrap/css/bootstrap.css', 'plugins/bootstrap/css/bootstrap.min.css',
+    <?= $this->Html->css(['plugins/bootstrap/css/bootstrap.css',
         'plugins/font-awesome/css/font-awesome.min.css',
         'plugins/datatables/dataTables.bootstrap4.css',
         'plugins/buttons.dataTables.min.css',
@@ -60,12 +60,11 @@ $cakeDescription = 'Control de Activos';
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <ul class="navbar-nav navbar-sidenav bg-light" id="exampleAccordion">
 
             <?php if ($allowU) : ?>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
                     <?= $this->Html->link(
-
                         $this->Html->tag('i', '', array('class' => 'fa fa-users')) . $this->Html->tag('span', ' Usuarios', array('class' => 'nav-link-text')), array('controller' => 'Users', 'action' => 'index'),
                         array('class' => 'nav-link',
                             'escape' => false)
@@ -146,7 +145,6 @@ $cakeDescription = 'Control de Activos';
             <?php if ($allowRT) : ?>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Informe Técnico">
                     <?= $this->Html->link(
-
                         $this->Html->tag('i', '', array('class' => 'fa fa-file')) . $this->Html->tag('span', ' Informe Técnico', array('class' => 'nav-link-text')), array('controller' => 'TechnicalReports', 'action' => 'index'),
                         array('class' => 'nav-link',
                             'escape' => false)
@@ -159,7 +157,6 @@ $cakeDescription = 'Control de Activos';
             <?php if ($allowUb) : ?>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ubicaciones">
                     <?= $this->Html->link(
-
                         $this->Html->tag('i', '', array('class' => 'fa fa-globe')) . $this->Html->tag('span', ' Ubicaciones', array('class' => 'nav-link-text')), array('controller' => 'Locations', 'action' => 'index'),
                         array('class' => 'nav-link',
                             'escape' => false)
@@ -196,7 +193,6 @@ $cakeDescription = 'Control de Activos';
             <?php if ($allowD) : ?>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Desechos">
                 <?= $this->Html->link(
-
                     $this->Html->tag('i', '', array('class' => 'fa fa-trash')) . $this->Html->tag('span', ' Desechos', array('class' => 'nav-link-text')), array('controller' => 'Residues', 'action' => 'index'),
                     array('class' => 'nav-link',
                         'escape' => false)
@@ -217,7 +213,7 @@ $cakeDescription = 'Control de Activos';
 
         </ul>
 
-        <ul class="navbar-nav sidenav-toggler">
+        <ul class="navbar-nav sidenav-toggler bg-light">
             <li class="nav-item">
                 <a class="nav-link text-center" id="sidenavToggler">
                     <i class="fa fa-fw fa-angle-left"></i>
@@ -228,7 +224,7 @@ $cakeDescription = 'Control de Activos';
             <li class="nav-item">
                 <a class="navbar-brand" style="color:white">
                     <i class="fa fa-user"></i> <?= $this->Html->link(__($nombre . " " . $apellido), ['controller' => 'Users',$uid, 'action' => 'profile']) ?>
-                    
+
             </li>
 
 
@@ -301,11 +297,3 @@ $this->Html->script(['plugins/jquery/jquery.min.js', 'plugins/bootstrap/js/boots
 
 </body>
 </html>
-
-
-
-
-
-
-
-

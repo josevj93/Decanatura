@@ -12,7 +12,6 @@ use Imagine;
  *
  * @property \App\Model\Table\TypesTable|\Cake\ORM\Association\BelongsTo $Types
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\LocationsTable|\Cake\ORM\Association\BelongsTo $Locations
  *
  * @method \App\Model\Entity\Asset get($primaryKey, $options = [])
