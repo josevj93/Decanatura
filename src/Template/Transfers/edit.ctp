@@ -69,7 +69,7 @@ use Cake\Routing\Router;
 
 <div class="transfers form large-9 medium-8 columns content">
   <fieldset>
-    <?= $this->Form->create($transfer) ?>
+    <?= $this->Form->create($transfer,['type' => 'file']) ?>
     <legend><?= __('Modificar traslado') ?></legend>
     <br>
         <div class= 'form-control sameLine' style="border-color: transparent;">
@@ -84,7 +84,7 @@ use Cake\Routing\Router;
                 // para dar formato a la fecha
                 $tmpDate= $transfer->date->format('d-m-Y');
                 ?>  
-                <?php echo '<input type="text" class="form-control col-xs-2 col-sm-2 col-md-6 col-lg-9" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?>
+                <?php echo '<input type="text" id ="date" class="form-control col-xs-2 col-sm-2 col-md-6 col-lg-9" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?>
             </div>
  
         </div>
@@ -116,7 +116,7 @@ use Cake\Routing\Router;
                 <br>
                 <div class="row">
                     <label class="label-t">Cédula:</label>
-                    <?php echo '<input type="text" name="identification" class="form-control col-sm-4"  value="' . htmlspecialchars($transfer->identification) . '">'; ?>
+                    <?php echo '<input type="text" name="identification" id="identification" class="form-control col-sm-4"  value="' . htmlspecialchars($transfer->identification) . '">'; ?>
                 </div>
             </td>
 
@@ -127,25 +127,25 @@ use Cake\Routing\Router;
                     
                         <label class="label-t">Unidad académica: </label>
                     
-                        <?php echo '<input type="text" name="Acade_Unit_recib" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->Acade_Unit_recib). '">'; ?>
+                        <?php echo '<input type="text" name="Acade_Unit_recib" id="Acade_Unit_recib" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->Acade_Unit_recib). '">'; ?>
                     
                 </div>
                 <br>
                 <div class="row">
                     <label class="label-t">Funcionario: </label>
-                    <?php echo '<input type="text" name="functionary_recib" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->functionary_recib). '">'; ?>
+                    <?php echo '<input type="text" name="functionary_recib" id="functionary_recib" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->functionary_recib). '">'; ?>
                 </div>
                 <br>
                 <div class="row">
                     <label class="label-t">Cédula:</label>
-                    <?php echo '<input type="text" name="identification_recib" class="form-control col-sm-4"  value="' . htmlspecialchars($transfer->identification_recib) . '">'; ?>
+                    <?php echo '<input type="text" name="identification_recib" id="identification_recib" class="form-control col-sm-4"  value="' . htmlspecialchars($transfer->identification_recib) . '">'; ?>
                 </div>               
             </td>
             
         </tr>
     </table>
     <br>
-
+</fieldset>
 
     <!-- AQUI ESTA LO IMPORTANTE. RECUERDEN COPIAR LOS SCRIPTS -->
     <div class="related">
@@ -203,10 +203,21 @@ use Cake\Routing\Router;
     <input type="hidden" name="checkList" id="checkList">
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'aceptar','style'=>'text-transform: capitalize;']) ?>
-      <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $transfer->transfers_id)]) ?>
-    <?= $this->Form->end() ?>
+    </form>
 
-  </fieldset>
+    <?= $this->Form->create(null,['type'=>'post',
+                                        'url'=>'/transfers/download/'.$transfer->transfers_id
+                                    ]) ?>
+        <!-- input donde coloco todo los datos de los demás imput exepto el input checkList -->
+        <input type="hidden" name="pdf" id="pdf">
+        <!-- input donde coloco todo los datos de los demás imput exepto el input checkList -->
+        <input type="hidden" name="plaques" id="plaques">
+
+
+        <?= $this->Form->button(__('Generar PDF'), ['class' => 'btn btn-primary', 'id'=>'generate','style'=>'float:left;text-transform: capitalize;']) ?>
+    
+    </form>
+  
 </div><br>
 
 
@@ -283,6 +294,27 @@ use Cake\Routing\Router;
         });
         }
     );
+
+    //  Funcion para meter todos los datos en el input pdf para posteriormente 
+    //usar los datos en el método download del controlador
+$("document").ready(
+    function() {
+      $('#generate').click( function()
+      {
+        var check = getValueUsingClass();
+        //concateno todos los valores
+        var res = document.getElementById('date').value;
+        res=res+","+document.getElementById('Acade_Unit_recib').value;
+        res=res+","+document.getElementById('functionary').value;
+        res=res+","+document.getElementById('identification').value;
+        res=res+","+document.getElementById('functionary_recib').value;
+        res=res+","+document.getElementById('identification_recib').value;
+        $('#pdf').val(res);
+        $('#plaques').val(check);
+        alert(document.getElementById('plaques').value;)
+        });
+    }
+);
 
 /** función optenida de http://bytutorial.com/blogs/jquery/jquery-get-selected-checkboxes */
 

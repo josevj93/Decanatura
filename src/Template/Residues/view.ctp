@@ -5,6 +5,73 @@
  */
    use Cake\Routing\Router;
 ?> 
+    <!-- Sección para el estilo de la pantalla -->
+<style>
+    .btn-primary {
+      color: #FFF;
+      background-color: #0099FF;
+      border-color: #0099FF;
+      float: right;
+      margin-left: 10px;
+    }
+
+    label {
+          text-align:left;
+          margin-right: 10px;
+          
+    }
+
+    label[class=label-t]{
+        margin-left: 20px;
+        width: 70px;
+    }
+
+    label[class=align]{
+        margin-left: 14px;
+    }
+
+    input[name=date]{
+          width:100px;
+          margin-left: 10px;
+        }
+
+    table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    }
+
+    td {
+
+        border: 1px solid #000000;
+        border-bottom: 1px solid #000000;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    th[class=transfer-h] {
+        border-bottom: 1px solid #000000;
+        text-align: center;
+        color:black;
+        padding: 8px;
+    }
+
+    .sameLine{
+    display: flex; 
+    justify-content: space-between; 
+    border-color: transparent;
+    }
+
+</style> 
 
 <div class="residues form large-9 medium-8 columns content">
     <?= $this->Form->create($residue) ?>
@@ -79,7 +146,7 @@
         </div><br>
 
     </fieldset>
-    </div>
+</div>
 
     <!-- Sección para grid con activos asignado al acta -->
     <div class="related">
@@ -129,104 +196,37 @@
         <p align="center">
             (Art. 26 del Reglamento para la Administración y Control de los Bienes Institucionales de la Universidad de Costa Rica)
         </p>
-    </div><br>
-
-    <!-- Sección para el estilo de la pantalla -->
-    <style>
-    .btn-primary {
-      color: #FFF;
-      background-color: #0099FF;
-      border-color: #0099FF;
-      float: right;
-      margin-left: 10px;
-    }
-
-    label {
-          text-align:left;
-          margin-right: 10px;
-          
-    }
-
-    label[class=label-t]{
-        margin-left: 20px;
-        width: 70px;
-    }
-
-    label[class=align]{
-        margin-left: 14px;
-    }
-
-    input[name=date]{
-          width:100px;
-          margin-left: 10px;
-        }
-
-    table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    }
-
-    th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-    }
-
-    td {
-
-        border: 1px solid #000000;
-        border-bottom: 1px solid #000000;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-
-    th[class=transfer-h] {
-        border-bottom: 1px solid #000000;
-        text-align: center;
-        color:black;
-        padding: 8px;
-    }
-
-    .sameLine{
-    display: flex; 
-    justify-content: space-between; 
-    border-color: transparent;
-    }
-
-    </style> 
-
-    <div >
-      <?php echo $this->Form->input('file_solicitud',['type' => 'file','label' => 'Subir Acta de Desechos', 'class' => 'form-control-file']); ?>
     </div>
+    <br>
 
-    </style>   
-    </div> 
+
+    <br>
     <div>
-    <!-- Sección de botones -->
 
-     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-     <?php if($residue->file_name == null) : ?> 
+        <div>
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-        <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $residue->residues_id], ['class' => 'btn btn-primary']) ?> 
+
+        <?php if($residue->file == null) : ?>
+
+        <?= $this->Html->link(__('Modificar'), ['action' => 'edit', $residue->residues_id], ['class' => 'btn btn-primary']) ?>
     
-    <?php endif; ?> 
+        <?php endif; ?> 
 
-    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $residue->residues_id], ['hidden'=> 'true','class' => 'btn btn-primary', 'confirm' => __
-        ('¿Está seguro que deseaaaaaaa eliminar el desecho #'.$residue->residues_id.' ?', $residue->residues_id)]) ?>
-    
-    <?php if(($residue->descargado == null) && ($residue->file_name == null )) : ?> 
+        <?php if(($residue->descargado == null) && ($residue->file == null )) : ?> 
 
-        <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __
-        ('¿Está seguro que desea eliminar el desecho #'.$residue->residues_id.' ?', $residue->residues_id)]) ?>
+        <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Está seguro que desea eliminar el traslado #'.$residue->residues_id.' ?', $residue->residues_id)]) ?>
 
-    <?php endif; ?> 
-    <?= $this->Form->postLink(__('Descargar Acta'), ['action' => 'download', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $residue->residues_id)]) ?>
-    
+        <?php endif; ?> 
+        </div>
+        </form>
+        <?php 
+            if($residue->file)
+            {
+                echo $this->Form->postLink(__('Descargar Acta'), ['action' => 'download2', $residue->residues_id], ['class' => 'btn btn-primary','style'=>'float:left;', 'confirm' => __('¿Seguro que desea descargar el archivo?', $residue->residues_id)]);
+            }
+        ?>
     </div>
 <br>
 
