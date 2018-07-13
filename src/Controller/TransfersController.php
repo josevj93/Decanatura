@@ -464,8 +464,22 @@ class TransfersController extends AppController
             $asset[$i]= (object)$asset[$i];
         }
 
+        /** obtengo una lista de usuarios para cargar un dropdown list en la vista */
+        $usersTable= TableRegistry::get('Users');
+        $queryUsers = $usersTable->find()
+                        ->select(['users.nombre','users.apellido1','users.apellido2'])
+                        ->toList();
+
+        $size = count($queryUsers);
+        $users= array_fill(0, $size, NULL);
+        /** se concatena el nombre y se coloca en un mismo array*/
+        for($i=0;$i<$size;$i++)
+        {
+            $users[$i] =$queryUsers[$i]->users['nombre'] ." ".$queryUsers[$i]->users['apellido1']." ".$queryUsers[$i]->users['apellido2'];
+        }
+
         $Unidad= $this->UnidadAcadémica;
-        $this->set(compact('transfer', 'asset', 'result','Unidad'));
+        $this->set(compact('transfer', 'asset', 'result','Unidad','users'));
 
     }
 

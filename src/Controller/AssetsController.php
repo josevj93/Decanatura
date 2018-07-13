@@ -109,7 +109,7 @@ class AssetsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             AppController::insertLog($asset['plaque'], FALSE);
-            $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
+            $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente. Placa existente'));
         }
         
         $this->loadModel('Brands');

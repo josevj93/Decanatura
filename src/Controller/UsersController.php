@@ -161,7 +161,7 @@ class UsersController extends AppController
             }
             $success = FALSE;
             AppController::insertLog($user['nombre'], $success);
-            $this->Flash->error(__('El usuario no pudo ser agregado, intente nuevamente'));
+            $this->Flash->error(__('El usuario no pudo ser agregado, intente nuevamente. Cédula Existente'));
         }
         $this->set(compact('user'));
     }
