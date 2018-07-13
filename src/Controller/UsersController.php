@@ -82,6 +82,8 @@ class UsersController extends AppController
             return $allowE;
         }else if($this->request->getParam('action') == 'view'){
             return $allowC;
+        }else if ($this->request->getParam('action') == 'profile') {
+            return true;
         }else{
             return $allowC;
         }
@@ -246,15 +248,26 @@ class UsersController extends AppController
 
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            
-            if ($this->Users->save($user)) {
-                AppController::insertLog($user['nombre'], $success);
-                $this->Flash->success(__('Cambios guardados.'));
+            //$user = $this->Users->patchEntity($user, $this->request->getData());
+            if($this->request->getData()['password'] == $this->request->getData()['password2']){
+                $user->password = $this->request->getData()['password'];
+                //print_r($user);
+                //die();
+                if ($this->Users->save($user)) {
+                    AppController::insertLog($user['nombre'], $success);
+                    $this->Flash->success(__('Cambios guardados.'));
+                }else{
+                    //debug($this->Users->validationErrors);
+                    //debug($this->Users->getDataSource()->getLog(false, false));
+                    //die();
+                    $success = FALSE;
+                    AppController::insertLog($user['nombre'], $success);
+                    $this->Flash->error(__('Los cambios no pudieron ser guardados. Por favor vuelva a intentarlo.')); 
+                }
             }else{
                 $success = FALSE;
                 AppController::insertLog($user['nombre'], $success);
-                $this->Flash->error(__('Los cambios no pudieron ser guardados. Por favor vuelva a intentarlo.')); 
+                $this->Flash->error(__('Las contraseñas no coinciden. Por favor vuelva a intentarlo.'));
             } 
         }
         $this->set(compact('user'));

@@ -45,40 +45,40 @@
     <br>
       <div class="form-control sameLine" >
         <div class="row">
-          <label> <b>Nombre:</b><b style="color:red;">*</b> </label>
-          <?php echo $this->Form->imput('nombre', ['class'=>'form-control col-md-6']); ?>
+          <label> <b>Nombre:</b><b style="color:red;"></b> </label>
+          <?php echo $this->Form->imput('nombre', ['class'=>'form-control col-md-6', 'disabled']); ?>
         </div>
 
         <div class="row">
-          <label> <b>Primer Apellido:</b><b style="color:red;">*</b> </label>
-          <?php echo $this->Form->imput('apellido1', ['class'=>'form-control col-md-6']); ?>
+          <label> <b>Primer Apellido:</b><b style="color:red;"></b> </label>
+          <?php echo $this->Form->imput('apellido1', ['class'=>'form-control col-md-6', 'disabled']); ?>
         </div>
 
         <div class="row">
-          <label> <b>Segundo Apellido:</b><b style="color:red;">*</b> </label>
-          <?php echo $this->Form->imput('apellido2', ['class'=>'form-control col-md-6']); ?>
+          <label> <b>Segundo Apellido:</b><b style="color:red;"></b> </label>
+          <?php echo $this->Form->imput('apellido2', ['class'=>'form-control col-md-6', 'disabled']); ?>
         </div>
       </div>
       <br>
 
-      <label> <b>Correo:</b><b style="color:red;">*</b> </label>
-      <?php echo $this->Form->imput('correo', ['class'=>'form-control col-md-6']); ?>
+      <label> <b>Correo:</b><b style="color:red;"></b> </label>
+      <?php echo $this->Form->imput('correo', ['class'=>'form-control col-md-6', 'disabled']); ?>
       <br>
 
       <div class="form-control sameLine" >
         <div class="row">
-          <label> <b>Usuario:</b><b style="color:red;">*</b> </label>
-          <?php echo $this->Form->imput('username', ['class'=>'form-control col-md-6']); ?>
+          <label> <b>Usuario:</b><b style="color:red;"></b> </label>
+          <?php echo $this->Form->imput('username', ['class'=>'form-control col-md-8', 'disabled']); ?>
         </div>
 
         <div class="row">
-          <label> <b>Contraseña:</b><b style="color:red;">*</b> </label>
-          <?php echo $this->Form->imput('password', ['class'=>'form-control col-md-6']); ?>
+          <label> <b>Contraseña:</b><b style="color:red;"></b> </label>
+          <?php echo $this->Form->imput('password', ['class'=>'form-control col-md-6', 'type' => 'password', 'value' => '']); ?>
         </div>
 
         <div class="row">
-          <label> <b>Confirmar Contraseña:</b><b style="color:red;">*</b> </label>
-          <?php echo $this->Form->imput('apellido2', ['class'=>'form-control col-md-6']); ?>
+          <label> <b>Confirmar Contraseña:</b><b style="color:red;"></b> </label>
+          <?php echo $this->Form->imput('password2', ['class'=>'form-control col-md-6', 'type' => 'password', 'value' => '']); ?>
         </div>
       </div>
       <br>
@@ -87,6 +87,6 @@
 <br>
 
   <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-  <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+  <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'action' => 'profile']) ?>
 
 <?= $this->Form->end(); ?>
