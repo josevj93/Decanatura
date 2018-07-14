@@ -117,7 +117,7 @@
                     'inputContainer' => '<div class="row">{{content}}</div>',
                     'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                     ],
-                'label'=>['text'=>'Número de traslado: VRA-', 'style'=>'margin-left= 10px;'],
+                'label'=>['text'=>'Número de traslado:', 'style'=>'margin-left= 10px;'],
                 'class'=>'form-control col-sm-4',
                 'type'=>'text',
                 'id' =>'transfers_id'
@@ -249,7 +249,7 @@
 
   <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
   <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'acept']) ?>
-  <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $transfer->transfers_id)]) ?>
+
 </body>
 
 <script>

@@ -11,22 +11,54 @@
         $dis = "Disabled";
     }
 ?>
-
-<div class="roles form large-9 medium-8 columns content">
-    <?= $this->Form->create($rol); ?>
-    <h3>Modificar Rol</h3>
-    <fieldset>
-        <?php
-            echo $this->Form->control('nombre', array('type'=> 'text', 'label'=> 'Nombre', 'class' => 'form-control', $dis));
-        ?>
-    </fieldset>
-        <style>
+<head>
+  <style>
         .btn-primary {
-            float: right;
-            margin: 20px;
+          color: #fff;
+          background-color: #0099FF;
+          border-color: #0099FF;
+          float: right;
+          margin-left: 10px;
         }
-    </style>
+
+        .btn-default {
+          color: #000;
+          background-color: #7DC7EF;
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+
+        label {
+          text-align:left;
+          margin-right: 10px;
+
+        }
+
+        .sameLine{
+          display: flex;
+          justify-content: space-between;
+          border-color: transparent;
+        }
+
+  </style>
+</head>
+
+<body>
+<div class="users form large-9 medium-8 columns content">
+  <?= $this->Form->create($rol) ?>
+  <fieldset>
+    <legend><?= __('Editar Rol') ?></legend>
+    <br>
+    <div class="row">
+      <label> <b>Nombre:</b><b style="color:red;">*</b> </label>
+      <?php echo $this->Form->imput('nombre', ['class'=>'form-control col-md-6', $dis]); ?>
     </div>
-    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Roles', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->end() ?>
+  <br>
+</fieldset>
+</div>
+<br>
+
+<?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+<?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+
+<?= $this->Form->end(); ?>

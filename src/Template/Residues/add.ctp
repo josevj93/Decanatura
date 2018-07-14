@@ -4,8 +4,6 @@
  * @var \App\Model\Entity\Residue $residue
  */
     use Cake\Routing\Router;
-
-
 ?>
 
 <head>
@@ -253,20 +251,21 @@
 
     <!-- input donde coloco la lista de placas checkeadas -->
     <input type="hidden" name="checkList" id="checkList">
+
     <div>
         <p align="center">
             (Art. 26 del Reglamento para la Administración y Control de los Bienes Institucionales de la Universidad de Costa Rica)
         </p>
     </div><br>
-
+    
 <br>
 <br>
 <div>
-    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id'=>'acept']) ?>
-    <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $residue->residues_id)]) ?>
-</div>
 
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+        <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id'=>'acept']) ?>
+        </form>
+</div>
 <script type="text/javascript">
 
  $( function Picker() {
@@ -342,7 +341,7 @@ $(document).ready(function()
     } );
 } );
 
-
+// funcion para validad que algun checkbox a sido marcado
     function validateCheck() {
     var checks, error;
 
@@ -360,18 +359,6 @@ $(document).ready(function()
     }
     
 }
-
-    $("document").ready(
-    function() {
-      $('#acept').click( function()
-      {
-        var check = getValueUsingClass();
-        $('#checkList').val(check);
-
-        });
-        }
-    );
-
 
 /** función optenida de http://bytutorial.com/blogs/jquery/jquery-get-selected-checkboxes */
 

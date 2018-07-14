@@ -12,7 +12,6 @@ use Imagine;
  *
  * @property \App\Model\Table\TypesTable|\Cake\ORM\Association\BelongsTo $Types
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\LocationsTable|\Cake\ORM\Association\BelongsTo $Locations
  *
  * @method \App\Model\Entity\Asset get($primaryKey, $options = [])
@@ -228,6 +227,18 @@ class AssetsTable extends Table
         return $validator;
     }
 
+    public function uniqueId($id){
+        $returnId = $this->find('all')
+        ->where([
+            'Assets.plaque' => $id,
+        ])
+        ->first();
+        if($returnId){
+        return false;
+        }
+        return true;
+    }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -243,7 +254,18 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['loan_id'], 'Loans'));
         $rules->add($rules->existsIn(['models_id'], 'Models'));
 		$rules->add($rules->existsIn(['type_id'], 'Types'));
+        $rules->add(function ($entity, $options) {
+
+        return $this->uniqueId($entity->plaque);
+        },
+        'uniqueId',
+        [
+        'errorField' => 'id',
+        'message' => 'El numero de placa ya existe.'
+        ]
+        );
 
         return $rules;
+
     }
 }
