@@ -100,38 +100,42 @@
         <legend><?= __('Insertar acta de desecho') ?></legend>
            
       <div class="form-control sameLine">
-        <div>
-            <!--<label class='align'> <b> Número de autorización: </b> <font color="red"> * </font> VRA- </label>-->
+        <div class="row">
+            <label class='align'> <b> Número de autorización: </b> <font color="red"> * </font> VRA- </label>
         <?php 
-            echo $this->Form->control('residues_id', 
+            echo $this->form->imput('residues_id', 
                 [
-                    'templates' => [
-                    'inputContainer' => '<div class="row">{{content}}</div>',
-                    'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
-                    ],
-                'label'=>['text'=>'Número de autorización: VRA-', 'style'=>'margin-left= 10px;'],
-                //'label'=>['text'=>''],
+                    //'templates' => [
+                    //'inputContainer' => '<div class="row">{{content}}</div>',
+                    //'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
+                    //],
+                //'label'=>['text'=>'Número de autorización: VRA-', 'required'=>'true','style'=>'margin-left= 10px;'],
+                //'label'=>['text'=>'', 'required'=>'true'],
                 'class'=>'form-control col-sm-4',
                 'type'=>'text',
-                'id' =>'residues_id'
+                'id' =>'residues_id',
+                'required' => 'true'
                 ]);
+            //echo $this->Form->imput('residues_id', ['class'=>'form-control col-sm-6']);
+
         ?>
         </div>    
         <br>
-        <div>
+        <div class="row">
             <label class='align'> <b> Fecha: </b> <font color="red"> * </font> </label><br>
         <?php 
-        echo $this->Form->control('date', 
+        echo $this->Form->imput('date', 
           [
-            'templates' => [
+            /*'templates' => [
               'inputContainer' => '<div class="row">{{content}}</div>',
               'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
-            ],
+            ],*/
             //'label'=>['text'=>'Fecha:', 'style'=>'margin-left= 10px;'],
-            'label'=>['text'=>''],
+            //'label'=>['text'=>''],
             'class'=>'form-control',
             'type'=>'text',
-            'id'=>'datepicker'
+            'id'=>'datepicker',
+            'required' => 'true'
           ]);
       ?>
         </div>
