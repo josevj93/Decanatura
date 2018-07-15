@@ -349,7 +349,7 @@ $(document).ready(function()
     } );
 } );
 
-// funcion para validad que algun checkbox a sido marcado
+// función para validar que algún checkbox ha sido marcado
     function validateCheck() {
     var checks, error;
 
@@ -367,7 +367,16 @@ $(document).ready(function()
     }
     
 }
+$("document").ready(
+    function() {
+      $('#acept').click( function()
+      {
+        var check = getValueUsingClass();
+        $('#checkList').val(check);
 
+        });
+        }
+    );
 /** función optenida de http://bytutorial.com/blogs/jquery/jquery-get-selected-checkboxes */
 
     function getValueUsingClass(){
