@@ -3,7 +3,7 @@
     <fieldset>
         <legend><?= __('Insertar Ubicación') ?></legend><br>
             <div class='row'>
-                <label class='align'>Ubicación:</label><br>
+                <label class='align'> <b> Ubicación: </b> <font color="red"> * </font> </label><br>
                 <?php 
                 echo $this->Form->imput('nombre', ['label' => 'Nombre:', 'class'=>'form-control col-sm-2']);
                 ?>

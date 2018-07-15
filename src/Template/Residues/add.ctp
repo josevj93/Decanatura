@@ -101,6 +101,7 @@
            
       <div class="form-control sameLine">
         <div>
+            <!--<label class='align'> <b> Número de autorización: </b> <font color="red"> * </font> VRA- </label>-->
         <?php 
             echo $this->Form->control('residues_id', 
                 [
@@ -109,6 +110,7 @@
                     'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                     ],
                 'label'=>['text'=>'Número de autorización: VRA-', 'style'=>'margin-left= 10px;'],
+                //'label'=>['text'=>''],
                 'class'=>'form-control col-sm-4',
                 'type'=>'text',
                 'id' =>'residues_id'
@@ -117,6 +119,7 @@
         </div>    
         <br>
         <div>
+            <label class='align'> <b> Fecha: </b> <font color="red"> * </font> </label><br>
         <?php 
         echo $this->Form->control('date', 
           [
@@ -124,7 +127,8 @@
               'inputContainer' => '<div class="row">{{content}}</div>',
               'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
             ],
-            'label'=>['text'=>'Fecha:', 'style'=>'margin-left= 10px;'],
+            //'label'=>['text'=>'Fecha:', 'style'=>'margin-left= 10px;'],
+            'label'=>['text'=>''],
             'class'=>'form-control',
             'type'=>'text',
             'id'=>'datepicker'
