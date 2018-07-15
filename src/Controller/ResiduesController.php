@@ -187,7 +187,6 @@ class ResiduesController extends AppController
                 return $this->redirect(['action' => 'index']    );
             }
             AppController::insertLog($model['residues_id'], FALSE);
-            debug($residue);
             $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Inténtelo de nuevo.'));
         }
 
