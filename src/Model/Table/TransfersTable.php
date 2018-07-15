@@ -35,6 +35,21 @@ class TransfersTable extends Table
         $this->setTable('transfers');
         $this->setDisplayField('transfers_id');
         $this->setPrimaryKey('transfers_id');
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'file_name' => [
+                'fields' => [
+                    'dir' => 'path',
+                    'size' => 'file_size',
+                    'type' => 'file_type',
+                ],
+                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:transfers_id}{DS}',
+                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
+                    return strtolower($data['name']);
+                },
+
+                'keepFilesOnDelete' => false
+            ]
+        ]);
 
         $this->belongsToMany('Assets', [
             'foreignKey' => 'transfer_id',
@@ -94,7 +109,6 @@ class TransfersTable extends Table
             ->allowEmpty('path');
 
         $validator
-            ->scalar('file_name')
             ->maxLength('file_name', 100)
             ->allowEmpty('file_name');
 

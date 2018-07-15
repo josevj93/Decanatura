@@ -64,7 +64,7 @@
 
 <body>
 <div class="locations form large-9 medium-8 columns content">
-  <?= $this->Form->create($technicalReport) ?>
+  <?= $this->Form->create($technicalReport,['onsubmit'=>'return validateCheck()']) ?>
   <fieldset>
     <legend><?= __('Insertar informe técnico') ?></legend>
     <br>
@@ -102,7 +102,8 @@
           
 
     </div>
-    <div id=assetResult> 
+    <div id=assetResult>
+    <p id="errorMsg" style="color: red;"></p> 
     </div><br>
    
     
@@ -151,10 +152,8 @@
 
 </div>
   <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-  <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-  <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]) ?>
-
-
+  <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'Aceptar']) ?>
+  </form>
 </body>
 
 <script>
@@ -197,4 +196,21 @@
       });
     }
   );
+  // funcion para validad que se escocje un activo para el informe
+  function validateCheck() {
+    var search, error;
+
+    // Get the value of the input field with id="numb"
+    search = document.getElementById('assetImput').value;
+    alert(search.length);
+    //If x is Not a Number or less than one or greater than 10
+    /*if ( search.length == 0 ) {
+        error = "Seleccione un activo para insertar el informe.";
+        document.getElementById("errorMsg").innerHTML = error;
+        return false;
+    } else {
+        return true;
+    }*/return false;
+  }
+
 </script>
