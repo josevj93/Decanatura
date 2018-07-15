@@ -73,8 +73,8 @@
     <div class="form-control sameLine" >
 
       <div class="row">
-          <label>Nº Reporte:</label>
-          <label><?php echo h($CompleteID); ?> *</label>
+          <label required="required"><b>Nº Reporte:</b><font color="red"> * </font></label>
+          <label><?php echo h($CompleteID); ?></label>
       </div>
       
       <div class="row">
@@ -87,8 +87,7 @@
         
     </div>
     
-
-    <label>Placa del activo:</label><br>
+    <label required="required"><b>Placa del activo:</b><font color="red"> * </font></label>
     <div class='input-group mb-3'>
         
           <?php 
@@ -109,7 +108,8 @@
     
 
     <div>
-      <label for="Evaluacion">Evaluación:</label>
+      <label required="required"><b>Evaluación:</b><font color="red"> * </font></label>
+
       <?php 
         echo $this->Form->textarea('evaluation', ['label' => 'Evaluación:', 'class'=>'form-control col-md-8']);
       ?>
@@ -117,7 +117,7 @@
     <br>
 
     <div>
-      <label >Recomendación:</label>
+      <label required="required"><b>Recomendación:</b><font color="red"> * </font></label>
       <br>
       <?php
        echo $this->Form->radio('recommendation',

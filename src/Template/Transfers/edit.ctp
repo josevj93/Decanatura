@@ -49,10 +49,25 @@ use Cake\Routing\Router;
     }
     label[class=label-t]{
         margin-left: 20px;
-        width: 150px;
     }
     label[class=label-h]{
         margin-right: 10px;
+    }
+    label[class = funcionario]
+    {
+      margin-left: 20px;
+      margin-right: 41px;
+    }
+    label[class = id]
+    {
+      margin-left: 20px;
+      margin-right: 45px;
+      width: 100px;
+    }
+    label {
+        text-align:left;
+        margin-right: 10px;
+          
     }
     .sameLine{
     display: flex; 
@@ -65,7 +80,7 @@ use Cake\Routing\Router;
 <div class="transfers form large-9 medium-8 columns content">
   <fieldset>
     <?= $this->Form->create($transfer,['type' => 'file']) ?>
-    <legend>Traslado</legend>
+    <legend>Editar traslado</legend>
     <br>
         <div class= 'form-control sameLine' style="border-color: transparent;">
             <div class ="row">                
@@ -93,50 +108,54 @@ use Cake\Routing\Router;
         <tr>
             <!-- Fila para la Unidad que entrega -->
             <td>
+
                 <div class="row" >
-                    <label class="label-t">Unidad académica: </label>
+                    <label class="label-t" required="required"><b>Unidad académica:</b><font color="red"> * </font></label>
                    
-                    <?php echo '<input type="text" readonly="readonly" class="form-control col-sm-6"  value="' . htmlspecialchars($Unidad) . '">'; ?>
+                    <label><?php echo h($Unidad); ?></label>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Funcionario: </label>
+                    <label class = "funcionario" required="required"><b>Funcionario:</b><font color="red"> * </font></label>
                     <?php 
                     echo $this->Form->select('functionary',
                       $users,
-                      ['empty' => '(Escoja un usuario)','class'=>'form-control', 'style'=>'width:220px;','id'=>'functionary']
+                      ['empty' => '(Escoja un usuario)','class'=>'form-control', 'style'=>'width:220px;']
                     );
                     ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Cédula:</label>
-                    <?php echo '<input type="text" name="identification" id="identification" class="form-control col-sm-4"  value="' . htmlspecialchars($transfer->identification) . '">'; ?>
+                    <label class="id" required="required"><b>Cédula:</b><font color="red"> * </font></label>
+
+                    <?php 
+            echo $this->Form->imput('identification', ['label' => 'identification:', 'class'=>'form-control col-sm-4']);
+            ?>
                 </div>
             </td>
-
-
             <!-- Fila para la Unidad que recibe -->
             <td>
                 <div class="row">
-                    
-                        <label class="label-t">Unidad académica: </label>
-                    
-                        <?php echo '<input type="text" id="Acade_Unit_recib" name="Acade_Unit_recib" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->Acade_Unit_recib). '">'; ?>
-                    
+                        <label class="label-t">Unidad académica:</label>
+                        <?php 
+            echo $this->Form->imput('Acade_Unit_recib', ['label' => 'Acade_Unit_recib:', 'class'=>'form-control col-sm-4']);
+            ?>       
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Funcionario: </label>
-                    <?php echo '<input type="text" name="functionary_recib" id="functionary_recib" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->functionary_recib). '">'; ?>
+                    <label class = "funcionario" style ="margin-right: 59px;">Funcionario:</label>
+                    <?php 
+            echo $this->Form->imput('functionary_recib', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
+            ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Identificación:</label>
-                    <?php echo '<input type="text" name="identification_recib" id="identification_recib" class="form-control col-sm-4"  value="' . htmlspecialchars($transfer->identification_recib) . '">'; ?>
+                    <label class="id" style ="margin-right: 45px;">Cédula:</label>
+                    <?php 
+            echo $this->Form->imput('identification_recib', ['label' => 'identification_recib:', 'class'=>'form-control col-sm-4']);
+            ?>
                 </div>               
             </td>
-            
         </tr>
     </table>
     <br>
@@ -198,7 +217,7 @@ use Cake\Routing\Router;
         <?php 
             if($transfer->file_name == null)
             {
-                echo <label> Subir acta de desechos: </label>;
+                echo '<label> Subir acta de desechos: </label>';
                 echo $this->Form->imput('file_name',['type' => 'file', 'class' => 'form-control-file']); 
             }
          ?>
