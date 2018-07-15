@@ -77,7 +77,7 @@
 <body>
 
 <div class="locations form large-9 medium-8 columns content">
-  <?= $this->Form->create($technicalReport) ?>
+  <?= $this->Form->create($technicalReport,['type' => 'file']) ?>
   <fieldset>
     <legend><?= __('Editar informe técnico') ?></legend>
     <br>
@@ -185,14 +185,35 @@
             ?>
       
     </div>
+    <br>
+    <div class='form-control' style="border-color: transparent;">
+        <label> Subir acta de desechos: </label>
+        <?php echo $this->Form->imput('file_name',['type' => 'file', 'class' => 'form-control-file']); ?>
+    </div>
+    <br>
 
   </fieldset>
 
 
 </div>
-  <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-  <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-  <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]) ?>
+  <div>
+    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+  </form>
+  </div>
+
+        <!-- Creo un nuevo from para hacer el post hacia el método de descarga
+            Además hay 2 inputs hidden para poder colocar ahí los datos actualues de la vista.
+        -->
+        
+        <?= $this->Form->create(null,['type'=>'post',
+                                        'url'=>'/technical-reports/download'
+                                    ]) ?>
+        <!-- input donde coloco todo los datos de los demás imput exepto el input checkList -->
+        <input type="hidden" name="pdf" id="pdf">
+
+        <?= $this->Form->button(__('Generar PDF'), ['class' => 'btn btn-primary', 'id'=>'generate','style'=>'float:left;']) ?>
+        </form>
 
 
 </body>
