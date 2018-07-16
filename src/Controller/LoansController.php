@@ -228,13 +228,6 @@ class LoansController extends AppController
                 $loan = $this->Loans->get($id, [
                     'contain' => ['Users']
                 ]);
-
-                if($loan->file_devolucion == null){
-                    $loan->estado = "En proceso";
-                    $this->Loans->save($loan);
-                    $this->Flash->error(__('Debe subir un archivo para finalizar el prestamo'));
-                    return $this->redirect(['action' => 'finalizar', $loan->id]);
-                }
                 
                 $this->Flash->success(__('El préstamo fue creado exitosamente.'));
                 return $this->redirect(['action' => 'index']);

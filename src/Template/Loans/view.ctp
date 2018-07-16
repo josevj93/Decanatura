@@ -102,45 +102,24 @@
     </div> <br>
 
 <?php
-  if($loan->file_solicitud == ''){
-      echo "<b>1- <?= $this->Html->link(__('Descargar'), ['controller'=> 'Loans', 'action' => 'download',$loan->id], [ 'confirm' => __('Seguro que desea descargar el archivo?')]) ?> el formulario para llenar y luego subirlo al sitema.</b>";
-      echo "<br><br><br>";
-      echo "<div >";
-      echo "<b><?php echo $this->Form->input('file_solicitud',['type' => 'file','label' => '2- Subir Formulario de Préstamo una vez lleno para Finalizar', 'class' => 'form-control-file']); ?></b>";
-      echo "</div>";
-      echo "<div class=\"col-12 text-right\">";
-
-  }else{
-
-      echo $this->Html->link(__('Ver Formulario'),'/' . $loan->file_solicitud_dir . '/' . $loan->file_solicitud);
-      echo "<div class=\"col-12 text-right\">";
+  if($loan->estado != 'En proceso'){
+    echo $this->Html->link(__('Ver Formulario'),'/' . $loan->file_solicitud_dir . '/' . $loan->file_solicitud);
+    echo "<div class=\"col-12 text-right\">";
 
   }
- 
-?>
-    
-
-
-
-
-<?php
-   if($loan->file_solicitud == ''){
-	   echo $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']);
-		$this->Form->button(__('Subir'), ['class' => 'btn btn-primary']);
-   }else{
-    if($loan->estado != 'Terminado'){
-		echo $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']);
-      echo $this->Html->link(__('Finalizar Préstamo'), ['action' => 'terminar',$loan->id], ['class' => 'btn btn-primary']);
-    }else{
-		echo $this->Html->link(__('Salir'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']);
-    }
-   }
 ?>
 
- <br><br> 
+<div class="col-12 text-right">
+    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-
-
+    <?php
+        if($loan->estado == 'En proceso'){
+            echo $this->Html->link(__('Seguir con proceso de insertar'), ['controller' => 'Loans', 'action' => 'finalizar', $loan->id], ['class' => 'btn btn-primary']);
+        }
+        else if($loan->estado == 'Activo'){
+			echo $this->Html->link(__('Finalizar Préstamo'), ['action' => 'terminar',$loan->id], ['class' => 'btn btn-primary']);
+        }
+    ?>
 </div>
 
 
