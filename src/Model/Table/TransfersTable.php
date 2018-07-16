@@ -124,7 +124,7 @@ class TransfersTable extends Table
     public function uniqueId($id){
         $returnId = $this->find('all')
         ->where([
-            'Transfer.transfers_id' => $id,
+            'Transfers.transfers_id' => $id,
         ])
         ->first();
         if($returnId){

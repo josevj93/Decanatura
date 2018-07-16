@@ -72,6 +72,11 @@
     justify-content: space-between; 
     border-color: transparent;
     }
+    .cuadro
+    {
+        display: flex; 
+    border-color: transparent;
+    }
 </style>
 <!-- Sección de scripts utilizados por la pantalla -->
 <head>
@@ -127,8 +132,11 @@
         <table>
             <tr>
                 <td><br>
+                    
                     <!-- Se modificó la clase del div (a travez de la plantilla) y la del label
-                    Este mismo proceso se aplica en las demás generaciones -->
+                                  Este mismo proceso se aplica en las demás geberaciones -->
+                    <div class="form-control cuadro">
+                    <label style =  "text-align:left; margin-right: 10px;" required="required"> <b> Nombre: </b> <font color="red"> * </font> </label><br>          
                     <?php 
                         echo $this->Form->control('name1', 
                             [
@@ -137,10 +145,17 @@
                                 'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                                 ],
 
-                            'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
+                            'label'=>['text'=>''],
+                            "required"=>"required",
                             'class'=>'form-control col-sm-6'
                             ]);
-                    ?><br>
+                    ?>
+                </div>
+                    <br>
+
+                    <div class="form-control cuadro">
+                    <label style =  "text-align:left; margin-right: 10px;"> <b> Cédula: </b> <font color="red"> * </font> </label><br>  
+
                     <?php 
                         echo $this->Form->control('identification1', 
                             [
@@ -148,14 +163,20 @@
                                 'inputContainer' => '<div class="row">{{content}}</div>',
                                 'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                                 ],
-
-                            'label'=>['class'=>'label-t','text'=>'Cédula:', 'style'=>'margin-left= 10px;'],
+                                "required"=>"required",
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
                             'class'=>'form-control col-sm-6'
                             ]);
-                    ?><br>
+                    ?>
+                </div>
+                    <br>
                 </td>
             
                 <td><br>
+
+                    <div class="form-control cuadro">
+                    <label style =  "text-align:left; margin-right: 10px;" required="required"> <b> Nombre: </b> <font color="red"> * </font> </label><br>  
+
                     <?php 
                         echo $this->Form->control('name2', 
                             [
@@ -164,10 +185,17 @@
                                 'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                                 ],
 
-                            'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
+                            'label'=>['text'=>''],
+                            "required"=>"required",
                             'class'=>'form-control col-sm-6'
                             ]);
-                    ?><br>
+                    ?>
+                </div>
+                    <br>
+
+                    <div class="form-control cuadro">
+                    <label style =  "text-align:left; margin-right: 10px;" required="required"> <b> Cédula: </b> <font color="red"> * </font> </label><br>  
+
                     <?php 
                         echo $this->Form->control('identification2', 
                             [
@@ -175,11 +203,13 @@
                                 'inputContainer' => '<div class="row">{{content}}</div>',
                                 'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                                 ],
-
-                            'label'=>['class'=>'label-t','text'=>'Cédula:', 'style'=>'margin-left= 10px;'],
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            "required"=>"required",
                             'class'=>'form-control col-sm-6'
                             ]);
-                    ?><br>
+                    ?>
+                    </div>
+                    <br>
                 </td>
             </tr>
         </table><br>
