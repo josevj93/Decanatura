@@ -40,16 +40,20 @@
 </style> 
   
 <div class="form large-9 medium-8 columns content">
-
+<?= $this->Form->create($loan, ['type' => 'file']) ?>
 	<fieldset>
-        <legend><?= __('Consultar préstamo') ?></legend>
-
+        <?php
+            if($loan->estado == "En proceso"){
+                echo "<legend>Insertar préstamo</legend>";
+            }
+        ?>
+        
 		<br>
 
 		<div class="form-control sameLine">
 			<div class="row col-lg-5">
 				<label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-				<?php echo '<input type="text" id="id_responsables" class="form-control col-sm-4 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($loan->user->nombre). '">'; ?>
+				<?php echo $this->Form->imput('id_responsables', ['class'=>'"form-control col-sm-4 col-md-4 col-lg-4', 'value' => $loan->user->nombre, 'disabled']); ?>
 			</div>
 
 			<div class="row">
@@ -101,25 +105,18 @@
 
     <br>
 
-    <?php
-        if($loan->estado == 'Activo'){
-            echo "<div>";
-            echo $this->Html->link( 
-                "Ver archivo adjunto",
-                '/webroot/files/Loans/file_solicitud/' . $loan->file_solicitud,
-                array('escape' => false, 'target' => '_blank'));
-            echo "</div>";
-        }
-    ?>
+    <div>
+        <?php echo $this->Form->input('file_solicitud',['type' => 'file','label' => 'Subir Formulario de Préstamo', 'class' => 'form-control-file']) ?>
+    </div>
+
 </div>
+
 <div class="col-12 text-right">
-    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
-    <?php
-        if($loan->estado == 'En proceso'){
-            echo $this->Html->link(__('Finalizar'), ['controller' => 'Loans', 'action' => 'finalizar', $loan->id], ['class' => 'btn btn-primary']);
-        }
-    ?>
+    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->postLink(__('Generar Formulario'), ['controller'=> 'Loans', 'action' => 'download',$loan->id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $loan->id)]) ?>
+
 </div>
 
-
+<?= $this->Form->end(); ?>

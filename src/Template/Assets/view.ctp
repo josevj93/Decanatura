@@ -106,14 +106,16 @@
       </div>
 
     </div> <br>
-	
-	<div class="form-control sameLine" >
 
-      <div class="row">
+      <div>
         <label> Sub-ubicación: </label>
-        <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" value="' . htmlspecialchars($asset->sub_location) . '">'; ?>       
+        <?php echo $this->Form->textarea('sub_location', ['class'=>'form-control col-md-8', 'disabled']); ?>     
       </div>
+
+      <br>
 	  
+
+    <div class="form-control sameLine" >
       
       <div class="row">
         <label class="col-lg-2"> Año: </label>
