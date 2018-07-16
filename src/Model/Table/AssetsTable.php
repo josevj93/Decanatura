@@ -254,16 +254,6 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['loan_id'], 'Loans'));
         $rules->add($rules->existsIn(['models_id'], 'Models'));
 		$rules->add($rules->existsIn(['type_id'], 'Types'));
-        $rules->add(function ($entity, $options) {
-
-        return $this->uniqueId($entity->plaque);
-        },
-        'uniqueId',
-        [
-        'errorField' => 'id',
-        'message' => 'El numero de placa ya existe.'
-        ]
-        );
 
         return $rules;
 
