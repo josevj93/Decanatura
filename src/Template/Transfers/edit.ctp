@@ -3,7 +3,6 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Transfer $transfer
  */
-
 use Cake\Routing\Router;
 ?>
 
@@ -13,8 +12,7 @@ use Cake\Routing\Router;
 
 <style>
     
-
-    .btn-primary{
+   .btn-primary{
       color: #FFF;
       background-color: #0099FF;
       border-color: #0099FF;
@@ -25,7 +23,6 @@ use Cake\Routing\Router;
     .btn-primary:hover{
         color: #fff;
         background-color: #0099FF;
-
     }
     .btn[type="submit"]:not{
         text-transform: capitalize;
@@ -35,7 +32,6 @@ use Cake\Routing\Router;
         color: #fff;
         background-color: #0099FF;
     }
-
     table {
     border-collapse: collapse;
     width: 100%;
@@ -53,38 +49,52 @@ use Cake\Routing\Router;
     }
     label[class=label-t]{
         margin-left: 20px;
-        width: 150px;
     }
     label[class=label-h]{
         margin-right: 10px;
+    }
+    label[class = funcionario]
+    {
+      margin-left: 20px;
+      margin-right: 41px;
+    }
+    label[class = id]
+    {
+      margin-left: 20px;
+      margin-right: 45px;
+      width: 100px;
+    }
+    label {
+        text-align:left;
+        margin-right: 10px;
+          
     }
     .sameLine{
     display: flex; 
     justify-content: space-between; 
     border-color: transparent;
-    }
-       
+    }       
 </style>
 
 
 <div class="transfers form large-9 medium-8 columns content">
   <fieldset>
     <?= $this->Form->create($transfer,['type' => 'file']) ?>
-    <legend><?= __('Modificar traslado') ?></legend>
+    <legend>Editar traslado</legend>
     <br>
         <div class= 'form-control sameLine' style="border-color: transparent;">
             <div class ="row">                
                 <label class="label-h">Nº traslado:</label>
-                <?php echo '<input type="text" class="form-control col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?> 
+                <?php echo '<input type="text" class="form-control col-sm-2 col-xs-2 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?> 
             </div>
 
-            <div  class="row" >
+            <div  class="row">
                 <label class="label-h">Fecha:</label>
                 <?php
                 // para dar formato a la fecha
                 $tmpDate= $transfer->date->format('d-m-Y');
                 ?>  
-                <?php echo '<input type="text" id ="date" class="form-control col-xs-2 col-sm-2 col-md-6 col-lg-9" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?>
+                <?php echo '<input type="text" style="width: 120px;" id ="date" class="form-control " readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?>
             </div>
  
         </div>
@@ -98,14 +108,15 @@ use Cake\Routing\Router;
         <tr>
             <!-- Fila para la Unidad que entrega -->
             <td>
+
                 <div class="row" >
-                    <label class="label-t">Unidad académica: </label>
+                    <label class="label-t" required="required"><b>Unidad académica:</b><font color="red"> * </font></label>
                    
-                    <?php echo '<input type="text" readonly="readonly" class="form-control col-sm-6"  value="' . htmlspecialchars($Unidad) . '">'; ?>
+                    <label><?php echo h($Unidad); ?></label>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Funcionario: </label>
+                    <label class = "funcionario" required="required"><b>Funcionario:</b><font color="red"> * </font></label>
                     <?php 
                     echo $this->Form->select('functionary',
                       $users,
@@ -115,42 +126,45 @@ use Cake\Routing\Router;
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Cédula:</label>
-                    <?php echo '<input type="text" name="identification" id="identification" class="form-control col-sm-4"  value="' . htmlspecialchars($transfer->identification) . '">'; ?>
+                    <label class="id" required="required"><b>Cédula:</b><font color="red"> * </font></label>
+
+                    <?php 
+            echo $this->Form->imput('identification', ['label' => 'identification:', 'class'=>'form-control col-sm-4']);
+            ?>
                 </div>
             </td>
-
-
             <!-- Fila para la Unidad que recibe -->
             <td>
                 <div class="row">
-                    
-                        <label class="label-t">Unidad académica: </label>
-                    
-                        <?php echo '<input type="text" name="Acade_Unit_recib" id="Acade_Unit_recib" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->Acade_Unit_recib). '">'; ?>
-                    
+                        <label class="label-t">Unidad académica:</label>
+                        <?php 
+            echo $this->Form->imput('Acade_Unit_recib', ['label' => 'Acade_Unit_recib:', 'class'=>'form-control col-sm-4']);
+            ?>       
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Funcionario: </label>
-                    <?php echo '<input type="text" name="functionary_recib" id="functionary_recib" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->functionary_recib). '">'; ?>
+                    <label class = "funcionario" style ="margin-right: 59px;">Funcionario:</label>
+                    <?php 
+            echo $this->Form->imput('functionary_recib', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
+            ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Cédula:</label>
-                    <?php echo '<input type="text" name="identification_recib" id="identification_recib" class="form-control col-sm-4"  value="' . htmlspecialchars($transfer->identification_recib) . '">'; ?>
+                    <label class="id" style ="margin-right: 45px;">Cédula:</label>
+                    <?php 
+            echo $this->Form->imput('identification_recib', ['label' => 'identification_recib:', 'class'=>'form-control col-sm-4']);
+            ?>
                 </div>               
             </td>
-            
         </tr>
     </table>
     <br>
-</fieldset>
+
 
     <!-- AQUI ESTA LO IMPORTANTE. RECUERDEN COPIAR LOS SCRIPTS -->
     <div class="related">
         <legend><?= __('Activos a trasladar') ?></legend>
-
+          </fieldset>
 
         <!-- tabla que contiene  datos básicos de activos-->
         <table id='assets-transfers-grid' cellpadding="0" cellspacing="0">
@@ -172,7 +186,7 @@ use Cake\Routing\Router;
                     <td><?= h($a->model) ?></td>
                     <td><?= h($a->series) ?></td>
                     <td><?= h($a->state) ?></td>
-                    <?php
+                     <?php
                         // If que verifica si el checkbox debe ir activado o no
                         
                         if(in_array($a->plaque, array_column($result, 'plaque'),true) )
@@ -197,7 +211,18 @@ use Cake\Routing\Router;
             </tbody>
         </table>
 
-    </div><br>
+    </div>
+    <br>
+    <div class='form-control' style="border-color: transparent;">
+        <?php 
+            if($transfer->file_name == null)
+            {
+                echo '<label> Subir acta de desechos: </label>';
+                echo $this->Form->imput('file_name',['type' => 'file', 'class' => 'form-control-file']); 
+            }
+         ?>
+    </div>
+    <br>
 
     <!-- input donde coloco la lista de placas checkeadas -->
     <input type="hidden" name="checkList" id="checkList">
@@ -217,15 +242,15 @@ use Cake\Routing\Router;
         <?= $this->Form->button(__('Generar PDF'), ['class' => 'btn btn-primary', 'id'=>'generate','style'=>'float:left;text-transform: capitalize;']) ?>
     
     </form>
-  
-</div><br>
+
+</div>
 
 
 
 <script type="text/javascript">
-    $(document).ready(function() 
+      $(document).ready(function() 
     {
-        $('#assets-transfers-grid').DataTable( {
+        var equipmentTable = $('#assets-transfers-grid').DataTable( {
               dom: 'Bfrtip',
                     buttons: [],
                    "iDisplayLength": 10,
@@ -284,6 +309,8 @@ use Cake\Routing\Router;
         } );
 } );
 
+// funcion para colocar los valores de las placas de los activos seleccionados
+//dentor de un input
     $("document").ready(
     function() {
       $('#aceptar').click( function()
@@ -297,7 +324,7 @@ use Cake\Routing\Router;
 
     //  Funcion para meter todos los datos en el input pdf para posteriormente 
     //usar los datos en el método download del controlador
-$("document").ready(
+    $("document").ready(
     function() {
       $('#generate').click( function()
       {
@@ -305,19 +332,33 @@ $("document").ready(
         //concateno todos los valores
         var res = document.getElementById('date').value;
         res=res+","+document.getElementById('Acade_Unit_recib').value;
-        res=res+","+document.getElementById('functionary').value;
+
+        var pos= document.getElementById('functionary');
+        res=res+","+pos.options[pos.selectedIndex].text;
         res=res+","+document.getElementById('identification').value;
         res=res+","+document.getElementById('functionary_recib').value;
         res=res+","+document.getElementById('identification_recib').value;
         $('#pdf').val(res);
         $('#plaques').val(check);
-        alert(document.getElementById('plaques').value;)
+
+        alert(res);
+        } );
+        }
+    );
+// funcion para colocar los valores de las placas de los activos seleccionados
+//dentor de un input
+    $("document").ready(
+    function() {
+      $('#aceptar').click( function()
+      {
+        var check = getValueUsingClass();
+        $('#checkList').val(check);
+
         });
-    }
-);
+        }
+    );
 
 /** función optenida de http://bytutorial.com/blogs/jquery/jquery-get-selected-checkboxes */
-
     function getValueUsingClass(){
     /* declare an checkbox array */
     var chkArray = [];
@@ -333,4 +374,3 @@ $("document").ready(
     return selected;
 }
 </script>
-

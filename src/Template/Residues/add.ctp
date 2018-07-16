@@ -78,6 +78,12 @@
     border-color: transparent;
     }
 
+    .cuadro
+    {
+        display: flex; 
+    border-color: transparent;
+    }
+
     </style> 
 
 </head>
@@ -101,22 +107,29 @@
            
       <div class="form-control sameLine">
         <div>
-        <?php 
-            echo $this->Form->control('residues_id', 
+            <div class="row">
+
+            <label  class='align' required="required"> <b> Número de autorización: </b> <font color="red"> * </font> VRA- </label>
+            <?php 
+                echo $this->Form->control('residues_id', 
                 [
                     'templates' => [
                     'inputContainer' => '<div class="row">{{content}}</div>',
                     'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                     ],
-                'label'=>['text'=>'Número de autorización: VRA-', 'style'=>'margin-left= 10px;'],
-                'class'=>'form-control col-sm-4',
+                'label'=>['text'=>''],
+                'class'=>'form-control col-sm-4 col-lg-6 col-md-6',
                 'type'=>'text',
+                "required"=>"required",
                 'id' =>'residues_id'
                 ]);
-        ?>
+            ?>
+            </div>
         </div>    
         <br>
         <div>
+            <div class="form-control sameLine">
+            <label class='align' required="required"> <b> Fecha: </b> <font color="red"> * </font> </label><br>
         <?php 
         echo $this->Form->control('date', 
           [
@@ -124,14 +137,17 @@
               'inputContainer' => '<div class="row">{{content}}</div>',
               'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
             ],
-            'label'=>['text'=>'Fecha:', 'style'=>'margin-left= 10px;'],
+            //'label'=>['text'=>'Fecha:', 'style'=>'margin-left= 10px;'],
+            'label'=>['text'=>''],
             'class'=>'form-control',
             'type'=>'text',
+            "required"=>"required",
             'id'=>'datepicker'
           ]);
       ?>
+  </div>
         </div>
-      </div>
+    </div>
       
       <label>En presencia de:</label>
         
@@ -141,6 +157,8 @@
                     
                     <!-- Se modificó la clase del div (a travez de la plantilla) y la del label
                                   Este mismo proceso se aplica en las demás geberaciones -->
+                    <div class="form-control cuadro">
+                    <label style =  "text-align:left; margin-right: 10px;" required="required"> <b> Nombre: </b> <font color="red"> * </font> </label><br>          
                     <?php 
                         echo $this->Form->control('name1', 
                             [
@@ -149,11 +167,17 @@
                                 'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                                 ],
 
-                            'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
+                            'label'=>['text'=>''],
+                            "required"=>"required",
                             'class'=>'form-control col-sm-6'
                             ]);
                     ?>
+                </div>
                     <br>
+
+                    <div class="form-control cuadro">
+                    <label style =  "text-align:left; margin-right: 10px;"> <b> Cédula: </b> <font color="red"> * </font> </label><br>  
+
                     <?php 
                         echo $this->Form->control('identification1', 
                             [
@@ -161,14 +185,20 @@
                                 'inputContainer' => '<div class="row">{{content}}</div>',
                                 'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                                 ],
-
-                            'label'=>['class'=>'label-t','text'=>'Cédula:', 'style'=>'margin-left= 10px;'],
+                                "required"=>"required",
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
                             'class'=>'form-control col-sm-6'
                             ]);
-                    ?><br>
+                    ?>
+                </div>
+                    <br>
                 </td>
             
                 <td><br>
+
+                    <div class="form-control cuadro">
+                    <label style =  "text-align:left; margin-right: 10px;" required="required"> <b> Nombre: </b> <font color="red"> * </font> </label><br>  
+
                     <?php 
                         echo $this->Form->control('name2', 
                             [
@@ -177,10 +207,17 @@
                                 'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                                 ],
 
-                            'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
+                            'label'=>['text'=>''],
+                            "required"=>"required",
                             'class'=>'form-control col-sm-6'
                             ]);
-                    ?><br>
+                    ?>
+                </div>
+                    <br>
+
+                    <div class="form-control cuadro">
+                    <label style =  "text-align:left; margin-right: 10px;" required="required"> <b> Cédula: </b> <font color="red"> * </font> </label><br>  
+
                     <?php 
                         echo $this->Form->control('identification2', 
                             [
@@ -188,11 +225,13 @@
                                 'inputContainer' => '<div class="row">{{content}}</div>',
                                 'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                                 ],
-
-                            'label'=>['class'=>'label-t','text'=>'Cédula:', 'style'=>'margin-left= 10px;'],
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            "required"=>"required",
                             'class'=>'form-control col-sm-6'
                             ]);
-                    ?><br>
+                    ?>
+                    </div>
+                    <br>
                 </td>
             </tr>
         </table>
@@ -341,7 +380,7 @@ $(document).ready(function()
     } );
 } );
 
-// funcion para validad que algun checkbox a sido marcado
+// función para validar que algún checkbox ha sido marcado
     function validateCheck() {
     var checks, error;
 
@@ -359,7 +398,16 @@ $(document).ready(function()
     }
     
 }
+$("document").ready(
+    function() {
+      $('#acept').click( function()
+      {
+        var check = getValueUsingClass();
+        $('#checkList').val(check);
 
+        });
+        }
+    );
 /** función optenida de http://bytutorial.com/blogs/jquery/jquery-get-selected-checkboxes */
 
     function getValueUsingClass(){

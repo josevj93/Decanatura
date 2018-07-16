@@ -416,6 +416,7 @@ class TransfersController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             AppController::insertLog($transfer['transfers_id'], FALSE);
+            debug($transfer);
             $this->Flash->error(__('El traslado no se pudo guardar, porfavor intente nuevamente'));
 
         }
@@ -587,7 +588,7 @@ public function download($id = null)
             inner join transfers on transfer_id= transfer_id
             inner join brands b on  b.id=a.brand
             inner join models m on m.id=a.models_id
-            where a.plaque in =(" . $plaqueList . ");");
+            where a.plaque in (" . $plaqueList . ");");
 
             $results = $stmt ->fetchAll('assoc');
 
@@ -629,7 +630,7 @@ public function download($id = null)
             <h3 align="center">Unidad de Control de Activos Fijos y Seguros</h3>
             <h2 align="center">FORMULARIO PARA TRASLADO DE ACTIVOS FIJOS</h2>
             <h1>&nbsp;</h1>
-            <div id="element1" align="left">  Fecha: '.$transfer->date.' </div> <div id="element2" align="right"> No.'.$transfer->transfer_id.' </div> 
+            <div id="element1" align="left">  Fecha: '.$transferArray[0].' </div> <div id="element2" align="right"> No.'.$id.' </div> 
             <p align="right">(Lo asigna el usuario)</p>
             <p><strong>&nbsp;</strong></p>
 
@@ -639,16 +640,16 @@ public function download($id = null)
                 <th align="center"><span style="font-weight:bold">RECIBE</span></th>
             </tr>
             <tr>
-                <td height="50"><strong>Unidad: '.$this->UnidadAcadémica.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-                <td height="50"><strong>Unidad:'.$transfer->Acade_Unit_recib.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+                <td height="50"><strong>Unidad: '.$this->UnidadAcadémica.'</td>
+                <td height="50"><strong>Unidad: '.$transfer->Acade_Unit_recib.'</td>
             </tr>
             <tr>
-                <td height="50"><strong>Nombre del Funcionario:'.$transfer->functionary.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-                <td height="50"><strong>Nombre del Funcionario'.$transfer->functionary_recib.':&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+                <td height="50"><strong>Nombre del Funcionario: '.$transfer->functionary.'</td>
+                <td height="50"><strong>Nombre del Funcionario: '.$transfer->functionary_recib.'</td>
             </tr>
             <tr>
-                <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula:'.$transfer->identification.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-                <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula:'.$transfer->identification_recib.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
+                <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula: '.$transfer->identification.'</strong></td>
+                <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula: '.$transfer->identification_recib.'</td>
             </tr>
             </table>
 
@@ -697,12 +698,25 @@ public function download($id = null)
             //Render the HTML as PDF
             $document->render();
             //Get output of generated pdf in Browser
-            $document->stream("Formulario de Traslado", array("Attachment"=>1));
+            $document->stream("Formulario de Traslado-".$id, array("Attachment"=>1));
             //1  = Download
             //0 = Preview
         }
         $this->Flash->error(__('El traslado no se ha generado. Existe un error en los campos editables.'));
         return $this->redirect(['action' => 'edit',$id]);
 
+    }
+
+    public function download2($id = null)
+    {
+        $transfer = $this->Transfers->get($id);
+        $path=WWW_ROOT.'files'.DS.'Transfers'.DS.'file_name'.DS.$transfer->transfers_id.DS.$transfer->file_name;
+        $this->response->file($path, array(
+        'download' => true,
+        'name' =>$transfer->file_name ,
+        ));
+        return $this->response;
+        /*$this->Flash->error($path);
+        return $this->redirect(['action' => 'view',$transfer->transfers_id]);*/
     }
 }
