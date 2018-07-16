@@ -123,7 +123,7 @@
 
        
         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-         <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
+         <?= $this->Form->button(__('Siguiente'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
 
 
 
