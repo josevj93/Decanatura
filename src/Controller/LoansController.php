@@ -187,14 +187,21 @@ class LoansController extends AppController
         ]);
         
         if ($this->request->is(['patch', 'post', 'put'])) {
-            if($this->request->getData('file_solicitud') == null){
-                $this->Flash->success(__('Debe subir un archivo para finalizar el prestamo'));
-                return $this->redirect(['action' => 'finalizar', $loan]);
-            }
             $loan->estado = "Activo";
             $loan = $this->Loans->patchEntity($loan, $this->request->getData());
 
             if ($this->Loans->save($loan)) {
+                $loan = $this->Loans->get($id, [
+                    'contain' => ['Users']
+                ]);
+
+                if($loan->file_devolucion == null){
+                    $loan->estado = "En proceso";
+                    $this->Loans->save($loan);
+                    $this->Flash->error(__('Debe subir un archivo para finalizar el prestamo'));
+                    return $this->redirect(['action' => 'finalizar', $loan]);
+                }
+                
                 $this->Flash->success(__('El préstamo fue creado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }

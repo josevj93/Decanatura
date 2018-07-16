@@ -373,5 +373,3 @@ class AssetsController extends AppController
         $this->set(compact('asset', 'brands', 'users', 'locations','models'));
     }
 }
-
-
