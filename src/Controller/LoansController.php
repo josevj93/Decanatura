@@ -98,7 +98,6 @@ class LoansController extends AppController
 
             //$loan = $this->Loans->patchEntity($loan, $this->request->getData());
             
-            $loan->estado = 'Terminado';
             $loan->file_solicitud = $this->request->getData()['file_solicitud'];
             //print_r($loan);
             //die();
@@ -106,27 +105,14 @@ class LoansController extends AppController
             
             if ($this->Loans->save($loan)){
                 
-                $assets = $this->Assets->find()
-                ->where(['assets.loan_id' => $id])
-                ->toList();
-                    
-                foreach($assets as $asset){
-                    $asset->state = 'Disponible';
-                    $asset->loan_id = NULL;
 
-                    if(!($this->Assets->save($asset))){
-                        $this->Flash->error(__('Error al terminar el préstamo'));
-                        return $this->redirect(['action' => 'index']);
-                    }
-                }
-
-                $this->Flash->success(__('El préstamo ha sido finalizado.'));
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('Archivo subido correctamente.'));
+                return $this->redirect(['action' => 'view', $loan->id]);
 
             }
             else{
-                $this->Flash->error(__('Error al finalizar el préstamo'));
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->error(__('Error al subir el archivo'));
+                return $this->redirect(['action' => 'view', $loan->id]);
             }
             $assets = $this->Loans->Assets->find('list', ['limit' => PHP_INT_MAX]);
             $users = $this->Loans->Users->find('list', ['limit' => PHP_INT_MAX ]);
