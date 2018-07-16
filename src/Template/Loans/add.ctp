@@ -124,8 +124,8 @@
        
         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
          <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
-
-
+        
+      
 
     </div>
     
@@ -134,6 +134,19 @@
 </div>
 
 <script>
+
+
+function download() {
+      $.ajax({
+           type: "POST",
+           url: '/Decanatura/loans/add.php',
+           data:{action:'download'},
+           success:function(html) {
+             alert("html");
+           }
+
+      });
+ }
 
 	$( function Picker() {
     $( "#datepicker" ).datepicker({ 
@@ -222,5 +235,8 @@
     var selected;
     selected = chkArray.join(',') ;
     return selected;
-}
+    }
+
+
+
 </script>

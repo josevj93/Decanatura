@@ -45,17 +45,17 @@
     <br>
       <div class="form-control sameLine" >
         <div class="row">
-          <label> <b>Nombre:</b><b style="color:red;">*</b> </label>
+          <label> <b>Nombre:</b><b style="color:red;"></b> </label>
           <?php echo $this->Form->imput('nombre', ['class'=>'form-control col-md-6']); ?>
         </div>
 
         <div class="row">
-          <label> <b>Primer Apellido:</b><b style="color:red;">*</b> </label>
+          <label> <b>Primer Apellido:</b><b style="color:red;"></b> </label>
           <?php echo $this->Form->imput('apellido1', ['class'=>'form-control col-md-6']); ?>
         </div>
 
         <div class="row">
-          <label> <b>Segundo Apellido:</b><b style="color:red;">*</b> </label>
+          <label> <b>Segundo Apellido:</b><b style="color:red;"></b> </label>
           <?php echo $this->Form->imput('apellido2', ['class'=>'form-control col-md-6']); ?>
         </div>
       </div>
@@ -63,12 +63,12 @@
 
       <div class="form-control sameLine" >
         <div class="row">
-          <label> <b>Cédula:</b><b style="color:red;">*</b> </label>
+          <label> <b>Cédula:</b><b style="color:red;"></b> </label>
           <?php echo $this->Form->imput('id', ['class'=>'form-control col-md-6', 'disabled']); ?>
         </div>
 
         <div class="row">
-          <label> <b>Rol:</b><b style="color:red;">*</b> </label>
+          <label> <b>Rol:</b><b style="color:red;"></b> </label>
           <?php echo $this->Form->select('id_rol', $roles, array('empty' => '-- Seleccione Rol --', 'class' => 'form-control col-md-9')); ?>
         </div>
 
@@ -80,24 +80,24 @@
       </div>
       <br>
 
-      <label> <b>Correo:</b><b style="color:red;">*</b> </label>
+      <label> <b>Correo:</b><b style="color:red;"></b> </label>
       <?php echo $this->Form->imput('correo', ['class'=>'form-control col-md-6']); ?>
       <br>
 
       <div class="form-control sameLine" >
         <div class="row">
-          <label> <b>Usuario:</b><b style="color:red;">*</b> </label>
+          <label> <b>Usuario:</b><b style="color:red;"></b> </label>
           <?php echo $this->Form->imput('username', ['class'=>'form-control col-md-6']); ?>
         </div>
 
         <div class="row">
-          <label> <b>Contraseña:</b><b style="color:red;">*</b> </label>
-          <?php echo $this->Form->imput('password', ['type'=> 'password', 'class'=>'form-control col-md-6', 'disabled']); ?>
+          <label> <b>Contraseña:</b><b style="color:red;"></b> </label>
+          <?php echo $this->Form->imput('password', ['type'=> 'password', 'class'=>'form-control col-md-6', 'value'=> '']); ?>
         </div>
 
         <div class="row">
-          <label> <b>Confirmar Contraseña:</b><b style="color:red;">*</b> </label>
-          <?php echo $this->Form->imput('password', ['type'=> 'password', 'class'=>'form-control col-md-6', 'disabled']); ?>
+          <label> <b>Confirmar Contraseña:</b><b style="color:red;"></b> </label>
+          <?php echo $this->Form->imput('password2', ['type'=> 'password', 'class'=>'form-control col-md-6', 'value'=> '']); ?>
         </div>
       </div>
       <br>

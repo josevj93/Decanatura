@@ -1712,6 +1712,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     public function save(EntityInterface $entity, $options = [])
     {
+
         if ($options instanceof SaveOptionsBuilder) {
             $options = $options->toArray();
         }

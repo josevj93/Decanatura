@@ -100,9 +100,9 @@ class LoansController extends AppController
             
             $loan->estado = 'Terminado';
             $loan->file_solicitud = $this->request->getData()['file_solicitud'];
-
             //print_r($loan);
             //die();
+
             
             if ($this->Loans->save($loan)){
                 
@@ -133,10 +133,7 @@ class LoansController extends AppController
             $this->set(compact('assets', 'loan', 'users'));
 
 
-        }else{
-            print_r("im not");
         }
-
         
 
         $loan = $this->Loans->get($id, [

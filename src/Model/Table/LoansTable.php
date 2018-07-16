@@ -33,16 +33,14 @@ class LoansTable extends Table
         $this->setTable('loans');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
-
         $this->addBehavior('Josegonzalez/Upload.Upload', [
-
             'file_solicitud' => [
                 'fields' => [
                     'dir' => 'file_solicitud_dir',
                     'size' => 'file_solicitud_size',
                     'type' => 'file_solicitud_type',
                 ],
-                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}',
+                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{primaryKey}{DS}',
                 'nameCallback' => function ($table, $entity, $data, $field, $settings) {
                     return strtolower($data['name']);
                 },

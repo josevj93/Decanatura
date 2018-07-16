@@ -203,17 +203,24 @@ class UsersController extends AppController
 
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            
-            if ($this->Users->save($user)) {
-                AppController::insertLog($user['nombre'], $success);
-                $this->Flash->success(__('Cambios guardados.'));
+            if($this->request->getData()['password'] == $this->request->getData()['password2']){
+                    
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+                
+                if ($this->Users->save($user)) {
+                    AppController::insertLog($user['nombre'], $success);
+                    $this->Flash->success(__('Cambios guardados.'));
 
-                return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'index']);
+                }
+                $success = FALSE;
+                AppController::insertLog($user['nombre'], $success);
+                $this->Flash->error(__('Los cambios no pudieron ser guardados. Por favor vuelva a intentarlo.'));
+            }else{
+                $success = FALSE;
+                AppController::insertLog($user['nombre'], $success);
+                $this->Flash->error(__('Las contraseñas no coinciden. Por favor vuelva a intentarlo.'));
             }
-            $success = FALSE;
-            AppController::insertLog($user['nombre'], $success);
-            $this->Flash->error(__('Los cambios no pudieron ser guardados. Por favor vuelva a intentarlo.'));
         }
         $this->set(compact('user'));
     }
