@@ -38,6 +38,22 @@ class TechnicalReportsTable extends Table
         $this->setDisplayField('technical_report_id');
         $this->setPrimaryKey('technical_report_id');
 
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'file_name' => [
+                'fields' => [
+                    'dir' => 'path',
+                    'size' => 'file_size',
+                    'type' => 'file_type',
+                ],
+                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:technical_report_id}{DS}',
+                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
+                    return strtolower($data['name']);
+                },
+
+                'keepFilesOnDelete' => false
+            ]
+        ]);
+
         $this->belongsTo('Assets', [
             'foreignKey' => 'assets_id',
             'joinType' => 'INNER'
@@ -63,6 +79,11 @@ class TechnicalReportsTable extends Table
             ->allowEmpty('technical_report_id', 'create');
 
         $validator
+            ->scalar('assets_id')
+            ->maxLength('assets_id', 255)
+            ->notEmpty('assets_id', 'create');
+
+        $validator
             ->scalar('evaluation')
             ->maxLength('evaluation', 500)
             ->requirePresence('evaluation', 'create')
@@ -79,7 +100,6 @@ class TechnicalReportsTable extends Table
             ->notEmpty('date');
 
         $validator
-            ->scalar('file_name')
             ->maxLength('file_name', 200)
             ->allowEmpty('file_name');
 

@@ -64,7 +64,7 @@
 
 <body>
 <div class="locations form large-9 medium-8 columns content">
-  <?= $this->Form->create($technicalReport) ?>
+  <?= $this->Form->create($technicalReport,['onsubmit'=>'return validateCheck()']) ?>
   <fieldset>
     <legend><?= __('Insertar informe técnico') ?></legend>
     <br>
@@ -73,8 +73,8 @@
     <div class="form-control sameLine" >
 
       <div class="row">
-          <label>Nº Reporte:</label>
-          <label><?php echo h($CompleteID); ?> *</label>
+          <label required="required"><b>Nº Reporte:</b><font color="red"> * </font></label>
+          <label><?php echo h($CompleteID); ?></label>
       </div>
       
       <div class="row">
@@ -87,8 +87,7 @@
         
     </div>
     
-
-    <label>Placa del activo:</label><br>
+    <label required="required"><b>Placa del activo:</b><font color="red"> * </font></label>
     <div class='input-group mb-3'>
         
           <?php 
@@ -102,13 +101,15 @@
           
 
     </div>
-    <div id=assetResult> 
+    <div id=assetResult>
+    <p id="errorMsg" style="color: red;"></p> 
     </div><br>
    
     
 
     <div>
-      <label for="Evaluacion">Evaluación:</label>
+      <label required="required"><b>Evaluación:</b><font color="red"> * </font></label>
+
       <?php 
         echo $this->Form->textarea('evaluation', ['label' => 'Evaluación:', 'class'=>'form-control col-md-8']);
       ?>
@@ -116,7 +117,7 @@
     <br>
 
     <div>
-      <label >Recomendación:</label>
+      <label required="required"><b>Recomendación:</b><font color="red"> * </font></label>
       <br>
       <?php
        echo $this->Form->radio('recommendation',
@@ -151,10 +152,8 @@
 
 </div>
   <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-  <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-  <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]) ?>
-
-
+  <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'Aceptar']) ?>
+  </form>
 </body>
 
 <script>
@@ -197,4 +196,21 @@
       });
     }
   );
+  // funcion para validad que se escocje un activo para el informe
+  function validateCheck() {
+    var search, error;
+
+    // Get the value of the input field with id="numb"
+    search = document.getElementById('assetImput').value;
+    alert(search.length);
+    //If x is Not a Number or less than one or greater than 10
+    /*if ( search.length == 0 ) {
+        error = "Seleccione un activo para insertar el informe.";
+        document.getElementById("errorMsg").innerHTML = error;
+        return false;
+    } else {
+        return true;
+    }*/return false;
+  }
+
 </script>
