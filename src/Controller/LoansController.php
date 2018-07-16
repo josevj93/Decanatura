@@ -123,7 +123,7 @@ class LoansController extends AppController
             
             $random = uniqid();
             $loan->id = $random;
-            $loan->estado = 'Activo';
+            $loan->estado = 'En proceso';
             $loan = $this->Loans->patchEntity($loan, $this->request->getData());
             
             if ($this->Loans->save($loan)) {
@@ -146,11 +146,9 @@ class LoansController extends AppController
                     }
                 }
                 AppController::insertLog($loan['id'], TRUE);
-                $this->Flash->success(__('El activo fue guardado exitosamente.'));
-                //$this->download($loan->id);
+                $this->Flash->success(__('Verifique la información del préstamo y suba el archivo firmado para finalizar'));
                 return $this->redirect(['action' => 'view',$loan->id]);
             }
-            
             
             $this->Flash->error(__('El préstamo no se pudo guardar, por favor intente nuevamente.'));
             return $this->redirect(['action' => 'index']);
@@ -179,6 +177,23 @@ class LoansController extends AppController
         ]);
         $users = $this->Loans->Users->find('list', ['limit' => PHP_INT_MAX ]);
         $this->set(compact('assets', 'loan', 'users', 'result'));
+    }
+
+    public function finish_add($id = null)
+    {
+        $loan = $this->Loans->get($id, [
+            'contain' => []
+        ]);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $loan->state = "Activo";
+            $loan = $this->Loans->patchEntity($loan, $this->request->getData());
+
+            if ($this->Loans->save($loan)) {
+                $this->Flash->success(__('El préstamo fue creado exitosamente.'));
+                return $this->redirect(['action' => 'index']);
+            }
+        }
     }
 
     /*Terminar para varios activos*/

@@ -222,7 +222,7 @@ class AssetsTable extends Table
 		$validator
             ->scalar('type_id')
 			->maxLength('type_id', 255)
-            ->notEmpty('type_id');
+            ->allowEmpty('type_id');
             
         return $validator;
     }

@@ -96,29 +96,41 @@
 </div>
 
 <div>
-      <label> Observaciones: </label>
-      <?php echo '<input type="text" id="observaciones" class="form-control col-sm-4 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($loan->observaciones). '">'; ?>
-    </div> <br>
+    <label> Observaciones: </label>
+    <?php echo '<input type="text" id="observaciones" class="form-control col-sm-4 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($loan->observaciones). '">'; ?>
+</div> 
 
-    <div >
-      <?php echo $this->Form->input('file_solicitud',['type' => 'file','label' => 'Subir Formulario de Préstamo', 'class' => 'form-control-file']); ?>
-    </div>
+<br>
+
+<?php
+    if($loan->estado == 'En proceso'){
+        echo "<div>";
+        echo $this->Form->input('file_solicitud',['type' => 'file','label' => 'Subir Formulario de Préstamo', 'class' => 'form-control-file']);
+        echo "</div>";
+    }
+    else{
+        echo "<div>";
+        echo $this->Html->link( 
+            "Ver archivo adjunto",
+            '/webroot/files/Loans/file/' . $loan->file_solicitud,
+            array('escape' => false, 'target' => '_blank'));
+        echo "</div>";
+    }
+?>
 
 <div class="col-12 text-right">
 
- <?= $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
- <?php 
-        if($loan->estado != 'Terminado'){
-			echo $this->Html->link(__('Finalizar Préstamo'), ['action' => 'terminar',$loan->id], ['class' => 'btn btn-primary']);
+    <?php 
+        if($loan->estado == 'Activo'){
+            echo $this->Html->link(__('Finalizar Préstamo'), ['action' => 'terminar',$loan->id], ['class' => 'btn btn-primary']);
+        }
+
+        else if($loan->estado == "En proceso"){
+            echo $this->Form->postLink(__('Generar Formulario'), ['controller'=> 'Loans', 'action' => 'download',$loan->id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $loan->id)]);
         }
     ?>
-  
-
- <?= $this->Form->postLink(__('Generar Formulario'), ['controller'=> 'Loans', 'action' => 'download',$loan->id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $loan->id)]) ?>
-
-  <?= $this->Form->postLink(__('Test'), ['controller'=> 'Loans', 'action' => 'terminar',$loan->id], ['class' => 'btn btn-primary']) ?>
-
 </div>
 
 
