@@ -1712,6 +1712,7 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     public function save(EntityInterface $entity, $options = [])
     {
+
         if ($options instanceof SaveOptionsBuilder) {
             $options = $options->toArray();
         }
@@ -1736,6 +1737,12 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             return $this->_processSave($entity, $options);
         }, $options['atomic']);
 
+        /*if($entity->getErrors()){
+                    debug($entity->getErrors());
+            die();
+
+        }*/
+            
         if ($success) {
             if ($this->_transactionCommitted($options['atomic'], $options['_primary'])) {
                 $this->dispatchEvent('Model.afterSaveCommit', compact('entity', 'options'));
