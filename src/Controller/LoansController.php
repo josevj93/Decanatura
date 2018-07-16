@@ -88,6 +88,40 @@ class LoansController extends AppController
      */
     public function view($id = null)
     {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $this->loadModel('Assets');
+
+            $loan = $this->Loans->get($id, [
+            'contain' => []
+            ]);
+            
+
+            //$loan = $this->Loans->patchEntity($loan, $this->request->getData());
+            
+            $loan->file_solicitud = $this->request->getData()['file_solicitud'];
+            //print_r($loan);
+            //die();
+
+            
+            if ($this->Loans->save($loan)){
+                
+
+                $this->Flash->success(__('Archivo subido correctamente.'));
+                return $this->redirect(['action' => 'view', $loan->id]);
+
+            }
+            else{
+                $this->Flash->error(__('Error al subir el archivo'));
+                return $this->redirect(['action' => 'view', $loan->id]);
+            }
+            $assets = $this->Loans->Assets->find('list', ['limit' => PHP_INT_MAX]);
+            $users = $this->Loans->Users->find('list', ['limit' => PHP_INT_MAX ]);
+            $this->set(compact('assets', 'loan', 'users'));
+
+
+        }
+        
+
         $loan = $this->Loans->get($id, [
             'contain' => ['Users']
         ]);

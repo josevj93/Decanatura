@@ -16,6 +16,7 @@ $cakeDescription = 'Control de Activos';
     <?= $this->Html->css('cake.css') ?>
 
 
+
     <?= $this->Html->css(['plugins/bootstrap/css/bootstrap.css',
         'plugins/font-awesome/css/font-awesome.min.css',
         'plugins/datatables/dataTables.bootstrap4.css',

@@ -102,12 +102,17 @@
         <label> Observaciones: </label>
         <?php echo '<input type="text" id="observaciones" class="form-control col-sm-4 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($loan->observaciones). '">'; ?>
     </div> 
-
+<br>
+	 <b>1- <?= $this->Html->link(__('Descargar'), ['controller'=> 'Loans', 'action' => 'download',$loan->id], [ 'confirm' => __('Seguro que desea descargar el archivo?')]) ?> el formulario para llenar y luego subirlo al sitema.</b>
+    <br><br>
+    <div >
+    <b><?php echo $this->Form->input('file_solicitud',['type' => 'file','label' => '2- Subir Formulario de Préstamo una vez lleno para Finalizar', 'class' => 'form-control-file']); ?></b>
+     </div>
+     <div class=\"col-12 text-right\">
+	
+	
     <br>
 
-    <div>
-        <?php echo $this->Form->input('file_solicitud',['type' => 'file','label' => 'Subir Formulario de Préstamo', 'class' => 'form-control-file']) ?>
-    </div>
 
 </div>
 
@@ -115,8 +120,8 @@
 
     <?= $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->postLink(__('Generar Formulario'), ['controller'=> 'Loans', 'action' => 'download',$loan->id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $loan->id)]) ?>
-
+    
+<br><br><br>
 </div>
 
 <?= $this->Form->end(); ?>

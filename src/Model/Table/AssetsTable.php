@@ -255,6 +255,7 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['models_id'], 'Models'));
 		$rules->add($rules->existsIn(['type_id'], 'Types'));
 
+
         return $rules;
 
     }

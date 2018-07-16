@@ -91,6 +91,9 @@ class AssetsController extends AppController
     {
         $asset = $this->Assets->newEntity();
         if ($this->request->is('post')) {
+            
+
+
             $random = uniqid();
             $fecha = date('Y-m-d H:i:s');
             $asset->created = $fecha;
@@ -100,6 +103,10 @@ class AssetsController extends AppController
             $asset->deleted = false;
             $asset->state = "Disponible";
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+
+            //print_r($asset);
+            //die();
+
 			if ($_POST['models_id'] == '') {
 				$asset->models_id = null;
 			}
