@@ -47,11 +47,17 @@
           text-align:left;
         }
         input[name=date]{
-          width:100px;
+          width:120px;
+          margin-left: 10px;
+        }
+
+        input[id=internalCompoundId]{
+          width:160px;
           margin-left: 10px;
         }
         
         input[name=plaque]{
+          width: 110px;
           margin-left: 10px;
         }
         input[name=brand]{
@@ -80,14 +86,15 @@
   <?= $this->Form->create($technicalReport,['type' => 'file']) ?>
   <fieldset>
     <legend><?= __('Editar informe técnico') ?></legend>
+    <?php echo '<input type="hidden" name="technical_report_id" id="technical_report_id" value="'.$technicalReport->technical_report_id.'" >'; ?>
     <br>
     
     <div class="form-control sameLine">
 
       <div class="row">
           <label>Nº Reporte:</label>
-          <label><?php echo h($technicalReport->technical_report_id); ?> </label>
-      </div>
+          <?php echo '<input id= "internalCompoundId"  disabled class="form-control" value="'.$internalID.'">'; ?>       
+        </div>
 
       <div class="row">
         <label>Fecha:</label>
@@ -97,13 +104,14 @@
         ?>
       </div>
   </div>
+  <br>
     
 
     <label>Placa del activo:</label><br>
     <div class='input-group mb-3'>
         
           <?php 
-            echo $this->form->imput('assets_id',['class'=>'form-control col-sm-3', 'id'=>'assetImput','value'=>$technicalReport->assets_id])
+            echo $this->form->imput('assets_id',['class'=>'form-control col-sm-3', 'id'=>'assetImput','value'=>$technicalReport->assets_id,'required'=>'required'])
           ?>
           <div class= 'input-group-append'>
           <?php echo $this->Html->link('Buscar','#',['type'=>'button','class'=>'btn btn-default','id'=>'assetButton','onclick'=>'return false']);
@@ -118,14 +126,14 @@
           <div class="col-md-6">
             <div class='input-group mb-3'>
               <label>Nº placa:</label>
-              <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" name="plaque" value="' . htmlspecialchars($assets2->plaque) . '">'; ?> 
+              <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" name="plaque" value="' . htmlspecialchars($assets->plaque) . '">'; ?> 
             </div>
           </div>
 
           <div class="col-md-6">
             <div class='row'>
             <label>Marca:  </label>
-            <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" name="brand" value="' . htmlspecialchars($assets2->brand). '">'; ?> 
+            <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" name="brand" value="' . htmlspecialchars($assets->brand). '">'; ?> 
             </div>
           </div>
         </div>
@@ -134,21 +142,21 @@
           <div class="col-md-6">
             <div class='input-group mb-3'>
               <label >Nº serie:</label>
-              <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" name="series" value="' . htmlspecialchars($assets2->series) . '">'; ?> 
+              <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" name="series" value="' . htmlspecialchars($assets->series) .  '">'; ?> 
             </div>
           </div>
 
           <div class="col-md-6">
             <div class='row'>
             <label>Modelo:  </label>
-            <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" name="model" name="fecha" value="' . htmlspecialchars($assets2->model). '">'; ?> 
+            <?php echo '<input type="text" class="form-control col-sm-6" readonly="readonly" name="model" name="fecha" value="' . htmlspecialchars($assets->model). '">'; ?> 
             </div>
           </div>
         </div>
 
         <div>
           <label>Descripción:</label><br>
-            <textarea class="form-control col-md-8" readonly="readonly" rows="3" cols="10"><?= h($assets2->description);?></textarea>     
+            <textarea class="form-control col-md-8" readonly="readonly" rows="3" cols="10"><?= h($assets->description);?></textarea>     
         </div>
 
     </div><br>
@@ -158,7 +166,7 @@
     <div>
       <label for="Evaluacion">Evaluación:</label>
       <?php 
-        echo $this->Form->textarea('evaluation', ['label' => 'Evaluación:', 'class'=>'form-control col-md-8']);
+        echo $this->Form->textarea('evaluation', ['label' =>['text'=>'Evaluación:'],'id'=>'evaluation','class'=>'form-control col-md-8']);
       ?>
     </div>
     <br>
@@ -181,7 +189,7 @@
     <div class="row col-md-8">
           <label>Nombre del Técnico Especializado:</label>
             <?php
-              echo $this->Form->imput('evaluator_name', ['class'=>'form-control col-md-5 ']); 
+              echo $this->Form->imput('evaluator_name', ['class'=>'form-control col-md-5 ', 'id'=>'evaluator_name']); 
             ?>
       
     </div>
@@ -207,7 +215,7 @@
         -->
         
         <?= $this->Form->create(null,['type'=>'post',
-                                        'url'=>'/technical-reports/download'
+                                        'url'=>'/technical-reports/download/'.$technicalReport->technical_report_id
                                     ]) ?>
         <!-- input donde coloco todo los datos de los demás imput exepto el input checkList -->
         <input type="hidden" name="pdf" id="pdf">
@@ -257,4 +265,41 @@
       });
     }
   );
+
+  //  Funcion para meter todos los datos en el input pdf para posteriormente 
+    //usar los datos en el método download del controlador
+    $("document").ready(
+    function() {
+      $('#generate').click( function()
+      {
+        //concateno todos los valores
+        var res = document.getElementById('technical_report_id').value;
+        res=res+","+document.getElementById('datepicker').value;
+        res=res+","+document.getElementById('assetImput').value;
+        res=res+","+document.getElementById('evaluation').value;
+        res=res+","+translateRecomendatio();
+        res=res+","+document.getElementById('evaluator_name').value;
+        $('#pdf').val(res);
+        });
+        }
+    );
+
+    // FUncion para traducir el valor de radiobutton a hilera
+    function translateRecomendatio() {
+    /** esta parte del codigo en base a la respuesta de  https://stackoverflow.com/questions/9618504/how-to-get-the-selected-radio-button-s-value , jbabey */
+    var radios = document.getElementsByName('recommendation');
+    var i = 0, length = radios.length;
+    var stop = false;
+    var ret;
+    while ( i < length && !stop) {
+      if (radios[i].checked) {
+
+          ret= radios[i].value;
+      stop= true;
+      }
+        i++
+    }
+    return ret;
+    
+}
 </script>
