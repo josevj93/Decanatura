@@ -35,6 +35,21 @@ class TransfersTable extends Table
         $this->setTable('transfers');
         $this->setDisplayField('transfers_id');
         $this->setPrimaryKey('transfers_id');
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'file_name' => [
+                'fields' => [
+                    'dir' => 'path',
+                    'size' => 'file_size',
+                    'type' => 'file_type',
+                ],
+                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:transfers_id}{DS}',
+                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
+                    return strtolower($data['name']);
+                },
+
+                'keepFilesOnDelete' => false
+            ]
+        ]);
 
         $this->belongsToMany('Assets', [
             'foreignKey' => 'transfer_id',
@@ -94,7 +109,6 @@ class TransfersTable extends Table
             ->allowEmpty('path');
 
         $validator
-            ->scalar('file_name')
             ->maxLength('file_name', 100)
             ->allowEmpty('file_name');
 
@@ -104,4 +118,35 @@ class TransfersTable extends Table
 
         return $validator;
     }
+
+    /* Idea de las sigueintes 2 funciones  obtenida de https://stackoverflow.com/questions/14932739/cakephp-notempty-and-unique-validation-on-field , Zachary Heaton
+    */
+    public function uniqueId($id){
+        $returnId = $this->find('all')
+        ->where([
+            'Transfers.transfers_id' => $id,
+        ])
+        ->first();
+        if($returnId){
+        return false;
+        }
+        return true;
+    }
+    
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->addCreate(function ($entity, $options) {
+
+        return $this->uniqueId($entity->transfers_id);
+        },
+        'uniqueId',
+        [
+        'errorField' => 'transfers_id',
+        'message' => 'El número de traslado ya existe.'
+        ]
+        );
+
+        return $rules;
+    }
+
 }

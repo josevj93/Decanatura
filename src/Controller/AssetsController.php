@@ -141,14 +141,15 @@ class AssetsController extends AppController
             $asset->modified = $fecha;
             
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
-			if ($_POST['models_id'] == '') {
+			/*if ($_POST['models_id'] == '') {
 				$asset->models_id = null;
 			}
             if ($this->Assets->save($asset)) {
                 AppController::insertLog($asset['plaque'], TRUE);
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
-            }
+            }*/
+            debug($asset);
             AppController::insertLog($asset['plaque'], FALSE);
             $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }

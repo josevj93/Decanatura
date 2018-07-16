@@ -7,7 +7,77 @@
     $mysqli = new mysqli('decanatura.mysql.database.azure.com','ecci@decanatura','Gaby1234','decanatura');
     use Cake\I18n\Date;
 ?>
+<!-- Sección de estilo para la pantalla -->
+ <style>
+    .btn-primary {
+      color: #FFF;
+      background-color: #0099FF;
+      border-color: #0099FF;
+      float: right;
+      margin-left: 10px;
+    }
 
+    label {
+          text-align:left;
+          margin-right: 10px;
+          
+    }
+
+    label[class=align]{
+        margin-left: 14px;
+    }
+
+    label[class=label-t]{
+        margin-left: 20px;
+        width: 70px;
+    }
+
+    input[name=date]{
+          width:120px;
+          margin-left: 10px;
+        }
+
+    table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    }
+
+    td {
+
+        border: 1px solid #000000;
+        border-bottom: 1px solid #000000;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    th[class=transfer-h] {
+        border-bottom: 1px solid #000000;
+        text-align: center;
+        color:black;
+        padding: 8px;
+    }
+
+    .sameLine{
+    display: flex; 
+    justify-content: space-between; 
+    border-color: transparent;
+    }
+    .cuadro
+    {
+        display: flex; 
+    border-color: transparent;
+    }
+</style>
 <!-- Sección de scripts utilizados por la pantalla -->
 <head>
   <meta charset="utf-8">
@@ -27,7 +97,7 @@
 
 
  <div class="residues form large-9 medium-8 columns content">
-    <?= $this->Form->create($residue,['novalidate','onsubmit'=>'return validateCheck()']) ?>
+    <?= $this->Form->create($residue,['novalidate','onsubmit'=>'return validateCheck()','type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Modificar acta de desecho') ?></legend>
         <br> 
@@ -41,8 +111,10 @@
         <div class='row'>
             <label>Fecha:</label>
                 <?php
+                    //debug($residue->date);
                     $tmpDate= $residue->date->format('d-m-Y');
-                    echo $this->Form->imput('date', ['class'=>'form-control', 'value'=>$residue->date, 'disabled']); 
+                    /*echo $this->Form->imput('date', ['class'=>'form-control', 'value'=>$tmpDate, 'disabled']); */
+                    echo "<input type='text' class='form-control' name='date' id='date' value=".$tmpDate." disabled>"
                 ?>
         </div>
         </div><br>
@@ -59,8 +131,11 @@
         <table>
             <tr>
                 <td><br>
+                    
                     <!-- Se modificó la clase del div (a travez de la plantilla) y la del label
-                    Este mismo proceso se aplica en las demás generaciones -->
+                                  Este mismo proceso se aplica en las demás geberaciones -->
+                    <div class="form-control cuadro">
+                    <label style =  "text-align:left; margin-right: 10px;" required="required"> <b> Nombre: </b> <font color="red"> * </font> </label><br>          
                     <?php 
                         echo $this->Form->control('name1', 
                             [
@@ -69,10 +144,17 @@
                                 'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                                 ],
 
-                            'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
+                            'label'=>['text'=>''],
+                            "required"=>"required",
                             'class'=>'form-control col-sm-6'
                             ]);
-                    ?><br>
+                    ?>
+                </div>
+                    <br>
+
+                    <div class="form-control cuadro">
+                    <label style =  "text-align:left; margin-right: 10px;"> <b> Cédula: </b> <font color="red"> * </font> </label><br>  
+
                     <?php 
                         echo $this->Form->control('identification1', 
                             [
@@ -80,14 +162,20 @@
                                 'inputContainer' => '<div class="row">{{content}}</div>',
                                 'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                                 ],
-
-                            'label'=>['class'=>'label-t','text'=>'Cédula:', 'style'=>'margin-left= 10px;'],
+                                "required"=>"required",
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
                             'class'=>'form-control col-sm-6'
                             ]);
-                    ?><br>
+                    ?>
+                </div>
+                    <br>
                 </td>
             
                 <td><br>
+
+                    <div class="form-control cuadro">
+                    <label style =  "text-align:left; margin-right: 10px;" required="required"> <b> Nombre: </b> <font color="red"> * </font> </label><br>  
+
                     <?php 
                         echo $this->Form->control('name2', 
                             [
@@ -96,10 +184,17 @@
                                 'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                                 ],
 
-                            'label'=>['class'=>'label-t','text'=>'Nombre:', 'style'=>'margin-left= 10px;'],
+                            'label'=>['text'=>''],
+                            "required"=>"required",
                             'class'=>'form-control col-sm-6'
                             ]);
-                    ?><br>
+                    ?>
+                </div>
+                    <br>
+
+                    <div class="form-control cuadro">
+                    <label style =  "text-align:left; margin-right: 10px;" required="required"> <b> Cédula: </b> <font color="red"> * </font> </label><br>  
+
                     <?php 
                         echo $this->Form->control('identification2', 
                             [
@@ -107,11 +202,13 @@
                                 'inputContainer' => '<div class="row">{{content}}</div>',
                                 'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                                 ],
-
-                            'label'=>['class'=>'label-t','text'=>'Cédula:', 'style'=>'margin-left= 10px;'],
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            "required"=>"required",
                             'class'=>'form-control col-sm-6'
                             ]);
-                    ?><br>
+                    ?>
+                    </div>
+                    <br>
                 </td>
             </tr>
         </table><br>
@@ -123,16 +220,17 @@
         </div><br>
 
     </fieldset>
-    </div><br>
+</div><br>
 
 
 
 
 
  <!-- Sección de grid para agregar o eliminar activos al acta de desecho -->
-        <div class="related">
-            <legend><?= __('Activos a desechar') ?></legend>
-
+        <div class="form-control" style="border-color: transparent;">
+            <fieldset>
+            <legend style="margin-left: 13px;"><?= __('Activos a desechar') ?></legend>
+            </fieldset>
             <!--  Sirve para mostrar el mensaje que se debe seleccionar un activo -->
             <p id="errorMsg" style="color: red;"></p>
             <!-- tabla que contiene  datos básicos de activos-->
@@ -195,79 +293,40 @@
         <p align="center">
             (Art. 26 del Reglamento para la Administración y Control de los Bienes Institucionales de la Universidad de Costa Rica)
         </p>
-    </div><br>
+    </div>
+    <br>
+    <div class='form-control' style="border-color: transparent;">
+        <label> Subir acta de desechos: </label>
+        <?php echo $this->Form->imput('file',['type' => 'file', 'class' => 'form-control-file']); ?>
+    </div>
+    <br>
     
-<!-- Sección de estilo para la pantalla -->
- <style>
-    .btn-primary {
-      color: #FFF;
-      background-color: #0099FF;
-      border-color: #0099FF;
-      float: right;
-      margin-left: 10px;
-    }
+    <div>
 
-    label {
-          text-align:left;
-          margin-right: 10px;
-          
-    }
+    
+    <!-- Sección de botones -->
+        <div>
+        <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+        <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
+        </div>
+</form>
+        <!-- Creo un nuevo from para hacer el post hacia el método de descarga
+            Además hay 2 inputs hidden para poder colocar ahí los datos actualues de la vista.
+        -->
+        
+        <?= $this->Form->create(null,['type'=>'post',
+                                        'url'=>'/residues/download'
+                                    ]) ?>
+        <!-- input donde coloco todo los datos de los demás imput exepto el input checkList -->
+        <input type="hidden" name="pdf" id="pdf">
+        <!-- input donde coloco todo los datos de los demás imput exepto el input checkList -->
+        <input type="hidden" name="plaques" id="plaques">
 
-    label[class=align]{
-        margin-left: 14px;
-    }
 
-    label[class=label-t]{
-        margin-left: 20px;
-        width: 70px;
-    }
+        <?= $this->Form->button(__('Generar PDF'), ['class' => 'btn btn-primary', 'id'=>'generate','style'=>'float:left;']) ?>
+        </form>
 
-    input[name=date]{
-          width:100px;
-          margin-left: 10px;
-        }
 
-    table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    }
-
-    th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-    }
-
-    td {
-
-        border: 1px solid #000000;
-        border-bottom: 1px solid #000000;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-
-    th[class=transfer-h] {
-        border-bottom: 1px solid #000000;
-        text-align: center;
-        color:black;
-        padding: 8px;
-    }
-
-    .sameLine{
-    display: flex; 
-    justify-content: space-between; 
-    border-color: transparent;
-    }
-</style>
-
-    <!-- Sección de botones -->    
-    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id' => 'acept']) ?>
-    <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $residue->residues_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $residue->residues_id)]) ?>
     </div>
 
     
@@ -358,7 +417,40 @@ function validateCheck() {
     
 }
 
+// funcion para colocar los valores de las placas de los activos seleccionados
+//dentor de un input
     $("document").ready(
+    function() {
+      $('#acept').click( function()
+      {
+        var check = getValueUsingClass();
+        $('#checkList').val(check);
+
+        });
+        }
+    );
+
+    //  Funcion para meter todos los datos en el input pdf para posteriormente 
+    //usar los datos en el método download del controlador
+    $("document").ready(
+    function() {
+      $('#generate').click( function()
+      {
+        var check = getValueUsingClass();
+        //concateno todos los valores
+        var res = document.getElementById('residues_id').value;
+        res=res+","+document.getElementById('date').value;
+        res=res+","+document.getElementById('name1').value;
+        res=res+","+document.getElementById('identification1').value;
+        res=res+","+document.getElementById('name2').value;
+        res=res+","+document.getElementById('identification2').value;
+        $('#pdf').val(res);
+        $('#plaques').val(check);
+        });
+        }
+    );
+
+    /*$("document").ready(
     function() {
       $('#acept').click( function()
       {
@@ -366,7 +458,7 @@ function validateCheck() {
         $('#checkList').val(check);
         });
         }
-    );
+    );*/
 /** función optenida de http://bytutorial.com/blogs/jquery/jquery-get-selected-checkboxes */
     function getValueUsingClass(){
     /* declare an checkbox array */

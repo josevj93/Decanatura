@@ -151,9 +151,6 @@
 
     </div>
   </fieldset>
-    <div >
-      <?php echo $this->Form->input('file_solicitud',['type' => 'file','label' => 'Subir Acta de Traslados', 'class' => 'form-control-file']); ?>
-    </div>
 
     <div>
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
@@ -169,9 +166,15 @@
 
         <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Está seguro que desea eliminar el traslado #'.$transfer->transfers_id.' ?', $transfer->transfers_id)]) ?>
 
-    <?php endif; ?> 
+    <?php endif; ?>
+    </form>  
 
-      <?= $this->Form->postLink(__('Descargar Acta'), ['action' => 'download', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $transfer->transfers_id)]) ?>
+    <?php 
+        if($transfer->file_name !=null)
+        {
+            echo $this->Form->postLink(__('Descargar Acta'), ['action' => 'download2', $transfer->transfers_id], ['class' => 'btn btn-primary','style'=>'float:left;', 'confirm' => __('¿Seguro que desea descargar el archivo?', $transfer->transfers_id)]);
+        }
+    ?>
 
   </div>
       <br><br> 

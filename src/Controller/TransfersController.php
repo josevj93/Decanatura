@@ -5,6 +5,7 @@ use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Dompdf\Dompdf;
 use Cake\Datasource\ConnectionManager;
+use Cake\I18n\Date;
 
 /**
  * Transfers Controller
@@ -175,7 +176,7 @@ class TransfersController extends AppController
             {
             $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
             //Se concatena el id de la vista con la constante en este caso (VRA-) que es diferente para cada unidad académica
-            $transfer->transfers_id = "VRA-".$this->request->getData('transfers_id');
+            $transfer->transfers_id = $this->request->getData('transfers_id');
             $users = TableRegistry::get('users');
             //se obtiene el nombre del usuario con la posición del dropdown
             $users_query = $users->find()
@@ -415,6 +416,7 @@ class TransfersController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             AppController::insertLog($transfer['transfers_id'], FALSE);
+            debug($transfer);
             $this->Flash->error(__('El traslado no se pudo guardar, porfavor intente nuevamente'));
 
         }
@@ -445,7 +447,6 @@ class TransfersController extends AppController
                         'conditions'=> [ 'assets.plaque= assets_transfers.assets_id']
                         ]
                         ])
-
                         ->where(['assets.state = "Disponible" or assets_transfers.transfer_id = "'.$id.'"'])
                         ->toList();
         $size = count($assetsQuery);
@@ -533,128 +534,189 @@ class TransfersController extends AppController
 
 public function download($id = null)
     {
-
+        /*
         $this->Assets = $this->loadModel('Assets');
         $this->AssetsTransfers = $this->loadModel('AssetsTransfers');
+        */
 
-        $conn = ConnectionManager::get('default');
-        $stmt = $conn->execute('SELECT * FROM assets
-            inner join assets_transfers on plaque = assets_id
-            inner join transfers on transfer_id = transfers_id
-            where transfers_id =' . $id . ';');
+        // se crea una entidad para luego poder hacer los validadores
+        $transfer = $this->Transfers->newEntity();
+        // Esta variable es simplemente para contener los datos en una estructura de array
+        //que entienda el patchEntity
+        $transferTMP;
 
-        $results = $stmt ->fetchAll('assoc');
+        // Aqui queda el resultado, en un vector genérico, de lo que contiene la vista
+        $transferArray= explode(',',$this->request->data('pdf') );
+
+        //re realiza una relacion 1 a 1
+        $transferTMP['residues_id']= $id;
+        $date = new Date($transferArray[0]);
+        $transferTMP['date']= $date->format('Y-m-d');
 
 
-         require_once 'dompdf/autoload.inc.php';
-        //initialize dompdf class
-        $document = new Dompdf();
-        $html = 
-        '
-        <style>
-        #element1 {float:left;margin-right:10px;} #element2 {float:right;} 
-        table, td, th {
+        $transferTMP['Acade_Unit_recib']= $transferArray[1];
+        $transferTMP['functionary']= $transferArray[2];
+        $transferTMP['identification']= $transferArray[3];
+        $transferTMP['functionary_recib']= $transferArray[4];
+        $transferTMP['identification_recib']= $transferArray[5];
+
+        $transfer = $this->Transfers->patchEntity($transfer,$transferTMP);
+        $errors = $transfer->errors();
+
+        if(/*$errors== null && $this->Transfers->save($transfer)*/true)
+        {
+            // linea para marcar el desecho como descargado, haciendo que ya no se pueda borrar
+            $transfer->descargado = true;
+
+            // pide la lista de placas a la vista
+            $plaques= explode(',',$this->request->data('plaques') );
+
+            //  las placas se pasan a un formato de string de manera que seaan válidas en
+            //el where assets.plaque in
+            $plaqueList;
+            $plaqueList.="'".$plaques[0]."'";
+            $size=count($plaques);
+            for($p=1;$p< $size;$p++)
+            {
+                $plaqueList.=",'".$plaques[$p]."'";
+            }
+
+            $conn = ConnectionManager::get('default');
+            $stmt = $conn->execute("select a.plaque, a.description, b.name as brand, m.name as model, a.series, a.state
+            from assets a
+            inner join assets_transfers on a.plaque= assets_id
+            inner join transfers on transfer_id= transfer_id
+            inner join brands b on  b.id=a.brand
+            inner join models m on m.id=a.models_id
+            where a.plaque in (" . $plaqueList . ");");
+
+            $results = $stmt ->fetchAll('assoc');
+
+
+            require_once 'dompdf/autoload.inc.php';
+            //initialize dompdf class
+            $document = new Dompdf();
+            $html = 
+            '
+            <style>
+            #element1 {float:left;margin-right:10px;} #element2 {float:right;} 
+            table, td, th {
             border: 1px solid black;
-        }
-        body {
+            }
+            body {
             border: 5px double;
             width:100%;
             height:100%;
             display:block;
             overflow:hidden;
             padding:30px 30px 30px 30px
-        }
+            }
 
-        table {
+            table {
             border-collapse: collapse;
             width: 100%;
-        }
+            }
 
-        th {
+            th {
             height: 50px;
-        }
-        </style>
+            }
+            </style>
 
 
-<center><img src="C:\xampp\htdocs\Decanatura\src\Controller\images\logoucr.png"></center>
-<h2 align="center">Universidad de Costa Rica</h2>
-<h2 align="center">Vicerrector&iacute;a de Administraci&oacute;n</h2>
-<h2 align="center">Oficina de Administraci&oacute;n Financiera</h2>
-<h3 align="center">Unidad de Control de Activos Fijos y Seguros</h3>
-<h2 align="center">FORMULARIO PARA TRASLADO DE ACTIVOS FIJOS</h2>
-<h1>&nbsp;</h1>
-<div id="element1" align="left">  Fecha: __________________ </div> <div id="element2" align="right"> No.__________________ </div> 
-<p align="right">(Lo asigna el usuario)</p>
-<p><strong>&nbsp;</strong></p>
+            <center><img src="C:\xampp\htdocs\Decanatura\src\Controller\images\logoucr.png"></center>
+            <h2 align="center">Universidad de Costa Rica</h2>
+            <h2 align="center">Vicerrector&iacute;a de Administraci&oacute;n</h2>
+            <h2 align="center">Oficina de Administraci&oacute;n Financiera</h2>
+            <h3 align="center">Unidad de Control de Activos Fijos y Seguros</h3>
+            <h2 align="center">FORMULARIO PARA TRASLADO DE ACTIVOS FIJOS</h2>
+            <h1>&nbsp;</h1>
+            <div id="element1" align="left">  Fecha: '.$transferArray[0].' </div> <div id="element2" align="right"> No.'.$id.' </div> 
+            <p align="right">(Lo asigna el usuario)</p>
+            <p><strong>&nbsp;</strong></p>
 
-<table>
-  <tr>
-    <th align="center"><span style="font-weight:bold">ENTREGA</span></th>
-    <th align="center"><span style="font-weight:bold">RECIBE</span></th>
-  </tr>
-  <tr>
-    <td height="50"><strong>Unidad: Decanato de la Facultad Ingenieria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-    <td height="50"><strong>Unidad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-  </tr>
-  <tr>
-    <td height="50"><strong>Nombre del Funcionario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-    <td height="50"><strong>Nombre del Funcionario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-  </tr>
-  <tr>
-    <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-    <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
-  </tr>
-</table>
+            <table>
+            <tr>
+                <th align="center"><span style="font-weight:bold">ENTREGA</span></th>
+                <th align="center"><span style="font-weight:bold">RECIBE</span></th>
+            </tr>
+            <tr>
+                <td height="50"><strong>Unidad: '.$this->UnidadAcadémica.'</td>
+                <td height="50"><strong>Unidad: '.$transfer->Acade_Unit_recib.'</td>
+            </tr>
+            <tr>
+                <td height="50"><strong>Nombre del Funcionario: '.$transfer->functionary.'</td>
+                <td height="50"><strong>Nombre del Funcionario: '.$transfer->functionary_recib.'</td>
+            </tr>
+            <tr>
+                <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula: '.$transfer->identification.'</strong></td>
+                <td height="75"><strong>Firma:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cedula: '.$transfer->identification_recib.'</td>
+            </tr>
+            </table>
 
-<h2 align="center">Detalle de los bienes a trasladar</h2>
-<table width="0" border="1">
-<tbody>
-<tr>
-<th align="center">Descripcion del Activo</th>
-<th align="center">Placa</th>
-<th align="center">Marca</th>
-<th align="center">Modelo</th>
-<th align="center">Serie</th>
-<th align="center">Estado Actual</th>
-</tr>';
+            <h2 align="center">Detalle de los bienes a trasladar</h2>
+            <table width="0" border="1">
+            <tbody>
+            <tr>
+            <th align="center">Descripcion del Activo</th>
+            <th align="center">Placa</th>
+            <th align="center">Marca</th>
+            <th align="center">Modelo</th>
+            <th align="center">Serie</th>
+            <th align="center">Estado Actual</th>
+            </tr>';
 
-        foreach ($results as $item) {
+            for($a=0;$a < $size; $a++) {
             $html .= 
             '<tr>
-            <td align="center">' . $item['description'] . '</td>
-             <td align="center">' . $item['plaque'] . '</td>
-             <td align="center">' . $item['brand'] . '</td>
-             <td align="center">' . $item['models_id'] . '</td>
-             <td align="center">' . $item['series'] . '</td>
-             <td align="center">' . $item['state'] . '</td>
+            <td align="center">' . $results[$a]['description'] . '</td>
+             <td align="center">' . $results[$a]['plaque'] . '</td>
+             <td align="center">' . $results[$a]['brand'] . '</td>
+             <td align="center">' . $results[$a]['model'] . '</td>
+             <td align="center">' . $results[$a]['series'] . '</td>
+             <td align="center">' . $results[$a]['state'] . '</td>
              </tr>';
+            }
+
+
+            $html .=
+
+            '</table>
+            <br><br><br>
+            <p><strong>Observaciones: </strong></p>
+            <p><strong>Nota: El formulario debe estar firmado por el encargado de activos fijos u otro funcionario autorizado en cada unidad.</strong></p>
+            <p><strong>Original: Oficina de Administraci&oacute;n Financiera&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copia: Unidad que entrega&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copia: Unidad que recibe</strong></p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p align="center">Tels: 2511 5759/1149      www.oaf.ucr.ac.cr     correo electrónico: activosfijos.oaf@ucr.ac.cr</p>
+            ';
+
+
+            $document->loadHtml($html);
+
+            //set page size and orientation
+            $document->setPaper('A3', 'portrait');
+            //Render the HTML as PDF
+            $document->render();
+            //Get output of generated pdf in Browser
+            $document->stream("Formulario de Traslado-".$id, array("Attachment"=>1));
+            //1  = Download
+            //0 = Preview
         }
+        $this->Flash->error(__('El traslado no se ha generado. Existe un error en los campos editables.'));
+        return $this->redirect(['action' => 'edit',$id]);
 
+    }
 
-$html .=
-
-'</table>
-<br><br><br>
-<p><strong>Observaciones: </strong></p>
-<p><strong>Nota: El formulario debe estar firmado por el encargado de activos fijos u otro funcionario autorizado en cada unidad.</strong></p>
-<p><strong>Original: Oficina de Administraci&oacute;n Financiera&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copia: Unidad que entrega&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copia: Unidad que recibe</strong></p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p align="center">Tels: 2511 5759/1149      www.oaf.ucr.ac.cr     correo electrónico: activosfijos.oaf@ucr.ac.cr</p>
-        ';
-
-
-        $document->loadHtml($html);
-
-        //set page size and orientation
-        $document->setPaper('A3', 'portrait');
-        //Render the HTML as PDF
-        $document->render();
-        //Get output of generated pdf in Browser
-        $document->stream("Formulario de Traslado", array("Attachment"=>1));
-        //1  = Download
-        //0 = Preview
-        return $this->redirect(['action' => 'index']);
-
+    public function download2($id = null)
+    {
+        $transfer = $this->Transfers->get($id);
+        $path=WWW_ROOT.'files'.DS.'Transfers'.DS.'file_name'.DS.$transfer->transfers_id.DS.$transfer->file_name;
+        $this->response->file($path, array(
+        'download' => true,
+        'name' =>$transfer->file_name ,
+        ));
+        return $this->response;
+        /*$this->Flash->error($path);
+        return $this->redirect(['action' => 'view',$transfer->transfers_id]);*/
     }
 }

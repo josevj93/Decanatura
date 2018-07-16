@@ -6,6 +6,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+
 /**
  * Residues Model
  *
@@ -33,6 +34,21 @@ class ResiduesTable extends Table
         $this->setTable('residues');
         $this->setDisplayField('residues_id');
         $this->setPrimaryKey('residues_id');
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'file' => [
+                'fields' => [
+                    'dir' => 'file_dir',
+                    'size' => 'file_size',
+                    'type' => 'file_type',
+                ],
+                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:residues_id}{DS}',
+                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
+                    return strtolower($data['name']);
+                },
+
+                'keepFilesOnDelete' => false
+            ]
+        ]);
     }
 
     /**
@@ -46,6 +62,10 @@ class ResiduesTable extends Table
         $validator
             ->scalar('residues_id')
             ->maxLength('residues_id', 200)
+            /*->add('residues_id', 'residues_id', [
+            'rule' => [$this, 'isUnique'],
+            'message' => __('El número de autorización ya existe.')
+            ])*/
             ->alphaNumeric('residues_id', 'El número de autorización debe contener solo caracteres alfanuméricos.')
             ->notEmpty('residues_id', 'El número de autorización es requerido.');
 
@@ -90,7 +110,7 @@ class ResiduesTable extends Table
             ->notEmpty('identification2','Este campo es requerido');
 
         $validator
-            ->date('date','dmy', 'Formato de fecha no válido.')
+            ->date('date','ymd', 'Formato de fecha no válido.')
             ->notEmpty('date','Este campo es requerido');
 
         $validator
@@ -98,15 +118,45 @@ class ResiduesTable extends Table
             ->allowEmpty('descargado');
 
         $validator
-            ->scalar('file_name')
-            ->maxLength('file_name', 100)
-            ->allowEmpty('file_name');
+            ->maxLength('file', 255)
+            ->allowEmpty('file');
 
         $validator
-            ->scalar('path')
-            ->maxLength('path', 100)
-            ->allowEmpty('path');
+            ->scalar('file_dir')
+            ->maxLength('file_dir', 255)
+            ->allowEmpty('file_dir');
 
         return $validator;
+    }
+
+    /* Idea de las sigueintes 2 funciones  obtenida de https://stackoverflow.com/questions/14932739/cakephp-notempty-and-unique-validation-on-field , Zachary Heaton
+    */
+    public function uniqueId($id){
+        $returnId = $this->find('all')
+        ->where([
+            'Residues.residues_id' => $id,
+        ])
+        ->first();
+        if($returnId){
+        return false;
+        }
+        return true;
+    }
+    
+    public function buildRules(RulesChecker $rules)
+    {
+        
+        $rules->addCreate(function ($entity, $options) {
+
+        return $this->uniqueId($entity->residues_id);
+        },
+        'uniqueId',
+        [
+        'errorField' => 'residues_id',
+        'message' => 'El número de acta ya existe.'
+        ]
+        );
+
+        return $rules;
     }
 }

@@ -4,6 +4,8 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Dompdf\Dompdf;
+use Cake\I18n\Date;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * TechnicalReports Controller
@@ -14,6 +16,8 @@ use Dompdf\Dompdf;
  */
 class TechnicalReportsController extends AppController
 {
+    /** variable para asignar las iniciales que correspondan a la facultad/escuela*/
+    public $escuela = 'INGELEC';
 
 
      public function isAuthorized($user)
@@ -80,7 +84,7 @@ class TechnicalReportsController extends AppController
 
     // Esta es la variable que se utiliza para generar los reportes
     // Es la sigla de la escuelta que va a utilizar el sistema
-    public $escuela = 'INGELEC';
+
     
     public function index()
     {
@@ -102,7 +106,42 @@ class TechnicalReportsController extends AppController
             'contain' => ['Assets']
         ]);
 
-        $this->set('technicalReport', $technicalReport);
+        $internalID= $this->escuela."-".$technicalReport->internal_id."-".$technicalReport->year;
+
+        //variable para cargar los datos del activo ya asignado
+        $Assets = TableRegistry::get('Assets');
+        $assetsQuery = $Assets->find()
+                         ->select(['assets.plaque','brands.name','models.name','assets.series','assets.description'])
+                         ->join([
+                            'models' => [
+                                    'table' => 'models',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.models_id= models.id']
+                                ]
+                                ])
+                         ->join([
+                            'brands' => [
+                                    'table' => 'brands',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['models.id_brand = brands.id']
+                                ]
+                                ])
+                         ->where(['assets.plaque' => $technicalReport->assets_id ])
+                        ->toList();
+
+
+        $assets;               
+        //* se acomodan los valores dentro 
+        $assets[0]['plaque']= $assetsQuery[0]->assets['plaque'];
+        $assets[0]['brand']= $assetsQuery[0]->brands['name'];
+        $assets[0]['model']= $assetsQuery[0]->models['name'];
+        $assets[0]['series']= $assetsQuery[0]->assets['series'];
+        $assets[0]['description']= $assetsQuery[$i]->assets['description'];
+
+        // se realiza una conversion a objeto para que la vista lo use sin problemas
+        $assets=(object)$assets[0];
+
+        $this->set(compact('technicalReport','assets','internalID'));
     }
 
     /**
@@ -186,6 +225,7 @@ class TechnicalReportsController extends AppController
         $technicalReport = $this->TechnicalReports->get($id, [
             'contain' => []
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $technicalReport = $this->TechnicalReports->patchEntity($technicalReport, $this->request->getData());
             if ($this->TechnicalReports->save($technicalReport)) {
@@ -194,16 +234,47 @@ class TechnicalReportsController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
+            //debug($technicalReport);
             AppController::insertLog($technicalReport['technical_report_id'], FALSE);
             $this->Flash->error(__('El reporte técnico no se pudo guardar.'));
-            debug($technicalReport->errors());
 
         }
-        $assets = $this->TechnicalReports->Assets->find('list', ['limit' => 200]);
+
+        $internalID= $this->escuela."-".$technicalReport->internal_id."-".$technicalReport->year;
 
         //variable para cargar los datos del activo ya asignado
-        $assets2= $this->TechnicalReports->Assets->get($technicalReport->assets_id);
-        $this->set(compact('technicalReport', 'assets','assets2'));
+        $Assets = TableRegistry::get('Assets');
+        $assetsQuery = $Assets->find()
+                         ->select(['assets.plaque','brands.name','models.name','assets.series','assets.description'])
+                         ->join([
+                            'models' => [
+                                    'table' => 'models',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.models_id= models.id']
+                                ]
+                                ])
+                         ->join([
+                            'brands' => [
+                                    'table' => 'brands',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['models.id_brand = brands.id']
+                                ]
+                                ])
+                         ->where(['assets.plaque' => $technicalReport->assets_id ])
+                        ->toList();
+
+
+        $assets;               
+        //* se acomodan los valores dentro 
+        $assets[0]['plaque']= $assetsQuery[0]->assets['plaque'];
+        $assets[0]['brand']= $assetsQuery[0]->brands['name'];
+        $assets[0]['model']= $assetsQuery[0]->models['name'];
+        $assets[0]['series']= $assetsQuery[0]->assets['series'];
+        $assets[0]['description']= $assetsQuery[$i]->assets['description'];
+
+        // se realiza una conversion a objeto para que la vista lo use sin problemas
+        $assets=(object)$assets[0];
+        $this->set(compact('technicalReport', 'assets','internalID'));
     }
 
     /**
@@ -286,86 +357,167 @@ class TechnicalReportsController extends AppController
 
     public function download($id = null)
     {
-        $technicalReport = $this->TechnicalReports->get($id, [
-            'contain' => ['Assets']
-        ]);
-        // linea para marcar el reporte tecnico como descargado, haciendo que ya no se pueda borrar
-        $technicalReport->descargado = true;
-        // Actualizo el reporte técnico, guardando el valor de descargado como true
-        $this->TechnicalReports->save($technicalReport);
-        require_once 'dompdf/autoload.inc.php';
-        //initialize dompdf class
-        $document = new Dompdf();
-        $html = '';
-        $document->loadHtml('
-        <html>
-        <style>
-        #element1 {float:left;margin-right:10px;margin-left:30px;} #element2 {float:right;margin-right:30px;}
-        table, td, th {
+
+        // se crea una entidad para luego poder hacer los validadores
+        $technicalReport= $this->TechnicalReports->newEntity();
+
+        // Esta variable es simplemente para contener los datos en una estructura de array
+        //que entienda el patchEntity
+        $techRepTMP;
+
+        // Aqui queda el resultado, en un vector genérico, de lo que contiene la vista
+        $techRepArray= explode(',',$this->request->data('pdf') );
+
+        //re realiza una relacion 1 a 1
+        $techRepTMP['technical_report_id']= $techRepArray[0];
+        $date = new Date($techRepArray[1]);
+        $techRepTMP['date']= $date->format('Y-m-d');
+        $techRepTMP['assets_id']= $techRepArray[2];
+        $techRepTMP['evaluation']= $techRepArray[3];
+        $techRepTMP['recommendation']= $techRepArray[4];
+        $techRepTMP['evaluator_name']= $techRepArray[5];
+
+        //  guarda el id mandado por la vista
+        
+
+        $technicalReport = $this->TechnicalReports->patchEntity($technicalReport,$techRepTMP);
+
+        $errors = $technicalReport->errors();
+        
+        if($errors == null /*&& $this->TechnicalReports->save($technicalReport)*/ )
+        {
+      
+            // linea para marcar el reporte tecnico como descargado, haciendo que ya no se pueda borrar
+            $technicalReport->descargado = true;
+            // Actualizo el reporte técnico, guardando el valor de descargado como true
+            //$this->TechnicalReports->save($technicalReport);
+
+            /** saca los datos del activo*/
+            $conn = ConnectionManager::get('default');
+            $stmt = $conn->execute("select a.plaque, a.description, b.name as brand, m.name as model, a.series, a.state
+            from assets a
+            inner join brands b on  b.id=a.brand
+            inner join models m on m.id=a.models_id
+            where a.plaque in('" . $technicalReport->assets_id. "');");
+
+            $results = $stmt ->fetchAll('assoc');
+
+
+
+            require_once 'dompdf/autoload.inc.php';
+            //initialize dompdf class
+            $document = new Dompdf();
+            $html = '';
+            $document->loadHtml('
+            <html>
+            <style>
+            #element1 {float:left;margin-right:10px;margin-left:30px;} #element2 {float:right;margin-right:30px;}
+            table, td, th {
             border: 1px solid black;
-        }
-        body {
+            }
+            body {
             border: 5px double;
             width:100%;
             height:100%;
             display:block;
             overflow:hidden;
             padding:30px 30px 30px 30px
-        }
-        table {
+            }
+            table {
             border-collapse: collapse;
             width: 100%;
-        }
-        th {
+            }
+            th {
             height: 50px;
+            }
+            </style>
+            <center><img src="C:\xampp\htdocs\Decanatura\src\Controller\images\logoucr.png"></center>
+            <title>Informe Técnico</title>
+            <h2 align="center">UNIVERSIDAD DE COSTA RICA</h2>
+            <h2 align="center">UNIDAD DE ACTIVOS FIJOS</h2>
+            <h2 align="center">PRESTAMO DE ACTIVO FIJO</h2>
+            <p>&nbsp;</p>
+            <div id="element1" align="left"><strong>Unidad custodio:</strong>'.$this->escuela.'</div> <div id="element2" align="right"><strong>Fecha:</strong>'.$technicalReport->date.'</div>
+            <p>&nbsp;</p>
+            <div id="element1" align="left"><strong>Descripción del bien</strong></div>
+            <p>&nbsp;</p>
+            <div style="width:960px;height:200px;border:1px solid #000;"></div>
+            <p>&nbsp;</p>
+            <div id="element1" align="left"><strong>N° Placa:&nbsp;</strong>'.$results[0]['plaque'].'</div> <div id="element2" align="right"><strong>Modelo:</strong>&nbsp;'.$results[0]['model'].'</div>
+            <p>&nbsp;</p>
+            <div id="element1" align="left"><strong>Marca:</strong>&nbsp;'.$results[0]['brand'].'</div> <div id="element2" align="right"><strong>Serie:</strong>&nbsp;'.$results[0]['series'].'</div>
+            <p>&nbsp;</p>
+            <div id="element1" align="left" ><strong>Evaluación del activo:</strong>&nbsp;'.$this->translateRecommendation($technicalReport->recommendation).'</div>
+            <p>&nbsp;</p>
+            <div id="element2" align="right"><strong>¿Cuál?</strong>&nbsp;_____________________</div>
+            <p>&nbsp;</p>
+            <div id="element1" align="left"><strong>Tecnico Especializado </strong></div> <div id="element2" align="right"><strong>Responsable de bienes de la Unidad Custodio <strong></div>
+            <p>&nbsp;</p>
+            <div id="element1" align="left">Nombre:&nbsp;'.$technicalReport->evaluator_name.'</div> <div id="element2" align="right">Nombre:&nbsp;___________________________</div>
+            <p>&nbsp;</p>
+            <div id="element1" align="left">Firma:&nbsp;___________________________</div> <div id="element2" align="right">Firma:&nbsp;___________________________</div>
+            <p>&nbsp;</p>
+            <p align="center"><strong> Autoridad Universitaria</strong></p> 
+            <p align="center">Nombre:&nbsp;___________________________</p> 
+            <p align="center">Firma:&nbsp;___________________________</p>
+            p>&nbsp;</p>
+            <p align="left">Original: Unidad de Bienes Institucionales&nbsp;&nbsp;(OAF)</p>
+            <p align="left">Copia: Bodega de Activos Recuperados&nbsp;&nbsp;(OSG)</p>
+            <p align="left">Copia: Unidad responsable</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p align="center">Tels: 2511 5759/1149 www.oaf.ucr.ac.cr correo electrónico: activosfijos.oaf@ucr.ac.cr</p>
+            ');
+            //set page size and orientation
+            $document->setPaper('A3', 'portrait');
+            //Render the HTML as PDF
+            $document->render();
+            //Get output of generated pdf in Browser
+            $document->stream("Informe Tecnico-".$technicalReport->technical_report_id, array("Attachment"=>1));
+            //1  = Download
+            //0 = Preview
         }
-        </style>
-        <center><img src="C:\xampp\htdocs\Decanatura\src\Controller\images\logoucr.png"></center>
-        <title>Informe Técnico</title>
-        <h2 align="center">UNIVERSIDAD DE COSTA RICA</h2>
-        <h2 align="center">UNIDAD DE ACTIVOS FIJOS</h2>
-        <h2 align="center">PRESTAMO DE ACTIVO FIJO</h2>
-        <p>&nbsp;</p>
-        <div id="element1" align="left"><strong>Unidad custodio:</strong>'.$technicalReport->asset->responsable_id.'</div> <div id="element2" align="right"><strong>Fecha:</strong>'.$technicalReport->date.'</div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left"><strong>Descripción del bien</strong></div>
-        <p>&nbsp;</p>
-        <div style="width:960px;height:200px;border:1px solid #000;"></div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left"><strong>N° Placa:&nbsp;</strong>'.$technicalReport->asset->plaque.'</div> <div id="element2" align="right"><strong>Modelo:</strong>&nbsp;'.$technicalReport->asset->models_id.'</div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left"><strong>Marca:</strong>&nbsp;'.$technicalReport->asset->brand.'</div> <div id="element2" align="right"><strong>Serie:</strong>&nbsp;'.$technicalReport->asset->series.'</div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left" ><strong>Evaluación del activo:</strong>&nbsp;'.$technicalReport->evaluation.'</div>
-        <p>&nbsp;</p>
-        <div id="element2" align="right"><strong>¿Cuál?</strong>&nbsp;_____________________</div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left"><strong>Tecnico Especializado </strong></div> <div id="element2" align="right"><strong>Responsable de bienes de la Unidad Custodio <strong></div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left">Nombre:&nbsp;___________________________</div> <div id="element2" align="right">Nombre:&nbsp;___________________________</div>
-        <p>&nbsp;</p>
-        <div id="element1" align="left">Firma:&nbsp;___________________________</div> <div id="element2" align="right">Firma:&nbsp;___________________________</div>
-        <p>&nbsp;</p>
-        <p align="center"><strong> Autoridad Universitaria</strong></p> 
-        <p align="center">Nombre:&nbsp;___________________________</p> 
-        <p align="center">Firma:&nbsp;___________________________</p>
-        <p>&nbsp;</p>
-        <p align="left">Original: Unidad de Bienes Institucionales&nbsp;&nbsp;(OAF)</p>
-        <p align="left">Copia: Bodega de Activos Recuperados&nbsp;&nbsp;(OSG)</p>
-        <p align="left">Copia: Unidad responsable</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p align="center">Tels: 2511 5759/1149 www.oaf.ucr.ac.cr correo electrónico: activosfijos.oaf@ucr.ac.cr</p>
-        ');
-        //set page size and orientation
-        $document->setPaper('A3', 'portrait');
-        //Render the HTML as PDF
-        $document->render();
-        //Get output of generated pdf in Browser
-        $document->stream("Informe Tecnico", array("Attachment"=>1));
-        //1  = Download
-        //0 = Preview
-        return $this->redirect(['action' => 'index']);
+        $this->Flash->error(__('El informe técnico no se ha generado. Existe un error en los campos editables.'));
+        return $this->redirect(['action' => 'edit',$id]);
+    }
+
+    /** método para descargar un documento que ya existe en el sistema de archivos */
+     public function download2($id = null)
+    {
+        $techRep = $this->TechnicalReports->get($id);
+        $path=WWW_ROOT.'files'.DS.'TechnicalReports'.DS.'file_name'.DS.$techRep->technical_report_id.DS.$techRep->file_name;
+        $this->response->file($path, array(
+        'download' => true,
+        'name' =>$techRep->file_name ,
+        ));
+        return $this->response;
+        /*$this->Flash->error($path);
+        return $this->redirect(['action' => 'edit',$residue->residues_id]);*/
+    }
+
+
+    public function translateRecommendation($r)
+    {
+        switch($r) {
+        case 'C':
+        return 'Reubicar';
+        break;
+
+        case 'R':
+        return 'Reparar';
+        break;
+
+        case 'D':
+        return 'Desechar';
+        break;
+
+        case 'U':
+        return 'Usar piezas';
+        break;
+        case 'O':
+        return 'Otros';
+        break;
+    }
     }
 
 }

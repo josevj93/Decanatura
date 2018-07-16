@@ -37,6 +37,7 @@ class TechnicalReport extends Entity
      * @var array
      */
     protected $_accessible = [
+        'technical_report_id'=>true,
         'assets_id' => true,
         'evaluation' => true,
         'recommendation' => true,

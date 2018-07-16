@@ -68,7 +68,7 @@
     label[class = funcionario]
     {
       margin-left: 20px;
-      margin-right: 57px;
+      margin-right: 41px;
     }
     label[class = id]
     {
@@ -110,6 +110,9 @@
 
     <div class="form-control sameLine">
       <div>
+        <div class="form-control sameLine">
+        <label class='align' required="required"> <b> Número de traslado: </b> <font color="red"> * </font> VRA- </label>
+
       <?php 
         echo $this->Form->control('transfers_id', 
                 [
@@ -117,15 +120,18 @@
                     'inputContainer' => '<div class="row">{{content}}</div>',
                     'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                     ],
-                'label'=>['text'=>'Número de traslado: VRA-', 'style'=>'margin-left= 10px;'],
+                'label'=>['text'=>'', 'style'=>'margin-left= 10px;'],
                 'class'=>'form-control col-sm-4',
                 'type'=>'text',
                 'id' =>'transfers_id'
                 ]);
       ?>
+    </div>
       </div>
       <br>
       <div>
+        <div class="form-control sameLine">
+        <label class='align' required="required"> <b> Fecha: </b> <font color="red"> * </font></label>
       <?php 
         echo $this->Form->control('date', 
           [
@@ -133,12 +139,13 @@
               'inputContainer' => '<div class="row">{{content}}</div>',
               'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
             ],
-            'label'=>['text'=>'Fecha:', 'style'=>'margin-left= 10px;'],
+            'label'=>['text'=>'', 'style'=>'margin-left= 10px;'],
             'class'=>'form-control',
             'type'=>'text',
             'id'=>'datepicker'
           ]);
       ?>
+    </div>
 
       </div>
   </div>
@@ -154,14 +161,15 @@
         <tr>
             <!-- Fila para la Unidad que entrega -->
             <td>
+
                 <div class="row" >
-                    <label class="label-t">Unidad académica: </label>
+                    <label class="label-t" required="required"><b>Unidad académica:</b><font color="red"> * </font></label>
                    
                     <label><?php echo h($paramUnidad); ?></label>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="funcionario">Funcionario: </label>
+                    <label class = "funcionario" required="required"><b>Funcionario:</b><font color="red"> * </font></label>
                     <?php 
                     echo $this->Form->select('functionary',
                       $users,
@@ -171,7 +179,8 @@
                 </div>
                 <br>
                 <div class="row">
-                    <label class="id">Cédula:</label>
+                    <label class="id" required="required"><b>Cédula:</b><font color="red"> * </font></label>
+
                     <?php 
             echo $this->Form->imput('identification', ['label' => 'identification:', 'class'=>'form-control col-sm-4']);
             ?>
@@ -180,21 +189,21 @@
             <!-- Fila para la Unidad que recibe -->
             <td>
                 <div class="row">
-                        <label class="label-t">Unidad académica: </label>
+                        <label class="label-t">Unidad académica:</label>
                         <?php 
             echo $this->Form->imput('Acade_Unit_recib', ['label' => 'Acade_Unit_recib:', 'class'=>'form-control col-sm-4']);
             ?>       
                 </div>
                 <br>
                 <div class="row">
-                    <label class="funcionario">Funcionario: </label>
+                    <label class = "funcionario" style ="margin-right: 59px;">Funcionario:</label>
                     <?php 
             echo $this->Form->imput('functionary_recib', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
             ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="id">Cédula:</label>
+                    <label class="id" style ="margin-right: 45px;">Cédula:</label>
                     <?php 
             echo $this->Form->imput('identification_recib', ['label' => 'identification_recib:', 'class'=>'form-control col-sm-4']);
             ?>
@@ -249,7 +258,7 @@
 
   <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
   <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'acept']) ?>
-  <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $transfer->transfers_id)]) ?>
+
 </body>
 
 <script>
