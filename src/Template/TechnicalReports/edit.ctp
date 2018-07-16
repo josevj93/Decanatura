@@ -97,7 +97,7 @@
         </div>
 
       <div class="row">
-        <label>Fecha:</label>
+        <label required="required"><b>Fecha:</b><font color="red"> * </font></label>
         <?php
         $tmpDate= $technicalReport->date->format('Y-m-d');
         echo $this->Form->imput('date', ['class'=>'form-control ','id'=>'datepicker','value'=>$tmpDate]); 

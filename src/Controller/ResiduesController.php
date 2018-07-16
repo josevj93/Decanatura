@@ -341,7 +341,7 @@ class ResiduesController extends AppController
             }
 
             AppController::insertLog($residue['residues_id'], FALSE);
-            //debug($residue);
+            
             $this->Flash->error(__('El acta de residuo no se ha guardado, inténtelo de nuevo'));
 
         }
@@ -408,7 +408,7 @@ class ResiduesController extends AppController
         }
 
         $Unidad = $this->UnidadAcadémica;
-
+        //debug($residue);
         $this->set(compact('residue', 'result', 'result2', 'Unidad'));
     }
 

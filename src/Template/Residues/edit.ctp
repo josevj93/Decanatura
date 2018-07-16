@@ -100,14 +100,13 @@
     <?= $this->Form->create($residue,['novalidate','onsubmit'=>'return validateCheck()','type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Modificar acta de desecho') ?></legend>
-        <?php echo '<input type="hidden" name="residues_id" id="residues_id" '.h($residue->residues_id).'  >' ?>
         <br> 
         <!-- Sección de entrada de datos -->   
          <div class="form-control sameLine" >    
         <div class='row'>
 
             <label>Autorización Número: VRA-</label>
-            <?php echo '<input type="text" id="residues_id" class="form-control col-sm-4" disabled value="'.h($id).'">'; ?>
+            <?php echo '<input type="text" id="residues_id" class="form-control col-sm-4" disabled value="'.h($residue->residues_id).'">'; ?>
         </div>
         <div class='row'>
             <label>Fecha:</label>

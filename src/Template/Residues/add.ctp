@@ -107,24 +107,24 @@
            
       <div class="form-control sameLine">
         <div>
-            <div class="form-control sameLine">
+            <div class="row">
 
-            <label class='align' required="required"> <b> Número de autorización: </b> <font color="red"> * </font> VRA- </label>
-        <?php 
-            echo $this->Form->control('residues_id', 
+            <label  class='align' required="required"> <b> Número de autorización: </b> <font color="red"> * </font> VRA- </label>
+            <?php 
+                echo $this->Form->control('residues_id', 
                 [
                     'templates' => [
                     'inputContainer' => '<div class="row">{{content}}</div>',
                     'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                     ],
                 'label'=>['text'=>''],
-                'class'=>'form-control col-sm-4',
+                'class'=>'form-control col-sm-4 col-lg-6 col-md-6',
                 'type'=>'text',
                 "required"=>"required",
                 'id' =>'residues_id'
                 ]);
-        ?>
-    </div>
+            ?>
+            </div>
         </div>    
         <br>
         <div>
@@ -147,7 +147,7 @@
       ?>
   </div>
         </div>
-      </div>
+    </div>
       
       <label>En presencia de:</label>
         
