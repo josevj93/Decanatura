@@ -110,7 +110,7 @@ class ResiduesTable extends Table
             ->notEmpty('identification2','Este campo es requerido');
 
         $validator
-            ->date('date','ymd', 'Formato de fecha no válido.')
+            ->date('date','dmy', 'Formato de fecha no válido.')
             ->notEmpty('date','Este campo es requerido');
 
         $validator
