@@ -146,6 +146,7 @@
 
                             'label'=>['text'=>''],
                             "required"=>"required",
+                            'id'=>'name1',
                             'class'=>'form-control col-sm-6'
                             ]);
                     ?>
@@ -164,6 +165,7 @@
                                 ],
                                 "required"=>"required",
                             'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            'id' => 'identification1',
                             'class'=>'form-control col-sm-6'
                             ]);
                     ?>
@@ -186,6 +188,7 @@
 
                             'label'=>['text'=>''],
                             "required"=>"required",
+                            'id' => 'name2',
                             'class'=>'form-control col-sm-6'
                             ]);
                     ?>
@@ -204,6 +207,7 @@
                                 ],
                             'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
                             "required"=>"required",
+                            'id' =>'identification2',
                             'class'=>'form-control col-sm-6'
                             ]);
                     ?>

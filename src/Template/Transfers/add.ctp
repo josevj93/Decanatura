@@ -182,17 +182,41 @@
                     <label class="id" required="required"><b>Cédula:</b><font color="red"> * </font></label>
 
                     <?php 
-            echo $this->Form->imput('identification', ['label' => 'identification:', 'class'=>'form-control col-sm-4']);
-            ?>
+                        echo $this->Form->control('identification', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+                                "required"=>"required",
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            'id' =>'identification',
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?>
+
+
+
                 </div>
             </td>
             <!-- Fila para la Unidad que recibe -->
             <td>
                 <div class="row">
                         <label class="label-t">Unidad académica:</label>
-                        <?php 
-            echo $this->Form->imput('Acade_Unit_recib', ['label' => 'Acade_Unit_recib:', 'class'=>'form-control col-sm-4']);
-            ?>       
+              <?php 
+                        echo $this->Form->control('Acade_Unit_recib', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div>{{content}}</div>',
+                                'inputContainerError' => '<div {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+                                "required"=>"required",
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            'id' =>'Acade_Unit_recib',
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?>
+
                 </div>
                 <br>
                 <div class="row">
@@ -205,8 +229,20 @@
                 <div class="row">
                     <label class="id" style ="margin-right: 45px;">Cédula:</label>
                     <?php 
-            echo $this->Form->imput('identification_recib', ['label' => 'identification_recib:', 'class'=>'form-control col-sm-4']);
-            ?>
+                        echo $this->Form->control('identification_recib', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+                                "required"=>"required",
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            'id' =>'identification_recib',
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?>
+
+
                 </div>               
             </td>
         </tr>

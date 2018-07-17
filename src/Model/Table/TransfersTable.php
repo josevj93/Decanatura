@@ -66,15 +66,16 @@ class TransfersTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
-        $validator
+            $validator
             ->scalar('transfers_id')
             ->maxLength('transfers_id', 100)
-            ->notEmpty('transfers_id', 'create');
+            ->alphaNumeric('transfers_id', 'El número de autorización debe contener solo caracteres alfanuméricos.')
+            ->notEmpty('transfers_id', 'El número de autorización es requerido.');
+
 
         $validator
-            ->date('date')
-            ->requirePresence('date', 'create')
-            ->notEmpty('date');
+            ->date('date','ymd', 'Formato de fecha no válido.')
+            ->notEmpty('date','Este campo es requerido');
 
         $validator
             ->scalar('functionary')
@@ -84,19 +85,31 @@ class TransfersTable extends Table
 
         $validator
             ->scalar('identification')
-            ->maxLength('identification', 10)
+            ->maxLength('identification', 9,'La cédula debe contener 9 dígitos' )
+            ->minLength('identification', 9,'La cédula debe contener 9 dígitos' )
+            ->numeric('identification','La cédula debe contener sólo digitos')
             ->requirePresence('identification', 'create')
-            ->notEmpty('identification');
+            ->notEmpty('identification','Este campo es requerido');
 
         $validator
             ->scalar('functionary_recib')
             ->maxLength('functionary_recib', 100)
-            ->notEmpty('functionary_recib');
+            ->requirePresence('functionary_recib', 'create')
+            ->add('functionary_recib',[ 
+                [
+                'rule'=>['custom', ' /^[a-zA-ZÀ-ÖØ-öø-ÿ ]+$/ '],
+                'message'=>'Debe contener sólo caracteres del alfabeto.'
+                ]
+            ])
+            ->allowEmpty('functionary_recib');
 
-        $validator
+            $validator
             ->scalar('identification_recib')
-            ->maxLength('identification_recib', 10)
-            ->notEmpty('identification_recib');
+            ->maxLength('identification_recib', 9,'La cédula debe contener 9 dígitos' )
+            ->minLength('identification_recib', 9,'La cédula debe contener 9 dígitos' )
+            ->numeric('identification_recib','La cédula debe contener sólo digitos')
+            ->allowEmpty('identification_recib');
+            
 
         $validator
             ->scalar('Acade_Unit_recib')
