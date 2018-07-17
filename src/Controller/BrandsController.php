@@ -94,15 +94,14 @@ class BrandsController extends AppController
             $random = uniqid();
             $brand->id = $random;
             $brand = $this->Brands->patchEntity($brand, $this->request->getData());
-            
-            if ($this->Brands->save($brand)) {
-                AppController::insertLog($brand['id'], TRUE);
+            try{  
+                $this->Brands->save($brand);
                 $this->Flash->success(__('La marca fue guardada exitosamente.'));
-
                 return $this->redirect(['action' => 'index']);
-            }
-            AppController::insertLog($brand['id'], FALSE);
-            $this->Flash->error(__('La marca no se pudo guardar, por favor intente nuevamente.'));
+            }catch (\PDOException $e) {
+            $this->Flash->error(__('La marca no se pudo guardar, puede deberse a que es una marca existente'));
+        }
+          
         }
         $this->set(compact('brand'));
     }
@@ -121,20 +120,19 @@ class BrandsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $brand = $this->Brands->patchEntity($brand, $this->request->getData());
-            if ($this->Brands->save($brand)) {
-                AppController::insertLog($brand['id'], TRUE);
-            $this->Flash->success(__('La marca fue modificada exitosamente.'));
-
+            try{  
+                $this->Brands->save($brand);
+                $this->Flash->success(__('La marca fue guardada exitosamente.'));
                 return $this->redirect(['action' => 'index']);
-            }
-            AppController::insertLog($brand['id'], FALSE);
-            $this->Flash->error(__('La marca no se pudo modificar, por favor intente nuevamente.'));
+            }catch (\PDOException $e) {
+            $this->Flash->error(__('La marca no se pudo guardar, puede deberse a que es una marca existente'));
+        }
         }
         $this->set(compact('brand'));
     }
 
 
-    /**
+    /** 
      * Delete method
      *
      * @param string|null $id Brand id.

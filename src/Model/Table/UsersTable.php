@@ -106,10 +106,41 @@ class UsersTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
+    /**public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['username']));
 
+
+        return $rules;
+    }**/
+
+    public function uniqueId($id){
+        $returnId = $this->find('all')
+        ->where([
+            'Users.id' => $id,
+        ])
+        ->first();
+        if($returnId){
+        return false;
+        }
+        return true;
+    }
+
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['username']));
+        $rules->addCreate(function ($entity, $options) {
+
+        return $this->uniqueId($entity->id);
+        },
+        'uniqueId',
+        [
+        'errorField' => 'id',
+        'message' => 'El número de cedula ya existe.'
+        ]
+        );
+
         return $rules;
     }
+    
 }

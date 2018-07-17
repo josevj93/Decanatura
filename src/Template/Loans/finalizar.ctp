@@ -39,20 +39,21 @@
         }
 </style> 
   
-
-<div class="residues form large-9 medium-8 columns content">
-  <?= $this->Form->create($loan, ['type' => 'file']) ?>
-
-
+<div class="form large-9 medium-8 columns content">
+<?= $this->Form->create($loan, ['type' => 'file']) ?>
 	<fieldset>
-        <legend><?= __('Consultar préstamo') ?></legend>
-
+        <?php
+            if($loan->estado == "En proceso"){
+                echo "<legend>Insertar préstamo</legend>";
+            }
+        ?>
+        
 		<br>
 
 		<div class="form-control sameLine">
 			<div class="row col-lg-5">
 				<label> <b>Responsable:</b><b style="color:red;">*</b> </label>
-				<?php echo '<input type="text" id="id_responsables" class="form-control col-sm-4 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($loan->user->nombre). '">'; ?>
+				<?php echo $this->Form->imput('id_responsables', ['class'=>'"form-control col-sm-4 col-md-4 col-lg-4', 'value' => $loan->user->nombre, 'disabled']); ?>
 			</div>
 
 			<div class="row">
@@ -95,31 +96,32 @@
             </tbody>
         </table>
 
+    </div>
 
-<div>
-      <label> Observaciones: </label>
-      <?php echo '<input type="text" id="observaciones" class="form-control col-sm-4 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($loan->observaciones). '">'; ?>
-    </div> <br>
+    <div>
+        <label> Observaciones: </label>
+        <?php echo '<input type="text" id="observaciones" class="form-control col-sm-4 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($loan->observaciones). '">'; ?>
+    </div> 
+<br>
+	 <b>1- <?= $this->Html->link(__('Descargar'), ['controller'=> 'Loans', 'action' => 'download',$loan->id], [ 'confirm' => __('Seguro que desea descargar el archivo?')]) ?> el formulario para llenar y luego subirlo al sitema.</b>
+    <br><br>
+    <div >
+    <b><?php echo $this->Form->input('file_solicitud',['type' => 'file','label' => '2- Subir Formulario de Préstamo una vez lleno para Finalizar', 'class' => 'form-control-file']); ?></b>
+     </div>
+     <div class=\"col-12 text-right\">
+	
+	
+    <br>
 
-<?php
-  if($loan->estado != 'En proceso'){
-    echo $this->Html->link(__('Ver Formulario'),'/' . $loan->file_solicitud_dir . '/' . $loan->file_solicitud);
-    echo "<div class=\"col-12 text-right\">";
 
-  }
-?>
-
-<div class="col-12 text-right">
-    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
-
-    <?php
-        if($loan->estado == 'En proceso'){
-            echo $this->Html->link(__('Seguir con proceso de insertar'), ['controller' => 'Loans', 'action' => 'finalizar', $loan->id], ['class' => 'btn btn-primary']);
-        }
-        else if($loan->estado == 'Activo'){
-			echo $this->Html->link(__('Finalizar Préstamo'), ['action' => 'terminar',$loan->id], ['class' => 'btn btn-primary']);
-        }
-    ?>
 </div>
 
+<div class="col-12 text-right">
 
+    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+    
+<br><br><br>
+</div>
+
+<?= $this->Form->end(); ?>

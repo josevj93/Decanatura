@@ -12,7 +12,6 @@ use Imagine;
  *
  * @property \App\Model\Table\TypesTable|\Cake\ORM\Association\BelongsTo $Types
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\LocationsTable|\Cake\ORM\Association\BelongsTo $Locations
  *
  * @method \App\Model\Entity\Asset get($primaryKey, $options = [])
@@ -223,9 +222,21 @@ class AssetsTable extends Table
 		$validator
             ->scalar('type_id')
 			->maxLength('type_id', 255)
-            ->notEmpty('type_id');
+            ->allowEmpty('type_id');
             
         return $validator;
+    }
+
+    public function uniqueId($id){
+        $returnId = $this->find('all')
+        ->where([
+            'Assets.plaque' => $id,
+        ])
+        ->first();
+        if($returnId){
+        return false;
+        }
+        return true;
     }
 
     /**
@@ -244,6 +255,8 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['models_id'], 'Models'));
 		$rules->add($rules->existsIn(['type_id'], 'Types'));
 
+
         return $rules;
+
     }
 }

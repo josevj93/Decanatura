@@ -91,6 +91,9 @@ class AssetsController extends AppController
     {
         $asset = $this->Assets->newEntity();
         if ($this->request->is('post')) {
+            
+
+
             $random = uniqid();
             $fecha = date('Y-m-d H:i:s');
             $asset->created = $fecha;
@@ -100,6 +103,10 @@ class AssetsController extends AppController
             $asset->deleted = false;
             $asset->state = "Disponible";
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+
+            //print_r($asset);
+            //die();
+
 			if ($_POST['models_id'] == '') {
 				$asset->models_id = null;
 			}
@@ -109,7 +116,7 @@ class AssetsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             AppController::insertLog($asset['plaque'], FALSE);
-            $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
+            $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente. Placa existente'));
         }
         
         $this->loadModel('Brands');
@@ -373,5 +380,3 @@ class AssetsController extends AppController
         $this->set(compact('asset', 'brands', 'users', 'locations','models'));
     }
 }
-
-

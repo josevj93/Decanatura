@@ -82,7 +82,10 @@ class UploadBehavior extends Behavior
      */
     public function beforeSave(Event $event, Entity $entity, ArrayObject $options)
     {
+
+
         foreach ($this->getConfig(null, []) as $field => $settings) {
+
             if (in_array($field, $this->protectedFieldNames)) {
                 continue;
             }
@@ -101,7 +104,6 @@ class UploadBehavior extends Behavior
             $filename = $path->filename();
             $data['name'] = $filename;
             $files = $this->constructFiles($entity, $data, $field, $settings, $basepath);
-
             $writer = $this->getWriter($entity, $data, $field, $settings);
             $success = $writer->write($files);
 
