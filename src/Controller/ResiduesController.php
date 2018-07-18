@@ -150,11 +150,11 @@ class ResiduesController extends AppController
      */
     public function add()
     {
+        
         $residue = $this->Residues->newEntity();
-
         if ($this->request->is('post')) {
 
-            $residue = $this->Residues->patchEntity($residue, $this->request->getData()/*,['validationDefault'=>'residues_id']*/);
+            $residue = $this->Residues->patchEntity($residue, $this->request->getData());
 
             // le doy formato a la fecha para que mysql pueda guardarla correctamente
             if($residue->date != null)
@@ -163,7 +163,18 @@ class ResiduesController extends AppController
                 $residue->date= $date->format('Y-m-d');
             }
 
-            //debug($residue);
+            /** varifica que el id no sea repetido y se setea el error manualmente */
+            $returnId = $this->Residues->find('all')
+            ->where([
+            'Residues.residues_id' => $residue->residues_id
+            ])
+            ->first();
+            if($returnId){
+                $residue->setError('residues_id', ['El número de acta ya existe.']);
+            }
+
+
+            $residue['new']=true;
             if ($this->Residues->save($residue) ) {
                 
 

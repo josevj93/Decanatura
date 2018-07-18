@@ -67,7 +67,7 @@ class TransfersTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            //->scalar('transfers_id')
+            ->scalar('transfers_id')
             ->maxLength('transfers_id', 100)
             ->alphaNumeric('transfers_id', 'El número de autorización debe contener solo caracteres alfanuméricos.')
             ->notEmpty('transfers_id', 'El número de autorización es requerido.');
@@ -131,36 +131,4 @@ class TransfersTable extends Table
 
         return $validator;
     }
-
-    /* Idea de las sigueintes 2 funciones  obtenida de https://stackoverflow.com/questions/14932739/cakephp-notempty-and-unique-validation-on-field , Zachary Heaton
-    */
-    public function unique_Id($id){
-        /*$returnId = $this->find('all')
-        ->where([
-            'Transfers.transfers_id' => $id,
-        ])
-        ->first();
-        if($returnId){
-        return false;
-        }
-        return true;*/
-        return false;
-    }
-    
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->addCreate(function ($entity, $options) {
-
-        return $this->unique_Id($entity->transfers_id);
-        },
-        'uniqueId',
-        [
-        'errorField' => 'transfers_id',
-        'message' => 'El número de traslado ya existe.'
-        ]
-        );
-
-        return $rules;
-    }
-
 }

@@ -169,65 +169,57 @@ class TransfersController extends AppController
 
             $check= $this->request->getData("checkList");
             $check = explode(",",$check);
-            /*if($check['0'] == null)
-            {
-                $this->Flash->error(__('No se pudo realizar la transferencia porque no se seleccionó ningún activo.'));
-            }
-            else
-            {*/
 
-                $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
+            $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
 
-                //Se concatena el id de la vista con la constante en este caso (VRA-) que es diferente para cada unidad académica
-                //$transfer->transfers_id = $this->request->getData('transfers_id');
-                $users = TableRegistry::get('users');
-                //se obtiene el nombre del usuario con la posición del dropdown
-                $users_query = $users->find()
+            //Se concatena el id de la vista con la constante en este caso (VRA-) que esdiferente para cada unidad académica
+            //$transfer->transfers_id = $this->request->getData('transfers_id');
+            $users = TableRegistry::get('users');
+            //se obtiene el nombre del usuario con la posición del dropdown
+            $users_query = $users->find()
                 ->select(['users.nombre','users.apellido1','users.apellido2'])->toList();
 
-                $array_funcionario = $users_query[$transfer->functionary];
-                $transfer->functionary = $array_funcionario->nombre.' '.$array_funcionario->apellido1.' '.$array_funcionario->apellido2;
-                //Se verifica que el id no esté duplicado, por alguna razón la base de datos no lo estaba haciendo.
-                /*$tmpId = $this->Transfers->find('all',['fields'=>'transfers_id'])
-                ->where(['transfers_id'=> $transfer->transfers_id])->toList();
+            $array_funcionario = $users_query[$transfer->functionary];
+            $transfer->functionary = $array_funcionario->nombre.' '.$array_funcionario->apellido1.' '.$array_funcionario->apellido2;
+            //Se verifica que el id no esté duplicado, por alguna razón la base de datos no lo estaba haciendo.
 
-                if($tmpId == null)
-                {*/
+            $returnId = $this->Transfers->find('all')
+            ->where([
+            'Transfers.transfers_id' => $transfer->transfers_id
+            ])
+            ->first();
+            if($returnId){
+                $transfer->setError('transfers_id', ['El número de traslado ya existe.']);
+            }
                     //comienza el ciclo para agregar la relación entre activos y acta.
-                    if ($this->Transfers->save($transfer)) {
-                        //se saca la lista de placas señaladas y luego se pasan a Array
-                        $check= $this->request->getData("checkList");
-                        $check = explode(",",$check);
-                        foreach($check as $placa)
-                        {
-                            $transferAssetTable = TableRegistry::get('AssetsTransfers');
-                            $transferAsset = $transferAssetTable->newEntity();
-                            //se asigna id de traslado a tabla de relación
-                            $transferAsset->transfer_id =  $transfer->transfers_id;
-                            $transferAsset->assets_id = $placa;
-                            //se guarda en tabla conjunta (assets y traslado)
-                            $transferAssetTable->save($transferAsset);
+            if ($this->Transfers->save($transfer)) {
+                //se saca la lista de placas señaladas y luego se pasan a Array
+                $check= $this->request->getData("checkList");
+                $check = explode(",",$check);
+                foreach($check as $placa)
+                {
+                    $transferAssetTable = TableRegistry::get('AssetsTransfers');
+                    $transferAsset = $transferAssetTable->newEntity();
+                    //se asigna id de traslado a tabla de relación
+                    $transferAsset->transfer_id =  $transfer->transfers_id;
+                    $transferAsset->assets_id = $placa;
+                    //se guarda en tabla conjunta (assets y traslado)
+                    $transferAssetTable->save($transferAsset);
 
-                            //Se le cambia el estado al activo.
-                            $assets = TableRegistry::get('Assets')->find('all');
+                    //Se le cambia el estado al activo.
+                    $assets = TableRegistry::get('Assets')->find('all');
                         
-                            $assets->update()
-                                    ->set(['state' => "Trasladado"])
-                                    ->where(['plaque IN' => $placa])
-                                    ->execute();
-                        }
-                        $this->Flash->success(__('La transferencia fue exitosa.'));
-                        return $this->redirect(['action' => 'viewDownload', $transfer->transfers_id]);
-                    }
-                    debug($transfer->errors());
-                    AppController::insertLog($transfer['transfers_id'], TRUE);
-                    $this->Flash->error(__('No se pudo realizar la transferencia.'));
-                /*}
-                else{
-                AppController::insertLog($transfer['transfers_id'], FALSE);
-                $this->Flash->error(__('No se pudo realizar la transferencia porque ya hay un traslado con ese número de traslado.'));
-                }*/
-            //}
+                    $assets->update()
+                            ->set(['state' => "Trasladado"])
+                            ->where(['plaque IN' => $placa])
+                            ->execute();
+                }
+                $this->Flash->success(__('La transferencia fue exitosa.'));
+                return $this->redirect(['action' => 'viewDownload', $transfer->transfers_id]);
+                }
+            //debug($transfer->errors());
+            AppController::insertLog($transfer['transfers_id'], TRUE);
+            $this->Flash->error(__('No se pudo realizar la transferencia.'));
         }
 
 
@@ -420,7 +412,7 @@ class TransfersController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             AppController::insertLog($transfer['transfers_id'], FALSE);
-            debug($transfer);
+            //debug($transfer);
             $this->Flash->error(__('El traslado no se pudo guardar, porfavor intente nuevamente'));
 
         }
@@ -540,7 +532,20 @@ class TransfersController extends AppController
     {
 
         $transfer = $this->Transfers->get($id);
+        if ($this->request->is(['patch', 'post', 'put'])) {
 
+
+            //saco la lista de placas señaladas y luego las paso a Array
+
+             
+            $transfer = $this->Transfers->patchEntity($transfer, $this->request->getData());
+            if ($this->Transfers->save($transfer)) {
+                AppController::insertLog($transfer['transfers_id'], TRUE);
+                $this->Flash->success(__('Los cambios han sido guardados.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+        }
         // obtengo la tabla assets
         $assets_transfers = TableRegistry::get('AssetsTransfers');
 
@@ -777,69 +782,34 @@ public function download($id = null)
 
     public function generate($id = null)
     {
-        /*
-        $this->Assets = $this->loadModel('Assets');
-        $this->AssetsTransfers = $this->loadModel('AssetsTransfers');
-        */
+
 
         // se crea una entidad para luego poder hacer los validadores
-        $transfer = $this->Transfers->newEntity();
-        // Esta variable es simplemente para contener los datos en una estructura de array
-        //que entienda el patchEntity
-        $transferTMP;
+        $transfer = $this->Transfers->get($id);
 
-        // Aqui queda el resultado, en un vector genérico, de lo que contiene la vista
-        $transferArray= explode(',',$this->request->data('pdf') );
+        $date = new Date($transfer->date);
+        $date= $date->format('Y-m-d');
 
-        //re realiza una relacion 1 a 1
-        $transferTMP['residues_id']= $id;
-        $date = new Date($transferArray[0]);
-        $transferTMP['date']= $date->format('Y-m-d');
+        // linea para marcar el desecho como descargado, haciendo que ya no se pueda borrar
+        $transfer->descargado = true;
 
 
-        $transferTMP['Acade_Unit_recib']= $transferArray[1];
-        $transferTMP['functionary']= $transferArray[2];
-        $transferTMP['identification']= $transferArray[3];
-        $transferTMP['functionary_recib']= $transferArray[4];
-        $transferTMP['identification_recib']= $transferArray[5];
-
-        $transfer = $this->Transfers->patchEntity($transfer,$transferTMP);
-        $errors = $transfer->errors();
-
-        if(/*$errors== null && $this->Transfers->save($transfer)*/true)
-        {
-            // linea para marcar el desecho como descargado, haciendo que ya no se pueda borrar
-            $transfer->descargado = true;
-
-            // pide la lista de placas a la vista
-            $plaques= explode(',',$this->request->data('plaques') );
-
-            //  las placas se pasan a un formato de string de manera que seaan válidas en
-            //el where assets.plaque in
-            $plaqueList;
-            $plaqueList.="'".$plaques[0]."'";
-            $size=count($plaques);
-            for($p=1;$p< $size;$p++)
-            {
-                $plaqueList.=",'".$plaques[$p]."'";
-            }
-
-            $conn = ConnectionManager::get('default');
-            $stmt = $conn->execute("select a.plaque, a.description, b.name as brand, m.name as model, a.series, a.state
+        $conn = ConnectionManager::get('default');
+        $stmt = $conn->execute("select a.plaque, a.description, b.name as brand, m.name as model, a.series, a.state
             from assets a
-            inner join assets_transfers on a.plaque= assets_id
-            inner join transfers on transfer_id= transfer_id
+            inner join assets_transfers atr on a.plaque= assets_id
+            inner join transfers tr on tr.transfers_id= atr.transfer_id
             inner join brands b on  b.id=a.brand
             inner join models m on m.id=a.models_id
-            where a.plaque in (" . $plaqueList . ");");
-
-            $results = $stmt ->fetchAll('assoc');
-
-
-            require_once 'dompdf/autoload.inc.php';
-            //initialize dompdf class
-            $document = new Dompdf();
-            $html = 
+            where tr.transfers_id = '" . $id . "';");
+        $results = $stmt ->fetchAll('assoc');
+        $size= count($results);
+        /*debug($results);
+        die();*/
+        require_once 'dompdf/autoload.inc.php';
+        //initialize dompdf class
+        $document = new Dompdf();
+        $html = 
             '
             <style>
             #element1 {float:left;margin-right:10px;} #element2 {float:right;} 
@@ -873,7 +843,7 @@ public function download($id = null)
             <h3 align="center">Unidad de Control de Activos Fijos y Seguros</h3>
             <h2 align="center">FORMULARIO PARA TRASLADO DE ACTIVOS FIJOS</h2>
             <h1>&nbsp;</h1>
-            <div id="element1" align="left">  Fecha: '.$transferArray[0].' </div> <div id="element2" align="right"> No.'.$id.' </div> 
+            <div id="element1" align="left">  Fecha: '.$date.' </div> <div id="element2" align="right"> No.'.$id.' </div> 
             <p align="right">(Lo asigna el usuario)</p>
             <p><strong>&nbsp;</strong></p>
 
@@ -908,7 +878,7 @@ public function download($id = null)
             <th align="center">Estado Actual</th>
             </tr>';
 
-            for($a=0;$a < $size; $a++) {
+        for($a=0;$a < $size; $a++) {
             $html .= 
             '<tr>
             <td align="center">' . $results[$a]['description'] . '</td>
@@ -918,10 +888,10 @@ public function download($id = null)
              <td align="center">' . $results[$a]['series'] . '</td>
              <td align="center">' . $results[$a]['state'] . '</td>
              </tr>';
-            }
+        }
 
 
-            $html .=
+        $html .=
 
             '</table>
             <br><br><br>
@@ -934,20 +904,16 @@ public function download($id = null)
             ';
 
 
-            $document->loadHtml($html);
+        $document->loadHtml($html);
 
-            //set page size and orientation
-            $document->setPaper('A3', 'portrait');
-            //Render the HTML as PDF
-            $document->render();
-            //Get output of generated pdf in Browser
-            $document->stream("Formulario de Traslado-".$id, array("Attachment"=>1));
+        //set page size and orientation
+        $document->setPaper('A3', 'portrait');
+        //Render the HTML as PDF
+        $document->render();
+        //Get output of generated pdf in Browser
+        $document->stream("Formulario de Traslado-".$id, array("Attachment"=>1));
             //1  = Download
             //0 = Preview
-        }
-        $this->Flash->error(__('El traslado no se ha generado. Existe un error en los campos editables.'));
-        return $this->redirect(['action' => 'edit',$id]);
-
     }
 
     public function download2($id = null)

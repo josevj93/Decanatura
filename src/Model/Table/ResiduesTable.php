@@ -125,35 +125,4 @@ class ResiduesTable extends Table
         return $validator;
     }
 
-    /* Idea de las sigueintes 2 funciones  obtenida de https://stackoverflow.com/questions/14932739/cakephp-notempty-and-unique-validation-on-field , Zachary Heaton
-    */
-    public function uniqueId($id){
-        $returnId = $this->find('all')
-        ->where([
-            'Residues.residues_id' => $id,
-        ])
-        ->first();
-        if($returnId){
-        return false;
-        }
-        return false;
-    }
-    
-    public function buildRules(RulesChecker $rules)
-    {
-        
-        $rules->add($rules->isUnique(['residues_id','name1']));
-
-
-        $rules->addCreate($this->uniqueId($entity) /*{
-        return $this->uniqueId($entity->residues_id);
-        }*/,
-        'uniqueId',
-        [
-        'errorField' => 'residues_id',
-        'message' => 'El número de acta ya existe.'
-        ]
-        );
-        return $rules;
-    }
 }

@@ -118,7 +118,8 @@
                     'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                     ],
                 'label'=>['text'=>''],
-                'class'=>'form-control col-sm-4 col-md-10 col-lg-10',
+                'class'=>'form-control',
+                'style'=>'width: 100px;',
                 'type'=>'text',
                 "required"=>"required",
                 'id' =>'residues_id'

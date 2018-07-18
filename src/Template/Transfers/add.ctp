@@ -121,7 +121,7 @@
                     'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                     ],
                 'label'=>['text'=>''],
-                'class'=>'form-control col-sm-4 col-lg-10 col-md-10',
+                'class'=>'form-control col-sm-4 col-lg-6 col-md-6',
                 'type'=>'text',
                 'id' =>'transfers_id'
                 ]);

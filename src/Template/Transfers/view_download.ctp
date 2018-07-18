@@ -162,7 +162,7 @@
 
     <div>
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','style'=>'background-color: #0099FF;border-color: #0099FF;text-transform: capitalize;']) ?>
     </div>
     
       <br><br> 
