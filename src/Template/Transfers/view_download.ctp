@@ -152,7 +152,7 @@
 
     </div>
   </fieldset>
-    <b>1- <?= $this->Html->link(__('Generar'), ['controller'=> 'Transfers', 'action' => 'generate',$transfer->transfers_id], [ 'confirm' => __('¿Seguro que desea descargar el archivo?')]) ?> el formulario para llenar y luego subirlo al sitema.</b>
+    <b>1- <?= $this->Html->link(__('Generar'), ['controller'=> 'Transfers', 'action' => 'generate',$transfer->transfers_id], [ 'confirm' => __('¿Seguro que desea descargar el archivo?')]) ?> el formulario para llenar y luego subirlo al sistema.</b>
     <br><br>
     <div >
     <b><?php echo $this->Form->input('file_name',['type' => 'file','label' => '2- Subir Formulario de Préstamo una vez lleno para Finalizar', 'class' => 'form-control-file']); ?></b>

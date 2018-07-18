@@ -135,7 +135,7 @@ class TransfersTable extends Table
     /* Idea de las sigueintes 2 funciones  obtenida de https://stackoverflow.com/questions/14932739/cakephp-notempty-and-unique-validation-on-field , Zachary Heaton
     */
     public function unique_Id($id){
-        /*$returnId = $this->find('all')
+        $returnId = $this->find('all')
         ->where([
             'Transfers.transfers_id' => $id,
         ])
@@ -143,8 +143,8 @@ class TransfersTable extends Table
         if($returnId){
         return false;
         }
-        return true;*/
-        return false;
+        return true;
+        //return false;
     }
     
     public function buildRules(RulesChecker $rules)

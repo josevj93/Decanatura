@@ -527,7 +527,7 @@ class TransfersController extends AppController
 
         if ($this->Transfers->delete($transfer)) {
             AppController::insertLog($transfer['transfers_id'], TRUE);
-            $this->Flash->success(__('El traslado a sido eliminado.'));
+            $this->Flash->success(__('El traslado ha sido eliminado.'));
         } else {
             AppController::insertLog($transfer['transfers_id'], FALSE);
             $this->Flash->error(__('El traslado no pudo ser eliminado. Por favor, intente de nuevo.'));
