@@ -142,7 +142,7 @@
 
 
     <div>
-      <label>nota * : El número de reporte es autogenerado.</label>
+      <label>Nota * : El número de reporte es autogenerado.</label>
 
     </div>
     <br>
@@ -152,7 +152,7 @@
 
 </div>
   <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-  <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'Aceptar']) ?>
+  <?= $this->Form->button(__('Siguiente'), ['class' => 'btn btn-primary','id'=>'Aceptar']) ?>
   </form>
 </body>
 

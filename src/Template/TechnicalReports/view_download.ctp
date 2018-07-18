@@ -1,14 +1,11 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\TechnicalReport $technicalReport
+ * @var \App\Model\Entity\Transfer $transfer
  */
-
-
-
 ?>
 <style>
-.modal-header-primary {
+    .modal-header-primary {
     color:#fff;
     padding:9px 15px;
     border-bottom:1px solid #eee;
@@ -42,12 +39,12 @@ label{
     border-color: transparent;
 
 }
+
 </style>
 
-
-
-<div class="technicalReports view large-9 medium-8 columns content">
-    <legend>Informe técnico</legend>
+<div class="transfers form large-9 medium-8 columns content">
+    <?= $this->Form->create($technicalReport,['type' => 'file']) ?>
+  <legend>Informe técnico</legend>
             <br>
             <div class="form-control sameLine" >
                 <div class="row">
@@ -118,8 +115,8 @@ label{
                             <label>Evaluación:</label><br>
                                 <textarea class="form-control" readonly="readonly" rows="3" cols="20"><?= h($technicalReport->asset->description);?></textarea>     
                             </div><br>
-            
-                         </div>
+                        </div>
+                    
                     </div>
                 </div>
             </div>
@@ -165,26 +162,21 @@ label{
             </div>
             <br><br>
 
-</div>
 
-<?= $this->Html->link(__('Cancelar'), ['controller'=> 'TechnicalReports', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
+    <b>1- <?= $this->Html->link(__('Generar'), ['controller'=> 'TechnicalReports', 'action' => 'generate',$technicalReport->technical_report_id], [ 'confirm' => __('¿Seguro que desea descargar el archivo?')]) ?> el formulario para llenar y luego subirlo al sistema.</b>
+    <br><br>
+    <div >
+    <b><?php echo $this->Form->input('file_name',['type' => 'file','label' => '2- Subir Formulario de Informe Técnico una vez lleno para Finalizar', 'class' => 'form-control-file']); ?></b>
+     </div>
+     <div class=\"col-12 text-right\">
 
-<?php if($technicalReport->file_name == null) : ?> 
 
-    <?= $this->Html->link(__('Modificar'), ['controller'=> 'TechnicalReports', 'action' => 'edit', $technicalReport->technical_report_id], ['class' => 'btn btn-primary']) ?>
+    <div>
+    <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
+    <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary']) ?>
+    </div>
+    
+      <br><br> 
+</div>   
 
-<?php endif; ?> 
 
-<?php if(($technicalReport->descargado == null) && ($technicalReport->file_name == null )) : ?> 
-
-    <?= $this->Form->postLink(__('Eliminar'), ['controller'=> 'TechnicalReports', 'action' => 'delete', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Seguro que desea eliminar la Ubicación #'.$technicalReport->technical_report_id.' ?', $technicalReport->technical_report_id)]) ?>
-
-<?php endif; ?>
-</form>
-
-<?php 
-    if($technicalReport->file_name != null)
-    {
-         echo $this->Form->postLink(__('Descargar Informe técnico'), ['action' => 'download2', $technicalReport->technical_report_id], ['class' => 'btn btn-primary','style'=>'float:left;', 'confirm' => __('¿Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]);
-    }
-?>
