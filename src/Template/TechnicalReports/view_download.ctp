@@ -43,6 +43,7 @@ label{
 </style>
 
 <div class="transfers form large-9 medium-8 columns content">
+    <?= $this->Form->create($technicalReport,['type' => 'file']) ?>
   <legend>Informe técnico</legend>
             <br>
             <div class="form-control sameLine" >
@@ -162,7 +163,7 @@ label{
             <br><br>
 
 
-    <b>1- <?= $this->Html->link(__('Generar'), ['controller'=> 'TechnicalReports', 'action' => 'generate',$TechnicalReport->technical_report_id?], [ 'confirm' => __('¿Seguro que desea descargar el archivo?')]) ?> el formulario para llenar y luego subirlo al sistema.</b>
+    <b>1- <?= $this->Html->link(__('Generar'), ['controller'=> 'TechnicalReports', 'action' => 'generate',$technicalReport->technical_report_id], [ 'confirm' => __('¿Seguro que desea descargar el archivo?')]) ?> el formulario para llenar y luego subirlo al sistema.</b>
     <br><br>
     <div >
     <b><?php echo $this->Form->input('file_name',['type' => 'file','label' => '2- Subir Formulario de Informe Técnico una vez lleno para Finalizar', 'class' => 'form-control-file']); ?></b>
