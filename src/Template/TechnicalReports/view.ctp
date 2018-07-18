@@ -52,7 +52,7 @@ label{
             <div class="form-control sameLine" >
                 <div class="row">
                 <label>Reporte Nº:</label>
-                <?php echo '<input type="text" class="form-control" readonly="readonly" name="id" value="' . htmlspecialchars($technicalReport->internal_id) . '" style="width: 120px;" >'; ?>     
+                <?php echo '<input type="text" class="form-control" readonly="readonly" name="id" value="' . htmlspecialchars($internalID) . '" style="width: 160px;" >'; ?>     
                 </div>
 
                 <div class="row">
@@ -81,7 +81,7 @@ label{
              <div class="modal-dialog" style="width: 100%">
                   <div class="modal-content">
                          <div class="modal-header modal-header-primary">
-                            <h1>Datos del activo</h4>
+                            <h1>Datos del activo</h1>
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         </div>
                         <div class="modal-body">
@@ -91,12 +91,12 @@ label{
                                 <div class="row">
                                     <label>Nº de placa:</label>
                                 
-                                    <?php echo '<input type="text" class="form-control" readonly="readonly" name="plaque" value="' . htmlspecialchars($technicalReport->asset->plaque) . '" style="width: 100px;">'; ?>
+                                    <?php echo '<input type="text" class="form-control" readonly="readonly" name="plaque" value="' . htmlspecialchars($assets->plaque) . '" style="width: 100px;">'; ?>
                                 </div>     
 
                                 <div class="row">
                                     <label>Nº de serie:</label>
-                                    <?php echo '<input type="text" class="form-control " readonly="readonly" name="series" value="' . htmlspecialchars($technicalReport->asset->series) . '" style="width: 100px;">'; ?> 
+                                    <?php echo '<input type="text" class="form-control " readonly="readonly" name="series" value="' . htmlspecialchars($assets->series) . '" style="width: 100px;">'; ?> 
                                 </div>    
                             </div>
                      
@@ -104,13 +104,13 @@ label{
                             <div class="form-control sameLine">
 
                                 <div class="row">
-                                    <label>Marca:</label>
-                                    <?php echo '<input type="text" class="form-control" readonly="readonly" name="brand" value="' . htmlspecialchars($technicalReport->asset->brand) . '" style="width: 139px;" >'; ?>     
+                                    <label style="width: 91px;" >Marca:</label>
+                                    <?php echo '<input type="text" class="form-control" readonly="readonly" name="brand" value="' . htmlspecialchars($assets->brand) . '" style="width: 100px;" >'; ?>     
                                 </div>
 
                                 <div class="row">
                                     <label>Modelo:</label>
-                                    <?php echo '<input type="text" class="form-control" readonly="readonly" name="model" value="' . htmlspecialchars($technicalReport->asset->model) . '" style="width: 100px;" >'; ?> 
+                                    <?php echo '<input type="text" class="form-control" readonly="readonly" name="model" value="' . htmlspecialchars($assets->model) . '" style="width: 100px;" >'; ?> 
                                 </div>          
                             </div><br>
 
@@ -179,6 +179,12 @@ label{
 
     <?= $this->Form->postLink(__('Eliminar'), ['controller'=> 'TechnicalReports', 'action' => 'delete', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('¿Seguro que desea eliminar la Ubicación #'.$technicalReport->technical_report_id.' ?', $technicalReport->technical_report_id)]) ?>
 
-<?php endif; ?> 
+<?php endif; ?>
+</form>
 
-<?= $this->Form->postLink(__('Generar Pdf'), ['controller'=> 'TechnicalReports', 'action' => 'download', $technicalReport->technical_report_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]) ?>
+<?php 
+    if($technicalReport->file_name != null)
+    {
+         echo $this->Form->postLink(__('Descargar Informe técnico'), ['action' => 'download2', $technicalReport->technical_report_id], ['class' => 'btn btn-primary','style'=>'float:left;', 'confirm' => __('¿Seguro que desea descargar el archivo?', $technicalReport->technical_report_id)]);
+    }
+?>

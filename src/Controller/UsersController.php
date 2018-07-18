@@ -82,6 +82,8 @@ class UsersController extends AppController
             return $allowE;
         }else if($this->request->getParam('action') == 'view'){
             return $allowC;
+        }else if ($this->request->getParam('action') == 'profile') {
+            return true;
         }else{
             return $allowC;
         }
@@ -144,7 +146,7 @@ class UsersController extends AppController
      */
     public function add()
     {
-        $user = $this->Users->newEntity();
+        $success = TRUE;
         $query = $this->Roles->find('all');
         $roles = array();
         foreach ($query as $items) {
@@ -152,44 +154,28 @@ class UsersController extends AppController
         }
         $this->set('roles', $roles);
         if ($this->request->is('post')) {
+            $user = $this->Users->newEntity();
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            
+            /** varifica que el id no sea repetido y se setea el error manualmente */
+            $returnId = $this->Users->find('all')
+            ->where([
+            'Users.id' => $user->id
+            ])
+            ->first();
+            if($returnId){
+                $user->setError('id', ['El número de cedula ya existe.']);
+            }
+
+
             if ($this->Users->save($user)) {
-
-                //print_r( $this->name );
-                AppController::insertLog($user);
-
-
-
-
-
-                //die();
-
-                /*$user_action = '';
-                if ($this->request->getParam('action') == 'add'){
-                    $user_action = 'Agregar';
-                }else if($this->request->getParam('action') == 'edit'){
-                    $user_action = 'Modificar';
-                }else if($this->request->getParam('action') == 'delete'){
-                    $user_action = 'Eliminar';
-                }
-                $session = $this->request->getSession();
-                $current_user = $session->read('Auth.User');
-                $dateAndTime = date("Y-m-d H:i:s");
-                $conn = ConnectionManager::get('default');
-                $stmt = $conn->execute('INSERT INTO activity_logs (DateAndTime,idUser,userAction,message) values(\'' . $dateAndTime . '\', \'' . $current_user['id'] . '\', \'' . $user_action . '\', \'se ha insertado el usuario ' . $user['nombre'] . '\');');
-*/
-
-                /* $myData = $this->ActivityLogs;
-                 $myData['DateAndTime'] = $dateAndTime;
-                 $myData['idUser'] = $user['id'];
-                 $myData['userAction'] = 'insertar';
-                 $myData['message'] = 'se ha insertado el usuario' .$current_user['nombre'];
-                 $this->al->save($myData);*/
-
+                AppController::insertLog($user['nombre'], $success);
                 $this->Flash->success(__('El usuario ha sido agregado.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('El usuario no pudo ser agregado, intente nuevamente'));
+            $success = FALSE;
+            AppController::insertLog($user['nombre'], $success);
+            $this->Flash->error(__('El usuario no pudo ser agregado, intente nuevamente. Cédula Existente'));
         }
         $this->set(compact('user'));
     }
@@ -203,6 +189,7 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+        $success = TRUE;
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
@@ -228,14 +215,79 @@ class UsersController extends AppController
 
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('Cambios guardados.'));
+            if($this->request->getData()['password'] == $this->request->getData()['password2']){
+                    
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+                
+                if ($this->Users->save($user)) {
+                    AppController::insertLog($user['nombre'], $success);
+                    $this->Flash->success(__('Cambios guardados.'));
 
-                return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'index']);
+                }
+                $success = FALSE;
+                AppController::insertLog($user['nombre'], $success);
+                $this->Flash->error(__('Los cambios no pudieron ser guardados. Por favor vuelva a intentarlo.'));
+            }else{
+                $success = FALSE;
+                AppController::insertLog($user['nombre'], $success);
+                $this->Flash->error(__('Las contraseñas no coinciden. Por favor vuelva a intentarlo.'));
             }
-            $this->Flash->error(__('Los cambios no pudieron ser guardados. Por favor vuelva a intentarlo.'));
+        }
+        $this->set(compact('user'));
+    }
+
+ 
+
+    public function profile($id = null)
+    {
+        $success = TRUE;
+        $user = $this->Users->get($id, [
+            'contain' => []
+        ]);
+
+        //seleccina todos los roles para desplegar
+        $query = $this->Roles->find('all');
+
+        //contiene todos los roles
+        $roles = array();
+
+        //id del rol actual del usuario
+        $rol = '';
+
+        foreach ($query as $items) {
+            $roles[$items['id']] = $items['nombre'];
+            if($items['id'] == $user['id_rol']){
+                $rol = $items['id'];
+            }
+        }
+
+        $this->set('roles', $roles);
+        $this->set('rol', $rol);
+
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            //$user = $this->Users->patchEntity($user, $this->request->getData());
+            if($this->request->getData()['password'] == $this->request->getData()['password2']){
+                $user->password = $this->request->getData()['password'];
+                //print_r($user);
+                //die();
+                if ($this->Users->save($user)) {
+                    AppController::insertLog($user['nombre'], $success);
+                    $this->Flash->success(__('Cambios guardados.'));
+                }else{
+                    //debug($this->Users->validationErrors);
+                    //debug($this->Users->getDataSource()->getLog(false, false));
+                    //die();
+                    $success = FALSE;
+                    AppController::insertLog($user['nombre'], $success);
+                    $this->Flash->error(__('Los cambios no pudieron ser guardados. Por favor vuelva a intentarlo.')); 
+                }
+            }else{
+                $success = FALSE;
+                AppController::insertLog($user['nombre'], $success);
+                $this->Flash->error(__('Las contraseñas no coinciden. Por favor vuelva a intentarlo.'));
+            } 
         }
         $this->set(compact('user'));
     }
@@ -249,11 +301,15 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+        $success = TRUE;
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
+            AppController::insertLog($user['nombre'], $success);
             $this->Flash->success(__('El usuario ha sido borrado.'));
         } else {
+            $success = FALSE;
+            AppController::insertLog($user['nombre'], $success);
             $this->Flash->error(__('El usuario no pudo ser borrado, intente nuevamente'));
         }
         return $this->redirect(['action' => 'index']);
@@ -267,6 +323,7 @@ class UsersController extends AppController
         $user = $this->Auth->identify();
         if($user){
             $this->Auth->setUser($user);
+            AppController::$this->insertLogin($user['nombre'], TRUE);
             return $this->redirect('/');
         }
         $this->Flash->error(__('Usuario o contaseña inválidos, intente otra vez'));
@@ -274,6 +331,7 @@ class UsersController extends AppController
     }
 
     public function logout(){
+
         return $this->redirect($this->Auth->logout());
     }
 }

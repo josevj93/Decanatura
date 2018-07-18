@@ -35,6 +35,21 @@ class TransfersTable extends Table
         $this->setTable('transfers');
         $this->setDisplayField('transfers_id');
         $this->setPrimaryKey('transfers_id');
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'file_name' => [
+                'fields' => [
+                    'dir' => 'path',
+                    'size' => 'file_size',
+                    'type' => 'file_type',
+                ],
+                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:transfers_id}{DS}',
+                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
+                    return strtolower($data['name']);
+                },
+
+                'keepFilesOnDelete' => false
+            ]
+        ]);
 
         $this->belongsToMany('Assets', [
             'foreignKey' => 'transfer_id',
@@ -54,12 +69,13 @@ class TransfersTable extends Table
         $validator
             ->scalar('transfers_id')
             ->maxLength('transfers_id', 100)
-            ->notEmpty('transfers_id', 'create');
+            ->alphaNumeric('transfers_id', 'El número de autorización debe contener solo caracteres alfanuméricos.')
+            ->notEmpty('transfers_id', 'El número de autorización es requerido.');
+
 
         $validator
-            ->date('date')
-            ->requirePresence('date', 'create')
-            ->notEmpty('date');
+            ->date('date','ymd', 'Formato de fecha no válido.')
+            ->notEmpty('date','Este campo es requerido');
 
         $validator
             ->scalar('functionary')
@@ -69,24 +85,36 @@ class TransfersTable extends Table
 
         $validator
             ->scalar('identification')
-            ->maxLength('identification', 10)
+            ->maxLength('identification', 9,'La cédula debe contener 9 dígitos' )
+            ->minLength('identification', 9,'La cédula debe contener 9 dígitos' )
+            ->numeric('identification','La cédula debe contener sólo digitos')
             ->requirePresence('identification', 'create')
-            ->notEmpty('identification');
+            ->notEmpty('identification','Este campo es requerido');
 
         $validator
             ->scalar('functionary_recib')
             ->maxLength('functionary_recib', 100)
-            ->allowEmpty('functionary_recib');
+            ->requirePresence('functionary_recib', 'create')
+            ->add('functionary_recib',[ 
+                [
+                'rule'=>['custom', ' /^[a-zA-ZÀ-ÖØ-öø-ÿ ]+$/ '],
+                'message'=>'Debe contener sólo caracteres del alfabeto.'
+                ]
+            ])
+            ->notEmpty('functionary_recib','Este campo es requerido');
 
-        $validator
+            $validator
             ->scalar('identification_recib')
-            ->maxLength('identification_recib', 10)
-            ->allowEmpty('identification_recib');
+            ->maxLength('identification_recib', 9,'La cédula debe contener 9 dígitos' )
+            ->minLength('identification_recib', 9,'La cédula debe contener 9 dígitos' )
+            ->numeric('identification_recib','La cédula debe contener sólo digitos')
+            ->notEmpty('identification_recib','Este campo es requerido');
+            
 
         $validator
             ->scalar('Acade_Unit_recib')
             ->maxLength('Acade_Unit_recib', 30)
-            ->allowEmpty('Acade_Unit_recib');
+            ->notEmpty('Acade_Unit_recib','Este campo es requerido');
 
         $validator
             ->scalar('path')
@@ -94,7 +122,6 @@ class TransfersTable extends Table
             ->allowEmpty('path');
 
         $validator
-            ->scalar('file_name')
             ->maxLength('file_name', 100)
             ->allowEmpty('file_name');
 

@@ -227,6 +227,9 @@ class RulesChecker
      */
     public function check(EntityInterface $entity, $mode, array $options = [])
     {
+
+        //debug($entity);
+        //die();
         if ($mode === self::CREATE) {
             return $this->checkCreate($entity, $options);
         }

@@ -3,7 +3,6 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Transfer $transfer
  */
-
 use Cake\Routing\Router;
 ?>
 
@@ -13,8 +12,7 @@ use Cake\Routing\Router;
 
 <style>
     
-
-    .btn-primary{
+   .btn-primary{
       color: #FFF;
       background-color: #0099FF;
       border-color: #0099FF;
@@ -25,7 +23,6 @@ use Cake\Routing\Router;
     .btn-primary:hover{
         color: #fff;
         background-color: #0099FF;
-
     }
     .btn[type="submit"]:not{
         text-transform: capitalize;
@@ -35,7 +32,6 @@ use Cake\Routing\Router;
         color: #fff;
         background-color: #0099FF;
     }
-
     table {
     border-collapse: collapse;
     width: 100%;
@@ -53,38 +49,53 @@ use Cake\Routing\Router;
     }
     label[class=label-t]{
         margin-left: 20px;
-        width: 150px;
+        width: 160px;
     }
     label[class=label-h]{
         margin-right: 10px;
+    }
+    label[class = funcionario]
+    {
+      margin-left: 20px;
+      margin-right: 41px;
+    }
+    label[class = id]
+    {
+      margin-left: 20px;
+      margin-right: 45px;
+      width: 100px;
+    }
+    label {
+        text-align:left;
+        margin-right: 10px;
+          
     }
     .sameLine{
     display: flex; 
     justify-content: space-between; 
     border-color: transparent;
-    }
-       
+    }       
 </style>
 
 
 <div class="transfers form large-9 medium-8 columns content">
   <fieldset>
-    <?= $this->Form->create($transfer) ?>
-    <legend><?= __('Modificar traslado') ?></legend>
+    <?= $this->Form->create($transfer,['type' => 'file']) ?>
+    <legend>Editar traslado</legend>
     <br>
         <div class= 'form-control sameLine' style="border-color: transparent;">
             <div class ="row">                
                 <label class="label-h">Nº traslado:</label>
-                <?php echo '<input type="text" class="form-control col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?> 
+                <?php echo '<input type="text" class="form-control col-sm-2 col-xs-2 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($transfer->transfers_id). '">'; ?> 
             </div>
 
-            <div  class="row" >
+            <div  class="row">
                 <label class="label-h">Fecha:</label>
                 <?php
                 // para dar formato a la fecha
                 $tmpDate= $transfer->date->format('d-m-Y');
                 ?>  
-                <?php echo '<input type="text" class="form-control col-xs-2 col-sm-2 col-md-6 col-lg-9" readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?>
+                <?php echo '<input type="text" style="width: 120px;" id ="date" class="form-control " readonly="readonly" value="' . htmlspecialchars($tmpDate) . '">'; ?>
             </div>
  
         </div>
@@ -98,45 +109,84 @@ use Cake\Routing\Router;
         <tr>
             <!-- Fila para la Unidad que entrega -->
             <td>
+
                 <div class="row" >
-                    <label class="label-t">Unidad académica: </label>
+                    <label class="label-t" ><b>Unidad académica:</b><font color="red"> * </font></label>
                    
-                    <?php echo '<input type="text" class="form-control col-sm-6"  value="' . htmlspecialchars($Unidad) . '">'; ?>
+                    <label><?php echo h($Unidad); ?></label>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Funcionario1: </label>
-                    <?php echo '<input type="text" name="functionary" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->functionary) . '">'; ?>
+                    <label class = "label-t" ><b>Funcionario:</b><font color="red"> * </font></label>
+                    <?php 
+                    echo $this->Form->select('functionary',
+                      $users,
+                      ['empty' => '(Escoja un usuario)','class'=>'form-control', 'style'=>'width:220px;','id'=>'functionary']
+                    );
+                    ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Cédula:</label>
-                    <?php echo '<input type="text" name="identification" class="form-control col-sm-4"  value="' . htmlspecialchars($transfer->identification) . '">'; ?>
+                    <label class="id" style ="margin-right: 67px;"><b>Cédula:</b><font color="red"> * </font></label>
+
+                    <?php 
+                        echo $this->Form->control('identification', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+                                "required"=>"required",
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            'id' =>'identification',
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?>
                 </div>
             </td>
-
-
             <!-- Fila para la Unidad que recibe -->
             <td>
                 <div class="row">
-                    
-                        <label class="label-t">Unidad académica: </label>
-                    
-                        <?php echo '<input type="text" name="Acade_Unit_recib" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->Acade_Unit_recib). '">'; ?>
-                    
+                        <label class="label-t"><b>Unidad académica:</b><font color="red"> * </font></label>
+                        <?php 
+                        echo $this->Form->input('Acade_Unit_recib', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '{{content}}',
+                                'inputContainerError' => '<div {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+                                "required"=>"required",
+                            'label'=>['text' => ''],
+                            'id' =>'Acade_Unit_recib',
+                            'class'=>'form-control col-sm-6 col-md-4 col-lg-4'
+                            ]);
+                    ?>      
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Funcionario: </label>
-                    <?php echo '<input type="text" name="functionary_recib" class="form-control col-sm-6"  value="' . htmlspecialchars($transfer->functionary_recib). '">'; ?>
+                    <label class = "label-t" style ="margin-right: 20px;"><b>Funcionario:</b><font color="red"> * </font></label>
+                    <?php 
+                        echo $this->Form->imput('functionary_recib', [ 'id'=>'functionary_recib','class'=>'form-control','style'=>'width: 130px;']);
+                    ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="label-t">Cédula:</label>
-                    <?php echo '<input type="text" name="identification_recib" class="form-control col-sm-4"  value="' . htmlspecialchars($transfer->identification_recib) . '">'; ?>
+                    <label class="id" style ="margin-right: 77px;"><b>Cédula:</b><font color="red"> *</label>
+                    <?php 
+                        echo $this->Form->control('identification_recib', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+                                "required"=>"required",
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            'id' =>'identification_recib',
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?>
                 </div>               
             </td>
-            
         </tr>
     </table>
     <br>
@@ -145,7 +195,7 @@ use Cake\Routing\Router;
     <!-- AQUI ESTA LO IMPORTANTE. RECUERDEN COPIAR LOS SCRIPTS -->
     <div class="related">
         <legend><?= __('Activos a trasladar') ?></legend>
-
+          </fieldset>
 
         <!-- tabla que contiene  datos básicos de activos-->
         <table id='assets-transfers-grid' cellpadding="0" cellspacing="0">
@@ -167,48 +217,71 @@ use Cake\Routing\Router;
                     <td><?= h($a->model) ?></td>
                     <td><?= h($a->series) ?></td>
                     <td><?= h($a->state) ?></td>
-                    <td>
-                        <?php
+                     <?php
                         // If que verifica si el checkbox debe ir activado o no
                         
                         if(in_array($a->plaque, array_column($result, 'plaque'),true) )
                             {
+                                echo '<td data-order="1">';
                                 echo $this->Form->checkbox('assets_id',
                                 ['value'=>htmlspecialchars($a->plaque),'checked', "class"=>"chk" ]
                                 );
+                                echo '</td>';
                             }
                         else
                             {
+                                echo '<td data-order="0">';
                                 echo $this->Form->checkbox('assets_id',
                                 ['value'=>htmlspecialchars($a->plaque),"class"=>"chk"]
                                 );
+                                echo '</td >';
                             }
-                        ?>
-                        
-                    </td>
+                    ?>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
 
-    </div><br>
+    </div>
+    <br>
+    <div class='form-control' style="border-color: transparent;">
+        <?php 
+            if($transfer->file_name == null)
+            {
+                echo '<label> Subir acta de desechos: </label>';
+                echo $this->Form->imput('file_name',['type' => 'file', 'class' => 'form-control-file']); 
+            }
+         ?>
+    </div>
+    <br>
 
     <!-- input donde coloco la lista de placas checkeadas -->
     <input type="hidden" name="checkList" id="checkList">
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'aceptar','style'=>'text-transform: capitalize;']) ?>
-      <?= $this->Form->postLink(__('Generar Pdf'), ['action' => 'download', $transfer->transfers_id], ['class' => 'btn btn-primary', 'confirm' => __('Seguro que desea descargar el archivo?', $transfer->transfers_id)]) ?>
-    <?= $this->Form->end() ?>
+    </form>
 
-  </fieldset>
-</div><br>
+    <?= $this->Form->create(null,['type'=>'post',
+                                        'url'=>'/transfers/download/'.$transfer->transfers_id
+                                    ]) ?>
+        <!-- input donde coloco todo los datos de los demás imput exepto el input checkList -->
+        <input type="hidden" name="pdf" id="pdf">
+        <!-- input donde coloco todo los datos de los demás imput exepto el input checkList -->
+        <input type="hidden" name="plaques" id="plaques">
+
+
+        <?= $this->Form->button(__('Generar PDF'), ['class' => 'btn btn-primary', 'id'=>'generate','style'=>'float:left;text-transform: capitalize;']) ?>
+    
+    </form>
+
+</div>
 
 
 
 <script type="text/javascript">
-    $(document).ready(function() 
+      $(document).ready(function() 
     {
-        $('#assets-transfers-grid').DataTable( {
+        var equipmentTable = $('#assets-transfers-grid').DataTable( {
               dom: 'Bfrtip',
                     buttons: [],
                    "iDisplayLength": 10,
@@ -247,10 +320,62 @@ use Cake\Routing\Router;
                         "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
                         "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                     }
-                }
+                },
+                "order": [[ 5, "desc" ]]
         } );
-    } );
+        // Listen to change event from checkbox to trigger re-sorting
+        $('#assets-transfers-grid input[type="checkbox"]').on('change', function() {
+        // Update data-sort on closest <td>
+        $(this).closest('td').attr('data-order', this.checked ? 1 : 0);
+    
+        // Store row reference so we can reset its data
+        var $tr = $(this).closest('tr');
+    
+        // Force resorting
+        equipmentTable
+        .row($tr)
+        .invalidate()
+        .order([ 5, 'desc' ])
+        .draw();
+        } );
+} );
 
+// funcion para colocar los valores de las placas de los activos seleccionados
+//dentor de un input
+    $("document").ready(
+    function() {
+      $('#aceptar').click( function()
+      {
+        var check = getValueUsingClass();
+        $('#checkList').val(check);
+
+        });
+        }
+    );
+
+    //  Funcion para meter todos los datos en el input pdf para posteriormente 
+    //usar los datos en el método download del controlador
+    $("document").ready(
+    function() {
+      $('#generate').click( function()
+      {
+        var check = getValueUsingClass();
+        //concateno todos los valores
+        var res = document.getElementById('date').value;
+        res=res+","+document.getElementById('Acade_Unit_recib').value;
+
+        var pos= document.getElementById('functionary');
+        res=res+","+pos.options[pos.selectedIndex].text;
+        res=res+","+document.getElementById('identification').value;
+        res=res+","+document.getElementById('functionary_recib').value;
+        res=res+","+document.getElementById('identification_recib').value;
+        $('#pdf').val(res);
+        $('#plaques').val(check);
+        } );
+    }
+    );
+// funcion para colocar los valores de las placas de los activos seleccionados
+//dentor de un input
     $("document").ready(
     function() {
       $('#aceptar').click( function()
@@ -263,7 +388,6 @@ use Cake\Routing\Router;
     );
 
 /** función optenida de http://bytutorial.com/blogs/jquery/jquery-get-selected-checkboxes */
-
     function getValueUsingClass(){
     /* declare an checkbox array */
     var chkArray = [];
@@ -279,4 +403,3 @@ use Cake\Routing\Router;
     return selected;
 }
 </script>
-

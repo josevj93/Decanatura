@@ -38,12 +38,15 @@
           margin-left: 10px;
         }
 </style> 
+  
 
 <div class="residues form large-9 medium-8 columns content">
-	<?= $this->Form->create($loan) ?>
+  <?= $this->Form->create($loan, ['type' => 'file']) ?>
+
+
 	<fieldset>
         <legend><?= __('Consultar préstamo') ?></legend>
-    
+
 		<br>
 
 		<div class="form-control sameLine">
@@ -66,49 +69,57 @@
 	
 	</fieldset>
     <br> <br>
-</div>
 
-<div class="related">
-    <legend><?= __('Activos prestados') ?></legend>
+    <div class="related">
+        <legend><?= __('Activos prestados') ?></legend>
 
-    <!-- tabla que contiene  datos básicos de activos-->
-    <table id='assets-borrowed-grid' cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th class="transfer-h"><?= __('Placa') ?></th>
-                <th class="transfer-h"><?= __('Modelo') ?></th>
-                <th class="transfer-h"><?= __('Serie') ?></th>
-            </tr>
-        <thead>
-        <tbody>
-            <?php 
-                foreach ($result as $a): ?>
+        <!-- tabla que contiene  datos básicos de activos-->
+        <table id='assets-borrowed-grid' cellpadding="0" cellspacing="0">
+            <thead>
                 <tr>
-                    <td><?= h($a->plaque) ?></td>
-                    <td><?= h($a->models_id) ?></td>  
-                    <td><?= h($a->series) ?></td>
+                    <th class="transfer-h"><?= __('Placa') ?></th>
+                    <th class="transfer-h"><?= __('Modelo') ?></th>
+                    <th class="transfer-h"><?= __('Serie') ?></th>
                 </tr>
-            <?php endforeach; ?>
-            
-        </tbody>
-    </table>
+            <thead>
+            <tbody>
+                <?php 
+                    foreach ($result as $a): ?>
+                    <tr>
+                        <td><?= h($a->plaque) ?></td>
+                        <td><?= h($a->models_id) ?></td>  
+                        <td><?= h($a->series) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                
+            </tbody>
+        </table>
 
-</div>
 
 <div>
       <label> Observaciones: </label>
       <?php echo '<input type="text" id="observaciones" class="form-control col-sm-4 col-md-4 col-lg-4" readonly="readonly" value="' . htmlspecialchars($loan->observaciones). '">'; ?>
     </div> <br>
 
+<?php
+  if($loan->estado != 'En proceso'){
+    echo $this->Html->link(__('Ver Formulario'),'/' . $loan->file_solicitud_dir . '/' . $loan->file_solicitud);
+    echo "<div class=\"col-12 text-right\">";
+
+  }
+?>
+
 <div class="col-12 text-right">
+    <?= $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
- <?= $this->Html->link(__('Cancelar'), ['controller' => 'Loans', 'action' => 'index'], ['class' => 'btn btn-primary']) ?>
-
- <?php 
-        if($loan->estado != 'Terminado'){
+    <?php
+        if($loan->estado == 'En proceso'){
+            echo $this->Html->link(__('Seguir con proceso de insertar'), ['controller' => 'Loans', 'action' => 'finalizar', $loan->id], ['class' => 'btn btn-primary']);
+        }
+        else if($loan->estado == 'Activo'){
 			echo $this->Html->link(__('Finalizar Préstamo'), ['action' => 'terminar',$loan->id], ['class' => 'btn btn-primary']);
         }
     ?>
-  
-
 </div>
+
+

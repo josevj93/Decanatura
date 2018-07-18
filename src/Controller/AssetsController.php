@@ -8,9 +8,9 @@ use Imagine;
 */
 class AssetsController extends AppController
 {
-
     public function isAuthorized($user)
     {
+
 
         $this->Roles = $this->loadModel('Roles');
         $this->Permissions = $this->loadModel('Permissions');
@@ -81,7 +81,7 @@ class AssetsController extends AppController
     public function view($id = null)
     {
         $asset = $this->Assets->get($id, [
-            'contain' => ['Users', 'Locations', 'Models']
+            'contain' => ['Users', 'Locations', 'Models', 'Types']
         ]);
         $this->set('asset', $asset);
     }
@@ -92,6 +92,9 @@ class AssetsController extends AppController
     {
         $asset = $this->Assets->newEntity();
         if ($this->request->is('post')) {
+            
+
+
             $random = uniqid();
             $fecha = date('Y-m-d H:i:s');
             $asset->created = $fecha;
@@ -100,21 +103,31 @@ class AssetsController extends AppController
             $asset->deletable = true;
             $asset->deleted = false;
             $asset->state = "Disponible";
-            $asset = $this->Assets->patchEntity($asset, $this->request->getData()); 
+            $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+
+            //print_r($asset);
+            //die();
+
+			if ($_POST['models_id'] == '') {
+				$asset->models_id = null;
+			}
             if ($this->Assets->save($asset)) {
+                AppController::insertLog($asset['plaque'], TRUE);
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
+            AppController::insertLog($asset['plaque'], FALSE);
+            $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente. Placa existente'));
         }
         
         $this->loadModel('Brands');
         $brands = $this->Brands->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
+		$types = $this->Assets->Types->find('list', ['limit' => 200]);
         
         
-        $this->set(compact('asset', 'brands', 'users', 'locations','models'));
+        $this->set(compact('asset', 'brands', 'users', 'locations', 'models', 'types'));
     }
     /**
      * Método para editar un activo en el sistema
@@ -129,10 +142,16 @@ class AssetsController extends AppController
             $asset->modified = $fecha;
             
             $asset = $this->Assets->patchEntity($asset, $this->request->getData());
+			/*if ($_POST['models_id'] == '') {
+				$asset->models_id = null;
+			}
             if ($this->Assets->save($asset)) {
+                AppController::insertLog($asset['plaque'], TRUE);
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
-            }
+            }*/
+            debug($asset);
+            AppController::insertLog($asset['plaque'], FALSE);
             $this->Flash->error(__('El activo no se pudo guardar, por favor intente nuevamente.'));
         }
 
@@ -140,7 +159,9 @@ class AssetsController extends AppController
         $brands = $this->Brands->find('list', ['limit' => 200]);
         $users = $this->Assets->Users->find('list', ['limit' => 200]);
         $locations = $this->Assets->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('asset', 'brands', 'users', 'locations','models'));
+		$types = $this->Assets->Types->find('list', ['limit' => 200]);
+		
+        $this->set(compact('asset', 'brands', 'users', 'locations', 'models', 'types'));
     }
 
     /**
@@ -173,9 +194,11 @@ class AssetsController extends AppController
         
         if($asset->deletable){
             if($this->Assets->delete($asset)){
+                AppController::insertLog($asset['plaque'], TRUE);
                 $this->Flash->success(__('El activo fue eliminado exitosamente.'));
                 return $this->redirect(['action' => 'index']);
             }
+            AppController::insertLog($asset['plaque'], FALSE);
             $this->Flash->error(__('El activo no se pudo eliminar correctamente.'));
             return $this->redirect(['action' => 'index']);
         }
@@ -245,58 +268,24 @@ class AssetsController extends AppController
         $asset = $this->Assets->newEntity();
         //$asset = $this->Assets->newEntity();
         if ($this->request->is('post')) {
-    
-                /**$asset = array(
-                    'plaque' => $this->$i,
-                    'type_id' => '5b08417d8e257',
-                    'brand' => 'Silla',
-                    'model' => 'modelo1',
-                    'state' => 'Activo',
-                    'description' => 'silla generica, modelo 1',
-                    'responsable_id' => 1,
-                    'assigned_to' => 1,
-                    'location_id' => 1, 
-                    'year' => '2018',
-                    'lendable' => 0
-                );
-                //$this->Assets->clear();
-                //$this->placa++;
-                
-        $cantidad = $this->request->getData('quantity');
-        $placa = $this->request->getData('plaque');
-        for ($i = 0; $i < $cantidad; $i++){
-            $asset = array();
-            $asset['Assets']['plaque'] = $placa;
-            $asset['Assets']['brand'] = 'Silla';
-            $asset['Assets']['model'] = 'modelo1';
-            $asset['Assets']['state'] = 'Activo';
-            $asset['Assets']['description'] = 'silla generica, modelo 1';
-            $asset['Assets']['responsable_id'] = 1;
-            $asset['Assets']['assigned_to'] = 1;
-            $asset['Assets']['location_id'] = 1;
-            $asset['Assets']['year'] = '2018';
-            $asset['Assets']['lendable'] = 0;
-            //meter una por una a la base
-            $this->Assets->save($asset);
-            //incrementar la placa
-            $this->Assets->clear();
-        }
-        $this->Flash->success(__('Los activos fueron guardados'));
-
-            return $this->redirect(['action' => 'index']);
-        }
-
-        $this->Flash->error(__('El activo no se pudo guardar, porfavor intente nuevamente'));
-        */
-
-
-
 
             //guarda en variables todos los campos reutilizables
             $cantidad = $this->request->getData('quantity');
             $placa = $this->request->getData('plaque');
             $marca = $this->request->getData('brand');
             $modelo = $this->request->getData('models_id');
+			//$type = $this->request->getData('type_id');
+            if ($_POST['brand'] == '') {
+                $marca = null;
+            } else {
+                $marca = $this->request->getData('brand');
+            }
+            
+			if ($_POST['models_id'] == '') {
+				$modelo = null;
+			} else {
+				$modelo = $this->request->getData('models_id');
+			}
             $descripcion = $this->request->getData('description');
             $dueno = $this->request->getData('owner_id');
             $responsable = $this->request->getData('responsable_id');
@@ -383,7 +372,6 @@ class AssetsController extends AppController
             }
             $this->Flash->success(__('Los activos fueron guardados'));
             return $this->redirect(['action' => 'index']);
-
         }
         $this->loadModel('Brands');
         $brands = $this->Brands->find('list', ['limit' => 200]);

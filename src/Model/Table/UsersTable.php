@@ -33,6 +33,10 @@ class UsersTable extends Table
         $this->setTable('users');
         $this->setDisplayField('username');
         $this->setPrimaryKey('id');
+
+        $this->hasMany('ActivityLogs', [
+            'foreignKey' => 'idUser',
+        ]);
     }
 
     /**
@@ -102,10 +106,40 @@ class UsersTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
+    /**public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['username']));
 
+
+        return $rules;
+    }**/
+
+
+
+    public function buildRules(RulesChecker $rules)
+    {
+        
+        $rules->addCreate(function ($entity, $options) {
+
+             $returnId = $this->find('all')
+            ->where([
+                'Users.id' => $id,
+            ])
+            ->first();
+            if($returnId != null){
+                return false;
+            }else{
+                return true;
+            }
+
+        },
+        [
+        'errorField' => 'id',
+        'message' => 'El número de cedula ya existe.'
+        ]
+        );
+
         return $rules;
     }
+    
 }

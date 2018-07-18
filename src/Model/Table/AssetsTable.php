@@ -1,10 +1,10 @@
 <?php
 namespace App\Model\Table;
+
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-
 use Imagine;
 
 /**
@@ -24,6 +24,7 @@ use Imagine;
  */
 class AssetsTable extends Table
 {
+
     /**
      * Initialize method
      *
@@ -33,6 +34,7 @@ class AssetsTable extends Table
     public function initialize(array $config)
     {
         parent::initialize($config);
+
         $this->setTable('assets');
         $this->setDisplayField('plaque');
         $this->setPrimaryKey('plaque');
@@ -115,7 +117,12 @@ class AssetsTable extends Table
             'foreignKey' => 'loan_id',
             'joinType' => 'INNER'
         ]);
+		$this->belongsTo('Types', [
+            'foreignKey' => 'type_id',
+            'joinType' => 'INNER'
+        ]);
     }
+
     /**
      * Default validation rules.
      *
@@ -128,37 +135,45 @@ class AssetsTable extends Table
             ->scalar('plaque')
             ->maxLength('plaque', 255)
             ->notEmpty('plaque', 'Debe ingresar una placa');
+
         $validator
             ->scalar('series')
             ->maxLength('series', 255)
             ->allowEmpty('series');
+
         $validator
             ->scalar('description')
             ->maxLength('description', 255)
             ->notEmpty('description','Debe ingresar una descripción');
+
         $validator
             ->scalar('state')
             ->maxLength('state', 255)
             ->notEmpty('state','Debe ingresar un estado');
+
         $validator
             ->scalar('sub_location')
             ->maxLength('sub_location', 255)
             ->allowEmpty('sub_location');
+
         $validator
             ->scalar('year')
             ->add('year', 'validFormat',[
                 'rule' => array('custom', '/^[0-9]{4}$/'),
                 'message' => 'El año debe de tener el formato yyyy'
-            ])
+                ])
             ->notEmpty('year','Debe ingresar un año');
+
         $validator
             ->boolean('lendable')
             ->requirePresence('lendable', 'create')
             ->notEmpty('lendable');
+
         $validator
             ->scalar('observations')
             ->maxLength('observations', 4294967295)
             ->allowEmpty('observations');
+
         $validator
             ->maxLength('image', 255)
             ->allowEmpty('image');
@@ -167,6 +182,7 @@ class AssetsTable extends Table
             ->scalar('image_dir')
             ->maxLength('image_dir', 255)
             ->allowEmpty('image_dir');
+
         $validator
             ->maxLength('file', 255)
             ->allowEmpty('file');
@@ -180,9 +196,11 @@ class AssetsTable extends Table
             ->scalar('unique_id')
             ->maxLength('unique_id', 255)
             ->allowEmpty('unique_id');
+            
         $validator
             ->scalar('location_id')
             ->notEmpty('location_id');
+
         $validator
             ->scalar('assigned_to')
             ->notEmpty('assigned_to');
@@ -190,8 +208,8 @@ class AssetsTable extends Table
         $validator
             ->scalar('responsable_id')
             ->notEmpty('responsable_id');
-			
-		$validator
+            
+        $validator
             ->scalar('models_id')
             ->maxLength('models_id', 255)
             ->allowEmpty('models_id');
@@ -200,8 +218,25 @@ class AssetsTable extends Table
             ->scalar('brand')
             ->maxLength('brand', 255)
             ->allowEmpty('brand');
+			
+		$validator
+            ->scalar('type_id')
+			->maxLength('type_id', 255)
+            ->allowEmpty('type_id');
             
         return $validator;
+    }
+
+    public function uniqueId($id){
+        $returnId = $this->find('all')
+        ->where([
+            'Assets.plaque' => $id,
+        ])
+        ->first();
+        if($returnId){
+        return false;
+        }
+        return true;
     }
 
     /**
@@ -218,7 +253,10 @@ class AssetsTable extends Table
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['loan_id'], 'Loans'));
         $rules->add($rules->existsIn(['models_id'], 'Models'));
+		$rules->add($rules->existsIn(['type_id'], 'Types'));
+
 
         return $rules;
+
     }
 }

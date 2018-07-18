@@ -32,6 +32,7 @@ class Transfer extends Entity
      * @var array
      */
     protected $_accessible = [
+        'transfers_id'=>true,
         'date' => true,
         'functionary' => true,
         'identification' => true,

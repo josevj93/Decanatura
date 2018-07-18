@@ -55,7 +55,13 @@
 		  <?php echo $this->Form->imput('plaque', ['class'=>'form-control col-md-9', 'disabled']); ?> 
       </div>
 	  
-	  <div class="col-lg-2">   </div>
+	  <div class="row">
+        <label> <b>Tipo:</b><b style="color:red;">*</b> </label>
+        <?php echo $this->Form->select('type_id', $types, array('empty' => '-- Seleccione Tipo --', 'class' => 'form-control col-md-9')); ?>            
+      </div>
+        
+		
+	  <div class="col-lg-3">   </div>
         
     </div> <br>
 	
@@ -102,13 +108,14 @@
 
     </div> <br>
 	
-	<div class="form-control sameLine" >
+	
 
-      <div class="row">
+      <div class>
         <label> Sub-ubicación: </label>
-        <?php echo $this->Form->imput('sub_location', ['class'=>'form-control col-md-7']); ?>       
+        <?php echo $this->Form->textarea('sub_location', ['class'=>'form-control col-md-7']); ?>       
       </div>
-	  
+      
+      <div class="form-control sameLine" >
       
       <div class="row">
         <label class="col-lg-3"> <b>Año:</b><b style="color:red;">*</b> </label>

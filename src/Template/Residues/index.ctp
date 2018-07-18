@@ -15,11 +15,11 @@ $mysqli = new mysqli('decanatura.mysql.database.azure.com','ecci@decanatura','Ga
             <table id="residues-grid"  class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col" class="actions"><?= __('Acciones') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('Unidad Custodio') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('Fecha') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('Recomendación') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('N° Autorización') ?></th>
+                        <th scope="col" class="actions">Acciones</th>
+                        <th scope="col">Unidad Custodio</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Recomendación</th>
+                        <th scope="col">N° Autorización</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,13 +30,13 @@ $mysqli = new mysqli('decanatura.mysql.database.azure.com','ecci@decanatura','Ga
 
                                 <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-eye')), ['action' => 'view', $residuess->residues_id], array('escape' => false)) ?>
 
-                                <?php if($residuess->file_name == null) : ?> 
+                                <?php if($residuess->file == null) : ?> 
 
                                     <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-edit')), ['action' => 'edit', $residuess->residues_id], array('escape' => false)) ?>
 
                                 <?php endif; ?>
 
-                                 <?php if(($residuess->descargado == null) && ($residuess->file_name == null )) : ?>
+                                 <?php if(($residuess->descargado == null) && ($residuess->file == null )) : ?>
 
                                     <?= $this->Form->postlink($this->Html->tag('i', '', array('class' => 'fa fa-trash')), ['action' => 'delete', $residuess->residues_id], ['escape' => false, 'confirm' => __('¿Seguro quiere borrar el reporte # '.$residuess->residues_id.' ?', $residuess->residues_id)]) ?>
                                 <?php endif; ?>

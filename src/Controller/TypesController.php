@@ -110,14 +110,17 @@ class TypesController extends AppController
             $random = uniqid();
             $type->type_id = $random;
             $type = $this->Types->patchEntity($type, $this->request->getData());
-            
-            if ($this->Types->save($type)) {
+            try{
+            $this->Types->save($type);
                 $this->Flash->success(__('El tipo de activo fue guardado exitosamente.'));
 
                 return $this->redirect(['action' => 'index']);
+            }catch(\PDOException $e){
+                 $this->Flash->error(__('El tipo de activo no se pudo guardar, puede deberse a que ya existe.'));
             }
-            $this->Flash->error(__('El tipo de activo no se pudo guardar, por favor intente nuevamente.'));
+           
         }
+
         $this->set(compact('type'));
     }
 
@@ -135,12 +138,14 @@ class TypesController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $type = $this->Types->patchEntity($type, $this->request->getData());
-            if ($this->Types->save($type)) {
-            $this->Flash->success(__('El tipo de activo fue modificado exitosamente.'));
+              try{
+            $this->Types->save($type);
+                $this->Flash->success(__('El tipo de activo fue guardado exitosamente.'));
 
                 return $this->redirect(['action' => 'index']);
+            }catch(\PDOException $e){
+                 $this->Flash->error(__('El tipo de activo no se pudo guardar, puede deberse a que ya existe.'));
             }
-            $this->Flash->error(__('El tipo de activo no se pudo modificar, por favor intente nuevamente.'));
         }
         $this->set(compact('type'));
     }
