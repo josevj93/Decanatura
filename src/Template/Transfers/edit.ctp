@@ -49,6 +49,7 @@ use Cake\Routing\Router;
     }
     label[class=label-t]{
         margin-left: 20px;
+        width: 160px;
     }
     label[class=label-h]{
         margin-right: 10px;
@@ -110,50 +111,80 @@ use Cake\Routing\Router;
             <td>
 
                 <div class="row" >
-                    <label class="label-t" required="required"><b>Unidad académica:</b><font color="red"> * </font></label>
+                    <label class="label-t" ><b>Unidad académica:</b><font color="red"> * </font></label>
                    
                     <label><?php echo h($Unidad); ?></label>
                 </div>
                 <br>
                 <div class="row">
-                    <label class = "funcionario" required="required"><b>Funcionario:</b><font color="red"> * </font></label>
+                    <label class = "label-t" ><b>Funcionario:</b><font color="red"> * </font></label>
                     <?php 
                     echo $this->Form->select('functionary',
                       $users,
-                      ['empty' => '(Escoja un usuario)','class'=>'form-control', 'style'=>'width:220px;']
+                      ['empty' => '(Escoja un usuario)','class'=>'form-control', 'style'=>'width:220px;','id'=>'functionary']
                     );
                     ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="id" required="required"><b>Cédula:</b><font color="red"> * </font></label>
+                    <label class="id" style ="margin-right: 67px;"><b>Cédula:</b><font color="red"> * </font></label>
 
                     <?php 
-            echo $this->Form->imput('identification', ['label' => 'identification:', 'class'=>'form-control col-sm-4']);
-            ?>
+                        echo $this->Form->control('identification', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+                                "required"=>"required",
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            'id' =>'identification',
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?>
                 </div>
             </td>
             <!-- Fila para la Unidad que recibe -->
             <td>
                 <div class="row">
-                        <label class="label-t">Unidad académica:</label>
+                        <label class="label-t"><b>Unidad académica:</b><font color="red"> * </font></label>
                         <?php 
-            echo $this->Form->imput('Acade_Unit_recib', ['label' => 'Acade_Unit_recib:', 'class'=>'form-control col-sm-4']);
-            ?>       
+                        echo $this->Form->input('Acade_Unit_recib', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '{{content}}',
+                                'inputContainerError' => '<div {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+                                "required"=>"required",
+                            'label'=>['text' => ''],
+                            'id' =>'Acade_Unit_recib',
+                            'class'=>'form-control col-sm-6 col-md-4 col-lg-4'
+                            ]);
+                    ?>      
                 </div>
                 <br>
                 <div class="row">
-                    <label class = "funcionario" style ="margin-right: 59px;">Funcionario:</label>
+                    <label class = "label-t" style ="margin-right: 20px;"><b>Funcionario:</b><font color="red"> * </font></label>
                     <?php 
-            echo $this->Form->imput('functionary_recib', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
-            ?>
+                        echo $this->Form->imput('functionary_recib', [ 'id'=>'functionary_recib','class'=>'form-control','style'=>'width: 130px;']);
+                    ?>
                 </div>
                 <br>
                 <div class="row">
-                    <label class="id" style ="margin-right: 45px;">Cédula:</label>
+                    <label class="id" style ="margin-right: 77px;"><b>Cédula:</b><font color="red"> *</label>
                     <?php 
-            echo $this->Form->imput('identification_recib', ['label' => 'identification_recib:', 'class'=>'form-control col-sm-4']);
-            ?>
+                        echo $this->Form->control('identification_recib', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+                                "required"=>"required",
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            'id' =>'identification_recib',
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?>
                 </div>               
             </td>
         </tr>
@@ -340,10 +371,8 @@ use Cake\Routing\Router;
         res=res+","+document.getElementById('identification_recib').value;
         $('#pdf').val(res);
         $('#plaques').val(check);
-
-        alert(res);
         } );
-        }
+    }
     );
 // funcion para colocar los valores de las placas de los activos seleccionados
 //dentor de un input

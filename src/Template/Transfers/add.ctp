@@ -103,7 +103,7 @@
 
 <body>
 <div class="locations form large-9 medium-8 columns content">
-  <?= $this->Form->create($transfer)?>
+  <?= $this->Form->create($transfer,['novalidate','onsubmit'=>'return validateCheck()'])?>
   <fieldset>
     <legend><?= __('Insertar traslado') ?></legend>
     <br>
@@ -111,7 +111,7 @@
     <div class="form-control sameLine">
       <div>
         <div class="form-control sameLine">
-        <label class='align' required="required"> <b> Número de traslado: </b> <font color="red"> * </font> VRA- </label>
+        <label class='align'> <b> Número de traslado: </b> <font color="red"> * </font> VRA- </label>
 
       <?php 
         echo $this->Form->control('transfers_id', 
@@ -120,8 +120,8 @@
                     'inputContainer' => '<div class="row">{{content}}</div>',
                     'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                     ],
-                'label'=>['text'=>'', 'style'=>'margin-left= 10px;'],
-                'class'=>'form-control col-sm-4',
+                'label'=>['text'=>''],
+                'class'=>'form-control col-sm-4 col-lg-6 col-md-6',
                 'type'=>'text',
                 'id' =>'transfers_id'
                 ]);
@@ -163,13 +163,13 @@
             <td>
 
                 <div class="row" >
-                    <label class="label-t" required="required"><b>Unidad académica:</b><font color="red"> * </font></label>
+                    <label class="label-t" ><b>Unidad académica:</b><font color="red"> * </font></label>
                    
                     <label><?php echo h($paramUnidad); ?></label>
                 </div>
                 <br>
                 <div class="row">
-                    <label class = "funcionario" required="required"><b>Funcionario:</b><font color="red"> * </font></label>
+                    <label class = "funcionario" ><b>Funcionario:</b><font color="red"> * </font></label>
                     <?php 
                     echo $this->Form->select('functionary',
                       $users,
@@ -179,34 +179,72 @@
                 </div>
                 <br>
                 <div class="row">
-                    <label class="id" required="required"><b>Cédula:</b><font color="red"> * </font></label>
+                    <label class="id"><b>Cédula:</b><font color="red"> * </font></label>
 
                     <?php 
-            echo $this->Form->imput('identification', ['label' => 'identification:', 'class'=>'form-control col-sm-4']);
-            ?>
+                        echo $this->Form->control('identification', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+                                "required"=>"required",
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            'id' =>'identification',
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?>
+
+
+
                 </div>
             </td>
             <!-- Fila para la Unidad que recibe -->
             <td>
                 <div class="row">
-                        <label class="label-t">Unidad académica:</label>
+                        <label style="width: 160px;margin-left: 20px;" ><b>Unidad académica:</b><font color="red"> * </font></label>
                         <?php 
-            echo $this->Form->imput('Acade_Unit_recib', ['label' => 'Acade_Unit_recib:', 'class'=>'form-control col-sm-4']);
-            ?>       
+                        echo $this->Form->control('Acade_Unit_recib', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div  class="row">{{content}}</div>',
+                                'inputContainerError' => '<div {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+                                "required"=>"required",
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            'id' =>'Acade_Unit_recib',
+                            'class'=>'form-control col-sm-6 col-md-10 col-lg-10'
+                            ]);
+                    ?>
+
                 </div>
                 <br>
+
                 <div class="row">
-                    <label class = "funcionario" style ="margin-right: 59px;">Funcionario:</label>
+                    <label style="width: 160px;margin-left: 20px;" ><b>Funcionario:</b><font color="red"> * </font></label>
                     <?php 
-            echo $this->Form->imput('functionary_recib', ['label' => 'functionary:', 'class'=>'form-control col-sm-4']);
-            ?>
+                      echo $this->Form->imput('functionary_recib', ['label' => 'functionary:', 'class'=>'form-control col-sm-4 col-xs-4']);
+                     ?>
                 </div>
+
                 <br>
                 <div class="row">
-                    <label class="id" style ="margin-right: 45px;">Cédula:</label>
+                    <label style="width: 160px;margin-left: 20px;"><b>Cédula:</b><font color="red"> * </font></label>
                     <?php 
-            echo $this->Form->imput('identification_recib', ['label' => 'identification_recib:', 'class'=>'form-control col-sm-4']);
-            ?>
+                        echo $this->Form->control('identification_recib', 
+                            [
+                            'templates' => [
+                                'inputContainer' => '<div class="row">{{content}}</div>',
+                                'inputContainerError' => '<div {{type}} error"> {{content}} {{error}}</div>'
+                                ],
+                                "required"=>"required",
+                            'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
+                            'id' =>'identification_recib',
+                            'class'=>'form-control col-sm-6'
+                            ]);
+                    ?>
+
+
                 </div>               
             </td>
         </tr>
@@ -257,7 +295,7 @@
 </div>
 
   <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-  <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'acept']) ?>
+  <?= $this->Form->button(__('Siguiente'), ['class' => 'btn btn-primary','id'=>'acept']) ?>
 
 </body>
 
@@ -364,6 +402,24 @@ $(document).ready(function()
         } );
 } );
 
+// función para validar que algún checkbox ha sido marcado
+    function validateCheck() {
+      var checks, error;
+
+      // Get the value of the input field with id="numb"
+      checks = getValueUsingClass();
+
+
+      // If x is Not a Number or less than one or greater than 10
+      if ( checks.length == 0 ) {
+        error = "Seleccione al menos un activo";
+        document.getElementById("errorMsg").innerHTML = error;
+        return false;
+      } else {
+        return true;
+      }
+    };
+
     $("document").ready(
     function() {
       $('#acept').click( function()
@@ -390,7 +446,7 @@ $(document).ready(function()
     var selected;
     selected = chkArray.join(',') ;
     return selected;
-}
+    };
 </script>
 
 

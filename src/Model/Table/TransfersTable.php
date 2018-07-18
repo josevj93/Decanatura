@@ -69,12 +69,13 @@ class TransfersTable extends Table
         $validator
             ->scalar('transfers_id')
             ->maxLength('transfers_id', 100)
-            ->notEmpty('transfers_id', 'create');
+            ->alphaNumeric('transfers_id', 'El número de autorización debe contener solo caracteres alfanuméricos.')
+            ->notEmpty('transfers_id', 'El número de autorización es requerido.');
+
 
         $validator
-            ->date('date')
-            ->requirePresence('date', 'create')
-            ->notEmpty('date');
+            ->date('date','ymd', 'Formato de fecha no válido.')
+            ->notEmpty('date','Este campo es requerido');
 
         $validator
             ->scalar('functionary')
@@ -84,24 +85,36 @@ class TransfersTable extends Table
 
         $validator
             ->scalar('identification')
-            ->maxLength('identification', 10)
+            ->maxLength('identification', 9,'La cédula debe contener 9 dígitos' )
+            ->minLength('identification', 9,'La cédula debe contener 9 dígitos' )
+            ->numeric('identification','La cédula debe contener sólo digitos')
             ->requirePresence('identification', 'create')
-            ->notEmpty('identification');
+            ->notEmpty('identification','Este campo es requerido');
 
         $validator
             ->scalar('functionary_recib')
             ->maxLength('functionary_recib', 100)
-            ->notEmpty('functionary_recib');
+            ->requirePresence('functionary_recib', 'create')
+            ->add('functionary_recib',[ 
+                [
+                'rule'=>['custom', ' /^[a-zA-ZÀ-ÖØ-öø-ÿ ]+$/ '],
+                'message'=>'Debe contener sólo caracteres del alfabeto.'
+                ]
+            ])
+            ->notEmpty('functionary_recib','Este campo es requerido');
 
-        $validator
+            $validator
             ->scalar('identification_recib')
-            ->maxLength('identification_recib', 10)
-            ->notEmpty('identification_recib');
+            ->maxLength('identification_recib', 9,'La cédula debe contener 9 dígitos' )
+            ->minLength('identification_recib', 9,'La cédula debe contener 9 dígitos' )
+            ->numeric('identification_recib','La cédula debe contener sólo digitos')
+            ->notEmpty('identification_recib','Este campo es requerido');
+            
 
         $validator
             ->scalar('Acade_Unit_recib')
             ->maxLength('Acade_Unit_recib', 30)
-            ->notEmpty('Acade_Unit_recib');
+            ->notEmpty('Acade_Unit_recib','Este campo es requerido');
 
         $validator
             ->scalar('path')
@@ -118,35 +131,4 @@ class TransfersTable extends Table
 
         return $validator;
     }
-
-    /* Idea de las sigueintes 2 funciones  obtenida de https://stackoverflow.com/questions/14932739/cakephp-notempty-and-unique-validation-on-field , Zachary Heaton
-    */
-    public function uniqueId($id){
-        $returnId = $this->find('all')
-        ->where([
-            'Transfers.transfers_id' => $id,
-        ])
-        ->first();
-        if($returnId){
-        return false;
-        }
-        return true;
-    }
-    
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->addCreate(function ($entity, $options) {
-
-        return $this->uniqueId($entity->transfers_id);
-        },
-        'uniqueId',
-        [
-        'errorField' => 'transfers_id',
-        'message' => 'El número de traslado ya existe.'
-        ]
-        );
-
-        return $rules;
-    }
-
 }

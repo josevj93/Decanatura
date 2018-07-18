@@ -118,7 +118,8 @@
                     'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                     ],
                 'label'=>['text'=>''],
-                'class'=>'form-control col-sm-4 col-lg-6 col-md-6',
+                'class'=>'form-control',
+                'style'=>'width: 100px;',
                 'type'=>'text',
                 "required"=>"required",
                 'id' =>'residues_id'
@@ -169,7 +170,7 @@
 
                             'label'=>['text'=>''],
                             "required"=>"required",
-                            'class'=>'form-control col-sm-6'
+                            'class'=>'form-control col-sm-6 col-md-10 col-lg-10',
                             ]);
                     ?>
                 </div>
@@ -187,7 +188,7 @@
                                 ],
                                 "required"=>"required",
                             'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
-                            'class'=>'form-control col-sm-6'
+                            'class'=>'form-control col-sm-6 col-md-10 col-lg-10'
                             ]);
                     ?>
                 </div>
@@ -209,7 +210,7 @@
 
                             'label'=>['text'=>''],
                             "required"=>"required",
-                            'class'=>'form-control col-sm-6'
+                            'class'=>'form-control col-sm-6 col-md-10 col-lg-10'
                             ]);
                     ?>
                 </div>
@@ -227,7 +228,7 @@
                                 ],
                             'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
                             "required"=>"required",
-                            'class'=>'form-control col-sm-6'
+                            'class'=>'form-control col-sm-6 col-md-10 col-lg-10'
                             ]);
                     ?>
                     </div>
@@ -302,7 +303,7 @@
 <div>
 
         <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
-        <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary', 'id'=>'acept']) ?>
+        <?= $this->Form->button(__('Siguiente'), ['class' => 'btn btn-primary', 'id'=>'acept']) ?>
         </form>
 </div>
 <script type="text/javascript">

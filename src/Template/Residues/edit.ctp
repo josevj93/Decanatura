@@ -135,7 +135,7 @@
                     <!-- Se modificó la clase del div (a travez de la plantilla) y la del label
                                   Este mismo proceso se aplica en las demás geberaciones -->
                     <div class="form-control cuadro">
-                    <label style =  "text-align:left; margin-right: 10px;" required="required"> <b> Nombre: </b> <font color="red"> * </font> </label><br>          
+                    <label style =  "text-align:left; margin-right: 10px;"> <b> Nombre: </b> <font color="red"> * </font> </label><br>          
                     <?php 
                         echo $this->Form->control('name1', 
                             [
@@ -145,8 +145,10 @@
                                 ],
 
                             'label'=>['text'=>''],
-                            "required"=>"required",
-                            'class'=>'form-control col-sm-6'
+                            //"required"=>"required",
+                            'id'=>'name1',
+                            'class'=>'form-control',
+                            'style'=>'width: 180px;'
                             ]);
                     ?>
                 </div>
@@ -164,7 +166,9 @@
                                 ],
                                 "required"=>"required",
                             'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
-                            'class'=>'form-control col-sm-6'
+                            'id' => 'identification1',
+                            'class'=>'form-control ',
+                            'style'=>'width: 180px;'
                             ]);
                     ?>
                 </div>
@@ -174,7 +178,7 @@
                 <td><br>
 
                     <div class="form-control cuadro">
-                    <label style =  "text-align:left; margin-right: 10px;" required="required"> <b> Nombre: </b> <font color="red"> * </font> </label><br>  
+                    <label style =  "text-align:left; margin-right: 10px;"> <b> Nombre: </b> <font color="red"> * </font> </label><br>  
 
                     <?php 
                         echo $this->Form->control('name2', 
@@ -185,15 +189,16 @@
                                 ],
 
                             'label'=>['text'=>''],
-                            "required"=>"required",
-                            'class'=>'form-control col-sm-6'
+                            'style'=>'width: 180px;',
+                            'id' => 'name2',
+                            'class'=>'form-control '
                             ]);
                     ?>
                 </div>
                     <br>
 
                     <div class="form-control cuadro">
-                    <label style =  "text-align:left; margin-right: 10px;" required="required"> <b> Cédula: </b> <font color="red"> * </font> </label><br>  
+                    <label style =  "text-align:left; margin-right: 10px;"> <b> Cédula: </b> <font color="red"> * </font> </label><br>  
 
                     <?php 
                         echo $this->Form->control('identification2', 
@@ -203,8 +208,9 @@
                                 'inputContainerError' => '<div class="row {{type}} error"> {{content}} {{error}}</div>'
                                 ],
                             'label'=>['text' => '' ,'style'=>'margin-left:7px;'],
-                            "required"=>"required",
-                            'class'=>'form-control col-sm-6'
+                            'style'=>'width: 180px;',
+                            'id' =>'identification2',
+                            'class'=>'form-control '
                             ]);
                     ?>
                     </div>
@@ -246,7 +252,7 @@
                     </tr>
                 <thead>
                 <tbody>
-                    <?php 
+                    <?php
                       foreach ($result as $a): ?>
                       <tr>
                           <td><?= h($a->plaque) ?></td>

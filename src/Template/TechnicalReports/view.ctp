@@ -81,7 +81,7 @@ label{
              <div class="modal-dialog" style="width: 100%">
                   <div class="modal-content">
                          <div class="modal-header modal-header-primary">
-                            <h1>Datos del activo</h4>
+                            <h1>Datos del activo</h1>
                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         </div>
                         <div class="modal-body">

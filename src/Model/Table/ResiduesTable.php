@@ -62,10 +62,6 @@ class ResiduesTable extends Table
         $validator
             ->scalar('residues_id')
             ->maxLength('residues_id', 200)
-            /*->add('residues_id', 'residues_id', [
-            'rule' => [$this, 'isUnique'],
-            'message' => __('El número de autorización ya existe.')
-            ])*/
             ->alphaNumeric('residues_id', 'El número de autorización debe contener solo caracteres alfanuméricos.')
             ->notEmpty('residues_id', 'El número de autorización es requerido.');
 
@@ -110,7 +106,7 @@ class ResiduesTable extends Table
             ->notEmpty('identification2','Este campo es requerido');
 
         $validator
-            ->date('date','ymd', 'Formato de fecha no válido.')
+            ->date('date','dmy', 'Formato de fecha no válido.')
             ->notEmpty('date','Este campo es requerido');
 
         $validator
@@ -129,34 +125,4 @@ class ResiduesTable extends Table
         return $validator;
     }
 
-    /* Idea de las sigueintes 2 funciones  obtenida de https://stackoverflow.com/questions/14932739/cakephp-notempty-and-unique-validation-on-field , Zachary Heaton
-    */
-    public function uniqueId($id){
-        $returnId = $this->find('all')
-        ->where([
-            'Residues.residues_id' => $id,
-        ])
-        ->first();
-        if($returnId){
-        return false;
-        }
-        return true;
-    }
-    
-    public function buildRules(RulesChecker $rules)
-    {
-        
-        $rules->addCreate(function ($entity, $options) {
-
-        return $this->uniqueId($entity->residues_id);
-        },
-        'uniqueId',
-        [
-        'errorField' => 'residues_id',
-        'message' => 'El número de acta ya existe.'
-        ]
-        );
-
-        return $rules;
-    }
 }

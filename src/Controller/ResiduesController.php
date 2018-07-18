@@ -150,10 +150,11 @@ class ResiduesController extends AppController
      */
     public function add()
     {
+        
         $residue = $this->Residues->newEntity();
         if ($this->request->is('post')) {
 
-            $residue = $this->Residues->patchEntity($residue, $this->request->getData()/*,['validationDefault'=>'residues_id']*/);
+            $residue = $this->Residues->patchEntity($residue, $this->request->getData());
 
             // le doy formato a la fecha para que mysql pueda guardarla correctamente
             if($residue->date != null)
@@ -162,8 +163,19 @@ class ResiduesController extends AppController
                 $residue->date= $date->format('Y-m-d');
             }
 
-            //debug($residue);
-            if ($this->Residues->save($residue)) {
+            /** varifica que el id no sea repetido y se setea el error manualmente */
+            $returnId = $this->Residues->find('all')
+            ->where([
+            'Residues.residues_id' => $residue->residues_id
+            ])
+            ->first();
+            if($returnId){
+                $residue->setError('residues_id', ['El número de acta ya existe.']);
+            }
+
+
+            $residue['new']=true;
+            if ($this->Residues->save($residue) ) {
                 
 
                 //Se obtienen los seleccionados y se convierte a string separado en , 
@@ -184,7 +196,7 @@ class ResiduesController extends AppController
                     ->execute();
                     AppController::insertLog($residue['residues_id'], TRUE);
                 $this->Flash->success(__('El acta de desecho fue guardada.'));
-                return $this->redirect(['action' => 'index']    );
+                return $this->redirect(['action' => 'viewDownload', $residue->residues_id ] );
             }
             AppController::insertLog($model['residues_id'], FALSE);
             $this->Flash->error(__('El Acta de Desecho no se pudo guardar. Inténtelo de nuevo.'));
@@ -348,7 +360,6 @@ class ResiduesController extends AppController
 
         // aqui pasa a sacar los valores de result2 e indexarlos
         $lastPlaques =array_column($result2, 'plaque');
-
         /** se obtienen los datos de los activos que se quieren desechar*/
         $technical_reports = TableRegistry::get('TechnicalReports');
         $query = $technical_reports->find()
@@ -389,9 +400,7 @@ class ResiduesController extends AppController
                         ->group(['assets.plaque'])
                         ->toList();
         //debug($query);
-
         $size = count($query);
-
         $result = array_fill(0, $size, NULL);
         
         for($i = 0; $i < $size; $i++)
@@ -402,10 +411,11 @@ class ResiduesController extends AppController
             $result[$i]['model']= $query[$i]->models['name'];
             $result[$i]['series']= $query[$i]->assets['series'];
             $result[$i]['state']= $query[$i]->assets['state'];
-
             // se realiza una conversion a objeto para que la vista lo use sin problemas
             $result[$i]= (object)$result[$i];
         }
+
+        
 
         $Unidad = $this->UnidadAcadémica;
         //debug($residue);
@@ -450,6 +460,70 @@ class ResiduesController extends AppController
     }
 
 
+    /** método para la ventana intermedia para insertar un acta de desechos */
+    public function viewDownload($id = null)
+    {
+        $residue = $this->Residues->get($id);
+
+        if ($this->request->is(['patch', 'post', 'put'])) { 
+
+            $residue = $this->Residues->patchEntity($residue, $this->request->getData());
+
+            // le doy formato a la fecha para que mysql pueda guardarla correctamente
+            $date = new Date($residue->date);
+            $residue->date= $date->format('Y-m-d');
+            if ($this->Residues->save($residue)) {
+                AppController::insertLog($residue['residues_id'], TRUE);
+                $this->Flash->success(__('El acta de residuo ha sido guardada'));
+                //debug($residue);
+                return $this->redirect(['action' => 'index']);
+            }
+
+            AppController::insertLog($residue['residues_id'], FALSE);
+            
+            $this->Flash->error(__('El acta de residuo no se ha guardado, inténtelo de nuevo'));
+
+        }
+        //obtengo la tabla assets
+        $assets = TableRegistry::get('Assets');
+        //busco los datos que necesito
+        $assetsquery = $assets->find()
+                        ->select(['assets.plaque'])
+                        ->where(['residues_id'=>$id])
+                        ->toList();
+
+        //lo paso a objeto para manejarlo en vista
+        $size = count($assetsquery);
+        $result = array_fill(0, $size, NULL);
+        
+        for($i = 0; $i < $size; $i++)
+        {
+            $result[$i] =(object)$assetsquery[$i]->assets;
+        }
+
+        //obtengo la tabla technical_reports
+        $technical_reports = TableRegistry::get('TechnicalReports');
+        //busco los datos que necesito
+        $queryRec = $technical_reports->find()
+                                    ->select(['recommendation', 'technical_report_id'])
+                                    ->where(['residues_id'=>$id])
+                                    ->group(['assets_id'])
+                                    ->toList();
+
+        //lo paso a objeto para manejarlo en vista
+        $size = count($queryRec);
+
+        $resultRec = array_fill(0, $size, NULL);
+        for($i = 0; $i < $size; $i++)
+        {
+            // se realiza una conversion a objeto para que la vista lo use sin problemas
+            $resultRec[$i]= (object)$queryRec[$i];
+        }
+
+        $Unidad = $this->UnidadAcadémica;
+        $this->set(compact('residue', 'result', 'resultRec', 'Unidad'));
+    }
+
 
 
     public function download($id = null)
@@ -475,7 +549,7 @@ class ResiduesController extends AppController
         //re realiza una relacion 1 a 1
         $residueTMP['residues_id']= $residueArray[0];
         $date = new Date($residueArray[1]);
-        $residueTMP['date']= $date->format('Y-m-d');
+        $residueTMP['date']= $residueArray[1];
 
 
         $residueTMP['name1']= $residueArray[2];
@@ -486,10 +560,12 @@ class ResiduesController extends AppController
         $residue = $this->Residues->patchEntity($residue,$residueTMP);
         $errors = $residue->errors();
 
+        $residueTMP['date']= $date->format('Y-m-d');
         // linea para marcar el desecho como descargado, haciendo que ya no se pueda borrar
         $residue->descargado = true;
         // Actualizo el desecho, guardando el valor de descargado como true
         //y de paso se validan los campos para mayor seguridad del PDF
+
         if($errors== null && $this->Residues->save($residue))
         {
             // pide la lista de placas a la vista
@@ -604,6 +680,121 @@ class ResiduesController extends AppController
         }
         $this->Flash->error(__('El acta de desechos no se ha generado. Existe un error en los campos editables.'));
         return $this->redirect(['action' => 'edit',$residue->residues_id]);
+    }
+
+
+
+        public function generate($id = null)
+    {
+        
+
+        $residue = $this->Residues->get($id);
+
+
+
+            // linea para marcar el desecho como descargado, haciendo que ya no se pueda borrar
+            $residue->descargado = true;
+            // Actualizo el desecho, guardando el valor de descargado como true
+             //y de paso se validan los campos para mayor seguridad del PDF
+            $this->Residues->save($residue);
+
+            $conn = ConnectionManager::get('default');
+            $stmt = $conn->execute("SELECT description, plaque FROM assets
+            where assets.residues_id = '". $id ."';");
+            $results = $stmt ->fetchAll('assoc');
+            $size = count($results);
+            require_once 'dompdf/autoload.inc.php';
+
+            $document = new Dompdf();
+            $html = 
+            '
+            <style>
+            #element1 {float:left;margin-right:10px;} #element2 {float:right;} 
+            table, td, th {
+            border: 1px solid black;
+            }
+            body {
+                border: 5px double;
+                width:100%;
+                height:100%;
+                display:block;
+                overflow:hidden;
+                padding:30px 30px 30px 30px
+            }
+            table {
+                border-collapse: collapse;
+                border: none;
+                width: 100%;
+            }
+            th {
+                height: 50px;
+            }
+            </style>
+            <center><img src="C:\xampp\htdocs\Decanatura\src\Controller\images\logoucr.png"></center>
+            <title>Informe Técnico</title>
+            <h2 align="center">UNIVERSIDAD DE COSTA RICA</h2>
+            <h2 align="center">UNIDAD DE ACTIVOS FIJOS</h2>
+            <h2 align="center">ACTA DE DESECHO</h2>
+            <p>&nbsp;</p>
+            <div id="element2" align="left"><strong>Autorización N.º VRA-'.$residue->residues_id.'</strong></div>
+            <p>&nbsp;</p>
+            <div id="element1" align="left"><strong>Unidad de Custodio:'.$this->UnidadAcadémica.'</strong></div>
+            <p>&nbsp;</p>
+            <p align="left">El dia <strong>'.$residue->date.'</strong> en presencia de los señores:</p>
+            <p>&nbsp;</p>
+            <div id="element1" align="left"><strong>Nombre:</strong>'.$residue->name1.'</div> <div id="element2" align="right"><strong>Cedula:</strong>'.$residue->identification1.'</div>
+            <p>&nbsp;</p>
+            <div id="element1" align="left"><strong>Nombre:</strong>'.$residue->name2.'</div> <div id="element2" align="right"><strong>Cedula:</strong>'.$residue->identification2.'</div>
+            <p>&nbsp;</p>
+            <p>Se procede a levantar el <strong>Acta de Desecho</strong> de bienes muebles por haber cumplido su periodo de vida útil, de acuerdo con el <strong>Informe Técnico</strong> adjunto y la respectiva autorización por parte de la Vicerrectoría de Administración, de conformidad con el Reglamento para la Administración y Control de los Bienes Institucionales de la Universidad de Costa Rica</p>
+            <p align="left">Los bienes son los siguientes:</p>
+            <p>&nbsp;</p>
+            </table>
+            <table width="0" border="1">
+            <tbody>
+            <tr>
+            <th align="center"><strong>DESCRIPCIÓN DEL BIEN</strong></th>
+            <th align="center"><strong>N.º PLACA</strong></th>
+            </tr>';
+            for($a=0;$a < $size; $a++) {
+            $html .= 
+            '<tr>
+                <td align="center">' . $results[$a]['description']. '</td>
+                <td align="center">' . $results[$a]['plaque'] . '</td>
+             </tr>';
+
+            }
+            $html .=
+            '</table>
+            <p>&nbsp;</p>
+            <div id="element1" align="left">____________________________________________</div> <div id="element2" align="right">____________________________________________</div>
+            <p>&nbsp;</p>
+            <div id="element1" align="left"><strong>Autoridad Universitaria / Jefatura Administrativa</strong></div> <div id="element2" align="right"><strong>RESPONSABLE AUTORIZADO</strong></div>        
+            <p>&nbsp;</p>
+            <div id="element2" align="left"><strong>Oficina de Servicios Generales<strong></div>
+            <p>&nbsp;</p>
+            <div id="element1" align="left">____________________________________________</div> <div id="element2" align="right">____________________________________________</div>
+            <p>&nbsp;</p>
+            <div id="element1" align="left"><strong>Testigo N°1</strong></div> <div id="element2" align="right"><strong>Testigo N°2</strong></div>
+            <p>&nbsp;</p>
+            <p>(Art. 26 del Reglamento para la Administración y Control de los Bienes Institucionales de la Universidad de Costa Rica)</p>
+            <p>Original: Unidad de Bienes Institucionales (OAF)</p>
+            <p>Copia: Bodega de Activos Recuperados (OSG)</p>
+            <p>Copia: Unidad responsable</p>        
+            <p>&nbsp;</p>
+            <p align="center">Tels: 2511 5759/1149      www.oaf.ucr.ac.cr     correo electrónico: activosfijos.oaf@ucr.ac.cr</p>
+            ';
+            
+            $document->loadHtml($html);
+            //set page size and orientation
+            $document->setPaper('A3', 'portrait');
+            //Render the HTML as PDF
+            $document->render();
+            //Get output of generated pdf in Browser
+            $document->stream("Acta de Desecho-".$residue->residues_id, array("Attachment"=>1));
+            //1  = Download
+            //0 = Preview
+        $this->Flash->error(__('El acta de desechos no se ha generado.'));
     }
 
      public function download2($id = null)
