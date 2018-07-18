@@ -202,15 +202,15 @@
 
     // Get the value of the input field with id="numb"
     search = document.getElementById('assetImput').value;
-    alert(search.length);
+    
     //If x is Not a Number or less than one or greater than 10
-    /*if ( search.length == 0 ) {
+    if ( search.length == 0 ) {
         error = "Seleccione un activo para insertar el informe.";
         document.getElementById("errorMsg").innerHTML = error;
         return false;
     } else {
         return true;
-    }*/return false;
+    }
   }
 
 </script>

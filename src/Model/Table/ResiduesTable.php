@@ -62,10 +62,6 @@ class ResiduesTable extends Table
         $validator
             ->scalar('residues_id')
             ->maxLength('residues_id', 200)
-            /*->add('residues_id', 'residues_id', [
-            'rule' => [$this, 'isUnique'],
-            'message' => __('El número de autorización ya existe.')
-            ])*/
             ->alphaNumeric('residues_id', 'El número de autorización debe contener solo caracteres alfanuméricos.')
             ->notEmpty('residues_id', 'El número de autorización es requerido.');
 
@@ -140,23 +136,24 @@ class ResiduesTable extends Table
         if($returnId){
         return false;
         }
-        return true;
+        return false;
     }
     
     public function buildRules(RulesChecker $rules)
     {
         
-        $rules->addCreate(function ($entity, $options) {
+        $rules->add($rules->isUnique(['residues_id','name1']));
 
+
+        $rules->addCreate($this->uniqueId($entity) /*{
         return $this->uniqueId($entity->residues_id);
-        },
+        }*/,
         'uniqueId',
         [
         'errorField' => 'residues_id',
         'message' => 'El número de acta ya existe.'
         ]
         );
-
         return $rules;
     }
 }

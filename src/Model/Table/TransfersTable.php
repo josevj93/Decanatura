@@ -66,8 +66,8 @@ class TransfersTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
-            $validator
-            ->scalar('transfers_id')
+        $validator
+            //->scalar('transfers_id')
             ->maxLength('transfers_id', 100)
             ->alphaNumeric('transfers_id', 'El número de autorización debe contener solo caracteres alfanuméricos.')
             ->notEmpty('transfers_id', 'El número de autorización es requerido.');
@@ -101,20 +101,20 @@ class TransfersTable extends Table
                 'message'=>'Debe contener sólo caracteres del alfabeto.'
                 ]
             ])
-            ->allowEmpty('functionary_recib');
+            ->notEmpty('functionary_recib','Este campo es requerido');
 
             $validator
             ->scalar('identification_recib')
             ->maxLength('identification_recib', 9,'La cédula debe contener 9 dígitos' )
             ->minLength('identification_recib', 9,'La cédula debe contener 9 dígitos' )
             ->numeric('identification_recib','La cédula debe contener sólo digitos')
-            ->allowEmpty('identification_recib');
+            ->notEmpty('identification_recib','Este campo es requerido');
             
 
         $validator
             ->scalar('Acade_Unit_recib')
             ->maxLength('Acade_Unit_recib', 30)
-            ->notEmpty('Acade_Unit_recib');
+            ->notEmpty('Acade_Unit_recib','Este campo es requerido');
 
         $validator
             ->scalar('path')
@@ -134,8 +134,8 @@ class TransfersTable extends Table
 
     /* Idea de las sigueintes 2 funciones  obtenida de https://stackoverflow.com/questions/14932739/cakephp-notempty-and-unique-validation-on-field , Zachary Heaton
     */
-    public function uniqueId($id){
-        $returnId = $this->find('all')
+    public function unique_Id($id){
+        /*$returnId = $this->find('all')
         ->where([
             'Transfers.transfers_id' => $id,
         ])
@@ -143,14 +143,15 @@ class TransfersTable extends Table
         if($returnId){
         return false;
         }
-        return true;
+        return true;*/
+        return false;
     }
     
     public function buildRules(RulesChecker $rules)
     {
         $rules->addCreate(function ($entity, $options) {
 
-        return $this->uniqueId($entity->transfers_id);
+        return $this->unique_Id($entity->transfers_id);
         },
         'uniqueId',
         [

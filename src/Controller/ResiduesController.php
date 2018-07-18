@@ -151,6 +151,7 @@ class ResiduesController extends AppController
     public function add()
     {
         $residue = $this->Residues->newEntity();
+
         if ($this->request->is('post')) {
 
             $residue = $this->Residues->patchEntity($residue, $this->request->getData()/*,['validationDefault'=>'residues_id']*/);
@@ -163,7 +164,7 @@ class ResiduesController extends AppController
             }
 
             //debug($residue);
-            if ($this->Residues->save($residue)) {
+            if ($this->Residues->save($residue) ) {
                 
 
                 //Se obtienen los seleccionados y se convierte a string separado en , 
