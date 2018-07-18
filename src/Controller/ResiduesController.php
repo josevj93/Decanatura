@@ -360,6 +360,60 @@ class ResiduesController extends AppController
 
         // aqui pasa a sacar los valores de result2 e indexarlos
         $lastPlaques =array_column($result2, 'plaque');
+        /** se obtienen los datos de los activos que se quieren desechar*/
+        $technical_reports = TableRegistry::get('TechnicalReports');
+        $query = $technical_reports->find()
+                        ->select(['assets.plaque', 'brands.name', 'models.name', 'assets.series', 'assets.state'])
+                        ->join ([
+                            'assets'=> [
+                                'table'=>'assets',
+                                'type'=>'INNER',
+                                'conditions'=> ['assets.plaque= TechnicalReports.assets_id']
+                            ]
+                        ])
+                        ->join([
+                            'models' => [
+                                    'table' => 'models',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['assets.models_id= models.id']
+                                ]
+                                ])
+                         ->join([
+                            'brands' => [
+                                    'table' => 'brands',
+                                    'type'  => 'LEFT',
+                                    'conditions' => ['models.id_brand = brands.id']
+                                ]
+                                ])
+                        ->where(['OR'=>[
+                                        ['AND'=>[
+                                                 ['TechnicalReports.recommendation' => "D"],
+                                                 ['assets.state' => 'Disponible']
+                                                ]
+                                        ],
+                                        ['assets.plaque in'=>array_column($result2, 'plaque')]
+                                       ]
+                                ])
+                        //->where(['assets.state not like' => 'Des%'])
+                        //->where(['TechnicalReports.recommendation' => "D"])
+                        //->where(['or assets.plaque in'=>$result2 ])
+                        ->group(['assets.plaque'])
+                        ->toList();
+        //debug($query);
+        $size = count($query);
+        $result = array_fill(0, $size, NULL);
+        
+        for($i = 0; $i < $size; $i++)
+        {
+            //* se acomodan los valores dentro de un mismo [$i]
+            $result[$i]['plaque']= $query[$i]->assets['plaque'];
+            $result[$i]['brand']= $query[$i]->brands['name'];
+            $result[$i]['model']= $query[$i]->models['name'];
+            $result[$i]['series']= $query[$i]->assets['series'];
+            $result[$i]['state']= $query[$i]->assets['state'];
+            // se realiza una conversion a objeto para que la vista lo use sin problemas
+            $result[$i]= (object)$result[$i];
+        }
 
         
 
@@ -495,7 +549,7 @@ class ResiduesController extends AppController
         //re realiza una relacion 1 a 1
         $residueTMP['residues_id']= $residueArray[0];
         $date = new Date($residueArray[1]);
-        $residueTMP['date']= $date->format('Y-m-d');
+        $residueTMP['date']= $residueArray[1];
 
 
         $residueTMP['name1']= $residueArray[2];
@@ -506,10 +560,12 @@ class ResiduesController extends AppController
         $residue = $this->Residues->patchEntity($residue,$residueTMP);
         $errors = $residue->errors();
 
+        $residueTMP['date']= $date->format('Y-m-d');
         // linea para marcar el desecho como descargado, haciendo que ya no se pueda borrar
         $residue->descargado = true;
         // Actualizo el desecho, guardando el valor de descargado como true
         //y de paso se validan los campos para mayor seguridad del PDF
+
         if($errors== null && $this->Residues->save($residue))
         {
             // pide la lista de placas a la vista
