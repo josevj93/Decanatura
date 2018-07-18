@@ -189,6 +189,7 @@ class ResiduesController extends AppController
             $date = new Date($residue->date);
             $residue->date= $date->format('Y-m-d');
             //debug($residue);
+            //die();
             if ($this->Residues->save($residue)) {
                 
 

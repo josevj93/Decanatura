@@ -109,4 +109,28 @@ class ResiduesTable extends Table
 
         return $validator;
     }
+
+
+    public function buildRules(RulesChecker $rules)
+    {
+
+        $rules->addCreate(
+            function ($entity, $options) {
+                $returnId = $this->find('all')->where([
+                    'Residues.residues_id' => $entity->residues_id,]
+                )->first();
+                if($returnId){
+                    return false;
+                }else{
+                    return true;
+                }
+
+            },
+            ['errorField' => 'residues_id', 'message' => 'Este id ya existe']
+        );
+
+
+        return $rules;
+    }
+
 }

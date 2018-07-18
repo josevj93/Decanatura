@@ -155,7 +155,9 @@ class UsersController extends AppController
         }
         $this->set('roles', $roles);
         if ($this->request->is('post')) {
+
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user['new'] = true;
             if ($this->Users->save($user)) {
                 AppController::insertLog($user['nombre'], $success);
                 $this->Flash->success(__('El usuario ha sido agregado.'));
