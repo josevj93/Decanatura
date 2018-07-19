@@ -82,6 +82,7 @@
         <div class="form-control sameLine" >    
             <div class='row'>
             <?php
+
             /*<label>Autorización Número: VRA-</label>
                 <label><?php echo h($residue->residues_id); ?></label>*/
             echo '<label>Autorización Número: VRA-'.h($residue->residues_id).'</label>';
