@@ -302,8 +302,24 @@
     </div>
     <br>
     <div class='form-control' style="border-color: transparent;">
-        <label> Subir acta de desechos: </label>
-        <?php echo $this->Form->imput('file',['type' => 'file', 'class' => 'form-control-file']); ?>
+        
+        <?php
+          if($residue->file_name == ''){
+              echo "<b>1- Descargar el acta para llenar y luego subirlo al sitema.</b>";
+              echo "<br><br><br>";
+              echo "<div >";
+              echo "<b>";
+              echo $this->Form->input('file_name',['type' => 'file','label' => '2- Subir Acta de Desecho una vez llena para Finalizar', 'class' => 'form-control-file']);
+              echo "</b>";
+              echo "</div>";
+              echo "<div class=\"col-12 text-right\">";
+
+          }
+         
+        ?>
+
+
+
     </div>
     <br>
     
@@ -329,7 +345,7 @@
         <input type="hidden" name="plaques" id="plaques">
 
 
-        <?= $this->Form->button(__('Generar PDF'), ['class' => 'btn btn-primary', 'id'=>'generate','style'=>'float:left;']) ?>
+        <?= $this->Form->button(__('Descargar PDF'), ['class' => 'btn btn-primary', 'id'=>'generate','style'=>'float:left;']) ?>
         </form>
 
 

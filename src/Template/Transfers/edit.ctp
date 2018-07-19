@@ -245,13 +245,23 @@ use Cake\Routing\Router;
     </div>
     <br>
     <div class='form-control' style="border-color: transparent;">
-        <?php 
-            if($transfer->file_name == null)
-            {
-                echo '<label> Subir acta de desechos: </label>';
-                echo $this->Form->imput('file_name',['type' => 'file', 'class' => 'form-control-file']); 
-            }
-         ?>
+        <?php
+          if($loan->file_solicitud == ''){
+              echo "<b>1- "; 
+              echo $this->Html->link(__('Descargar'), ['controller'=> 'Transfers', 'action' => 'download',$transfer->transfer_id], [ 'confirm' => __('Seguro que desea descargar el archivo?')]);
+              echo " el acta para llenar y luego subirlo al sitema.</b>";
+              echo "<br><br><br>";
+              echo "<div >";
+              echo "<b>";
+              echo $this->Form->input('file_name',['type' => 'file','label' => '2- Subir Acta de Traslado una vez llena para Finalizar', 'class' => 'form-control-file']);
+              echo "</b>";
+              echo "</div>";
+              echo "<div class=\"col-12 text-right\">";
+
+          }
+         
+        ?>
+
     </div>
     <br>
 
@@ -261,18 +271,7 @@ use Cake\Routing\Router;
     <?= $this->Form->button(__('Aceptar'), ['class' => 'btn btn-primary','id'=>'aceptar','style'=>'text-transform: capitalize;']) ?>
     </form>
 
-    <?= $this->Form->create(null,['type'=>'post',
-                                        'url'=>'/transfers/download/'.$transfer->transfers_id
-                                    ]) ?>
-        <!-- input donde coloco todo los datos de los demás imput exepto el input checkList -->
-        <input type="hidden" name="pdf" id="pdf">
-        <!-- input donde coloco todo los datos de los demás imput exepto el input checkList -->
-        <input type="hidden" name="plaques" id="plaques">
-
-
-        <?= $this->Form->button(__('Generar PDF'), ['class' => 'btn btn-primary', 'id'=>'generate','style'=>'float:left;text-transform: capitalize;']) ?>
     
-    </form>
 
 </div>
 

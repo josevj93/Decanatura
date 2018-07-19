@@ -1740,12 +1740,6 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
         $success = $this->_executeTransaction(function () use ($entity, $options) {
             return $this->_processSave($entity, $options);
         }, $options['atomic']);
-
-        /*if($entity->getErrors()){
-                    debug($entity->getErrors());
-            die();
-
-        }*/
             
         if ($success) {
             if ($this->_transactionCommitted($options['atomic'], $options['_primary'])) {
@@ -1793,11 +1787,6 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     protected function _processSave($entity, $options)
     {
-        $primaryColumns = (array)$this->getPrimaryKey();
-
-
-        //debug($entity);
-
         if ($options['checkExisting'] && $primaryColumns && $entity->isNew() && $entity->has($primaryColumns)) {
             $alias = $this->getAlias();
             $conditions = [];
@@ -1809,12 +1798,14 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             //die();
             $entity->isNew(!$this->exists($conditions));
         }
+        $primaryColumns = (array)$this->getPrimaryKey();
 
         //debug($entity);
         //debug($options);
         //die();
 
         $mode = $entity->isNew() ? RulesChecker::CREATE : RulesChecker::UPDATE;
+        
         if ($options['checkRules'] && !$this->checkRules($entity, $mode, $options)) {
             return false;
         }

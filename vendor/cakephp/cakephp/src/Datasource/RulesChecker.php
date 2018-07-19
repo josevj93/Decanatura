@@ -228,8 +228,6 @@ class RulesChecker
     public function check(EntityInterface $entity, $mode, array $options = [])
     {
 
-        //debug($entity);
-        //die();
         if ($mode === self::CREATE) {
             return $this->checkCreate($entity, $options);
         }
@@ -299,6 +297,7 @@ class RulesChecker
         $options += $this->_options;
         foreach ($rules as $rule) {
             $success = $rule($entity, $options) && $success;
+
         }
 
         return $success;

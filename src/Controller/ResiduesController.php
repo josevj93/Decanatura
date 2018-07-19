@@ -157,6 +157,7 @@ class ResiduesController extends AppController
             $residue = $this->Residues->patchEntity($residue, $this->request->getData());
 
             // le doy formato a la fecha para que mysql pueda guardarla correctamente
+
             if($residue->date != null)
             {
                 $date = new Date($residue->date);
@@ -176,6 +177,7 @@ class ResiduesController extends AppController
 
             $residue['new']=true;
             if ($this->Residues->save($residue) ) {
+
                 
 
                 //Se obtienen los seleccionados y se convierte a string separado en , 
@@ -247,6 +249,10 @@ class ResiduesController extends AppController
             // se realiza una conversion a objeto para que la vista lo use sin problemas
             $result[$i]= (object)$result[$i];
         }
+
+        debug($result);
+        die();
+
         $this->set(compact('residue', 'result'));
     }
     /**

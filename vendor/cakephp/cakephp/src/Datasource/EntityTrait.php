@@ -821,12 +821,13 @@ trait EntityTrait
 
         $new = (bool)$new;
 
+
+
         if ($new) {
             foreach ($this->_properties as $k => $p) {
                 $this->_dirty[$k] = true;
             }
         }
-
         return $this->_new = $new;
     }
 

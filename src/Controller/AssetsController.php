@@ -111,6 +111,19 @@ class AssetsController extends AppController
 			if ($_POST['models_id'] == '') {
 				$asset->models_id = null;
 			}
+
+
+            /** varifica que el id no sea repetido y se setea el error manualmente */
+            $returnId = $this->Assets->find('all')
+            ->where([
+            'Assets.plaque' => $asset->plaque
+            ])
+            ->first();
+            if($returnId){
+                $asset->setError('plaque', ['El número de placa ya existe.']);
+            }
+
+
             if ($this->Assets->save($asset)) {
                 AppController::insertLog($asset['plaque'], TRUE);
                 $this->Flash->success(__('El activo fue guardado exitosamente.'));
