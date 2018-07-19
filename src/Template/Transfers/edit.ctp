@@ -248,7 +248,7 @@ use Cake\Routing\Router;
         <?php
           if($loan->file_solicitud == ''){
               echo "<b>1- "; 
-              echo $this->Html->link(__('Descargar'), ['controller'=> 'Loans', 'action' => 'download',$transfer->transfer_id], [ 'confirm' => __('Seguro que desea descargar el archivo?')]);
+              echo $this->Html->link(__('Descargar'), ['controller'=> 'Transfers', 'action' => 'download',$transfer->transfer_id], [ 'confirm' => __('Seguro que desea descargar el archivo?')]);
               echo " el acta para llenar y luego subirlo al sitema.</b>";
               echo "<br><br><br>";
               echo "<div >";
