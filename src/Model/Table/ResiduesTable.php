@@ -41,7 +41,7 @@ class ResiduesTable extends Table
                     'size' => 'file_size',
                     'type' => 'file_type',
                 ],
-                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:residues_id}{DS}',
+                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}}{primaryKey}{DS}',
                 'nameCallback' => function ($table, $entity, $data, $field, $settings) {
                     return strtolower($data['name']);
                 },

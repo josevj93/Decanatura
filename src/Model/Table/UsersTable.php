@@ -50,7 +50,8 @@ class UsersTable extends Table
         $validator
             ->scalar('id')
             ->maxLength('id', 15)
-            ->allowEmpty('id', 'create');
+            ->numeric('id','La cédula debe contener sólo digitos')
+            ->notEmpty('residues_id', 'El número de cédula es requerido.');
 
         $validator
             ->scalar('nombre')
@@ -84,7 +85,7 @@ class UsersTable extends Table
         $validator
             ->scalar('password')
             ->maxLength('password', 60)
-            ->allowEmpty('password');
+            ->notEmpty('residues_id', 'La constraseña es requerida.');
 
         $validator
             ->integer('id_rol')

@@ -168,6 +168,15 @@ class UsersController extends AppController
                 $user->setError('id', ['El número de cedula ya existe.']);
             }
 
+            $returnUser = $this->Users->find('all')
+            ->where([
+            'Users.username' => $user->username
+            ])
+            ->first();
+            if($returnUser){
+                $user->setError('username', ['El usuario ya existe.']);
+            }
+
             if ($this->Users->save($user)) {
                 AppController::insertLog($user['nombre'], $success);
                 $this->Flash->success(__('El usuario ha sido agregado.'));
@@ -175,7 +184,7 @@ class UsersController extends AppController
             }
             $success = FALSE;
             AppController::insertLog($user['nombre'], $success);
-            $this->Flash->error(__('El usuario no pudo ser agregado, intente nuevamente. Cédula Existente'));
+            $this->Flash->error(__('El usuario no pudo ser agregado, intente nuevamente. Cedula o usuario existentes.'));
         }
         $this->set(compact('user'));
     }

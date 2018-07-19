@@ -249,6 +249,10 @@ class ResiduesController extends AppController
             // se realiza una conversion a objeto para que la vista lo use sin problemas
             $result[$i]= (object)$result[$i];
         }
+
+        debug($result);
+        die();
+
         $this->set(compact('residue', 'result'));
     }
     /**

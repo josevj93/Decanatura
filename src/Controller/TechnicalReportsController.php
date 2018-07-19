@@ -357,6 +357,7 @@ class TechnicalReportsController extends AppController
 
      public function viewDownload($id = null)
     {
+
         $technicalReport = $this->TechnicalReports->get($id, [
             'contain' => ['Assets']
         ]);
@@ -427,6 +428,7 @@ class TechnicalReportsController extends AppController
         // Aqui queda el resultado, en un vector genérico, de lo que contiene la vista
         $techRepArray= explode(',',$this->request->data('pdf') );
 
+
         //re realiza una relacion 1 a 1
         $techRepTMP['technical_report_id']= $techRepArray[0];
         $date = new Date($techRepArray[1]);
@@ -435,6 +437,8 @@ class TechnicalReportsController extends AppController
         $techRepTMP['evaluation']= $techRepArray[3];
         $techRepTMP['recommendation']= $techRepArray[4];
         $techRepTMP['evaluator_name']= $techRepArray[5];
+
+        debug($techRepTMP);
 
         //  guarda el id mandado por la vista
         
@@ -461,7 +465,9 @@ class TechnicalReportsController extends AppController
 
             $results = $stmt ->fetchAll('assoc');
 
-
+            debug($results);
+            debug($technicalReport);
+            die();
 
             require_once 'dompdf/autoload.inc.php';
             //initialize dompdf class
@@ -494,7 +500,6 @@ class TechnicalReportsController extends AppController
             <title>Informe Técnico</title>
             <h2 align="center">UNIVERSIDAD DE COSTA RICA</h2>
             <h2 align="center">UNIDAD DE ACTIVOS FIJOS</h2>
-            <h2 align="center">PRESTAMO DE ACTIVO FIJO</h2>
             <p>&nbsp;</p>
             <div id="element1" align="left"><strong>Unidad custodio:</strong>'.$this->escuela.'</div> <div id="element2" align="right"><strong>Fecha:</strong>'.$technicalReport->date.'</div>
             <p>&nbsp;</p>
@@ -543,8 +548,10 @@ class TechnicalReportsController extends AppController
 
      public function generate($id = null)
     {
-        //debug($id);
-        //die();
+
+                    debug($this->request->getData());
+            die();
+
         // se crea una entidad para luego poder hacer los validadores
         $technicalReport= $this->TechnicalReports->get($id);
 
@@ -571,6 +578,8 @@ class TechnicalReportsController extends AppController
             where a.plaque in('" . $technicalReport->assets_id. "');");
 
             $results = $stmt ->fetchAll('assoc');
+
+
 
             require_once 'dompdf/autoload.inc.php';
             //initialize dompdf class
@@ -652,6 +661,7 @@ class TechnicalReportsController extends AppController
     /** método para descargar un documento que ya existe en el sistema de archivos */
      public function download2($id = null)
     {
+
         $techRep = $this->TechnicalReports->get($id);
         $path=WWW_ROOT.'files'.DS.'TechnicalReports'.DS.'file_name'.DS.$techRep->technical_report_id.DS.$techRep->file_name;
         $this->response->file($path, array(

@@ -152,6 +152,14 @@
     </div>
   </fieldset>
 
+<?php
+  if($transfer->file_name != ''){
+    echo $this->Html->link(__('Ver Formulario'),'/' . $transfer->path . '/' . $transfer->file_name);
+    echo "<div class=\"col-12 text-right\">";
+
+  }
+?>
+
     <div>
     <?= $this->Html->link(__('Cancelar'), ['action' => 'index'], ['class' => 'btn btn-primary']) ?>
 
@@ -168,13 +176,6 @@
 
     <?php endif; ?>
     </form>  
-
-    <?php 
-        if($transfer->file_name !=null)
-        {
-            echo $this->Form->postLink(__('Descargar Acta'), ['action' => 'download2', $transfer->transfers_id], ['class' => 'btn btn-primary','style'=>'float:left;', 'confirm' => __('¿Seguro que desea descargar el archivo?', $transfer->transfers_id)]);
-        }
-    ?>
 
   </div>
       <br><br> 

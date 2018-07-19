@@ -195,8 +195,23 @@
     </div>
     <br>
     <div class='form-control' style="border-color: transparent;">
-        <label> Subir acta de desechos: </label>
-        <?php echo $this->Form->imput('file_name',['type' => 'file', 'class' => 'form-control-file']); ?>
+        
+         <?php
+          if($technicalReport->file_name == ''){
+              echo "<b>1- Descargar el reporte para llenar y luego subirlo al sitema.</b>";
+              echo "<br><br><br>";
+              echo "<div >";
+              echo "<b>";
+              echo $this->Form->input('file_name',['type' => 'file','label' => '2- Subir Reporte Técnico una vez llena para Finalizar', 'class' => 'form-control-file']);
+              echo "</b>";
+              echo "</div>";
+              echo "<div class=\"col-12 text-right\">";
+
+          }
+         
+        ?>
+
+
     </div>
     <br>
 
@@ -220,7 +235,7 @@
         <!-- input donde coloco todo los datos de los demás imput exepto el input checkList -->
         <input type="hidden" name="pdf" id="pdf">
 
-        <?= $this->Form->button(__('Generar PDF'), ['class' => 'btn btn-primary', 'id'=>'generate','style'=>'float:left;']) ?>
+        <?= $this->Form->button(__('Descargar PDF'), ['class' => 'btn btn-primary', 'id'=>'generate','style'=>'float:left;']) ?>
         </form>
 
 
@@ -236,7 +251,7 @@
   $("document").ready(
     function() {
       $('#assetButton').click( function()
-      {
+      { 
         var plaque = $('#assetImput').val();
         if(''!=plaque)
         {
