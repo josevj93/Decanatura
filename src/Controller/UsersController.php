@@ -147,7 +147,6 @@ class UsersController extends AppController
     public function add()
     {
         $success = TRUE;
-        $user = $this->Users->newEntity();
         $query = $this->Roles->find('all');
         $roles = array();
         foreach ($query as $items) {
@@ -156,8 +155,19 @@ class UsersController extends AppController
         $this->set('roles', $roles);
         if ($this->request->is('post')) {
 
+            $user = $this->Users->newEntity();
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            $user['new'] = true;
+            
+            /** varifica que el id no sea repetido y se setea el error manualmente */
+            $returnId = $this->Users->find('all')
+            ->where([
+            'Users.id' => $user->id
+            ])
+            ->first();
+            if($returnId){
+                $user->setError('id', ['El número de cedula ya existe.']);
+            }
+
             if ($this->Users->save($user)) {
                 AppController::insertLog($user['nombre'], $success);
                 $this->Flash->success(__('El usuario ha sido agregado.'));

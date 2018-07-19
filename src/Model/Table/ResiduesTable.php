@@ -6,6 +6,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+
 /**
  * Residues Model
  *
@@ -33,6 +34,21 @@ class ResiduesTable extends Table
         $this->setTable('residues');
         $this->setDisplayField('residues_id');
         $this->setPrimaryKey('residues_id');
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'file' => [
+                'fields' => [
+                    'dir' => 'file_dir',
+                    'size' => 'file_size',
+                    'type' => 'file_type',
+                ],
+                'path' => 'webroot{DS}files{DS}{model}{DS}{field}{DS}{field-value:residues_id}{DS}',
+                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
+                    return strtolower($data['name']);
+                },
+
+                'keepFilesOnDelete' => false
+            ]
+        ]);
     }
 
     /**
@@ -98,39 +114,16 @@ class ResiduesTable extends Table
             ->allowEmpty('descargado');
 
         $validator
-            ->scalar('file_name')
-            ->maxLength('file_name', 100)
-            ->allowEmpty('file_name');
+            ->maxLength('file', 255)
+            ->allowEmpty('file');
 
         $validator
-            ->scalar('path')
-            ->maxLength('path', 100)
-            ->allowEmpty('path');
+            ->scalar('file_dir')
+            ->maxLength('file_dir', 255)
+            ->allowEmpty('file_dir');
 
         return $validator;
     }
 
-
-    public function buildRules(RulesChecker $rules)
-    {
-
-        $rules->addCreate(
-            function ($entity, $options) {
-                $returnId = $this->find('all')->where([
-                    'Residues.residues_id' => $entity->residues_id,]
-                )->first();
-                if($returnId){
-                    return false;
-                }else{
-                    return true;
-                }
-
-            },
-            ['errorField' => 'residues_id', 'message' => 'Este id ya existe']
-        );
-
-
-        return $rules;
-    }
 
 }

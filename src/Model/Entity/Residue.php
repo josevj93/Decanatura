@@ -36,7 +36,7 @@ class Residue extends Entity
         'identification2' => true,
         'date' => true,
         'descargado' => true,
-        'file_name' => true,
-        'path' => true
+        'file' => true,
+        'file_dir' => true
     ];
 }

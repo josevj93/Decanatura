@@ -114,37 +114,30 @@ class UsersTable extends Table
         return $rules;
     }**/
 
+
+
     public function buildRules(RulesChecker $rules)
     {
+        
+        $rules->addCreate(function ($entity, $options) {
 
-        $rules->addCreate(
-            function ($entity, $options) {
-                $returnId = $this->find('all')->where([
-                    'Users.id' => $entity->id,]
-                )->first();
-                if($returnId){
-                    return false;
-                }else{
-                    return true;
-                }
+             $returnId = $this->find('all')
+            ->where([
+                'Users.id' => $id,
+            ])
+            ->first();
+            if($returnId != null){
+                return false;
+            }else{
+                return true;
+            }
 
-            },
-            ['errorField' => 'id', 'message' => 'Esta cedula ya existe']
-        );
+        },
+        [
+        'errorField' => 'id',
+        'message' => 'El número de cedula ya existe.'
+        ]
 
-        $rules->addCreate(
-            function ($entity, $options) {
-                $returnId = $this->find('all')->where([
-                    'Users.id' => $entity->id,]
-                )->first();
-                if($returnId){
-                    return false;
-                }else{
-                    return true;
-                }
-
-            },
-            ['errorField' => 'id', 'message' => 'Esta cedula ya existe']
         );
 
         return $rules;

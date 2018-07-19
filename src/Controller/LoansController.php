@@ -157,7 +157,7 @@ class LoansController extends AppController
             
             $random = uniqid();
             $loan->id = $random;
-            $loan->estado = 'Activo';
+            $loan->estado = 'En proceso';
             $loan = $this->Loans->patchEntity($loan, $this->request->getData());
             
             if ($this->Loans->save($loan)) {
@@ -180,11 +180,9 @@ class LoansController extends AppController
                     }
                 }
                 AppController::insertLog($loan['id'], TRUE);
-                $this->Flash->success(__('El activo fue guardado exitosamente.'));
-                //$this->download($loan->id);
-                return $this->redirect(['action' => 'view',$loan->id]);
+                $this->Flash->success(__('Verifique la información del préstamo y suba el archivo firmado para finalizar'));
+                return $this->redirect(['action' => 'finalizar', $loan->id]);
             }
-            
             
             $this->Flash->error(__('El préstamo no se pudo guardar, por favor intente nuevamente.'));
             return $this->redirect(['action' => 'index']);
@@ -213,6 +211,48 @@ class LoansController extends AppController
         ]);
         $users = $this->Loans->Users->find('list', ['limit' => PHP_INT_MAX ]);
         $this->set(compact('assets', 'loan', 'users', 'result'));
+    }
+
+    /*Segundo paso para ingresar prestamo*/
+    public function finalizar($id)
+    {
+        $loan = $this->Loans->get($id, [
+            'contain' => ['Users']
+        ]);
+        
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $loan->estado = "Activo";
+            $loan = $this->Loans->patchEntity($loan, $this->request->getData());
+
+            if ($this->Loans->save($loan)) {
+                $loan = $this->Loans->get($id, [
+                    'contain' => ['Users']
+                ]);
+                
+                $this->Flash->success(__('El préstamo fue creado exitosamente.'));
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $this->Flash->error(__('El préstamo no se pudo finalizar, por favor intente nuevamente.'));
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $this->loadModel('Assets');
+        $query = $this->Assets->find()
+
+                        ->select(['assets.plaque', 'assets.models_id', 'assets.series'])
+                        ->where(['assets.loan_id' => $id])
+                        ->toList();
+
+        $size = count($query);
+
+        $result = array_fill(0, $size, NULL);
+        
+        for($i = 0; $i < $size; $i++)
+        {
+            $result[$i] =(object)$query[$i]->assets;
+        }
+        $this->set(compact('loan', 'result'));
     }
 
     /*Terminar para varios activos*/

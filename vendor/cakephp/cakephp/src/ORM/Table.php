@@ -1729,6 +1729,10 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
             return false;
         }
 
+        //debug($entity);
+        //debug($options);
+        //die();
+
         if ($entity->isNew() === false && !$entity->isDirty()) {
             return $entity;
         }
@@ -1783,23 +1787,29 @@ class Table implements RepositoryInterface, EventListenerInterface, EventDispatc
      */
     protected function _processSave($entity, $options)
     {
-
-        
         if ($options['checkExisting'] && $primaryColumns && $entity->isNew() && $entity->has($primaryColumns)) {
             $alias = $this->getAlias();
             $conditions = [];
             foreach ($entity->extract($primaryColumns) as $k => $v) {
                 $conditions["$alias.$k"] = $v;
             }
+            //debug($conditions);
+            //debug($this->exists($conditions));
+            //die();
             $entity->isNew(!$this->exists($conditions));
         }
         $primaryColumns = (array)$this->getPrimaryKey();
+
+        //debug($entity);
+        //debug($options);
+        //die();
 
         $mode = $entity->isNew() ? RulesChecker::CREATE : RulesChecker::UPDATE;
         
         if ($options['checkRules'] && !$this->checkRules($entity, $mode, $options)) {
             return false;
         }
+
 
         $options['associated'] = $this->_associations->normalizeKeys($options['associated']);
         $event = $this->dispatchEvent('Model.beforeSave', compact('entity', 'options'));

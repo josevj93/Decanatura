@@ -91,6 +91,7 @@
           <?php echo $this->Form->select('responsable_id', $users, array('empty' => '-- Seleccione Responsable --', 'class' => 'form-control col-md-7')); ?>
         </div>
 
+
         <div class="row">
           <label><b>Asignado a:</b><b style="color:red;">*</b> </label>
           <?php echo $this->Form->select('assigned_to', $users, ['empty' => '-- Seleccione Asignado --', 'class'=>'form-control col-md-7']); ?>
@@ -100,6 +101,7 @@
           <label> <b>Ubicación:</b><b style="color:red;">*</b></label>
           <?php echo $this->Form->select('location_id', $locations, ['empty' => '-- Seleccione Ubicación --', 'class'=>'form-control col-md-7']); ?>
         </div>
+
 
     </div>
     <br>
@@ -111,6 +113,7 @@
           <label> Sub-ubicación: </label>
           <?php echo $this->Form->imput('sub_location', ['class'=>'form-control col-md-7']); ?>
         </div>
+
 
 
         <div class="row">
@@ -127,6 +130,7 @@
 
         <div class="col-lg-1">
       </div>
+
 
     </div>
     <br>

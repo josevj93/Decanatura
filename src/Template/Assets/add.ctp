@@ -107,15 +107,15 @@
 
   </div> 
   <br>
-	
 
-	<div class="form-control sameLine" >
-
-      <div class="row">
+      <div>
         <label> Sub-ubicación: </label>
-        <?php echo $this->Form->imput('sub_location', ['class'=>'form-control col-md-7']); ?>       
+        <?php echo $this->Form->textarea('sub_location', ['class'=>'form-control col-md-7']); ?>       
       </div>
-	  
+      
+      <br>
+      
+      <div class="form-control sameLine" >
       
       <div class="row">
         <label class="col-lg-3"> <b>Año:</b><b style="color:red;">*</b> </label>
