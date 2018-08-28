@@ -47,54 +47,95 @@ class UsersTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
-        $validator
-            ->scalar('id')
-            ->maxLength('id', 15)
-            ->numeric('id','La cédula debe contener sólo digitos')
-            ->notEmpty('residues_id', 'El número de cédula es requerido.');
-
-        $validator
-            ->scalar('nombre')
-            ->maxLength('nombre', 25)
-            ->requirePresence('nombre', 'create')
-            ->notEmpty('nombre');
-
-        $validator
-            ->scalar('apellido1')
-            ->maxLength('apellido1', 25)
-            ->requirePresence('apellido1', 'create')
-            ->notEmpty('apellido1');
-
-        $validator
-            ->scalar('apellido2')
-            ->maxLength('apellido2', 25)
-            ->allowEmpty('apellido2');
 
         $validator
             ->scalar('correo')
             ->maxLength('correo', 100)
             ->requirePresence('correo', 'create')
-            ->notEmpty('correo');
+            ->requirePresence('correo', 'update')
+            ->add('correo',[ 
+                [
+                'rule'=>['custom', ' /^.+@.+\.com$/ '],
+                'message'=>'Debe seguir el formato: correo@ejemplo.com'
+                ]
+            ])
+            ->notEmpty('correo','Este campo es requerido.');
+
+
+        $validator
+            ->scalar('nombre')
+            ->maxLength('nombre', 50)
+            ->requirePresence('nombre', 'create')
+            ->requirePresence('nombre', 'update')
+            ->add('nombre',[ 
+                [
+                'rule'=>['custom', ' /^[a-zA-ZÀ-ÖØ-öø-ÿ ]+$/ '],
+                'message'=>'Debe contener sólo caracteres del alfabeto.'
+                ]
+            ])
+            ->notEmpty('nombre','Este campo es requerido.');
+
+        $validator
+            ->scalar('apellido1')
+            ->maxLength('apellido1', 50)
+            ->requirePresence('apellido1', 'create')
+            ->requirePresence('apellido1', 'update')
+            ->add('apellido1',[ 
+                [
+                'rule'=>['custom', ' /^[a-zA-ZÀ-ÖØ-öø-ÿ ]+$/ '],
+                'message'=>'Debe contener sólo caracteres del alfabeto.'
+                ]
+            ])
+            ->notEmpty('apellido1','Este campo es requerido.');
+
+        $validator
+            ->scalar('apellido2')
+            ->maxLength('apellido2', 50)
+            ->requirePresence('apellido2', 'create')
+            ->requirePresence('apellido2', 'update')
+            ->add('apellido2',[ 
+                [
+                'rule'=>['custom', ' /^[a-zA-ZÀ-ÖØ-öø-ÿ ]+$/ '],
+                'message'=>'Debe contener sólo caracteres del alfabeto.'
+                ]
+            ])
+            ->notEmpty('apellido2','Este campo es requerido.');
+
+        $validator
+            ->scalar('id')
+            ->maxLength('id', 9,'La cédula debe contener 9 dígitos' )
+            ->minLength('id', 9,'La cédula debe contener 9 dígitos' )
+            ->numeric('id','La cédula debe contener sólo digitos')
+            ->requirePresence('id', 'create')
+            ->requirePresence('id', 'update')
+            ->notEmpty('id','Este campo es requerido');
+
+
 
         $validator
             ->scalar('username')
             ->maxLength('username', 100)
             ->requirePresence('username', 'create')
+            ->requirePresence('username', 'update')
             ->notEmpty('username');
 
         $validator
             ->scalar('password')
             ->maxLength('password', 60)
+            ->requirePresence('password', 'create')
+            ->requirePresence('password', 'update')
             ->notEmpty('residues_id', 'La constraseña es requerida.');
 
         $validator
             ->integer('id_rol')
             ->requirePresence('id_rol', 'create')
+            ->requirePresence('id_rol', 'update')
             ->notEmpty('id_rol');
 
         $validator
             ->boolean('account_status')
             ->requirePresence('account_status', 'create')
+            ->requirePresence('account_status', 'update')
             ->notEmpty('account_status');
 
         return $validator;
