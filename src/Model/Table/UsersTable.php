@@ -103,11 +103,16 @@ class UsersTable extends Table
 
         $validator
             ->scalar('id')
-            ->maxLength('id', 9,'La cédula debe contener 9 dígitos' )
-            ->minLength('id', 9,'La cédula debe contener 9 dígitos' )
-            ->numeric('id','La cédula debe contener sólo digitos')
+            ->maxLength('id', 15,'La identificación debe contener 15 dígitos máximo' )
+            ->minLength('id', 9,'La identificación debe contener 9 dígitos mínimo. Asegúrese de incluir los 0 en su identificación.' )
             ->requirePresence('id', 'create')
             ->requirePresence('id', 'update')
+            ->add('id',[ 
+                [
+                'rule'=>['custom', ' /^[a-zA-Z0-9]+$/ '],
+                'message'=>'Debe contener sólo números o letras'
+                ]
+            ])
             ->notEmpty('id','Este campo es requerido');
 
 
@@ -122,9 +127,17 @@ class UsersTable extends Table
         $validator
             ->scalar('password')
             ->maxLength('password', 60)
+            ->minLength('password', 8, 'La constraseña debe tener mínimo 8 caracteres')
             ->requirePresence('password', 'create')
             ->requirePresence('password', 'update')
             ->notEmpty('residues_id', 'La constraseña es requerida.');
+
+        $validator
+            ->scalar('password2')
+            ->maxLength('password2', 60)
+            ->requirePresence('password', 'create')
+            ->requirePresence('password', 'update')
+            ->notEmpty('residues_id', 'La confirmación de constraseña es requerida.');
 
         $validator
             ->integer('id_rol')
@@ -160,27 +173,11 @@ class UsersTable extends Table
 
     public function buildRules(RulesChecker $rules)
     {
+
+
+
         
-        $rules->addCreate(function ($entity, $options) {
-
-             $returnId = $this->find('all')
-            ->where([
-                'Users.id' => $id,
-            ])
-            ->first();
-            if($returnId != null){
-                return false;
-            }else{
-                return true;
-            }
-
-        },
-        [
-        'errorField' => 'id',
-        'message' => 'El número de cedula ya existe.'
-        ]
-
-        );
+    
 
         return $rules;
     }

@@ -152,20 +152,22 @@ class UsersController extends AppController
         foreach ($query as $items) {
             $roles[$items['id']] = $items['nombre'];
         }
+
         $this->set('roles', $roles);
         if ($this->request->is('post')) {
 
             $user = $this->Users->newEntity();
             $user = $this->Users->patchEntity($user, $this->request->getData());
             
-            /** varifica que el id no sea repetido y se setea el error manualmente */
+            /** verifica que el id no sea repetido y se setea el error manualmente */
             $returnId = $this->Users->find('all')
             ->where([
             'Users.id' => $user->id
             ])
             ->first();
             if($returnId){
-                $user->setError('id', ['El número de cedula ya existe.']);
+                $user->setError('id', ['La identificación ya existe.']);
+
             }
 
             $returnUser = $this->Users->find('all')
@@ -177,6 +179,16 @@ class UsersController extends AppController
                 $user->setError('username', ['El usuario ya existe.']);
             }
 
+            if($user->password != $user->password2){
+                $user->setError('password', ['Las contraseñas no coinciden.']);
+                $user->setError('password2', ['Las contraseñas no coinciden.']);
+            }
+
+            debug($user);
+            die();
+
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            
             if ($this->Users->save($user)) {
                 AppController::insertLog($user['nombre'], $success);
                 $this->Flash->success(__('El usuario ha sido agregado.'));
