@@ -107,6 +107,8 @@
                           'inputContainerError' => '{{content}} {{error}}'
                         ], 
                         'label'=>['text'=>''],
+                        'type'=>'text',
+                        'maxlenght' => '15',
                         "required"=>"required",
                         'class'=>'form-control col-sm-6 col-md-10 col-lg-10',
                       ]);
